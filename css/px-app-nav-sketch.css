@@ -1,0 +1,1969 @@
+@charset "UTF-8";
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+/*
+THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PREDIX BRANDING
+Predix branding rules go in px-app-nav-predix.scss, not in this file.
+*/
+/*
+See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
+in import paths
+*/
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+   *
+   * 1. Set the default `font-size` and `line-height` for the entire project,
+   *    sourced from our default variables. The `font-size` is calculated to exist
+   *    in ems, the `line-height` is calculated to exist unitlessly.
+   * 2. Force scrollbars to always be visible to prevent awkward ‘jumps’ when
+   *    navigating between pages that do/do not have enough content to produce
+   *    scrollbars naturally.
+   * 3. Ensure the page always fills at least the entire height of the viewport.
+   * 4. Prevent certain mobile browsers from automatically zooming fonts.
+   * 5. Fonts on OSX will look more consistent with other systems that do not
+   *    render text using sub-pixel anti-aliasing.
+   */
+html {
+  font-size: 1em;
+  /* [1] */
+  line-height: 1.5;
+  /* [1] */
+  background-color: #fff;
+  color: #333;
+  overflow-y: scroll;
+  /* [2] */
+  min-height: 100%;
+  /* [3] */
+  text-size-adjust: 100%;
+  /* [4] */
+  -moz-osx-font-smoothing: grayscale;
+  /* [5] */
+  -webkit-font-smoothing: antialiased;
+  /* [5] */ }
+
+/**
+   * Remove default margin.
+   */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+     ========================================================================== */
+/**
+   * Correct `block` display not defined for any HTML5 element in IE 8/9.
+   * Correct `block` display not defined for `details` or `summary` in IE 10/11
+   * and Firefox.
+   * Correct `block` display not defined for `main` in IE 11.
+   */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+/**
+   * 1. Correct `inline-block` display not defined in IE 8/9.
+   * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+   */
+audio, canvas, progress, video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+   * Prevent modern browsers from displaying `audio` without controls.
+   * Remove excess height in iOS 5 devices.
+   */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+   * Address `[hidden]` styling not present in IE 8/9/10.
+   * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+   */
+[hidden], template {
+  display: none; }
+
+/* Margins
+     ========================================================================== */
+/**
+   * Where `margin-bottom` is concerned,this value will be the same as the
+   * base line-height. This allows us to keep a consistent vertical rhythm.
+   * As per: csswizardry.com/2012/06/single-direction-margin-declarations
+   */
+h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, p, address, hr, table, fieldset, figure, pre {
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem; }
+
+/**
+   * Remove extra vertical spacing when nesting lists.
+   */
+li > ul, li > ol {
+  margin-bottom: 0; }
+
+/**
+   * Where `margin-left` is concerned we want to try and indent certain elements
+   * by a consistent amount. Define that amount once,here.
+   */
+ul, ol, dd {
+  margin-left: 48px;
+  margin-left: 3rem; }
+
+/* Links
+     ========================================================================== */
+/**
+   * Remove the gray background color from active links in IE 10.
+   */
+a {
+  background-color: transparent; }
+
+/**
+   * Improve readability when focused and also mouse hovered in all browsers.
+   */
+a:active, a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+     ========================================================================== */
+/**
+   * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+   */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+   * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+   */
+b, strong {
+  font-weight: bold; }
+
+/**
+   * Address styling not present in Safari and Chrome.
+   */
+dfn {
+  font-style: italic; }
+
+/**
+   * Address variable `h1` font-size and margin within `section` and `article`
+   * contexts in Firefox 4+, Safari, and Chrome.
+   */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+   * Address styling not present in IE 8/9.
+   */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+   * Address inconsistent and variable font size in all browsers.
+   */
+small {
+  font-size: 80%; }
+
+/**
+   * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+   */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+     ========================================================================== */
+/**
+   * Remove border when inside `a` element in IE 8/9/10.
+   */
+img {
+  border: 0; }
+
+/**
+   * Correct overflow not hidden in IE 9/10/11.
+   */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+     ========================================================================== */
+/**
+   * Address margin not present in IE 8/9 and Safari.
+   */
+figure {
+  margin: 1em 40px; }
+
+/**
+   * Address differences between Firefox and other browsers.
+   */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+   * Contain overflow in all browsers.
+   */
+pre {
+  overflow: auto; }
+
+/**
+   * Address odd `em`-unit font size rendering in all browsers.
+   */
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+     ========================================================================== */
+/**
+   * Known limitation: by default, Chrome and Safari on OS X allow very limited
+   * styling of `select`, unless a `border` property is set.
+   */
+/**
+   * 1. Correct color not being inherited.
+   *    Known issue: affects color of disabled elements.
+   * 2. Correct font properties not being inherited.
+   * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+   */
+button, input, optgroup, select, textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+   * Address `overflow` set to `hidden` in IE 8/9/10/11.
+   */
+button {
+  overflow: visible; }
+
+/**
+   * Address inconsistent `text-transform` inheritance for `button` and `select`.
+   * All other form control elements do not inherit `text-transform` values.
+   * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+   * Correct `select` style inheritance in Firefox.
+   */
+button, select {
+  text-transform: none; }
+
+/**
+   * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+   *    and `video` controls.
+   * 2. Correct inability to style clickable `input` types in iOS.
+   * 3. Improve usability and consistency of cursor style between image-type
+   *    `input` and others.
+   */
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+:host input[type="button"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+   * Re-set default cursor for disabled elements.
+   */
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+:host input[disabled] {
+  cursor: default; }
+
+/**
+   * Remove inner padding and border in Firefox 4+.
+   */
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+   * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+   * the UA stylesheet.
+   */
+input {
+  line-height: normal; }
+
+/**
+   * It's recommended that you don't attempt to style these elements.
+   * Firefox's implementation doesn't respect box-sizing, padding, or width.
+   *
+   * 1. Address box sizing set to `content-box` in IE 8/9/10.
+   * 2. Remove excess padding in IE 8/9/10.
+   */
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+   * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+   * `font-size` values of the `input`, it causes the cursor style of the
+   * decrement button to change from `default` to `text`.
+   */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+   * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+   * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+   *    (include `-moz` to future-proof).
+   */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+   * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+   * Safari (but not Chrome) clips the cancel button when the search input has
+   * padding (and `textfield` appearance).
+   */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+   * Define consistent border, margin, and padding.
+   */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+   * 1. Correct `color` not being inherited in IE 8/9/10/11.
+   * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+   */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+   * Remove default vertical scrollbar in IE 8/9/10/11.
+   */
+textarea {
+  overflow: auto; }
+
+/**
+   * Don't inherit the `font-weight` (applied by a rule above).
+   * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+   */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+     ========================================================================== */
+/**
+   * Remove most spacing between table cells.
+   */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td, th {
+  padding: 0; }
+
+/*------------------------------------*\
+    #PX-BOX-SIZING-DESIGN
+\*------------------------------------*/
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+   * Set the global `box-sizing` state to `border-box`.
+   *
+   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+   * paulirish.com/2012/box-sizing-border-box-ftw
+   */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+:host {
+  /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+/*------------------------------------*\
+    #PX-HELPERS-DESIGN
+\*------------------------------------*/
+/**
+ * A series of helper classes to use arbitrarily. Only use a helper class if an
+ * element/component doesn’t already have a class to which you could apply this
+ * styling, e.g. if you need to float `.main-nav` left then add `float:left;` to
+ * that ruleset as opposed to adding the `.float--left` class to the markup.
+ *
+ * A lot of these classes carry `!important` as you will always want them to win
+ * out over other selectors.
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+   * Add/remove floats
+   */
+.float--right {
+  float: right !important; }
+
+.float--left {
+  float: left !important; }
+
+.float--none {
+  float: none !important; }
+
+/**
+   * Text alignment
+   */
+.text--left {
+  text-align: left !important; }
+
+.text--center {
+  text-align: center !important; }
+
+.text--right {
+  text-align: right !important; }
+
+/**
+   * Add a help cursor to any element that gives the user extra information on
+   * `:hover`.
+   */
+.informative {
+  cursor: help !important; }
+
+/**
+   * Mute an object by reducing its opacity.
+   */
+.muted {
+  opacity: 0.5 !important;
+  filter: alpha(opacity=50) !important; }
+
+/**
+   * Align items to the right where they imply progression/movement forward, e.g.:
+   *
+     <p class=proceed><a href=#>Read more...</a></p>
+   *
+   */
+.proceed {
+  text-align: right !important; }
+
+/**
+   * Apply capital case to an element (usually a `strong`).
+   */
+.caps {
+  text-transform: uppercase !important; }
+
+/**
+   * Hide visually and from screen readers:
+   * http://juicystudio.com/article/screen-readers-display-none.php
+   */
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+/**
+   * Hide content off-screen without resorting to `display:none;`
+   */
+.a11y, .visuallyhidden {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  clip: rect(0 0 0 0) !important; }
+
+.a11y.focusable:active, .a11y.focusable:focus, .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  position: static;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto; }
+
+@media screen and (max-width: 44.9375em) {
+  .a11y-palm, .visuallyhidden-palm {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .a11y-lap, .visuallyhidden-lap {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+@media screen and (min-width: 45em) {
+  .a11y-lap-and-up, .visuallyhidden-lap-and-up {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .a11y-portable, .visuallyhidden-portable {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+@media screen and (min-width: 64em) {
+  .a11y-desk, .visuallyhidden-desk {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .a11y-retina, .visuallyhidden-retina {
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important; } }
+
+/**
+   * Hide visually and from screen readers, but maintain layout
+   */
+.invisible {
+  visibility: hidden; }
+
+/*------------------------------------*\
+    $PX-TYPOGRAPHY-DESIGN
+\*------------------------------------*/
+/**
+ * Base typographic styles for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+@font-face {
+  font-family: 'GE Inspira';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../type/GEInspMd.eot');
+  src: url('../type/GEInspMd.eot?#iefix') format('embedded-opentype'), url('../type/GEInspMd.woff') format('woff'), url('../type/GEInspMd.ttf') format('truetype'), url('../type/GEInspMd.svg#GE Inspira') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../type/GEInspMdIt.eot');
+  src: url('../type/GEInspMdIt.eot?#iefix') format('embedded-opentype'), url('../type/GEInspMdIt.woff') format('woff'), url('../type/GEInspMdIt.ttf') format('truetype'), url('../type/GEInspMdIt.svg#GE Inspira') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../type/GEInspBd.eot');
+  src: url('../type/GEInspBd.eot?#iefix') format('embedded-opentype'), url('../type/GEInspBd.woff') format('woff'), url('../type/GEInspBd.ttf') format('truetype'), url('../type/GEInspBd.svg#GE Inspira') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../type/GEInspBI.eot');
+  src: url('../type/GEInspBI.eot?#iefix') format('embedded-opentype'), url('../type/GEInspBI.woff') format('woff'), url('../type/GEInspBI.ttf') format('truetype'), url('../type/GEInspBI.svg#GE Inspira') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../type/GEInspiraSans-Regular-v01.eot');
+  src: url('../type/GEInspiraSans-Regular-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSans-Regular-v01.woff') format('woff'), url('../type/GEInspiraSans-Regular-v01.ttf') format('truetype'), url('../type/GEInspiraSans-Regular-v01.svg#GE Inspira Sans') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../type/GEInspiraSans-Italic-v01.eot');
+  src: url('../type/GEInspiraSans-Italic-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSans-Italic-v01.woff') format('woff'), url('../type/GEInspiraSans-Italic-v01.ttf') format('truetype'), url('../type/GEInspiraSans-Italic-v01.svg#GE Inspira Sans') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../type/GEInspiraSans-Bold-v01.eot');
+  src: url('../type/GEInspiraSans-Bold-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSans-Bold-v01.woff') format('woff'), url('../type/GEInspiraSans-Bold-v01.ttf') format('truetype'), url('../type/GEInspiraSans-Bold-v01.svg#GE Inspira Sans') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Sans';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../type/GEInspiraSans-BoldItalic-v01.eot');
+  src: url('../type/GEInspiraSans-BoldItalic-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSans-BoldItalic-v01.woff') format('woff'), url('../type/GEInspiraSans-BoldItalic-v01.ttf') format('truetype'), url('../type/GEInspiraSans-BoldItalic-v01.svg#GE Inspira Sans') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Serif';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../type/GEInspiraSerif-Regular-v01.eot');
+  src: url('../type/GEInspiraSerif-Regular-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSerif-Regular-v01.woff') format('woff'), url('../type/GEInspiraSerif-Regular-v01.ttf') format('truetype'), url('../type/GEInspiraSerif-Regular-v01.svg#GE Inspira Serif') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Serif';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../type/GEInspiraSerif-Italic-v01.eot');
+  src: url('../type/GEInspiraSerif-Italic-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSerif-Italic-v01.woff') format('woff'), url('../type/GEInspiraSerif-Italic-v01.ttf') format('truetype'), url('../type/GEInspiraSerif-Italic-v01.svg#GE Inspira Serif') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Serif';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../type/GEInspiraSerif-Bold-v01.eot');
+  src: url('../type/GEInspiraSerif-Bold-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSerif-Bold-v01.woff') format('woff'), url('../type/GEInspiraSerif-Bold-v01.ttf') format('truetype'), url('../type/GEInspiraSerif-Bold-v01.svg#GE Inspira Serif') format('svg'); }
+
+@font-face {
+  font-family: 'GE Inspira Serif';
+  font-weight: bold;
+  font-style: italic;
+  src: url('../type/GEInspiraSerif-BoldItalic-v01.eot');
+  src: url('../type/GEInspiraSerif-BoldItalic-v01.eot?#iefix') format('embedded-opentype'), url('../type/GEInspiraSerif-BoldItalic-v01.woff') format('woff'), url('../type/GEInspiraSerif-BoldItalic-v01.ttf') format('truetype'), url('../type/GEInspiraSerif-BoldItalic-v01.svg#GE Inspira Serif') format('svg'); }
+
+html {
+  font-family: "GE Inspira Sans", sans-serif; }
+
+:host {
+  font-family: "GE Inspira Sans", sans-serif; }
+
+/**
+   * Font weights
+   */
+.weight--light {
+  font-weight: 300 !important; }
+
+.weight--normal {
+  font-weight: 400 !important; }
+
+.weight--semibold {
+  font-weight: 600 !important; }
+
+/*------------------------------------*\
+    #PX-META-LISTS-DESIGN
+\*------------------------------------*/
+/*------------------------------------*\
+    #PX-LIST-BARE-DESIGN
+\*------------------------------------*/
+/**
+ * The list-bare object simply removes any indents and bullet points from lists.
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+.list-bare {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/*------------------------------------*\
+    #PX-LIST-BUTTONS-DESIGN
+\*------------------------------------*/
+/**
+ * Styles for lists of buttons in Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+.list-btn {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.2; }
+  .list-btn li {
+    margin-right: 1em; }
+    .list-btn li:last-child {
+      margin-right: 0; }
+
+.list-btn .btn {
+  font-size: inherit;
+  line-height: 1; }
+
+/*------------------------------------*\
+    #PX-LIST-INLINE-DESIGN
+\*------------------------------------*/
+/**
+ * The list-inline object simply displays a list of items in one line.
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+.list-inline {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .list-inline > li {
+    display: inline-block; }
+
+/**
+       * Comma delimited list to semantically mark up lists of tags, etc.
+       *
+       * N.B. This component requires that you remove the whitespace between LIs.
+       *      The simplest (and valid) way to achieve this is by omitting the
+       *      closing `</li>` tag.
+       */
+.list-inline--delimited > li + li:before {
+  content: ",\00A0"; }
+
+/*------------------------------------*\
+    #PX-LIST-UI-DESIGN
+\*------------------------------------*/
+/**
+ * The UI list object creates blocky list items with a keyline separator out of
+ * a `ul` or `ol`.
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+.list-ui, .list-ui__item, .list-ui > li {
+  border: 0 solid #ccc; }
+
+.list-ui {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top-width: 1px;
+  color: inherit; }
+
+.list-ui__item, .list-ui > li {
+  padding: 24px;
+  border-bottom-width: 1px; }
+
+/**
+     * Tiny list-uis.
+     */
+.list-ui--tiny > .list-ui__item, .list-ui.list-ui--tiny > li {
+  padding: 6px; }
+
+/**
+     * Small list-uis.
+     */
+.list-ui--small > .list-ui__item, .list-ui.list-ui--small > li {
+  padding: 12px; }
+
+/**
+     * Large list-uis.
+     */
+.list-ui--large > .list-ui__item, .list-ui.list-ui--large > li {
+  padding: 48px; }
+
+/**
+     * Huge list-uis.
+     */
+.list-ui--huge > .list-ui__item, .list-ui.list-ui--huge > li {
+  padding: 96px; }
+
+.list-ui > li:last-child, .list-ui__item:last-child {
+  border-bottom-width: 0; }
+
+/*------------------------------------*\
+    #PX-CLEARFIX-DESIGN
+\*------------------------------------*/
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+   * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
+   * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
+   * over and over in your markup.
+   */
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+/*------------------------------------*\
+    #PX-SPACING-RESPONSIVE-DESIGN
+\*------------------------------------*/
+/**
+ * Margin and padding helper classes. Use these to tweak layout on a micro
+ * level.
+ *
+ * `.(m|p)(t|r|b|l|h|v)(-|+|0) {}` = margin/padding top/right/bottom/left/horizontal/vertical less/more/none
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-SPACING-DESIGN
+\*------------------------------------*/
+/**
+ * Margin and padding helper classes. Use these to tweak layout on a micro
+ * level.
+ *
+ * `.(m|p)(t|r|b|l|h|v)(-|+|0) {}` = margin/padding top/right/bottom/left/horizontal/vertical less/more/none
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+       * Margin helper classes.
+       *
+       * Add margins.
+       */
+.m {
+  margin: 24px !important; }
+
+.mt {
+  margin-top: 24px !important; }
+
+.mr {
+  margin-right: 24px !important; }
+
+.mb {
+  margin-bottom: 24px !important; }
+
+.ml {
+  margin-left: 24px !important; }
+
+.mh {
+  margin-right: 24px !important;
+  margin-left: 24px !important; }
+
+.mv {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important; }
+
+/**
+       * Add tiny margins.
+       */
+.m-- {
+  margin: 6px !important; }
+
+.mt-- {
+  margin-top: 6px !important; }
+
+.mr-- {
+  margin-right: 6px !important; }
+
+.mb-- {
+  margin-bottom: 6px !important; }
+
+.ml-- {
+  margin-left: 6px !important; }
+
+.mh-- {
+  margin-right: 6px !important;
+  margin-left: 6px !important; }
+
+.mv-- {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important; }
+
+/**
+       * Add small margins.
+       */
+.m- {
+  margin: 12px !important; }
+
+.mt- {
+  margin-top: 12px !important; }
+
+.mr- {
+  margin-right: 12px !important; }
+
+.mb- {
+  margin-bottom: 12px !important; }
+
+.ml- {
+  margin-left: 12px !important; }
+
+.mh- {
+  margin-right: 12px !important;
+  margin-left: 12px !important; }
+
+.mv- {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important; }
+
+/**
+       * Add large margins.
+       */
+.m\+ {
+  margin: 48px !important; }
+
+.mt\+ {
+  margin-top: 48px !important; }
+
+.mr\+ {
+  margin-right: 48px !important; }
+
+.mb\+ {
+  margin-bottom: 48px !important; }
+
+.ml\+ {
+  margin-left: 48px !important; }
+
+.mh\+ {
+  margin-right: 48px !important;
+  margin-left: 48px !important; }
+
+.mv\+ {
+  margin-top: 48px !important;
+  margin-bottom: 48px !important; }
+
+/**
+       * Remove margins.
+       */
+.m0 {
+  margin: 0 !important; }
+
+.mt0 {
+  margin-top: 0 !important; }
+
+.mr0 {
+  margin-right: 0 !important; }
+
+.mb0 {
+  margin-bottom: 0 !important; }
+
+.ml0 {
+  margin-left: 0 !important; }
+
+.mh0 {
+  margin-right: 0 !important;
+  margin-left: 0 !important; }
+
+.mv0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important; }
+
+/**
+       * Negative margins.
+       */
+.-m {
+  margin: -24px !important; }
+
+.-mt {
+  margin-top: -24px !important; }
+
+.-mr {
+  margin-right: -24px !important; }
+
+.-mb {
+  margin-bottom: -24px !important; }
+
+.-ml {
+  margin-left: -24px !important; }
+
+.-mh {
+  margin-right: -24px !important;
+  margin-left: -24px !important; }
+
+.-mv {
+  margin-top: -24px !important;
+  margin-bottom: -24px !important; }
+
+/**
+       * Tiny negative margins.
+       */
+.-m-- {
+  margin: -6px !important; }
+
+.-mt-- {
+  margin-top: -6px !important; }
+
+.-mr-- {
+  margin-right: -6px !important; }
+
+.-mb-- {
+  margin-bottom: -6px !important; }
+
+.-ml-- {
+  margin-left: -6px !important; }
+
+.-mh-- {
+  margin-right: -6px !important;
+  margin-left: -6px !important; }
+
+.-mv-- {
+  margin-top: -6px !important;
+  margin-bottom: -6px !important; }
+
+/**
+       * Padding helper classes.
+       *
+       * Add paddings.
+       */
+.p {
+  padding: 24px !important; }
+
+.pt {
+  padding-top: 24px !important; }
+
+.pr {
+  padding-right: 24px !important; }
+
+.pb {
+  padding-bottom: 24px !important; }
+
+.pl {
+  padding-left: 24px !important; }
+
+.ph {
+  padding-right: 24px !important;
+  padding-left: 24px !important; }
+
+.pv {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important; }
+
+/**
+       * Add small paddings.
+       */
+.p- {
+  padding: 12px !important; }
+
+.pt- {
+  padding-top: 12px !important; }
+
+.pr- {
+  padding-right: 12px !important; }
+
+.pb- {
+  padding-bottom: 12px !important; }
+
+.pl- {
+  padding-left: 12px !important; }
+
+.ph- {
+  padding-right: 12px !important;
+  padding-left: 12px !important; }
+
+.pv- {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important; }
+
+/**
+       * Add large paddings.
+       */
+.p\+ {
+  padding: 48px !important; }
+
+.pt\+ {
+  padding-top: 48px !important; }
+
+.pr\+ {
+  padding-right: 48px !important; }
+
+.pb\+ {
+  padding-bottom: 48px !important; }
+
+.pl\+ {
+  padding-left: 48px !important; }
+
+.ph\+ {
+  padding-right: 48px !important;
+  padding-left: 48px !important; }
+
+.pv\+ {
+  padding-top: 48px !important;
+  padding-bottom: 48px !important; }
+
+/**
+       * Margin helper classes.
+       *
+       * Add margins.
+       */
+@media screen and (max-width: 44.9375em) {
+  .palm-m {
+    margin: 24px !important; }
+  .palm-mt {
+    margin-top: 24px !important; }
+  .palm-mr {
+    margin-right: 24px !important; }
+  .palm-mb {
+    margin-bottom: 24px !important; }
+  .palm-ml {
+    margin-left: 24px !important; }
+  .palm-mh {
+    margin-right: 24px !important;
+    margin-left: 24px !important; }
+  .palm-mv {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .lap-m {
+    margin: 24px !important; }
+  .lap-mt {
+    margin-top: 24px !important; }
+  .lap-mr {
+    margin-right: 24px !important; }
+  .lap-mb {
+    margin-bottom: 24px !important; }
+  .lap-ml {
+    margin-left: 24px !important; }
+  .lap-mh {
+    margin-right: 24px !important;
+    margin-left: 24px !important; }
+  .lap-mv {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important; } }
+
+@media screen and (min-width: 45em) {
+  .lap-and-up-m {
+    margin: 24px !important; }
+  .lap-and-up-mt {
+    margin-top: 24px !important; }
+  .lap-and-up-mr {
+    margin-right: 24px !important; }
+  .lap-and-up-mb {
+    margin-bottom: 24px !important; }
+  .lap-and-up-ml {
+    margin-left: 24px !important; }
+  .lap-and-up-mh {
+    margin-right: 24px !important;
+    margin-left: 24px !important; }
+  .lap-and-up-mv {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .portable-m {
+    margin: 24px !important; }
+  .portable-mt {
+    margin-top: 24px !important; }
+  .portable-mr {
+    margin-right: 24px !important; }
+  .portable-mb {
+    margin-bottom: 24px !important; }
+  .portable-ml {
+    margin-left: 24px !important; }
+  .portable-mh {
+    margin-right: 24px !important;
+    margin-left: 24px !important; }
+  .portable-mv {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important; } }
+
+@media screen and (min-width: 64em) {
+  .desk-m {
+    margin: 24px !important; }
+  .desk-mt {
+    margin-top: 24px !important; }
+  .desk-mr {
+    margin-right: 24px !important; }
+  .desk-mb {
+    margin-bottom: 24px !important; }
+  .desk-ml {
+    margin-left: 24px !important; }
+  .desk-mh {
+    margin-right: 24px !important;
+    margin-left: 24px !important; }
+  .desk-mv {
+    margin-top: 24px !important;
+    margin-bottom: 24px !important; } }
+
+/**
+       * Padding helper classes.
+       *
+       * Add paddings.
+       */
+@media screen and (max-width: 44.9375em) {
+  .palm-p {
+    padding: 24px !important; }
+  .palm-pt {
+    padding-top: 24px !important; }
+  .palm-pr {
+    padding-right: 24px !important; }
+  .palm-pb {
+    padding-bottom: 24px !important; }
+  .palm-pl {
+    padding-left: 24px !important; }
+  .palm-ph {
+    padding-right: 24px !important;
+    padding-left: 24px !important; }
+  .palm-pv {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .lap-p {
+    padding: 24px !important; }
+  .lap-pt {
+    padding-top: 24px !important; }
+  .lap-pr {
+    padding-right: 24px !important; }
+  .lap-pb {
+    padding-bottom: 24px !important; }
+  .lap-pl {
+    padding-left: 24px !important; }
+  .lap-ph {
+    padding-right: 24px !important;
+    padding-left: 24px !important; }
+  .lap-pv {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; } }
+
+@media screen and (min-width: 45em) {
+  .lap-and-up-p {
+    padding: 24px !important; }
+  .lap-and-up-pt {
+    padding-top: 24px !important; }
+  .lap-and-up-pr {
+    padding-right: 24px !important; }
+  .lap-and-up-pb {
+    padding-bottom: 24px !important; }
+  .lap-and-up-pl {
+    padding-left: 24px !important; }
+  .lap-and-up-ph {
+    padding-right: 24px !important;
+    padding-left: 24px !important; }
+  .lap-and-up-pv {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .portable-p {
+    padding: 24px !important; }
+  .portable-pt {
+    padding-top: 24px !important; }
+  .portable-pr {
+    padding-right: 24px !important; }
+  .portable-pb {
+    padding-bottom: 24px !important; }
+  .portable-pl {
+    padding-left: 24px !important; }
+  .portable-ph {
+    padding-right: 24px !important;
+    padding-left: 24px !important; }
+  .portable-pv {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; } }
+
+@media screen and (min-width: 64em) {
+  .desk-p {
+    padding: 24px !important; }
+  .desk-pt {
+    padding-top: 24px !important; }
+  .desk-pr {
+    padding-right: 24px !important; }
+  .desk-pb {
+    padding-bottom: 24px !important; }
+  .desk-pl {
+    padding-left: 24px !important; }
+  .desk-ph {
+    padding-right: 24px !important;
+    padding-left: 24px !important; }
+  .desk-pv {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important; } }
+
+/**
+       * Add small paddings.
+       */
+@media screen and (max-width: 44.9375em) {
+  .palm-p- {
+    padding: 12px !important; }
+  .palm-pt- {
+    padding-top: 12px !important; }
+  .palm-pr- {
+    padding-right: 12px !important; }
+  .palm-pb- {
+    padding-bottom: 12px !important; }
+  .palm-pl- {
+    padding-left: 12px !important; }
+  .palm-ph- {
+    padding-right: 12px !important;
+    padding-left: 12px !important; }
+  .palm-pv- {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .lap-p- {
+    padding: 12px !important; }
+  .lap-pt- {
+    padding-top: 12px !important; }
+  .lap-pr- {
+    padding-right: 12px !important; }
+  .lap-pb- {
+    padding-bottom: 12px !important; }
+  .lap-pl- {
+    padding-left: 12px !important; }
+  .lap-ph- {
+    padding-right: 12px !important;
+    padding-left: 12px !important; }
+  .lap-pv- {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important; } }
+
+@media screen and (min-width: 45em) {
+  .lap-and-up-p- {
+    padding: 12px !important; }
+  .lap-and-up-pt- {
+    padding-top: 12px !important; }
+  .lap-and-up-pr- {
+    padding-right: 12px !important; }
+  .lap-and-up-pb- {
+    padding-bottom: 12px !important; }
+  .lap-and-up-pl- {
+    padding-left: 12px !important; }
+  .lap-and-up-ph- {
+    padding-right: 12px !important;
+    padding-left: 12px !important; }
+  .lap-and-up-pv- {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .portable-p- {
+    padding: 12px !important; }
+  .portable-pt- {
+    padding-top: 12px !important; }
+  .portable-pr- {
+    padding-right: 12px !important; }
+  .portable-pb- {
+    padding-bottom: 12px !important; }
+  .portable-pl- {
+    padding-left: 12px !important; }
+  .portable-ph- {
+    padding-right: 12px !important;
+    padding-left: 12px !important; }
+  .portable-pv- {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important; } }
+
+@media screen and (min-width: 64em) {
+  .desk-p- {
+    padding: 12px !important; }
+  .desk-pt- {
+    padding-top: 12px !important; }
+  .desk-pr- {
+    padding-right: 12px !important; }
+  .desk-pb- {
+    padding-bottom: 12px !important; }
+  .desk-pl- {
+    padding-left: 12px !important; }
+  .desk-ph- {
+    padding-right: 12px !important;
+    padding-left: 12px !important; }
+  .desk-pv- {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important; } }
+
+/**
+       * Remove paddings.
+       */
+@media screen and (max-width: 44.9375em) {
+  .palm-p0 {
+    padding: 0 !important; }
+  .palm-pt0 {
+    padding-top: 0 !important; }
+  .palm-pr0 {
+    padding-right: 0 !important; }
+  .palm-pb0 {
+    padding-bottom: 0 !important; }
+  .palm-pl0 {
+    padding-left: 0 !important; }
+  .palm-ph0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+  .palm-pv0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .lap-p0 {
+    padding: 0 !important; }
+  .lap-pt0 {
+    padding-top: 0 !important; }
+  .lap-pr0 {
+    padding-right: 0 !important; }
+  .lap-pb0 {
+    padding-bottom: 0 !important; }
+  .lap-pl0 {
+    padding-left: 0 !important; }
+  .lap-ph0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+  .lap-pv0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; } }
+
+@media screen and (min-width: 45em) {
+  .lap-and-up-p0 {
+    padding: 0 !important; }
+  .lap-and-up-pt0 {
+    padding-top: 0 !important; }
+  .lap-and-up-pr0 {
+    padding-right: 0 !important; }
+  .lap-and-up-pb0 {
+    padding-bottom: 0 !important; }
+  .lap-and-up-pl0 {
+    padding-left: 0 !important; }
+  .lap-and-up-ph0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+  .lap-and-up-pv0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .portable-p0 {
+    padding: 0 !important; }
+  .portable-pt0 {
+    padding-top: 0 !important; }
+  .portable-pr0 {
+    padding-right: 0 !important; }
+  .portable-pb0 {
+    padding-bottom: 0 !important; }
+  .portable-pl0 {
+    padding-left: 0 !important; }
+  .portable-ph0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+  .portable-pv0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; } }
+
+@media screen and (min-width: 64em) {
+  .desk-p0 {
+    padding: 0 !important; }
+  .desk-pt0 {
+    padding-top: 0 !important; }
+  .desk-pr0 {
+    padding-right: 0 !important; }
+  .desk-pb0 {
+    padding-bottom: 0 !important; }
+  .desk-pl0 {
+    padding-left: 0 !important; }
+  .desk-ph0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important; }
+  .desk-pv0 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important; } }
+
+/*------------------------------------*\
+    #PX-WIDTHS-RESPONSIVE-DESIGN
+\*------------------------------------*/
+/**
+ * Responsive width classes based on your responsive settings.
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #WIDTHS
+\*------------------------------------*/
+/**
+ * A series of width helper classes that you can use to size things like grid
+ * systems. Classes can take a fraction-like format (e.g. `.u-2/3`) or a spoken-
+ * word format (e.g. `.u-2-of-3`). Use these in your markup:
+ *
+ * <div class="u-7/12">
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+.u-1\/1 {
+  width: 100% !important; }
+
+.u-1\/2 {
+  width: 50% !important;
+  flex: none !important; }
+
+.u-1\/3 {
+  width: 33.3333333333% !important;
+  flex: none !important; }
+
+.u-2\/3 {
+  width: 66.6666666667% !important;
+  flex: none !important; }
+
+.u-1\/4 {
+  width: 25% !important;
+  flex: none !important; }
+
+.u-2\/4 {
+  width: 50% !important;
+  flex: none !important; }
+
+.u-3\/4 {
+  width: 75% !important;
+  flex: none !important; }
+
+.u-1\/5 {
+  width: 20% !important;
+  flex: none !important; }
+
+.u-2\/5 {
+  width: 40% !important;
+  flex: none !important; }
+
+.u-3\/5 {
+  width: 60% !important;
+  flex: none !important; }
+
+.u-4\/5 {
+  width: 80% !important;
+  flex: none !important; }
+
+@media screen and (max-width: 44.9375em) {
+  .u-1\/1-palm {
+    width: 100% !important; }
+  .u-1\/2-palm {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-palm {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-palm {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-palm {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-palm {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-palm {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-palm {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-palm {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-palm {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-palm {
+    width: 80% !important;
+    flex: none !important; } }
+
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
+  .u-1\/1-lap {
+    width: 100% !important; }
+  .u-1\/2-lap {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-lap {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-lap {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-lap {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-lap {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-lap {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-lap {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-lap {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-lap {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-lap {
+    width: 80% !important;
+    flex: none !important; } }
+
+@media screen and (min-width: 45em) {
+  .u-1\/1-lap-and-up {
+    width: 100% !important; }
+  .u-1\/2-lap-and-up {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-lap-and-up {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-lap-and-up {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-lap-and-up {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-lap-and-up {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-lap-and-up {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-lap-and-up {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-lap-and-up {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-lap-and-up {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-lap-and-up {
+    width: 80% !important;
+    flex: none !important; } }
+
+@media screen and (max-width: 63.9375em) {
+  .u-1\/1-portable {
+    width: 100% !important; }
+  .u-1\/2-portable {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-portable {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-portable {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-portable {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-portable {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-portable {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-portable {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-portable {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-portable {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-portable {
+    width: 80% !important;
+    flex: none !important; } }
+
+@media screen and (min-width: 64em) {
+  .u-1\/1-desk {
+    width: 100% !important; }
+  .u-1\/2-desk {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-desk {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-desk {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-desk {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-desk {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-desk {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-desk {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-desk {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-desk {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-desk {
+    width: 80% !important;
+    flex: none !important; } }
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  .u-1\/1-retina {
+    width: 100% !important; }
+  .u-1\/2-retina {
+    width: 50% !important;
+    flex: none !important; }
+  .u-1\/3-retina {
+    width: 33.3333333333% !important;
+    flex: none !important; }
+  .u-2\/3-retina {
+    width: 66.6666666667% !important;
+    flex: none !important; }
+  .u-1\/4-retina {
+    width: 25% !important;
+    flex: none !important; }
+  .u-2\/4-retina {
+    width: 50% !important;
+    flex: none !important; }
+  .u-3\/4-retina {
+    width: 75% !important;
+    flex: none !important; }
+  .u-1\/5-retina {
+    width: 20% !important;
+    flex: none !important; }
+  .u-2\/5-retina {
+    width: 40% !important;
+    flex: none !important; }
+  .u-3\/5-retina {
+    width: 60% !important;
+    flex: none !important; }
+  .u-4\/5-retina {
+    width: 80% !important;
+    flex: none !important; } }
+
+/*------------------------------------*\
+    #PX-BUTTONS-DESIGN
+\*------------------------------------*/
+/**
+* A simple button object.
+*/
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+  * 1. Allow us to style box model properties.
+  * 2. Line different sized buttons up a little nicer.
+  * 3. Make buttons inherit font styles (often necessary when styling `input`s as
+  *    buttons).
+  * 4. Reset/normalize some styles.
+  * 5. Force all button-styled elements to appear clickable.
+  * 6. Fixes odd inner spacing in IE7.
+  * 7. Subtract the border size from the padding value so that buttons do not
+  *    grow larger as we add borders.
+  */
+.btn {
+  display: inline-block;
+  /* [1] */
+  vertical-align: middle;
+  /* [2] */
+  font: inherit;
+  /* [3] */
+  text-align: center;
+  /* [4] */
+  margin: 0;
+  /* [4] */
+  cursor: pointer;
+  /* [5] */
+  overflow: visible;
+  /* [6] */
+  background: #3171e3;
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+  padding: 6px 1em;
+  border-radius: 3px; }
+  .btn, .btn:hover, .btn:active, .btn:focus {
+    text-decoration: none;
+    /* [4] */
+    color: white; }
+  .btn:hover, .btn:focus {
+    background: linear-gradient(180deg, #34b2fc 0%, #3171e3 100%); }
+  .btn:active {
+    background: linear-gradient(0deg, #34b2fc 0%, #3171e3 100%); }
+
+/**
+  * Establish default space between adjacent buttons
+  */
+.btn + .btn {
+  margin-left: 12px; }
+
+/**
+  * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
+  */
+.btn::-moz-focus-inner {
+  border: 0;
+  padding: 0; }

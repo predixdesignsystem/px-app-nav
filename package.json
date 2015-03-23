@@ -1,0 +1,24 @@
+{
+    "name": "px-app-nav",
+    "author": "General Electric",
+    "description": "A Px component",
+    "version": "0.0.1",
+    "private": true,
+    "fwk": "polymer05",
+    "extName" : null,
+    "repository" :
+    {
+        "type": "git",
+        "url": "https://github.sw.ge.com/change-this-in-package.json-please.git"
+    },
+    "homepage": "http://predix.sw.ge.com/",
+    "devDependencies": {
+        "grunt": "~v0.4.5",
+        "grunt-sass": "~v0.18.1",
+        "grunt-shell": "~v1.1.1",
+        "grunt-contrib-clean": "~v0.6.0",
+        "grunt-contrib-jshint": "~v0.10.0",
+        "grunt-contrib-watch": "~v0.6.1",
+        "grunt-dep-serve": "git+https://github.sw.ge.com/jreichenberg/grunt-dep-serve.git#master"
+    }
+}

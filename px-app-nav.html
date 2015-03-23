@@ -1,0 +1,99 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+
+<!--
+Nav bar for applications
+
+##### Usage
+
+    <px-app-nav
+            navItems="[{'path': '#', 'text':'Tab 1'},{'path': '#tab2', 'text': 'Tab 2'},{'path': '#tab3', 'text': 'Another Tab'}]"
+            solutionName="Columbia Pipeline Group"
+            userName="Tom Smith"
+        >
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="50" height="50" viewBox="-280 372 50 50">
+                <path style="..."></path>
+            </svg>
+            <div class="auth">
+                <button class="btn btn-bare">
+                    Tom Smith
+                    <i class="fa fa-chevron-right" aria-hidden=true></i>
+                </button>
+            </div>
+    </px-app-nav>
+
+@element px-app-nav
+@blurb Nav bar for applications.
+@homepage index.html
+-->
+<polymer-element name="px-app-nav" attributes="navItems solutionName">
+
+    <template>
+        <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
+        <nav class="navbar" role=navigation>
+            <div class=vw>
+                <div class="navbar__item pt- lap-and-up-pt0 ph-">
+                    <content select=".logo"></content>
+                </div>
+                <ul class="navbar__item nav list-bare">
+                    <template repeat="{{navItem in navItems}}">
+                        <li>
+                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{navItem.path}}" on-click="{{navClickHandler}}">{{navItem.text}}</a>
+                        </li>
+                    </template>
+                </ul>
+                <div class="navbar__item">
+                    <h2 class="mv0 pt lap-and-up-pt0 pr+ lap-and-up-pb-">{{solutionName}}</h2>
+                    <div class="pt- lap-and-up-pt0 lap-and-up-pb-">
+                        <content select=".auth"></content>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </template>
+
+    <script>
+        Polymer({
+
+            publish: {
+                navItems: [{}]
+            },
+
+            navItemsChanged: function(oldValue, newValue) {
+                if (typeof this.navItems === 'string') {
+                    if (this.navItems.length > 0) {
+                        this.navItems = JSON.parse(this.navItems);
+                    }
+                }
+            },
+
+            /**
+             * Parse navItemsStrings and navItemsPaths to create unified navItems
+             */
+            ready: function() {
+                var hash = window.location.hash;
+                this.navItems.forEach(function(navItem) {
+                    if (navItem.path === hash) {
+                        navItem.selected = true;
+                    }
+                })
+            },
+
+            navClickHandler: function(event, detail, sender) {
+                var href = sender.getAttribute("href");
+                for (var i = 0 ; i < this.navItems.length; i++) {
+                    var item = this.navItems[i];
+                    item.selected =  item.path === href;
+                }
+            }
+
+        });
+    </script>
+
+</polymer-element>
