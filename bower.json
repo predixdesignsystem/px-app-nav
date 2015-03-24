@@ -8,20 +8,19 @@
         ".*",
         "npm-debug.log",
         "Gruntfile.js",
-        "doc",
-        "lib",
-        "src",
+        "sass",
+        "bower_components",
         "node_modules",
         "test"
     ],
     "dependencies": {
-        "polymer": "~0.5.5",
+        "polymer": "~0.5.5"
+    },
+    "devDependencies": {
         "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#master",
         "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
         "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#master",
-        "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master"
-    },
-    "devDependencies": {
+        "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master",
         "core-component-page" : "https://github.com/Polymer/core-component-page.git#~v0.5.5",
         "web-component-tester": "~2.2.6"
     }
