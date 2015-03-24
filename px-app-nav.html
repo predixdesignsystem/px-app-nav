@@ -31,7 +31,7 @@ Nav bar for applications
 @blurb Nav bar for applications.
 @homepage index.html
 -->
-<polymer-element name="px-app-nav" attributes="navItems solutionName pathPrefix">
+<polymer-element name="px-app-nav" attributes="navItems solutionName pathPrefix pathKey">
 
     <template>
         <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
@@ -43,7 +43,7 @@ Nav bar for applications
                 <ul class="navbar__item nav list-bare">
                     <template repeat="{{navItem in navItems}}">
                         <li>
-                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem.path}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
+                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem[pathKey]}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
                         </li>
                     </template>
                 </ul>
@@ -62,7 +62,8 @@ Nav bar for applications
 
             publish: {
                 navItems: [{}],
-                pathPrefix: "#"
+                pathPrefix: "#",
+                pathKey: "path"
             },
 
             navItemsChanged: function(oldValue, newValue) {
@@ -89,7 +90,7 @@ Nav bar for applications
                 var resolvedPath = this.parseOutPathPrefix(path);
                 for (var i = 0 ; i < this.navItems.length; i++) {
                     var item = this.navItems[i];
-                    item.selected = item.path === resolvedPath;
+                    item.selected = item[this.pathKey] === resolvedPath;
                 }
             },
 
