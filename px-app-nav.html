@@ -66,6 +66,8 @@ Nav bar for applications
                 pathKey: "path"
             },
 
+            protocolRE: new RegExp('(http|https)://'),
+
             navItemsChanged: function(oldValue, newValue) {
                 if (typeof this.navItems === 'string') {
                     if (this.navItems.length > 0) {
@@ -95,8 +97,9 @@ Nav bar for applications
             },
 
             parseOutPathPrefix: function (fullPath) {
-                var idx = fullPath.indexOf(this.pathPrefix);
-                return fullPath.substring(idx + 1);
+                var resolvedPath = fullPath.replace(this.protocolRE, '');
+                var idx = resolvedPath.indexOf(this.pathPrefix);
+                return resolvedPath.substring(idx + 1);
             }
 
         });
