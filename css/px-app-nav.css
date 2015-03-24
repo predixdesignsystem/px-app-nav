@@ -1981,12 +1981,14 @@ html {
   border: 0;
   padding: 0; }
 
-:host {
-  position: fixed;
-  top: 0;
-  width: 100%; }
+.navbar + * {
+  padding-top: 4.875rem; }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 16px;

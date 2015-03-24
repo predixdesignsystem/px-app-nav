@@ -80,13 +80,15 @@ $inuit-enable-responsive-paddings--none : true;
 
 $px-navbar-height: 78px;
 
-:host {
-  position: fixed;
-  top: 0;
-  width: 100%;
+.navbar + * {
+  padding-top: calculateRem($px-navbar-height);
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   @include inuit-font-size(12px, 16px);
   @include media-query(lap-and-up) {
     height: calculateRem($px-navbar-height);
