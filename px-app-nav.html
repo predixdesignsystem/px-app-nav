@@ -74,6 +74,9 @@ Nav bar for applications
                         this.navItems = JSON.parse(this.navItems);
                     }
                 }
+                else {
+                    this.markSelected(window.location.href);
+                }
             },
 
             /**
