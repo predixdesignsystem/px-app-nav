@@ -2039,3 +2039,6 @@ html {
   letter-spacing: .04em; }
   .navbar__item .btn .fa, ::content .btn .fa {
     font-size: .75em; }
+.navbar__item .auth, ::content .auth {
+  padding-right: 15px;
+  height: 4.25rem; }

@@ -170,4 +170,8 @@ $px-navbar-height: 78px;
       font-size: .75em;
     }
   }
+  .auth {
+    padding-right: 15px;
+    height: calculateRem($px-navbar-height - 10);
+  }
 }
