@@ -1981,85 +1981,16 @@ html {
   border: 0;
   padding: 0; }
 
-/*------------------------------------*\
-    #PX-COLORS-DESIGN
-\*------------------------------------*/
-/**
- * GE Color Palette
- */
-/**
- * Primary
- */
-/**
- * Light
- */
-/**
- * Dark
- */
-/**
- * Circle
- */
-/**
- * Monochrome
- */
 :host {
   position: fixed;
   top: 0;
   width: 100%; }
 
-:host .btn {
-  display: inline-block;
-  /* [1] */
-  vertical-align: middle;
-  /* [2] */
-  font: inherit;
-  /* [3] */
-  text-align: center;
-  /* [4] */
-  margin: 0;
-  /* [4] */
-  cursor: pointer;
-  /* [5] */
-  overflow: visible;
-  /* [6] */
-  background: #3171e3;
-  -webkit-font-smoothing: antialiased;
-  border: 0;
-  padding: 6px 1em;
-  border-radius: 3px; }
-
-:host .btn, :host .btn:hover, :host .btn:active, :host .btn:focus {
-  text-decoration: none;
-  /* [4] */
-  color: white; }
-
-:host .btn:hover, :host .btn:focus {
-  background: linear-gradient(180deg, #34b2fc 0%, #3171e3 100%); }
-
-:host .btn:active {
-  background: linear-gradient(0deg, #34b2fc 0%, #3171e3 100%); }
-
-/**
-  * Establish default space between adjacent buttons
-  */
-:host .btn + :host .btn {
-  margin-left: 12px; }
-
-/**
-  * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
-  */
-:host .btn::-moz-focus-inner {
-  border: 0;
-  padding: 0; }
-
 .navbar {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 16px;
-  height: 9.75rem;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  background-color: black; }
+  height: 9.75rem; }
   @media screen and (min-width: 45em) {
     .navbar {
       height: 4.875rem; } }
@@ -2092,8 +2023,7 @@ html {
       display: table-cell;
       height: 4.875rem; } }
 .navbar__item, .navbar__item > *, .navbar__item > li a, ::content, ::content > *, ::content > li a {
-  display: inline-block;
-  color: white; }
+  display: inline-block; }
   @media screen and (min-width: 45em) {
     .navbar__item, .navbar__item > *, .navbar__item > li a, ::content, ::content > *, ::content > li a {
       display: table-cell;
@@ -2104,32 +2034,63 @@ html {
   @media screen and (min-width: 45em) {
     .navbar__item li:last-child a, ::content li:last-child a {
       border-right-width: 1px; } }
-.navbar__item:first-child, ::content:first-child {
-  border: solid rgba(255, 255, 255, 0.3);
-  border-width: 0 1px; }
-.navbar__item em a, .navbar__item a.active, ::content em a, ::content a.active {
-  color: #3693f8; }
 .navbar__item a, ::content a {
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
   padding-right: 12px;
-  padding-left: 12px;
-  font-weight: bold;
-  color: white; }
+  padding-left: 12px; }
   @media screen and (min-width: 45em) {
     .navbar__item a, ::content a {
       width: 7.375rem;
       padding-top: 12px;
       padding-bottom: 12px; } }
-  .navbar__item a:hover, ::content a:hover {
-    color: #3693f8; }
 .navbar__item h2, ::content h2 {
   font-size: 12px;
   font-size: 0.75rem;
-  line-height: 2;
-  color: rgba(255, 255, 255, 0.3); }
+  line-height: 2; }
 .navbar__item .btn, ::content .btn {
-  letter-spacing: .04em;
-  text-transform: uppercase; }
+  letter-spacing: .04em; }
   .navbar__item .btn .fa, ::content .btn .fa {
-    font-size: .75em;
-    color: white; }
+    font-size: .75em; }
+
+/*------------------------------------*\
+    #PX-COLORS-DESIGN
+\*------------------------------------*/
+/**
+ * GE Color Palette
+ */
+/**
+ * Primary
+ */
+/**
+ * Light
+ */
+/**
+ * Dark
+ */
+/**
+ * Circle
+ */
+/**
+ * Monochrome
+ */
+.navbar {
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  background-color: black; }
+
+.navbar__item, .navbar__item > *, .navbar__item > li a, ::content, ::content > *, ::content > li a {
+  color: white; }
+.navbar__item em a, .navbar__item a.active, ::content em a, ::content a.active {
+  color: #3693f8; }
+.navbar__item a, ::content a {
+  color: white; }
+  .navbar__item a:hover, ::content a:hover {
+    color: #3693f8; }
+.navbar__item:first-child, ::content:first-child {
+  border: solid rgba(255, 255, 255, 0.3);
+  border-width: 0 1px; }
+.navbar__item a, ::content a {
+  border-right: 1px solid rgba(255, 255, 255, 0.3); }
+.navbar__item h2, ::content h2 {
+  color: rgba(255, 255, 255, 0.3); }
+.navbar__item .btn .fa, ::content .btn .fa {
+  color: white; }

@@ -22,156 +22,37 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 @import 'px-app-nav-sketch.scss';
 @import "../px-colors-design/settings.colors";
 
-$px-navbar-height: 78px;
-
-:host {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-:host .btn {
-  display: inline-block;
-  /* [1] */
-  vertical-align: middle;
-  /* [2] */
-  font: inherit;
-  /* [3] */
-  text-align: center;
-  /* [4] */
-  margin: 0;
-  /* [4] */
-  cursor: pointer;
-  /* [5] */
-  overflow: visible;
-  /* [6] */
-  background: #3171e3;
-  -webkit-font-smoothing: antialiased;
-  border: 0;
-  padding: 6px 1em;
-  border-radius: 3px; }
-:host .btn, :host .btn:hover, :host .btn:active, :host .btn:focus {
-  text-decoration: none;
-  /* [4] */
-  color: white; }
-:host .btn:hover, :host .btn:focus {
-  background: linear-gradient(180deg, #34b2fc 0%, #3171e3 100%); }
-:host .btn:active {
-  background: linear-gradient(0deg, #34b2fc 0%, #3171e3 100%); }
-
-/**
-  * Establish default space between adjacent buttons
-  */
-:host .btn + :host .btn {
-  margin-left: 12px; }
-
-/**
-  * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
-  */
-:host .btn::-moz-focus-inner {
-  border: 0;
-  padding: 0; }
-
-
 .navbar {
-  @include inuit-font-size(12px, 16px);
-  @include media-query(lap-and-up) {
-    height: calculateRem($px-navbar-height);
-  }
-
-  height: calculateRem($px-navbar-height*2);
   text-transform: uppercase;
   letter-spacing: .04em;
   background-color: $true-black;
-  + .vw {
-    padding-top: calculateRem($px-navbar-height*2);
-    @include media-query(lap-and-up) {
-      padding-top: calculateRem($px-navbar-height);
-    }
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  em {
-    font-style: normal;
-  }
 }
 
 .navbar__item, ::content {
-  &:last-child {
-    &, > *, li a {
-      display: block;
-    }
-  }
-  @include media-query(lap-and-up) {
-    float: left;
-    &:last-child {
-      display: inline-block;
-      float: right;
-      margin-top: calculateRem($px-navbar-height/4);
-      &, > *, li a {
-        display: block;
-        height: auto;
-      }
-    }
-  }
-  @include media-query(desk) {
-    &:last-child {
-      margin-top: 0;
-      &, > *, li a {
-        display: table-cell;
-        height: calculateRem($px-navbar-height);
-      }
-    }
-  }
   &, > *, > li a {
-    display: inline-block;
-    @include media-query(lap-and-up) {
-      display: table-cell;
-      height: calculateRem($px-navbar-height);
-      vertical-align: bottom;
-    }
     color: $white;
   }
-  li:last-child a {
-    border-right-width: 0;
-    @include media-query(lap-and-up) {
-      border-right-width: 1px;
+  em a, a.active {
+    color: $blue-light;
+  }
+  a {
+    color: $white;
+    &:hover {
+      color: $blue-light;
     }
   }
   &:first-child {
     border: solid rgba($white, .3);
     border-width: 0 1px;
   }
-  em a, a.active {
-    color: $blue-light;
-  }
   a {
-    @include media-query(lap-and-up) {
-      width: calculateRem(118px);
-      padding-top: halve($inuit-base-spacing-unit);
-      padding-bottom: halve($inuit-base-spacing-unit);
-    }
     border-right: 1px solid rgba($white, .3);
-    padding-right: halve($inuit-base-spacing-unit);
-    padding-left: halve($inuit-base-spacing-unit);
-    font-weight: bold;
-    color: $white;
-    &:hover {
-      color: $blue-light;
-    }
   }
   h2 {
-    @include inuit-font-size(12px);
     color: rgba($white, .3);
   }
   .btn {
-    letter-spacing: .04em;
-    text-transform: uppercase;
     .fa {
-      font-size: .75em;
       color: $white;
     }
   }

@@ -1967,3 +1967,73 @@ html {
 .btn::-moz-focus-inner {
   border: 0;
   padding: 0; }
+
+:host {
+  position: fixed;
+  top: 0;
+  width: 100%; }
+
+.navbar {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 16px;
+  height: 9.75rem; }
+  @media screen and (min-width: 45em) {
+    .navbar {
+      height: 4.875rem; } }
+  .navbar + .vw {
+    padding-top: 9.75rem; }
+    @media screen and (min-width: 45em) {
+      .navbar + .vw {
+        padding-top: 4.875rem; } }
+  .navbar a {
+    text-decoration: none; }
+  .navbar em {
+    font-style: normal; }
+
+.navbar__item:last-child, .navbar__item:last-child > *, .navbar__item:last-child li a, ::content:last-child, ::content:last-child > *, ::content:last-child li a {
+  display: block; }
+@media screen and (min-width: 45em) {
+  .navbar__item, ::content {
+    float: left; }
+    .navbar__item:last-child, ::content:last-child {
+      display: inline-block;
+      float: right;
+      margin-top: 1.21875rem; }
+      .navbar__item:last-child, .navbar__item:last-child > *, .navbar__item:last-child li a, ::content:last-child, ::content:last-child > *, ::content:last-child li a {
+        display: block;
+        height: auto; } }
+@media screen and (min-width: 64em) {
+  .navbar__item:last-child, ::content:last-child {
+    margin-top: 0; }
+    .navbar__item:last-child, .navbar__item:last-child > *, .navbar__item:last-child li a, ::content:last-child, ::content:last-child > *, ::content:last-child li a {
+      display: table-cell;
+      height: 4.875rem; } }
+.navbar__item, .navbar__item > *, .navbar__item > li a, ::content, ::content > *, ::content > li a {
+  display: inline-block; }
+  @media screen and (min-width: 45em) {
+    .navbar__item, .navbar__item > *, .navbar__item > li a, ::content, ::content > *, ::content > li a {
+      display: table-cell;
+      height: 4.875rem;
+      vertical-align: bottom; } }
+.navbar__item li:last-child a, ::content li:last-child a {
+  border-right-width: 0; }
+  @media screen and (min-width: 45em) {
+    .navbar__item li:last-child a, ::content li:last-child a {
+      border-right-width: 1px; } }
+.navbar__item a, ::content a {
+  padding-right: 12px;
+  padding-left: 12px; }
+  @media screen and (min-width: 45em) {
+    .navbar__item a, ::content a {
+      width: 7.375rem;
+      padding-top: 12px;
+      padding-bottom: 12px; } }
+.navbar__item h2, ::content h2 {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 2; }
+.navbar__item .btn, ::content .btn {
+  letter-spacing: .04em; }
+  .navbar__item .btn .fa, ::content .btn .fa {
+    font-size: .75em; }

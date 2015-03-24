@@ -78,3 +78,94 @@ $inuit-enable-responsive-paddings--none : true;
 
 @import "../px-buttons-design/objects.buttons";
 
+$px-navbar-height: 78px;
+
+:host {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar {
+  @include inuit-font-size(12px, 16px);
+  @include media-query(lap-and-up) {
+    height: calculateRem($px-navbar-height);
+  }
+
+  height: calculateRem($px-navbar-height*2);
+  + .vw {
+    padding-top: calculateRem($px-navbar-height*2);
+    @include media-query(lap-and-up) {
+      padding-top: calculateRem($px-navbar-height);
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  em {
+    font-style: normal;
+  }
+}
+
+.navbar__item, ::content {
+  &:last-child {
+    &, > *, li a {
+      display: block;
+    }
+  }
+  @include media-query(lap-and-up) {
+    float: left;
+    &:last-child {
+      display: inline-block;
+      float: right;
+      margin-top: calculateRem($px-navbar-height/4);
+      &, > *, li a {
+        display: block;
+        height: auto;
+      }
+    }
+  }
+  @include media-query(desk) {
+    &:last-child {
+      margin-top: 0;
+      &, > *, li a {
+        display: table-cell;
+        height: calculateRem($px-navbar-height);
+      }
+    }
+  }
+  &, > *, > li a {
+    display: inline-block;
+    @include media-query(lap-and-up) {
+      display: table-cell;
+      height: calculateRem($px-navbar-height);
+      vertical-align: bottom;
+    }
+  }
+  li:last-child a {
+    border-right-width: 0;
+    @include media-query(lap-and-up) {
+      border-right-width: 1px;
+    }
+  }
+  a {
+    @include media-query(lap-and-up) {
+      width: calculateRem(118px);
+      padding-top: halve($inuit-base-spacing-unit);
+      padding-bottom: halve($inuit-base-spacing-unit);
+    }
+    padding-right: halve($inuit-base-spacing-unit);
+    padding-left: halve($inuit-base-spacing-unit);
+  }
+  h2 {
+    @include inuit-font-size(12px);
+  }
+  .btn {
+    letter-spacing: .04em;
+    .fa {
+      font-size: .75em;
+    }
+  }
+}
