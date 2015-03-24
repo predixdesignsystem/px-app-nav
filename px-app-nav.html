@@ -13,7 +13,7 @@ Nav bar for applications
 ##### Usage
 
     <px-app-nav
-            navItems="[{'path': '#', 'text':'Tab 1'},{'path': '#tab2', 'text': 'Tab 2'},{'path': '#tab3', 'text': 'Another Tab'}]"
+            navItems="[{'path': '', 'label':'Tab 1'},{'path': 'tab2', 'label': 'Tab 2'},{'path': 'tab3', 'label': 'Another Tab'}]"
             solutionName="Columbia Pipeline Group"
         >
             <svg class="logo" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="50" height="50" viewBox="-280 372 50 50">
@@ -31,7 +31,7 @@ Nav bar for applications
 @blurb Nav bar for applications.
 @homepage index.html
 -->
-<polymer-element name="px-app-nav" attributes="navItems solutionName">
+<polymer-element name="px-app-nav" attributes="navItems solutionName pathPrefix">
 
     <template>
         <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
@@ -43,7 +43,7 @@ Nav bar for applications
                 <ul class="navbar__item nav list-bare">
                     <template repeat="{{navItem in navItems}}">
                         <li>
-                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{navItem.path}}" on-click="{{navClickHandler}}">{{navItem.text}}</a>
+                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem.path}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
                         </li>
                     </template>
                 </ul>
@@ -61,7 +61,8 @@ Nav bar for applications
         Polymer({
 
             publish: {
-                navItems: [{}]
+                navItems: [{}],
+                pathPrefix: "#"
             },
 
             navItemsChanged: function(oldValue, newValue) {
@@ -76,20 +77,25 @@ Nav bar for applications
              * Parse navItemsStrings and navItemsPaths to create unified navItems
              */
             ready: function() {
-                var hash = window.location.hash;
-                this.navItems.forEach(function(navItem) {
-                    if (navItem.path === hash) {
-                        navItem.selected = true;
-                    }
-                })
+                this.markSelected(window.location.href);
             },
 
             navClickHandler: function(event, detail, sender) {
                 var href = sender.getAttribute("href");
+                this.markSelected(href);
+            },
+
+            markSelected: function(path) {
+                var resolvedPath = this.parseOutPathPrefix(path);
                 for (var i = 0 ; i < this.navItems.length; i++) {
                     var item = this.navItems[i];
-                    item.selected =  item.path === href;
+                    item.selected = item.path === resolvedPath;
                 }
+            },
+
+            parseOutPathPrefix: function (fullPath) {
+                var idx = fullPath.indexOf(this.pathPrefix);
+                return fullPath.substring(idx + 1);
             }
 
         });
