@@ -80,11 +80,11 @@ $inuit-enable-responsive-paddings--none : true;
 
 $px-navbar-height: 78px;
 
-.navbar + * {
+nav + * {
   padding-top: calculateRem($px-navbar-height);
 }
 
-.navbar {
+nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -111,52 +111,40 @@ $px-navbar-height: 78px;
   }
 }
 
-.navbar__item, ::content {
-  &:last-child {
-    &, > *, li a {
-      display: block;
-    }
-  }
+.navbar__item {
+  float: left;
   @include media-query(lap-and-up) {
-    float: left;
     &:last-child {
       display: inline-block;
-      float: right;
       margin-top: calculateRem($px-navbar-height/4);
-      &, > *, li a {
-        display: block;
-        height: auto;
-      }
     }
   }
   @include media-query(desk) {
     &:last-child {
       margin-top: 0;
-      &, > *, li a {
-        display: table-cell;
+      &, > *{
         height: calculateRem($px-navbar-height);
       }
     }
   }
-  &, > *, > li a {
+  > * {
     display: inline-block;
     @include media-query(lap-and-up) {
-      display: table-cell;
       height: calculateRem($px-navbar-height);
       vertical-align: bottom;
     }
   }
-  li:last-child a {
+  li:last-child {
     border-right-width: 0;
     @include media-query(lap-and-up) {
       border-right-width: 1px;
     }
   }
   a {
+    display: inline-block;
     @include media-query(lap-and-up) {
       width: calculateRem(118px);
-      padding-top: halve($inuit-base-spacing-unit);
-      padding-bottom: halve($inuit-base-spacing-unit);
+      padding-top: ($px-navbar-height - 30);
     }
     padding-right: halve($inuit-base-spacing-unit);
     padding-left: halve($inuit-base-spacing-unit);

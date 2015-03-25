@@ -22,13 +22,13 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 @import 'px-app-nav-sketch.scss';
 @import "../px-colors-design/settings.colors";
 
-.navbar {
+nav {
   text-transform: uppercase;
   letter-spacing: .04em;
   background-color: $true-black;
 }
 
-.navbar__item, ::content {
+.navbar__item {
   &, > *, > li a {
     color: $white;
   }
@@ -45,7 +45,7 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
     border: solid rgba($white, .3);
     border-width: 0 1px;
   }
-  a {
+  li {
     border-right: 1px solid rgba($white, .3);
   }
   h2 {

@@ -35,10 +35,12 @@ Nav bar for applications
 
     <template>
         <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
-        <nav class="navbar" role=navigation>
+        <nav role=navigation>
             <div class=vw>
-                <div class="navbar__item pt- lap-and-up-pt0 ph-">
-                    <content select=".logo"></content>
+                <div class="navbar__item pt- ph-">
+                    <div>
+                        <content select=".logo"></content>
+                    </div>
                 </div>
                 <ul class="navbar__item nav list-bare">
                     <template repeat="{{navItem in navItems}}">
@@ -47,7 +49,7 @@ Nav bar for applications
                         </li>
                     </template>
                 </ul>
-                <div class="navbar__item">
+                <div class="navbar__item float--right pt+ ph-">
                     <h2 class="mv0 pt lap-and-up-pt0 pr+ lap-and-up-pb-">{{solutionName}}</h2>
                     <div class="pt- lap-and-up-pt0 lap-and-up-pb-">
                         <content select=".auth"></content>
