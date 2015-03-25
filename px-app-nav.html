@@ -42,7 +42,7 @@ Nav bar for applications
                         <content select=".logo"></content>
                     </div>
                 </div>
-                <ul class="navbar__item nav list-bare">
+                <ul class="navbar__item list-bare">
                     <template repeat="{{navItem in navItems}}">
                         <li>
                             <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem[pathKey]}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
