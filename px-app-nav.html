@@ -31,85 +31,100 @@ Nav bar for applications
 @blurb Nav bar for applications.
 @homepage index.html
 -->
-<polymer-element name="px-app-nav" attributes="navItems solutionName pathPrefix pathKey">
 
-    <template>
-        <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
-        <nav role=navigation>
-            <div class="navbar viewport flex flex--justify">
-                <div class="nav flex">
-                    <div class="navbar__item ph- pb- flex flex--bottom">
-                      <content select=".logo"></content>
-                    </div>
-                    <ul class="navbar__item list-bare flex">
-                        <template repeat="{{navItem in navItems}}">
-                            <li class="pb- flex flex--bottom">
-                                <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem[pathKey]}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
-                <div class="flex flex--bottom pb-">
-                    <div class="navbar__item mr+">
-                        <h2 class=mv0>{{solutionName}}</h2>
-                    </div>
-                    <div class=navbar__item>
-                        <content select=".auth"></content>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </template>
+<dom-module id="px-app-nav">
+  <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
+  <template>
+    <nav role=navigation>
+      <div class="navbar viewport flex flex--justify">
+        <div class="nav flex">
+          <div class="navbar__item ph- pb- flex flex--bottom">
+            <content select=".logo"></content>
+          </div>
+          <ul class="navbar__item list-bare flex">
+            <template is="x-repeat" items="{{navItems}}">
+              <li class="pb- flex flex--bottom">
+                <a class$="_computeActiveClassName(item.selected)" href$="_computeHref(item)" on-click="navClickHandler">{{item.label}}</a>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="flex flex--bottom pb-">
+          <div class="navbar__item mr+">
+            <h2 class=mv0>{{solutionName}}</h2>
+          </div>
+          <div class=navbar__item>
+            <content select=".auth"></content>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </template>
+</dom-module>
 
-    <script>
-        Polymer({
+<script>
 
-            publish: {
-                navItems: [{}],
-                pathPrefix: "#",
-                pathKey: "path"
-            },
+  Polymer({
+    is: 'px-app-nav',
+    properties: {
+      navItems: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      },
+      pathPrefix: '#',
+      pathKey: 'path',
+      solutionName: ''
+    },
 
-            protocolRE: new RegExp('(http|https)://'),
+    protocolRE: new RegExp('(http|https)://'),
 
-            navItemsChanged: function(oldValue, newValue) {
-                if (typeof this.navItems === 'string') {
-                    if (this.navItems.length > 0) {
-                        this.navItems = JSON.parse(this.navItems);
-                    }
-                }
-                else {
-                    this.markSelected(window.location.href);
-                }
-            },
+    navItemsChanged: function(oldValue, newValue) {
+      if (typeof this.navItems === 'string') {
+        if (this.navItems.length > 0) {
+          this.navItems = JSON.parse(this.navItems);
+        }
+      } else {
+        this.markSelected(window.location.href);
+      }
+    },
 
-            /**
-             * Parse navItemsStrings and navItemsPaths to create unified navItems
-             */
-            ready: function() {
-                this.markSelected(window.location.href);
-            },
+    /**
+     * Parse navItemsStrings and navItemsPaths to create unified navItems
+     */
+    ready: function() {
+      // this.markSelected(window.location.href);
+    },
 
-            navClickHandler: function(event, detail, sender) {
-                var href = sender.getAttribute("href");
-                this.markSelected(href);
-            },
+    navClickHandler: function(event, detail, sender) {
+      var href = sender.getAttribute("href");
+      this.markSelected(href);
+    },
 
-            markSelected: function(path) {
-                var resolvedPath = this.parseOutPathPrefix(path);
-                for (var i = 0 ; i < this.navItems.length; i++) {
-                    var item = this.navItems[i];
-                    item.selected = item[this.pathKey] === resolvedPath;
-                }
-            },
+    markSelected: function(path) {
+      var resolvedPath = this.parseOutPathPrefix(path);
+      for (var i = 0; i < this.navItems.length; i++) {
+        var item = this.navItems[i];
+        item.selected = item[this.pathKey] === resolvedPath;
+      }
+    },
 
-            parseOutPathPrefix: function (fullPath) {
-                var resolvedPath = fullPath.replace(this.protocolRE, '');
-                var idx = resolvedPath.indexOf(this.pathPrefix);
-                return resolvedPath.substring(idx + 1);
-            }
+    parseOutPathPrefix: function(fullPath) {
+      var resolvedPath = fullPath.replace(this.protocolRE, '');
+      var idx = resolvedPath.indexOf(this.pathPrefix);
+      return resolvedPath.substring(idx + 1);
+    },
 
-        });
-    </script>
+    _computeActiveClassName: function(isSelected) {
+      if (isSelected) {
+        return "active";
+      }
+    },
 
-</polymer-element>
+    _computeHref: function(item) {
+      return this.pathPrefix + item[this.pathKey];
+    }
+
+  });
+</script>
