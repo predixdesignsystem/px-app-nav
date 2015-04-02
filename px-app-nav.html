@@ -20,7 +20,7 @@ Nav bar for applications
                 <path style="..."></path>
             </svg>
             <div class="auth">
-                <button class="btn btn-bare">
+                <button class="btn btn--bare">
                     Tom Smith
                     <i class="fa fa-chevron-right" aria-hidden=true></i>
                 </button>
@@ -36,28 +36,29 @@ Nav bar for applications
     <template>
         <link rel="stylesheet" href="css/px-app-nav.css" polyfill-next-selector/>
         <nav role=navigation>
-            <div class=vw>
-                <div class="navbar__item pt- ph-">
-                    <div>
-                        <content select=".logo"></content>
+            <div class="navbar viewport flex flex--justify">
+                <div class="nav flex">
+                    <div class="navbar__item ph- pb- flex flex--bottom">
+                      <content select=".logo"></content>
                     </div>
+                    <ul class="navbar__item list-bare flex">
+                        <template repeat="{{navItem in navItems}}">
+                            <li class="pb- flex flex--bottom">
+                                <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem[pathKey]}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
+                            </li>
+                        </template>
+                    </ul>
                 </div>
-                <ul class="navbar__item list-bare">
-                    <template repeat="{{navItem in navItems}}">
-                        <li>
-                            <a class="{{ {active: navItem.selected === true} | tokenList}}" href="{{pathPrefix}}{{navItem[pathKey]}}" on-click="{{navClickHandler}}">{{navItem.label}}</a>
-                        </li>
-                    </template>
-                </ul>
-                <div class="navbar__item float--right pt+ ph-">
-                    <h2 class="mv0 pt lap-and-up-pt0 pr+ lap-and-up-pb-">{{solutionName}}</h2>
-                    <div class="pt- lap-and-up-pt0 lap-and-up-pb-">
+                <div class="flex flex--bottom pb-">
+                    <div class="navbar__item mr+">
+                        <h2 class=mv0>{{solutionName}}</h2>
+                    </div>
+                    <div class=navbar__item>
                         <content select=".auth"></content>
                     </div>
                 </div>
             </div>
         </nav>
-        <div class="clearfix"></div>
     </template>
 
     <script>
