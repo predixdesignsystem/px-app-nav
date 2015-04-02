@@ -22,10 +22,31 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'css/px-app-nav-sketch.css': 'sass/px-app-nav-sketch.scss',
-                    'css/px-app-nav.css': 'sass/px-app-nav-predix.scss'
+                    'css/noprefix/px-app-nav-sketch.css': 'sass/px-app-nav-sketch.scss',
+                    'css/noprefix/px-app-nav.css': 'sass/px-app-nav-predix.scss'
                 }
             }
+        },
+        
+        autoprefixer: {
+          options: {
+            browsers: ['last 2 version']
+          },
+          multiple_files: {
+            expand: true,
+            flatten: true,
+            src: 'css/noprefix/*.css',
+            dest: 'css'
+          }
+        },
+        
+        copy: {
+          icons: {
+            expand: true,
+            flatten: true,
+            src: '*/font-awesome/fonts/*',
+            dest: 'icons'
+          }
         },
 
         shell: {
@@ -51,7 +72,7 @@ module.exports = function (grunt) {
         watch: {
             sass: {
                 files: ['sass/**/*.scss'],
-                tasks: ['sass'],
+                tasks: ['sass', 'autoprefixer'],
                 options: {
                     interrupt: true
                 }
@@ -82,12 +103,16 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-dep-serve');
     grunt.loadNpmTasks('web-component-tester');
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
-        'sass'
+        'sass',
+        'autoprefixer',
+        'copy'
     ]);
 
     // First run task.
