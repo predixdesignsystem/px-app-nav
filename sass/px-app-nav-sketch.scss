@@ -31,23 +31,31 @@ in import paths
 
 // Settings
 @import "../inuit-defaults/settings.defaults";
+@import "../inuit-responsive-settings/settings.responsive";
 
 // Tools
 @import "../px-functions-design/tools.functions";
 @import "../px-mixins-design/tools.mixins";
+@import "../inuit-responsive-tools/tools.responsive";
 
 // Generic
 @import "../px-normalize-design/generic.normalize";
 @import "../px-box-sizing-design/generic.box-sizing";
 @import "../px-helpers-design/generic.helpers";
 
-// Base
-@import "../px-typography-design/base.typography";
-
 // Meta
-
 @import "../px-meta-lists-design/meta.lists";
 
+// Base
+@import "../px-viewport-design/base.viewport";
+@import "../px-flexbox-design/base.flexbox";
+@import "../px-typography-design/base.typography";
+@import "../px-iconography-design/base.iconography";
+
+// Objects
+$inuit-enable-btn--bare                 : true;
+
+@import "../px-buttons-design/objects.buttons";
 
 $inuit-enable-margins                   : true;
 $inuit-enable-margins--negative         : true;
@@ -74,13 +82,9 @@ $inuit-enable-responsive-paddings--none : true;
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";
 
-
-
-@import "../px-buttons-design/objects.buttons";
-
 $px-navbar-height: 78px;
 
-nav + * {
+:host + * {
   padding-top: calculateRem($px-navbar-height);
 }
 
@@ -89,77 +93,34 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.navbar {
   @include inuit-font-size(12px, 16px);
-  @include media-query(lap-and-up) {
-    height: calculateRem($px-navbar-height);
-  }
-
-  height: calculateRem($px-navbar-height*2);
-  + .vw {
-    padding-top: calculateRem($px-navbar-height*2);
-    @include media-query(lap-and-up) {
-      padding-top: calculateRem($px-navbar-height);
-    }
-  }
-
   a {
     text-decoration: none;
   }
-
   em {
     font-style: normal;
+  }
+  .flex {
+    height: calculateRem($px-navbar-height);
   }
 }
 
 .navbar__item {
-  float: left;
-  @include media-query(lap-and-up) {
-    &:last-child {
-      display: inline-block;
-      margin-top: calculateRem($px-navbar-height/4);
-    }
-  }
-  @include media-query(desk) {
-    &:last-child {
-      margin-top: 0;
-      &, > *{
-        height: calculateRem($px-navbar-height);
-      }
-    }
-  }
-  > * {
-    display: inline-block;
-    @include media-query(lap-and-up) {
-      height: calculateRem($px-navbar-height);
-      vertical-align: bottom;
-    }
-  }
-  li:last-child {
-    border-right-width: 0;
-    @include media-query(lap-and-up) {
-      border-right-width: 1px;
-    }
-  }
   a {
-    display: inline-block;
-    @include media-query(lap-and-up) {
-      width: calculateRem(118px);
-      padding-top: ($px-navbar-height - 30);
-    }
+    width: calculateRem(118px);
     padding-right: halve($inuit-base-spacing-unit);
     padding-left: halve($inuit-base-spacing-unit);
   }
   h2 {
-    @include inuit-font-size(12px);
+    @include inuit-font-size(12px,16px);
   }
   .btn {
     letter-spacing: .04em;
     .fa {
       font-size: .75em;
     }
-  }
-  .auth {
-    padding-right: 15px;
-    height: calculateRem($px-navbar-height - 10);
   }
 }

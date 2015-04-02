@@ -28,7 +28,17 @@ nav {
   background-color: $true-black;
 }
 
+.nav .navbar__item {
+  &, li {
+    border-left: 1px solid rgba($white, .3);
+  }
+  li:last-child {
+    border-right: 1px solid rgba($white, .3);
+  }
+}
+
 .navbar__item {
+  font-weight: bold;
   &, > *, > li a {
     color: $white;
   }
@@ -40,13 +50,6 @@ nav {
     &:hover {
       color: $blue-light;
     }
-  }
-  &:first-child {
-    border: solid rgba($white, .3);
-    border-width: 0 1px;
-  }
-  li {
-    border-right: 1px solid rgba($white, .3);
   }
   h2 {
     color: rgba($white, .3);
