@@ -44,7 +44,7 @@ Nav bar for applications
           <ul class="navbar__item list-bare flex">
             <template is="x-repeat" items="{{navItems}}">
               <li class="pb- flex flex--bottom">
-                <a class$="_computeActiveClassName(item.selected)" href$="_computeHref(item)" on-click="navClickHandler">{{item.label}}</a>
+                <a class$="_computeActiveClassName(item.selected)" href$="{{item.path}}" on-click="navClickHandler">{{item.label}}</a>
               </li>
             </template>
           </ul>
@@ -73,9 +73,22 @@ Nav bar for applications
           return [];
         }
       },
-      pathPrefix: '#',
-      pathKey: 'path',
-      solutionName: ''
+      pathPrefix: {
+        value : '#',
+        type: String
+      },
+      pathKey: {
+        value: 'path',
+        type: String
+      },
+      solutionName: {
+        value: '',
+        type: String
+      }
+    },
+
+    created: function() {
+      console.log(this);
     },
 
     protocolRE: new RegExp('(http|https)://'),
@@ -94,6 +107,7 @@ Nav bar for applications
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
     ready: function() {
+      this.navItems.forEach(this._computeHref, this);
       this.markSelected(window.location.href);
     },
 
@@ -107,6 +121,7 @@ Nav bar for applications
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
+        console.log(item.selected);
       }
     },
 
@@ -123,7 +138,8 @@ Nav bar for applications
     },
 
     _computeHref: function(item) {
-      return this.pathPrefix + item[this.pathKey];
+      // return this.pathPrefix + item[this.pathKey];
+      item.path = this.pathPrefix + item[this.pathKey];
     }
 
   });
