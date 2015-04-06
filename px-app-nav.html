@@ -94,11 +94,11 @@ Nav bar for applications
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
     ready: function() {
-      // this.markSelected(window.location.href);
+      this.markSelected(window.location.href);
     },
 
-    navClickHandler: function(event, detail, sender) {
-      var href = sender.getAttribute("href");
+    navClickHandler: function(event) {
+      var href = event.target.getAttribute("href");
       this.markSelected(href);
     },
 
