@@ -44,7 +44,7 @@ Nav bar for applications
           <ul class="navbar__item list-bare flex">
             <template is="x-repeat" items="{{navItems}}">
               <li class="pb- flex flex--bottom">
-                <a class$="_computeActiveClassName(item.selected)" href$="{{item.path}}" on-click="navClickHandler">{{item.label}}</a>
+                <a href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
               </li>
             </template>
           </ul>
@@ -87,10 +87,6 @@ Nav bar for applications
       }
     },
 
-    created: function() {
-      console.log(this);
-    },
-
     protocolRE: new RegExp('(http|https)://'),
 
     navItemsChanged: function(oldValue, newValue) {
@@ -114,6 +110,7 @@ Nav bar for applications
     navClickHandler: function(event) {
       var href = event.target.getAttribute("href");
       this.markSelected(href);
+      this.toggleClass("active", true, event.target);
     },
 
     markSelected: function(path) {
@@ -121,7 +118,6 @@ Nav bar for applications
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
-        console.log(item.selected);
       }
     },
 
@@ -131,15 +127,8 @@ Nav bar for applications
       return resolvedPath.substring(idx + 1);
     },
 
-    _computeActiveClassName: function(isSelected) {
-      if (isSelected) {
-        return "active";
-      }
-    },
-
     _computeHref: function(item) {
-      // return this.pathPrefix + item[this.pathKey];
-      item.path = this.pathPrefix + item[this.pathKey];
+      item.href = this.pathPrefix + item[this.pathKey];
     }
 
   });
