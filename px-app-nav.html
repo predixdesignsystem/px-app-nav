@@ -44,7 +44,7 @@ Nav bar for applications
           <ul class="navbar__item list-bare flex">
             <template is="x-repeat" items="{{navItems}}">
               <li class="pb- flex flex--bottom">
-                <a href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
+                <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
               </li>
             </template>
           </ul>
@@ -109,8 +109,7 @@ Nav bar for applications
 
     navClickHandler: function(event) {
       var href = event.target.getAttribute("href");
-      this.markSelected(href);
-      this.toggleClass("active", true, event.target);
+      this.markSelected(href, event.target);
     },
 
     markSelected: function(path) {
@@ -118,6 +117,7 @@ Nav bar for applications
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
+        item.class = item.selected ? "active" : "";
       }
     },
 

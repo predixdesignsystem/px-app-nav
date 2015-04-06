@@ -49,6 +49,9 @@ in import paths
 // Base
 @import "../px-viewport-design/base.viewport";
 @import "../px-flexbox-design/base.flexbox";
+
+$predix-typography-for-web-component : true;
+
 @import "../px-typography-design/base.typography";
 @import "../px-iconography-design/base.iconography";
 
