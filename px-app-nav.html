@@ -35,17 +35,34 @@ Nav bar for applications
 <dom-module id="px-app-nav">
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <template>
-    <div class="layout mt">
-      <nav class="layout__item u-1/5" role=navigation>
-        <ul class="navbar__item list-bare ">
-          <template is="x-repeat" items="{{navItems}}">
-            <li class="pb- flex flex--bottom">
-              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
-            </li>
-          </template>
-        </ul>
-      </nav>
+    <div class="layout">
+      <div class="layout__item u-1/5">
+        <nav class="navbar" role=navigation>
+          <ul class="navbar__item list-bare ">
+            <template is="x-repeat" items="{{navItems}}">
+              <li class="pb- flex flex--bottom">
+                <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
+              </li>
+            </template>
+          </ul>
+        </nav>
+      </div>
       <div class="layout__item">
+        <div style="margin:1em;">
+
+          <h3>Demo</h3>
+
+          <p>
+              Although related, examples are /not/ the same as the test fixtures.
+              Tests are tests, examples are examples.
+          </p>
+
+          <p>
+              Also see the <a href="index.html">documentation</a> and the <a href="test/spec.html">UI test fixture</a>.
+          </p>
+
+        </div>
+
       </div>
     </div>
   </template>
@@ -73,6 +90,9 @@ Nav bar for applications
       solutionName: {
         value: '',
         type: String
+      },
+      hostAttributes: {
+        class: "layout"
       }
     },
 
