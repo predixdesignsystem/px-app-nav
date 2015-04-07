@@ -35,30 +35,19 @@ Nav bar for applications
 <dom-module id="px-app-nav">
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <template>
-    <nav role=navigation>
-      <div class="navbar viewport flex flex--justify">
-        <div class="nav flex">
-          <div class="navbar__item ph- pb- flex flex--bottom">
-            <content select=".logo"></content>
-          </div>
-          <ul class="navbar__item list-bare flex">
-            <template is="x-repeat" items="{{navItems}}">
-              <li class="pb- flex flex--bottom">
-                <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
-              </li>
-            </template>
-          </ul>
-        </div>
-        <div class="flex flex--bottom pb-">
-          <div class="navbar__item mr+">
-            <h2 class=mv0>{{solutionName}}</h2>
-          </div>
-          <div class=navbar__item>
-            <content select=".auth"></content>
-          </div>
-        </div>
+    <div class="layout mt">
+      <nav class="layout__item u-1/5" role=navigation>
+        <ul class="navbar__item list-bare ">
+          <template is="x-repeat" items="{{navItems}}">
+            <li class="pb- flex flex--bottom">
+              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
+            </li>
+          </template>
+        </ul>
+      </nav>
+      <div class="layout__item">
       </div>
-    </nav>
+    </div>
   </template>
 </dom-module>
 
