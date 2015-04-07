@@ -14,17 +14,18 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v0.8.0"
+    "polymer": "~v0.8.0",
+    "layout": "Polymer/layout"
   },
   "devDependencies": {
     "core-component-page": "https://github.com/Polymer/core-component-page.git#~v0.5.5",
     "web-component-tester": "~2.2.6",
     "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
     "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master",
-    "px-flexbox-design": "git://github.sw.ge.com/pxc/px-flexbox-design.git#master",
     "px-iconography-design": "git://github.sw.ge.com/pxc/px-iconography-design.git#master",
     "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#master",
-    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#master"
+    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#master",
+    "px-layout-design": "https://github.sw.ge.com/PXd/px-layout-design.git#master"
   },
   "resolutions": {
     "polymer": "~v0.8.0",

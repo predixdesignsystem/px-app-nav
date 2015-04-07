@@ -48,7 +48,8 @@ in import paths
 
 // Base
 @import "../px-viewport-design/base.viewport";
-@import "../px-flexbox-design/base.flexbox";
+
+@import "../px-layout-design/objects.layout.scss";
 
 $predix-typography-for-web-component : true;
 
@@ -85,29 +86,24 @@ $inuit-enable-responsive-paddings--none : true;
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";
 
-$px-navbar-height: 78px;
-
-:host + * {
-  padding-top: calculateRem($px-navbar-height);
-}
-
 nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+//   width: 100%;
 }
 
 .navbar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   @include inuit-font-size(12px, 16px);
   a {
     text-decoration: none;
   }
   em {
     font-style: normal;
-  }
-  .flex {
-    height: calculateRem($px-navbar-height);
   }
 }
 
