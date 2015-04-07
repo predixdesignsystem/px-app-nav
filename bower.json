@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": [
     "px-app-nav.html"
   ],
@@ -14,7 +14,7 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "v0.8.0-rc.2"
+    "polymer": "~v0.8.0"
   },
   "devDependencies": {
     "core-component-page": "https://github.com/Polymer/core-component-page.git#~v0.5.5",
@@ -27,7 +27,7 @@
     "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#master"
   },
   "resolutions": {
-    "webcomponentsjs": "^0.6.0",
-    "polymer": "v0.8.0-rc.2"
+    "polymer": "~v0.8.0",
+    "webcomponentsjs": "^0.6.0"
   }
 }
