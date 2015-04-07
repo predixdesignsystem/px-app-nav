@@ -35,18 +35,18 @@ Nav bar for applications
 <dom-module id="px-app-nav">
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <template>
-    <div class="layout">
-      <div class="layout__item u-1/5">
-        <nav class="navbar" role=navigation>
-          <ul class="navbar__item list-bare ">
-            <template is="x-repeat" items="{{navItems}}">
-              <li class="pb- flex flex--bottom">
-                <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
-              </li>
-            </template>
-          </ul>
-        </nav>
-      </div>
+    <div class="layout page-container">
+      <nav id="navbar" class="navbar layout__item u-1/5" role=navigation>
+        <img class="navbar__item hamburger-menu" src="icons/hamburger_icon.svg" on-click="menuClicked"/>
+        <ul class="navbar__item list-bare ">
+          <template is="x-repeat" items="{{navItems}}">
+            <li class="pb- flex flex--bottom">
+              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
+            </li>
+          </template>
+        </ul>
+      </nav>
+
       <div class="layout__item">
         <div style="margin:1em;">
 
@@ -91,8 +91,9 @@ Nav bar for applications
         value: '',
         type: String
       },
-      hostAttributes: {
-        class: "layout"
+      expanded: {
+        value: 'True',
+        type: Boolean
       }
     },
 
@@ -138,6 +139,12 @@ Nav bar for applications
 
     _computeHref: function(item) {
       item.href = this.pathPrefix + item[this.pathKey];
+    },
+
+    menuClicked: function(event){
+      this.toggleClass('u-1/5', this.expanded, this.$.navbar);
+      this.expanded = !this.expanded;
+      // this.toggleClass('u-1/8', this.expanded, this.$.navbar);
     }
 
   });

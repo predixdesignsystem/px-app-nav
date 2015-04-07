@@ -86,18 +86,21 @@ $inuit-enable-responsive-paddings--none : true;
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";
 
-nav {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-//   width: 100%;
+.page-container {
+  height: inherit;
 }
 
-.navbar {
+.hamburger-menu{
+  height: 1em;
+}
+
+:host {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
 
+.navbar {
   @include inuit-font-size(12px, 16px);
   a {
     text-decoration: none;
@@ -105,6 +108,10 @@ nav {
   em {
     font-style: normal;
   }
+}
+
+.navbar--collapsed {
+  width: 20px;
 }
 
 .navbar__item {
