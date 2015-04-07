@@ -36,7 +36,8 @@ Nav bar for applications
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <template>
     <div class="layout page-container">
-      <nav id="navbar" class="navbar layout__item u-1/5" role=navigation>
+
+      <nav id="navbar" class="navbar" role=navigation>
         <img class="navbar__item hamburger-menu" src="icons/hamburger_icon.svg" on-click="menuClicked"/>
         <ul class="navbar__item list-bare ">
           <template is="x-repeat" items="{{navItems}}">
@@ -142,9 +143,8 @@ Nav bar for applications
     },
 
     menuClicked: function(event){
-      this.toggleClass('u-1/5', this.expanded, this.$.navbar);
+      this.toggleClass('navbar--collapsed', !this.expanded, this.$.navbar);
       this.expanded = !this.expanded;
-      // this.toggleClass('u-1/8', this.expanded, this.$.navbar);
     }
 
   });

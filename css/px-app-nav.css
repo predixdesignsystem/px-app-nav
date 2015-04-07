@@ -3939,6 +3939,7 @@ html {
   height: 100%; }
 
 .navbar {
+  width: 209px;
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 16px; }
@@ -3948,7 +3949,7 @@ html {
     font-style: normal; }
 
 .navbar--collapsed {
-  width: 20px; }
+  width: 55px; }
 
 .navbar__item a {
   width: 7.375rem;

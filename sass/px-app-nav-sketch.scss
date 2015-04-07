@@ -86,6 +86,9 @@ $inuit-enable-responsive-paddings--none : true;
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";
 
+$px-navbar-open-width : 209px;
+$px-navbar-collapsed-width : 55px;
+
 .page-container {
   height: inherit;
 }
@@ -101,6 +104,7 @@ $inuit-enable-responsive-paddings--none : true;
 }
 
 .navbar {
+  width: $px-navbar-open-width;
   @include inuit-font-size(12px, 16px);
   a {
     text-decoration: none;
@@ -111,7 +115,7 @@ $inuit-enable-responsive-paddings--none : true;
 }
 
 .navbar--collapsed {
-  width: 20px;
+  width: $px-navbar-collapsed-width;
 }
 
 .navbar__item {
