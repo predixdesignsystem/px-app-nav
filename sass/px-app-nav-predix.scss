@@ -23,8 +23,8 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 @import "../px-colors-design/settings.colors";
 
 nav {
-  text-transform: uppercase;
-  letter-spacing: .04em;
+  // text-transform: uppercase;
+  // letter-spacing: .04em;
   background-color: $true-black;
 }
 
@@ -36,6 +36,8 @@ nav {
     border-right: 1px solid rgba($white, .3);
   }
 }
+
+.whiteiconcolor {color:$white;}
 
 .navbar__item {
   font-weight: bold;

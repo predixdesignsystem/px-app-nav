@@ -34,15 +34,17 @@ Nav bar for applications
 
 <dom-module id="px-app-nav">
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
+  <link rel="import" href="../web-animations-js/web-animations-next.dev.html"/>
   <template>
     <div class="layout page-container">
 
       <nav id="navbar" class="navbar" role=navigation>
-        <img class="navbar__item hamburger-menu" src="icons/hamburger_icon.svg" on-click="menuClicked"/>
+        <i class="pb- pt- pl- fa whiteiconcolor fa-bars fa-2x fa-fw" on-click="menuClicked"></i>
+
         <ul class="navbar__item list-bare ">
           <template is="x-repeat" items="{{navItems}}">
             <li class="pb- flex flex--bottom">
-              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler">{{item.label}}</a>
+              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class="fa fa-home fa-2x fa-fw"></i><span>{{item.label}}</span></a>
             </li>
           </template>
         </ul>
@@ -93,7 +95,7 @@ Nav bar for applications
         type: String
       },
       expanded: {
-        value: 'True',
+        value: true,
         type: Boolean
       }
     },
@@ -143,9 +145,22 @@ Nav bar for applications
     },
 
     menuClicked: function(event){
-      this.toggleClass('navbar--collapsed', !this.expanded, this.$.navbar);
       this.expanded = !this.expanded;
-    }
+      // this.toggleClass('navbar--collapsed', !this.expanded, this.$.navbar);
 
+      // buttonAnimation = new Animation(this.$.navbar,
+      // [{width: '55px'}, {width: '209'}], 2000);
+
+      // this.$.navbar.animate([
+      //         {opacity: 0.5, transform: "scale(0.5)"},
+      //         {opacity: 1.0, transform: "scale(1)"}
+      //     ], {
+      //         direction: 'alternate',
+      //         duration: 500,
+      //         iterations: Infinity
+      //     });
+
+
+    }
   });
 </script>

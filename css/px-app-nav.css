@@ -3927,7 +3927,8 @@ html {
   height: inherit; }
 
 .hamburger-menu {
-  height: 1em; }
+  padding-right: 12px;
+  padding-left: 12px; }
 
 :host {
   display: -webkit-flex;
@@ -3952,7 +3953,6 @@ html {
   width: 55px; }
 
 .navbar__item a {
-  width: 7.375rem;
   padding-right: 12px;
   padding-left: 12px; }
 .navbar__item h2 {
@@ -3986,14 +3986,15 @@ html {
  * Monochrome
  */
 nav {
-  text-transform: uppercase;
-  letter-spacing: .04em;
   background-color: black; }
 
 .nav .navbar__item, .nav .navbar__item li {
   border-left: 1px solid rgba(255, 255, 255, 0.3); }
 .nav .navbar__item li:last-child {
   border-right: 1px solid rgba(255, 255, 255, 0.3); }
+
+.whiteiconcolor {
+  color: white; }
 
 .navbar__item {
   font-weight: bold; }

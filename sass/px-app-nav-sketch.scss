@@ -94,7 +94,9 @@ $px-navbar-collapsed-width : 55px;
 }
 
 .hamburger-menu{
-  height: 1em;
+  
+  padding-right: halve($inuit-base-spacing-unit);
+  padding-left: halve($inuit-base-spacing-unit);
 }
 
 :host {
@@ -120,7 +122,7 @@ $px-navbar-collapsed-width : 55px;
 
 .navbar__item {
   a {
-    width: calculateRem(118px);
+    // width: calculateRem(118px);
     padding-right: halve($inuit-base-spacing-unit);
     padding-left: halve($inuit-base-spacing-unit);
   }
