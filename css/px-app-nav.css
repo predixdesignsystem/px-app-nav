@@ -3949,7 +3949,7 @@ html {
   .navbar em {
     font-style: normal; }
 
-.navbar--anchor-hidden span {
+.navbar--text-hidden span {
   opacity: 0;
   display: none; }
 
