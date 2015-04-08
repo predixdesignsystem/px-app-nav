@@ -3936,6 +3936,10 @@ html {
   .navbar em {
     font-style: normal; }
 
+.navbar--anchor-hidden span {
+  opacity: 0;
+  display: none; }
+
 .navbar--collapsed {
   width: 55px; }
 

@@ -94,7 +94,7 @@ $px-navbar-collapsed-width : 55px;
 }
 
 .hamburger-menu{
-  
+
   padding-right: halve($inuit-base-spacing-unit);
   padding-left: halve($inuit-base-spacing-unit);
 }
@@ -113,6 +113,13 @@ $px-navbar-collapsed-width : 55px;
   }
   em {
     font-style: normal;
+  }
+}
+
+.navbar--anchor-hidden {
+  span {
+    opacity: 0;
+    display: none;
   }
 }
 
