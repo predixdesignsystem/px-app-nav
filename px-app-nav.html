@@ -34,7 +34,7 @@ Nav bar for applications
 
 <dom-module id="px-app-nav">
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
-  <link rel="import" href="../web-animations-js/web-animations-next.dev.html"/>
+  <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
     <div class="layout page-container">
 
@@ -144,23 +144,18 @@ Nav bar for applications
       item.href = this.pathPrefix + item[this.pathKey];
     },
 
+    buttonAnimation : function(elem){
+      if(!this.expanded) {
+        return new Animation(elem, [{width: '209px'}, {width: '55px'}], 200);
+      } else {
+        return new Animation(elem, [{width: '55px'}, {width: '209px'}], 200);
+      }
+    },
+
     menuClicked: function(event){
       this.expanded = !this.expanded;
-      // this.toggleClass('navbar--collapsed', !this.expanded, this.$.navbar);
-
-      // buttonAnimation = new Animation(this.$.navbar,
-      // [{width: '55px'}, {width: '209'}], 2000);
-
-      // this.$.navbar.animate([
-      //         {opacity: 0.5, transform: "scale(0.5)"},
-      //         {opacity: 1.0, transform: "scale(1)"}
-      //     ], {
-      //         direction: 'alternate',
-      //         duration: 500,
-      //         iterations: Infinity
-      //     });
-
-
+      document.timeline.play(this.buttonAnimation(this.$.navbar));
+      this.toggleClass('navbar--collapsed', !this.expanded, this.$.navbar);
     }
   });
 </script>
