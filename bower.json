@@ -14,11 +14,11 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v0.8.0"
+    "polymer": "~v0.8.0",
+    "layout": "Polymer/layout",
+    "web-animations-js": "~2.0.0"
   },
   "devDependencies": {
-    "layout": "Polymer/layout",
-    "web-animations-js": "~2.0.0",
     "core-component-page": "https://github.com/Polymer/core-component-page.git#~v0.5.5",
     "web-component-tester": "~2.2.6",
     "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
