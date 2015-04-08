@@ -44,7 +44,7 @@ Nav bar for applications
         <ul class="navbar__item list-bare ">
           <template is="x-repeat" items="{{navItems}}">
             <li class="pb- flex flex--bottom">
-              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class="fa fa-home fa-2x fa-fw"></i><span>{{item.label}}</span></a>
+              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
             </li>
           </template>
         </ul>
@@ -121,6 +121,7 @@ Nav bar for applications
      */
     ready: function() {
       this.navItems.forEach(this._computeHref, this);
+      this.navItems.forEach(this._computeIcon);
       this.markSelected(window.location.href);
     },
 
@@ -146,6 +147,10 @@ Nav bar for applications
 
     _computeHref: function(item) {
       item.href = this.pathPrefix + item[this.pathKey];
+    },
+
+    _computeIcon: function(item) {
+      item.icon = item.icon + " fa fa-fw";
     },
 
     buttonAnimation : function(navElem, textElems){
