@@ -3923,9 +3923,6 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-.page-container {
-  height: inherit; }
-
 .hamburger-menu {
   padding-right: 12px;
   padding-left: 12px; }
@@ -3937,9 +3934,10 @@ html {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: inherit; }
+  height: 100%; }
 
 .navbar {
+  height: inherit;
   width: 209px;
   font-size: 12px;
   font-size: 0.75rem;
