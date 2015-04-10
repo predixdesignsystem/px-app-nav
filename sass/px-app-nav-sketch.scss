@@ -51,7 +51,7 @@ in import paths
 
 @import "../px-layout-design/objects.layout.scss";
 
-
+$predix-typography-for-web-component : true;
 
 @import "../px-typography-design/base.typography";
 @import "../px-iconography-design/base.iconography";
@@ -102,7 +102,7 @@ $px-navbar-collapsed-width : 55px;
 :host {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: inherit;
 }
 
 .navbar {
