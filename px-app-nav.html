@@ -36,32 +36,28 @@ Nav bar for applications
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
-    <div class="layout page-container">
+    <nav id="navbar" class="navbar" role=navigation>
+      <i class="pb- pt- pl- fa whiteiconcolor fa-bars fa-2x fa-fw" on-click="menuClicked"></i>
 
-      <nav id="navbar" class="navbar" role=navigation>
-        <i class="pb- pt- pl- fa whiteiconcolor fa-bars fa-2x fa-fw" on-click="menuClicked"></i>
+      <ul class="navbar__item list-bare ">
+        <template is="x-repeat" items="{{navItems}}">
+          <li class="pb- flex flex--bottom">
+            <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
 
-        <ul class="navbar__item list-bare ">
-          <template is="x-repeat" items="{{navItems}}">
-            <li class="pb- flex flex--bottom">
-              <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
+            <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
-              <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
+            <ul class="navbar__item list-bare ">
+              <template is="x-repeat" items="{{item.subitems}}">
+                <li class="pb- pl flex flex--bottom">
+                  <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
+                </li>
+              </template>
+            </ul>
 
-              <ul class="navbar__item list-bare ">
-                <template is="x-repeat" items="{{item.subitems}}">
-                  <li class="pb- pl flex flex--bottom">
-                    <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
-                  </li>
-                </template>
-              </ul>
-
-            </li>
-          </template>
-        </ul>
-      </nav>
-
-    </div>
+          </li>
+        </template>
+      </ul>
+    </nav>
   </template>
 </dom-module>
 

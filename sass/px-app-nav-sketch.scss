@@ -89,10 +89,6 @@ $inuit-enable-responsive-paddings--none : true;
 $px-navbar-open-width : 209px;
 $px-navbar-collapsed-width : 55px;
 
-.page-container {
-  height: inherit;
-}
-
 .hamburger-menu{
 
   padding-right: halve($inuit-base-spacing-unit);
@@ -102,10 +98,11 @@ $px-navbar-collapsed-width : 55px;
 :host {
   display: flex;
   flex-direction: column;
-  height: inherit;
+  height: 100%;
 }
 
 .navbar {
+  height: inherit;
   width: $px-navbar-open-width;
   @include inuit-font-size(12px, 16px);
   a {
