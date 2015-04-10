@@ -46,7 +46,7 @@ Nav bar for applications
             <li class="pb- flex flex--bottom">
               <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
 
-              <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
+              <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> --> -->
 
               <ul class="navbar__item list-bare ">
                 <template is="x-repeat" items="{{item.subitems}}">
@@ -61,7 +61,7 @@ Nav bar for applications
         </ul>
       </nav>
 
-      <div class="layout__item">
+      <!-- <div class="layout__item">
         <div style="margin:1em;">
 
           <h3>Demo</h3>
@@ -77,7 +77,7 @@ Nav bar for applications
 
         </div>
 
-      </div>
+      </div> -->
     </div>
   </template>
 </dom-module>
@@ -89,8 +89,9 @@ Nav bar for applications
     properties: {
       navItems: {
         type: Array,
+        notify: true,
         value: function() {
-          return [];
+          return [{}];
         }
       },
       pathPrefix: {
@@ -115,14 +116,19 @@ Nav bar for applications
       }
     },
 
+    listeners: {
+      "nav-items-changed": "_observeChanged"
+     },
+
     protocolRE: new RegExp('(http|https)://'),
 
-    navItemsChanged: function(oldValue, newValue) {
-      if (typeof this.navItems === 'string') {
-        if (this.navItems.length > 0) {
-          this.navItems = JSON.parse(this.navItems);
-        }
-      } else {
+    _observeChanged: function(event) {
+      if (!event.detail.value){
+        this.navItems = [];
+      }
+      else{
+        this.navItems.forEach(this._computeHref, this);
+        this.navItems.forEach(this._computeIcon);
         this.markSelected(window.location.href);
       }
     },
@@ -131,8 +137,6 @@ Nav bar for applications
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
     ready: function() {
-      this.navItems.forEach(this._computeHref, this);
-      this.navItems.forEach(this._computeIcon);
       this.markSelected(window.location.href);
     },
 
