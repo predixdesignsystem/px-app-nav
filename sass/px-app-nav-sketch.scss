@@ -140,3 +140,8 @@ $px-navbar-collapsed-width : 55px;
     }
   }
 }
+
+.navbar__item--closed{
+  height: 0px;
+  opacity: 0;
+}

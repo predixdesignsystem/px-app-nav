@@ -3952,3 +3952,7 @@ html {
   letter-spacing: .04em; }
   .navbar__item .btn .fa {
     font-size: .75em; }
+
+.navbar__item--closed {
+  height: 0px;
+  opacity: 0; }

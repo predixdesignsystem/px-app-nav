@@ -46,7 +46,7 @@ Nav bar for applications
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
-            <ul class="navbar__item list-bare ">
+            <ul class="navbar__item navbar__item--closed list-bare ">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li class="pb- pl flex flex--bottom">
                   <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
@@ -120,7 +120,7 @@ Nav bar for applications
     },
 
     navClickHandler: function(event) {
-      var href = event.target.getAttribute("href");
+      var href = event.target.parentElement.getAttribute("href");
       this.markSelected(href, event.target);
     },
 
