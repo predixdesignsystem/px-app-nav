@@ -168,11 +168,13 @@ Nav bar / drawer for applications
       var hidden = subnavEle.classList.contains('visuallyhidden');
       this.toggleClass('visuallyhidden' , !hidden, subnavEle);
 
-      var allSubNavs = this.$.navitemlist.querySelectorAll("ul");
+      if(hidden){
+        var allSubNavs = this.$.navitemlist.querySelectorAll("ul");
 
-      for (i=0; i<allSubNavs.length; i++) {
-        if (allSubNavs[i] != subnavEle){
-          this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
+        for (i=0; i<allSubNavs.length; i++) {
+          if (allSubNavs[i] != subnavEle){
+            this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
+          }
         }
       }
     },
