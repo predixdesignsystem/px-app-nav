@@ -26,7 +26,7 @@ THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PRE
 Predix branding rules go in px-app-nav-predix.scss, not in this file.
 */
 /*
-See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
+See https                               : //github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
 in import paths
 */
 /*!
@@ -77,9 +77,9 @@ in import paths
    *    render text using sub-pixel anti-aliasing.
    */
 html {
-  font-size: 1em;
+  font-size: 0.9375em;
   /* [1] */
-  line-height: 1.5;
+  line-height: 1.3333333333;
   /* [1] */
   background-color: #fff;
   color: #333;
@@ -146,8 +146,8 @@ audio:not([controls]) {
    * As per: csswizardry.com/2012/06/single-direction-margin-declarations
    */
 h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, p, address, hr, table, fieldset, figure, pre {
-  margin-bottom: 24px;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 20px;
+  margin-bottom: 1.3333333333rem; }
 
 /**
    * Remove extra vertical spacing when nesting lists.
@@ -160,8 +160,8 @@ li > ul, li > ol {
    * by a consistent amount. Define that amount once,here.
    */
 ul, ol, dd {
-  margin-left: 48px;
-  margin-left: 3rem; }
+  margin-left: 40px;
+  margin-left: 2.6666666667rem; }
 
 /* Links
      ========================================================================== */
@@ -676,8 +676,8 @@ html {
  */
 .list-btn {
   font-size: 20px;
-  font-size: 1.25rem;
-  line-height: 1.2; }
+  font-size: 1.3333333333rem;
+  line-height: 1; }
   .list-btn li {
     margin-right: 1em; }
     .list-btn li:last-child {
@@ -750,35 +750,132 @@ html {
   color: inherit; }
 
 .list-ui__item, .list-ui > li {
-  padding: 24px;
+  padding: 20px;
   border-bottom-width: 1px; }
 
 /**
      * Tiny list-uis.
      */
 .list-ui--tiny > .list-ui__item, .list-ui.list-ui--tiny > li {
-  padding: 6px; }
+  padding: 5px; }
 
 /**
      * Small list-uis.
      */
 .list-ui--small > .list-ui__item, .list-ui.list-ui--small > li {
-  padding: 12px; }
+  padding: 10px; }
 
 /**
      * Large list-uis.
      */
 .list-ui--large > .list-ui__item, .list-ui.list-ui--large > li {
-  padding: 48px; }
+  padding: 40px; }
 
 /**
      * Huge list-uis.
      */
 .list-ui--huge > .list-ui__item, .list-ui.list-ui--huge > li {
-  padding: 96px; }
+  padding: 80px; }
 
 .list-ui > li:last-child, .list-ui__item:last-child {
   border-bottom-width: 0; }
+
+/*------------------------------------*\
+    #PX-FLEXBOX-DESIGN
+\*------------------------------------*/
+/**
+* Flexbox for Predix Experience
+*/
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+.flex, :host {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.flex--reverse {
+  -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse; }
+
+.flex--column, :host {
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.flex--column--reverse {
+  -webkit-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
+
+.flex--wrap {
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+
+.flex--center {
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.flex--right {
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
+.flex--justify {
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.flex--spaced {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+
+.flex--top {
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
+
+.flex--middle {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.flex--bottom {
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end; }
+
+.flex--baseline {
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline; }
+
+.flex__item--top {
+  -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+          align-self: flex-start; }
+
+.flex__item--middle {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center; }
+
+.flex__item--bottom {
+  -webkit-align-self: flex-end;
+      -ms-flex-item-align: end;
+          align-self: flex-end; }
+
+.flex__item--baseline {
+  -webkit-align-self: baseline;
+      -ms-flex-item-align: baseline;
+          align-self: baseline; }
 
 /*------------------------------------*\
     #PX-VIEWPORT-DESIGN
@@ -804,63 +901,6 @@ html {
       width: 100%;
       padding-right: 0;
       padding-left: 0; } }
-
-/*------------------------------------*\
-    #PX-LAYOUT-DESIGN
-\*------------------------------------*/
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/**
- * The Predix Experience layout system uses `box-sizing: border-box;` and
- * `display: flex;` to create an extremely powerful, flexible
- * alternative to the traditional grid system. Combine the layout items with
- * the widths found in `trumps.widths`.
- */
-/**
-   * Begin a layout group.
-   */
-.layout {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  /* [1] */
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  margin-left: -6px;
-  padding: 0; }
-
-/**
-       * 1. Space columns apart.
-       * 2. Full-width unless told to behave otherwise.
-       * 3. Required to combine fluid widths and fixed gutters.
-       */
-.layout__item {
-  padding-left: 6px;
-  /* [1] */
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  /* [2] */
-  -webkit-flex-basis: 10em;
-      -ms-flex-preferred-size: 10em;
-          flex-basis: 10em; }
-  @media screen and (min-width: 64rem) {
-    .layout__item {
-      -webkit-flex-basis: 0;
-          -ms-flex-preferred-size: 0;
-              flex-basis: 0; } }
 
 /*------------------------------------*\
     $PX-TYPOGRAPHY-DESIGN
@@ -2626,7 +2666,7 @@ html {
   background: #3171e3;
   -webkit-font-smoothing: antialiased;
   border: 0;
-  padding: 6px 1em;
+  padding: 5px 1em;
   border-radius: 3px; }
   .btn, .btn:hover, .btn:active, .btn:focus {
     text-decoration: none;
@@ -2641,7 +2681,7 @@ html {
   * Establish default space between adjacent buttons
   */
 .btn + .btn {
-  margin-left: 12px; }
+  margin-left: 10px; }
 
 /**
   * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
@@ -2662,6 +2702,55 @@ html {
     background: transparent;
     background-image: none;
     color: inherit; }
+
+:host {
+  min-height: 100%; }
+
+.navbar {
+  font-size: 15px;
+  font-size: 1rem;
+  line-height: 1.3333333333;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 219px;
+  padding-top: 1em;
+  padding-bottom: 1em; }
+
+.navbar__item > li {
+  line-height: 3; }
+  .navbar__item > li a {
+    padding-right: 1em;
+    padding-left: 1.0666666667em; }
+  .navbar__item > li i {
+    margin-right: .3333333333em; }
+  .navbar__item > li li {
+    font-size: 12px;
+    font-size: 0.8rem;
+    line-height: 1.6666666667;
+    line-height: 2.5; }
+    .navbar__item > li li a {
+      padding-left: 3.4166666667em; }
+.navbar__item a {
+  display: block; }
+
+.navbar--collapsed {
+  width: 55px; }
+
+.navbar--text-hidden .navbar__item > li > a span, .navbar--text-hidden .navbar__item > li ul {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  clip: rect(0 0 0 0) !important; }
+
+.btn--svg {
+  height: 16px;
+  margin-bottom: 1.5em;
+  margin-left: 1em; }
 
 /*------------------------------------*\
     #PX-CLEARFIX-DESIGN
@@ -2723,716 +2812,32 @@ html {
  * Sass functions for Predix Experience
  */
 /**
-       * Margin helper classes.
-       *
-       * Add margins.
-       */
-.m {
-  margin: 24px !important; }
-
-.mt {
-  margin-top: 24px !important; }
-
-.mr {
-  margin-right: 24px !important; }
-
-.mb {
-  margin-bottom: 24px !important; }
-
-.ml {
-  margin-left: 24px !important; }
-
-.mh {
-  margin-right: 24px !important;
-  margin-left: 24px !important; }
-
-.mv {
-  margin-top: 24px !important;
-  margin-bottom: 24px !important; }
-
-/**
-       * Add tiny margins.
-       */
-.m-- {
-  margin: 6px !important; }
-
-.mt-- {
-  margin-top: 6px !important; }
-
-.mr-- {
-  margin-right: 6px !important; }
-
-.mb-- {
-  margin-bottom: 6px !important; }
-
-.ml-- {
-  margin-left: 6px !important; }
-
-.mh-- {
-  margin-right: 6px !important;
-  margin-left: 6px !important; }
-
-.mv-- {
-  margin-top: 6px !important;
-  margin-bottom: 6px !important; }
-
-/**
-       * Add small margins.
-       */
-.m- {
-  margin: 12px !important; }
-
-.mt- {
-  margin-top: 12px !important; }
-
-.mr- {
-  margin-right: 12px !important; }
-
-.mb- {
-  margin-bottom: 12px !important; }
-
-.ml- {
-  margin-left: 12px !important; }
-
-.mh- {
-  margin-right: 12px !important;
-  margin-left: 12px !important; }
-
-.mv- {
-  margin-top: 12px !important;
-  margin-bottom: 12px !important; }
-
-/**
-       * Add large margins.
-       */
-.m\+ {
-  margin: 48px !important; }
-
-.mt\+ {
-  margin-top: 48px !important; }
-
-.mr\+ {
-  margin-right: 48px !important; }
-
-.mb\+ {
-  margin-bottom: 48px !important; }
-
-.ml\+ {
-  margin-left: 48px !important; }
-
-.mh\+ {
-  margin-right: 48px !important;
-  margin-left: 48px !important; }
-
-.mv\+ {
-  margin-top: 48px !important;
-  margin-bottom: 48px !important; }
-
-/**
-       * Remove margins.
-       */
-.m0 {
-  margin: 0 !important; }
-
-.mt0 {
-  margin-top: 0 !important; }
-
-.mr0 {
-  margin-right: 0 !important; }
-
-.mb0 {
-  margin-bottom: 0 !important; }
-
-.ml0 {
-  margin-left: 0 !important; }
-
-.mh0 {
-  margin-right: 0 !important;
-  margin-left: 0 !important; }
-
-.mv0 {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important; }
-
-/**
-       * Negative margins.
-       */
-.-m {
-  margin: -24px !important; }
-
-.-mt {
-  margin-top: -24px !important; }
-
-.-mr {
-  margin-right: -24px !important; }
-
-.-mb {
-  margin-bottom: -24px !important; }
-
-.-ml {
-  margin-left: -24px !important; }
-
-.-mh {
-  margin-right: -24px !important;
-  margin-left: -24px !important; }
-
-.-mv {
-  margin-top: -24px !important;
-  margin-bottom: -24px !important; }
-
-/**
-       * Tiny negative margins.
-       */
-.-m-- {
-  margin: -6px !important; }
-
-.-mt-- {
-  margin-top: -6px !important; }
-
-.-mr-- {
-  margin-right: -6px !important; }
-
-.-mb-- {
-  margin-bottom: -6px !important; }
-
-.-ml-- {
-  margin-left: -6px !important; }
-
-.-mh-- {
-  margin-right: -6px !important;
-  margin-left: -6px !important; }
-
-.-mv-- {
-  margin-top: -6px !important;
-  margin-bottom: -6px !important; }
-
-/**
        * Padding helper classes.
        *
        * Add paddings.
        */
 .p {
-  padding: 24px !important; }
+  padding: 20px !important; }
 
 .pt {
-  padding-top: 24px !important; }
+  padding-top: 20px !important; }
 
 .pr {
-  padding-right: 24px !important; }
+  padding-right: 20px !important; }
 
 .pb {
-  padding-bottom: 24px !important; }
+  padding-bottom: 20px !important; }
 
 .pl {
-  padding-left: 24px !important; }
+  padding-left: 20px !important; }
 
 .ph {
-  padding-right: 24px !important;
-  padding-left: 24px !important; }
+  padding-right: 20px !important;
+  padding-left: 20px !important; }
 
 .pv {
-  padding-top: 24px !important;
-  padding-bottom: 24px !important; }
-
-/**
-       * Add small paddings.
-       */
-.p- {
-  padding: 12px !important; }
-
-.pt- {
-  padding-top: 12px !important; }
-
-.pr- {
-  padding-right: 12px !important; }
-
-.pb- {
-  padding-bottom: 12px !important; }
-
-.pl- {
-  padding-left: 12px !important; }
-
-.ph- {
-  padding-right: 12px !important;
-  padding-left: 12px !important; }
-
-.pv- {
-  padding-top: 12px !important;
-  padding-bottom: 12px !important; }
-
-/**
-       * Add large paddings.
-       */
-.p\+ {
-  padding: 48px !important; }
-
-.pt\+ {
-  padding-top: 48px !important; }
-
-.pr\+ {
-  padding-right: 48px !important; }
-
-.pb\+ {
-  padding-bottom: 48px !important; }
-
-.pl\+ {
-  padding-left: 48px !important; }
-
-.ph\+ {
-  padding-right: 48px !important;
-  padding-left: 48px !important; }
-
-.pv\+ {
-  padding-top: 48px !important;
-  padding-bottom: 48px !important; }
-
-/**
-       * Margin helper classes.
-       *
-       * Add margins.
-       */
-@media screen and (max-width: 44.9375rem) {
-  .palm-m {
-    margin: 24px !important; }
-  .palm-mt {
-    margin-top: 24px !important; }
-  .palm-mr {
-    margin-right: 24px !important; }
-  .palm-mb {
-    margin-bottom: 24px !important; }
-  .palm-ml {
-    margin-left: 24px !important; }
-  .palm-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .palm-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-@media screen and (min-width: 45rem) and (max-width: 63.9375rem) {
-  .lap-m {
-    margin: 24px !important; }
-  .lap-mt {
-    margin-top: 24px !important; }
-  .lap-mr {
-    margin-right: 24px !important; }
-  .lap-mb {
-    margin-bottom: 24px !important; }
-  .lap-ml {
-    margin-left: 24px !important; }
-  .lap-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .lap-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-@media screen and (min-width: 45rem) {
-  .lap-and-up-m {
-    margin: 24px !important; }
-  .lap-and-up-mt {
-    margin-top: 24px !important; }
-  .lap-and-up-mr {
-    margin-right: 24px !important; }
-  .lap-and-up-mb {
-    margin-bottom: 24px !important; }
-  .lap-and-up-ml {
-    margin-left: 24px !important; }
-  .lap-and-up-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .lap-and-up-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-@media screen and (max-width: 63.9375rem) {
-  .portable-m {
-    margin: 24px !important; }
-  .portable-mt {
-    margin-top: 24px !important; }
-  .portable-mr {
-    margin-right: 24px !important; }
-  .portable-mb {
-    margin-bottom: 24px !important; }
-  .portable-ml {
-    margin-left: 24px !important; }
-  .portable-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .portable-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-@media screen and (min-width: 64rem) {
-  .desk-m {
-    margin: 24px !important; }
-  .desk-mt {
-    margin-top: 24px !important; }
-  .desk-mr {
-    margin-right: 24px !important; }
-  .desk-mb {
-    margin-bottom: 24px !important; }
-  .desk-ml {
-    margin-left: 24px !important; }
-  .desk-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .desk-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-@media screen and (min-width: 75rem) {
-  .desk-wide-m {
-    margin: 24px !important; }
-  .desk-wide-mt {
-    margin-top: 24px !important; }
-  .desk-wide-mr {
-    margin-right: 24px !important; }
-  .desk-wide-mb {
-    margin-bottom: 24px !important; }
-  .desk-wide-ml {
-    margin-left: 24px !important; }
-  .desk-wide-mh {
-    margin-right: 24px !important;
-    margin-left: 24px !important; }
-  .desk-wide-mv {
-    margin-top: 24px !important;
-    margin-bottom: 24px !important; } }
-
-/**
-       * Padding helper classes.
-       *
-       * Add paddings.
-       */
-@media screen and (max-width: 44.9375rem) {
-  .palm-p {
-    padding: 24px !important; }
-  .palm-pt {
-    padding-top: 24px !important; }
-  .palm-pr {
-    padding-right: 24px !important; }
-  .palm-pb {
-    padding-bottom: 24px !important; }
-  .palm-pl {
-    padding-left: 24px !important; }
-  .palm-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .palm-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-@media screen and (min-width: 45rem) and (max-width: 63.9375rem) {
-  .lap-p {
-    padding: 24px !important; }
-  .lap-pt {
-    padding-top: 24px !important; }
-  .lap-pr {
-    padding-right: 24px !important; }
-  .lap-pb {
-    padding-bottom: 24px !important; }
-  .lap-pl {
-    padding-left: 24px !important; }
-  .lap-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .lap-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-@media screen and (min-width: 45rem) {
-  .lap-and-up-p {
-    padding: 24px !important; }
-  .lap-and-up-pt {
-    padding-top: 24px !important; }
-  .lap-and-up-pr {
-    padding-right: 24px !important; }
-  .lap-and-up-pb {
-    padding-bottom: 24px !important; }
-  .lap-and-up-pl {
-    padding-left: 24px !important; }
-  .lap-and-up-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .lap-and-up-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-@media screen and (max-width: 63.9375rem) {
-  .portable-p {
-    padding: 24px !important; }
-  .portable-pt {
-    padding-top: 24px !important; }
-  .portable-pr {
-    padding-right: 24px !important; }
-  .portable-pb {
-    padding-bottom: 24px !important; }
-  .portable-pl {
-    padding-left: 24px !important; }
-  .portable-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .portable-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-@media screen and (min-width: 64rem) {
-  .desk-p {
-    padding: 24px !important; }
-  .desk-pt {
-    padding-top: 24px !important; }
-  .desk-pr {
-    padding-right: 24px !important; }
-  .desk-pb {
-    padding-bottom: 24px !important; }
-  .desk-pl {
-    padding-left: 24px !important; }
-  .desk-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .desk-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-@media screen and (min-width: 75rem) {
-  .desk-wide-p {
-    padding: 24px !important; }
-  .desk-wide-pt {
-    padding-top: 24px !important; }
-  .desk-wide-pr {
-    padding-right: 24px !important; }
-  .desk-wide-pb {
-    padding-bottom: 24px !important; }
-  .desk-wide-pl {
-    padding-left: 24px !important; }
-  .desk-wide-ph {
-    padding-right: 24px !important;
-    padding-left: 24px !important; }
-  .desk-wide-pv {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important; } }
-
-/**
-       * Add small paddings.
-       */
-@media screen and (max-width: 44.9375rem) {
-  .palm-p- {
-    padding: 12px !important; }
-  .palm-pt- {
-    padding-top: 12px !important; }
-  .palm-pr- {
-    padding-right: 12px !important; }
-  .palm-pb- {
-    padding-bottom: 12px !important; }
-  .palm-pl- {
-    padding-left: 12px !important; }
-  .palm-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .palm-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-@media screen and (min-width: 45rem) and (max-width: 63.9375rem) {
-  .lap-p- {
-    padding: 12px !important; }
-  .lap-pt- {
-    padding-top: 12px !important; }
-  .lap-pr- {
-    padding-right: 12px !important; }
-  .lap-pb- {
-    padding-bottom: 12px !important; }
-  .lap-pl- {
-    padding-left: 12px !important; }
-  .lap-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .lap-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-@media screen and (min-width: 45rem) {
-  .lap-and-up-p- {
-    padding: 12px !important; }
-  .lap-and-up-pt- {
-    padding-top: 12px !important; }
-  .lap-and-up-pr- {
-    padding-right: 12px !important; }
-  .lap-and-up-pb- {
-    padding-bottom: 12px !important; }
-  .lap-and-up-pl- {
-    padding-left: 12px !important; }
-  .lap-and-up-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .lap-and-up-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-@media screen and (max-width: 63.9375rem) {
-  .portable-p- {
-    padding: 12px !important; }
-  .portable-pt- {
-    padding-top: 12px !important; }
-  .portable-pr- {
-    padding-right: 12px !important; }
-  .portable-pb- {
-    padding-bottom: 12px !important; }
-  .portable-pl- {
-    padding-left: 12px !important; }
-  .portable-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .portable-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-@media screen and (min-width: 64rem) {
-  .desk-p- {
-    padding: 12px !important; }
-  .desk-pt- {
-    padding-top: 12px !important; }
-  .desk-pr- {
-    padding-right: 12px !important; }
-  .desk-pb- {
-    padding-bottom: 12px !important; }
-  .desk-pl- {
-    padding-left: 12px !important; }
-  .desk-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .desk-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-@media screen and (min-width: 75rem) {
-  .desk-wide-p- {
-    padding: 12px !important; }
-  .desk-wide-pt- {
-    padding-top: 12px !important; }
-  .desk-wide-pr- {
-    padding-right: 12px !important; }
-  .desk-wide-pb- {
-    padding-bottom: 12px !important; }
-  .desk-wide-pl- {
-    padding-left: 12px !important; }
-  .desk-wide-ph- {
-    padding-right: 12px !important;
-    padding-left: 12px !important; }
-  .desk-wide-pv- {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important; } }
-
-/**
-       * Remove paddings.
-       */
-@media screen and (max-width: 44.9375rem) {
-  .palm-p0 {
-    padding: 0 !important; }
-  .palm-pt0 {
-    padding-top: 0 !important; }
-  .palm-pr0 {
-    padding-right: 0 !important; }
-  .palm-pb0 {
-    padding-bottom: 0 !important; }
-  .palm-pl0 {
-    padding-left: 0 !important; }
-  .palm-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .palm-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
-
-@media screen and (min-width: 45rem) and (max-width: 63.9375rem) {
-  .lap-p0 {
-    padding: 0 !important; }
-  .lap-pt0 {
-    padding-top: 0 !important; }
-  .lap-pr0 {
-    padding-right: 0 !important; }
-  .lap-pb0 {
-    padding-bottom: 0 !important; }
-  .lap-pl0 {
-    padding-left: 0 !important; }
-  .lap-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .lap-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
-
-@media screen and (min-width: 45rem) {
-  .lap-and-up-p0 {
-    padding: 0 !important; }
-  .lap-and-up-pt0 {
-    padding-top: 0 !important; }
-  .lap-and-up-pr0 {
-    padding-right: 0 !important; }
-  .lap-and-up-pb0 {
-    padding-bottom: 0 !important; }
-  .lap-and-up-pl0 {
-    padding-left: 0 !important; }
-  .lap-and-up-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .lap-and-up-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
-
-@media screen and (max-width: 63.9375rem) {
-  .portable-p0 {
-    padding: 0 !important; }
-  .portable-pt0 {
-    padding-top: 0 !important; }
-  .portable-pr0 {
-    padding-right: 0 !important; }
-  .portable-pb0 {
-    padding-bottom: 0 !important; }
-  .portable-pl0 {
-    padding-left: 0 !important; }
-  .portable-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .portable-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
-
-@media screen and (min-width: 64rem) {
-  .desk-p0 {
-    padding: 0 !important; }
-  .desk-pt0 {
-    padding-top: 0 !important; }
-  .desk-pr0 {
-    padding-right: 0 !important; }
-  .desk-pb0 {
-    padding-bottom: 0 !important; }
-  .desk-pl0 {
-    padding-left: 0 !important; }
-  .desk-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .desk-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
-
-@media screen and (min-width: 75rem) {
-  .desk-wide-p0 {
-    padding: 0 !important; }
-  .desk-wide-pt0 {
-    padding-top: 0 !important; }
-  .desk-wide-pr0 {
-    padding-right: 0 !important; }
-  .desk-wide-pb0 {
-    padding-bottom: 0 !important; }
-  .desk-wide-pl0 {
-    padding-left: 0 !important; }
-  .desk-wide-ph0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important; }
-  .desk-wide-pv0 {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important; } }
+  padding-top: 20px !important;
+  padding-bottom: 20px !important; }
 
 /*------------------------------------*\
     #PX-WIDTHS-RESPONSIVE-DESIGN
@@ -3923,49 +3328,6 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-.hamburger-menu {
-  padding-right: 12px;
-  padding-left: 12px; }
-
-:host {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100%; }
-
-.navbar {
-  height: inherit;
-  width: 209px;
-  font-size: 12px;
-  font-size: 0.75rem;
-  line-height: 16px; }
-  .navbar a {
-    text-decoration: none; }
-  .navbar em {
-    font-style: normal; }
-
-.navbar--text-hidden span {
-  opacity: 0;
-  display: none; }
-
-.navbar--collapsed {
-  width: 55px; }
-
-.navbar__item a {
-  padding-right: 12px;
-  padding-left: 12px; }
-.navbar__item h2 {
-  font-size: 12px;
-  font-size: 0.75rem;
-  line-height: 16px; }
-.navbar__item .btn {
-  letter-spacing: .04em; }
-  .navbar__item .btn .fa {
-    font-size: .75em; }
-
 /*------------------------------------*\
     #PX-COLORS-DESIGN
 \*------------------------------------*/
@@ -3987,28 +3349,13 @@ html {
 /**
  * Monochrome
  */
-nav {
-  background-color: black; }
-
-.nav .navbar__item, .nav .navbar__item li {
-  border-left: 1px solid rgba(255, 255, 255, 0.3); }
-.nav .navbar__item li:last-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.3); }
-
-.whiteiconcolor {
+a {
+  text-decoration: none;
   color: white; }
+  a:hover {
+    background-color: #575757; }
+  a:active {
+    background-color: #3693f8; }
 
-.navbar__item {
-  font-weight: bold; }
-  .navbar__item, .navbar__item > *, .navbar__item > li a {
-    color: white; }
-  .navbar__item em a, .navbar__item a.active {
-    color: #3693f8; }
-  .navbar__item a {
-    color: white; }
-    .navbar__item a:hover {
-      color: #3693f8; }
-  .navbar__item h2 {
-    color: rgba(255, 255, 255, 0.3); }
-  .navbar__item .btn .fa {
-    color: white; }
+.navbar {
+  background-color: #2b2b2b; }

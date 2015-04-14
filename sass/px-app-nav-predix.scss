@@ -22,43 +22,18 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 @import 'px-app-nav-sketch.scss';
 @import "../px-colors-design/settings.colors";
 
-nav {
-  // text-transform: uppercase;
-  // letter-spacing: .04em;
-  background-color: $true-black;
-}
 
-.nav .navbar__item {
-  &, li {
-    border-left: 1px solid rgba($white, .3);
+a {
+  text-decoration: none;
+  color: $white;
+  &:hover {
+    background-color: $gray-dark;
   }
-  li:last-child {
-    border-right: 1px solid rgba($white, .3);
+  &:active {
+    background-color: $blue-light;
   }
 }
 
-.whiteiconcolor {color:$white;}
-
-.navbar__item {
-  font-weight: bold;
-  &, > *, > li a {
-    color: $white;
-  }
-  em a, a.active {
-    color: $blue-light;
-  }
-  a {
-    color: $white;
-    &:hover {
-      color: $blue-light;
-    }
-  }
-  h2 {
-    color: rgba($white, .3);
-  }
-  .btn {
-    .fa {
-      color: $white;
-    }
-  }
+.navbar {
+  background-color: $gray-darkest;
 }

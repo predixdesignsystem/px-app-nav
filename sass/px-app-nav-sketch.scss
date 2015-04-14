@@ -19,17 +19,20 @@ THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PRE
 Predix branding rules go in px-app-nav-predix.scss, not in this file.
 */
 
-$imported-once-files: ();
+$imported-once-files                    : ();
 
 
 
 /*
-See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
+See https                               : //github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
 in import paths
 */
 
 
 // Settings
+$inuit-base-font-size                   : 15px;
+$inuit-base-line-height                 : 20px;
+
 @import "../inuit-defaults/settings.defaults";
 @import "../inuit-responsive-settings/settings.responsive";
 
@@ -47,11 +50,10 @@ in import paths
 @import "../px-meta-lists-design/meta.lists";
 
 // Base
+@import "../px-flexbox-design/base.flexbox";
 @import "../px-viewport-design/base.viewport";
 
-@import "../px-layout-design/objects.layout.scss";
-
-$predix-typography-for-web-component : true;
+$predix-typography-for-web-component    : true;
 
 @import "../px-typography-design/base.typography";
 @import "../px-iconography-design/base.iconography";
@@ -61,82 +63,71 @@ $inuit-enable-btn--bare                 : true;
 
 @import "../px-buttons-design/objects.buttons";
 
-$inuit-enable-margins                   : true;
-$inuit-enable-margins--negative         : true;
-$inuit-enable-margins--small            : true;
-$inuit-enable-margins--large            : true;
-$inuit-enable-margins--tiny             : true;
-$inuit-enable-margins--none             : true;
-
-$inuit-enable-margins--negative-tiny    : true;
-
-$inuit-enable-paddings                  : true;
-$inuit-enable-paddings--small           : true;
-$inuit-enable-paddings--large           : true;
-
-$inuit-enable-responsive-margins        : true;
-
-$inuit-enable-responsive-paddings       : true;
-$inuit-enable-responsive-paddings--small: true;
-
-$inuit-enable-responsive-paddings--none : true;
-
-// Trumps
-@import "../px-clearfix-design/trumps.clearfix";
-@import "../px-spacing-responsive-design/trumps.spacing-responsive";
-@import "../px-widths-responsive-design/trumps.widths-responsive";
-
-$px-navbar-open-width : 209px;
-$px-navbar-collapsed-width : 55px;
-
-.hamburger-menu{
-
-  padding-right: halve($inuit-base-spacing-unit);
-  padding-left: halve($inuit-base-spacing-unit);
-}
-
+// Component
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  @extend %flex;
+  @extend %flex--column;
+  min-height: 100%;
 }
 
 .navbar {
-  height: inherit;
-  width: $px-navbar-open-width;
-  @include inuit-font-size(12px, 16px);
-  a {
-    text-decoration: none;
-  }
-  em {
-    font-style: normal;
-  }
+  @include inuit-font-size(15px);
+  flex: 1;
+  width: 219px;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
-.navbar--text-hidden {
-  span {
-    opacity: 0;
-    display: none;
+.navbar__item {
+  > li {
+    line-height: 3;
+    a {
+      padding-right: 1em;
+      padding-left: 1.0666666667em;
+    }
+    i {
+      margin-right: .3333333333em;
+    }
+    ul {
+      
+    }
+    li {
+      @include inuit-font-size(12px);
+      line-height: 2.5;
+      a {
+        padding-left: 3.4166666667em;
+      }
+    }
+  }
+  a {
+    display: block;
   }
 }
 
 .navbar--collapsed {
-  width: $px-navbar-collapsed-width;
+  width: 55px;
 }
 
-.navbar__item {
-  a {
-    // width: calculateRem(118px);
-    padding-right: halve($inuit-base-spacing-unit);
-    padding-left: halve($inuit-base-spacing-unit);
-  }
-  h2 {
-    @include inuit-font-size(12px,16px);
-  }
-  .btn {
-    letter-spacing: .04em;
-    .fa {
-      font-size: .75em;
+.navbar--text-hidden {
+  .navbar__item {
+    > li {
+      > a span, ul {
+        @include accessibility;
+      }
     }
   }
 }
+
+.btn--svg {
+  height: 16px;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+}
+
+// Trumps
+@import "../px-clearfix-design/trumps.clearfix";
+
+$inuit-enable-paddings                  : true;
+
+@import "../px-spacing-responsive-design/trumps.spacing-responsive";
+@import "../px-widths-responsive-design/trumps.widths-responsive";
