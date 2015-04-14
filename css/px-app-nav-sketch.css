@@ -2798,34 +2798,6 @@ html {
 /**
  * Sass functions for Predix Experience
  */
-/**
-       * Padding helper classes.
-       *
-       * Add paddings.
-       */
-.p {
-  padding: 20px !important; }
-
-.pt {
-  padding-top: 20px !important; }
-
-.pr {
-  padding-right: 20px !important; }
-
-.pb {
-  padding-bottom: 20px !important; }
-
-.pl {
-  padding-left: 20px !important; }
-
-.ph {
-  padding-right: 20px !important;
-  padding-left: 20px !important; }
-
-.pv {
-  padding-top: 20px !important;
-  padding-bottom: 20px !important; }
-
 /*------------------------------------*\
     #PX-WIDTHS-RESPONSIVE-DESIGN
 \*------------------------------------*/
