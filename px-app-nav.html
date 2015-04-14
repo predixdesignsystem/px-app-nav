@@ -38,14 +38,14 @@ Nav bar for applications
   <template>
     <nav id="navbar" class="navbar" role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
-      <ul class="navbar__item list-bare">
+      <ul id="navitemlist" class="navbar__item list-bare">
         <template is="x-repeat" items="{{navItems}}">
           <li>
             <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
-            <ul class="list-bare">
+            <ul class="list-bare hidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
                   <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
@@ -127,6 +127,18 @@ Nav bar for applications
     navClickHandler: function(event) {
       var href = event.target.parentElement.getAttribute("href");
       this.markSelected(href, event.target);
+
+      var subnavEle = event.target.parentElement.parentElement.querySelector('ul');
+      var hidden = subnavEle.classList.contains('hidden');
+      this.toggleClass('hidden' , !hidden, subnavEle);
+
+      var allSubNavs = this.$.navitemlist.querySelectorAll("ul");
+
+      for (i=0; i<allSubNavs.length; i++) {
+        if (allSubNavs[i] != subnavEle){
+          this.toggleClass('hidden', hidden, allSubNavs[i]);
+        }
+      }
     },
 
     markSelected: function(path) {
