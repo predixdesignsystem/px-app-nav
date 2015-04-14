@@ -125,10 +125,11 @@ Nav bar for applications
     },
 
     navClickHandler: function(event) {
-      var href = event.target.parentElement.getAttribute("href");
-      this.markSelected(href, event.target);
 
-      var subnavEle = event.target.parentElement.parentElement.querySelector('ul');
+      var href = event.currentTarget.getAttribute("href");
+      this.markSelected(href, event.currentTarget);
+
+      var subnavEle = event.currentTarget.parentElement.querySelector('ul');
       var hidden = subnavEle.classList.contains('hidden');
       this.toggleClass('hidden' , !hidden, subnavEle);
 
