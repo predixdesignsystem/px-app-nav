@@ -153,9 +153,16 @@ Nav bar / drawer for applications
       this.markSelected(window.location.href);
     },
 
-    navClickHandler: function(event) {
-      var href = event.target.parentElement.getAttribute("href");
-      this.markSelected(href, event.target);
+    /**
+     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
+     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
+     *
+     * @see #markSelected
+     * @param {Event} evt The click event.
+     */
+    navClickHandler: function(evt) {
+      var href = evt.target.parentElement.getAttribute("href");
+      this.markSelected(href, evt.target);
 
       var subnavEle = event.target.parentElement.parentElement.querySelector('ul');
       var hidden = subnavEle.classList.contains('hidden');
@@ -232,7 +239,7 @@ Nav bar / drawer for applications
      *
      * @param {Event} evt The click event.
      */
-    navExpanderButton: function(event){
+    navExpanderButton: function(evt){
       this.navExpanded = !this.navExpanded;
       this.ani = document.timeline.play(this._buttonAnimation(this.$.navbar, this.querySelectorAll("span")));
     }
