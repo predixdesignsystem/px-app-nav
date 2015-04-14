@@ -46,6 +46,12 @@ module.exports = function (grunt) {
             flatten: true,
             src: '*/font-awesome/fonts/*',
             dest: 'icons'
+          },
+          type: {
+            expand: true,
+            flatten: true,
+            src: '*/px-typography-design/type/*',
+            dest: 'type'
           }
         },
 
