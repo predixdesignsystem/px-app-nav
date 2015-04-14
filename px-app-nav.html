@@ -38,7 +38,7 @@ Nav bar / drawer for applications
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
-            <ul class="list-bare hidden">
+            <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
                   <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
@@ -165,14 +165,14 @@ Nav bar / drawer for applications
       this.markSelected(href, evt.currentTarget);
 
       var subnavEle = evt.currentTarget.parentElement.querySelector('ul');
-      var hidden = subnavEle.classList.contains('hidden');
-      this.toggleClass('hidden' , !hidden, subnavEle);
+      var hidden = subnavEle.classList.contains('visuallyhidden');
+      this.toggleClass('visuallyhidden' , !hidden, subnavEle);
 
       var allSubNavs = this.$.navitemlist.querySelectorAll("ul");
 
       for (i=0; i<allSubNavs.length; i++) {
         if (allSubNavs[i] != subnavEle){
-          this.toggleClass('hidden', hidden, allSubNavs[i]);
+          this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
         }
       }
     },
