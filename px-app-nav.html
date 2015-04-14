@@ -8,27 +8,20 @@
 
 
 <!--
-Nav bar for applications
+Nav bar / drawer for applications
 
 ##### Usage
 
     <px-app-nav
-            navItems="[{'path': '', 'label':'Tab 1'},{'path': 'tab2', 'label': 'Tab 2'},{'path': 'tab3', 'label': 'Another Tab'}]"
-            solutionName="Columbia Pipeline Group"
-        >
-            <svg class="logo" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="50" height="50" viewBox="-280 372 50 50">
-                <path style="..."></path>
-            </svg>
+        nav-items='[{"path": "", "icon": "fa-warning", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
+            <any-arbitrary-content></any-arbitrary-content>
             <div class="auth">
-                <button class="btn btn--bare">
-                    Tom Smith
-                    <i class="fa fa-chevron-right" aria-hidden=true></i>
-                </button>
+                <any-auth-control></any-auth-control>
             </div>
     </px-app-nav>
 
 @element px-app-nav
-@blurb Nav bar for applications.
+@blurb Nav bar / drawer for applications.
 @homepage index.html
 -->
 
@@ -64,7 +57,16 @@ Nav bar for applications
 
   Polymer({
     is: 'px-app-nav',
+
     properties: {
+
+      /**
+       * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
+       * and 'subitems', which is another Array.
+       *
+       * @type {Array}
+       * @default [{}]
+       */
       navItems: {
         type: Array,
         notify: true,
@@ -72,22 +74,49 @@ Nav bar for applications
           return [{}];
         }
       },
+
+      /**
+       * When navigating, this prefix is appended to the relative URL. Defaults to '#', indicating paths are routed via the
+       * hash part of the URL.  To make them relative to current directory, use '/'.
+       *
+       * @type {String}
+       * @default ["#"]
+       */
       pathPrefix: {
         value : '#',
         type: String
       },
+
+      /**
+       * Allows a level of indirection in the Array of navItems passed in to resolve paths
+       *
+       * @type {String}
+       * @default ["path"]
+       */
       pathKey: {
         value: 'path',
         type: String
       },
-      solutionName: {
-        value: '',
-        type: String
-      },
+
+      /**
+       * Whether the navigation is expanded. Reflected to an attribute (reflectToAttribute: true) so the application can
+       * bind to it and maintain state as needed.
+       *
+       * @type {Boolean}
+       * @default [true]
+       */
       navExpanded: {
         value: true,
-        type: Boolean
+        type: Boolean,
+        reflectToAttribute: true
       },
+
+      /**
+       * Animation function
+       *
+       * @type {Function}
+       * @default [function(){ return {};}]
+       */
       ani:{
         type: Object,
         value:function(){ return {};}
@@ -98,7 +127,7 @@ Nav bar for applications
       "nav-items-changed": "_observeChanged"
      },
 
-    protocolRE: new RegExp('(http|https)://'),
+    _protocolRE: new RegExp('(http|https)://'),
 
     _observeChanged: function(event) {
       if (!event.detail.value){
@@ -124,13 +153,25 @@ Nav bar for applications
       this.markSelected(window.location.href);
     },
 
-    navClickHandler: function(event) {
-      var href = event.target.parentElement.getAttribute("href");
-      this.markSelected(href, event.target);
+    /**
+     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
+     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
+     *
+     * @see #markSelected
+     * @param {Event} evt The click event.
+     */
+    navClickHandler: function(evt) {
+      var href = evt.target.parentElement.getAttribute("href");
+      this.markSelected(href, evt.target);
     },
 
+    /**
+     * Marks the nav item with the given path as selected, and all others as unselected.
+     *
+     * @param {String} path The selected path
+     */
     markSelected: function(path) {
-      var resolvedPath = this.parseOutPathPrefix(path);
+      var resolvedPath = this._parseOutPathPrefix(path);
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
@@ -138,8 +179,11 @@ Nav bar for applications
       }
     },
 
-    parseOutPathPrefix: function(fullPath) {
-      var resolvedPath = fullPath.replace(this.protocolRE, '');
+    _parseOutPathPrefix: function(fullPath) {
+      if (!fullPath) {
+          return null;
+      }
+      var resolvedPath = fullPath.replace(this._protocolRE, '');
       var idx = resolvedPath.indexOf(this.pathPrefix);
       return resolvedPath.substring(idx + 1);
     },
@@ -152,7 +196,7 @@ Nav bar for applications
       item.icon = item.icon + " fa fa-fw";
     },
 
-    buttonAnimation : function(navElem, textElems){
+    _buttonAnimation : function(navElem, textElems){
       var textElemArray = Array.prototype.slice.call(textElems);
       var self = this;
 
@@ -178,9 +222,14 @@ Nav bar for applications
       }
     },
 
+    /**
+     * Called when the nav expander control is clicked.
+     *
+     * @param {Event} evt The click event.
+     */
     navExpanderButton: function(event){
       this.navExpanded = !this.navExpanded;
-      this.ani = document.timeline.play(this.buttonAnimation(this.$.navbar, this.querySelectorAll("span")));
+      this.ani = document.timeline.play(this._buttonAnimation(this.$.navbar, this.querySelectorAll("span")));
     }
   });
 </script>
