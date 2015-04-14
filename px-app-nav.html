@@ -37,7 +37,7 @@ Nav bar for applications
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
     <nav id="navbar" class="navbar" role=navigation>
-      <i class="pb- pt- pl- fa whiteiconcolor fa-bars fa-2x fa-fw" on-click="menuClicked"></i>
+      <i class="pb- pt- pl- fa whiteiconcolor fa-bars fa-2x fa-fw" on-click="navExpanderButton"></i>
 
       <ul class="navbar__item list-bare ">
         <template is="x-repeat" items="{{navItems}}">
@@ -85,7 +85,7 @@ Nav bar for applications
         value: '',
         type: String
       },
-      expanded: {
+      navExpanded: {
         value: true,
         type: Boolean
       },
@@ -116,6 +116,12 @@ Nav bar for applications
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
     ready: function() {
+      //check to see if navitems have been initialised.
+      if (this.navItems.length > 0 && !this.navItems[0].href){
+        this.navItems.forEach(this._computeHref, this);
+        this.navItems.forEach(this._computeIcon);
+      }
+
       this.markSelected(window.location.href);
     },
 
@@ -151,21 +157,21 @@ Nav bar for applications
       var textElemArray = Array.prototype.slice.call(textElems);
       var self = this;
 
-      if(!this.expanded) {
+      if(!this.navExpanded) {
         return new SequenceEffect(
           [new GroupEffect(textElemArray.map(function(elem){
             return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100)
            })),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.expanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
            new KeyframeEffect(navElem, [{width: '209px'}, {width: '55px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.expanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
            ])
       }
       else {
         return new SequenceEffect(
-          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.expanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
            new KeyframeEffect(navElem, [{width: '55px'}, {width: '209px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.expanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
            new GroupEffect(textElemArray.map(function(elem){
              return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100)
            }))
@@ -173,8 +179,8 @@ Nav bar for applications
       }
     },
 
-    menuClicked: function(event){
-      this.expanded = !this.expanded;
+    navExpanderButton: function(event){
+      this.navExpanded = !this.navExpanded;
       this.ani = document.timeline.play(this.buttonAnimation(this.$.navbar, this.querySelectorAll("span")));
     }
   });

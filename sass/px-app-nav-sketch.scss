@@ -143,5 +143,6 @@ $px-navbar-collapsed-width : 55px;
 
 .navbar__item--closed{
   height: 0px;
-  opacity: 0;
+  // opacity: 0;
+  display:none;
 }

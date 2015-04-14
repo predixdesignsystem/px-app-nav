@@ -3955,4 +3955,4 @@ html {
 
 .navbar__item--closed {
   height: 0px;
-  opacity: 0; }
+  display: none; }
