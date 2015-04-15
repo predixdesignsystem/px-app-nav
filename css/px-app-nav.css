@@ -3332,7 +3332,9 @@ html {
 a {
   text-decoration: none;
   color: white; }
+  a.selected {
+    background-color: #005cb9; }
   a:hover {
     background-color: #575757; }
-  a:active, a.active {
+  a:active {
     background-color: #3693f8; }

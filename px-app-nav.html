@@ -315,9 +315,10 @@ Nav bar / drawer for applications
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
-        item.class = item.selected ? "active" : "";
+        item.class = item.selected ? "selected" : "";
 
-        this.toggleClass("active", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+        this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+
       }
     },
 

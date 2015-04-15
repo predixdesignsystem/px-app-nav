@@ -30,10 +30,13 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 a {
   text-decoration: none;
   color: $white;
+  &.selected {
+    background-color: $blue;
+  }
   &:hover {
     background-color: $gray-dark;
   }
-  &:active, &.active {
+  &:active {
     background-color: $blue-light;
   }
 }
