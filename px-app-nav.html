@@ -34,14 +34,14 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="x-repeat" items="{{navItems}}">
           <li>
-            <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span>{{item.label}}</span></a>
+            <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
             <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="navClickHandler"><span>{{item.label}}</span></a>
+                  <a href$="{{item.href}}" on-click="navClickHandler"><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -65,7 +65,7 @@ Nav bar / drawer for applications
 
       /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
-       * and 'subitems', which is another Array.
+       * 'l10nId', and 'subitems', which is another Array.
        *
        * @type {Array}
        * @default [{}]
