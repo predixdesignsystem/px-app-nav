@@ -3,7 +3,7 @@ Px-App-Nav
 
 ## Overview
 
-Px-App-Nav is a Predix Experience ('Px') component
+Application navigation bar/drawer for Px Applications
 
 ## Getting Started
 
