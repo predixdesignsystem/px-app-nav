@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "polymer": "~v0.8.0",
+    "px-l10n-mixin": "git://github.sw.ge.com/PXm/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0"
   },
   "devDependencies": {

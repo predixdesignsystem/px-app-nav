@@ -5,7 +5,7 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-
+<link rel="import" href="../px-l10n-mixin/px-l10n-mixin.html"/>
 
 <!--
 Nav bar / drawer for applications
@@ -57,6 +57,8 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
+
+    mixins: [pxL10NMixin],
 
     properties: {
 
