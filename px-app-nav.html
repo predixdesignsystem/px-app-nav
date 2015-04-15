@@ -171,17 +171,20 @@ Nav bar / drawer for applications
       }
 
       this.markSelected(window.location.href);
+      this.localize();
     },
 
     /**
      * Callback called by pxL10NMixin, which assumes Mozilla's L20N framework (which sets the "dir" property on the
      * document element.
      */
-    localizeComponent: function() {
+    localize: function() {
+        this.pxL10NMixin_localize();//call function on the px-l10n-mixin
+
+        //do additional component-specific stuff
         if (document.documentElement.dir === 'rtl') {
             this.rtl = true;
         }
-        return true;
     },
 
     /**
