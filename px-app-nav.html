@@ -41,7 +41,7 @@ Nav bar / drawer for applications
             <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="navClickHandler"><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -222,6 +222,20 @@ Nav bar / drawer for applications
     },
 
     /**
+     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
+     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
+     *
+     * @see #markSelected
+     * @param {Event} evt The click event.
+     */
+     subnavClickHandler: function(evt){
+       var href = evt.currentTarget.getAttribute("href");
+       this.markSelected(href, evt.parentElement);
+
+
+     },
+
+    /**
      * Marks the nav item with the given path as selected, and all others as unselected.
      *
      * @param {String} path The selected path
@@ -238,12 +252,6 @@ Nav bar / drawer for applications
         this.toggleClass("active", item.selected, topLevelNavElems[i].querySelector('a'));
 
       }
-
-      // for (var i = 0; i < this.navItems.length; i++) {
-      //   console.log(topLevelNavElems[i].classList);
-      // }
-
-
     },
 
     _parseOutPathPrefix: function(fullPath) {
