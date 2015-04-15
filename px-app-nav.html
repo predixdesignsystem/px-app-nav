@@ -263,23 +263,22 @@ Nav bar / drawer for applications
 
     _buttonAnimation : function(navElem, textElems){
       var textElemArray = Array.prototype.slice.call(textElems);
-      var self = this;
 
       if(!this.navExpanded) {
         return new SequenceEffect(
           [new GroupEffect(textElemArray.map(function(elem){
             return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100)
            })),
-           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(self, [{width: '219px'}, {width: '56px'}], 200),
-           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded, navElem);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded, navElem);}, { duration: 0, fill: 'forwards' }),
            ])
       }
       else {
         return new SequenceEffect(
-          [new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(self, [{width: '56px'}, {width: '219px'}], 200),
-           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
+          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded, navElem);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded, navElem);}, { duration: 0, fill: 'forwards' }),
            new GroupEffect(textElemArray.map(function(elem){
              return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100)
            }))
