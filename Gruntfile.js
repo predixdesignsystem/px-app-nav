@@ -91,17 +91,26 @@ module.exports = function (grunt) {
             }
         },
 
-        'wct-test': {
+        webdriver: {
+            options: {
+                specFiles: ['test/*spec.js']
+            },
             local: {
-                options: {
-                    root: './',
-                    verbose: false,
-                    plugins: {
-                        local: {browsers: ['chrome']}
-                    }
-                }
+                webdrivers: ['chrome']
             }
-        }
+        }//,
+
+//        'wct-test': {
+//            local: {
+//                options: {
+//                    root: './',
+//                    verbose: false,
+//                    plugins: {
+//                        local: {browsers: ['chrome']}
+//                    }
+//                }
+//            }
+//        }
     });
 
     grunt.loadNpmTasks('grunt-sass');
@@ -112,7 +121,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-dep-serve');
-    grunt.loadNpmTasks('web-component-tester');
+    //grunt.loadNpmTasks('web-component-tester');
+    grunt.loadNpmTasks('webdriver-support');
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
@@ -131,7 +141,7 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('test', 'Test', [
         'jshint',
-        'wct-test:local'
+        'webdriver'
     ]);
 
     grunt.registerTask('release', 'Release', [
