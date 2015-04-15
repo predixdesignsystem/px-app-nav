@@ -15,7 +15,6 @@
   ],
   "dependencies": {
     "polymer": "~v0.8.0",
-    "layout": "Polymer/layout",
     "web-animations-js": "~2.0.0"
   },
   "devDependencies": {
