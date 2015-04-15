@@ -21,6 +21,7 @@
         "grunt-contrib-clean": "~v0.6.0",
         "grunt-contrib-jshint": "~v0.10.0",
         "grunt-contrib-watch": "~v0.6.1",
-        "grunt-dep-serve": "git+https://github.sw.ge.com/jreichenberg/grunt-dep-serve.git#master"
+        "grunt-dep-serve": "git+https://github.sw.ge.com/jreichenberg/grunt-dep-serve.git#master",
+        "webdriver-support": "git+https://github.sw.ge.com/DT/webdriver-support.git#master"
     }
 }
