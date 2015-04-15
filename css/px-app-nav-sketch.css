@@ -2691,7 +2691,7 @@ html {
     color: inherit; }
 
 :host {
-  min-height: 100%; }
+  min-height: 100vh; }
 
 :host(.rtl) {
   direction: rtl; }
