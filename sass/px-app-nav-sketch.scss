@@ -67,6 +67,10 @@ $inuit-enable-btn--bare                 : true;
   min-height: 100%;
 }
 
+:host(.rtl) {
+  direction: rtl;
+}
+
 .navbar {
   @include inuit-font-size(15px,false);
   flex: 1;

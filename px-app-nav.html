@@ -120,6 +120,19 @@ Nav bar / drawer for applications
       ani:{
         type: Object,
         value:function(){ return {};}
+      },
+
+      /**
+       * If true, nav drawer appears on the right to accommodate RTL languages. Set automatically if Mozilla's
+       * L20N framework is loaded on the document
+       *
+       * @type {Boolean}
+       * @default [false]
+       */
+      rtl: {
+        type: Boolean,
+        value: false,
+        observer: "_rtlChanged"
       }
     },
 
@@ -140,6 +153,10 @@ Nav bar / drawer for applications
       }
     },
 
+    _rtlChanged: function(newValue, oldValue) {
+        this.toggleClass("rtl", newValue);
+    },
+
     /**
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
@@ -151,6 +168,17 @@ Nav bar / drawer for applications
       }
 
       this.markSelected(window.location.href);
+    },
+
+    /**
+     * Callback called by pxL10NMixin, which assumes Mozilla's L20N framework (which sets the "dir" property on the
+     * document element.
+     */
+    localizeComponent: function() {
+        if (document.documentElement.dir === 'rtl') {
+            this.rtl = true;
+        }
+        return true;
     },
 
     /**
