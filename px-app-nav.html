@@ -41,7 +41,7 @@ Nav bar / drawer for applications
             <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="navbar__subnavtext--hidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -208,17 +208,83 @@ Nav bar / drawer for applications
 
       var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
       var hidden = subnavEle.classList.contains('visuallyhidden');
-      this.toggleClass('visuallyhidden' , !hidden, subnavEle);
 
-      if(hidden){
+
+      //animation here...
+      // Polymer.dom(this.$.navitemlist).querySelector("li ul li").clientHeight
+
+      var allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span");
+      var self = this,
+          navToHide,
+          navToHideSpans;
+
+      // if(hidden){
         var allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
 
         for (i=0; i<allSubNavs.length; i++) {
-          if (allSubNavs[i] != subnavEle){
-            this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
+          if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
+            navToHide = allSubNavs[i];
+            navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
+            // this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
           }
         }
+      // }
+
+      var openAnimation;
+
+      if (navToHide){
+        openAnimation = new SequenceEffect([
+                              //animate close the open accordion
+                              new GroupEffect(navToHideSpans.map(function(elem){
+                                return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
+                              })),
+                              new GroupEffect(navToHideSpans.map(function(elem){
+                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+                              })),
+                              new KeyframeEffect(navToHide, [ {height: '90px'}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
+                              new KeyframeEffect(navToHide, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, navToHide);}, { duration: 0, fill: 'forwards' }),
+
+                              //animate open the clicked accordion
+                              new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, subnavEle);}, { duration: 0, fill: 'forwards' }),
+                              new KeyframeEffect(subnavEle, [ {height: '0px'}, {height: '90px' }], { duration: 200, fill: 'forwards' }),
+                              new GroupEffect(allSubNavSpans.map(function(elem){
+                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+                              })),
+                              new GroupEffect(allSubNavSpans.map(function(elem){
+                                return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
+                              }))
+                            ]);
+      } else if (!hidden){
+        openAnimation = new SequenceEffect([
+                            //animate close the open accordion
+                            new GroupEffect(allSubNavSpans.map(function(elem){
+                              return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
+                            })),
+                            new GroupEffect(allSubNavSpans.map(function(elem){
+                              return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+                            })),
+                            new KeyframeEffect(subnavEle, [ {height: '90px'}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
+                            new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, subnavEle);}, { duration: 0, fill: 'forwards' })
+                          ]);
+      } else{
+        openAnimation = new SequenceEffect([
+
+                              //animate open the clicked accordion
+                              new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, subnavEle);}, { duration: 0, fill: 'forwards' }),
+                              new KeyframeEffect(subnavEle, [ {height: '0px'}, {height: '90px' }], { duration: 200, fill: 'forwards' }),
+                              new GroupEffect(allSubNavSpans.map(function(elem){
+                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+                              })),
+                              new GroupEffect(allSubNavSpans.map(function(elem){
+                                return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
+                              }))
+                            ]);
+
       }
+
+
+      document.timeline.play(openAnimation);
+
     },
 
     /**
@@ -250,7 +316,6 @@ Nav bar / drawer for applications
         item.class = item.selected ? "active" : "";
 
         this.toggleClass("active", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-
       }
     },
 

@@ -127,6 +127,11 @@ $inuit-enable-btn--bare                 : true;
   margin-left: 1em;
 }
 
+.navbar__subnavtext--hidden{
+  opacity: 0;
+  display: none;
+}
+
 // Trumps
 @import "../px-clearfix-design/trumps.clearfix";
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";

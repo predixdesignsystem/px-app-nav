@@ -2753,6 +2753,10 @@ html {
   margin-bottom: 1.5em;
   margin-left: 1em; }
 
+.navbar__subnavtext--hidden {
+  opacity: 0;
+  display: none; }
+
 /*------------------------------------*\
     #PX-CLEARFIX-DESIGN
 \*------------------------------------*/
