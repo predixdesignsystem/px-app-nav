@@ -2693,9 +2693,6 @@ html {
 :host {
   font-size: 15px;
   font-size: 0.9375rem;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   min-height: 100vh;
   padding-top: 1em;
   padding-bottom: 1em; }

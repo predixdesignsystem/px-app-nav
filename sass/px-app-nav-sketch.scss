@@ -65,7 +65,6 @@ $inuit-enable-btn--bare                 : true;
   @extend %flex;
   @extend %flex--column;
   @include inuit-font-size(15px,false);
-  flex: 1;
   min-height: 100vh;
   padding-top: 1em;
   padding-bottom: 1em;
