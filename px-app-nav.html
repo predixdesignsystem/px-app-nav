@@ -225,17 +225,17 @@ Nav bar / drawer for applications
      * @param {String} path The selected path
      */
     markSelected: function(path, selectedElement) {
-      // var resolvedPath = this._parseOutPathPrefix(path);
-      // var topLevelNavElems = this.$.navbar.querySelectorAll("#navitemlist>li");
-      //
-      // for (var i = 0; i < this.navItems.length; i++) {
-      //   var item = this.navItems[i];
-      //   item.selected = item[this.pathKey] === resolvedPath;
-      //   item.class = item.selected ? "active" : "";
-      //
-      //   this.toggleClass("active", item.selected, topLevelNavElems[i]);
-      //
-      // }
+      var resolvedPath = this._parseOutPathPrefix(path);
+      var topLevelNavElems = this.querySelectorAll("#navitemlist>li");
+
+      for (var i = 0; i < this.navItems.length; i++) {
+        var item = this.navItems[i];
+        item.selected = item[this.pathKey] === resolvedPath;
+        item.class = item.selected ? "active" : "";
+
+        this.toggleClass("active", item.selected, topLevelNavElems[i].querySelector('a'));
+
+      }
 
       // for (var i = 0; i < this.navItems.length; i++) {
       //   console.log(topLevelNavElems[i].classList);
