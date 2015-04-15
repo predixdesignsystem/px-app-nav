@@ -192,6 +192,10 @@ Nav bar / drawer for applications
       var href = evt.currentTarget.getAttribute("href");
       this.markSelected(href, evt.currentTarget);
 
+      if(!this.navExpanded){
+        this.navExpanderButton();
+      }
+
       var subnavEle = evt.currentTarget.parentElement.querySelector('ul');
       var hidden = subnavEle.classList.contains('visuallyhidden');
       this.toggleClass('visuallyhidden' , !hidden, subnavEle);
