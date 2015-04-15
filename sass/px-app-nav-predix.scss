@@ -23,17 +23,17 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 @import "../px-colors-design/settings.colors";
 
 
+:host {
+  background-color: $gray-darkest;
+}
+
 a {
   text-decoration: none;
   color: $white;
   &:hover {
     background-color: $gray-dark;
   }
-  &.active {
+  &:active, &.active {
     background-color: $blue-light;
   }
-}
-
-:host(.navbarwidth) {
-  background-color: $gray-darkest;
 }

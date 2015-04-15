@@ -64,22 +64,32 @@ $inuit-enable-btn--bare                 : true;
 :host {
   @extend %flex;
   @extend %flex--column;
+  @include inuit-font-size(15px,false);
   min-height: 100vh;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+:host(.navbar) {
+  width: 219px;
+}
+
+:host(.navbar--collapsed) {
+  width: 55px;
+}
+
+:host(.navbar--text-hidden) {
+  .navbar__item {
+    > li {
+      > a span, ul {
+        @include accessibility;
+      }
+    }
+  }
 }
 
 :host(.rtl) {
   direction: rtl;
-}
-
-:host(.navbarwidth) {
-  width: 219px;
-  flex: 1;
-}
-
-.navbar {
-  @include inuit-font-size(15px,false);
-  padding-top: 1em;
-  padding-bottom: 1em;
 }
 
 .navbar__item {
@@ -105,20 +115,6 @@ $inuit-enable-btn--bare                 : true;
   }
   a {
     display: block;
-  }
-}
-
-:host(.navbar--collapsed) {
-  width: 55px;
-}
-
-:host(.navbar--text-hidden) {
-  .navbar__item {
-    > li {
-      > a span, ul {
-        @include accessibility;
-      }
-    }
   }
 }
 
