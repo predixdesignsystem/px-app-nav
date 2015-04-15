@@ -3328,7 +3328,7 @@ a {
   color: white; }
   a:hover {
     background-color: #575757; }
-  a:active {
+  a.active {
     background-color: #3693f8; }
 
 .navbar {
