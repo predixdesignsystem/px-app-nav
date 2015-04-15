@@ -2706,6 +2706,9 @@ html {
 :host {
   min-height: 100%; }
 
+:host(.rtl) {
+  direction: rtl; }
+
 .navbar {
   font-size: 15px;
   font-size: 0.9375rem;
