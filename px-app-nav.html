@@ -60,8 +60,8 @@ Nav bar / drawer for applications
     is: 'px-app-nav',
 
     mixins: [pxL10NMixin],
-    hostAttributes: {
-      class: 'navbar'
+    created: function(){
+      this.toggleClass("navbar", true)
     },
 
     properties: {
