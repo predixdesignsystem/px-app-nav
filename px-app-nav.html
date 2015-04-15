@@ -206,12 +206,12 @@ Nav bar / drawer for applications
         this.navExpanderButton();
       }
 
-      var subnavEle = evt.currentTarget.parentElement.querySelector('ul');
+      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
       var hidden = subnavEle.classList.contains('visuallyhidden');
       this.toggleClass('visuallyhidden' , !hidden, subnavEle);
 
       if(hidden){
-        var allSubNavs = this.$.navitemlist.querySelectorAll("ul");
+        var allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
 
         for (i=0; i<allSubNavs.length; i++) {
           if (allSubNavs[i] != subnavEle){
@@ -242,14 +242,14 @@ Nav bar / drawer for applications
      */
     markSelected: function(path, selectedElement) {
       var resolvedPath = this._parseOutPathPrefix(path);
-      var topLevelNavElems = this.querySelectorAll("#navitemlist>li");
+      var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
 
       for (var i = 0; i < this.navItems.length; i++) {
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
         item.class = item.selected ? "active" : "";
 
-        this.toggleClass("active", item.selected, topLevelNavElems[i].querySelector('a'));
+        this.toggleClass("active", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
 
       }
     },
@@ -271,8 +271,7 @@ Nav bar / drawer for applications
       item.icon = item.icon + " fa fa-fw";
     },
 
-    _buttonAnimation : function(navElem, textElems){
-      var textElemArray = Array.prototype.slice.call(textElems);
+    _buttonAnimation : function(navElem, textElemArray){
 
       if(!this.navExpanded) {
         return new SequenceEffect(
@@ -303,7 +302,7 @@ Nav bar / drawer for applications
      */
     navExpanderButton: function(evt){
       this.navExpanded = !this.navExpanded;
-      this.ani = document.timeline.play(this._buttonAnimation(this, this.querySelectorAll("span")));
+      this.ani = document.timeline.play(this._buttonAnimation(this, Polymer.dom(this.root).querySelectorAll("span")));
     }
   });
 </script>
