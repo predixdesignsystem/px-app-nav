@@ -71,10 +71,13 @@ $inuit-enable-btn--bare                 : true;
   direction: rtl;
 }
 
+:host(.navbarwidth) {
+  width: 219px;
+  flex: 1;
+}
+
 .navbar {
   @include inuit-font-size(15px,false);
-  flex: 1;
-  width: 219px;
   padding-top: 1em;
   padding-bottom: 1em;
 }
@@ -90,7 +93,7 @@ $inuit-enable-btn--bare                 : true;
       margin-right: .3333333333em;
     }
     ul {
-      
+
     }
     li {
       @include inuit-font-size(12px);
@@ -105,11 +108,11 @@ $inuit-enable-btn--bare                 : true;
   }
 }
 
-.navbar--collapsed {
+:host(.navbar--collapsed) {
   width: 55px;
 }
 
-.navbar--text-hidden {
+:host(.navbar--text-hidden) {
   .navbar__item {
     > li {
       > a span, ul {

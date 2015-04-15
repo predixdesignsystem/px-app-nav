@@ -2696,13 +2696,15 @@ html {
 :host(.rtl) {
   direction: rtl; }
 
+:host(.navbarwidth) {
+  width: 219px;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
+
 .navbar {
   font-size: 15px;
   font-size: 0.9375rem;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  width: 219px;
   padding-top: 1em;
   padding-bottom: 1em; }
 
@@ -2723,10 +2725,10 @@ html {
 .navbar__item a {
   display: block; }
 
-.navbar--collapsed {
+:host(.navbar--collapsed) {
   width: 55px; }
 
-.navbar--text-hidden .navbar__item > li > a span, .navbar--text-hidden .navbar__item > li ul {
+:host(.navbar--text-hidden) .navbar__item > li > a span, :host(.navbar--text-hidden) .navbar__item > li ul {
   position: absolute !important;
   overflow: hidden !important;
   width: 1px !important;

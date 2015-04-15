@@ -29,7 +29,6 @@ Nav bar / drawer for applications
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
-    <nav id="navbar" class="navbar" role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="x-repeat" items="{{navItems}}">
@@ -50,7 +49,6 @@ Nav bar / drawer for applications
         </template>
       </ul>
       <content></content>
-    </nav>
   </template>
 </dom-module>
 
@@ -60,6 +58,9 @@ Nav bar / drawer for applications
     is: 'px-app-nav',
 
     mixins: [pxL10NMixin],
+    hostAttributes: {
+      class: 'navbarwidth'
+    },
 
     properties: {
 
@@ -224,17 +225,17 @@ Nav bar / drawer for applications
      * @param {String} path The selected path
      */
     markSelected: function(path, selectedElement) {
-      var resolvedPath = this._parseOutPathPrefix(path);
-      var topLevelNavElems = this.$.navbar.querySelectorAll("#navitemlist>li");
-
-      for (var i = 0; i < this.navItems.length; i++) {
-        var item = this.navItems[i];
-        item.selected = item[this.pathKey] === resolvedPath;
-        item.class = item.selected ? "active" : "";
-
-        this.toggleClass("active", item.selected, topLevelNavElems[i]);
-
-      }
+      // var resolvedPath = this._parseOutPathPrefix(path);
+      // var topLevelNavElems = this.$.navbar.querySelectorAll("#navitemlist>li");
+      //
+      // for (var i = 0; i < this.navItems.length; i++) {
+      //   var item = this.navItems[i];
+      //   item.selected = item[this.pathKey] === resolvedPath;
+      //   item.class = item.selected ? "active" : "";
+      //
+      //   this.toggleClass("active", item.selected, topLevelNavElems[i]);
+      //
+      // }
 
       // for (var i = 0; i < this.navItems.length; i++) {
       //   console.log(topLevelNavElems[i].classList);
@@ -269,16 +270,16 @@ Nav bar / drawer for applications
           [new GroupEffect(textElemArray.map(function(elem){
             return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100)
            })),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(self, [{width: '219px'}, {width: '56px'}], 200),
+           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
            ])
       }
       else {
         return new SequenceEffect(
-          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self.$.navbar);}, { duration: 0, fill: 'forwards' }),
+          [new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--collapsed', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(self, [{width: '56px'}, {width: '219px'}], 200),
+           new KeyframeEffect(self, function(tf) { if (tf == null) return; self.toggleClass('navbar--text-hidden', !self.navExpanded, self);}, { duration: 0, fill: 'forwards' }),
            new GroupEffect(textElemArray.map(function(elem){
              return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100)
            }))
@@ -293,7 +294,7 @@ Nav bar / drawer for applications
      */
     navExpanderButton: function(evt){
       this.navExpanded = !this.navExpanded;
-      this.ani = document.timeline.play(this._buttonAnimation(this.$.navbar, this.querySelectorAll("span")));
+      this.ani = document.timeline.play(this._buttonAnimation(this, this.querySelectorAll("span")));
     }
   });
 </script>

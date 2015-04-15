@@ -34,6 +34,6 @@ a {
   }
 }
 
-.navbar {
+:host(.navbarwidth) {
   background-color: $gray-darkest;
 }
