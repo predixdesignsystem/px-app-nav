@@ -65,9 +65,6 @@ $inuit-enable-btn--bare                 : true;
   @extend %flex;
   @extend %flex--column;
   @include inuit-font-size(15px,false);
-  min-height: 100vh;
-  padding-top: 1em;
-  padding-bottom: 1em;
 }
 
 :host(.navbar) {
@@ -90,6 +87,12 @@ $inuit-enable-btn--bare                 : true;
 
 :host(.rtl) {
   direction: rtl;
+}
+
+:host > nav {
+  min-height: 100vh;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .navbar__item {

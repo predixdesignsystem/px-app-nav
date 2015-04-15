@@ -2705,10 +2705,7 @@ html {
 
 :host {
   font-size: 15px;
-  font-size: 0.9375rem;
-  min-height: 100vh;
-  padding-top: 1em;
-  padding-bottom: 1em; }
+  font-size: 0.9375rem; }
 
 :host(.navbar) {
   width: 219px; }
@@ -2728,6 +2725,11 @@ html {
 
 :host(.rtl) {
   direction: rtl; }
+
+:host > nav {
+  min-height: 100vh;
+  padding-top: 1em;
+  padding-bottom: 1em; }
 
 .navbar__item > li {
   line-height: 3; }
@@ -3320,7 +3322,7 @@ html {
 /**
  * Monochrome
  */
-:host {
+:host > nav {
   background-color: #2b2b2b; }
 
 a {
