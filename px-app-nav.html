@@ -202,9 +202,6 @@ Nav bar / drawer for applications
       var href = evt.currentTarget.getAttribute("href");
       this.markSelected(href, evt.currentTarget);
 
-      if(!this.navExpanded){
-        this.navExpanderButton();
-      }
 
       var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
       var hidden = subnavEle.classList.contains('visuallyhidden');
@@ -282,8 +279,13 @@ Nav bar / drawer for applications
 
       }
 
+      var accordionAnimationPlayer = document.timeline.play(openAnimation);
 
-      document.timeline.play(openAnimation);
+      accordionAnimationPlayer.addEventListener('finish', function(){
+        if(!self.navExpanded){
+          self.navExpanderButton();
+        }
+      });
 
     },
 
