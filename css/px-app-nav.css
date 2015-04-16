@@ -2737,6 +2737,10 @@ html {
   height: 16px;
   margin-bottom: 1.5em; }
 
+.navbar__subnavtext--hidden {
+  opacity: 0;
+  display: none; }
+
 /*------------------------------------*\
     #PX-CLEARFIX-DESIGN
 \*------------------------------------*/
