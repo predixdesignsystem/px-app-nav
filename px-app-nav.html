@@ -203,18 +203,15 @@ Nav bar / drawer for applications
       this.markSelected(href, evt.currentTarget);
 
 
-      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
-      var hidden = subnavEle.classList.contains('visuallyhidden');
+      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul'),
+          hidden = subnavEle.classList.contains('visuallyhidden'),
 
-
-      //animation here...
-
-      var allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span");
-      var self = this,
+          allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span"),
+          self = this,
           navToHide,
-          navToHideSpans;
-
-        var allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
+          navToHideSpans,
+          allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
+          openAnimation;
 
         for (i=0; i<allSubNavs.length; i++) {
           if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
@@ -223,7 +220,6 @@ Nav bar / drawer for applications
           }
         }
 
-      var openAnimation;
 
       if (navToHide){
         openAnimation = new SequenceEffect([
