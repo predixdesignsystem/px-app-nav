@@ -2691,9 +2691,9 @@ html {
   padding: 0 !important;
   clip: rect(0 0 0 0) !important; }
 
-:host(.rtl) {
+[dir=rtl] {
   direction: rtl; }
-  :host(.rtl) .navbar__item > li i {
+  [dir=rtl] .navbar__item > li i {
     margin-left: .3333333333em; }
 
 :host > nav {
