@@ -86,6 +86,9 @@ $inuit-enable-btn--bare                 : true;
 
 :host(.rtl) {
   direction: rtl;
+  .navbar__item > li i {
+    margin-left: .3333333333em;
+  }
 }
 
 :host > nav {

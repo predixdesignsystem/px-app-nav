@@ -2706,6 +2706,8 @@ html {
 
 :host(.rtl) {
   direction: rtl; }
+  :host(.rtl) .navbar__item > li i {
+    margin-left: .3333333333em; }
 
 :host > nav {
   -webkit-flex: 1;
