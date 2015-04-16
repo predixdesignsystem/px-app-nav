@@ -208,74 +208,32 @@ Nav bar / drawer for applications
 
 
       //animation here...
-      // Polymer.dom(this.$.navitemlist).querySelector("li ul li").clientHeight
 
       var allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span");
       var self = this,
           navToHide,
           navToHideSpans;
 
-      // if(hidden){
         var allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
 
         for (i=0; i<allSubNavs.length; i++) {
           if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
             navToHide = allSubNavs[i];
             navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
-            // this.toggleClass('visuallyhidden', hidden, allSubNavs[i]);
           }
         }
-      // }
 
       var openAnimation;
 
       if (navToHide){
         openAnimation = new SequenceEffect([
-                              //animate close the open accordion
-                              new GroupEffect(navToHideSpans.map(function(elem){
-                                return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
-                              })),
-                              new GroupEffect(navToHideSpans.map(function(elem){
-                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
-                              })),
-                              new KeyframeEffect(navToHide, [ {height: '90px'}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
-                              new KeyframeEffect(navToHide, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, navToHide);}, { duration: 0, fill: 'forwards' }),
-
-                              //animate open the clicked accordion
-                              new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, subnavEle);}, { duration: 0, fill: 'forwards' }),
-                              new KeyframeEffect(subnavEle, [ {height: '0px'}, {height: '90px' }], { duration: 200, fill: 'forwards' }),
-                              new GroupEffect(allSubNavSpans.map(function(elem){
-                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
-                              })),
-                              new GroupEffect(allSubNavSpans.map(function(elem){
-                                return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
-                              }))
+                              this._closeAccordionEffectAnimation(navToHide, navToHideSpans),
+                              this._openAccordionEffectAnimation(subnavEle, allSubNavSpans)
                             ]);
       } else if (!hidden){
-        openAnimation = new SequenceEffect([
-                            //animate close the open accordion
-                            new GroupEffect(allSubNavSpans.map(function(elem){
-                              return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
-                            })),
-                            new GroupEffect(allSubNavSpans.map(function(elem){
-                              return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
-                            })),
-                            new KeyframeEffect(subnavEle, [ {height: '90px'}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
-                            new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, subnavEle);}, { duration: 0, fill: 'forwards' })
-                          ]);
+        openAnimation = this._closeAccordionEffectAnimation(subnavEle, allSubNavSpans);
       } else{
-        openAnimation = new SequenceEffect([
-
-                              //animate open the clicked accordion
-                              new KeyframeEffect(subnavEle, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, subnavEle);}, { duration: 0, fill: 'forwards' }),
-                              new KeyframeEffect(subnavEle, [ {height: '0px'}, {height: '90px' }], { duration: 200, fill: 'forwards' }),
-                              new GroupEffect(allSubNavSpans.map(function(elem){
-                                return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
-                              })),
-                              new GroupEffect(allSubNavSpans.map(function(elem){
-                                return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
-                              }))
-                            ]);
+        openAnimation = this._openAccordionEffectAnimation(subnavEle, allSubNavSpans);
 
       }
 
@@ -287,6 +245,37 @@ Nav bar / drawer for applications
         }
       });
 
+    },
+
+    _openAccordionEffectAnimation: function(mainElement, textElements){
+      //animate open the clicked accordion
+      var self = this;
+      //animate close the open accordion
+      return new SequenceEffect([
+        new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, mainElement);}, { duration: 0, fill: 'forwards' }),
+        new KeyframeEffect(mainElement, [ {height: '0px'}, {height: '90px' }], { duration: 200, fill: 'forwards' }),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+        })),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
+        }))
+      ]);
+
+    },
+
+    _closeAccordionEffectAnimation: function(mainElement, textElements){
+      var self = this;
+      //animate close the open accordion
+      return new SequenceEffect([ new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
+        })),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+        })),
+        new KeyframeEffect(mainElement, [ {height: '90px'}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
+        new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, mainElement);}, { duration: 0, fill: 'forwards' })
+      ]);
     },
 
     /**
