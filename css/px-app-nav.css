@@ -792,7 +792,7 @@ html {
 /**
  * Sass functions for Predix Experience
  */
-.flex, :host {
+.flex {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
@@ -802,7 +802,7 @@ html {
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse; }
 
-.flex--column, :host {
+.flex--column {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column; }
@@ -876,31 +876,6 @@ html {
   -webkit-align-self: baseline;
       -ms-flex-item-align: baseline;
           align-self: baseline; }
-
-/*------------------------------------*\
-    #PX-VIEWPORT-DESIGN
-\*------------------------------------*/
-/**
-* Define a default max viewport
-*/
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-.viewport {
-  width: 98%;
-  max-width: 75rem;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 1%;
-  padding-left: 1%; }
-  @media screen and (min-width: 75rem) {
-    .viewport {
-      width: 100%;
-      padding-right: 0;
-      padding-left: 0; } }
 
 /*------------------------------------*\
     $PX-TYPOGRAPHY-DESIGN
@@ -2705,7 +2680,13 @@ html {
 
 :host {
   font-size: 15px;
-  font-size: 0.9375rem; }
+  font-size: 0.9375rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
 
 :host(.navbar) {
   width: 219px; }
@@ -2727,11 +2708,14 @@ html {
   direction: rtl; }
 
 :host > nav {
-  min-height: 100vh;
-  padding-top: 1em;
-  padding-bottom: 1em; }
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 1em; }
 
 .navbar__item > li {
+  margin-right: -1em;
+  margin-left: -1em;
   line-height: 3; }
   .navbar__item > li a {
     padding-right: 1em;
@@ -2749,9 +2733,9 @@ html {
   display: block; }
 
 .btn--svg {
+  width: 20px;
   height: 16px;
-  margin-bottom: 1.5em;
-  margin-left: 1em; }
+  margin-bottom: 1.5em; }
 
 /*------------------------------------*\
     #PX-CLEARFIX-DESIGN
@@ -2923,7 +2907,7 @@ html {
       -ms-flex: none !important;
           flex: none !important; }
 
-@media screen and (max-width: 44.9375rem) {
+@media screen and (max-width: 44.9375em) {
   .u-1\/1-palm {
     width: 100% !important; }
   .u-1\/2-palm {
@@ -2977,7 +2961,7 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-@media screen and (min-width: 45rem) and (max-width: 63.9375rem) {
+@media screen and (min-width: 45em) and (max-width: 63.9375em) {
   .u-1\/1-lap {
     width: 100% !important; }
   .u-1\/2-lap {
@@ -3031,7 +3015,7 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-@media screen and (min-width: 45rem) {
+@media screen and (min-width: 45em) {
   .u-1\/1-lap-and-up {
     width: 100% !important; }
   .u-1\/2-lap-and-up {
@@ -3085,7 +3069,7 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-@media screen and (max-width: 63.9375rem) {
+@media screen and (max-width: 63.9375em) {
   .u-1\/1-portable {
     width: 100% !important; }
   .u-1\/2-portable {
@@ -3139,7 +3123,7 @@ html {
         -ms-flex: none !important;
             flex: none !important; } }
 
-@media screen and (min-width: 64rem) {
+@media screen and (min-width: 64em) {
   .u-1\/1-desk {
     width: 100% !important; }
   .u-1\/2-desk {
@@ -3188,60 +3172,6 @@ html {
         -ms-flex: none !important;
             flex: none !important; }
   .u-4\/5-desk {
-    width: 80% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; } }
-
-@media screen and (min-width: 75rem) {
-  .u-1\/1-desk-wide {
-    width: 100% !important; }
-  .u-1\/2-desk-wide {
-    width: 50% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-1\/3-desk-wide {
-    width: 33.3333333333% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-2\/3-desk-wide {
-    width: 66.6666666667% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-1\/4-desk-wide {
-    width: 25% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-2\/4-desk-wide {
-    width: 50% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-3\/4-desk-wide {
-    width: 75% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-1\/5-desk-wide {
-    width: 20% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-2\/5-desk-wide {
-    width: 40% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-3\/5-desk-wide {
-    width: 60% !important;
-    -webkit-flex: none !important;
-        -ms-flex: none !important;
-            flex: none !important; }
-  .u-4\/5-desk-wide {
     width: 80% !important;
     -webkit-flex: none !important;
         -ms-flex: none !important;
