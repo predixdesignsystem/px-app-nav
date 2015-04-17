@@ -48,10 +48,6 @@ in import paths
 
 // Base
 @import "../px-flexbox-design/base.flexbox";
-@import "../px-viewport-design/base.viewport";
-
-$predix-typography-for-web-component    : true;
-
 @import "../px-typography-design/base.typography";
 @import "../px-iconography-design/base.iconography";
 
@@ -62,9 +58,9 @@ $inuit-enable-btn--bare                 : true;
 
 // Component
 :host {
-  @extend %flex;
-  @extend %flex--column;
   @include inuit-font-size(15px,false);
+  display: flex;
+  flex-direction: column;
 }
 
 :host(.navbar) {
@@ -85,18 +81,22 @@ $inuit-enable-btn--bare                 : true;
   }
 }
 
-:host(.rtl) {
+[dir=rtl] {
   direction: rtl;
+  .navbar__item > li i {
+    margin-left: .3333333333em;
+  }
 }
 
 :host > nav {
-  min-height: 100vh;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  flex: 1;
+  padding: 1em;
 }
 
 .navbar__item {
   > li {
+    margin-right: -1em;
+    margin-left: -1em;
     line-height: 3;
     a {
       padding-right: 1em;
@@ -122,14 +122,9 @@ $inuit-enable-btn--bare                 : true;
 }
 
 .btn--svg {
+  width: 20px;
   height: 16px;
   margin-bottom: 1.5em;
-  margin-left: 1em;
-}
-
-.navbar__subnavtext--hidden{
-  opacity: 0;
-  display: none;
 }
 
 // Trumps

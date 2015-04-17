@@ -29,7 +29,7 @@ Nav bar / drawer for applications
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
-    <nav role="navigation">
+    <nav class="flex flex--column" role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="x-repeat" items="{{navItems}}">
@@ -41,7 +41,7 @@ Nav bar / drawer for applications
             <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="navbar__subnavtext--hidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -252,7 +252,7 @@ Nav bar / drawer for applications
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, mainElement);}, { duration: 0, fill: 'forwards' }),
         new KeyframeEffect(mainElement, [ {height: '0px'}, {height: accordionHeight }], { duration: 200, fill: 'forwards' }),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
         })),
         new GroupEffect(textElements.map(function(elem){
           return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
@@ -269,7 +269,7 @@ Nav bar / drawer for applications
           return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
         })),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
         })),
         new KeyframeEffect(mainElement, [ {height: accordionHeight}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, mainElement);}, { duration: 0, fill: 'forwards' })
