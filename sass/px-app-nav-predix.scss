@@ -24,19 +24,19 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 
 
 :host > nav {
-  background-color: $gray-darkest;
+  background-color: var(--px-navbar-background-colour); //$gray-darkest;
 }
 
 a {
   text-decoration: none;
-  color: $white;
+  color: var(--px-navbar-link-text-color); //$white;
   &.selected {
-    background-color: $blue;
+    background-color: var(--px-navbar-link-selected-color); //$blue;
   }
   &:hover {
-    background-color: $gray-dark;
+    background-color: var(--px-navbar-link-hover-color); //$gray-dark;
   }
   &:active {
-    background-color: $blue-light;
+    background-color: var(--px-navbar-link-active-color); //$blue-light;
   }
 }
