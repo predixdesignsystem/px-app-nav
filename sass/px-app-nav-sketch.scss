@@ -48,9 +48,6 @@ in import paths
 
 // Base
 @import "../px-flexbox-design/base.flexbox";
-
-$predix-typography-for-web-component    : true;
-
 @import "../px-typography-design/base.typography";
 @import "../px-iconography-design/base.iconography";
 
@@ -128,11 +125,6 @@ $inuit-enable-btn--bare                 : true;
   width: 20px;
   height: 16px;
   margin-bottom: 1.5em;
-}
-
-.navbar__subnavtext--hidden{
-  opacity: 0;
-  display: none;
 }
 
 // Trumps

@@ -41,7 +41,7 @@ Nav bar / drawer for applications
             <ul class="list-bare visuallyhidden">
               <template is="x-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="navbar__subnavtext--hidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -252,7 +252,7 @@ Nav bar / drawer for applications
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, mainElement);}, { duration: 0, fill: 'forwards' }),
         new KeyframeEffect(mainElement, [ {height: '0px'}, {height: accordionHeight }], { duration: 200, fill: 'forwards' }),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
         })),
         new GroupEffect(textElements.map(function(elem){
           return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
@@ -269,7 +269,7 @@ Nav bar / drawer for applications
           return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
         })),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('navbar__subnavtext--hidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
         })),
         new KeyframeEffect(mainElement, [ {height: accordionHeight}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, mainElement);}, { duration: 0, fill: 'forwards' })
