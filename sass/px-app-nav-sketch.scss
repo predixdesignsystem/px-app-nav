@@ -58,7 +58,7 @@ $inuit-enable-btn--bare                 : true;
 
 // Component
 :host {
-  @include inuit-font-size(15px,false);
+  @include inuit-font-size(15px);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
