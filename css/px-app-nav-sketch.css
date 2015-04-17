@@ -2673,7 +2673,8 @@ html {
   display: flex;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  min-height: 100vh; }
 
 :host(.navbar) {
   width: 219px; }
@@ -2690,11 +2691,6 @@ html {
   border: 0 !important;
   padding: 0 !important;
   clip: rect(0 0 0 0) !important; }
-
-[dir=rtl] {
-  direction: rtl; }
-  [dir=rtl] .navbar__item > li i {
-    margin-left: .3333333333em; }
 
 :host > nav {
   -webkit-flex: 1;
