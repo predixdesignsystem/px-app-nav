@@ -137,7 +137,7 @@ Nav bar / drawer for applications
        */
       rtl: {
         type: Boolean,
-        value: false,
+        value: (document.documentElement.dir === 'rtl'),
         observer: "_rtlChanged"
       }
     },
@@ -156,12 +156,12 @@ Nav bar / drawer for applications
         this.navItems.forEach(this._computeHref, this);
         this.navItems.forEach(this._computeIcon);
         this.markSelected(window.location.href);
-        this.async(this.localize);//called async to let template refresh after prop change
+        this.async(this.pxL10NMixin_localize);//called async to let template refresh after prop change
       }
     },
 
     _rtlChanged: function(newValue, oldValue) {
-        this.toggleClass("rtl", newValue);
+      this.toggleClass("rtl", newValue);
     },
 
     /**
@@ -175,20 +175,15 @@ Nav bar / drawer for applications
       }
 
       this.markSelected(window.location.href);
-      this.localize();
+      this.pxL10NMixin_localize();//call function on the px-l10n-mixin
     },
 
     /**
      * Callback called by pxL10NMixin, which assumes Mozilla's L20N framework (which sets the "dir" property on the
-     * document element.
+     * document element.)
      */
-    localize: function() {
-        this.pxL10NMixin_localize();//call function on the px-l10n-mixin
-
-        //do additional component-specific stuff
-        if (document.documentElement.dir === 'rtl') {
-            this.rtl = true;
-        }
+    localeChangedCallback: function() {
+      this.rtl = (document.documentElement.dir === 'rtl');
     },
 
     /**
