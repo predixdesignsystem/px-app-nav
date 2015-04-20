@@ -96,12 +96,6 @@ $inuit-enable-btn--bare                 : true;
       padding-right: 1em;
       padding-left: 1.0666666667em;
     }
-    i {
-      margin-right: .3333333333em;
-    }
-    ul {
-
-    }
     li {
       @include inuit-font-size(12px);
       line-height: 2.5;
