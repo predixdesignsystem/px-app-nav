@@ -19,7 +19,7 @@
     "web-animations-js": "~2.0.0"
   },
   "devDependencies": {
-    "core-doc-viewer": "https://github.com/Polymer/core-doc-viewer.git#0.8-preview",
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v0.8.3",
     "web-component-tester": "~2.2.6",
     "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
     "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master",
