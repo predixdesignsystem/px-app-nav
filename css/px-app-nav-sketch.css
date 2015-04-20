@@ -844,6 +844,11 @@ html {
       -ms-flex-align: baseline;
           align-items: baseline; }
 
+.flex__item {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
+
 .flex__item--top {
   -webkit-align-self: flex-start;
       -ms-flex-item-align: start;
