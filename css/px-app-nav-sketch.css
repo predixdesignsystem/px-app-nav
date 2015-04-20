@@ -64,12 +64,12 @@ in import paths
    *    render text using sub-pixel anti-aliasing.
    */
 html {
-  font-size: 1em;
+  font-size: 0.9375em;
   /* [1] */
-  line-height: 1.5;
+  line-height: 1.3333333333;
   /* [1] */
   background-color: #fff;
-  color: #333;
+  color: #000;
   overflow-y: scroll;
   /* [2] */
   min-height: 100%;
@@ -133,8 +133,8 @@ audio:not([controls]) {
    * As per: csswizardry.com/2012/06/single-direction-margin-declarations
    */
 h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, p, address, hr, table, fieldset, figure, pre {
-  margin-bottom: 24px;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 20px;
+  margin-bottom: 1.3333333333rem; }
 
 /**
    * Remove extra vertical spacing when nesting lists.
@@ -147,8 +147,8 @@ li > ul, li > ol {
    * by a consistent amount. Define that amount once,here.
    */
 ul, ol, dd {
-  margin-left: 48px;
-  margin-left: 3rem; }
+  margin-left: 40px;
+  margin-left: 2.6666666667rem; }
 
 /* Links
      ========================================================================== */
@@ -659,8 +659,8 @@ html {
  */
 .list-btn {
   font-size: 20px;
-  font-size: 1.25rem;
-  line-height: 1.2; }
+  font-size: 1.3333333333rem;
+  line-height: 1; }
   .list-btn li {
     margin-right: 1em; }
     .list-btn li:last-child {
@@ -733,32 +733,32 @@ html {
   color: inherit; }
 
 .list-ui__item, .list-ui > li {
-  padding: 24px;
+  padding: 20px;
   border-bottom-width: 1px; }
 
 /**
      * Tiny list-uis.
      */
 .list-ui--tiny > .list-ui__item, .list-ui.list-ui--tiny > li {
-  padding: 6px; }
+  padding: 5px; }
 
 /**
      * Small list-uis.
      */
 .list-ui--small > .list-ui__item, .list-ui.list-ui--small > li {
-  padding: 12px; }
+  padding: 10px; }
 
 /**
      * Large list-uis.
      */
 .list-ui--large > .list-ui__item, .list-ui.list-ui--large > li {
-  padding: 48px; }
+  padding: 40px; }
 
 /**
      * Huge list-uis.
      */
 .list-ui--huge > .list-ui__item, .list-ui.list-ui--huge > li {
-  padding: 96px; }
+  padding: 80px; }
 
 .list-ui > li:last-child, .list-ui__item:last-child {
   border-bottom-width: 0; }
@@ -2624,7 +2624,7 @@ html {
   background: #3171e3;
   -webkit-font-smoothing: antialiased;
   border: 0;
-  padding: 6px 1em;
+  padding: 5px 1em;
   border-radius: 3px; }
   .btn, .btn:hover, .btn:active, .btn:focus {
     text-decoration: none;
@@ -2639,7 +2639,7 @@ html {
   * Establish default space between adjacent buttons
   */
 .btn + .btn {
-  margin-left: 12px; }
+  margin-left: 10px; }
 
 /**
   * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
@@ -2659,13 +2659,15 @@ html {
 
 :host {
   font-size: 15px;
-  font-size: 0.9375rem;
+  font-size: 1rem;
+  line-height: 1.3333333333;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column;
+  min-height: 100vh; }
 
 :host(.navbar) {
   width: 219px; }
@@ -2683,11 +2685,6 @@ html {
   padding: 0 !important;
   clip: rect(0 0 0 0) !important; }
 
-[dir=rtl] {
-  direction: rtl; }
-  [dir=rtl] .navbar__item > li i {
-    margin-left: .3333333333em; }
-
 :host > nav {
   -webkit-flex: 1;
       -ms-flex: 1;
@@ -2701,12 +2698,10 @@ html {
   .navbar__item > li a {
     padding-right: 1em;
     padding-left: 1.0666666667em; }
-  .navbar__item > li i {
-    margin-right: .3333333333em; }
   .navbar__item > li li {
     font-size: 12px;
-    font-size: 0.75rem;
-    line-height: 2;
+    font-size: 0.8rem;
+    line-height: 1.6666666667;
     line-height: 2.5; }
     .navbar__item > li li a {
       padding-left: 3.4166666667em; }

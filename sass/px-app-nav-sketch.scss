@@ -30,7 +30,7 @@ in import paths
 
 
 // Settings
-@import "../inuit-defaults/settings.defaults";
+@import "../px-defaults-design/settings.defaults";
 @import "../inuit-responsive-settings/settings.responsive";
 
 // Tools
@@ -58,9 +58,10 @@ $inuit-enable-btn--bare                 : true;
 
 // Component
 :host {
-  @include inuit-font-size(15px,false);
+  @include inuit-font-size(15px);
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 :host(.navbar) {
@@ -81,13 +82,6 @@ $inuit-enable-btn--bare                 : true;
   }
 }
 
-[dir=rtl] {
-  direction: rtl;
-  .navbar__item > li i {
-    margin-left: .3333333333em;
-  }
-}
-
 :host > nav {
   flex: 1;
   padding: 1em;
@@ -101,12 +95,6 @@ $inuit-enable-btn--bare                 : true;
     a {
       padding-right: 1em;
       padding-left: 1.0666666667em;
-    }
-    i {
-      margin-right: .3333333333em;
-    }
-    ul {
-
     }
     li {
       @include inuit-font-size(12px);
