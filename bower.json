@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v0.8.3",
-    "web-component-tester": "~2.2.6",
     "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
     "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master",
     "px-flexbox-design": "git://github.sw.ge.com/PXd/px-flexbox-design.git#master",
