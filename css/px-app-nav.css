@@ -341,10 +341,6 @@ button[disabled], html input[disabled] {
 /**
    * Remove inner padding and border in Firefox 4+.
    */
-button::-moz-focus-inner, input::-moz-focus-inner {
-  border: 0;
-  padding: 0; }
-
 /**
    * Address Firefox 4+ setting `line-height` on `input` using `!important` in
    * the UA stylesheet.
@@ -2661,10 +2657,6 @@ html {
 /**
   * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
   */
-.btn::-moz-focus-inner {
-  border: 0;
-  padding: 0; }
-
 /**
      * Buttons with no styles (good a11y practice to use <button> for actions rather than <a>.
      */
@@ -3255,14 +3247,14 @@ html {
  * Monochrome
  */
 :host > nav {
-  background-color: var(--px-navbar-background-colour); }
+  background-color: var(--px-app-nav-background-color, #2b2b2b); }
 
 a {
   text-decoration: none;
-  color: var(--px-navbar-link-text-color); }
+  color: var(--px-app-nav-link-text-color, #ffffff); }
   a.selected {
-    background-color: var(--px-navbar-link-selected-color); }
+    background-color: var(--px-app-nav-link-selected-color, #005cb9); }
   a:hover {
-    background-color: var(--px-navbar-link-hover-color); }
+    background-color: var(--px-app-nav-link-hover-color, #575757); }
   a:active {
-    background-color: var(--px-navbar-link-active-color); }
+    background-color: var(--px-app-nav-link-active-color, #3693f8); }
