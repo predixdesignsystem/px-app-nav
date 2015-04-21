@@ -7,9 +7,14 @@
     <title>px-app-nav Demo</title>
     <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../polymer/polymer.html"/>
+
     <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+    <link rel="import" href="../px-theme/px-theme.html"/>
+
     <link rel="import" href="px-app-nav.html" />
-    <style>
+
+    <style is="x-style">
       body {
         display: -webkit-flex;
         display: flex;
@@ -30,6 +35,7 @@
         flex: 1;
         margin: 1em;
       }
+
     </style>
   </head>
 
@@ -39,6 +45,7 @@
           nav-items='[{"path": "", "icon": "fa-warning", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}, {"label": "Sub Category 3"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}, {"label": "Sub Category 3"}]},{"path": "tab3", "icon": "fa-bar-chart", "label": "Analysis"}, {"path": "tab4", "icon": "fa-dashboard", "label": "Dashboards"}]'>
           Auth, login, other content
       </px-app-nav>
+
       <div class="demo-body">
         <h3>Demo</h3>
         <p>Although related, examples are /not/ the same as the test fixtures. Tests are tests, examples are examples.</p>

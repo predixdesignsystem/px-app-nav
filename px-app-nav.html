@@ -26,7 +26,9 @@ Nav bar / drawer for applications
 -->
 
 <dom-module id="px-app-nav">
+
   <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
+
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
     <nav class="flex flex--column" role="navigation">
@@ -58,7 +60,7 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
-
+    enableCustomStyleProperties: true,
     mixins: [pxL10NMixin],
     created: function(){
       this.toggleClass("navbar", true)
