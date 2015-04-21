@@ -14,7 +14,7 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v0.8.0",
+    "polymer": "v0.8.0-rc.4",
     "px-l10n-mixin": "git://github.sw.ge.com/PXm/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
     "px-theme": "git://github.sw.ge.com/PXc/px-theme.git"
