@@ -3,6 +3,5 @@ node_modules
 temp
 bower_components
 .idea
-test/unit/report*
-test/ui/report*
+reports
 css/noprefix
