@@ -34,7 +34,6 @@ in import paths
 @import "../inuit-responsive-settings/settings.responsive";
 
 // Tools
-@import "../px-functions-design/tools.functions";
 @import "../px-mixins-design/tools.mixins";
 @import "../inuit-responsive-tools/tools.responsive";
 
@@ -117,5 +116,9 @@ $inuit-enable-btn--bare                 : true;
 
 // Trumps
 @import "../px-clearfix-design/trumps.clearfix";
+
+$inuit-enable-margins--tiny:            true;
+$inuit-enable-margins--rtl:             true;
+
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";
