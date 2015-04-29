@@ -61,7 +61,7 @@ Nav bar / drawer for applications
   Polymer({
     is: 'px-app-nav',
     enableCustomStyleProperties: true,
-    mixins: [pxL10NMixin],
+    behaviors: [pxL10NMixin],
     created: function(){
       this.toggleClass("navbar", true)
     },
