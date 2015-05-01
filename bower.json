@@ -21,12 +21,11 @@
   },
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v0.8.3",
-    "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#v0.1.1",
-    "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#v0.1.0",
-    "px-flexbox-design": "git://github.sw.ge.com/PXd/px-flexbox-design.git#v0.1.1",
-    "px-iconography-design": "git://github.sw.ge.com/pxc/px-iconography-design.git#v0.1.0",
-    "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#v0.1.0",
-    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#v0.1.1"
+    "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#~0.1.0",
+    "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#~0.1.0",
+    "px-iconography-design": "git://github.sw.ge.com/pxc/px-iconography-design.git#~0.1.0",
+    "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#~0.1.0",
+    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#~0.1.0"
   },
   "resolutions": {
     "polymer": "v0.8.0-rc.7"
