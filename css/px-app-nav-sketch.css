@@ -677,13 +677,29 @@ html {
  * Sass functions for Predix Experience
  */
 /*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
 /**
  * Sass functions for Predix Experience
  */
 .list-btn {
-  font-size: 20px;
   font-size: 1.3333333333rem;
   line-height: 1; }
   .list-btn li {
@@ -1045,7 +1061,6 @@ html {
   font-weight: 600 !important; }
 
 small {
-  font-size: 12px;
   font-size: 0.8rem;
   line-height: 1.6666666667; }
 
@@ -2643,6 +2658,27 @@ small {
 .fa-meanpath:before {
   content: "\f20c"; }
 
+[dir=rtl] .fa-chevron-left, [dir=rtl] .fa-chevron-right, [dir=rtl] .fa-chevron-circle-left, [dir=rtl] .fa-chevron-circle-right, [dir=rtl] .fa-angle-left, [dir=rtl] .fa-angle-right, [dir=rtl] .fa-angle-double-left, [dir=rtl] .fa-angle-double-right, [dir=rtl] .fa-arrow-circle-left, [dir=rtl] .fa-arrow-circle-right, [dir=rtl] .fa-arrow-circle-o-left, [dir=rtl] .fa-arrow-circle-o-right {
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1); }
+
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
 /*!
  * inuitcss, by @csswizardry
  *
@@ -2725,7 +2761,6 @@ small {
     color: inherit; }
 
 :host {
-  font-size: 15px;
   font-size: 1rem;
   line-height: 1.3333333333;
   display: -webkit-flex;
@@ -2766,7 +2801,6 @@ small {
     padding-right: 1em;
     padding-left: 1.0666666667em; }
   .navbar__item > li li {
-    font-size: 12px;
     font-size: 0.8rem;
     line-height: 1.6666666667;
     line-height: 2.5; }

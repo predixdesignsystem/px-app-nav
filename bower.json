@@ -14,21 +14,21 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "v0.8.0-rc.4",
+    "polymer": "v0.8.0-rc.7",
     "px-l10n-mixin": "git://github.sw.ge.com/PXm/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
-    "px-theme": "git://github.sw.ge.com/PXc/px-theme.git#master"
+    "px-theme": "git://github.sw.ge.com/PXc/px-theme.git#v0.0.1"
   },
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v0.8.3",
-    "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#master",
-    "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#master",
-    "px-flexbox-design": "git://github.sw.ge.com/PXd/px-flexbox-design.git#master",
-    "px-iconography-design": "git://github.sw.ge.com/pxc/px-iconography-design.git#master",
-    "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#master",
-    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#master"
+    "px-buttons-design": "git://github.sw.ge.com/pxc/px-buttons-design.git#v0.1.1",
+    "px-colors-design": "git://github.sw.ge.com/pxc/px-colors-design.git#v0.1.0",
+    "px-flexbox-design": "git://github.sw.ge.com/PXd/px-flexbox-design.git#v0.1.1",
+    "px-iconography-design": "git://github.sw.ge.com/pxc/px-iconography-design.git#v0.1.0",
+    "px-meta-lists-design": "git://github.sw.ge.com/pxc/px-meta-lists-design.git#v0.1.0",
+    "px-starter-kit-design": "git://github.sw.ge.com/pxc/px-starter-kit-design.git#v0.1.1"
   },
   "resolutions": {
-    "polymer": "v0.8.0-rc.4"
+    "polymer": "v0.8.0-rc.7"
   }
 }
