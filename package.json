@@ -4,7 +4,7 @@
     "description": "A Px component",
     "version": "0.0.3",
     "private": true,
-    "fwk": "polymer05",
+    "fwk": "polymer08",
     "extName" : null,
     "repository" :
     {
