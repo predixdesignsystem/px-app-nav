@@ -9,7 +9,7 @@
     "repository" :
     {
         "type": "git",
-        "url": "https://github.sw.ge.com/change-this-in-package.json-please.git"
+        "url": "https://github.build.ge.com/PXc/px-app-nav.git"
     },
     "homepage": "http://predix.sw.ge.com/",
     "devDependencies": {
