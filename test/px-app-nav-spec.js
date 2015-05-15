@@ -115,7 +115,7 @@ describe('Navigation', function () {
 
     it('should mark the selected item as selected', function () {
         return chai.expect(
-            driver.findElement(webdriver.By.css("px-app-nav a[href='#tab2'].active"))
+            driver.findElement(webdriver.By.css("px-app-nav a[href='#tab2'].selected"))
         ).to.eventually.exist;
     });
 });

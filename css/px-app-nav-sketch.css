@@ -499,6 +499,12 @@ html {
   text-align: right !important; }
 
 /**
+   * Full height element
+   */
+.full-height {
+  height: 100% !important; }
+
+/**
    * Add a help cursor to any element that gives the user extra information on
    * `:hover`.
    */

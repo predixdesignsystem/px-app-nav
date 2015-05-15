@@ -34,14 +34,14 @@ Nav bar / drawer for applications
     <nav class="flex flex--column" role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
-        <template is="x-repeat" items="{{navItems}}">
+        <template is="dom-repeat" items="{{navItems}}">
           <li>
             <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
             <ul class="list-bare visuallyhidden">
-              <template is="x-repeat" items="{{item.subitems}}">
+              <template is="dom-repeat" items="{{item.subitems}}">
                 <li>
                   <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
@@ -177,7 +177,6 @@ Nav bar / drawer for applications
       }
 
       this.markSelected(window.location.href);
-      this.pxL10NMixin_localize();//call function on the px-l10n-mixin
     },
 
     /**
