@@ -297,7 +297,7 @@ Nav bar / drawer for applications
      *
      * @param {String} path The selected path
      */
-    markSelected: function(path, selectedElement) {
+    markSelected: function(path) {
       var resolvedPath = this._parseOutPathPrefix(path);
       var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
 
@@ -321,7 +321,13 @@ Nav bar / drawer for applications
     },
 
     _computeHref: function(item) {
-      item.href = this.pathPrefix + item[this.pathKey];
+      var _this = this;
+      item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
+      if (item.subitems) {
+        item.subitems.forEach(function(subitem) {
+          _this._computeHref(subitem);
+        })
+      }
     },
 
     _computeIcon: function(item) {
