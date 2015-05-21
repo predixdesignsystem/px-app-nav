@@ -36,14 +36,14 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}">
           <li>
-            <a class$="{{item.class}}" href$="{{item.href}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+            <a class$="{{item.class}}" href$="{{item.href}}" event-name$="{{item.eventName}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
 
             <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
 
             <ul class="list-bare visuallyhidden">
               <template is="dom-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -69,7 +69,7 @@ Nav bar / drawer for applications
 
       /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
-       * 'l10nId', and 'subitems', which is another Array.
+       * 'l10nId', 'eventName', and 'subitems', which is another Array.
        *
        * @type {Array}
        * @default [{}]
@@ -194,8 +194,12 @@ Nav bar / drawer for applications
      * @param {Event} evt The click event.
      */
     navClickHandler: function(evt) {
-      var href = evt.currentTarget.getAttribute("href");
-      this.markSelected(href, evt.currentTarget);
+      var el = evt.currentTarget;
+      if (el.getAttribute("event-name")) {
+        this.fire(el.getAttribute("event-name"));
+      }
+      var href = el.getAttribute("href");
+      this.markSelected(href, el);
 
 
       var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul'),
@@ -279,9 +283,12 @@ Nav bar / drawer for applications
      * @param {Event} evt The click event.
      */
      subnavClickHandler: function(evt){
-       var href = evt.currentTarget.getAttribute("href");
+       var el = evt.currentTarget;
+       if (el.getAttribute("event-name")) {
+         this.fire(el.getAttribute("event-name"));
+       }
+       var href = el.getAttribute("href");
        this.markSelected(href, evt.parentElement);
-
 
      },
 
