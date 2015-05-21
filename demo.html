@@ -56,11 +56,11 @@
           <a href="test/fixture.html">UI test fixture</a>.
         </p>
         <script>
-          window.addEventListener("firstItem", function(arg1, arg2, arg3) {
+          window.addEventListener("firstItem", function(evt) {
             console.log("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired.");
           });
 
-          window.addEventListener("subitemTwo", function(arg1, arg2, arg3) {
+          window.addEventListener("subitemTwo", function(evt) {
             console.log("Event 'subitemTwo' attached to a nav item via the 'eventName' prop was fired.");
           });
         </script>
