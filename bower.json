@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.1.3",
+  "version": "0.2.4",
   "main": [
     "px-app-nav.html"
   ],
@@ -22,9 +22,9 @@
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
     "px-buttons-design": "git://github.build.ge.com/pxc/px-buttons-design.git#~0.1.0",
-    "px-colors-design": "git://github.build.ge.com/pxc/px-colors-design.git#~0.1.0",
+    "px-colors-design": "git://github.build.ge.com/pxc/px-colors-design.git#~0.2.0",
     "px-iconography-design": "git://github.build.ge.com/pxc/px-iconography-design.git#~0.1.0",
     "px-meta-lists-design": "git://github.build.ge.com/pxc/px-meta-lists-design.git#~0.1.0",
-    "px-starter-kit-design": "git://github.build.ge.com/pxc/px-starter-kit-design.git#~0.1.0"
+    "px-starter-kit-design": "git://github.build.ge.com/pxc/px-starter-kit-design.git#~0.1.1"
   }
 }
