@@ -17,7 +17,7 @@
     "polymer": "~v1.0.2",
     "px-l10n-mixin": "git://github.build.ge.com/PXb/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
-    "px-theme": "git://github.build.ge.com/PXc/px-theme.git#~v0.1.11"
+    "px-theme": "git://github.build.ge.com/PXc/px-theme.git#~v0.1.12"
   },
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
