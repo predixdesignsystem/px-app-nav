@@ -14,13 +14,13 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v1.0.2",
+    "polymer": "~v1.0.3",
     "px-l10n-mixin": "git://github.build.ge.com/PXb/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
-    "px-theme": "git://github.build.ge.com/PXc/px-theme.git#~v0.1.12"
+    "px-theme": "git://github.build.ge.com/PXc/px-theme.git#~v0.1.13"
   },
   "devDependencies": {
-    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.0.4",
     "px-buttons-design": "git://github.build.ge.com/pxc/px-buttons-design.git#~0.1.0",
     "px-colors-design": "git://github.build.ge.com/pxc/px-colors-design.git#~0.2.0",
     "px-iconography-design": "git://github.build.ge.com/pxc/px-iconography-design.git#~0.1.0",

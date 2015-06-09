@@ -23,6 +23,7 @@ Nav bar / drawer for applications
 @element px-app-nav
 @blurb Nav bar / drawer for applications.
 @homepage index.html
+@demo demo.html
 -->
 
 <dom-module id="px-app-nav">
@@ -199,7 +200,7 @@ Nav bar / drawer for applications
         this.fire(el.getAttribute("event-name"));
       }
       var href = el.getAttribute("href");
-      this.markSelected(href, el);
+      this.markSelected(href);
 
 
       var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul'),
@@ -288,7 +289,7 @@ Nav bar / drawer for applications
          this.fire(el.getAttribute("event-name"));
        }
        var href = el.getAttribute("href");
-       this.markSelected(href, evt.parentElement);
+       this.markSelected(href);
 
      },
 
@@ -310,6 +311,34 @@ Nav bar / drawer for applications
 
       }
     },
+
+    /**
+     * Marks the nav item with the given path as selected, and all others as unselected.
+     *
+     * @param {String} path The selected path
+     * @param {Array} items Optional. Start point of looking for items to mark selected.
+     *
+    markSelected: function(path, items, pathStr) {
+      var itemsToIterate = items ? items : this.navItems;
+      var resolvedParentParthStr = pathStr ? pathStr + ".subitems" : "navItems";
+      var resolvedPath = this._parseOutPathPrefix(path);
+
+      for (var i = 0; i < itemsToIterate.length; i++) {
+        var item = itemsToIterate[i];
+        item.selected = item[this.pathKey] === resolvedPath;
+        this.set(resolvedParentParthStr + "." + i + ".class", item.selected ? "selected" : "");
+        //item.class = item.selected ? "selected" : "";
+        //this.notifyPath(resolvedParentParthStr + "." + i + ".selected", item.selected);
+        //this.notifyPath(resolvedParentParthStr + "." + i, item);
+        //this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+
+        if (item.subitems) {
+          this.markSelected(path, item.subitems, resolvedParentParthStr + "." + i);
+        }
+
+      }
+
+    },*/
 
     _parseOutPathPrefix: function(fullPath) {
       if (!fullPath) {
