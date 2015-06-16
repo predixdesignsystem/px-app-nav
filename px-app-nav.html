@@ -32,7 +32,7 @@ Nav bar / drawer for applications
 
   <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
-    <nav class="flex flex--column" role="navigation">
+    <nav role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}">
@@ -360,7 +360,7 @@ Nav bar / drawer for applications
     },
 
     _computeIcon: function(item) {
-      item.icon = item.icon + " fa fa-fw mr--";
+      item.icon = item.icon + " fa fa-fw u-mr--";
     },
 
     _buttonAnimation : function(navElem, textElemArray){
