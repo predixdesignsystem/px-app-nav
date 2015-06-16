@@ -1,5 +1,7 @@
 'use strict';
 
+var importOnce = require('node-sass-import-once');
+
 module.exports = function (grunt) {
 
     // Project configuration.
@@ -13,12 +15,11 @@ module.exports = function (grunt) {
         sass: {
             options: {
                 sourceMap: false, //no source maps b/c web-components inline css anyway...
-
-                 /*
-                  See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation
-                  of the contents of the includePaths option for Sass
-                 */
-                includePaths: ['bower_components/*']
+                importer: importOnce,
+                importOnce: {
+                  index: true,
+                  bower: true
+                }
             },
             dist: {
                 files: {
