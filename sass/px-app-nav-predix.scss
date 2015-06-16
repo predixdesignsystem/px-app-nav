@@ -20,8 +20,6 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 */
 
 @import 'px-app-nav-sketch.scss';
-@import "../px-colors-design/settings.colors";
-
 
 :host > nav {
   background-color: var(--px-app-nav-background-color); //$gray-darkest;
