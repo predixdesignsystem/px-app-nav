@@ -2811,3 +2811,5 @@ a {
     background-color: var(--px-app-nav-link-hover-color); }
   a:active {
     background-color: var(--px-app-nav-link-active-color); }
+  a:visited {
+    color: var(--px-app-nav-link-text-color); }

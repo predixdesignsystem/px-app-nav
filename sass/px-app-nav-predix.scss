@@ -37,4 +37,7 @@ a {
   &:active {
     background-color: var(--px-app-nav-link-active-color); //$blue-light;
   }
+  &:visited{
+    color: var(--px-app-nav-link-text-color); //$white
+  }
 }
