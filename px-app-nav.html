@@ -352,6 +352,9 @@ Nav bar / drawer for applications
     _computeHref: function(item) {
       var _this = this;
       item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
+      if (!item.class){
+        item.class = "";
+      }
       if (item.subitems) {
         item.subitems.forEach(function(subitem) {
           _this._computeHref(subitem);

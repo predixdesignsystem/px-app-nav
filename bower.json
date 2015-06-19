@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": [
     "px-app-nav.html"
   ],
@@ -17,7 +17,7 @@
     "polymer": "~v1.0.3",
     "px-l10n-mixin": "https://github.build.ge.com/PXb/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
-    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.0"
+    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.4",
