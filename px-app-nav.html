@@ -346,7 +346,13 @@ Nav bar / drawer for applications
       }
       var resolvedPath = fullPath.replace(this._protocolRE, '');
       var idx = resolvedPath.indexOf(this.pathPrefix);
-      return resolvedPath.substring(idx + 1);
+      var argsIdx = resolvedPath.indexOf('?');
+
+      if (argsIdx === -1){
+        argsIdx = resolvedPath.length;
+      }
+
+      return resolvedPath.substring(idx + 1, argsIdx);
     },
 
     _computeHref: function(item) {
