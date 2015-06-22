@@ -303,39 +303,19 @@ Nav bar / drawer for applications
         var item = this.navItems[i];
         item.selected = item[this.pathKey] === resolvedPath;
         item.class = item.selected ? "selected" : "";
+        if (item.subitems) {
+          item.subitems.forEach(function(subitem, idx) {
+            subitem.selected = subitem[this.pathKey] === resolvedPath;
+            subitem.class = subitem.selected ? "selected" : "";
+            this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+
+          }, this)
+        }
 
         this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
 
       }
     },
-
-    /**
-     * Marks the nav item with the given path as selected, and all others as unselected.
-     *
-     * @param {String} path The selected path
-     * @param {Array} items Optional. Start point of looking for items to mark selected.
-     *
-    markSelected: function(path, items, pathStr) {
-      var itemsToIterate = items ? items : this.navItems;
-      var resolvedParentParthStr = pathStr ? pathStr + ".subitems" : "navItems";
-      var resolvedPath = this._parseOutPathPrefix(path);
-
-      for (var i = 0; i < itemsToIterate.length; i++) {
-        var item = itemsToIterate[i];
-        item.selected = item[this.pathKey] === resolvedPath;
-        this.set(resolvedParentParthStr + "." + i + ".class", item.selected ? "selected" : "");
-        //item.class = item.selected ? "selected" : "";
-        //this.notifyPath(resolvedParentParthStr + "." + i + ".selected", item.selected);
-        //this.notifyPath(resolvedParentParthStr + "." + i, item);
-        //this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-
-        if (item.subitems) {
-          this.markSelected(path, item.subitems, resolvedParentParthStr + "." + i);
-        }
-
-      }
-
-    },*/
 
     _parseOutPathPrefix: function(fullPath) {
       if (!fullPath) {
@@ -353,15 +333,14 @@ Nav bar / drawer for applications
     },
 
     _computeHref: function(item) {
-      var _this = this;
       item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
       if (!item.class){
         item.class = "";
       }
       if (item.subitems) {
         item.subitems.forEach(function(subitem) {
-          _this._computeHref(subitem);
-        })
+          this._computeHref(subitem);
+        }, this)
       }
     },
 
