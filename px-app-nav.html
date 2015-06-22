@@ -38,9 +38,6 @@ Nav bar / drawer for applications
         <template is="dom-repeat" items="{{navItems}}">
           <li>
             <a class$="{{item.class}}" href$="{{item.href}}" event-name$="{{item.eventName}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
-
-            <!-- <px-nav-sub-items subitems="{{item.subitems}}"></px-nav-sub-items> -->
-
             <ul class="list-bare visuallyhidden">
               <template is="dom-repeat" items="{{item.subitems}}">
                 <li>
