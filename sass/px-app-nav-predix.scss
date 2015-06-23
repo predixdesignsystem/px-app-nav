@@ -31,6 +31,10 @@ a {
   &.selected {
     background-color: var(--px-app-nav-link-selected-color); //$blue;
   }
+  &.subselected {
+    background-color: var(--px-app-nav-link-hover-color); //$gray-dark;
+  }
+
   &:hover {
     background-color: var(--px-app-nav-link-hover-color); //$gray-dark;
   }

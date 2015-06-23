@@ -2807,6 +2807,8 @@ a {
   color: var(--px-app-nav-link-text-color); }
   a.selected {
     background-color: var(--px-app-nav-link-selected-color); }
+  a.subselected {
+    background-color: var(--px-app-nav-link-hover-color); }
   a:hover {
     background-color: var(--px-app-nav-link-hover-color); }
   a:active {
