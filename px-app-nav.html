@@ -299,24 +299,24 @@ Nav bar / drawer for applications
       var resolvedPath = this._parseOutPathPrefix(path);
       var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
 
-      for (var i = 0; i < this.navItems.length; i++) {
-        var item = this.navItems[i];
-        item.selected = item[this.pathKey] === resolvedPath;
-        // item.subSelected = false;
-        item.class = item.selected ? "selected" : "";
-        if (item.subitems) {
-          item.subitems.forEach(function(subitem, idx) {
-            subitem.selected = subitem[this.pathKey] === resolvedPath;
-            subitem.class = subitem.selected ? "selected" : "";
-            this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
-            // item.subSelected = subitem.selected;
-          }, this)
+      if(topLevelNavElems.length > 0){
+        for (var i = 0; i < this.navItems.length; i++) {
+          var item = this.navItems[i];
+          item.selected = item[this.pathKey] === resolvedPath;
+          item.subSelected = false;
+          item.class = item.selected ? "selected" : "";
+          if (item.subitems) {
+            item.subitems.forEach(function(subitem, idx) {
+              subitem.selected = subitem[this.pathKey] === resolvedPath;
+              subitem.class = subitem.selected ? "selected" : "";
+              this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+              item.subSelected = subitem.selected ? true : item.subSelected;
+            }, this)
+          }
+
+          this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+          this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
         }
-
-        this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-        // this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-        // console.log(item.subSelected);
-
       }
     },
 
