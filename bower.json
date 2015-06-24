@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "main": [
     "px-app-nav.html"
   ],
@@ -17,13 +17,13 @@
     "polymer": "~v1.0.3",
     "px-l10n-mixin": "https://github.build.ge.com/PXb/px-l10n-mixin.git#master",
     "web-animations-js": "~2.0.0",
-    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.3"
+    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.3",
+    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.4",
     "px-buttons-design": "https://github.build.ge.com/PXd/px-buttons-design.git#~0.4.0",
     "px-colors-design": "https://github.build.ge.com/PXd/px-colors-design.git#~0.2.0",
-    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0",
     "px-meta-lists-design": "https://github.build.ge.com/PXd/px-meta-lists-design.git#~0.2.0",
     "px-starter-kit-design": "https://github.build.ge.com/PXd/px-starter-kit-design.git#~0.3.0"
   }
