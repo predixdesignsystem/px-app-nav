@@ -198,11 +198,14 @@ Nav bar / drawer for applications
       }
       var href = el.getAttribute("href");
       this.markSelected(href);
+      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
 
+      this._animateMenuItem(subnavEle);
+    },
 
-      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul'),
-          hidden = subnavEle.classList.contains('visuallyhidden'),
-
+    _animateMenuItem: function(subnavEle){
+      console.log(subnavEle);
+      var hidden = subnavEle.classList.contains('visuallyhidden'),
           allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span"),
           self = this,
           navToHide,
@@ -210,14 +213,12 @@ Nav bar / drawer for applications
           allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
           openAnimation;
 
-        for (i=0; i<allSubNavs.length; i++) {
-          if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
-            navToHide = allSubNavs[i];
-            navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
-          }
+      for (i=0; i<allSubNavs.length; i++) {
+        if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
+          navToHide = allSubNavs[i];
+          navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
         }
-
-
+      }
       if (navToHide){
         openAnimation = new SequenceEffect([
                               this._closeAccordionEffectAnimation(navToHide, navToHideSpans),
@@ -318,6 +319,11 @@ Nav bar / drawer for applications
 
           this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
           this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+
+          // console.log(path, ' ', item.subSelected, ' ', topLevelNavElems.length);
+          // if (item.subSelected && topLevelNavElems.length > 0){
+          //   this._animateMenuItem(Polymer.dom(topLevelNavElems[i]).querySelector('ul'));
+          // }
         }
     },
 
