@@ -35,13 +35,13 @@ Nav bar / drawer for applications
     <nav role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
-        <template is="dom-repeat" items="{{navItems}}">
+        <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{item.class}}" href$="{{item.href}}" event-name$="{{item.eventName}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
-            <ul class$="{{item.subitemlistclass}}">
-              <template is="dom-repeat" items="{{item.subitems}}">
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span data-l10n-id$="{{navitem.l10nId}}">{{navitem.label}}</span></a>
+            <ul class$="{{navitem.subitemlistclass}}">
+              <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{item.subitemclass}}" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{navitem.subitemclass}}" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -155,6 +155,7 @@ Nav bar / drawer for applications
         this.navItems.forEach(this._computeHref, this);
         this.navItems.forEach(this._computeIcon);
         this.markSelected(window.location.href);
+        this._setSubNavVisibility();
         this.async(this.pxL10NMixin_localize);//called async to let template refresh after prop change
       }
     },
@@ -299,35 +300,38 @@ Nav bar / drawer for applications
       var resolvedPath = this._parseOutPathPrefix(path);
       var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
 
-
-        for (var i = 0; i < this.navItems.length; i++) {
-          var item = this.navItems[i];
-          item.selected = item[this.pathKey] === resolvedPath;
-          item.subSelected = false;
-          item.class = item.selected ? "selected" : "";
-          if (item.subitems) {
-            item.subitems.forEach(function(subitem, idx) {
-              subitem.selected = subitem[this.pathKey] === resolvedPath;
-              subitem.class = subitem.selected ? "selected" : "";
-              if(topLevelNavElems.length > 0){
-                this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
-              }
-              item.subSelected = subitem.selected ? true : item.subSelected;
-            }, this)
-          }
-
-          this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-          this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-
-          if (item.subSelected){
-            item.subitemlistclass = "list-bare";
-            item.subitemclass = "";
-          }
-          else{
-            item.subitemlistclass = "visuallyhidden list-bare";
-            item.subitemclass = "visuallyhidden";
-          }
+      for (var i = 0; i < this.navItems.length; i++) {
+        var item = this.navItems[i];
+        item.selected = item[this.pathKey] === resolvedPath;
+        item.subSelected = false;
+        item.class = item.selected ? "selected" : "";
+        if (item.subitems) {
+          item.subitems.forEach(function(subitem, idx) {
+            subitem.selected = subitem[this.pathKey] === resolvedPath;
+            subitem.class = subitem.selected ? "selected" : "";
+            if(topLevelNavElems.length > 0){
+              this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+            }
+            item.subSelected = subitem.selected ? true : item.subSelected;
+          }, this)
         }
+
+        this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+        this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+      }
+    },
+
+    _setSubNavVisibility: function(){
+      this.navItems.forEach( function(item){
+        if (item.subSelected){
+          item.subitemlistclass = "list-bare";
+          item.subitemclass = "";
+        }
+        else{
+          item.subitemlistclass = "visuallyhidden list-bare";
+          item.subitemclass = "visuallyhidden";
+        }
+      }, this)
     },
 
     _parseOutPathPrefix: function(fullPath) {
@@ -348,7 +352,8 @@ Nav bar / drawer for applications
     _computeHref: function(item) {
       item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
       if (!item.class){
-        item.class = "";
+        item.subitemlistclass = item.subitemclass = item.class = "";
+
       }
       if (item.subitems) {
         item.subitems.forEach(function(subitem) {
