@@ -38,10 +38,10 @@ Nav bar / drawer for applications
         <template is="dom-repeat" items="{{navItems}}">
           <li>
             <a class$="{{item.class}}" href$="{{item.href}}" event-name$="{{item.eventName}}" on-click="navClickHandler"><i class$="{{item.icon}}"></i><span data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
-            <ul class="list-bare visuallyhidden">
+            <ul class$="{{item.subitemlistclass}}">
               <template is="dom-repeat" items="{{item.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class="visuallyhidden" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{item.subitemclass}}" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -320,10 +320,14 @@ Nav bar / drawer for applications
           this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
           this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
 
-          // console.log(path, ' ', item.subSelected, ' ', topLevelNavElems.length);
-          // if (item.subSelected && topLevelNavElems.length > 0){
-          //   this._animateMenuItem(Polymer.dom(topLevelNavElems[i]).querySelector('ul'));
-          // }
+          if (item.subSelected){
+            item.subitemlistclass = "list-bare";
+            item.subitemclass = "";
+          }
+          else{
+            item.subitemlistclass = "visuallyhidden list-bare";
+            item.subitemclass = "visuallyhidden";
+          }
         }
     },
 
