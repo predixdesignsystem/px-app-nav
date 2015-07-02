@@ -310,12 +310,13 @@ Nav bar / drawer for applications
             subitem.selected = subitem[this.pathKey] === resolvedPath;
             subitem.class = subitem.selected ? "selected" : "";
             if(topLevelNavElems.length > 0){
-              this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+              if(idx < Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li').length) {
+                this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+              }
             }
             item.subSelected = subitem.selected ? true : item.subSelected;
           }, this)
         }
-
         this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
         this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
       }
