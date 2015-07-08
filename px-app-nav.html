@@ -156,8 +156,32 @@ Nav bar / drawer for applications
         this.navItems.forEach(this._computeIcon);
         this.markSelected(window.location.href);
         this._setSubNavVisibility();
+        this._potentiallyAdjustAccordion();
         this.async(this.pxL10NMixin_localize);//called async to let template refresh after prop change
       }
+    },
+
+    _potentiallyAdjustAccordion: function() {
+
+       var allNavItems = this.navItems;
+
+       this.navItems.forEach(function(item){
+         var navSubitems = item.subitems;
+         if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+
+            var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected'),
+                parent = parentA.parentElement.querySelector('ul'),
+                heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
+                listResizeAnimation = new SequenceEffect([
+                 new KeyframeEffect(parent, [{height: parent.clientHeight}, {height: heightAfter}], {
+                     duration: 200,
+                     fill: 'forwards'
+                 })
+             ]);
+
+             var accordionAnimationPlayer = document.timeline.play(listResizeAnimation);
+         }
+       }, this)
     },
 
     _rtlChanged: function(newValue, oldValue) {
