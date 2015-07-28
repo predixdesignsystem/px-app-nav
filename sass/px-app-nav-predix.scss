@@ -27,22 +27,23 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 
 a {
   text-decoration: none;
-  color: var(--px-app-nav-link-text-color); //$white;
+  color: var(--px-app-nav-link-text-color);
   &.selected {
-    background-color: var(--px-app-nav-link-selected-color); //$blue;
+    &, &:hover {
+      background-color: var(--px-app-nav-link-selected-color);
+    }
   }
   &.subselected {
-    background-color: var(--px-app-nav-link-hover-color); //$gray-dark;
+    background-color: var(--px-app-nav-parent-selected-color);
   }
-
   &:hover {
-    background-color: var(--px-app-nav-link-hover-color); //$gray-dark;
+    background-color: var(--px-app-nav-link-hover-color);
   }
   &:active {
-    background-color: var(--px-app-nav-link-active-color); //$blue-light;
+    background-color: var(--px-app-nav-link-selected-active-color);
   }
   &:visited{
-    color: var(--px-app-nav-link-text-color); //$white
+    color: var(--px-app-nav-link-text-color);
   }
 }
 

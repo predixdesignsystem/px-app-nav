@@ -2809,14 +2809,14 @@ button.btn {
 a {
   text-decoration: none;
   color: var(--px-app-nav-link-text-color); }
-  a.selected {
+  a.selected, a.selected:hover {
     background-color: var(--px-app-nav-link-selected-color); }
   a.subselected {
-    background-color: var(--px-app-nav-link-hover-color); }
+    background-color: var(--px-app-nav-parent-selected-color); }
   a:hover {
     background-color: var(--px-app-nav-link-hover-color); }
   a:active {
-    background-color: var(--px-app-nav-link-active-color); }
+    background-color: var(--px-app-nav-link-selected-active-color); }
   a:visited {
     color: var(--px-app-nav-link-text-color); }
 
