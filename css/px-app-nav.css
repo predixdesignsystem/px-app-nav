@@ -188,9 +188,10 @@ ul, ol, dd {
 /* Embedded content
    ========================================================================== */
 /**
- * Remove border when inside `a` element in IE 8/9/10.
+ * Remove border when inside `a` element in IE 8/9/10. Make images shrink from their largest size.
  */
 img {
+  max-width: 100%;
   border: 0; }
 
 /**
@@ -2622,9 +2623,10 @@ sub {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  background-color: #e4e4ea;
-  -webkit-appearance: button; }
+  white-space: nowrap;
+  background-color: #e4e4ea; }
   .btn,
+  .btn:link,
   .btn:visited,
   .btn:hover,
   .btn:focus,
@@ -2639,6 +2641,9 @@ sub {
     border-color: #7c7c84;
     box-shadow: none;
     background-color: #9999a3; }
+
+button.btn {
+  -webkit-appearance: button; }
 
 /**
 * Establish default space between adjacent buttons
@@ -2655,6 +2660,7 @@ sub {
   padding: 0;
   line-height: inherit; }
   .btn--bare,
+  .btn--bare:link,
   .btn--bare:visited,
   .btn--bare:hover,
   .btn--bare:active,
@@ -2704,11 +2710,9 @@ sub {
     padding-right: 1em;
     padding-left: 1.0666666667em; }
   .navbar__item > li li {
-    font-size: 0.8rem;
-    line-height: 1.6666666667;
-    line-height: 2.5; }
+    line-height: 2; }
     .navbar__item > li li a {
-      padding-left: 3.4166666667em; }
+      padding-left: 2.7333333333em; }
 
 .navbar__item a {
   display: block; }
