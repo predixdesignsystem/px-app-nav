@@ -82,10 +82,9 @@ $inuit-enable-btn--bare                 : true;
       padding-left: 1.0666666667em;
     }
     li {
-      @include inuit-font-size(12px);
-      line-height: 2.5;
+      line-height: 2;
       a {
-        padding-left: 3.4166666667em;
+        padding-left: 2.7333333333em;
       }
     }
   }
