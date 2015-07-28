@@ -45,3 +45,7 @@ a {
     color: var(--px-app-nav-link-text-color); //$white
   }
 }
+
+.btn--svg path {
+  fill: var(--px-app-nav-hamburger-button-color, $white);
+}

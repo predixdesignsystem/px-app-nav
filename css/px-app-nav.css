@@ -2815,3 +2815,6 @@ a {
     background-color: var(--px-app-nav-link-active-color); }
   a:visited {
     color: var(--px-app-nav-link-text-color); }
+
+.btn--svg path {
+  fill: var(--px-app-nav-hamburger-button-color, white); }
