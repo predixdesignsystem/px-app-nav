@@ -37,7 +37,7 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span data-l10n-id$="{{navitem.l10nId}}">{{navitem.label}}</span></a>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span data-l10n-id$="{{navitem.l10nId}}" class=u-ml-->{{navitem.label}}</span></a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
@@ -392,7 +392,7 @@ Nav bar / drawer for applications
     },
 
     _computeIcon: function(item) {
-      item.icon = item.icon + " fa fa-fw u-mr--";
+      item.icon = item.icon + " fa";
     },
 
     _buttonAnimation : function(navElem, textElemArray){

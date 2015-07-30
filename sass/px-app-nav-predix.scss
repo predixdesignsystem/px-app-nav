@@ -34,7 +34,7 @@ a {
     }
   }
   &.subselected {
-    background-color: var(--px-app-nav-parent-selected-color);
+    background-color: var(--px-app-nav-link-hover-color);
   }
   &:hover {
     background-color: var(--px-app-nav-link-hover-color);

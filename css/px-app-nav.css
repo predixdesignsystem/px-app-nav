@@ -25,44 +25,6 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
 THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PREDIX BRANDING
 Predix branding rules go in px-app-nav-predix.scss, not in this file.
 */
-/*------------------------------------*    #PX-COLORS-DESIGN
-\*------------------------------------*/
-/**
- * Brand Colors
- */
-/**
-     * Primary
-     */
-/**
-     * Light
-     */
-/**
-     * Dark
-     */
-/**
- * Monochromatic (gray10 is darkest, gray1 is lightest)
- */
-/**
- * Buttons
- */
-/**
- * Selection
- */
-/**
- * Alerts
- */
-/**
- * Data Visualization
- */
-/**
-     * Basic
-     */
-/**
-     * Light
-     */
-/**
-     * Dark
-     */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  *
@@ -416,71 +378,6 @@ html {
 .invisible {
   visibility: hidden !important; }
 
-/*------------------------------------*    #PX-META-LISTS-DESIGN
-\*------------------------------------*/
-.list-bare {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-.list-inline {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-  .list-inline > li {
-    display: inline-block; }
-
-/**
-     * Pipe delimited list to semantically mark up lists of tags, etc.
-     *
-     */
-.list-inline--delimited > li + li:before {
-  content: " | "; }
-
-.list-ui,
-.list-ui__item,
-.list-ui > li {
-  border: 0 solid #d1d0d8; }
-
-.list-ui {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top-width: 1px; }
-
-.list-ui__item,
-.list-ui > li {
-  padding: 1rem;
-  border-bottom-width: 1px; }
-
-/**
-   * Tiny list-uis.
-   */
-.list-ui--tiny > .list-ui__item,
-.list-ui.list-ui--tiny > li {
-  padding: 0.3333333333rem; }
-
-/**
-   * Small list-uis.
-   */
-.list-ui--small > .list-ui__item,
-.list-ui.list-ui--small > li {
-  padding: 0.6666666667rem; }
-
-/**
-   * Large list-uis.
-   */
-.list-ui--large > .list-ui__item,
-.list-ui.list-ui--large > li {
-  padding: 1.3333333333rem; }
-
-/**
-   * Huge list-uis.
-   */
-.list-ui--huge > .list-ui__item,
-.list-ui.list-ui--huge > li {
-  padding: 2rem; }
-
 .flex {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -626,6 +523,44 @@ html {
       -ms-flex-item-align: baseline;
           align-self: baseline; }
 
+/*------------------------------------*    #PX-COLORS-DESIGN
+\*------------------------------------*/
+/**
+ * Brand Colors
+ */
+/**
+     * Primary
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+/**
+ * Monochromatic (gray10 is darkest, gray1 is lightest)
+ */
+/**
+ * Buttons
+ */
+/**
+ * Selection
+ */
+/**
+ * Alerts
+ */
+/**
+ * Data Visualization
+ */
+/**
+     * Basic
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
 @font-face {
   font-family: "GE Inspira";
   font-weight: normal;
@@ -2608,6 +2543,11 @@ sub {
   -webkit-transform: scale(-1, 1);
           transform: scale(-1, 1); }
 
+.list-bare {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
 .btn {
   display: inline-block;
   overflow: visible;
@@ -2709,6 +2649,9 @@ button.btn {
   .navbar__item > li a {
     padding-right: 1em;
     padding-left: 1.0666666667em; }
+  .navbar__item > li .fa {
+    width: 1.5333333333rem;
+    text-align: center; }
   .navbar__item > li li {
     line-height: 2; }
     .navbar__item > li li a {
@@ -2718,16 +2661,10 @@ button.btn {
   display: block; }
 
 .btn--svg {
-  width: 20px;
-  height: 16px;
-  margin-bottom: 1.5em; }
+  width: 1.6rem;
+  height: 1.0666666667rem;
+  margin-bottom: 1.6rem; }
 
-/**
- * Margin and padding helper classes with breakpoint prefixes. Use these to tweak layout on a micro
- * level based on viewport widths.
- *
- * `.u-[breakpoint]-(m|p)(t|r|b|l|h|v)(-|+|0) {}` = utility - breakpoint - margin/padding top/right/bottom/left/horizontal/vertical less/more/none
- */
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro
  * level.
@@ -2812,7 +2749,7 @@ a {
   a.selected, a.selected:hover {
     background-color: var(--px-app-nav-link-selected-color); }
   a.subselected {
-    background-color: var(--px-app-nav-parent-selected-color); }
+    background-color: var(--px-app-nav-link-hover-color); }
   a:hover {
     background-color: var(--px-app-nav-link-hover-color); }
   a:active {
