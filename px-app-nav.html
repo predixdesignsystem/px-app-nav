@@ -196,6 +196,9 @@ Nav bar / drawer for applications
       if (this.navItems.length > 0 && !this.navItems[0].href){
         this.navItems.forEach(this._computeHref, this);
         this.navItems.forEach(this._computeIcon);
+        this._setSubNavVisibility();
+        this._potentiallyAdjustAccordion();
+
       }
 
       this.markSelected(window.location.href);
