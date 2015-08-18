@@ -1,53 +1,7 @@
-Px-App-Nav
------------------------------------------------
+#### Latest Release
+- <a href="https://github.build.ge.com/pages/PXc/pxc-demos/bower_components/px-app-nav/demo.html" target="_blank">Demo</a>
+- <a href="https://github.build.ge.com/pages/PXc/pxc-demos/bower_components/px-app-nav/index.html" target="_blank">API Docs</a>
 
-## Overview
-
-Application navigation bar/drawer for Px Applications
-
-## Getting Started
-
-Read https://github.sw.ge.com/pages/PX/technical-principles/
-
-From the component's directory...
-
-```
-$ npm install
-$ bower install
-$ grunt sass
-```
-
-### API and examples
-
-From the component's directory
-
-```
-$ grunt depserve
-```
-
-Starts a local server. Navigate to the root of that server (e.g. http://localhost:8080/) in a browser to open the API documentation page, with link to the "Demo" / working examples.
-
-### Options
-
-Does this component have runtime configuration options?  If so, they should be able to be passed as attributes on the element with examples shown below.
-
-### Function calls
-
-What is the public API of this component?
-
-### Extending styles
-
-Documented CSS extension points?
-
-### Extending behavior
-
-See Polymer composition patterns
-
-GE Coding Style Guide
----------------------
-
-[GE JS Developer's Guide](https://github.com/GeneralElectric/javascript)
-
-
-### Known Issues
-
+#### Active Development (master branch)
+- <a href="http://pxc-demos.grc-apps.svc.ice.ge.com/bower_components/px-app-nav/demo.html" target="_blank">Demo</a>
+- <a href="http://pxc-demos.grc-apps.svc.ice.ge.com/bower_components/px-app-nav/index.html" target="_blank">API Docs</a>
