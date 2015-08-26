@@ -19,14 +19,18 @@ THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PRE
 Predix branding rules go in px-app-nav-predix.scss, not in this file.
 */
 
+// Settings
+@import "px-defaults-design/_settings.defaults.scss";
+@import "px-mixins-design/_tools.mixins.scss";
+
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 @import "px-helpers-design/_generic.helpers.scss";
 
+
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
-@import "px-typography-design/_base.typography.scss";
 @import "px-iconography-design/_base.iconography.scss";
 
 // Objects
