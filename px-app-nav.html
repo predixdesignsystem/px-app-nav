@@ -5,7 +5,6 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-l10n-mixin/px-l10n-mixin.html"/>
 
 <!--
 Nav bar / drawer for applications
@@ -37,11 +36,11 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span data-l10n-id$="{{navitem.l10nId}}" class=u-ml-->{{navitem.label}}</span></a>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
-                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{navitem.subitemclass}}" data-l10n-id$="{{item.l10nId}}">{{item.label}}</span></a>
+                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{navitem.subitemclass}}">{{item.label}}</span></a>
                 </li>
               </template>
             </ul>
@@ -58,7 +57,7 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
-    behaviors: [pxL10NMixin],
+
     created: function(){
       this.toggleClass("navbar", true)
     },
@@ -67,7 +66,7 @@ Nav bar / drawer for applications
 
       /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
-       * 'l10nId', 'eventName', and 'subitems', which is another Array.
+       * 'eventName', and 'subitems', which is another Array.
        *
        * @type {Array}
        * @default [{}]
@@ -121,23 +120,11 @@ Nav bar / drawer for applications
        *
        * @type {Function}
        * @default [function(){ return {};}]
+       * @private
        */
       ani:{
         type: Object,
         value:function(){ return {};}
-      },
-
-      /**
-       * If true, nav drawer appears on the right to accommodate RTL languages. Set automatically if Mozilla's
-       * L20N framework is loaded on the document
-       *
-       * @type {Boolean}
-       * @default [false]
-       */
-      rtl: {
-        type: Boolean,
-        value: (document.documentElement.dir === 'rtl'),
-        observer: "_rtlChanged"
       }
     },
 
@@ -157,14 +144,10 @@ Nav bar / drawer for applications
         this.markSelected(window.location.href);
         this._setSubNavVisibility();
         this._potentiallyAdjustAccordion();
-        this.async(this.pxL10NMixin_localize);//called async to let template refresh after prop change
       }
     },
 
     _potentiallyAdjustAccordion: function() {
-
-       var allNavItems = this.navItems;
-
        this.navItems.forEach(function(item){
          var navSubitems = item.subitems;
          if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
@@ -179,13 +162,9 @@ Nav bar / drawer for applications
                  })
              ]);
 
-             var accordionAnimationPlayer = document.timeline.play(listResizeAnimation);
+             document.timeline.play(listResizeAnimation);
          }
        }, this)
-    },
-
-    _rtlChanged: function(newValue, oldValue) {
-      this.toggleClass("rtl", newValue);
     },
 
     /**
@@ -205,19 +184,12 @@ Nav bar / drawer for applications
     },
 
     /**
-     * Callback called by pxL10NMixin, which assumes Mozilla's L20N framework (which sets the "dir" property on the
-     * document element.)
-     */
-    localeChangedCallback: function() {
-      this.rtl = (document.documentElement.dir === 'rtl');
-    },
-
-    /**
      * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
      * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
      *
      * @see #markSelected
      * @param {Event} evt The click event.
+     * @private
      */
     navClickHandler: function(evt) {
       var el = evt.currentTarget;
@@ -307,6 +279,7 @@ Nav bar / drawer for applications
      *
      * @see #markSelected
      * @param {Event} evt The click event.
+     * @private
      */
      subnavClickHandler: function(evt){
        var el = evt.currentTarget;
@@ -423,6 +396,7 @@ Nav bar / drawer for applications
      * Called when the nav expander control is clicked.
      *
      * @param {Event} evt The click event.
+     * @private
      */
     navExpanderButton: function(evt){
       this.navExpanded = !this.navExpanded;
