@@ -57,9 +57,7 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
-    behaviors: [
-      'pxL10NMixin'
-    ],
+
     created: function(){
       this.toggleClass("navbar", true);
     },
@@ -181,11 +179,11 @@ Nav bar / drawer for applications
         this._potentiallyAdjustAccordion();
 
       }
-      
+
       var media = window.matchMedia('screen and (max-width: 68.2rem)');
-      
+
       var self = this;
-      
+
       media.addListener(function(data) {
         if (data.matches) {
           if (self.navExpanded) {
@@ -198,7 +196,7 @@ Nav bar / drawer for applications
           }
         }
       });
-      
+
       if (media.matches) {
         this.navExpanderButton();
       }
@@ -254,7 +252,7 @@ Nav bar / drawer for applications
 
       var accordionAnimationPlayer = document.timeline.play(openAnimation);
       var self = this;
-      
+
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
         if(!self.navExpanded){
@@ -263,7 +261,7 @@ Nav bar / drawer for applications
       });
 
     },
-    
+
     _navResized: function() {
       this.fire('navHeightChanged');
     },
