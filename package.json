@@ -2,7 +2,7 @@
     "name": "px-app-nav",
     "author": "General Electric",
     "description": "A Px component",
-    "version": "0.3.10",
+    "version": "0.3.12",
     "private": true,
     "fwk": "polymer08",
     "extName" : null,
