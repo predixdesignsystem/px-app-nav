@@ -58,9 +58,12 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
-    behaviors: [pxL10NMixin],
+    behaviors: [
+      pxL10NMixin
+    ],
+    
     created: function(){
-      this.toggleClass("navbar", true)
+      this.toggleClass("navbar", true);
     },
 
     properties: {
@@ -200,6 +203,27 @@ Nav bar / drawer for applications
         this._potentiallyAdjustAccordion();
 
       }
+      
+      var media = window.matchMedia('screen and (max-width: 68.2rem)');
+      
+      var self = this;
+      
+      media.addListener(function(data) {
+        if (data.matches) {
+          if (self.navExpanded) {
+            self.navExpanderButton();
+          }
+        }
+        else {
+          if (!self.navExpanded) {
+            self.navExpanderButton();
+          }
+        }
+      });
+      
+      if (media.matches) {
+        this.navExpanderButton();
+      }
 
       this.markSelected(window.location.href);
     },
@@ -227,7 +251,6 @@ Nav bar / drawer for applications
       var href = el.getAttribute("href");
       this.markSelected(href);
       var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
-
       this._animateMenuItem(subnavEle);
     },
 
@@ -259,13 +282,19 @@ Nav bar / drawer for applications
       }
 
       var accordionAnimationPlayer = document.timeline.play(openAnimation);
-
+      var self = this;
+      
       accordionAnimationPlayer.addEventListener('finish', function(){
+        self._navResized();
         if(!self.navExpanded){
           self.navExpanderButton();
         }
       });
 
+    },
+    
+    _navResized: function() {
+      this.fire('navHeightChanged');
     },
 
     _openAccordionEffectAnimation: function(mainElement, textElements){
@@ -283,7 +312,6 @@ Nav bar / drawer for applications
           return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
         }))
       ]);
-
     },
 
     _closeAccordionEffectAnimation: function(mainElement, textElements){
@@ -315,7 +343,11 @@ Nav bar / drawer for applications
        }
        var href = el.getAttribute("href");
        this.markSelected(href);
-
+       var self = this;
+       // We need a short delay for Safari to fire navResized after nav resize.
+       setTimeout(function() {
+          self._navResized();
+        }, 100);
      },
 
     /**
@@ -396,7 +428,6 @@ Nav bar / drawer for applications
     },
 
     _buttonAnimation : function(navElem, textElemArray){
-
       if(!this.navExpanded) {
         return new SequenceEffect(
           [new GroupEffect(textElemArray.map(function(elem){
