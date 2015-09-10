@@ -45,15 +45,35 @@ $inuit-enable-btn--bare                 : true;
   @include inuit-font-size(15px);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 :host(.navbar) {
-  width: 219px;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  width: calculateRem(219px);
+  @include media-query(desk) {
+    position: relative;
+  }
+  ::content {
+    .login {
+      width: calculateRem(219px);
+    }
+  }
 }
 
 :host(.navbar--collapsed) {
-  width: 55px;
+  position: relative;
+  width: calculateRem(55px);
+  ::content {
+    .fa + span, span + .fa {
+      @include accessibility;
+    }
+    .login {
+      width: calculateRem(55px);
+    }
+  }
 }
 
 :host(.navbar--text-hidden) {
@@ -67,6 +87,7 @@ $inuit-enable-btn--bare                 : true;
 }
 
 :host > nav {
+  position: relative;
   flex: 1;
   padding: 1em;
 }
