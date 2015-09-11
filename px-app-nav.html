@@ -5,6 +5,7 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
+<script src="../web-animations-js/web-animations-next.min.js"></script>
 
 <!--
 Nav bar / drawer for applications
@@ -27,9 +28,8 @@ Nav bar / drawer for applications
 
 <dom-module id="px-app-nav">
 
-  <link rel="import" type="css" href="css/px-app-nav.css" polyfill-next-selector/>
+  <link rel="import" type="css" href="css/px-app-nav.css"/>
 
-  <script src="../web-animations-js/web-animations-next.min.js"></script>
   <template>
     <nav role="navigation">
       <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
@@ -48,8 +48,8 @@ Nav bar / drawer for applications
           </li>
         </template>
       </ul>
-      <content></content>
     </nav>
+    <content></content>
   </template>
 </dom-module>
 
@@ -57,12 +57,6 @@ Nav bar / drawer for applications
 
   Polymer({
     is: 'px-app-nav',
-    behaviors: [
-      'pxL10NMixin'
-    ],
-    created: function(){
-      this.toggleClass("navbar", true);
-    },
 
     properties: {
 
