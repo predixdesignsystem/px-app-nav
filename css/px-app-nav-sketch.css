@@ -2421,29 +2421,23 @@ button.btn {
     color: inherit; }
 
 :host {
-  font-size: 1rem;
-  line-height: 1.3333333333;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  min-height: 100%; }
-
-:host(.navbar) {
   position: absolute;
-  left: 0;
-  z-index: 10;
-  width: 14.6rem; }
+  -webkit-flex: none;
+      -ms-flex: none;
+          flex: none;
+  z-index: 999;
+  width: 14.6rem;
+  padding: 1em; }
   @media screen and (min-width: 64em) {
-    :host(.navbar) {
+    :host {
       position: relative; } }
-  :host(.navbar) ::content .login {
+  @media screen and (min-height: 100vh) {
+    :host {
+      min-height: 100%; } }
+  :host ::content .login {
     width: 14.6rem; }
 
 :host(.navbar--collapsed) {
-  position: relative;
   width: 3.6666666667rem; }
   :host(.navbar--collapsed) ::content .fa + span, :host(.navbar--collapsed) ::content span + .fa {
     position: absolute !important;
@@ -2468,11 +2462,7 @@ button.btn {
   clip: rect(0 0 0 0) !important; }
 
 :host > nav {
-  position: relative;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  padding: 1em; }
+  height: 100%; }
 
 .navbar__item > li {
   margin-right: -1em;
