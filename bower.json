@@ -16,7 +16,6 @@
   "dependencies": {
     "polymer": "~v1.0.3",
     "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0",
-    "px-l10n-mixin": "https://github.build.ge.com/PXb/px-l10n-mixin.git#master",
     "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.11",
     "web-animations-js": "~2.0.0"
   },
