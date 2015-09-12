@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "main": [
     "px-app-nav.html"
   ],
@@ -15,8 +15,7 @@
   ],
   "dependencies": {
     "polymer": "~v1.0.3",
-    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0",
-    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.11",
+    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.3.0",
     "web-animations-js": "~2.0.0"
   },
   "devDependencies": {

@@ -28,10 +28,8 @@ Predix branding rules go in px-app-nav-predix.scss, not in this file.
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 @import "px-helpers-design/_generic.helpers.scss";
 
-
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
-@import "px-iconography-design/_base.iconography.scss";
 
 // Objects
 @import "px-list-bare-design/_objects.list-bare.scss";
