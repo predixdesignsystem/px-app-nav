@@ -40,21 +40,6 @@ module.exports = function (grunt) {
             dest: 'css'
           }
         },
-        
-        copy: {
-          icons: {
-            expand: true,
-            flatten: true,
-            src: '*/font-awesome/fonts/*',
-            dest: 'icons'
-          },
-          type: {
-            expand: true,
-            flatten: true,
-            src: '*/px-typography-design/type/*',
-            dest: 'type'
-          }
-        },
 
         shell: {
             options: {
@@ -119,7 +104,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-dep-serve');
     //grunt.loadNpmTasks('web-component-tester');
@@ -128,8 +112,7 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('default', 'Basic build', [
         'sass',
-        'autoprefixer',
-        'copy'
+        'autoprefixer'
     ]);
 
     // First run task.
