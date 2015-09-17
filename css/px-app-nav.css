@@ -632,11 +632,13 @@ button.btn {
   -webkit-flex: none;
       -ms-flex: none;
           flex: none;
-  z-index: 999;
+  z-index: 1002;
+  /* Context browser is at 1000-1001 */
   width: 14.6rem;
   padding: 1em; }
   @media screen and (min-width: 64em) {
     :host {
+      z-index: 999;
       position: relative; } }
   @media screen and (min-height: 100vh) {
     :host {
