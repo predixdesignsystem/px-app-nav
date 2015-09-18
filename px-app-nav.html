@@ -168,7 +168,8 @@ Nav bar / drawer for applications
      */
     ready: function() {
       //check to see if navitems have been initialised.
-      if (this.navItems.length > 0 && !this.navItems[0].href){
+
+      if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
         this.navItems.forEach(this._computeHref, this);
         this.navItems.forEach(this._computeIcon);
         this._setSubNavVisibility();
@@ -325,25 +326,27 @@ Nav bar / drawer for applications
       var resolvedPath = this._parseOutPathPrefix(path);
       var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
 
-      for (var i = 0; i < this.navItems.length; i++) {
-        var item = this.navItems[i];
-        item.selected = item[this.pathKey] === resolvedPath;
-        item.subSelected = false;
-        item.class = item.selected ? "selected" : "";
-        if (item.subitems) {
-          item.subitems.forEach(function(subitem, idx) {
-            subitem.selected = subitem[this.pathKey] === resolvedPath;
-            subitem.class = subitem.selected ? "selected" : "";
-            if(topLevelNavElems.length > 0){
-              if(idx < Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li').length) {
-                this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+      if (this.navItems){
+        for (var i = 0; i < this.navItems.length; i++) {
+          var item = this.navItems[i];
+          item.selected = item[this.pathKey] === resolvedPath;
+          item.subSelected = false;
+          item.class = item.selected ? "selected" : "";
+          if (item.subitems) {
+            item.subitems.forEach(function(subitem, idx) {
+              subitem.selected = subitem[this.pathKey] === resolvedPath;
+              subitem.class = subitem.selected ? "selected" : "";
+              if(topLevelNavElems.length > 0){
+                if(idx < Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li').length) {
+                  this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+                }
               }
-            }
-            item.subSelected = subitem.selected ? true : item.subSelected;
-          }, this)
+              item.subSelected = subitem.selected ? true : item.subSelected;
+            }, this)
+          }
+          this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+          this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
         }
-        this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-        this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
       }
     },
 

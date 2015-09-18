@@ -197,6 +197,68 @@ html {
  * A lot of these classes carry `!important` as you will always want them to win
  * out over other selectors.
  */
+/*------------------------------------*    #PX-COLORS-DESIGN
+\*------------------------------------*/
+/**
+ * Brand Colors
+ */
+/**
+     * Primary
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+/**
+ * Monochromatic (gray10 is darkest, gray1 is lightest)
+ */
+/**
+ * Buttons
+ */
+/**
+ * Selection
+ */
+/**
+ * Alerts
+ */
+/**
+ * Data Visualization
+ */
+/**
+     * Basic
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+a {
+  background-color: transparent;
+  /**
+ * Default link colors
+ */
+  /**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */ }
+  a:link,
+  a:visited {
+    color: #3e87e8; }
+  a:hover {
+    color: #3573c5; }
+  a:active {
+    color: #2b5ea2; }
+  a:active,
+  a:hover {
+    outline: 0; }
+
 /**
  * Add/remove floats
  */
@@ -515,47 +577,10 @@ html {
   padding: 0;
   list-style: none; }
 
-/*------------------------------------*    #PX-COLORS-DESIGN
-\*------------------------------------*/
-/**
- * Brand Colors
- */
-/**
-     * Primary
-     */
-/**
-     * Light
-     */
-/**
-     * Dark
-     */
-/**
- * Monochromatic (gray10 is darkest, gray1 is lightest)
- */
-/**
- * Buttons
- */
-/**
- * Selection
- */
-/**
- * Alerts
- */
-/**
- * Data Visualization
- */
-/**
-     * Basic
-     */
-/**
-     * Light
-     */
-/**
-     * Dark
-     */
 .btn {
   display: inline-block;
   overflow: visible;
+  height: 2em;
   margin: 0;
   border: 1px solid #b1b1bc;
   border-radius: 3px;
