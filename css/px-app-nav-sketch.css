@@ -641,6 +641,7 @@ button.btn {
 
 :host {
   position: absolute;
+  display: block;
   -webkit-flex: none;
       -ms-flex: none;
           flex: none;

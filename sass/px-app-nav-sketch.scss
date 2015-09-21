@@ -41,6 +41,7 @@ $inuit-enable-btn--bare                 : true;
 // Component
 :host {
   position: absolute;
+  display: block;
   flex: none;
   z-index: 1002; /* Context browser is at 1000-1001 */
   width: calculateRem(219px);
