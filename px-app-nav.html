@@ -1,0 +1,433 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+<script src="../web-animations-js/web-animations-next.min.js"></script>
+
+<!--
+Nav bar / drawer for applications
+
+##### Usage
+
+    <px-app-nav
+        nav-items='[{"path": "", "icon": "fa-warning", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
+            <any-arbitrary-content></any-arbitrary-content>
+            <div class="auth">
+                <any-auth-control></any-auth-control>
+            </div>
+    </px-app-nav>
+
+@element px-app-nav
+@blurb Nav bar / drawer for applications.
+@homepage index.html
+@demo demo.html
+-->
+
+<dom-module id="px-app-nav">
+
+  <link rel="import" type="css" href="css/px-app-nav.css"/>
+
+  <template>
+    <nav role="navigation">
+      <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
+      <ul id="navitemlist" class="navbar__item list-bare">
+        <template is="dom-repeat" items="{{navItems}}" as="navitem">
+          <li>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
+            <ul class$="{{navitem.subitemlistclass}}">
+              <template is="dom-repeat" items="{{navitem.subitems}}">
+                <li>
+                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{navitem.subitemclass}}">{{item.label}}</span></a>
+                </li>
+              </template>
+            </ul>
+
+          </li>
+        </template>
+      </ul>
+    </nav>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+    is: 'px-app-nav',
+
+    properties: {
+
+      /**
+       * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
+       * 'eventName', and 'subitems', which is another Array.
+       *
+       * @type {Array}
+       * @default [{}]
+       */
+      navItems: {
+        type: Array,
+        notify: true,
+        value: function() {
+          return [{}];
+        }
+      },
+
+      /**
+       * When navigating, this prefix is appended to the relative URL. Defaults to '#', indicating paths are routed via the
+       * hash part of the URL.  To make them relative to current directory, use '/'.
+       *
+       * @type {String}
+       * @default ["#"]
+       */
+      pathPrefix: {
+        value : '#',
+        type: String
+      },
+
+      /**
+       * Allows a level of indirection in the Array of navItems passed in to resolve paths
+       *
+       * @type {String}
+       * @default ["path"]
+       */
+      pathKey: {
+        value: 'path',
+        type: String
+      },
+
+      /**
+       * Whether the navigation is expanded. Reflected to an attribute (reflectToAttribute: true) so the application can
+       * bind to it and maintain state as needed.
+       *
+       * @type {Boolean}
+       * @default [true]
+       */
+      navExpanded: {
+        value: true,
+        type: Boolean,
+        reflectToAttribute: true
+      },
+
+      /**
+       * Animation function
+       *
+       * @type {Function}
+       * @default [function(){ return {};}]
+       * @private
+       */
+      ani:{
+        type: Object,
+        value:function(){ return {};}
+      }
+    },
+
+    listeners: {
+      "nav-items-changed": "_observeChanged"
+     },
+
+    _protocolRE: new RegExp('(http|https)://'),
+
+    _observeChanged: function(event) {
+      if (!event.detail.value){
+        this.navItems = [];
+      }
+      else{
+        this.navItems.forEach(this._computeHref, this);
+        this.navItems.forEach(this._computeIcon);
+        this.markSelected(window.location.href);
+        this._setSubNavVisibility();
+        this._potentiallyAdjustAccordion();
+      }
+    },
+
+    _potentiallyAdjustAccordion: function() {
+       this.navItems.forEach(function(item){
+         var navSubitems = item.subitems;
+         if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+
+            var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected'),
+                parent = parentA.parentElement.querySelector('ul'),
+                heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
+                listResizeAnimation = new SequenceEffect([
+                 new KeyframeEffect(parent, [{height: parent.clientHeight}, {height: heightAfter}], {
+                     duration: 200,
+                     fill: 'forwards'
+                 })
+             ]);
+
+             document.timeline.play(listResizeAnimation);
+         }
+       }, this)
+    },
+
+    /**
+     * Parse navItemsStrings and navItemsPaths to create unified navItems
+     */
+    ready: function() {
+      //check to see if navitems have been initialised.
+
+      if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
+        this.navItems.forEach(this._computeHref, this);
+        this.navItems.forEach(this._computeIcon);
+        this._setSubNavVisibility();
+        this._potentiallyAdjustAccordion();
+
+      }
+
+      var media = window.matchMedia('screen and (max-width: 68.2rem)');
+
+      var self = this;
+
+      media.addListener(function(data) {
+        if (data.matches) {
+          if (self.navExpanded) {
+            self.navExpanderButton();
+          }
+        }
+        else {
+          if (!self.navExpanded) {
+            self.navExpanderButton();
+          }
+        }
+      });
+
+      if (media.matches) {
+        this.navExpanderButton();
+      }
+
+      this.markSelected(window.location.href);
+    },
+
+    /**
+     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
+     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
+     *
+     * @see #markSelected
+     * @param {Event} evt The click event.
+     * @private
+     */
+    navClickHandler: function(evt) {
+      var el = evt.currentTarget;
+      if (el.getAttribute("event-name")) {
+        this.fire(el.getAttribute("event-name"));
+      }
+      var href = el.getAttribute("href");
+      this.markSelected(href);
+      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
+      this._animateMenuItem(subnavEle);
+    },
+
+    _animateMenuItem: function(subnavEle){
+      var hidden = subnavEle.classList.contains('visuallyhidden'),
+          allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span"),
+          self = this,
+          navToHide,
+          navToHideSpans,
+          allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
+          openAnimation;
+
+      for (i=0; i<allSubNavs.length; i++) {
+        if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
+          navToHide = allSubNavs[i];
+          navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
+        }
+      }
+      if (navToHide){
+        openAnimation = new SequenceEffect([
+                              this._closeAccordionEffectAnimation(navToHide, navToHideSpans),
+                              this._openAccordionEffectAnimation(subnavEle, allSubNavSpans)
+                            ]);
+      } else if (!hidden){
+        openAnimation = this._closeAccordionEffectAnimation(subnavEle, allSubNavSpans);
+      } else{
+        openAnimation = this._openAccordionEffectAnimation(subnavEle, allSubNavSpans);
+
+      }
+
+      var accordionAnimationPlayer = document.timeline.play(openAnimation);
+      var self = this;
+
+      accordionAnimationPlayer.addEventListener('finish', function(){
+        self._navResized();
+        if(!self.navExpanded){
+          self.navExpanderButton();
+        }
+      });
+
+    },
+
+    _navResized: function() {
+      this.fire('navHeightChanged');
+    },
+
+    _openAccordionEffectAnimation: function(mainElement, textElements){
+      //animate open the clicked accordion
+      var self = this,
+          accordionHeight = textElements.length * (mainElement.parentElement.clientHeight * 0.6666) + 'px';
+      //animate close the open accordion
+      return new SequenceEffect([
+        new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, mainElement);}, { duration: 0, fill: 'forwards' }),
+        new KeyframeEffect(mainElement, [ {height: '0px'}, {height: accordionHeight }], { duration: 200, fill: 'forwards' }),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
+        })),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
+        }))
+      ]);
+    },
+
+    _closeAccordionEffectAnimation: function(mainElement, textElements){
+      var self = this,
+          accordionHeight = mainElement.clientHeight + 'px';
+      //animate close the open accordion
+      return new SequenceEffect([ new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
+        })),
+        new GroupEffect(textElements.map(function(elem){
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
+        })),
+        new KeyframeEffect(mainElement, [ {height: accordionHeight}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
+        new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, mainElement);}, { duration: 0, fill: 'forwards' })
+      ]);
+    },
+
+    /**
+     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
+     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
+     *
+     * @see #markSelected
+     * @param {Event} evt The click event.
+     * @private
+     */
+     subnavClickHandler: function(evt){
+       var el = evt.currentTarget;
+       if (el.getAttribute("event-name")) {
+         this.fire(el.getAttribute("event-name"));
+       }
+       var href = el.getAttribute("href");
+       this.markSelected(href);
+       var self = this;
+       // We need a short delay for Safari to fire navResized after nav resize.
+       setTimeout(function() {
+          self._navResized();
+        }, 100);
+     },
+
+    /**
+     * Marks the nav item with the given path as selected, and all others as unselected.
+     *
+     * @param {String} path The selected path
+     */
+    markSelected: function(path) {
+      var resolvedPath = this._parseOutPathPrefix(path);
+      var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
+
+      if (this.navItems){
+        for (var i = 0; i < this.navItems.length; i++) {
+          var item = this.navItems[i];
+          item.selected = item[this.pathKey] === resolvedPath;
+          item.subSelected = false;
+          item.class = item.selected ? "selected" : "";
+          if (item.subitems) {
+            item.subitems.forEach(function(subitem, idx) {
+              subitem.selected = subitem[this.pathKey] === resolvedPath;
+              subitem.class = subitem.selected ? "selected" : "";
+              if(topLevelNavElems.length > 0){
+                if(idx < Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li').length) {
+                  this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
+                }
+              }
+              item.subSelected = subitem.selected ? true : item.subSelected;
+            }, this)
+          }
+          this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+          this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+        }
+      }
+    },
+
+    _setSubNavVisibility: function(){
+      this.navItems.forEach( function(item){
+        if (item.subSelected){
+          item.subitemlistclass = "list-bare";
+          item.subitemclass = "";
+          item.class = "subselected";
+        }
+        else{
+          item.subitemlistclass = "visuallyhidden list-bare";
+          item.subitemclass = "visuallyhidden";
+        }
+      }, this)
+    },
+
+    _parseOutPathPrefix: function(fullPath) {
+      if (!fullPath) {
+          return null;
+      }
+      var resolvedPath = fullPath.replace(this._protocolRE, '');
+      var idx = resolvedPath.indexOf(this.pathPrefix);
+      var argsIdx = resolvedPath.indexOf('?');
+
+      if (argsIdx === -1){
+        argsIdx = resolvedPath.length;
+      }
+
+      return resolvedPath.substring(idx + 1, argsIdx);
+    },
+
+    _computeHref: function(item) {
+      item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
+      if (!item.class){
+        item.subitemlistclass = item.subitemclass = item.class = "";
+
+      }
+      if (item.subitems) {
+        item.subitems.forEach(function(subitem) {
+          this._computeHref(subitem);
+        }, this)
+      }
+    },
+
+    _computeIcon: function(item) {
+      item.icon = item.icon + " fa";
+    },
+
+    _buttonAnimation : function(navElem, textElemArray){
+      if(!this.navExpanded) {
+        return new SequenceEffect(
+          [new GroupEffect(textElemArray.map(function(elem){
+            return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100)
+           })),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
+           ])
+      }
+      else {
+        return new SequenceEffect(
+          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
+           new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
+           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
+           new GroupEffect(textElemArray.map(function(elem){
+             return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100)
+           }))
+          ]);
+      }
+    },
+
+    /**
+     * Called when the nav expander control is clicked.
+     *
+     * @param {Event} evt The click event.
+     * @private
+     */
+    navExpanderButton: function(evt){
+      this.navExpanded = !this.navExpanded;
+      this.ani = document.timeline.play(this._buttonAnimation(this, Polymer.dom(this.root).querySelectorAll("span")));
+    }
+  });
+</script>

@@ -1,0 +1,29 @@
+{
+    "name": "px-app-nav",
+    "author": "General Electric",
+    "description": "A Px component",
+    "version": "0.4.2",
+    "private": true,
+    "fwk": "polymer08",
+    "extName" : null,
+    "repository" :
+    {
+        "type": "git",
+        "url": "https://github.com/PredixDev/px-app-nav.git"
+    },
+    "homepage": "http://predix.io",
+    "dependencies": {
+        "node-sass-import-once": "^1.2.0"
+    },
+    "devDependencies": {
+        "grunt": "~v0.4.5",
+        "grunt-sass": "^1.0.0",
+        "grunt-shell": "~v1.1.1",
+        "grunt-autoprefixer": "^3.0.3",
+        "grunt-contrib-clean": "~v0.6.0",
+        "grunt-contrib-jshint": "~v0.10.0",
+        "grunt-contrib-watch": "~v0.6.1",
+        "grunt-dep-serve": "git+https://github.com/GeneralElectric/grunt-dep-serve.git#master",
+        "webdriver-support": "git://github.com/PredixDev/webdriver-support.git#master"
+    }
+}
