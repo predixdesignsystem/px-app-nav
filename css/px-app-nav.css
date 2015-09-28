@@ -638,6 +638,7 @@ button.btn {
    * Buttons with no styles (good a11y practice to use <button> for actions rather than <a>).
    */
 .btn--bare {
+  height: auto;
   border: 0;
   border-radius: 0;
   padding: 0;
@@ -658,19 +659,22 @@ button.btn {
   -webkit-flex: none;
       -ms-flex: none;
           flex: none;
-  z-index: 1002;
-  /* Context browser is at 1000-1001 */
   width: 14.6rem;
   padding: 1em; }
   @media screen and (min-width: 64em) {
     :host {
-      z-index: 999;
       position: relative; } }
   @media screen and (min-height: 100vh) {
     :host {
       min-height: 100%; } }
   :host ::content .login {
     width: 14.6rem; }
+
+:host[nav-expanded] {
+  z-index: 2; }
+  @media screen and (min-width: 64em) {
+    :host[nav-expanded] {
+      z-index: auto; } }
 
 :host(.navbar--collapsed) {
   width: 3.6666666667rem; }
