@@ -39,7 +39,7 @@ Finally, use the component in your application:
 
 ## Attributes
 
-#### navExpanded
+#### nav-expanded
 
 *Type:* **Boolean** - (*Optional*) - *Default:* "true"
 
@@ -48,11 +48,11 @@ Whether the navigation is expanded. Reflected to an attribute (reflectToAttribut
 ```
 <px-app-nav
 	...
-	navExpanded="true">
+	nav-expanded="true">
 </px-app-nav>
 ```
 <br />
-#### navItems
+#### nav-items
 
 *Type:* **Array** - (*Optional*) - *Default:* [{}] notify
 
@@ -69,7 +69,7 @@ Object array of items and sub-items in the nav. Each object in the Array can spe
 ```
 
 <br />
-#### pathKey
+#### path-key
 
 *Type:* **String** - (*Optional*) - *Default:* "path"
 
@@ -78,13 +78,13 @@ Allows a level of indirection in the Array of navItems passed in to resolve path
 ```
 <px-app-nav
 	...
-	pathKey="path">
+	path-key="path">
 </px-app-nav>
 ```
 
 <br />
 
-#### pathPrefix
+#### path-prefix
 
 *Type:* **String** - (*Optional*) - *Default:* "#"
 
@@ -93,7 +93,7 @@ When navigating, this prefix is appended to the relative URL. Defaults to '#', i
 ```
 <px-app-nav
 	...
-	pathPrefix="/">
+	path-prefix="/">
 </px-app-nav>
 ```
 
