@@ -25,7 +25,7 @@ bower install https://github.com/PredixDev/px-app-nav.git --save
 Second, import the component to your application with the following tag in your head.
 
 ```
-<link rel="import" href="/bower_components/px-app-nav/px-app-nav.html" ></link>
+<link rel="import" href="/bower_components/px-app-nav/px-app-nav.html"/>
 ```
 
 Finally, use the component in your application:
