@@ -210,9 +210,7 @@ html {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
   box-sizing: border-box; }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit; }
 
 /**
@@ -237,15 +235,13 @@ a {
   /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */ }
-  a:link,
-  a:visited {
+  a:link, a:visited {
     color: #3e87e8; }
   a:hover {
     color: #3573c5; }
   a:active {
     color: #2b5ea2; }
-  a:active,
-  a:hover {
+  a:active, a:hover {
     outline: 0; }
 
 /**
@@ -328,9 +324,9 @@ a {
   padding: 0 !important;
   clip: rect(0 0 0 0) !important; }
 
-.a11y.focusable:active,
-.a11y.focusable:focus,
-.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+.a11y.focusable:active, .a11y.focusable:focus,
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
   position: static;
   overflow: visible;
   width: auto;
@@ -772,7 +768,7 @@ code {
 
 .fa {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -817,7 +813,7 @@ code {
     left: -1.8571428571em; }
 
 .fa-border {
-  padding: 0.2em 0.25em 0.15em;
+  padding: .2em .25em .15em;
   border: solid 0.08em #eee;
   border-radius: .1em; }
 
@@ -2835,11 +2831,7 @@ code {
   text-transform: none;
   white-space: nowrap;
   background-color: #e4e4ea; }
-  .btn,
-  .btn:link,
-  .btn:visited,
-  .btn:hover,
-  .btn:active {
+  .btn, .btn:link, .btn:visited, .btn:hover, .btn:active {
     color: black; }
   .btn:hover {
     border-color: #9999a3;
@@ -2870,12 +2862,7 @@ button.btn {
   border-radius: 0;
   padding: 0;
   line-height: inherit; }
-  .btn--bare,
-  .btn--bare:link,
-  .btn--bare:visited,
-  .btn--bare:hover,
-  .btn--bare:active,
-  .btn--bare:focus {
+  .btn--bare, .btn--bare:link, .btn--bare:visited, .btn--bare:hover, .btn--bare:active, .btn--bare:focus {
     box-shadow: none;
     background: none;
     color: inherit; }
@@ -3089,16 +3076,22 @@ body {
 [role=banner], [role=contentinfo] {
   height: 4rem; }
 
-[role=banner] h1 {
+[role=banner] h1, [role=banner] h2 {
   font-size: 1.6rem;
   line-height: 1.6666666667;
   margin: 0;
   font-weight: normal;
-  color: #7c7c84; }
-  [role=banner] h1 svg {
+  color: #7c7c84;
+  display: inline-block;
+  float: left; }
+  [role=banner] h1 svg, [role=banner] h2 svg {
     margin-bottom: -.1em; }
-    [role=banner] h1 svg path {
+    [role=banner] h1 svg path, [role=banner] h2 svg path {
       fill: #7c7c84; }
+
+[role=banner] h2 {
+  float: right;
+  color: #9999a3; }
 
 .content-wrapper {
   position: relative;

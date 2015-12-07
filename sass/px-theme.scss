@@ -13,7 +13,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 :root{
   @import "px-iconography-design/_base.iconography.scss";
   @import "px-typography-design/_base.typography.scss";
-  
+
   --px-app-nav-background-color:            $gray10;
   --px-app-nav-link-text-color:             $white;
   --px-app-nav-link-selected-color:         $select-blue-pressed;

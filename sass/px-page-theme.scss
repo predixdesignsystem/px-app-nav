@@ -46,17 +46,24 @@ body {
 }
 
 [role=banner] {
-  h1 {
+  h1, h2 {
     @include inuit-font-size(24px);
     margin: 0;
     font-weight: normal;
     color: $px-page-banner-text-color;
+    display:inline-block;
+    float:left;
     svg {
       margin-bottom: -.1em;
       path{
         fill: $px-page-banner-meatball-color;
       }
     }
+
+  }
+  h2 {
+    float:right;
+    color:$gray6;
   }
 }
 
