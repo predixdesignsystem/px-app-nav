@@ -4,7 +4,6 @@ Px-app-nav is a navigation bar or drawer for applications.
 
 ## Overview
 
-One or mutliple paragraph description of component.
 Use the px-app-nav to cleanly navigate portions or pages of a application. The navigation can be minimized or expanded to reveal the navigation items, which can have sub items. The navigation can host other web components or authentication such as the px-login web component. Navigation items can use font-awesome icons to better communicate with the user.
 
 ## Usage
