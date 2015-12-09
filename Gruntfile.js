@@ -1,20 +1,20 @@
 'use strict';
 
-var importOnce = require('node-sass-import-once');
 
 module.exports = function (grunt) {
 
+    var importOnce = require('node-sass-import-once');
     // Project configuration.
     grunt.initConfig({
 
         clean: {
             css: ['css'],
-            bower: ['bower_components']
+            bower: ['bower_components'],
+            reports: ['reports']
         },
 
         sass: {
             options: {
-                sourceMap: false, //no source maps b/c web-components inline css anyway...
                 importer: importOnce,
                 importOnce: {
                   index: true,
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        
+
         autoprefixer: {
           options: {
             browsers: ['last 2 version']
@@ -66,7 +66,15 @@ module.exports = function (grunt) {
                 files: ['sass/**/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
                 options: {
-                    interrupt: true
+                    interrupt: true,
+                    livereload: true
+                }
+            },
+            htmljs: {
+                files: ['*.html', '*.js'],
+                options: {
+                    interrupt: true,
+                    livereload: true
                 }
             }
         },
@@ -76,7 +84,6 @@ module.exports = function (grunt) {
                 open: '<%= depserveOpenUrl %>'
             }
         },
-
         webdriver: {
             options: {
                 specFiles: ['test/*spec.js']
@@ -84,19 +91,15 @@ module.exports = function (grunt) {
             local: {
                 webdrivers: ['chrome']
             }
-        }//,
-
-//        'wct-test': {
-//            local: {
-//                options: {
-//                    root: './',
-//                    verbose: false,
-//                    plugins: {
-//                        local: {browsers: ['chrome']}
-//                    }
-//                }
-//            }
-//        }
+        },
+        concurrent: {
+            devmode: {
+                tasks: ['watch', 'depserve'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-sass');
@@ -104,15 +107,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-dep-serve');
-    //grunt.loadNpmTasks('web-component-tester');
     grunt.loadNpmTasks('webdriver-support');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
         'sass',
         'autoprefixer'
+    ]);
+
+    grunt.registerTask('devmode', 'Development Mode', [
+        'concurrent:devmode'
     ]);
 
     // First run task.
