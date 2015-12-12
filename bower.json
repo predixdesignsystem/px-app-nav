@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "main": [
     "px-app-nav.html"
   ],
@@ -22,6 +22,7 @@
     "iron-component-page": "PolymerElements/iron-component-page#~1.1.0",
     "px-buttons-design": "https://github.com/predixDev/px-buttons-design.git#~0.4.0",
     "px-list-bare-design": "https://github.com/predixDev/px-list-bare-design.git#~0.2.0",
-    "px-starter-kit-design": "https://github.com/predixDev/px-starter-kit-design.git#~0.4.0"
+    "px-starter-kit-design": "https://github.com/predixDev/px-starter-kit-design.git#~0.4.0",
+    "px-login": "https://github.com/predixDev/px-login.git#~0.1.0"
   }
 }

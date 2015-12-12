@@ -13,6 +13,7 @@
     <link rel="import" href="../px-theme/px-theme.html"/>
 
     <link rel="import" href="px-app-nav.html" />
+    <link rel="import" href="../px-login/px-login.html" />
 
     <style is="custom-style">
       html {
@@ -54,6 +55,7 @@
     <div class="demo">
       <px-app-nav
           nav-items='[{"path": "tab1", "icon": "fa-warning", "eventName": "firstItem", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2", "eventName": "subitemTwo"}, {"label": "Sub Category 3", "path" : "subitem3"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}, {"label": "Sub Category 3"}]},{"path": "tab3", "icon": "fa-bar-chart", "label": "Analysis"}, {"path": "tab4", "icon": "fa-dashboard", "label": "Dashboards"}]'>
+          <px-login></px-login>
       </px-app-nav>
 
       <div class="demo-body">
@@ -65,6 +67,7 @@
           and the
           <a href="test/fixture.html">UI test fixture</a>.
         </p>
+
         <script>
           window.addEventListener("firstItem", function(evt) {
             console.log("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired.");
