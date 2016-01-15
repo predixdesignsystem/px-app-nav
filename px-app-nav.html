@@ -72,7 +72,8 @@ Nav bar / drawer for applications
         notify: true,
         value: function() {
           return [{}];
-        }
+        },
+        observer: '_observeChanged'
       },
 
       /**
@@ -124,14 +125,14 @@ Nav bar / drawer for applications
       }
     },
 
-    listeners: {
-      "nav-items-changed": "_observeChanged"
-     },
+    // listeners: {
+    //   "nav-items-changed": "_observeChanged"
+    //  },
 
     _protocolRE: new RegExp('(http|https)://'),
 
-    _observeChanged: function(event) {
-      if (!event.detail.value){
+    _observeChanged: function(newValue) {
+      if (!newValue){
         this.navItems = [];
       }
       else{
@@ -160,7 +161,7 @@ Nav bar / drawer for applications
 
              document.timeline.play(listResizeAnimation);
          }
-       }, this)
+       }, this);
     },
 
     /**
@@ -229,8 +230,8 @@ Nav bar / drawer for applications
           allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
           openAnimation;
 
-      for (i=0; i<allSubNavs.length; i++) {
-        if (allSubNavs[i] != subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
+      for (var i=0; i<allSubNavs.length; i++) {
+        if (allSubNavs[i] += subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
           navToHide = allSubNavs[i];
           navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
         }
@@ -248,7 +249,6 @@ Nav bar / drawer for applications
       }
 
       var accordionAnimationPlayer = document.timeline.play(openAnimation);
-      var self = this;
 
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
@@ -272,10 +272,10 @@ Nav bar / drawer for applications
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, mainElement);}, { duration: 0, fill: 'forwards' }),
         new KeyframeEffect(mainElement, [ {height: '0px'}, {height: accordionHeight }], { duration: 200, fill: 'forwards' }),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' });
         })),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' })
+          return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], { duration: 200, fill: 'forwards' });
         }))
       ]);
     },
@@ -285,10 +285,10 @@ Nav bar / drawer for applications
           accordionHeight = mainElement.clientHeight + 'px';
       //animate close the open accordion
       return new SequenceEffect([ new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' })
+          return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], { duration: 200, fill: 'forwards' });
         })),
         new GroupEffect(textElements.map(function(elem){
-          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' })
+          return new KeyframeEffect(elem, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', false, elem);}, { duration: 0, fill: 'forwards' });
         })),
         new KeyframeEffect(mainElement, [ {height: accordionHeight}, {height: '0px' }], { duration: 200, fill: 'forwards' }),
         new KeyframeEffect(mainElement, function(tf) { if (tf == null) return; self.toggleClass('visuallyhidden', true, mainElement);}, { duration: 0, fill: 'forwards' })
@@ -342,7 +342,7 @@ Nav bar / drawer for applications
                 }
               }
               item.subSelected = subitem.selected ? true : item.subSelected;
-            }, this)
+            }, this);
           }
           this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
           this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
@@ -361,7 +361,7 @@ Nav bar / drawer for applications
           item.subitemlistclass = "visuallyhidden list-bare";
           item.subitemclass = "visuallyhidden";
         }
-      }, this)
+      }, this);
     },
 
     _parseOutPathPrefix: function(fullPath) {
@@ -388,7 +388,7 @@ Nav bar / drawer for applications
       if (item.subitems) {
         item.subitems.forEach(function(subitem) {
           this._computeHref(subitem);
-        }, this)
+        }, this);
       }
     },
 
@@ -400,12 +400,12 @@ Nav bar / drawer for applications
       if(!this.navExpanded) {
         return new SequenceEffect(
           [new GroupEffect(textElemArray.map(function(elem){
-            return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100)
+            return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100);
            })),
            new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
            new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
            new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           ])
+         ]);
       }
       else {
         return new SequenceEffect(
@@ -413,7 +413,7 @@ Nav bar / drawer for applications
            new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
            new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
            new GroupEffect(textElemArray.map(function(elem){
-             return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100)
+             return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100);
            }))
           ]);
       }
