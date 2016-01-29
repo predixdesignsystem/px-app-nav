@@ -438,6 +438,11 @@ Nav bar / drawer for applications
           //raise event once we've expanded;
           this.fire('nav-expanded');
         }
+        // let the nav bar animation truly finish before broadcasting a window resize event
+        // so other components can react after the animation
+        setTimeout(function(){
+          window.dispatchEvent(new Event('resize'));
+        }, 50);
       }.bind(this));
     }
   });
