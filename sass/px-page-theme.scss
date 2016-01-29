@@ -6,6 +6,11 @@
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 @import "px-helpers-design/_generic.helpers.scss";
 
+$desk-wide-width: auto;
+$desk-wide-max-width: none;
+$viewport-margin: 2rem;
+
+
 // Base
 @import "px-viewport-design/_base.viewport.scss";
 @import "px-flexbox-design/_base.flexbox.scss";
@@ -46,13 +51,16 @@ body {
 }
 
 [role=banner] {
+  width: 100%;
+  display: block;
+  margin: auto;
   h1, h2 {
     @include inuit-font-size(24px);
     margin: 0;
+    line-height: calculateRem(60px);
     font-weight: normal;
     color: $px-page-banner-text-color;
     display:inline-block;
-    float:left;
     svg {
       margin-bottom: -.1em;
       path{
@@ -62,7 +70,6 @@ body {
 
   }
   h2 {
-    float:right;
     color:$gray6;
   }
 }
