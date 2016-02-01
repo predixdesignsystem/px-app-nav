@@ -22,7 +22,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'css/noprefix/px-app.css': 'sass/px-page-theme.scss',
+                    'css/noprefix/px-app.css': 'sass/px-app.scss',
                     'css/noprefix/px-theme.css': 'sass/px-theme.scss'
                   }
             }
