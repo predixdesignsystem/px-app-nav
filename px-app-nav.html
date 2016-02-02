@@ -32,7 +32,7 @@ Nav bar / drawer for applications
 
   <template>
     <nav role="navigation">
-      <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
+      <button class="btn btn--bare btn--svg" on-click="expandNav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
@@ -179,7 +179,7 @@ Nav bar / drawer for applications
 
       var media = window.matchMedia('screen and (max-width: 63.9rem)');
       if (media.matches) {
-        this.navExpanderButton();
+        this.expandNav();
       };
       this.markSelected(window.location.href);
 
@@ -190,13 +190,13 @@ Nav bar / drawer for applications
         if (data.matches) {
           // width is less than 63.9rem in width
           if (self.navExpanded) {
-            self.navExpanderButton();
+            self.expandNav();
           }
         }
         else {
           // width is greater than 63.9rem
           if (!self.navExpanded) {
-            self.navExpanderButton();
+            self.expandNav();
           }
         }
       });
@@ -254,7 +254,7 @@ Nav bar / drawer for applications
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
         if(!self.navExpanded){
-          self.navExpanderButton();
+          self.expandNav();
         }
       });
 
@@ -463,7 +463,7 @@ Nav bar / drawer for applications
      * @param {Event} evt The click event.
      * @private
      */
-    navExpanderButton: function(evt){
+    expandNav: function(evt){
       if(this.navExpanded){
         //raise event we're about to close.
         this.fire('nav-collapsing');
