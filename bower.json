@@ -1,6 +1,6 @@
 {
   "name": "px-theme",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "main": [
     "px-theme.html"
   ],
@@ -25,6 +25,6 @@
     "px-headings-design": "https://github.com/PredixDev/px-headings-design.git#~0.2.0",
     "px-layout-design": "https://github.com/PredixDev/px-layout-design.git#~0.3.0",
     "px-meta-lists-design": "https://github.com/PredixDev/px-meta-lists-design.git#~0.3.0",
-    "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.5.0"
+    "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.5.1"
   }
 }
