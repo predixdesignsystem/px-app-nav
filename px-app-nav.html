@@ -437,24 +437,24 @@ Nav bar / drawer for applications
       }, { duration: 0, fill: 'forwards' })
     },
 
-    _buttonAnimation : function(navElem, textElemArray){
+    _contractNavAnimation: function(navEl, textEls) {
       var _this = this;
-      if(!this.navExpanded) {
-        // closing animation
-        return new SequenceEffect([
-          _this._keyframeFadeOutAll(textElemArray),
-          _this._keyframeToggleClass(navElem, 'navbar--text-hidden'),
-          _this._keyframeContractWidth(navElem),
-          _this._keyframeToggleClass(navElem, 'navbar--collapsed')
-        ]);
-      } else {
-        return new SequenceEffect([
-          _this._keyframeToggleClass(navElem, 'navbar--collapsed'),
-          _this._keyframeExpandWidth(navElem),
-          _this._keyframeToggleClass(navElem, 'navbar--text-hidden'),
-          _this._keyframeFadeInAll(textElemArray)
-        ]);
-      }
+      return new SequenceEffect([
+        _this._keyframeFadeOutAll(textEls),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden'),
+        _this._keyframeContractWidth(navEl),
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed')
+      ]);
+    },
+
+    _expandNavAnimation: function(navEl, textEls) {
+      var _this = this;
+      return new SequenceEffect([
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed'),
+        _this._keyframeExpandWidth(navEl),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden'),
+        _this._keyframeFadeInAll(textEls)
+      ]);
     },
 
     /**
@@ -464,12 +464,16 @@ Nav bar / drawer for applications
      * @private
      */
     expandNav: function(evt){
-      if(this.navExpanded){
+      if(this.navExpanded) {
         //raise event we're about to close.
         this.fire('nav-collapsing');
-      }
+      };
       this.navExpanded = !this.navExpanded;
-      this.ani = document.timeline.play(this._buttonAnimation(this, Polymer.dom(this.root).querySelectorAll("span")));
+      var navEl = this;
+      var textEls = Polymer.dom(this.root).querySelectorAll("span");
+      var navAnimation = this.navExpanded ?
+        this._expandNavAnimation(navEl, textEls) : this._contractNavAnimation(navEl, textEls);
+      this.ani = document.timeline.play(navAnimation);
 
       this.ani.addEventListener('finish', function(){
         if(this.navExpanded){
