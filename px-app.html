@@ -3094,6 +3094,9 @@ body {
         fill: #d1d0d8; }
   [role=banner] h2 {
     color: #9999a3; }
+    @media screen and (max-width: 47.9rem) {
+      [role=banner] h2 {
+        display: none; } }
 
 .content-wrapper {
   position: relative;
@@ -3103,12 +3106,15 @@ body {
 
 main {
   min-height: calc(100vh - 8rem);
-  margin-left: 3.6666666667rem;
+  margin-left: 0;
   background-color: #8b8d8f;
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1; }
-  @media screen and (min-width: 68.266666667rem) {
+  @media screen and (max-width: 63.9rem) {
+    main {
+      margin-left: 3.6666666667rem; } }
+  @media screen and (min-width: 63.9rem) {
     main {
       margin-left: 0; } }
 
