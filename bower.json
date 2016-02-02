@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": [
     "px-app-nav.html"
   ],
@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "polymer": "~v1.2.3",
-    "px-theme": "https://github.com/PredixDev/px-theme.git#~0.4.0",
+    "px-theme": "https://github.com/PredixDev/px-theme.git#~0.5.1",
     "web-animations-js": "~2.0.0"
   },
   "devDependencies": {

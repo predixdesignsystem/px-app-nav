@@ -231,7 +231,7 @@ Nav bar / drawer for applications
           openAnimation;
 
       for (var i=0; i<allSubNavs.length; i++) {
-        if (allSubNavs[i] += subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
+        if (allSubNavs[i] === subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
           navToHide = allSubNavs[i];
           navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
         }
