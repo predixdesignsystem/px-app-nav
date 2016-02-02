@@ -175,31 +175,32 @@ Nav bar / drawer for applications
         this.navItems.forEach(this._computeIcon);
         this._setSubNavVisibility();
         this._potentiallyAdjustAccordion();
+      };
 
-      }
-
-      var media = window.matchMedia('screen and (max-width: 68.2rem)');
+      var media = window.matchMedia('screen and (max-width: 63.9rem)');
+      if (media.matches) {
+        this.navExpanderButton();
+      };
+      this.markSelected(window.location.href);
 
       var self = this;
 
+      // add listener on screen width change
       media.addListener(function(data) {
         if (data.matches) {
+          // width is less than 63.9rem in width
           if (self.navExpanded) {
             self.navExpanderButton();
           }
         }
         else {
+          // width is greater than 63.9rem
           if (!self.navExpanded) {
             self.navExpanderButton();
           }
         }
       });
 
-      if (media.matches) {
-        this.navExpanderButton();
-      }
-
-      this.markSelected(window.location.href);
     },
 
     /**
@@ -396,26 +397,63 @@ Nav bar / drawer for applications
       item.icon = item.icon + " fa";
     },
 
+    _keyframeFadeIn: function(el) {
+      return new KeyframeEffect(el, [ {opacity: 0}, {opacity: 1} ], 100);
+    },
+
+    _keyframeFadeOut: function(el) {
+      return new KeyframeEffect(el, [ {opacity: 1}, {opacity: 0} ], 100);
+    },
+
+    _keyframeFadeInAll: function(els) {
+      var _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeFadeIn(el);
+      }));
+    },
+
+    _keyframeFadeOutAll: function(els) {
+      var _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeFadeOut(el);
+      }));
+    },
+
+    _keyframeContractWidth: function(el) {
+      return new KeyframeEffect(el, [{ width: '219px'}, { width:  '56px' }], 200);
+    },
+
+    _keyframeExpandWidth: function(el) {
+      return new KeyframeEffect(el, [{ width: '56px' }, { width: '219px' }], 200);
+    },
+
+    _keyframeToggleClass: function(el, className) {
+      return new KeyframeEffect(el, function(tf) {
+        if (tf == null) {
+          return;
+        } else {
+          el.toggleClass(className, !el.navExpanded);
+        };
+      }, { duration: 0, fill: 'forwards' })
+    },
+
     _buttonAnimation : function(navElem, textElemArray){
+      var _this = this;
       if(!this.navExpanded) {
-        return new SequenceEffect(
-          [new GroupEffect(textElemArray.map(function(elem){
-            return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100);
-           })),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-         ]);
-      }
-      else {
-        return new SequenceEffect(
-          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new GroupEffect(textElemArray.map(function(elem){
-             return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100);
-           }))
-          ]);
+        // closing animation
+        return new SequenceEffect([
+          _this._keyframeFadeOutAll(textElemArray),
+          _this._keyframeToggleClass(navElem, 'navbar--text-hidden'),
+          _this._keyframeContractWidth(navElem),
+          _this._keyframeToggleClass(navElem, 'navbar--collapsed')
+        ]);
+      } else {
+        return new SequenceEffect([
+          _this._keyframeToggleClass(navElem, 'navbar--collapsed'),
+          _this._keyframeExpandWidth(navElem),
+          _this._keyframeToggleClass(navElem, 'navbar--text-hidden'),
+          _this._keyframeFadeInAll(textElemArray)
+        ]);
       }
     },
 
