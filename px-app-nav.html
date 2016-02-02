@@ -464,22 +464,24 @@ Nav bar / drawer for applications
      * @private
      */
     expandNav: function(evt){
-      if(this.navExpanded) {
-        //raise event we're about to close.
-        this.fire('nav-collapsing');
-      };
-      this.navExpanded = !this.navExpanded;
+      var navAnimation;
       var navEl = this;
       var textEls = Polymer.dom(this.root).querySelectorAll("span");
-      var navAnimation = this.navExpanded ?
-        this._expandNavAnimation(navEl, textEls) : this._contractNavAnimation(navEl, textEls);
+      this.navExpanded = !this.navExpanded;
+      if(!this.navExpanded) {
+        //raise event we're about to close.
+        this.fire('nav-collapsing');
+        navAnimation = this._contractNavAnimation(navEl, textEls);
+      } else {
+        navAnimation = this._expandNavAnimation(navEl, textEls);
+      };
       this.ani = document.timeline.play(navAnimation);
 
       this.ani.addEventListener('finish', function(){
         if(this.navExpanded){
           //raise event once we've expanded;
           this.fire('nav-expanded');
-        }
+        };
         // let the nav bar animation truly finish before broadcasting a window resize event
         // so other components can react after the animation
         setTimeout(function(){
