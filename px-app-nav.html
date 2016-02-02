@@ -32,7 +32,7 @@ Nav bar / drawer for applications
 
   <template>
     <nav role="navigation">
-      <button class="btn btn--bare btn--svg" on-click="navExpanderButton"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
+      <button class="btn btn--bare btn--svg" on-click="expandNav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
@@ -175,31 +175,32 @@ Nav bar / drawer for applications
         this.navItems.forEach(this._computeIcon);
         this._setSubNavVisibility();
         this._potentiallyAdjustAccordion();
+      };
 
-      }
-
-      var media = window.matchMedia('screen and (max-width: 68.2rem)');
+      var media = window.matchMedia('screen and (max-width: 63.9rem)');
+      if (media.matches) {
+        this.expandNav();
+      };
+      this.markSelected(window.location.href);
 
       var self = this;
 
+      // add listener on screen width change
       media.addListener(function(data) {
         if (data.matches) {
+          // width is less than 63.9rem in width
           if (self.navExpanded) {
-            self.navExpanderButton();
+            self.expandNav();
           }
         }
         else {
+          // width is greater than 63.9rem
           if (!self.navExpanded) {
-            self.navExpanderButton();
+            self.expandNav();
           }
         }
       });
 
-      if (media.matches) {
-        this.navExpanderButton();
-      }
-
-      this.markSelected(window.location.href);
     },
 
     /**
@@ -253,7 +254,7 @@ Nav bar / drawer for applications
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
         if(!self.navExpanded){
-          self.navExpanderButton();
+          self.expandNav();
         }
       });
 
@@ -396,27 +397,64 @@ Nav bar / drawer for applications
       item.icon = item.icon + " fa";
     },
 
-    _buttonAnimation : function(navElem, textElemArray){
-      if(!this.navExpanded) {
-        return new SequenceEffect(
-          [new GroupEffect(textElemArray.map(function(elem){
-            return new KeyframeEffect(elem, [{opacity: 1}, {opacity: 0}], 100);
-           })),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '219px'}, {width: '56px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-         ]);
-      }
-      else {
-        return new SequenceEffect(
-          [new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--collapsed', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new KeyframeEffect(navElem, [{width: '56px'}, {width: '219px'}], 200),
-           new KeyframeEffect(navElem, function(tf) { if (tf == null) return; navElem.toggleClass('navbar--text-hidden', !navElem.navExpanded);}, { duration: 0, fill: 'forwards' }),
-           new GroupEffect(textElemArray.map(function(elem){
-             return new KeyframeEffect(elem, [{opacity: 0}, {opacity: 1}], 100);
-           }))
-          ]);
-      }
+    _keyframeFadeIn: function(el) {
+      return new KeyframeEffect(el, [ {opacity: 0}, {opacity: 1} ], 100);
+    },
+
+    _keyframeFadeOut: function(el) {
+      return new KeyframeEffect(el, [ {opacity: 1}, {opacity: 0} ], 100);
+    },
+
+    _keyframeFadeInAll: function(els) {
+      var _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeFadeIn(el);
+      }));
+    },
+
+    _keyframeFadeOutAll: function(els) {
+      var _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeFadeOut(el);
+      }));
+    },
+
+    _keyframeContractWidth: function(el) {
+      return new KeyframeEffect(el, [{ width: '219px'}, { width:  '56px' }], 200);
+    },
+
+    _keyframeExpandWidth: function(el) {
+      return new KeyframeEffect(el, [{ width: '56px' }, { width: '219px' }], 200);
+    },
+
+    _keyframeToggleClass: function(el, className) {
+      return new KeyframeEffect(el, function(tf) {
+        if (tf == null) {
+          return;
+        } else {
+          el.toggleClass(className, !el.navExpanded);
+        };
+      }, { duration: 0, fill: 'forwards' })
+    },
+
+    _contractNavAnimation: function(navEl, textEls) {
+      var _this = this;
+      return new SequenceEffect([
+        _this._keyframeFadeOutAll(textEls),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden'),
+        _this._keyframeContractWidth(navEl),
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed')
+      ]);
+    },
+
+    _expandNavAnimation: function(navEl, textEls) {
+      var _this = this;
+      return new SequenceEffect([
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed'),
+        _this._keyframeExpandWidth(navEl),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden'),
+        _this._keyframeFadeInAll(textEls)
+      ]);
     },
 
     /**
@@ -425,19 +463,25 @@ Nav bar / drawer for applications
      * @param {Event} evt The click event.
      * @private
      */
-    navExpanderButton: function(evt){
-      if(this.navExpanded){
+    expandNav: function(evt){
+      var navAnimation;
+      var navEl = this;
+      var textEls = Polymer.dom(this.root).querySelectorAll("span");
+      this.navExpanded = !this.navExpanded;
+      if(!this.navExpanded) {
         //raise event we're about to close.
         this.fire('nav-collapsing');
-      }
-      this.navExpanded = !this.navExpanded;
-      this.ani = document.timeline.play(this._buttonAnimation(this, Polymer.dom(this.root).querySelectorAll("span")));
+        navAnimation = this._contractNavAnimation(navEl, textEls);
+      } else {
+        navAnimation = this._expandNavAnimation(navEl, textEls);
+      };
+      this.ani = document.timeline.play(navAnimation);
 
       this.ani.addEventListener('finish', function(){
         if(this.navExpanded){
           //raise event once we've expanded;
           this.fire('nav-expanded');
-        }
+        };
         // let the nav bar animation truly finish before broadcasting a window resize event
         // so other components can react after the animation
         setTimeout(function(){
