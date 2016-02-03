@@ -657,10 +657,10 @@ button.btn {
   :host ::content .login {
     width: 14.6rem; }
 
-:host[nav-expanded] {
+:host[nav-expanded], :host[nav-contracting] {
   z-index: 2; }
   @media screen and (min-width: 64em) {
-    :host[nav-expanded] {
+    :host[nav-expanded], :host[nav-contracting] {
       z-index: auto; } }
 
 :host(.navbar--collapsed) {

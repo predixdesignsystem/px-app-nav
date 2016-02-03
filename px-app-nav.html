@@ -32,7 +32,7 @@ Nav bar / drawer for applications
 
   <template>
     <nav role="navigation">
-      <button class="btn btn--bare btn--svg" on-click="expandNav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
+      <button class="btn btn--bare btn--svg" on-click="toggleNav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
@@ -113,6 +113,19 @@ Nav bar / drawer for applications
       },
 
       /**
+       * Whether the navigation is contracting. Reflected to an attribute (reflectToAttribute: true) so the application can
+       * bind to it and maintain state as needed.
+       *
+       * @type {Boolean}
+       * @default [true]
+       */
+      navContracting: {
+        value: true,
+        type: Boolean,
+        reflectToAttribute: true
+      },
+
+      /**
        * Animation function
        *
        * @type {Function}
@@ -179,7 +192,7 @@ Nav bar / drawer for applications
 
       var media = window.matchMedia('screen and (max-width: 63.9rem)');
       if (media.matches) {
-        this.expandNav();
+        this.toggleNav();
       };
       this.markSelected(window.location.href);
 
@@ -190,13 +203,13 @@ Nav bar / drawer for applications
         if (data.matches) {
           // width is less than 63.9rem in width
           if (self.navExpanded) {
-            self.expandNav();
+            self.toggleNav();
           }
         }
         else {
           // width is greater than 63.9rem
           if (!self.navExpanded) {
-            self.expandNav();
+            self.toggleNav();
           }
         }
       });
@@ -254,7 +267,7 @@ Nav bar / drawer for applications
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
         if(!self.navExpanded){
-          self.expandNav();
+          self.toggleNav();
         }
       });
 
@@ -465,37 +478,56 @@ Nav bar / drawer for applications
       ]);
     },
 
-    /**
-     * Called when the nav expander control is clicked.
-     *
-     * @param {Event} evt The click event.
-     * @private
-     */
-    expandNav: function(evt){
-      var navAnimation;
-      var navEl = this;
-      var textEls = Polymer.dom(this.root).querySelectorAll("span");
-      this.navExpanded = !this.navExpanded;
-      if(!this.navExpanded) {
-        //raise event we're about to close.
-        this.fire('nav-collapsing');
-        navAnimation = this._contractNavAnimation(navEl, textEls);
-      } else {
-        navAnimation = this._expandNavAnimation(navEl, textEls);
-      };
-      this.ani = document.timeline.play(navAnimation);
+    _getTextEls: function() {
+      return Polymer.dom(this.root).querySelectorAll("span");
+    },
 
+    _expandNav: function() {
+      this.fire('nav-expanding');
+      var navAnimation = this._expandNavAnimation(this, this._getTextEls());
+      this.ani = document.timeline.play(navAnimation);
       this.ani.addEventListener('finish', function(){
-        if(this.navExpanded){
-          //raise event once we've expanded;
-          this.fire('nav-expanded');
-        };
+        //raise event once we've expanded;
+        this.fire('nav-expanded');
         // let the nav bar animation truly finish before broadcasting a window resize event
         // so other components can react after the animation
         setTimeout(function(){
           window.dispatchEvent(new Event('resize'));
         }, 50);
       }.bind(this));
+    },
+
+    _contractNav: function() {
+      //raise event we're about to close.
+      this.fire('nav-collapsing');
+      this.navContracting = true;
+      var navAnimation = this._contractNavAnimation(this, this._getTextEls());
+      this.ani = document.timeline.play(navAnimation);
+      this.ani.addEventListener('finish', function(){
+        this.navContracting = false;
+        this.fire('nav-collapsed');
+        // let the nav bar animation truly finish before broadcasting a window resize event
+        // so other components can react after the animation
+        setTimeout(function(){
+          window.dispatchEvent(new Event('resize'));
+        }, 50);
+      }.bind(this));
+    },
+
+    /**
+     * Called when the nav expander control is clicked.
+     *
+     * @param {Event} evt The click event.
+     * @private
+     */
+    toggleNav: function(evt){
+      this.navExpanded = !this.navExpanded;
+      if(!this.navExpanded) {
+        this._contractNav();
+      } else {
+        this._expandNav();
+      };
     }
+
   });
 </script>
