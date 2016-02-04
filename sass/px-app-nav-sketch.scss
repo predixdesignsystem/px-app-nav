@@ -58,7 +58,7 @@ $inuit-enable-btn--bare                 : true;
   }
 }
 
-:host[nav-expanded] {
+:host[nav-expanded], :host[nav-contracting] {
   z-index: 2;
   @include media-query(desk) {
     z-index: auto;
