@@ -431,7 +431,7 @@ Nav bar / drawer for applications
     },
 
     _keyframeExpandAccordian: function(el, textEls) {
-      var accordionHeight = textEls.length * (mainElement.parentElement.clientHeight * 0.6666) + 'px';
+      var accordionHeight = textEls.length * (el.parentElement.clientHeight * 0.6666) + 'px';
       return new KeyframeEffect(el, [{ height: '0px' }, { height: accordionHeight }], { duration: 200, fill: 'forwards' });
     },
 
