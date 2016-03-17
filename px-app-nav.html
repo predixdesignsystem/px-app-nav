@@ -214,6 +214,11 @@ Nav bar / drawer for applications
         }
       });
 
+      // add listener for history change event (back button)
+      window.addEventListener('popstate', function(event) {
+        self.markSelected(window.location.href);
+      });
+
     },
 
     /**
