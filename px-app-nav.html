@@ -200,11 +200,33 @@ Nav bar / drawer for applications
       }
     },
 
-    _changeNavExpandedState: function() {
+    _checkNavExpandedState: function() {
       if(!this._navExpanded) {
-        this._contractNav();
+        this.debounce('checkNav', function() {
+          this._contractNav();
+        }, 100);
       } else {
-        this._expandNav();
+        this.debounce('checkNav', function() {
+          this._expandNav();
+        }, 100);
+      };
+    },
+
+    _checkMediaMatches: function(matches) {
+      console.log('_checkMediaMatches', matches);
+      console.log('this._navExpanded', this._navExpanded);
+      if (matches) {
+        // width is less than 63.9rem in width
+        if (this._navExpanded) {
+          this._navExpanded = false;
+          this._checkNavExpandedState();
+        }
+      } else {
+        // width is greater than 63.9rem
+        if (!self._navExpanded) {
+          this._navExpanded = true;
+          this._checkNavExpandedState();
+        }
       };
     },
 
@@ -214,7 +236,7 @@ Nav bar / drawer for applications
     ready: function() {
 
       this._checkNavExpanded();
-      this._changeNavExpandedState();
+      this._checkNavExpandedState();
 
       //check to see if navitems have been initialised.
 
@@ -225,27 +247,16 @@ Nav bar / drawer for applications
         this._potentiallyAdjustAccordion();
       };
 
-      var media = window.matchMedia('screen and (max-width: 63.9rem)');
-      if (media.matches) {
-        this.toggleNav();
-      };
+      this._media = window.matchMedia('screen and (max-width: 63.9rem)');
+      this._checkMediaMatches(this._media.matches);
+
       this.markSelected(window.location.href);
 
       var self = this;
 
       // add listener on screen width change
-      media.addListener(function(data) {
-        if (data.matches) {
-          // width is less than 63.9rem in width
-          if (self._navExpanded) {
-            self.toggleNav();
-          }
-        } else {
-          // width is greater than 63.9rem
-          if (!self._navExpanded) {
-            self.toggleNav();
-          }
-        }
+      this._media.addListener(function(data) {
+        self._checkMediaMatches(data.matches);
       });
 
       // add listener for history change event (back button)
@@ -447,12 +458,15 @@ Nav bar / drawer for applications
       return new KeyframeEffect(el, [{ width: '56px' }, { width: '219px' }], 200);
     },
 
-    _keyframeToggleClass: function(el, className) {
+    _keyframeToggleClass: function(el, className, applyClass) {
       return new KeyframeEffect(el, function(tf) {
         if (tf == null) {
           return;
         } else {
-          el.classList.toggle(className);
+          if(!applyClass) {
+            applyClass = null;
+          };
+          el.classList.toggle(className, applyClass);
         };
       }, { duration: 0, fill: 'forwards' })
     },
@@ -499,20 +513,22 @@ Nav bar / drawer for applications
 
     _contractNavAnimation: function(navEl, textEls) {
       var _this = this;
+      console.log('_contractNavAnimation');
       return new SequenceEffect([
         _this._keyframeFadeOutAll(textEls),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl._navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', true),
         _this._keyframeContractWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl._navExpanded)
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed', true)
       ]);
     },
 
     _expandNavAnimation: function(navEl, textEls) {
+      console.log('_expandNavAnimation');
       var _this = this;
       return new SequenceEffect([
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl._navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed', false),
         _this._keyframeExpandWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl._navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', false),
         _this._keyframeFadeInAll(textEls)
       ]);
     },
@@ -522,7 +538,10 @@ Nav bar / drawer for applications
     },
 
     _expandNav: function() {
+      this._navExpanded = true;
+      this.navExpanded = 'true';
       this.fire('nav-expanding');
+      console.log('nav-expanding');
       var navAnimation = this._expandNavAnimation(this, this._getTextEls());
       this.ani = document.timeline.play(navAnimation);
       this.ani.addEventListener('finish', function(){
@@ -538,6 +557,9 @@ Nav bar / drawer for applications
 
     _contractNav: function() {
       //raise event we're about to close.
+      this._navExpanded = false;
+      this.navExpanded = 'false';
+      console.log('nav-collapsing');
       this.fire('nav-collapsing');
       this.navContracting = true;
       var navAnimation = this._contractNavAnimation(this, this._getTextEls());
@@ -561,11 +583,7 @@ Nav bar / drawer for applications
      */
     toggleNav: function(evt){
       this._navExpanded = !this._navExpanded;
-      if(!this._navExpanded) {
-        this._contractNav();
-      } else {
-        this._expandNav();
-      };
+      this._checkNavExpandedState();
     }
 
   });
