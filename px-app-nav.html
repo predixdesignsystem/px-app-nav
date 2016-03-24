@@ -213,8 +213,6 @@ Nav bar / drawer for applications
     },
 
     _checkMediaMatches: function(matches) {
-      console.log('_checkMediaMatches', matches);
-      console.log('this._navExpanded', this._navExpanded);
       if (matches) {
         // width is less than 63.9rem in width
         if (this._navExpanded) {
@@ -236,10 +234,8 @@ Nav bar / drawer for applications
     ready: function() {
 
       this._checkNavExpanded();
-      this._checkNavExpandedState();
 
       //check to see if navitems have been initialised.
-
       if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
         this.navItems.forEach(this._computeHref, this);
         this.navItems.forEach(this._computeIcon);
@@ -513,7 +509,6 @@ Nav bar / drawer for applications
 
     _contractNavAnimation: function(navEl, textEls) {
       var _this = this;
-      console.log('_contractNavAnimation');
       return new SequenceEffect([
         _this._keyframeFadeOutAll(textEls),
         _this._keyframeToggleClass(navEl, 'navbar--text-hidden', true),
@@ -523,7 +518,6 @@ Nav bar / drawer for applications
     },
 
     _expandNavAnimation: function(navEl, textEls) {
-      console.log('_expandNavAnimation');
       var _this = this;
       return new SequenceEffect([
         _this._keyframeToggleClass(navEl, 'navbar--collapsed', false),
@@ -541,7 +535,6 @@ Nav bar / drawer for applications
       this._navExpanded = true;
       this.navExpanded = 'true';
       this.fire('nav-expanding');
-      console.log('nav-expanding');
       var navAnimation = this._expandNavAnimation(this, this._getTextEls());
       this.ani = document.timeline.play(navAnimation);
       this.ani.addEventListener('finish', function(){
@@ -559,7 +552,6 @@ Nav bar / drawer for applications
       //raise event we're about to close.
       this._navExpanded = false;
       this.navExpanded = 'false';
-      console.log('nav-collapsing');
       this.fire('nav-collapsing');
       this.navContracting = true;
       var navAnimation = this._contractNavAnimation(this, this._getTextEls());
