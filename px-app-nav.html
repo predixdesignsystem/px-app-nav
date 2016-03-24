@@ -107,9 +107,21 @@ Nav bar / drawer for applications
        * @default [true]
        */
       navExpanded: {
-        value: true,
-        type: Boolean,
+        value: function() { return "true"; },
+        type: String,
         reflectToAttribute: true
+      },
+
+      /**
+       * Internal representation of navExpanded as a Boolean because boolean values cannot
+       * be passed into Polymer elements as strings "false"
+       *
+       * @type {Boolean}
+       * @default [true]
+       */
+       _navExpanded: {
+        value: true,
+        type: Boolean
       },
 
       /**
@@ -177,10 +189,33 @@ Nav bar / drawer for applications
        }, this);
     },
 
+    _checkNavExpanded: function() {
+      // ensure that internal representation matches external property
+      if(this.navExpanded === "false") {
+        this._navExpanded = false;
+      } else if(this.navExpanded === "true") {
+        this._navExpanded = true;
+      } else {
+        this._navExpanded = true;
+      }
+    },
+
+    _changeNavExpandedState: function() {
+      if(!this._navExpanded) {
+        this._contractNav();
+      } else {
+        this._expandNav();
+      };
+    },
+
     /**
      * Parse navItemsStrings and navItemsPaths to create unified navItems
      */
     ready: function() {
+
+      this._checkNavExpanded();
+      this._changeNavExpandedState();
+
       //check to see if navitems have been initialised.
 
       if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
@@ -202,13 +237,12 @@ Nav bar / drawer for applications
       media.addListener(function(data) {
         if (data.matches) {
           // width is less than 63.9rem in width
-          if (self.navExpanded) {
+          if (self._navExpanded) {
             self.toggleNav();
           }
-        }
-        else {
+        } else {
           // width is greater than 63.9rem
-          if (!self.navExpanded) {
+          if (!self._navExpanded) {
             self.toggleNav();
           }
         }
@@ -271,7 +305,7 @@ Nav bar / drawer for applications
 
       accordionAnimationPlayer.addEventListener('finish', function(){
         self._navResized();
-        if(!self.navExpanded){
+        if(!self._navExpanded){
           self.toggleNav();
         }
       });
@@ -467,18 +501,18 @@ Nav bar / drawer for applications
       var _this = this;
       return new SequenceEffect([
         _this._keyframeFadeOutAll(textEls),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl.navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl._navExpanded),
         _this._keyframeContractWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl.navExpanded)
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl._navExpanded)
       ]);
     },
 
     _expandNavAnimation: function(navEl, textEls) {
       var _this = this;
       return new SequenceEffect([
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl.navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--collapsed', !navEl._navExpanded),
         _this._keyframeExpandWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl.navExpanded),
+        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', !navEl._navExpanded),
         _this._keyframeFadeInAll(textEls)
       ]);
     },
@@ -526,8 +560,8 @@ Nav bar / drawer for applications
      * @private
      */
     toggleNav: function(evt){
-      this.navExpanded = !this.navExpanded;
-      if(!this.navExpanded) {
+      this._navExpanded = !this._navExpanded;
+      if(!this._navExpanded) {
         this._contractNav();
       } else {
         this._expandNav();
