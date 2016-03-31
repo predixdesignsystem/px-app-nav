@@ -87,6 +87,7 @@ main {
   min-height: calc(100vh - #{calculateRem(120px)});
   margin-left: 0;
   background-color: $px-page-main-content-area-background-color;
+  overflow-x: hidden;
   @include media-query(portable) {
     margin-left: calculateRem(55px);
   };
