@@ -19,6 +19,9 @@
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -2844,6 +2847,13 @@ code {
   .btn:active {
     outline: none; }
 
+/** Workaround for FF since it does not support calc().
+  * Other buttons appear ok with the height declaration, but non-button elements do not.
+**/
+@-moz-document url-prefix() {
+  .btn:not(button) {
+    line-height: 1.8em; } }
+
 button.btn {
   -webkit-appearance: button; }
 
@@ -3108,6 +3118,7 @@ main {
   min-height: calc(100vh - 8rem);
   margin-left: 0;
   background-color: #8b8d8f;
+  overflow-x: hidden;
   -webkit-flex: 1;
       -ms-flex: 1;
           flex: 1; }
