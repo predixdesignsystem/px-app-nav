@@ -277,8 +277,53 @@ Nav bar / drawer for applications
       }
       var href = el.getAttribute("href");
       this.markSelected(href);
-      var subnavEle = Polymer.dom(evt.currentTarget.parentElement).querySelector('ul');
-      this._animateMenuItem(subnavEle);
+      this._newAnimateMenuItem(el);
+    },
+
+    _closeOpenSubnav: function() {
+      // find open subnavs and close them
+      var closeAnimation = null;
+      var uls = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
+      for (var i=0; i<uls.length; i++) {
+        var ulIsHidden = uls[i].classList.contains('visuallyhidden');
+        if(!ulIsHidden){
+          navToHide = uls[i];
+          navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
+          closeAnimation = this._closeAccordionEffectAnimation(navToHide, navToHideSpans);
+        }
+      };
+      return closeAnimation;
+    },
+
+    _newAnimateMenuItem: function(navElement) {
+      var _this = this;
+      var subnavUl = Polymer.dom(navElement.parentElement).querySelector('ul');
+      var ulIsHidden = subnavUl.classList.contains('visuallyhidden');
+      var subnavSpans = Polymer.dom(subnavUl).querySelectorAll("span");
+      var openAnimation = null;
+      var animations = [];
+      // returns null if no subnavs are open
+      if(ulIsHidden) {
+        var openAnimation = this._openAccordionEffectAnimation(subnavUl, subnavSpans);
+      };
+      var closeAnimation = this._closeOpenSubnav();
+      if(closeAnimation) {
+        animations.push(closeAnimation);
+      } else if(openAnimation) {
+        animations.push(openAnimation);
+      }
+      var animation = new SequenceEffect(animations);
+
+      // play the animations
+      var accordionAnimationPlayer = document.timeline.play(animation);
+
+      accordionAnimationPlayer.addEventListener('finish', function(){
+        _this._navResized();
+        if(!_this._navExpanded){
+          _this.toggleNav();
+        }
+      });
+
     },
 
     _animateMenuItem: function(subnavEle){
@@ -454,6 +499,32 @@ Nav bar / drawer for applications
       return new KeyframeEffect(el, [{ width: '56px' }, { width: '219px' }], 200);
     },
 
+    _keyframeRemoveClass: function(el, className) {
+      return new KeyframeEffect(el, function() {
+        el.classList.remove(className);
+      }, { duration: 0, fill: 'forwards' })
+    },
+
+    _keyframeRemoveClassAll: function(els, className) {
+      _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeRemoveClass(el, className);
+      }));
+    },
+
+    _keyframeAddClass: function(el, className) {
+      return new KeyframeEffect(el, function() {
+        el.classList.add(className);
+      }, { duration: 0, fill: 'forwards' })
+    },
+
+    _keyframeAddClassAll: function(els, className) {
+      _this = this;
+      return new GroupEffect(els.map(function(el) {
+        return _this._keyframeAddClass(el, className);
+      }));
+    },
+
     _keyframeToggleClass: function(el, className, applyClass) {
       return new KeyframeEffect(el, function(tf) {
         if (tf == null) {
@@ -486,12 +557,12 @@ Nav bar / drawer for applications
 
     _closeAccordionEffectAnimation: function(mainEl, textEls){
       var _this = this;
-      //animate close the open accordion
+      // animate close the open accordion
       return new SequenceEffect([
         _this._keyframeFadeOutAll(textEls),
-        _this._keyframeToggleClassAll(textEls, 'visuallyhidden'),
+        _this._keyframeAddClassAll(textEls, 'visuallyhidden'),
         _this._keyframeContractAccordian(mainEl),
-        _this._keyframeToggleClassAll(textEls, 'visuallyhidden')
+        _this._keyframeAddClass(mainEl, 'visuallyhidden'),
       ]);
     },
 
