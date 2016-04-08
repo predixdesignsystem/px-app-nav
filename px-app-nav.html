@@ -309,7 +309,8 @@ Nav bar / drawer for applications
       var closeAnimation = this._closeOpenSubnav();
       if(closeAnimation) {
         animations.push(closeAnimation);
-      } else if(openAnimation) {
+      }
+      if(openAnimation) {
         animations.push(openAnimation);
       }
       var animation = new SequenceEffect(animations);
