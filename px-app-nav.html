@@ -327,44 +327,6 @@ Nav bar / drawer for applications
 
     },
 
-    _animateMenuItem: function(subnavEle){
-      var hidden = subnavEle.classList.contains('visuallyhidden'),
-          allSubNavSpans = Polymer.dom(subnavEle).querySelectorAll("span"),
-          self = this,
-          navToHide,
-          navToHideSpans,
-          allSubNavs = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
-          openAnimation;
-
-      for (var i=0; i<allSubNavs.length; i++) {
-        if (allSubNavs[i] === subnavEle && !allSubNavs[i].classList.contains('visuallyhidden')){
-          navToHide = allSubNavs[i];
-          navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
-        }
-      }
-      if (navToHide){
-        openAnimation = new SequenceEffect([
-                              this._closeAccordionEffectAnimation(navToHide, navToHideSpans),
-                              this._openAccordionEffectAnimation(subnavEle, allSubNavSpans)
-                            ]);
-      } else if (!hidden){
-        openAnimation = this._closeAccordionEffectAnimation(subnavEle, allSubNavSpans);
-      } else{
-        openAnimation = this._openAccordionEffectAnimation(subnavEle, allSubNavSpans);
-
-      }
-
-      var accordionAnimationPlayer = document.timeline.play(openAnimation);
-
-      accordionAnimationPlayer.addEventListener('finish', function(){
-        self._navResized();
-        if(!self._navExpanded){
-          self.toggleNav();
-        }
-      });
-
-    },
-
     _navResized: function() {
       this.fire('nav-height-changed');
     },
