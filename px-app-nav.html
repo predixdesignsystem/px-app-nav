@@ -277,16 +277,16 @@ Nav bar / drawer for applications
       }
       var href = el.getAttribute("href");
       this.markSelected(href);
-      this._newAnimateMenuItem(el);
+      console.log('el', el)
     },
 
-    _closeOpenSubnav: function() {
+    _closeOpenSubnav: function(openUl) {
       // find open subnavs and close them
       var closeAnimation = null;
       var uls = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
       for (var i=0; i<uls.length; i++) {
         var ulIsHidden = uls[i].classList.contains('visuallyhidden');
-        if(!ulIsHidden){
+        if(!ulIsHidden && uls[i] !== openUl){
           navToHide = uls[i];
           navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
           closeAnimation = this._closeAccordionEffectAnimation(navToHide, navToHideSpans);
@@ -306,7 +306,7 @@ Nav bar / drawer for applications
       if(ulIsHidden) {
         var openAnimation = this._openAccordionEffectAnimation(subnavUl, subnavSpans);
       };
-      var closeAnimation = this._closeOpenSubnav();
+      var closeAnimation = this._closeOpenSubnav(subnavUl);
       if(closeAnimation) {
         animations.push(closeAnimation);
       }
@@ -365,7 +365,7 @@ Nav bar / drawer for applications
       if (this.navItems){
         for (var i = 0; i < this.navItems.length; i++) {
           var item = this.navItems[i];
-          item.selected = item[this.pathKey] === resolvedPath;
+          item.selected = (item[this.pathKey] === resolvedPath);
           item.subSelected = false;
           item.class = item.selected ? "selected" : "";
           if (item.subitems) {
@@ -380,10 +380,16 @@ Nav bar / drawer for applications
               item.subSelected = subitem.selected ? true : item.subSelected;
             }, this);
           }
-          this.toggleClass("selected", item.selected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
-          this.toggleClass("subselected", item.subSelected, Polymer.dom(topLevelNavElems[i]).querySelector('a'));
+          var topLevelLink = Polymer.dom(topLevelNavElems[i]).querySelector('a');
+          this.toggleClass("selected", item.selected, topLevelLink);
+          this.toggleClass("subselected", item.subSelected, topLevelLink);
+
+          if( (item.subSelected || item.selected ) && typeof topLevelNavElems[i] !== 'undefined') {
+            this._newAnimateMenuItem(topLevelNavElems[i].querySelector('a'));
+          }
         }
       }
+
     },
 
     _setSubNavVisibility: function(){
