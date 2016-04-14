@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -47,39 +46,39 @@
         flex: 1;
         margin: 1em;
       }
-
     </style>
   </head>
 
   <body>
     <div class="demo">
       <px-app-nav
-          nav-items='[
-            {
-              "path": "tab1", "icon": "fa-warning", "eventName": "firstItem", "label":"Alerts",
-              "subitems": [
-                {"label": "Sub Category 1"},
-                {"label": "Sub Category 2", "eventName": "subitemTwo"},
-                {"label": "Sub Category 3", "path" : "subitem3"}
-              ]
-            },
-            {
-              "path": "tab2", "icon": "fa-briefcase", "label": "Cases",
-              "subitems": [
-                {"label": "Sub Category 1"},
-                {"label": "Sub Category 2"},
-                {"label": "Sub Category 3"}
-              ]
-            },
-            {
-              "path": "tab3",
-              "icon": "fa-bar-chart",
-              "label": "Analysis"
-            }, {
-              "path": "tab4", "icon": "fa-dashboard", "label": "Dashboards"
-            }
-          ]'>
-          <px-login></px-login>
+        nav-expanded="false"
+        nav-items='[
+          {
+            "path": "tab1", "icon": "fa-warning", "eventName": "firstItem", "label":"Alerts",
+            "subitems": [
+              {"label": "Sub Category 1"},
+              {"label": "Sub Category 2", "eventName": "subitemTwo"},
+              {"label": "Sub Category 3", "path" : "subitem3"}
+            ]
+          },
+          {
+            "path": "tab2", "icon": "fa-briefcase", "label": "Cases",
+            "subitems": [
+              {"label": "Sub Category 1"},
+              {"label": "Sub Category 2"},
+              {"label": "Sub Category 3"}
+            ]
+          },
+          {
+            "path": "tab3",
+            "icon": "fa-bar-chart",
+            "label": "Analysis"
+          }, {
+            "path": "tab4", "icon": "fa-dashboard", "label": "Dashboards"
+          }
+        ]'>
+        <px-login></px-login>
       </px-app-nav>
 
       <div class="demo-body">
@@ -91,23 +90,18 @@
           and the
           <a href="test/fixture.html">UI test fixture</a>.
         </p>
-
         <script>
           window.addEventListener("firstItem", function(evt) {
             console.log("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired.");
           });
-
           window.addEventListener("subitemTwo", function(evt) {
             console.log("Event 'subitemTwo' attached to a nav item via the 'eventName' prop was fired.");
           });
-
-
           function doMarkSelected() {
             var appNavEl = document.querySelector('px-app-nav');
             appNavEl.markSelected(window.location.href);
           }
         </script>
-
         <button onclick="doMarkSelected()">Mark selected</button>
       </div>
     </div>

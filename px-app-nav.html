@@ -32,7 +32,11 @@ Nav bar / drawer for applications
 
   <template>
     <nav role="navigation">
-      <button class="btn btn--bare btn--svg" on-click="toggleNav"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16"><path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/></svg></button>
+      <button class="btn btn--bare btn--svg" on-click="toggleNav">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16">
+          <path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/>
+        </svg>
+      </button>
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
@@ -44,7 +48,6 @@ Nav bar / drawer for applications
                 </li>
               </template>
             </ul>
-
           </li>
         </template>
       </ul>
@@ -98,12 +101,11 @@ Nav bar / drawer for applications
         value: 'path',
         type: String
       },
-
       /**
        * Whether the navigation is expanded. Reflected to an attribute (reflectToAttribute: true) so the application can
        * bind to it and maintain state as needed.
        *
-       * @type {Boolean}
+       * @type {String}
        * @default [true]
        */
       navExpanded: {
@@ -119,9 +121,10 @@ Nav bar / drawer for applications
        * @type {Boolean}
        * @default [true]
        */
-       _navExpanded: {
+      _navExpanded: {
         value: true,
-        type: Boolean
+        type: Boolean,
+        computed: "_computeNavExpanded(navExpanded)"
       },
 
       /**
@@ -189,25 +192,25 @@ Nav bar / drawer for applications
        }, this);
     },
 
-    _checkNavExpanded: function() {
+    _computeNavExpanded: function() {
       // ensure that internal representation matches external property
       if(this.navExpanded === "false") {
-        this._navExpanded = false;
+        return false;
       } else if(this.navExpanded === "true") {
-        this._navExpanded = true;
+        return true;
       } else {
-        this._navExpanded = true;
+        return true;
       }
     },
 
     _checkNavExpandedState: function() {
-      if(!this._navExpanded) {
+      if(this._navExpanded) {
         this.debounce('checkNav', function() {
-          this._contractNav();
+          this._expandNav();
         }, 100);
       } else {
         this.debounce('checkNav', function() {
-          this._expandNav();
+          this._contractNav();
         }, 100);
       };
     },
@@ -221,7 +224,7 @@ Nav bar / drawer for applications
         }
       } else {
         // width is greater than 63.9rem
-        if (!self._navExpanded) {
+        if (!this._navExpanded) {
           this._navExpanded = true;
           this._checkNavExpandedState();
         }
@@ -233,7 +236,8 @@ Nav bar / drawer for applications
      */
     ready: function() {
 
-      this._checkNavExpanded();
+      this._checkNavExpandedState();
+      // this._checkNavExpanded();
 
       //check to see if navitems have been initialised.
       if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
@@ -244,20 +248,20 @@ Nav bar / drawer for applications
       };
 
       this._media = window.matchMedia('screen and (max-width: 63.9rem)');
-      this._checkMediaMatches(this._media.matches);
+      // this._checkMediaMatches(this._media.matches);
 
       this.markSelected(window.location.href);
 
-      var self = this;
+      var _this = this;
 
       // add listener on screen width change
       this._media.addListener(function(data) {
-        self._checkMediaMatches(data.matches);
+        _this._checkMediaMatches(data.matches);
       });
 
       // add listener for history change event (back button)
       window.addEventListener('popstate', function(event) {
-        self.markSelected(window.location.href);
+        _this.markSelected(window.location.href);
       });
 
     },
@@ -572,7 +576,6 @@ Nav bar / drawer for applications
     },
 
     _expandNav: function() {
-      this._navExpanded = true;
       this.navExpanded = 'true';
       this.fire('nav-expanding');
       var navAnimation = this._expandNavAnimation(this, this._getTextEls());
@@ -590,7 +593,6 @@ Nav bar / drawer for applications
 
     _contractNav: function() {
       //raise event we're about to close.
-      this._navExpanded = false;
       this.navExpanded = 'false';
       this.fire('nav-collapsing');
       this.navContracting = true;
@@ -607,6 +609,14 @@ Nav bar / drawer for applications
       }.bind(this));
     },
 
+    _toggleNavExpanded: function() {
+      if(this.navExpanded === 'true') {
+        this.navExpanded = 'false';
+      } else {
+        this.navExpanded = 'true';
+      }
+    },
+
     /**
      * Called when the nav expander control is clicked.
      *
@@ -614,7 +624,7 @@ Nav bar / drawer for applications
      * @private
      */
     toggleNav: function(evt){
-      this._navExpanded = !this._navExpanded;
+      this._toggleNavExpanded();
       this._checkNavExpandedState();
     }
 
