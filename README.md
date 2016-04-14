@@ -36,87 +36,10 @@ Finally, use the component in your application:
 <br />
 <hr />
 
-## Attributes
+## documentation
 
-#### nav-expanded
+Read the full API and view the demo [here](https://predixdev.github.io/px-app-nav).
 
-*Type:* **Boolean** - (*Optional*) - *Default:* "true"
-
-Whether the navigation is expanded. Reflected to an attribute (reflectToAttribute: true) so the application can bind to it and maintain state as needed.
-
-```
-<px-app-nav
-	...
-	nav-expanded="true">
-</px-app-nav>
-```
-<br />
-#### nav-items
-
-*Type:* **Array** - (*Optional*) - *Default:* [{}] notify
-
-Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon' 'l10nId', 'eventName', and 'subitems', which is another Array.
-```
-<px-app-nav
-	...
-	nav-items='[{"path": "", "icon": "fa-warning", 
-	"label":"Alerts","subitems": [{"label": "Sub 
-	Category 1"}, {"label": "Sub Category 2"}]},
-	{"path":"tab2", "icon": "fa-briefcase", "label":
-	 "Cases"}]'>
-</px-app-nav>
-```
-
-<br />
-#### path-key
-
-*Type:* **String** - (*Optional*) - *Default:* "path"
-
-Allows a level of indirection in the Array of navItems passed in to resolve paths.
-
-```
-<px-app-nav
-	...
-	path-key="path">
-</px-app-nav>
-```
-
-<br />
-
-#### path-prefix
-
-*Type:* **String** - (*Optional*) - *Default:* "#"
-
-When navigating, this prefix is appended to the relative URL. Defaults to '#', indicating paths are routed via the hash part of the URL. To make them relative to current directory, use '/'.
-
-```
-<px-app-nav
-	...
-	path-prefix="/">
-</px-app-nav>
-```
-
-<br />
-
-#### rtl
-
-*Type:* **Boolean** - (*Optional*) - *Default:* false
-
-If true, nav drawer appears on the right to accommodate RTL languages. Set automatically if Mozilla's L20N framework is loaded on the document.
-
-```
-<px-app-nav
-	...
-	rtl="false">
-</px-app-nav>
-```
-<br />
-
-##Events
-####nav-items-changed
-
-Fired when any of the navigation items are modified.
-<br />
 ## Using Events
 
 Events follow the [Polymer data-binding standards](https://www.polymer-project.org/1.0/docs/devguide/data-binding.html).
@@ -126,13 +49,6 @@ You can can attach listeners by using one of the methods below:
 1. Polymer Event listener
 2. on- annotated event listener
 3. addEventListener vanila Javascript method
-<br />
-<hr />
-
-## Methods
-#### markSelected(path)
-
-Marks the nav item with the given path as selected, and all others as unselected.
 <br />
 <hr />
 
