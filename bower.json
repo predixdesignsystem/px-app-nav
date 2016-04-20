@@ -15,25 +15,24 @@
   ],
   "dependencies": {
     "polymer": "~v1.2.3",
-    "px-iconography-design": "https://github.com/PredixDev/px-iconography-design.git#~0.2.0",
-    "px-typography-design": "https://github.com/PredixDev/px-typography-design.git#~0.3.1"
+    "px-iconography-design": "https://github.com/PredixDev/px-iconography-design.git#~0.2.9",
+    "px-typography-design": "https://github.com/PredixDev/px-typography-design.git#~0.3.4"
   },
   "devDependencies": {
-    "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.0",
-    "px-code-design": "https://github.com/PredixDev/px-code-design.git#~0.2.0",
-    "px-colors-design": "https://github.com/PredixDev/px-colors-design.git#~0.2.0",
-    "px-headings-design": "https://github.com/PredixDev/px-headings-design.git#~0.2.0",
-    "px-layout-design": "https://github.com/PredixDev/px-layout-design.git#~0.3.0",
-    "px-meta-lists-design": "https://github.com/PredixDev/px-meta-lists-design.git#~0.3.0",
+    "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.17",
+    "px-code-design": "https://github.com/PredixDev/px-code-design.git#~0.2.8",
+    "px-colors-design": "https://github.com/PredixDev/px-colors-design.git#~0.2.9",
+    "px-headings-design": "https://github.com/PredixDev/px-headings-design.git#~0.2.10",
+    "px-layout-design": "https://github.com/PredixDev/px-layout-design.git#~0.3.12",
+    "px-meta-lists-design": "https://github.com/PredixDev/px-meta-lists-design.git#~0.3.4",
     "inuit-clearfix": "~0.2.2",
-    "px-box-sizing-design": "https://github.com/PredixDev/px-box-sizing-design.git#~0.2.0",
-    "px-colors-design": "https://github.com/PredixDev/px-colors-design.git#~0.2.0",
-    "px-flexbox-design": "https://github.com/PredixDev/px-flexbox-design.git#~0.3.0",
-    "px-helpers-design": "https://github.com/PredixDev/px-helpers-design.git#~0.3.0",
-    "px-normalize-design": "https://github.com/PredixDev/px-normalize-design.git#~0.3.0",
-    "px-spacing-responsive-design": "https://github.com/PredixDev/px-spacing-responsive-design.git#~0.3.0",
-    "px-typography-design": "https://github.com/PredixDev/px-typography-design.git#~0.3.0",
-    "px-viewport-design": "https://github.com/PredixDev/px-viewport-design.git#~0.4.1",
-    "px-widths-responsive-design": "https://github.com/PredixDev/px-widths-responsive-design.git#~0.3.0"
+    "px-box-sizing-design": "https://github.com/PredixDev/px-box-sizing-design.git#~0.2.4",
+    "px-flexbox-design": "https://github.com/PredixDev/px-flexbox-design.git#~0.3.5",
+    "px-helpers-design": "https://github.com/PredixDev/px-helpers-design.git#~0.3.2",
+    "px-normalize-design": "https://github.com/PredixDev/px-normalize-design.git#~0.3.6",
+    "px-spacing-responsive-design": "https://github.com/PredixDev/px-spacing-responsive-design.git#~0.3.7",
+    "px-typography-design": "https://github.com/PredixDev/px-typography-design.git#~0.3.4",
+    "px-viewport-design": "https://github.com/PredixDev/px-viewport-design.git#~0.4.3",
+    "px-widths-responsive-design": "https://github.com/PredixDev/px-widths-responsive-design.git#~0.3.7"
   }
 }
