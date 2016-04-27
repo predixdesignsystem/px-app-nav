@@ -1,3 +1,7 @@
+v0.6.8
+==================
+* updated README.
+
 v0.6.4
 ==================
 * Updated License
