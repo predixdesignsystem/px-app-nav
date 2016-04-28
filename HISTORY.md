@@ -1,3 +1,7 @@
+v0.7.0
+=================
+* migrate to polymer 1.4.0
+
 v0.6.8
 ==================
 * updated README.
