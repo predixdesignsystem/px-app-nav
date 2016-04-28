@@ -38,6 +38,7 @@ a {
   }
   &:hover {
     background-color: var(--px-app-nav-link-hover-color);
+    color: var(--px-app-nav-link-text-color);
   }
   &:active {
     background-color: var(--px-app-nav-link-selected-active-color);

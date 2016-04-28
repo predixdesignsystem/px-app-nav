@@ -226,6 +226,9 @@ html {
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -617,6 +620,13 @@ a {
   .btn:active {
     outline: none; }
 
+/** Workaround for FF since it does not support calc().
+  * Other buttons appear ok with the height declaration, but non-button elements do not.
+**/
+@-moz-document url-prefix() {
+  .btn:not(button) {
+    line-height: 1.8em; } }
+
 button.btn {
   -webkit-appearance: button; }
 
@@ -772,19 +782,23 @@ button.btn {
   margin-right: 0.3333333333rem !important;
   margin-left: 0 !important; }
 
-[dir=rtl] .u-mr\00002b {
+[dir=rtl] .u-mr\00002b
+{
   margin-right: 0 !important;
   margin-left: 1.3333333333rem !important; }
 
-[dir=rtl] .u-ml\00002b {
+[dir=rtl] .u-ml\00002b
+{
   margin-right: 1.3333333333rem !important;
   margin-left: 0 !important; }
 
-[dir=rtl] .u-mr\00002b\00002b {
+[dir=rtl] .u-mr\00002b\00002b
+{
   margin-right: 0 !important;
   margin-left: 2rem !important; }
 
-[dir=rtl] .u-ml\00002b\00002b {
+[dir=rtl] .u-ml\00002b\00002b
+{
   margin-right: 2rem !important;
   margin-left: 0 !important; }
 
@@ -799,7 +813,8 @@ a {
   a.subselected {
     background-color: var(--px-app-nav-link-hover-color); }
   a:hover {
-    background-color: var(--px-app-nav-link-hover-color); }
+    background-color: var(--px-app-nav-link-hover-color);
+    color: var(--px-app-nav-link-text-color); }
   a:active {
     background-color: var(--px-app-nav-link-selected-active-color); }
   a:visited {
