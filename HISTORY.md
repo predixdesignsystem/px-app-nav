@@ -1,4 +1,8 @@
-v1.4.0
+v1.5.1
+==================
+* Up px-login version
+
+v1.5.0
 ==================
 * migrate to polymer 1.4.0
 
