@@ -1,3 +1,7 @@
+v1.5.2
+==================
+* added auto github pages functionality
+
 v1.5.1
 ==================
 * Up px-login version
