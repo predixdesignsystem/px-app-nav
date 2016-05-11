@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "main": [
     "px-app-nav.html"
   ],
@@ -11,7 +11,8 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf"
   ],
   "dependencies": {
     "polymer": "~v1.4.0",
