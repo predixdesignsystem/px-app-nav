@@ -1,6 +1,6 @@
 {
   "name": "px-theme",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": [
     "px-theme.html"
   ],
@@ -11,7 +11,8 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf"
   ],
   "dependencies": {
     "polymer": "~v1.4.0",
