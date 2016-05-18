@@ -472,9 +472,12 @@ Nav bar / drawer for applications
     },
 
     _keyframeRemoveClass: function(el, className) {
-      return new KeyframeEffect(el, function() {
-        el.classList.remove(className);
-      }, { duration: 0, fill: 'forwards' })
+      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
+      myEffect.onsample = function(timeFraction, effect, animation) {
+         el.classList.remove(className);
+      };
+      
+      return myEffect;
     },
 
     _keyframeRemoveClassAll: function(els, className) {
@@ -485,9 +488,12 @@ Nav bar / drawer for applications
     },
 
     _keyframeAddClass: function(el, className) {
-      return new KeyframeEffect(el, function() {
-        el.classList.add(className);
-      }, { duration: 0, fill: 'forwards' })
+      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
+      myEffect.onsample = function(timeFraction, effect, animation) {
+         el.classList.add(className);
+      };
+      
+      return myEffect;
     },
 
     _keyframeAddClassAll: function(els, className) {
@@ -498,8 +504,9 @@ Nav bar / drawer for applications
     },
 
     _keyframeToggleClass: function(el, className, applyClass) {
-      return new KeyframeEffect(el, function(tf) {
-        if (tf == null) {
+      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
+      myEffect.onsample = function(timeFraction, effect, animation) {
+        if (timeFraction == null) {
           return;
         } else {
           if(!applyClass) {
@@ -507,7 +514,9 @@ Nav bar / drawer for applications
           };
           el.classList.toggle(className, applyClass);
         };
-      }, { duration: 0, fill: 'forwards' })
+      };
+      
+      return myEffect;
     },
 
     _keyframeToggleClassAll: function(els, className) {
