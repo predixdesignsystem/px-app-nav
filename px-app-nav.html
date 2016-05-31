@@ -40,7 +40,7 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}" title="{{_navTitle(_navExpanded, navitem.label)}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
@@ -229,6 +229,13 @@ Nav bar / drawer for applications
           this._checkNavExpandedState();
         }
       };
+    },
+
+    _navTitle: function(isNavExpanded, title){
+        if (isNavExpanded){
+            return '';
+        }
+        return title;
     },
 
     /**
