@@ -205,7 +205,7 @@ Nav bar / drawer for applications
         return true;
       } else {
         return true;
-      };
+      }
     },
 
     _checkNavExpandedState: function() {
@@ -228,12 +228,12 @@ Nav bar / drawer for applications
           this._checkNavExpandedState();
         }
       } else {
-          // width is greater than 63.9rem
-          if (!this._navExpanded) {
-              this._navExpanded = true;
-              this._checkNavExpandedState();
-          }
-      }
+        // width is greater than 63.9rem
+        if (!this._navExpanded) {
+          this._navExpanded = true;
+          this._checkNavExpandedState();
+        }
+      };
     },
 
     /**
