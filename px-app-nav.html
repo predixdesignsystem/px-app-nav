@@ -40,7 +40,7 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}" title="{{_navTitle(_navExpanded, navitem.label)}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler" title="{{_computeNavItemTitle(_navExpanded, navitem.label)}}"><i class$="{{navitem.icon}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
@@ -173,23 +173,25 @@ Nav bar / drawer for applications
     },
 
     _potentiallyAdjustAccordion: function() {
-       this.navItems.forEach(function(item){
-         var navSubitems = item.subitems;
-         if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+      this.navItems.forEach(function(item){
+        var navSubitems = item.subitems;
+        if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+          var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected');
+          if (parentA) {
+            var parent = parentA.parentElement.querySelector('ul'),
+              heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
+              listResizeAnimation = new SequenceEffect([
+                new KeyframeEffect(parent, [
+                   {height: parent.clientHeight},
+                   {height: heightAfter}
+                  ],
+                  {duration: 200,fill: 'forwards'})
+                ]);
 
-            var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected'),
-                parent = parentA.parentElement.querySelector('ul'),
-                heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
-                listResizeAnimation = new SequenceEffect([
-                 new KeyframeEffect(parent, [{height: parent.clientHeight}, {height: heightAfter}], {
-                     duration: 200,
-                     fill: 'forwards'
-                 })
-             ]);
-
-             document.timeline.play(listResizeAnimation);
-         }
-       }, this);
+            document.timeline.play(listResizeAnimation);
+          }
+        }
+      }, this);
     },
 
     _computeNavExpanded: function() {
@@ -200,7 +202,7 @@ Nav bar / drawer for applications
         return true;
       } else {
         return true;
-      }
+      };
     },
 
     _checkNavExpandedState: function() {
@@ -228,14 +230,13 @@ Nav bar / drawer for applications
           this._navExpanded = true;
           this._checkNavExpandedState();
         }
-      };
     },
 
-    _navTitle: function(isNavExpanded, title){
-        if (isNavExpanded){
-            return '';
-        }
-        return title;
+    _computeNavItemTitle: function(isNavExpanded, title){
+      if (isNavExpanded){
+        return '';
+      }
+      return title;
     },
 
     /**
@@ -483,7 +484,7 @@ Nav bar / drawer for applications
       myEffect.onsample = function(timeFraction, effect, animation) {
          el.classList.remove(className);
       };
-      
+
       return myEffect;
     },
 
@@ -499,7 +500,7 @@ Nav bar / drawer for applications
       myEffect.onsample = function(timeFraction, effect, animation) {
          el.classList.add(className);
       };
-      
+
       return myEffect;
     },
 
@@ -522,7 +523,7 @@ Nav bar / drawer for applications
           el.classList.toggle(className, applyClass);
         };
       };
-      
+
       return myEffect;
     },
 
