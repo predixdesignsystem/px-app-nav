@@ -17,7 +17,8 @@
   "dependencies": {
     "polymer": "~v1.4.0",
     "px-theme": "https://github.com/PredixDev/px-theme.git#~0.7.0",
-    "web-animations-js": "^2.2.0"
+    "web-animations-js": "^2.2.0",
+    "px-tooltip": "https://github.com/PredixDev/px-tooltip.git#~v0.6.8"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.1.0",
