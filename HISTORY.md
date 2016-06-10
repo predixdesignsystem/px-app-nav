@@ -1,3 +1,7 @@
+v0.8.0
+=================
+* migrate to polymer 1.5.0
+
 v0.7.1
 =================
 * added oss_notice to bower ignore
