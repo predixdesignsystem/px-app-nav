@@ -1,4 +1,5 @@
 # Px-app-nav
+[![Build Status](https://travis-ci.org/PredixDev/px-app-nav.svg?branch=master)](https://travis-ci.org/PredixDev/px-app-nav)
 
 Px-app-nav is a navigation bar or drawer for applications.
 
