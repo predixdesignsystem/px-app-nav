@@ -5,6 +5,7 @@
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-tooltip/px-tooltip.html"/>
 <script src="../web-animations-js/web-animations-next.min.js"></script>
 
 <!--
@@ -40,7 +41,11 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler"><i class$="{{navitem.icon}}"></i><span class=u-ml-->{{navitem.label}}</span></a>
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler">
+              <i class$="{{navitem.icon}}" id$="nav-item-{{index}}"></i>
+              <span class=u-ml-->{{navitem.label}}</span>
+              <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded)}}"></px-tooltip>
+            </a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
                 <li>
@@ -173,23 +178,25 @@ Nav bar / drawer for applications
     },
 
     _potentiallyAdjustAccordion: function() {
-       this.navItems.forEach(function(item){
-         var navSubitems = item.subitems;
-         if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+      this.navItems.forEach(function(item){
+        var navSubitems = item.subitems;
+        if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
+          var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected');
+          if (parentA) {
+            var parent = parentA.parentElement.querySelector('ul'),
+              heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
+              listResizeAnimation = new SequenceEffect([
+                new KeyframeEffect(parent, [
+                   {height: parent.clientHeight},
+                   {height: heightAfter}
+                  ],
+                  {duration: 200,fill: 'forwards'})
+                ]);
 
-            var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected'),
-                parent = parentA.parentElement.querySelector('ul'),
-                heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
-                listResizeAnimation = new SequenceEffect([
-                 new KeyframeEffect(parent, [{height: parent.clientHeight}, {height: heightAfter}], {
-                     duration: 200,
-                     fill: 'forwards'
-                 })
-             ]);
-
-             document.timeline.play(listResizeAnimation);
-         }
-       }, this);
+            document.timeline.play(listResizeAnimation);
+          }
+        }
+      }, this);
     },
 
     _computeNavExpanded: function() {
@@ -476,7 +483,7 @@ Nav bar / drawer for applications
       myEffect.onsample = function(timeFraction, effect, animation) {
          el.classList.remove(className);
       };
-      
+
       return myEffect;
     },
 
@@ -492,7 +499,7 @@ Nav bar / drawer for applications
       myEffect.onsample = function(timeFraction, effect, animation) {
          el.classList.add(className);
       };
-      
+
       return myEffect;
     },
 
@@ -515,7 +522,7 @@ Nav bar / drawer for applications
           el.classList.toggle(className, applyClass);
         };
       };
-      
+
       return myEffect;
     },
 
