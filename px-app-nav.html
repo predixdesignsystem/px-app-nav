@@ -64,6 +64,7 @@ Nav bar / drawer for applications
 <script>
 
   Polymer({
+
     is: 'px-app-nav',
 
     properties: {
@@ -226,13 +227,13 @@ Nav bar / drawer for applications
       if (matches) {
         // width is less than 63.9rem in width
         if (this._navExpanded) {
-          this._navExpanded = false;
+          this.set('navExpanded', 'false');
           this._checkNavExpandedState();
         }
       } else {
         // width is greater than 63.9rem
         if (!this._navExpanded) {
-          this._navExpanded = true;
+          this.set('navExpanded', 'true');
           this._checkNavExpandedState();
         }
       };

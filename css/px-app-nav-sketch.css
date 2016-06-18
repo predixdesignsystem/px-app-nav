@@ -769,22 +769,18 @@ button.btn {
   margin-right: 0.3333333333rem !important;
   margin-left: 0 !important; }
 
-[dir=rtl] .u-mr\00002b
-{
+[dir=rtl] .u-mr\00002b {
   margin-right: 0 !important;
   margin-left: 1.3333333333rem !important; }
 
-[dir=rtl] .u-ml\00002b
-{
+[dir=rtl] .u-ml\00002b {
   margin-right: 1.3333333333rem !important;
   margin-left: 0 !important; }
 
-[dir=rtl] .u-mr\00002b\00002b
-{
+[dir=rtl] .u-mr\00002b\00002b {
   margin-right: 0 !important;
   margin-left: 2rem !important; }
 
-[dir=rtl] .u-ml\00002b\00002b
-{
+[dir=rtl] .u-ml\00002b\00002b {
   margin-right: 2rem !important;
   margin-left: 0 !important; }
