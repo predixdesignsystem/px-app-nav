@@ -1,3 +1,7 @@
+v1.6.1
+==================
+* Merge of pull request number 16 to enable "Display tooltip when nav is collapsed"
+
 v1.6.0
 ==================
 * Upgrade to Polymer 1.5.0
