@@ -44,7 +44,7 @@ Nav bar / drawer for applications
             <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler">
               <i class$="{{navitem.icon}}" id$="nav-item-{{index}}"></i>
               <span class=u-ml-->{{navitem.label}}</span>
-              <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded)}}"></px-tooltip>
+              <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded}}"></px-tooltip>
             </a>
             <ul class$="{{navitem.subitemlistclass}}">
               <template is="dom-repeat" items="{{navitem.subitems}}">
