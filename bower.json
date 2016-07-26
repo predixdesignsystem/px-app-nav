@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "main": [
     "px-app-nav.html"
   ],
@@ -12,19 +12,21 @@
     "bower_components",
     "node_modules",
     "test",
-    "OSS_Notice.pdf"
+    "OSS_Notice.pdf",
+    "scripts",
+    ".github"
   ],
   "dependencies": {
     "polymer": "^v1.5.0",
-    "px-theme": "https://github.com/PredixDev/px-theme.git#~0.8.0",
+    "px-theme": "~0.8.0",
     "web-animations-js": "^2.2.0",
     "px-tooltip": "^0.7.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.1.0",
-    "px-buttons-design": "https://github.com/predixDev/px-buttons-design.git#~0.4.0",
-    "px-list-bare-design": "https://github.com/predixDev/px-list-bare-design.git#~0.2.0",
-    "px-starter-kit-design": "https://github.com/predixDev/px-starter-kit-design.git#~0.4.0",
-    "px-login": "https://github.com/predixDev/px-login.git#~0.4.0"
+    "px-buttons-design": "~0.4.0",
+    "px-list-bare-design": "~0.2.0",
+    "px-starter-kit-design": "~0.4.0",
+    "px-login": "~0.4.0"
   }
 }

@@ -1,3 +1,7 @@
+v1.7.2
+==================
+* added vulcanize to demo gh-pages
+
 v1.6.1
 ==================
 * Merge of pull request number 16 to enable "Display tooltip when nav is collapsed"
