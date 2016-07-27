@@ -26,6 +26,11 @@ module.exports = function (grunt) {
                     'css/noprefix/px-app-nav-sketch.css': 'sass/px-app-nav-sketch.scss',
                     'css/noprefix/px-app-nav.css': 'sass/px-app-nav-predix.scss'
                 }
+            },
+            demo: {
+              files: {
+                'css/noprefix/px-app-nav-demo.css': 'sass/px-app-nav-demo.scss'
+              }
             }
         },
 
