@@ -14,7 +14,8 @@
     "test",
     "OSS_Notice.pdf",
     "scripts",
-    ".github"
+    ".github",
+    "px-app-nav.png"
   ],
   "dependencies": {
     "polymer": "^v1.5.0",
