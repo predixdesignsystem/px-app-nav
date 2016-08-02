@@ -1,10 +1,9 @@
 {
   "name": "px-theme",
   "author": "General Electric",
-  "description": "A Px component",
+  "description": "A component to theme the Predix UI Sesign System",
   "version": "0.8.0",
   "private": true,
-  "fwk": "polymer08",
   "extName": null,
   "repository": {
     "type": "git",
