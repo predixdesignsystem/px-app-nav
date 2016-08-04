@@ -8,6 +8,7 @@ const importOnce = require('node-sass-import-once');
 const stylemod = require('gulp-style-modules');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
+const bump = require('gulp-bump');
 
 const sassOptions = {
   importer: importOnce,
