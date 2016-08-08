@@ -1,6 +1,6 @@
 v1.7.3
 ==================
-*
+* updated mega demo styles and bower px-demo-snippet to ^
 
 v1.7.2
 ==================
