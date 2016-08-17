@@ -69,8 +69,8 @@ $inuit-enable-list-inline--delimited : true;
 }
 .demoContainer {
   flex: 1 1 auto;
+  overflow: auto;
 }
-
 .demoSnippet {
   flex-basis: calculateRem(150px);
 }
