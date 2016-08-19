@@ -7,7 +7,6 @@
 
 $fa-font-path       : "../font-awesome/fonts";
 $fa-version         : "4.4.0" !default;
-$inuit-webfont-path: '../px-typography-design/type' !default;
 $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
 :root{
@@ -43,19 +42,6 @@ $px-page-card-paragraph-text-color: $gray5;
 $px-page-banner-text-color: $gray4;
 $px-page-banner-meatball-color : $gray4;
 $px-page-main-content-area-background-color: $graybg;
-
-@include font-face('GE Inspira', '#{$inuit-webfont-path}/GEInspMd');
-@include font-face('GE Inspira', '#{$inuit-webfont-path}/GEInspMdIt', normal, italic);
-@include font-face('GE Inspira', '#{$inuit-webfont-path}/GEInspBd', bold, normal);
-@include font-face('GE Inspira', '#{$inuit-webfont-path}/GEInspBI', bold, italic);
-@include font-face('GE Inspira Sans', '#{$inuit-webfont-path}/GEInspiraSans-Regular-v01');
-@include font-face('GE Inspira Sans', '#{$inuit-webfont-path}/GEInspiraSans-Italic-v01', normal, italic);
-@include font-face('GE Inspira Sans', '#{$inuit-webfont-path}/GEInspiraSans-Bold-v01', bold, normal);
-@include font-face('GE Inspira Sans', '#{$inuit-webfont-path}/GEInspiraSans-BoldItalic-v01', bold, italic);
-@include font-face('GE Inspira Serif', '#{$inuit-webfont-path}/GEInspiraSerif-Regular-v01');
-@include font-face('GE Inspira Serif', '#{$inuit-webfont-path}/GEInspiraSerif-Italic-v01', normal, italic);
-@include font-face('GE Inspira Serif', '#{$inuit-webfont-path}/GEInspiraSerif-Bold-v01', bold, normal);
-@include font-face('GE Inspira Serif', '#{$inuit-webfont-path}/GEInspiraSerif-BoldItalic-v01', bold, italic);
 
 html {
   font-family: $predix-font-family;

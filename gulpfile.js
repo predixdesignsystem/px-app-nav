@@ -9,6 +9,7 @@ const stylemod = require('gulp-style-modules');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
 const bump = require('gulp-bump');
+const argv = require('yargs').argv;
 
 const sassOptions = {
   importer: importOnce,
@@ -31,7 +32,7 @@ gulp.task('sass', function() {
         path.basename = new RegExp('.+?(?=\-predix)').exec(path.basename)[0];
       })
     ))
-    .pipe($.cssmin())
+    .pipe(gulpif(!argv.debug, $.cssmin()))
     .pipe(stylemod({
       moduleId: function(file) {
         return path.basename(file.path, path.extname(file.path)) + '-styles';
