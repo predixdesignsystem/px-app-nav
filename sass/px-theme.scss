@@ -9,9 +9,10 @@ $fa-font-path       : "../font-awesome/fonts";
 $fa-version         : "4.4.0" !default;
 $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
+@import "px-typography-design/_base.typography.scss";
+
 :root{
   @import "px-iconography-design/_base.iconography.scss";
-  @import "px-typography-design/_base.typography.scss";
 
   --px-app-nav-background-color:            $gray10;
   --px-app-nav-link-text-color:             $white;
