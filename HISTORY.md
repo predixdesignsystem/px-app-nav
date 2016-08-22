@@ -1,3 +1,7 @@
+v1.7.5
+==================
+* changed icons to work under shadow dom.
+
 v1.7.4
 ==================
 * added overflow to demoContainer and removed flex__wrap from mega-demo

@@ -6,6 +6,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-tooltip/px-tooltip.html"/>
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
 <script src="../web-animations-js/web-animations-next.min.js"></script>
 
 <!--
@@ -14,7 +15,7 @@ Nav bar / drawer for applications
 ##### Usage
 
     <px-app-nav
-        nav-items='[{"path": "", "icon": "fa-warning", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
+        nav-items='[{"path": "", "icon": "fa-exclamation-triangle", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
             <any-arbitrary-content></any-arbitrary-content>
             <div class="auth">
                 <any-auth-control></any-auth-control>
@@ -24,7 +25,7 @@ Nav bar / drawer for applications
 @element px-app-nav
 @blurb Nav bar / drawer for applications.
 @homepage index.html
-@demo demo.html
+@demo index.html
 -->
 
 <dom-module id="px-app-nav">
@@ -42,7 +43,7 @@ Nav bar / drawer for applications
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
             <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler">
-              <i class$="{{navitem.icon}}" id$="nav-item-{{index}}"></i>
+              <iron-icon icon$="fa:{{navitem.icon}}" id$="nav-item-{{index}}"></iron-icon>
               <span class=u-ml-->{{navitem.label}}</span>
               <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded}}"></px-tooltip>
             </a>
@@ -171,7 +172,6 @@ Nav bar / drawer for applications
       }
       else{
         this.navItems.forEach(this._computeHref, this);
-        this.navItems.forEach(this._computeIcon);
         this.markSelected(window.location.href);
         this._setSubNavVisibility();
         this._potentiallyAdjustAccordion();
@@ -220,7 +220,7 @@ Nav bar / drawer for applications
         this.debounce('checkNav', function() {
           this._contractNav();
         }, 100);
-      };
+      }
     },
 
     _checkMediaMatches: function(matches) {
@@ -236,7 +236,7 @@ Nav bar / drawer for applications
           this.set('navExpanded', 'true');
           this._checkNavExpandedState();
         }
-      };
+      }
     },
 
     /**
@@ -250,10 +250,9 @@ Nav bar / drawer for applications
       //check to see if navitems have been initialised.
       if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
         this.navItems.forEach(this._computeHref, this);
-        this.navItems.forEach(this._computeIcon);
         this._setSubNavVisibility();
         this._potentiallyAdjustAccordion();
-      };
+      }
 
       this._media = window.matchMedia('screen and (max-width: 63.9rem)');
       // this._checkMediaMatches(this._media.matches);
@@ -293,8 +292,10 @@ Nav bar / drawer for applications
 
     _closeOpenSubnav: function(openUl) {
       // find open subnavs and close them
-      var closeAnimation = null;
-      var uls = Polymer.dom(this.$.navitemlist).querySelectorAll("ul");
+      var closeAnimation = null,
+          uls = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
+          navToHide,
+          navToHideSpans;
       for (var i=0; i<uls.length; i++) {
         var ulIsHidden = uls[i].classList.contains('visuallyhidden');
         if(!ulIsHidden && uls[i] !== openUl){
@@ -302,7 +303,7 @@ Nav bar / drawer for applications
           navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
           closeAnimation = this._closeAccordionEffectAnimation(navToHide, navToHideSpans);
         }
-      };
+      }
       return closeAnimation;
     },
 
@@ -315,8 +316,8 @@ Nav bar / drawer for applications
       var animations = [];
       // returns null if no subnavs are open
       if(ulIsHidden) {
-        var openAnimation = this._openAccordionEffectAnimation(subnavUl, subnavSpans);
-      };
+        openAnimation = this._openAccordionEffectAnimation(subnavUl, subnavSpans);
+      }
       var closeAnimation = this._closeOpenSubnav(subnavUl);
       if(closeAnimation) {
         animations.push(closeAnimation);
@@ -335,7 +336,6 @@ Nav bar / drawer for applications
           _this.toggleNav();
         }
       });
-
     },
 
     _navResized: function() {
@@ -445,10 +445,6 @@ Nav bar / drawer for applications
       }
     },
 
-    _computeIcon: function(item) {
-      item.icon = item.icon + " fa";
-    },
-
     _keyframeFadeIn: function(el) {
       return new KeyframeEffect(el, [ {opacity: 0}, {opacity: 1} ], 100);
     },
@@ -489,7 +485,7 @@ Nav bar / drawer for applications
     },
 
     _keyframeRemoveClassAll: function(els, className) {
-      _this = this;
+      var _this = this;
       return new GroupEffect(els.map(function(el) {
         return _this._keyframeRemoveClass(el, className);
       }));
@@ -505,7 +501,7 @@ Nav bar / drawer for applications
     },
 
     _keyframeAddClassAll: function(els, className) {
-      _this = this;
+      var _this = this;
       return new GroupEffect(els.map(function(el) {
         return _this._keyframeAddClass(el, className);
       }));
@@ -519,16 +515,16 @@ Nav bar / drawer for applications
         } else {
           if(!applyClass) {
             applyClass = null;
-          };
+          }
           el.classList.toggle(className, applyClass);
-        };
+        }
       };
 
       return myEffect;
     },
 
     _keyframeToggleClassAll: function(els, className) {
-      _this = this;
+      var _this = this;
       return new GroupEffect(els.map(function(el) {
         return _this._keyframeToggleClass(el, className);
       }));
