@@ -69,7 +69,7 @@
                 <div class="flex flex--col">
                   <div class="demo u-p+">
                     <div style="height:350px;">
-                      <px-app-nav style="position:inherit" nav-items=[[item.navItem]]>
+                      <px-app-nav style="position:inherit" nav-items=[[item.navItems]]>
                       </px-app-nav>
                     </div>
                   </div>
@@ -120,7 +120,7 @@ window.addEventListener('WebComponentsReady', function() {
       year = new Date(),
       optionsArray = [
         {
-          navItem: [
+          navItems: [
             {
               "path": "tab1", "icon": "fa-exclamation-triangle", "eventName": "firstItem", "label":"Alerts",
               "subitems": [
