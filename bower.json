@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "main": [
     "px-app-nav.html"
   ],
@@ -31,7 +31,7 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
     "px-tabs": "~0.4.0",
     "px-api-viewer": "~0.0.5",
-    "px-demo-snippet": "^0.2.2",
+    "px-demo-snippet": "^0.4.0",
     "px-toggle-design": "^0.2.12",
     "px-headings-design": "^0.2.14",
     "px-actionable-text-icons-design": "^0.0.3",

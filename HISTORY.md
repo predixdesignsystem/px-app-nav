@@ -1,3 +1,7 @@
+v1.7.6
+==================
+* added codepen
+
 v1.7.5
 ==================
 * changed icons to work under shadow dom.
