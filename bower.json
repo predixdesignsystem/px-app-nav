@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.7.6",
+  "version": "1.8.0",
   "main": [
     "px-app-nav.html"
   ],
@@ -39,6 +39,7 @@
     "px-list-inline-design": "^0.2.11",
     "px-buttons-design": "^0.4.26",
     "px-starter-kit-design": "~0.4.0",
-    "px-login": "~0.4.0"
+    "px-login": "~0.4.0",
+    "px-iconography-design": "^0.3.0"
   }
 }

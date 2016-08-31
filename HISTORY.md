@@ -1,3 +1,7 @@
+v1.8.0
+==================
+* added px-iconography-styles
+
 v1.7.6
 ==================
 * added codepen

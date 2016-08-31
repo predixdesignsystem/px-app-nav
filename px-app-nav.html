@@ -4,9 +4,10 @@
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-tooltip/px-tooltip.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../px-tooltip/px-tooltip.html">
+<link rel="import" href="../px-iconography-design/iconography-styles.html">
+
 <script src="../web-animations-js/web-animations-next.min.js"></script>
 
 <!--
@@ -33,6 +34,7 @@ Nav bar / drawer for applications
   <link rel="import" type="css" href="css/px-app-nav.css"/>
 
   <template>
+    <style include="iconography-styles"></style>
     <nav role="navigation">
       <button class="btn btn--bare btn--svg" on-click="toggleNav">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16">
