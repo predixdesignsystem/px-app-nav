@@ -25,7 +25,7 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
   background-color: var(--px-app-nav-background-color); //$gray-darkest;
 }
 
-a {
+iron-icon, a, span {
   text-decoration: none;
   color: var(--px-app-nav-link-text-color);
   &.selected {
@@ -50,4 +50,11 @@ a {
 
 .btn--svg path {
   fill: var(--px-app-nav-hamburger-button-color, $white);
+}
+
+.nav-item--icon {
+  --iron-icon-height: 15px;
+  --iron-icon-width: 15px;
+  margin-bottom: calculateRem(2px);
+  margin-left: calculateRem(4px);
 }
