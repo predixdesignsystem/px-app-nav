@@ -53,8 +53,8 @@ iron-icon, a, span {
 }
 
 .nav-item--icon {
-  --iron-icon-height: 15px;
-  --iron-icon-width: 15px;
+  --iron-icon-height: $inuit-base-font-size;
+  --iron-icon-width: $inuit-base-font-size;
   margin-bottom: calculateRem(2px);
   margin-left: calculateRem(4px);
 }
