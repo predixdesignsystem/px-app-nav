@@ -1,3 +1,15 @@
+v1.9.2
+==================
+* fix select & hover span gray text issue.
+
+v1.9.1
+==================
+* use sass variables for nav icon height.
+
+v1.9.0
+==================
+* grunt to gulp conversion and move to style modules.
+
 v1.8.0
 ==================
 * added px-iconography-styles
