@@ -8,6 +8,7 @@ const importOnce = require('node-sass-import-once');
 const stylemod = require('gulp-style-modules');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
+const combiner = require('stream-combiner2');
 const bump = require('gulp-bump');
 const argv = require('yargs').argv;
 
@@ -19,46 +20,70 @@ const sassOptions = {
   }
 };
 
-gulp.task('sass', function() {
-  return gulp.src(['./sass/*.scss', '!./sass/*sketch.scss'])
-    .pipe($.sass(sassOptions).on('error', $.sass.logError))
-    .pipe($.autoprefixer({
+gulp.task('clean', function() {
+  return gulp.src(['.tmp', 'css'], {
+    read: false
+  }).pipe($.clean());
+});
+
+function handleError(err){
+  console.log(err.toString());
+  this.emit('end');
+}
+
+function buildCSS(){
+  return combiner.obj([
+    $.sass(sassOptions),
+    $.autoprefixer({
       browsers: ['last 2 versions', 'Safari 8.0'],
       cascade: false
-    }))
+    }),
+    gulpif(!argv.debug, $.cssmin())
+  ]).on('error', handleError);
+}
+
+gulp.task('sass', function() {
+  return gulp.src(['./sass/*.scss', '!./sass/*sketch.scss', '!./sass/*-demo.scss'])
+    .pipe(buildCSS())
     .pipe(gulpif(/.*predix/,
       $.rename(function(path){
-        console.log(new RegExp('.+?(?=\-predix)').exec(path.basename)[0]);
         path.basename = new RegExp('.+?(?=\-predix)').exec(path.basename)[0];
       })
     ))
-    .pipe(gulpif(!argv.debug, $.cssmin()))
     .pipe(stylemod({
       moduleId: function(file) {
         return path.basename(file.path, path.extname(file.path)) + '-styles';
       }
     }))
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('css'))
+    .pipe(browserSync.stream({match: 'css/*.html'}));
+});
+
+gulp.task('demosass', function() {
+  return gulp.src(['./sass/*-demo.scss'])
+    .pipe(buildCSS())
+    .pipe(gulp.dest('css'))
     .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./sass/**/*.scss', ['default']);
+  gulp.watch(['!sass/*-demo.scss', 'sass/*.scss'], ['sass']);
+  gulp.watch('sass/*-demo.scss', ['demosass']);
 });
 
-gulp.task('serve', ['default'], function() {
+gulp.task('serve', function() {
   browserSync.init({
     port: 8080,
     notify: false,
     reloadOnRestart: true,
     logPrefix: `${pkg.name}`,
     https: false,
-    files: ['*.*'],
     server: ['./', 'bower_components'],
   });
 
-  gulp.watch(['!${pkg.name}-styles.html', '*.html', 'bower_components/**/*.html']).on('change', browserSync.reload);
-  gulp.watch('sass/*.scss', ['default']);
+  gulp.watch(['css/*-styles.html', 'css/*-demo.css', '*.html', '*.js']).on('change', browserSync.reload);
+  gulp.watch(['sass/*.scss', '!sass/*-demo.scss'], ['sass']);
+  gulp.watch('sass/*-demo.scss', ['demosass']);
 
 });
 
@@ -80,4 +105,6 @@ gulp.task('bump:major', function(){
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', gulpSequence('sass'));
+gulp.task('default', function(callback) {
+  gulpSequence('clean', 'sass', 'demosass')(callback);
+});
