@@ -1,3 +1,7 @@
+v1.9.6
+==================
+* removed call to checkNavExpandedState() which made everything break.
+
 v1.9.2
 ==================
 * fix select & hover span gray text issue.

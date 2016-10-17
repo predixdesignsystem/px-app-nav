@@ -16,7 +16,7 @@ Nav bar / drawer for applications
 ##### Usage
 
     <px-app-nav
-        nav-items='[{"path": "", "icon": "fa-exclamation-triangle", "label":"Alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
+        nav-items='[{"path": "", "icon": "fa-exclamation-triangle", "label":"//alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
             <any-arbitrary-content></any-arbitrary-content>
             <div class="auth">
                 <any-auth-control></any-auth-control>
@@ -45,7 +45,7 @@ Nav bar / drawer for applications
       <ul id="navitemlist" class="navbar__item list-bare">
         <template is="dom-repeat" items="{{navItems}}" as="navitem">
           <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler">
+            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler" target$="_is NewTarget(item  )">
               <iron-icon class="u-mr-- nav-item--icon" icon$="fa:{{navitem.icon}}" id$="nav-item-{{index}}"></iron-icon>
               <span class="u-ml--">{{navitem.label}}</span>
               <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded}}"></px-tooltip>
@@ -121,7 +121,8 @@ Nav bar / drawer for applications
       navExpanded: {
         value: "true",
         type: String,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        notify: true
       },
 
       /**
@@ -214,11 +215,11 @@ Nav bar / drawer for applications
       if(this._navExpanded) {
         this.debounce('checkNav', function() {
           this._expandNav();
-        }, 100);
+        }, 5);
       } else {
         this.debounce('checkNav', function() {
           this._contractNav();
-        }, 100);
+        }, 5);
       }
     },
 
@@ -243,7 +244,7 @@ Nav bar / drawer for applications
      */
     ready: function() {
 
-      this._checkNavExpandedState();
+      //this._checkNavExpandedState();
       // this._checkNavExpanded();
 
       //check to see if navitems have been initialised.
@@ -359,7 +360,7 @@ Nav bar / drawer for applications
        this.markSelected(href);
        var self = this;
        // We need a short delay for Safari to fire navResized after nav resize.
-       setTimeout(function() {
+       this.async(function() {
           self._navResized();
         }, 100);
      },
@@ -433,7 +434,12 @@ Nav bar / drawer for applications
     },
 
     _computeHref: function(item) {
-      item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
+      if (item.externalLink && item[this.pathKey]) {
+          item.href = item[this.pathKey];
+      } else {
+        item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
+      }
+
       if (!item.class){
         item.subitemlistclass = item.subitemclass = item.class = "";
 
@@ -588,7 +594,7 @@ Nav bar / drawer for applications
     },
 
     _expandNav: function() {
-      this.navExpanded = 'true';
+      this.set('navExpanded', 'true');
       this.fire('nav-expanding');
       var navAnimation = this._expandNavAnimation(this, this._getTextEls());
       this.ani = document.timeline.play(navAnimation);
@@ -597,7 +603,7 @@ Nav bar / drawer for applications
         this.fire('nav-expanded');
         // let the nav bar animation truly finish before broadcasting a window resize event
         // so other components can react after the animation
-        setTimeout(function(){
+        this.async(function(){
           window.dispatchEvent(new Event('resize'));
         }, 50);
       }.bind(this));
@@ -605,7 +611,7 @@ Nav bar / drawer for applications
 
     _contractNav: function() {
       //raise event we're about to close.
-      this.navExpanded = 'false';
+      this.set('navExpanded','false');
       this.fire('nav-collapsing');
       this.navContracting = true;
       var navAnimation = this._contractNavAnimation(this, this._getTextEls());
@@ -615,7 +621,7 @@ Nav bar / drawer for applications
         this.fire('nav-collapsed');
         // let the nav bar animation truly finish before broadcasting a window resize event
         // so other components can react after the animation
-        setTimeout(function(){
+        this.async(function(){
           window.dispatchEvent(new Event('resize'));
         }, 50);
       }.bind(this));
@@ -623,9 +629,9 @@ Nav bar / drawer for applications
 
     _toggleNavExpanded: function() {
       if(this.navExpanded === 'true') {
-        this.navExpanded = 'false';
+        this.set('navExpanded', 'false');
       } else {
-        this.navExpanded = 'true';
+        this.set('navExpanded','true');
       }
     },
 
