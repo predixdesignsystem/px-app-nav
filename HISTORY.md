@@ -1,3 +1,7 @@
+v1.9.8
+==================
+* Updates dependencies to fix bower resolution for px-defaults-design
+
 v1.9.7
 ==================
 * merge PR #25 which fixes missing px-theme import
