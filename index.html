@@ -160,11 +160,9 @@ window.addEventListener('WebComponentsReady', function() {
         if (pxApp) {
           pxApp.addEventListener('firstItem', function(e) {
             alert("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired");
-            console.log('Event detail: ', e.detail);
           });
           pxApp.addEventListener('subitemTwo', function(e) {
             alert("Event 'subitemTwo' attached to a nav item via the 'eventName' prop was fired.");
-            console.log('Event detail: ', e.detail);
           });
         }
       },
