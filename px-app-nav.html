@@ -285,8 +285,11 @@ Nav bar / drawer for applications
 
     navClickHandler: function(evt) {
       var el = evt.currentTarget;
-      if (el.getAttribute("event-name")) {
-        this.fire(el.getAttribute("event-name"));
+      var event = el.getAttribute('event-name')
+
+      if (event) {
+        var navItem = evt.model.dataHost.itemForElement(el);
+        this.fire(event, navItem);
       }
       var href = el.getAttribute("href");
       this.markSelected(href);
@@ -354,8 +357,11 @@ Nav bar / drawer for applications
      */
      subnavClickHandler: function(evt){
        var el = evt.currentTarget;
-       if (el.getAttribute("event-name")) {
-         this.fire(el.getAttribute("event-name"));
+       var event = el.getAttribute('event-name')
+
+       if (event) {
+         var navItem = evt.model.dataHost.itemForElement(el);
+         this.fire(event, navItem);
        }
        var href = el.getAttribute("href");
        this.markSelected(href);

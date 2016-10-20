@@ -158,10 +158,10 @@ window.addEventListener('WebComponentsReady', function() {
         var pxApp = Polymer.dom(pxTabs).querySelector('px-app-nav');
 
         if (pxApp) {
-          pxApp.addEventListener('firstItem', function() {
-            alert("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired.");
+          pxApp.addEventListener('firstItem', function(e) {
+            alert("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired");
           });
-          pxApp.addEventListener('subitemTwo', function() {
+          pxApp.addEventListener('subitemTwo', function(e) {
             alert("Event 'subitemTwo' attached to a nav item via the 'eventName' prop was fired.");
           });
         }
