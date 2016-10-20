@@ -1,3 +1,7 @@
+v1.9.7
+==================
+* merge PR #25 which fixes missing px-theme import
+
 v1.9.6
 ==================
 * removed call to checkNavExpandedState() which made everything break.
