@@ -1,3 +1,7 @@
+v1.9.9
+==================
+* merge PR #26 to provide the object model with event details
+
 v1.9.8
 ==================
 * Updates dependencies to fix bower resolution for px-defaults-design
