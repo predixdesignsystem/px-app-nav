@@ -1,3 +1,7 @@
+v1.1.3
+=================
+* Updated dependencies
+
 v0.8.0
 =================
 * migrate to polymer 1.5.0
