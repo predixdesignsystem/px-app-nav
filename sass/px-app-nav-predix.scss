@@ -25,7 +25,11 @@ common/abstract rules go in px-app-nav-sketch.scss, not in this file.
   background-color: var(--px-app-nav-background-color); //$gray-darkest;
 }
 
-iron-icon, a, span {
+span {
+  color: var(--px-app-nav-link-text-color);
+}
+
+iron-icon, a{
   text-decoration: none;
   color: var(--px-app-nav-link-text-color);
   &.selected {

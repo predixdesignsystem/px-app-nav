@@ -1,3 +1,27 @@
+v1.9.8
+==================
+* Updates dependencies to fix bower resolution for px-defaults-design
+
+v1.9.7
+==================
+* merge PR #25 which fixes missing px-theme import
+
+v1.9.6
+==================
+* removed call to checkNavExpandedState() which made everything break.
+
+v1.9.2
+==================
+* fix select & hover span gray text issue.
+
+v1.9.1
+==================
+* use sass variables for nav icon height.
+
+v1.9.0
+==================
+* grunt to gulp conversion and move to style modules.
+
 v1.8.0
 ==================
 * added px-iconography-styles
