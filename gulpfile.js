@@ -55,7 +55,7 @@ gulp.task('sass', function() {
         return path.basename(file.path, path.extname(file.path)) + '-styles';
       }
     }))
-    .pipe(gulp.dest('css'))
+    .pipe(gulp.dest('.'))
     .pipe(browserSync.stream({match: 'css/*.html'}));
 });
 
