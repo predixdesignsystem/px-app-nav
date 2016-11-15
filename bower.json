@@ -1,44 +1,44 @@
 {
-  "name": "px-app-nav",
-  "version": "1.9.9",
-  "main": [
-    "px-app-nav.html"
-  ],
-  "ignore": [
-    ".*",
-    "npm-debug.log",
-    "Gruntfile.js",
-    "sass",
-    "bower_components",
-    "node_modules",
-    "test",
-    "OSS_Notice.pdf",
-    "scripts",
-    ".github",
-    "px-app-nav.png"
-  ],
-  "dependencies": {
-    "polymer": "^1.6.1",
-    "px-theme": "~1.1.2",
-    "web-animations-js": "^2.2.2",
-    "px-tooltip": "^0.9.0",
-    "px-polymer-font-awesome": "^0.1.9"
-  },
-  "devDependencies": {
-    "px-list-bare-design": "^0.2.13",
-    "px-forms-design": "~0.3.17",
-    "px-tables-design": "~0.3.13",
-    "iron-demo-helpers": "~1.2.5",
-    "px-tabs": "~0.5.2",
-    "px-api-viewer": "~0.1.0",
-    "px-demo-snippet": "^0.6.2",
-    "px-toggle-design": "^0.2.12",
-    "px-headings-design": "^0.2.14",
-    "px-actionable-text-icons-design": "^0.1.0",
-    "px-code-design": "^0.2.11",
-    "px-list-inline-design": "^0.2.11",
-    "px-buttons-design": "^0.4.26",
-    "px-starter-kit-design": "~0.6.0",
-    "px-login": "~0.5.0"
-  }
+    "name": "px-app-nav",
+    "version": "1.9.10",
+    "main": [
+        "px-app-nav.html"
+    ],
+    "ignore": [
+        ".*",
+        "npm-debug.log",
+        "Gruntfile.js",
+        "sass",
+        "bower_components",
+        "node_modules",
+        "test",
+        "OSS_Notice.pdf",
+        "scripts",
+        ".github",
+        "px-app-nav.png"
+    ],
+    "dependencies": {
+        "polymer": "^1.6.1",
+        "px-theme": "~1.1.2",
+        "web-animations-js": "^2.2.2",
+        "px-tooltip": "^0.9.0",
+        "px-polymer-font-awesome": "^0.1.9"
+    },
+    "devDependencies": {
+        "px-list-bare-design": "^0.2.13",
+        "px-forms-design": "~0.3.17",
+        "px-tables-design": "~0.3.13",
+        "iron-demo-helpers": "~1.2.5",
+        "px-tabs": "~0.5.2",
+        "px-api-viewer": "~0.1.0",
+        "px-demo-snippet": "^0.6.9",
+        "px-toggle-design": "^0.2.12",
+        "px-headings-design": "^0.2.14",
+        "px-actionable-text-icons-design": "^0.1.0",
+        "px-code-design": "^0.2.11",
+        "px-list-inline-design": "^0.2.11",
+        "px-buttons-design": "^0.4.26",
+        "px-starter-kit-design": "~0.6.0",
+        "px-login": "~0.5.0"
+    }
 }

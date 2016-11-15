@@ -1,3 +1,8 @@
+
+v1.9.10
+==================
+* bower updating px-demo-snippet
+
 v1.9.9
 ==================
 * merge PR #26 to provide the object model with event details
