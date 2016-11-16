@@ -1,13 +1,13 @@
 {
     "name": "px-app-nav",
-    "version": "1.9.10",
+    "version": "1.9.11",
     "main": [
         "px-app-nav.html"
     ],
     "ignore": [
         ".*",
         "npm-debug.log",
-        "Gruntfile.js",
+        "gulpfile.js",
         "sass",
         "bower_components",
         "node_modules",
