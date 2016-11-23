@@ -1,6 +1,6 @@
 {
     "name": "px-app-nav",
-    "version": "1.9.17",
+    "version": "1.9.18",
     "main": [
         "px-app-nav.html"
     ],
@@ -26,11 +26,11 @@
     },
     "devDependencies": {
         "px-list-bare-design": "^0.2.13",
-        "px-forms-design": "~0.3.17",
-        "px-tables-design": "~0.3.13",
+        "px-forms-design": "^0.3.17",
+        "px-tables-design": "^0.3.13",
         "iron-demo-helpers": "~1.2.5",
-        "px-tabs": "~0.5.2",
-        "px-api-viewer": "~0.1.0",
+        "px-tabs": "^0.5.2",
+        "px-api-viewer": "^0.1.0",
         "px-demo-snippet": "^0.6.9",
         "px-toggle-design": "^0.2.12",
         "px-headings-design": "^0.2.14",
@@ -38,7 +38,7 @@
         "px-code-design": "^0.2.11",
         "px-list-inline-design": "^0.2.11",
         "px-buttons-design": "^0.4.26",
-        "px-starter-kit-design": "~0.6.0",
-        "px-login": "~0.5.0"
+        "px-starter-kit-design": "^0.6.0",
+        "px-login": "^0.5.0"
     }
 }
