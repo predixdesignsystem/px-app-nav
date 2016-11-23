@@ -1,6 +1,6 @@
 {
     "name": "px-app-nav",
-    "version": "1.9.14",
+    "version": "1.9.15",
     "main": [
         "px-app-nav.html"
     ],
