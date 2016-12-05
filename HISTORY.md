@@ -1,3 +1,7 @@
+v1.9.19
+==================
+* added missing font-awesome import
+
 v1.9.18
 ==================
 * changing all devDeps to ^
