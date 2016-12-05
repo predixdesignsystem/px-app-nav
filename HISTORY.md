@@ -1,3 +1,7 @@
+v1.9.20
+==================
+* updated dependencies
+
 v1.9.19
 ==================
 * added missing font-awesome import
