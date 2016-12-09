@@ -63,20 +63,20 @@ From the component's directory...
 ```
 $ npm install
 $ bower install
-$ grunt sass
+$ gulp sass
 ```
 
 From the component's directory, to start a local server run:
 
 ```
-$ grunt depserve
+$ gulp serve
 ```
 
 Navigate to the root of that server (e.g. http://localhost:8080/) in a browser to open the API documentation page, with link to the "Demo" / working examples.
 
 ### LiveReload
 
-By default grunt watch is configured to enable LiveReload and will be watching for modifications in your root directory as well as `/css`.
+By default gulp serve is configured to enable LiveReload and will be watching for modifications in your root directory as well as `/css`.
 
 Your browser will also need to have the LiveReload extension installed and enabled. For instructions on how to do this please refer to: [livereload.com/extensions/](http://livereload.com/extensions/).
 
