@@ -1,3 +1,7 @@
+v1.9.22
+==================
+* changing browser in wct testing from safari 8 to safari 10 on elcapitan
+
 v1.9.21
 ==================
 * moving px-polymer-font-awesome back to 0.1.x version.
