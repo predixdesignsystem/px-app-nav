@@ -23,7 +23,7 @@ Use the px-app-nav to cleanly navigate portions or pages of a application. The n
 First, install the component via bower on the command line.
 
 ```
-bower install https://github.com/PredixDev/px-app-nav.git --save
+bower install px-app-nav --save
 ```
 Second, import the component to your application with the following tag in your head.
 
@@ -77,19 +77,6 @@ Navigate to the root of that server (e.g. http://localhost:8080/) in a browser t
 ### LiveReload
 
 By default gulp serve is configured to enable LiveReload and will be watching for modifications in your root directory as well as `/css`.
-
-Your browser will also need to have the LiveReload extension installed and enabled. For instructions on how to do this please refer to: [livereload.com/extensions/](http://livereload.com/extensions/).
-
-Disable LiveReload by removing the `livereload` key from the configuration object or explicitly setting it to false.
-
-
-### DevMode
-Devmode runs `grunt depserve` and `grunt watch` concurrently so that when you make a change to your source files and save them, your preview will be updated in any browsers you have opened and turned on LiveReload.
-From the component's directory run:
-
-```
-$ grunt devmode
-```
 
 ### GE Coding Style Guide
 [GE JS Developer's Guide](https://github.com/GeneralElectric/javascript)
