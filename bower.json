@@ -1,24 +1,24 @@
 {
-    "name": "px-theme",
-    "version": "2.0.1",
-    "main": [
-        "px-theme.html"
-    ],
-    "ignore": [
-        ".*",
-        "npm-debug.log",
-        "gulpfile.js",
-        "sass",
-        "bower_components",
-        "node_modules",
-        "test",
-        "OSS_Notice.pdf"
-    ],
-    "dependencies": {
-        "polymer": "^1.7.0",
-        "px-typography-design": "^1.1.3"
-    },
-    "devDependencies": {
-        "px-colors-design": "^0.2.20"
-    }
+  "name": "px-theme",
+  "version": "2.0.2",
+  "main": [
+    "px-theme.html"
+  ],
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "gulpfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test",
+    "OSS_Notice.pdf"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.0",
+    "px-typography-design": "^1.2.0"
+  },
+  "devDependencies": {
+    "px-colors-design": "^0.2.20"
+  }
 }
