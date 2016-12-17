@@ -1,6 +1,6 @@
 {
   "name": "px-theme",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": [
     "px-theme.html"
   ],
@@ -19,6 +19,6 @@
     "px-typography-design": "^1.2.0"
   },
   "devDependencies": {
-    "px-colors-design": "^0.2.20"
+    "px-colors-design": "^0.3.0"
   }
 }
