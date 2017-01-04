@@ -184,6 +184,14 @@ function runBaseTests() {
     test('px-app-nav fixture is created', function() {
       assert.isTrue(document.getElementById('app_nav') !== null);
     });
-
+    test('First px-app-nav fixture is collapsed because nav-expanded="false"', function() {
+      // wait for the app-nav to collapse
+      setTimeout(function() {
+        assert.isTrue(document.getElementById('app_nav').classList.contains('navbar--collapsed'));
+      }, 200);
+    });
+    test('Second px-app-nav fixture is expanded by default', function() {
+      assert.isFalse(document.getElementById('app_nav').classList.contains('navbar--collapsed'));
+    });
   });
 }
