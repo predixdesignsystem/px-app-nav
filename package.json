@@ -2,7 +2,7 @@
     "name": "px-app-nav",
     "author": "General Electric",
     "description": "A Px component for menu-based view navigation",
-    "version": "1.10.3",
+    "version": "1.10.4",
     "private": true,
     "extName": null,
     "repository": {
