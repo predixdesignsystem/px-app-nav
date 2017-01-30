@@ -1,6 +1,6 @@
 {
   "name": "px-theme",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "main": [
     "px-theme.html"
   ],
@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "polymer": "^1.7.0",
-    "px-typography-design": "^1.2.0"
+    "px-typography-design": "^1.2.0",
+    "px-iconography-design": "^0.3.8"
   },
   "devDependencies": {
     "px-colors-design": "^0.3.0"
