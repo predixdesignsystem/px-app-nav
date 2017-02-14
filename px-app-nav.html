@@ -11,9 +11,8 @@
 <script src="../web-animations-js/web-animations-next.min.js"></script>
 
 <!--
-Nav bar / drawer for applications
 
-##### Usage
+#### Usage
 
     <px-app-nav
         nav-items='[{"path": "", "icon": "fa-exclamation-triangle", "label":"//alerts","subitems": [{"label": "Sub Category 1"}, {"label": "Sub Category 2"}]},{"path": "tab2", "icon": "fa-briefcase", "label": "Cases"}]'
@@ -22,6 +21,18 @@ Nav bar / drawer for applications
                 <any-auth-control></any-auth-control>
             </div>
     </px-app-nav>
+
+#### Styling
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--px-app-nav-background-color` | Background color for the app navigation component | `$gray10`
+`--px-app-nav-link-text-color` | Text color for the nav items | `$white`
+`--px-app-nav-link-hover-color` | Background color for a nav item when a user hovers over one | `$gray8`
+`--px-app-nav-link-selected-active-color` | Background color for a nav item when a user clicks on one | `$select-blue-hover`
+`--px-app-nav-link-selected-color` | Background color for the selected nav item | `$select-blue-pressed`
+`--px-app-nav-hamburger-button-color` | Fill color for the hamburger menu icon | `$white`
 
 @element px-app-nav
 @blurb Nav bar / drawer for applications.

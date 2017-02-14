@@ -1,3 +1,7 @@
+v1.10.6
+==================
+* added styling section to API documentation
+
 v1.10.4
 ==================
 * updated to px-demo
