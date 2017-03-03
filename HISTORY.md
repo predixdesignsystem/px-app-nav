@@ -1,3 +1,7 @@
+v1.10.7
+==================
+* removed alert dialog from demo per design feedback
+
 v1.10.6
 ==================
 * added styling section to API documentation
