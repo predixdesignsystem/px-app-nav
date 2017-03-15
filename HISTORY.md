@@ -1,3 +1,7 @@
+v1.10.8
+==================
+* fix for web animations dependency clash with vis/paper elements
+
 v1.10.7
 ==================
 * removed alert dialog from demo per design feedback
