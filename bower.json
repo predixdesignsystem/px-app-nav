@@ -18,15 +18,15 @@
     "px-app-nav.png"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
-    "px-theme": "^2.0.1",
+    "polymer": "^1.8.1",
+    "px-theme": "^2.0.4",
     "web-animations-js": "^2.2.2",
-    "px-tooltip": "^0.10.0",
-    "px-polymer-font-awesome": "^1.1.0"
+    "px-tooltip": "^0.10.17",
+    "px-polymer-font-awesome": "^1.1.5"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.3",
-    "px-demo": "^1.2.8",
-    "px-buttons-design": "^1.1.4"
+    "px-starter-kit-design": "^0.7.4",
+    "px-demo": "^1.5.2",
+    "px-buttons-design": "^1.1.7"
   }
 }
