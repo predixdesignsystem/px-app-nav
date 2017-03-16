@@ -1,3 +1,7 @@
+v1.10.9
+==================
+* use neon-animation instead of web-animations-js direct. Plays nicer with paper/vis components
+
 v1.10.8
 ==================
 * fix for web animations dependency clash with vis/paper elements

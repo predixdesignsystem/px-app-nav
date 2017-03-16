@@ -1,6 +1,6 @@
 {
   "name": "px-app-nav",
-  "version": "1.10.8",
+  "version": "1.10.9",
   "main": [
     "px-app-nav.html"
   ],
@@ -20,9 +20,9 @@
   "dependencies": {
     "polymer": "^1.8.1",
     "px-theme": "^2.0.4",
-    "web-animations-js": "^2.2.2",
     "px-tooltip": "^0.10.17",
-    "px-polymer-font-awesome": "^1.1.5"
+    "px-polymer-font-awesome": "^1.1.5",
+    "neon-animation": "^1.2.4"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.4",
