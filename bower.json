@@ -22,7 +22,10 @@
     "px-theme": "^2.0.4",
     "px-tooltip": "^0.10.17",
     "px-polymer-font-awesome": "^1.1.5",
-    "neon-animation": "^1.2.4"
+    "neon-animation": "^1.2.4",
+    "app-layout": "PolymerElements/app-layout#^0.10.7",
+    "iron-dropdown": "PolymerElements/iron-dropdown#^1.5.5",
+    "iron-selector": "PolymerElements/iron-selector#^1.5.2"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.4",

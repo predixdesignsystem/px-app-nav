@@ -5,17 +5,9 @@
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html">
-<!-- <link rel="import" href="../px-tooltip/px-tooltip.html"> -->
-<!-- <link rel="import" href="../neon-animation/neon-animation.html"> -->
-
-<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
-<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html" />
-<link rel="import" href="../app-layout/app-header/app-header.html" />
-<link rel="import" href="../iron-dropdown/iron-dropdown.html" />
-<link rel="import" href="../iron-selector/iron-selector.html" />
-
-<link rel="import" href="px-app-nav-item.html" />
-<link rel="import" href="px-app-nav-subitem.html" />
+<link rel="import" href="../px-tooltip/px-tooltip.html">
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html">
+<link rel="import" href="../neon-animation/neon-animation.html">
 
 <!--
 
@@ -53,28 +45,8 @@ Custom property | Description | Default
   <template>
     <style include="px-app-nav-styles"></style>
 
-    <section class="app-nav app-nav--horizontal">
-      <app-header fixed>
-        <app-toolbar class="app-nav-toolbar">
-          <iron-selector class="app-nav-selector" selected-attribute="selected" activate-event="px-app-nav-item-selected" selected="{{_selectedItem}}">
-            <template is="dom-repeat" items="{{navItems}}">
 
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" group="{{_hasSubitems(item)}}">
-                  <!-- This will only stamp if the item has subitems -->
-                  <template is="dom-if" if="{{_hasSubitems(item)}}">
-                    <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                      <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-subitem>
-                    </template>
-                  </template>
-                </px-app-nav-item>
-
-            </template>
-          </iron-selector>
-        </app-toolbar>
-      </app-header>
-    </section>
-
-<!--
+    <nav role="navigation">
       <button class="btn btn--bare btn--svg" on-click="toggleNav">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16">
           <path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/>
@@ -98,8 +70,7 @@ Custom property | Description | Default
           </li>
         </template>
       </ul>
-    </nav> -->
-
+    </nav>
     <content></content>
   </template>
 </dom-module>
@@ -111,6 +82,7 @@ Custom property | Description | Default
     is: 'px-app-nav',
 
     properties: {
+
       /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
        * 'eventName', and 'subitems', which is another Array.
@@ -687,13 +659,6 @@ Custom property | Description | Default
     toggleNav: function(evt){
       this._toggleNavExpanded();
       this._checkNavExpandedState();
-    },
-
-    /**
-     * Helps check if items generated from data have subitems.
-     */
-    _hasSubitems(item) {
-      return item && Array.isArray(item.subitems) && item.subitems.length;
     }
 
   });

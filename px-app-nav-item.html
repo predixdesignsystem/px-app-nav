@@ -1,0 +1,195 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+
+<link rel="import" href="css/px-app-nav-item-styles.html">
+
+<dom-module id="px-app-nav-item">
+  <template>
+    <style include="px-app-nav-item-styles"></style>
+    <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
+      <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
+    </template>
+
+    <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
+      <p class="app-nav-item__label">{{label}}</p>
+    </template>
+
+    <template is="dom-if" if="{{group}}">
+      <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down" on-tap="_handleOpenIconTap"></iron-icon>
+
+      <div class="app-nav-item__subitems" id="groupcontainer">
+        <iron-dropdown id="group" class="app-nav-item__subitems-dropdown"
+            vertical-align="top"
+            auto-fit-on-attached
+            on-iron-overlay-canceled="_handleGroupCanceled">
+          <div class="dropdown-content" id="groupcontent">
+            <iron-selector
+                selected-attribute="selected"
+                selected="{{_selectedSubitem}}"
+                on-iron-select="_handleSubitemSelected">
+              <content select="*"></content>
+            </iron-selector>
+          </div>
+        </iron-dropdown>
+      </div>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-app-nav-item',
+
+    properties: {
+      /**
+       * If `true` the item is selected. Watch for updates to find out when the
+       * user clicks/taps the item and selects it, or when the item is selected
+       * through data binding.
+       *
+       * Set the attribute to select this item. If you set the attribute to true,
+       * any peer items that are currently selected will be deselected.
+       *
+       * If this item is a group that holds subitems, it can only be selected if
+       * one of its children are selected. See the `group` attribute for details.
+       */
+      selected: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true
+      },
+
+      /**
+       * Used as the label text for the item.
+       */
+      label: {
+        type: String
+      },
+
+      /**
+       * Used to set the icon for the item. Should be a valid font awesome icon name.
+       */
+      icon: {
+        type: String
+      },
+
+      /**
+       * Set to `true` if this item is a group that holds subitems. Groups will
+       * show a dropdown menu of subitems when tapped. Add entries to the menu
+       * by passing `<px-app-nav-subitem>` as children into this tag.
+       *
+       * Groups can't be selected as a path on their own. They are only selected
+       * if one of the subitems within them are selected.
+       */
+      group: {
+        type: Boolean,
+        value: false
+      },
+
+      path: {
+        type: String,
+        reflectToAttribute: true
+      },
+
+      _selectedSubitem: {
+        type: (String|Number)
+      }
+    },
+
+    attached: function() {
+      this.listen(this, 'tap', '_handleSelfTapped');
+    },
+
+    detached: function() {
+      this.unlisten(this, 'tap', '_handleSelfTapped');
+    },
+
+    /**
+     * Checks if a property is the desired `type`.
+     *
+     * @param {*} prop
+     * @returns {Boolean}
+     */
+    _propIsTypeOf(prop, type) {
+      return prop && type && (typeof prop === type);
+    },
+
+    _toggleGroup() {
+      var group = this.$$('#group');
+      if (!this.group || !group) return;
+
+      if (group.opened) {
+        this.async(function(){
+          // Wait a tick before closing for the group to clear its event queue
+          // after we stopped the original cancel event
+          this.closeGroup();
+        });
+      }
+      if (!group.opened) {
+        this.openGroup();
+      }
+    },
+
+    openGroup() {
+      var group = this.$$('#group');
+      if (!this.group || !group) return;
+
+      // Measure the size of the group's container before trying to open it,
+      // so we can set the min width of the group's dropdown
+      var container = this.$$('#groupcontainer');
+      var content = this.$$('#groupcontent');
+      var minWidth = container.getBoundingClientRect().width + 'px';
+
+      if (content.style.minWidth !== minWidth) {
+        content.style.minWidth = minWidth;
+      }
+
+      group.open();
+    },
+
+    closeGroup() {
+      var group = this.$$('#group');
+      if (!this.group || !group) return;
+
+      group.close();
+    },
+
+    /**
+     * If this button is not a group (and does not have a submenu to open) we
+     * can fire the select event and its parent will mark it as selected.
+     *
+     * If it is a group, we should toggle the menu so the user can attempt to
+     * select and item inside of it.
+     */
+    _handleSelfTapped(evt) {
+      if (!this.group) {
+        this.fire('px-app-nav-item-selected');
+      }
+      if (this.group) {
+        this._toggleGroup();
+      }
+    },
+
+    /**
+     * If the dropdown is cancelled (about to close) but the cancel event comes
+     * from a click on target element, stop the cancel so we can handle it
+     * through the click handler on the target element.
+     *
+     * Thanks to åpaper-menu-button for the guidance on how to best handle this.
+     */
+    _handleGroupCanceled(evt) {
+      var uiEvt = evt.detail;
+      var target = Polymer.dom(uiEvt).rootTarget;
+      var trigger = this;
+      var path = Polymer.dom(uiEvt).path;
+
+      if (path.indexOf(trigger) > -1) {
+        evt.preventDefault();
+      }
+    },
+
+    _handleSubitemSelected(evt) {
+      this.fire('px-app-nav-item-selected');
+    }
+  });
+</script>
