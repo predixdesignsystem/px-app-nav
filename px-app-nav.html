@@ -14,6 +14,7 @@
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
 <link rel="import" href="../iron-selector/iron-selector.html" />
 
+<link rel="import" href="px-app-nav-group.html" />
 <link rel="import" href="px-app-nav-item.html" />
 <link rel="import" href="px-app-nav-subitem.html" />
 
@@ -56,17 +57,28 @@ Custom property | Description | Default
     <section class="app-nav app-nav--horizontal">
       <app-header fixed>
         <app-toolbar class="app-nav-toolbar">
-          <iron-selector class="app-nav-selector" selected-attribute="selected" activate-event="px-app-nav-item-selected" selected="{{_selectedItem}}">
+          <iron-selector class="app-nav-selector"
+              selected-attribute="selected"
+              attr-for-selected="path"
+              activate-event="px-app-nav-item-selected"
+              selected="{{_selectedPath}}"
+              selected-item="{{_selectedItem}}">
             <template is="dom-repeat" items="{{navItems}}">
 
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" group="{{_hasSubitems(item)}}">
-                  <!-- This will only stamp if the item has subitems -->
-                  <template is="dom-if" if="{{_hasSubitems(item)}}">
-                    <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                      <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-subitem>
-                    </template>
+              <!-- Stamp groups, which hold subitems -->
+              <template is="dom-if" if="{{_hasSubitems(item)}}">
+                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
+                  <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
+                    <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-subitem>
                   </template>
+                </px-app-nav-group>
+              </template>
+
+              <!-- Stamp plain old items, which hold subitems -->
+              <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
                 </px-app-nav-item>
+              </template>
 
             </template>
           </iron-selector>
@@ -111,6 +123,15 @@ Custom property | Description | Default
     is: 'px-app-nav',
 
     properties: {
+      /**
+       * Selects a path.
+       */
+      selectedPath: {
+        type: String,
+        notify: true,
+        observer: '_selectedPathChanged'
+      },
+
       /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
        * 'eventName', and 'subitems', which is another Array.
@@ -200,6 +221,10 @@ Custom property | Description | Default
         type: Object,
         value:function(){ return {};}
       }
+    },
+
+    _selectedPathChanged: function(nextPath, lastPath) {
+
     },
 
     _protocolRE: new RegExp('(http|https)://'),
@@ -694,7 +719,13 @@ Custom property | Description | Default
      */
     _hasSubitems(item) {
       return item && Array.isArray(item.subitems) && item.subitems.length;
-    }
+    },
 
+    /**
+     * Helps check if items generated from data have subitems.
+     */
+    _hasNoSubitems(item) {
+      return !item.hasOwnProperty('subitems');
+    },
   });
 </script>

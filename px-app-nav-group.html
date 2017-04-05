@@ -1,0 +1,229 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+
+<link rel="import" href="css/px-app-nav-item-styles.html">
+
+<dom-module id="px-app-nav-group">
+  <template>
+    <style include="px-app-nav-item-styles"></style>
+
+    <div class="app-nav-item dropdown-trigger" id="itemButton">
+      <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
+        <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
+      </template>
+
+      <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
+        <p class="app-nav-item__label">{{label}}</p>
+      </template>
+
+      <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
+    </div>
+
+    <iron-dropdown id="group" class="app-nav-item__subitems-dropdown"
+        no-overlap
+        dynamic-align
+        no-animations
+        auto-fit-on-attached
+        opened="{{opened}}"
+        position-target="[[_getPositionTarget()]]"
+        on-iron-overlay-canceled="_handleGroupCanceled">
+      <div class="dropdown-content" id="groupcontent">
+        <iron-selector
+            selected-attribute="selected"
+            selected="{{selectedSubpath}}"
+            selected-item="{{selectedSubitem}}"
+            on-iron-select="_handleSubitemSelected"
+            attr-for-selected="path">
+          <content select="*"></content>
+        </iron-selector>
+      </div>
+    </iron-dropdown>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-app-nav-group',
+
+    properties: {
+      /**
+       * If `true`, one of the group's subitems is selected.
+       *
+       * Watch for updates to find out when the group becomes selected through
+       * user interaction or through automatic selection.
+       *
+       * Set the `selected` attribute on one of the group's subitems to select
+       * this group.
+       */
+      selected: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true,
+        observer: '_handleSelectedChanged'
+      },
+
+      /**
+       * The label text for the group's button.
+       */
+      label: {
+        type: String
+      },
+
+      /**
+       * The icon for the group's button. Should be a valid font awesome icon
+       * name (e.g. 'fa-briefcase').
+       */
+      icon: {
+        type: String
+      },
+
+      /**
+       * A named path for this item. Used to select one of its subitems programatically,
+       * e.g. by binding to the current URL route.
+       */
+      path: {
+        type: String,
+        reflectToAttribute: true
+      },
+
+      /**
+       * The select subitem's element, if a subitem is selected.
+       */
+      selectedSubitem: {
+        type: HTMLElement,
+        notify: true
+      },
+
+      /**
+       * The selected subitem's path, if a subitem is selected.
+       */
+      selectedSubpath: {
+        type: (String|Number),
+        notify: true
+      },
+
+      /**
+       * If `true` the group is expanded so the user can select a subitem.
+       */
+      opened: {
+        type: Boolean
+      }
+    },
+
+    attached: function() {
+      this.listen(this, 'tap', '_handleSelfTapped');
+    },
+
+    detached: function() {
+      this.unlisten(this, 'tap', '_handleSelfTapped');
+    },
+
+    /**
+     * Checks if a property is the desired `type`.
+     *
+     * @param {*} prop
+     * @returns {Boolean}
+     */
+    _propIsTypeOf(prop, type) {
+      return prop && type && (typeof prop === type);
+    },
+
+    _toggleGroup() {
+      if (this.opened) {
+        this.async(function(){
+          // Wait a tick before closing for the group to clear its event queue
+          // after we stopped the original cancel event
+          this.closeGroup();
+        });
+      }
+      if (!this.opened) {
+        this.openGroup();
+      }
+    },
+
+    openGroup() {
+      var group = this.$$('#group');
+      if (!group) return;
+
+      // Measure the size of the group's container before trying to open it,
+      // so we can set the min width of the group's dropdown
+      //
+      // Ben says this is OK.
+      var button = this.$$('#itemButton');
+      var minWidth = button.getBoundingClientRect().width + 'px';
+      var content = this.$$('#groupcontent');
+      if (content.style.minWidth !== minWidth) {
+        content.style.minWidth = minWidth;
+      }
+
+      group.open();
+    },
+
+    closeGroup() {
+      var group = this.$$('#group');
+      if (!group) return;
+
+      group.close();
+    },
+
+    /**
+     * When the user clicks on a group, toggle the group's dropdown menu
+     * so the user can to select a subitem.
+     */
+    _handleSelfTapped(evt) {
+      this._toggleGroup();
+    },
+
+    /**
+     * If the dropdown is cancelled (about to close) but the cancel event comes
+     * from a click on target element, stop the cancel so we can handle it
+     * through the click handler on the target element.
+     *
+     * Thanks to paper-menu-button for the guidance on how to best handle this.
+     */
+    _handleGroupCanceled(evt) {
+      var uiEvt = evt.detail;
+      var target = Polymer.dom(uiEvt).rootTarget;
+      var trigger = this;
+      var path = Polymer.dom(uiEvt).path;
+
+      if (path.indexOf(trigger) > -1) {
+        evt.preventDefault();
+      }
+    },
+
+    /**
+     * If a group's subitem is selected, it should also be selected. Fire an event
+     * to ask this item's parent to select it when its subitem is selected.
+     */
+    _handleSubitemSelected(evt) {
+      var localEvt = Polymer.dom(evt);
+
+      var path = [];
+      path[0] = this.path ? this.path : this;
+      path[1] = localEvt.event.detail.item.path ? localEvt.event.detail.item.path : localEvt.event.detail.item;
+
+      this.fire('px-app-nav-item-selected', {
+        group: true,
+        path: path
+      });
+    },
+
+    /**
+     * If a group is goes from being selected to deselected, set its selected
+     * subitem to null to clear the selected and call closeGroup to ensure
+     * it is closed.
+     */
+    _handleSelectedChanged(nextState, lastState) {
+      if (lastState === true && nextState === false) {
+        this.set('selectedSubpath', null);
+        this.closeGroup();
+      }
+    },
+
+    _getPositionTarget() {
+      return this.$.itemButton;
+    }
+  });
+</script>
