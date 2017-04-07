@@ -10,123 +10,124 @@ $fa-font-path       : "../font-awesome/fonts";
 $fa-version         : "4.4.0" !default;
 $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
+$predix-load-local-fonts : true;
 @import "px-typography-design/_base.typography.scss";
 
 :root{
 @import "px-iconography-design/_base.iconography.scss";
 
   // Defaults
-  --px-base-text-color:
-  --px-base-background-color:
+  // --px-base-text-color:
+  // --px-base-background-color:
 
   @import "px-defaults-design/_settings.defaults.scss";
   @import "px-mixins-design/_tools.mixins.scss";
 
-  // Actionable Text & Icons
-  --px-actionable-text-color:
-  --px-actionable-text-color--hover:
-  --px-actionable-text-color--active:
-  --px-selectable-text-color:
-  --px-selectable-text-color--hover:
-  --px-selectable-text-color--active:
-  --px-actionable-alt-text-color:
-  --px-actionable-alt-text-color--hover:
-  --px-actionable-alt-text-color--active:
-  --px-disabled-text-color:
-
-  // Button Group
-  --px-btn-group-text-color:
-  --px-btn-group-background-color:
-  --px-btn-group-background-color--hover:
-  --px-btn-group-background-color--pressed:
-  --px-btn-group-border-color:
-  --px-btn-group-border-color--hover:
-  --px-btn-group-border-color--pressed:
-
-  // Buttons
-  --px-btn-border-color:
-  --px-btn-border-color--hover:
-  --px-btn-border-color--pressed:
-  --px-btn-shadow--light:
-  --px-btn-background:
-  --px-btn-background--hover:
-  --px-btn-background--pressed:
-  --px-btn-color:
-  --px-btn-shadow:
-  --px-btn-bare-color--visited:
-  --px-btn-bare-color--hover:
-  --px-btn-bare-color--pressed:
-  --px-btn-primary-bare-color--visited:
-  --px-btn-primary-bare-color--hover:
-  --px-btn-primary-bare-color--pressed:
-  --px-btn-primary-border-color:
-  --px-btn-primary-background:
-  --px-btn-primary-background--hover:
-  --px-btn-primary-background--pressed:
-  --px-btn-primary-color:
-  --px-btn-tertiary-background:
-  --px-btn-tertiary-color:
-  --px-btn-tertiary-background--hover:
-  --px-btn-tertiary-background--pressed:
-  --px-btn-disabled-border-color:
-  --px-btn-disabled-background:
-  --px-btn-disabled-color:
-
-  // Code
-  --px-code-text-color:
-  --px-code-background-color:
-  --px-code-border-color:
-
-  // Forms
-  --px-input-text-color:
-  --px-input-text-color--placeholder:
-  --px-input-background-color:
-  --px-input-border-color--inner:
-  --px-input-border-color--outer:
-  --px-input-border-color--inner--focused:
-  --px-input-border-color--outer--focused:
-  --px-input-text-color--disabled:
-  --px-input-background-color--disabled:
-  --px-input-border-color--disabled:
-  // --px-input-text-color--readonly: TODO;
-  // --px-input-background-color--readonly: TODO;
-  // --px-input-border-color--readonly: TODO;
-  // --px-input-text-color--help: TODO;
-  --px-select-background-color:
-  --px-select-text-color:
-  // --px-select-chevron-color:
-  --px-select-shadow-color--dark:
-  --px-select-shadow-color--light:
-  --px-select-text-color--disabled:
-  // --px-select-chevron-color--disabled:
-  --px-select-background-color--disabled:
-  --px-select-background-color--hover:
-  --px-select-border-color--hover:
-  --px-select-background-color--pressed:
-  --px-select-border-color--pressed:
-  --px-multiselect-background-color:
-  --px-validation-warning-text-color:
-  --px-validation-error-text-color:
-  --px-validation-success-text-color:
-
-  // Input Group
-  --px-input-group-text-color:
-  --px-input-group-icon-color:
-
-  // List UI
-  --px-list-ui-border-color:
-
-  // Tables
-  --px-table-border-color:
-
-  // Toggle
-  --px-toggle-switch-color:
-  --px-toggle-switch-border-color:
-  --px-toggle-switch-shadow-color:
-  --px-toggle-backgound-color--off:
-  --px-toggle-border-color--off:
-  --px-toggle-background-color--on:
-  --px-toggle-border-color--on:
+  // // Actionable Text & Icons
+  // --px-actionable-text-color:
+  // --px-actionable-text-color--hover:
+  // --px-actionable-text-color--active:
+  // --px-selectable-text-color:
+  // --px-selectable-text-color--hover:
+  // --px-selectable-text-color--active:
+  // --px-actionable-alt-text-color:
+  // --px-actionable-alt-text-color--hover:
+  // --px-actionable-alt-text-color--active:
+  // --px-disabled-text-color:
+  //
+  // // Button Group
+  // --px-btn-group-text-color:
+  // --px-btn-group-background-color:
+  // --px-btn-group-background-color--hover:
+  // --px-btn-group-background-color--pressed:
+  // --px-btn-group-border-color:
+  // --px-btn-group-border-color--hover:
+  // --px-btn-group-border-color--pressed:
+  //
+  // // Buttons
+  // --px-btn-border-color:
+  // --px-btn-border-color--hover:
+  // --px-btn-border-color--pressed:
+  // --px-btn-shadow--light:
+  // --px-btn-background:
+  // --px-btn-background--hover:
+  // --px-btn-background--pressed:
+  // --px-btn-color:
+  // --px-btn-shadow:
+  // --px-btn-bare-color--visited:
+  // --px-btn-bare-color--hover:
+  // --px-btn-bare-color--pressed:
+  // --px-btn-primary-bare-color--visited:
+  // --px-btn-primary-bare-color--hover:
+  // --px-btn-primary-bare-color--pressed:
+  // --px-btn-primary-border-color:
+  // --px-btn-primary-background:
+  // --px-btn-primary-background--hover:
+  // --px-btn-primary-background--pressed:
+  // --px-btn-primary-color:
+  // --px-btn-tertiary-background:
+  // --px-btn-tertiary-color:
+  // --px-btn-tertiary-background--hover:
+  // --px-btn-tertiary-background--pressed:
+  // --px-btn-disabled-border-color:
+  // --px-btn-disabled-background:
+  // --px-btn-disabled-color:
+  //
+  // // Code
+  // --px-code-text-color:
+  // --px-code-background-color:
+  // --px-code-border-color:
+  //
+  // // Forms
+  // --px-input-text-color:
+  // --px-input-text-color--placeholder:
+  // --px-input-background-color:
+  // --px-input-border-color--inner:
+  // --px-input-border-color--outer:
+  // --px-input-border-color--inner--focused:
+  // --px-input-border-color--outer--focused:
+  // --px-input-text-color--disabled:
+  // --px-input-background-color--disabled:
+  // --px-input-border-color--disabled:
+  // // --px-input-text-color--readonly: TODO;
+  // // --px-input-background-color--readonly: TODO;
+  // // --px-input-border-color--readonly: TODO;
+  // // --px-input-text-color--help: TODO;
+  // --px-select-background-color:
+  // --px-select-text-color:
+  // // --px-select-chevron-color:
+  // --px-select-shadow-color--dark:
+  // --px-select-shadow-color--light:
+  // --px-select-text-color--disabled:
+  // // --px-select-chevron-color--disabled:
+  // --px-select-background-color--disabled:
+  // --px-select-background-color--hover:
+  // --px-select-border-color--hover:
+  // --px-select-background-color--pressed:
+  // --px-select-border-color--pressed:
+  // --px-multiselect-background-color:
+  // --px-validation-warning-text-color:
+  // --px-validation-error-text-color:
+  // --px-validation-success-text-color:
+  //
+  // // Input Group
+  // --px-input-group-text-color:
+  // --px-input-group-icon-color:
+  //
+  // // List UI
+  // --px-list-ui-border-color:
+  //
+  // // Tables
+  // --px-table-border-color:
+  //
+  // // Toggle
+  // --px-toggle-switch-color:
+  // --px-toggle-switch-border-color:
+  // --px-toggle-switch-shadow-color:
+  // --px-toggle-backgound-color--off:
+  // --px-toggle-border-color--off:
+  // --px-toggle-background-color--on:
+  // --px-toggle-border-color--on:
 
 
   /********************************/
@@ -134,408 +135,410 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   /********************************/
 
   // Alert Label
-  --px-alert-label-text-color--alert:
-  --px-alert-label-background-color--alert:
-  --px-alert-label-text-color--warning:
-  --px-alert-label-background-color--warning:
-  --px-alert-label-text-color--error:
-  --px-alert-label-background-color--error:
-  --px-alert-label-text-color--info:
-  --px-alert-label-background-color--info:
-  --px-alert-label-text-color--healthy:
-  --px-alert-label-background-color--healthy:
-  --px-alert-label-border-color--healthy:
-  --px-alert-label-text-color--inverted:
-  --px-alert-label-background-color--inverted:
-  --px-alert-label-text-color--unknown:
-  --px-alert-label-background-color--unknown:
-
-  // Alert Message
-  --px-alert-message-background-color:
-  --px-alert-message-icon-outline-color:
-  --px-alert-message-icon-text-color:
-  --px-alert-message-alert-color:
-  --px-alert-message-warning-color:
-  --px-alert-message-error-color:
-  --px-alert-message-info-color:
-  --px-alert-message-dismiss-icon-color:
+  // --px-alert-label-text-color--alert:
+  // --px-alert-label-background-color--alert:
+  // --px-alert-label-text-color--warning:
+  // --px-alert-label-background-color--warning:
+  // --px-alert-label-text-color--error:
+  // --px-alert-label-background-color--error:
+  // --px-alert-label-text-color--info:
+  // --px-alert-label-background-color--info:
+  // --px-alert-label-text-color--healthy:
+  // --px-alert-label-background-color--healthy:
+  // --px-alert-label-border-color--healthy:
+  // --px-alert-label-text-color--inverted:
+  // --px-alert-label-background-color--inverted:
+  // --px-alert-label-text-color--unknown:
+  // --px-alert-label-background-color--unknown:
+  //
+  // // Alert Message
+  // --px-alert-message-background-color:
+  // --px-alert-message-icon-outline-color:
+  // --px-alert-message-icon-text-color:
+  // --px-alert-message-alert-color:
+  // --px-alert-message-warning-color:
+  // --px-alert-message-error-color:
+  // --px-alert-message-info-color:
+  // --px-alert-message-dismiss-icon-color:
 
   // App Nav
-  --px-app-nav-background-color:
-  --px-app-nav-link-text-color:
-  --px-app-nav-link-selected-color:
-  --px-app-nav-link-hover-color:
-  --px-app-nav-link-selected-active-color:
-  --px-app-nav-hamburger-button-color:
+
+  --px-app-nav-background-color:            $gray10;
+  --px-app-nav-link-text-color:             $white;
+  --px-app-nav-link-selected-color:         $select-pressed;
+  --px-app-nav-link-selected-active-color:  $select-hover;
+  --px-app-nav-link-hover-color:            $gray8;
+  --px-app-nav-link-active-color:           $primary-hover;
+  --px-app-nav-hamburger-button-color:      $white;
 
   // Card
-  --px-card-border-color:
-  --px-card-background-color:
-
-  // Deck Selector
-  --px-deck-selector-border-color:
-  --px-deck-selector-background-color:
-  --px-deck-selector-text-color:
-  --px-deck-selector-hover-background-color:
-  --px-deck-selector-hover-text-color:
-  --px-deck-selector-li-border:
-
-  // Widget Cards
-  --px-widget-border-color:
-
-  //// Charts
-
-  // Percent Circle
-  --px-percent-circle-fill-color:
-  --px-percent-circle-background-color:
-  --px-percent-circle-text-color:
-
-  // Simple Bar Chart
-  --px-simple-bar-chart-text-color:
-  --px-simple-bar-chart-background-color:
-
-  // Simple Horizontal Bar Chart
-  --px-simple-horizontal-bar-chart-background-color:
-  --px-simple-horizontal-bar-chart-legend-text-color:
-  --px-simple-horizontal-bar-chart-label-text-color:
-  --px-simple-horizontal-bar-chart-axis-color:
-
-  // Simple Line Chart
-  --px-simple-line-chart-background-color:
-  --px-simple-line-chart-border-color:
-  --px-simple-line-chart-grid-color:
-  --px-simple-line-chart-bottom-color:
-  --px-simple-line-chart-axis-bar-color:
-  --px-simple-line-chart-axis-label-color:
-  --px-simple-line-chart-axis-label-font-weight:
-  --px-simple-line-chart-line-color:
-  --px-simple-line-chart-theshold-line-color:
-
-  // Simple Win-Loss Chart
-  --px-win-loss-border-color:
-  --px-win-loss-background-color:
-  --px-win-loss-positive-fill-color:
-  --px-win-loss-negative-fill-color:
-
-  // Clipboard
-  --px-clipboard-icon-color:
-  --px-clipboard-icon-color--hover:
-  --px-clipboard-icon-color--pressed:
-  --px-clipboard-icon-color--copied:
-
-  // Context Browser
-  --px-cb-background-color:
-  --px-cb-modal-color:
-  --px-cb-scrollbar-track-color:
-  --px-cb-scrollbar-thumb-color:
-  --px-cb-border-color:
-  --px-cb-background-color--selected:
-  --px-cb-text-color--selected:
-  --px-cb-background-color--secondary:
-
-  // Data Table
-  --px-data-table-border-color:
-  --px-data-table-cell-border-color:
-  --px-data-table-cell-border-validation--failed:
-  --px-data-table-cell-border-color--edit:
-  --px-data-table-cell-border-color--selected:
-  --px-data-table-cell--selected:
-  --px-data-table-cell-background-color--selected:
-  --px-data-table-cell-background-color--edit:
-  --px-data-table-background-color-striped--even:
-  --px-data-table-row-border-top-color--selected:
-  --px-data-table-row-border-bottom-color--selected:
-  --px-data-table-cell-text-color--selected:
-  --px-data-table-cell-text-color-validation--failed:
-  --px-data-table-cell-text-color--sorted:
-  --px-data-table-cell-border-validation--failed:
-  --px-data-table-results-text-color--none:
-  --px-data-table-btn-pagination-number-background-color:
-  --px-data-table-btn-pagination-number-text-color:
-  --px-data-table-btn-pagination-number-background-color--hover:
-  --px-data-table-btn-pagination-number-text-color--hover:
-  --px-data-table-insertion-indicator-td-background-color:
-  --px-data-table-text-input-background-color--filter:
-  --px-data-table-tr--filter:
-  --px-data-table-text-color--dragged:
-  --cell--value__highlight--color__high:
-  --cell--value__highlight--color__medium:
-  --cell--value__highlight--color__low:
-
-  //// Datetime Components
-
-  // Calendar Picker
-  --px-calendar-background-color:
-  --px-calendar-background-color--hover:
-  --px-calendar-background-color--pressed:
-  --px-calendar-background-color--selected:
-  --px-calendar-background-color--selected--hover:
-  --px-calendar-background-color--selected--pressed:
-  --px-calendar-text-color:
-  --px-calendar-text-color--hover:
-  --px-calendar-text-color--selected:
-  --px-calendar-alt-background-color:
-  --px-calendar-labels--text-color:
-  --px-calendar-sub-labels--text-color:
-
-  // Datetime Common
-  --px-datetime-entry-selected:
-
-  // Datetime Field
-  --px-datetime-border-color-validation--failed:
-
-  // Datetime Picker
-  --px-datetime-picker-background-color:
-  --px-datetime-picker-background-color--hover:
-  --px-datetime-picker-background-color--pressed:
-  --px-datetime-picker-border-color:
-  --px-datetime-picker-overlay-color:
-
-  // Datetime Range Field
-  --px-datetime-range-field-text-color-validation--failed:
-  --px-datetime-range-field-to-color:
-
-  // Datetime Range Panel
-  --px-range-panel-border-color:
-  --px-range-panel-background-color:
-  --px-range-panel-text-color:
-  --px-range-panel-dash:
-  --px-range-panel-overlay-color:
-  --px-range-panel-background-color--hover:
-  --px-range-panel-background-color--pressed:
-  --px-range-panel-text-color--selected:
-  --px-range-panel-text-color--selected--hover:
-  --px-range-panel-text-color--selected--pressed:
-
-  // Rangepicker
-  --px-rangepicker-overlay-color:
-
-  //Demo Snippet
-  --px-demo-snippet-background-color:
-
-  // Dropdown
-  --px-dropdown-bg-color:
-  --px-dropdown-bg-color--hover:
-  --px-dropdown-bg-color--disabled:
-  --px-dropdown-bg-color--opened:
-  --px-dropdown-border-color:
-  --px-dropdown-border-color--hover:
-  --px-dropdown-border-color--opened:
-  --px-dropdown-border-color--disabled:
-  --px-dropdown-text-color:
-  --px-dropdown-text-color--hover:
-  --px-dropdown-text-color--pressed:
-  --px-dropdown-text-color--disabled:
-  --px-dropdown-text-color--opened:
-  --px-dropdown-list-item-background-color:
-  --px-dropdown-list-item-text-color:
-  --px-dropdown-content-background-color:
-  --px-dropdown-content-border-color:
-  --px-dropdown-content-text-color:
-
-  // File Upload
-  --px-file-upload-validation-color:
-  --px-file-upload-dropzone-background-color:
-  --px-file-upload-dropzone-border-color:
-
-  // Inbox
-  --px-inbox-border-color:
-  --px-inbox-secondary-text-color:
-  --px-inbox-li-background-color:
-  --px-inbox-li-background-color--selected:
-  --px-inbox-li-text-color--selected:
-  --px-inbox-icon-outline-color:
-  --px-inbox-alert-color:
-  --px-inbox-warning-color:
-  --px-inbox-error-color:
-  --px-inbox-information-color:
-
-  // KPI
-  --px-kpi-text-color:
-
-  // Login
-  --px-login-border-color:
-  --px-login-text-color:
-  --px-login-text-color--hover:
-  --px-login-background-color:
-  --px-login-background-color--hover:
-
-  // Modal
-  --px-modal-background-color:
-  --px-modal-overlay-color:
-  --px-modal-border-color:
-
-  // Overlay
-  --px-overlay-light-color:
-  --px-overlay-dark-color:
-
-  // Popover
-  --px-popover-background-color:
-  --px-popover-border-color:
-  --px-popover-text-color:
-
-  // Progress Bar
-  --px-progress-bar-fill-color:
-  --px-progress-bar-stripe-color:
-  --px-progress-bar-background-color:
-
-  // Slider
-  --px-slider-border-color:
-  --px-slider-background-color:
-  --px-slider-border-color--selected:
-  --px-slider-background-color--selected:
-  --px-handle-border-color:
-  --px-handle-border-color--disabled:
-  --px-handle-stroke-color:
-  --px-handle-background-color:
-  --px-handle-background-color--hover:
-  --px-handle-shadow-color:
-
-  // Spinner
-  --px-spinner-fill-color:
-  --px-spinner-background-color:
-
-  // Tabs
-  --px-tab-background-color:
-  --px-tab-background-color--selected:
-  --px-tab-text-color:
-  --px-tab-text-color--selected:
-  --px-tab-text-color--bare:
-  --px-tab-border-color:
-  --px-tab-border-color--bare:
-  --px-tab-border-color--selected:
-
-  // Tooltip
-  --px-tooltip-background-color:
-  --px-tooltip-text-color:
-
-  --px-tooltip-light-background-color:
-  --px-tooltip-light-text-color:
-  --px-tooltip-light-border-color:
-
-  // Typeahead
-  --px-typeahead-background-color:
-  --px-typeahead-background-color--selected:
-  --px-typeahead-border-color:
-  --px-typeahead-border-color--focus:
-  --px-typeahead-box-shadow-color:
-  --px-typeahead-box-shadow-color--focus:
-  --px-typeahead-text-color:
-  --px-typeahead-text-color--selected:
-
-  // View Header
-  --px-view-header-background-color:
-
-
-  --px-font-family: $predix-font-family;
-
-
-  // Vis
-  --px-vis-axis-brush-outline-color:
-  --px-vis-axis-brush-fill-color:
-  --px-vis-axis-brush-fill-opacity:
-
-  --px-vis-axis-color:
-  --px-vis-axis-title-color:
-
-  --px-vis-axis-inline-title-color:
-  --px-vis-axis-inline-type-color:
-  --px-vis-axis-inline-box-color:
-
-  --px-dynamic-menu-icon-color:
-  --px-dynamic-menu-background-color:
-  --px-dynamic-menu-border-color:
-  --px-dynamic-menu-text-color:
-  --px-dynamic-menu-item-background-color:
-  --px-dynamic-menu-item-text-color:
-
-  --px-vis-nav-brush-outline-color:
-  --px-vis-nav-brush-fill-color:
-  --px-vis-nav-brush-opacity:
-  --px-vis-nav-brush-gradient-fill-color:
-  --px-vis-nav-brush-gradient-opacity-1:
-  --px-vis-nav-brush-gradient-opacity-2:
-  --px-vis-nav-brush-handle-fill-color:
-  --px-vis-nav-brush-handle-lines-color:
-  --px-vis-nav-brush-handle-fill-color-hover:
-  --px-vis-nav-brush-handle-lines-color-hover:
-  --px-vis-nav-brush-handle-fill-color-press:
-  --px-vis-nav-brush-handle-lines-color-press:
-
-  --px-vis-cursor-line-color:
-
-  --px-vis-event-line-color:
-  --px-vis-event-icon-color:
-
-  --px-vis-gridlines-color:
-
-  --px-vis-pie-empty-color:
-
-  --px-vis-threshold-color:
-
-  --px-vis-zoom-brush-outline-color:
-  --px-vis-zoom-brush-fill-color:
-  --px-vis-zoom-brush-fill-opacity:
-
-
-  // Vis CSS
-  --px-vis-pie-title-color:
-  --px-vis-pie-title-value-color:
-
-  --px-vis-register-series-name:
-  --px-vis-register-data-value:
-  --px-vis-register-box:
-
-  // Vis Data Vis
-  // Colors MUST start at 0 and cannot contain gaps.
-  --px-vis-series-color-0:
-  --px-vis-series-color-1:
-  --px-vis-series-color-2:
-  --px-vis-series-color-3:
-  --px-vis-series-color-4:
-  --px-vis-series-color-5:
-  --px-vis-series-color-6:
-  --px-vis-series-color-7:
-  --px-vis-series-color-8:
-  --px-vis-series-color-9:
-
-  --px-vis-series-color-10:
-  --px-vis-series-color-11:
-  --px-vis-series-color-12:
-  --px-vis-series-color-13:
-  --px-vis-series-color-14:
-  --px-vis-series-color-15:
-  --px-vis-series-color-16:
-  --px-vis-series-color-17:
-  --px-vis-series-color-18:
-  --px-vis-series-color-19:
-
-  --px-vis-series-color-20:
-  --px-vis-series-color-21:
-  --px-vis-series-color-22:
-  --px-vis-series-color-23:
-  --px-vis-series-color-24:
-  --px-vis-series-color-25:
-  --px-vis-series-color-26:
-  --px-vis-series-color-27:
-  --px-vis-series-color-28:
-  --px-vis-series-color-29:
-
-
-  // Gauge styles
-  --px-gauge-fill-error-color:
-  --px-gauge-fill-anomaly-color:
-  --px-gauge-fill-abnormal-color:
-  --px-gauge-fill-normal-color:
-  --px-gauge-empty-color:
-  --px-gauge-needle-color:
-
-  // Seed App styles
-  --px-seed-app-main-content-area-background-color:
-  --px-seed-app-logo-color:
-  --px-seed-header-text-color:
-  --px-seed-header-background-color:
-  --px-seed-footer-background-color:
+  // --px-card-border-color:
+  // --px-card-background-color:
+  //
+  // // Deck Selector
+  // --px-deck-selector-border-color:
+  // --px-deck-selector-background-color:
+  // --px-deck-selector-text-color:
+  // --px-deck-selector-hover-background-color:
+  // --px-deck-selector-hover-text-color:
+  // --px-deck-selector-li-border:
+  //
+  // // Widget Cards
+  // --px-widget-border-color:
+  //
+  // //// Charts
+  //
+  // // Percent Circle
+  // --px-percent-circle-fill-color:
+  // --px-percent-circle-background-color:
+  // --px-percent-circle-text-color:
+  //
+  // // Simple Bar Chart
+  // --px-simple-bar-chart-text-color:
+  // --px-simple-bar-chart-background-color:
+  //
+  // // Simple Horizontal Bar Chart
+  // --px-simple-horizontal-bar-chart-background-color:
+  // --px-simple-horizontal-bar-chart-legend-text-color:
+  // --px-simple-horizontal-bar-chart-label-text-color:
+  // --px-simple-horizontal-bar-chart-axis-color:
+  //
+  // // Simple Line Chart
+  // --px-simple-line-chart-background-color:
+  // --px-simple-line-chart-border-color:
+  // --px-simple-line-chart-grid-color:
+  // --px-simple-line-chart-bottom-color:
+  // --px-simple-line-chart-axis-bar-color:
+  // --px-simple-line-chart-axis-label-color:
+  // --px-simple-line-chart-axis-label-font-weight:
+  // --px-simple-line-chart-line-color:
+  // --px-simple-line-chart-theshold-line-color:
+  //
+  // // Simple Win-Loss Chart
+  // --px-win-loss-border-color:
+  // --px-win-loss-background-color:
+  // --px-win-loss-positive-fill-color:
+  // --px-win-loss-negative-fill-color:
+  //
+  // // Clipboard
+  // --px-clipboard-icon-color:
+  // --px-clipboard-icon-color--hover:
+  // --px-clipboard-icon-color--pressed:
+  // --px-clipboard-icon-color--copied:
+  //
+  // // Context Browser
+  // --px-cb-background-color:
+  // --px-cb-modal-color:
+  // --px-cb-scrollbar-track-color:
+  // --px-cb-scrollbar-thumb-color:
+  // --px-cb-border-color:
+  // --px-cb-background-color--selected:
+  // --px-cb-text-color--selected:
+  // --px-cb-background-color--secondary:
+  //
+  // // Data Table
+  // --px-data-table-border-color:
+  // --px-data-table-cell-border-color:
+  // --px-data-table-cell-border-validation--failed:
+  // --px-data-table-cell-border-color--edit:
+  // --px-data-table-cell-border-color--selected:
+  // --px-data-table-cell--selected:
+  // --px-data-table-cell-background-color--selected:
+  // --px-data-table-cell-background-color--edit:
+  // --px-data-table-background-color-striped--even:
+  // --px-data-table-row-border-top-color--selected:
+  // --px-data-table-row-border-bottom-color--selected:
+  // --px-data-table-cell-text-color--selected:
+  // --px-data-table-cell-text-color-validation--failed:
+  // --px-data-table-cell-text-color--sorted:
+  // --px-data-table-cell-border-validation--failed:
+  // --px-data-table-results-text-color--none:
+  // --px-data-table-btn-pagination-number-background-color:
+  // --px-data-table-btn-pagination-number-text-color:
+  // --px-data-table-btn-pagination-number-background-color--hover:
+  // --px-data-table-btn-pagination-number-text-color--hover:
+  // --px-data-table-insertion-indicator-td-background-color:
+  // --px-data-table-text-input-background-color--filter:
+  // --px-data-table-tr--filter:
+  // --px-data-table-text-color--dragged:
+  // --cell--value__highlight--color__high:
+  // --cell--value__highlight--color__medium:
+  // --cell--value__highlight--color__low:
+  //
+  // //// Datetime Components
+  //
+  // // Calendar Picker
+  // --px-calendar-background-color:
+  // --px-calendar-background-color--hover:
+  // --px-calendar-background-color--pressed:
+  // --px-calendar-background-color--selected:
+  // --px-calendar-background-color--selected--hover:
+  // --px-calendar-background-color--selected--pressed:
+  // --px-calendar-text-color:
+  // --px-calendar-text-color--hover:
+  // --px-calendar-text-color--selected:
+  // --px-calendar-alt-background-color:
+  // --px-calendar-labels--text-color:
+  // --px-calendar-sub-labels--text-color:
+  //
+  // // Datetime Common
+  // --px-datetime-entry-selected:
+  //
+  // // Datetime Field
+  // --px-datetime-border-color-validation--failed:
+  //
+  // // Datetime Picker
+  // --px-datetime-picker-background-color:
+  // --px-datetime-picker-background-color--hover:
+  // --px-datetime-picker-background-color--pressed:
+  // --px-datetime-picker-border-color:
+  // --px-datetime-picker-overlay-color:
+  //
+  // // Datetime Range Field
+  // --px-datetime-range-field-text-color-validation--failed:
+  // --px-datetime-range-field-to-color:
+  //
+  // // Datetime Range Panel
+  // --px-range-panel-border-color:
+  // --px-range-panel-background-color:
+  // --px-range-panel-text-color:
+  // --px-range-panel-dash:
+  // --px-range-panel-overlay-color:
+  // --px-range-panel-background-color--hover:
+  // --px-range-panel-background-color--pressed:
+  // --px-range-panel-text-color--selected:
+  // --px-range-panel-text-color--selected--hover:
+  // --px-range-panel-text-color--selected--pressed:
+  //
+  // // Rangepicker
+  // --px-rangepicker-overlay-color:
+  //
+  // //Demo Snippet
+  // --px-demo-snippet-background-color:
+  //
+  // // Dropdown
+  // --px-dropdown-bg-color:
+  // --px-dropdown-bg-color--hover:
+  // --px-dropdown-bg-color--disabled:
+  // --px-dropdown-bg-color--opened:
+  // --px-dropdown-border-color:
+  // --px-dropdown-border-color--hover:
+  // --px-dropdown-border-color--opened:
+  // --px-dropdown-border-color--disabled:
+  // --px-dropdown-text-color:
+  // --px-dropdown-text-color--hover:
+  // --px-dropdown-text-color--pressed:
+  // --px-dropdown-text-color--disabled:
+  // --px-dropdown-text-color--opened:
+  // --px-dropdown-list-item-background-color:
+  // --px-dropdown-list-item-text-color:
+  // --px-dropdown-content-background-color:
+  // --px-dropdown-content-border-color:
+  // --px-dropdown-content-text-color:
+  //
+  // // File Upload
+  // --px-file-upload-validation-color:
+  // --px-file-upload-dropzone-background-color:
+  // --px-file-upload-dropzone-border-color:
+  //
+  // // Inbox
+  // --px-inbox-border-color:
+  // --px-inbox-secondary-text-color:
+  // --px-inbox-li-background-color:
+  // --px-inbox-li-background-color--selected:
+  // --px-inbox-li-text-color--selected:
+  // --px-inbox-icon-outline-color:
+  // --px-inbox-alert-color:
+  // --px-inbox-warning-color:
+  // --px-inbox-error-color:
+  // --px-inbox-information-color:
+  //
+  // // KPI
+  // --px-kpi-text-color:
+  //
+  // // Login
+  // --px-login-border-color:
+  // --px-login-text-color:
+  // --px-login-text-color--hover:
+  // --px-login-background-color:
+  // --px-login-background-color--hover:
+  //
+  // // Modal
+  // --px-modal-background-color:
+  // --px-modal-overlay-color:
+  // --px-modal-border-color:
+  //
+  // // Overlay
+  // --px-overlay-light-color:
+  // --px-overlay-dark-color:
+  //
+  // // Popover
+  // --px-popover-background-color:
+  // --px-popover-border-color:
+  // --px-popover-text-color:
+  //
+  // // Progress Bar
+  // --px-progress-bar-fill-color:
+  // --px-progress-bar-stripe-color:
+  // --px-progress-bar-background-color:
+  //
+  // // Slider
+  // --px-slider-border-color:
+  // --px-slider-background-color:
+  // --px-slider-border-color--selected:
+  // --px-slider-background-color--selected:
+  // --px-handle-border-color:
+  // --px-handle-border-color--disabled:
+  // --px-handle-stroke-color:
+  // --px-handle-background-color:
+  // --px-handle-background-color--hover:
+  // --px-handle-shadow-color:
+  //
+  // // Spinner
+  // --px-spinner-fill-color:
+  // --px-spinner-background-color:
+  //
+  // // Tabs
+  // --px-tab-background-color:
+  // --px-tab-background-color--selected:
+  // --px-tab-text-color:
+  // --px-tab-text-color--selected:
+  // --px-tab-text-color--bare:
+  // --px-tab-border-color:
+  // --px-tab-border-color--bare:
+  // --px-tab-border-color--selected:
+  //
+  // // Tooltip
+  // --px-tooltip-background-color:
+  // --px-tooltip-text-color:
+  //
+  // --px-tooltip-light-background-color:
+  // --px-tooltip-light-text-color:
+  // --px-tooltip-light-border-color:
+  //
+  // // Typeahead
+  // --px-typeahead-background-color:
+  // --px-typeahead-background-color--selected:
+  // --px-typeahead-border-color:
+  // --px-typeahead-border-color--focus:
+  // --px-typeahead-box-shadow-color:
+  // --px-typeahead-box-shadow-color--focus:
+  // --px-typeahead-text-color:
+  // --px-typeahead-text-color--selected:
+  //
+  // // View Header
+  // --px-view-header-background-color:
+  //
+  //
+  // --px-font-family: $predix-font-family;
+  //
+  //
+  // // Vis
+  // --px-vis-axis-brush-outline-color:
+  // --px-vis-axis-brush-fill-color:
+  // --px-vis-axis-brush-fill-opacity:
+  //
+  // --px-vis-axis-color:
+  // --px-vis-axis-title-color:
+  //
+  // --px-vis-axis-inline-title-color:
+  // --px-vis-axis-inline-type-color:
+  // --px-vis-axis-inline-box-color:
+  //
+  // --px-dynamic-menu-icon-color:
+  // --px-dynamic-menu-background-color:
+  // --px-dynamic-menu-border-color:
+  // --px-dynamic-menu-text-color:
+  // --px-dynamic-menu-item-background-color:
+  // --px-dynamic-menu-item-text-color:
+  //
+  // --px-vis-nav-brush-outline-color:
+  // --px-vis-nav-brush-fill-color:
+  // --px-vis-nav-brush-opacity:
+  // --px-vis-nav-brush-gradient-fill-color:
+  // --px-vis-nav-brush-gradient-opacity-1:
+  // --px-vis-nav-brush-gradient-opacity-2:
+  // --px-vis-nav-brush-handle-fill-color:
+  // --px-vis-nav-brush-handle-lines-color:
+  // --px-vis-nav-brush-handle-fill-color-hover:
+  // --px-vis-nav-brush-handle-lines-color-hover:
+  // --px-vis-nav-brush-handle-fill-color-press:
+  // --px-vis-nav-brush-handle-lines-color-press:
+  //
+  // --px-vis-cursor-line-color:
+  //
+  // --px-vis-event-line-color:
+  // --px-vis-event-icon-color:
+  //
+  // --px-vis-gridlines-color:
+  //
+  // --px-vis-pie-empty-color:
+  //
+  // --px-vis-threshold-color:
+  //
+  // --px-vis-zoom-brush-outline-color:
+  // --px-vis-zoom-brush-fill-color:
+  // --px-vis-zoom-brush-fill-opacity:
+  //
+  //
+  // // Vis CSS
+  // --px-vis-pie-title-color:
+  // --px-vis-pie-title-value-color:
+  //
+  // --px-vis-register-series-name:
+  // --px-vis-register-data-value:
+  // --px-vis-register-box:
+  //
+  // // Vis Data Vis
+  // // Colors MUST start at 0 and cannot contain gaps.
+  // --px-vis-series-color-0:
+  // --px-vis-series-color-1:
+  // --px-vis-series-color-2:
+  // --px-vis-series-color-3:
+  // --px-vis-series-color-4:
+  // --px-vis-series-color-5:
+  // --px-vis-series-color-6:
+  // --px-vis-series-color-7:
+  // --px-vis-series-color-8:
+  // --px-vis-series-color-9:
+  //
+  // --px-vis-series-color-10:
+  // --px-vis-series-color-11:
+  // --px-vis-series-color-12:
+  // --px-vis-series-color-13:
+  // --px-vis-series-color-14:
+  // --px-vis-series-color-15:
+  // --px-vis-series-color-16:
+  // --px-vis-series-color-17:
+  // --px-vis-series-color-18:
+  // --px-vis-series-color-19:
+  //
+  // --px-vis-series-color-20:
+  // --px-vis-series-color-21:
+  // --px-vis-series-color-22:
+  // --px-vis-series-color-23:
+  // --px-vis-series-color-24:
+  // --px-vis-series-color-25:
+  // --px-vis-series-color-26:
+  // --px-vis-series-color-27:
+  // --px-vis-series-color-28:
+  // --px-vis-series-color-29:
+  //
+  //
+  // // Gauge styles
+  // --px-gauge-fill-error-color:
+  // --px-gauge-fill-anomaly-color:
+  // --px-gauge-fill-abnormal-color:
+  // --px-gauge-fill-normal-color:
+  // --px-gauge-empty-color:
+  // --px-gauge-needle-color:
+  //
+  // // Seed App styles
+  // --px-seed-app-main-content-area-background-color:
+  // --px-seed-app-logo-color:
+  // --px-seed-header-text-color:
+  // --px-seed-header-background-color:
+  // --px-seed-footer-background-color:
 
 }
 
@@ -547,26 +550,6 @@ html {
 :host {
   font-family: $predix-font-family;
 }
-
-}
-
-
-//
-// page theme variables
-//
-
-$px-page-html-background-color:
-$px-page-link-color:
-$px-page-spine-border-color:
-$px-page-spine-text-color:
-$px-page-bold-text-color:
-$px-page-card-border-color:
-$px-page-card-background-color:
-$px-page-card-text-color:
-$px-page-card-paragraph-text-color:
-$px-page-banner-text-color:
-$px-page-banner-meatball-color:
-$px-page-main-content-area-background-color:
 
 @font-face {
   font-family: 'FontAwesome';
