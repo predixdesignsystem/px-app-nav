@@ -1,3 +1,7 @@
+v3.0.0
+=================
+* Release with new typography and colour dependencies
+
 v2.0.3
 =================
 * Update colors design dependency
