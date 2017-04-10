@@ -27,14 +27,13 @@
 // Component
 
 :host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
   position: relative;
 }
 
 .app-nav-item {
-  // display: flex;
   display: flex;
   flex: 1;
   align-items: center;
@@ -46,11 +45,11 @@
   height: 60px;
 }
 
-:host:hover:not([selected]) .app-nav-item {
+.app-nav-item:hover {
   background-color: rgb(239, 242, 245);
 }
 
-:host([selected]) .app-nav-item {
+.app-nav-item.app-nav-item--selected {
   background-color: #FFFFFF;
 
   &:before {
@@ -65,6 +64,26 @@
     background-color: #0986A4;
   }
 }
+
+:host-context(.app-nav-group) .app-nav-item {
+  display: block;
+  height: 30px;
+  padding-left: $inuit-base-spacing-unit;
+  padding-right: $inuit-base-spacing-unit;
+  line-height: 30px;
+}
+
+:host-context(.app-nav-group) .app-nav-item.app-nav-item--selected {
+  background-color: inherit;
+  color: rgb(21,163,196);
+  &:before {
+    display: none;
+  }
+}
+
+// :host([selected]) .app-nav-item {
+//   color: red;
+// }
 
 .app-nav-item__label {
   margin: 0;
@@ -93,6 +112,10 @@
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
   display: block;
   max-width: 632px;
+}
+
+.app-nav-item__group {
+
 }
 
 // Trumps

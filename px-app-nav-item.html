@@ -7,7 +7,7 @@
   <template>
     <style include="px-app-nav-item-styles"></style>
 
-    <div class="app-nav-item" on-tap="_handleSelfTapped">
+    <div class="app-nav-item" id="item" on-tap="_handleSelfTapped">
       <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
         <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
       </template>
@@ -57,11 +57,22 @@
 
       /**
        * A named path for this item. Used to select it programatically, e.g.
-       * by binding to the current URL route.
+       * by binding to the current URL route. Path names cannot have a dot
+       * ('.') in them or they will not work.
        */
       path: {
         type: String,
         reflectToAttribute: true
+      },
+
+      /**
+       * Optional. The index of the item in a group of other items. Helps with
+       * selecting an item when no paths are provided. If you provide a path,
+       * you do not need to set this. If possible, items will be automatically
+       * indexed as they're added to the navigation.
+       */
+      index: {
+        type: Number
       }
     },
 
@@ -92,14 +103,18 @@
      */
     _handleSelectedChanged(nextState, lastState) {
       if (nextState === true) {
+        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
         this.fire('px-app-nav-item-selected', {
-          path: this.path ? [this.path] : [this]
-        });
+          path: [path]
+        }, {cancelable:true});
+        this.toggleClass('app-nav-item--selected', true, this.$.item);
       }
       if (nextState === false) {
+        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
         this.fire('px-app-nav-item-deselected', {
-          path: this.path ? [this.path] : [this]
-        });
+          path: [path]
+        }, {cancelable:true});
+        this.toggleClass('app-nav-item--selected', false, this.$.item);
       }
     }
   });

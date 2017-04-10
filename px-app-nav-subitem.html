@@ -28,7 +28,8 @@
         type: Boolean,
         value: false,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        observer: '_handleSelectedChanged'
       },
 
       /**
@@ -56,6 +57,15 @@
      */
     _propIsTypeOf(prop, type) {
       return prop && type && (typeof prop === type);
+    },
+
+    _handleSelectedChanged(nextState, lastState) {
+      if (nextState === true) {
+        this.fire('px-app-nav-subitem-selected');
+      }
+      if (nextState === false) {
+        this.fire('px-app-nav-subitem-deselected');
+      }
     }
   });
 </script>

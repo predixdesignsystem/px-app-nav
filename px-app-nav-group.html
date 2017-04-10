@@ -19,7 +19,7 @@
       <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
     </div>
 
-    <iron-dropdown id="group" class="app-nav-item__subitems-dropdown"
+    <iron-dropdown id="group" class=""
         no-overlap
         dynamic-align
         no-animations
@@ -27,13 +27,15 @@
         opened="{{opened}}"
         position-target="[[_getPositionTarget()]]"
         on-iron-overlay-canceled="_handleGroupCanceled">
-      <div class="dropdown-content" id="groupcontent">
+      <div class="dropdown-content app-nav-group" id="groupcontent">
         <iron-selector
             selected-attribute="selected"
             selected="{{selectedSubpath}}"
             selected-item="{{selectedSubitem}}"
-            on-iron-select="_handleSubitemSelected"
-            attr-for-selected="path">
+            activate-event="px-app-nav-item-selected"
+            attr-for-selected="path"
+            on-items-changed="_indexItems"
+            id="selector">
           <content select="*"></content>
         </iron-selector>
       </div>
@@ -80,7 +82,8 @@
 
       /**
        * A named path for this item. Used to select one of its subitems programatically,
-       * e.g. by binding to the current URL route.
+       * e.g. by binding to the current URL route. Path names cannot have a dot
+       * ('.') in them or they will not work.
        */
       path: {
         type: String,
@@ -113,10 +116,45 @@
 
     attached: function() {
       this.listen(this, 'tap', '_handleSelfTapped');
+      this.listen(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
+
+      // var itemsObserveFn = this._handleItemsChanged.bind(this);
+      // this._itemsObserver = Polymer.dom(this.$.selector).observeNodes(itemsObserveFn);
     },
 
     detached: function() {
       this.unlisten(this, 'tap', '_handleSelfTapped');
+      this.unlisten(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
+
+      // Polymer.dom(this.$.selector).unobserveNodes(this._itemsObserver);
+    },
+
+    /**
+     * Selects a group subitem. Specify the item by its path attribute or by
+     * its index attribute.
+     *
+     * @param {Number|String} item
+     */
+    select(item) {
+      if (typeof item === 'string' && item.length) {
+        this._selectItem(item, 'path');
+      }
+      if (typeof item === 'number') {
+        this._selectItem(item, 'index');
+      }
+    },
+
+    _selectItem(ref, attr) {
+      var items = this.$.selector.items;
+      if (!items || !items.length) return;
+
+      var i = 0;
+      var len = items.length;
+      for (; i<len; i++) {
+        if (!items[i].selected && items[i].hasOwnProperty(attr) && items[i][attr] === ref) {
+          items[i].set('selected', true);
+        }
+      }
     },
 
     /**
@@ -198,11 +236,11 @@
      * to ask this item's parent to select it when its subitem is selected.
      */
     _handleSubitemSelected(evt) {
-      var localEvt = Polymer.dom(evt);
+      evt.preventDefault();
+      evt.stopPropagation();
 
-      var path = [];
-      path[0] = this.path ? this.path : this;
-      path[1] = localEvt.event.detail.item.path ? localEvt.event.detail.item.path : localEvt.event.detail.item;
+      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
+      var path = (evt.detail.path && Array.isArray(evt.detail.path)) ? [localPath].concat(evt.detail.path) : [localPath];
 
       this.fire('px-app-nav-item-selected', {
         group: true,
@@ -220,10 +258,32 @@
         this.set('selectedSubpath', null);
         this.closeGroup();
       }
+      if (nextState === true) {
+        this.toggleClass('app-nav-item--selected', true, this.$.itemButton);
+      }
+      if (nextState === false) {
+        this.toggleClass('app-nav-item--selected', false, this.$.itemButton);
+      }
     },
 
     _getPositionTarget() {
       return this.$.itemButton;
+    },
+
+    /**
+     * When new items are added to the group, automatically add an index to assist
+     * in keeping track of items without paths.
+     */
+    _indexItems(evt) {
+      if (!evt.detail || !evt.detail.value || !Array.isArray(evt.detail.value) || !evt.detail.value.length) return;
+
+      var i = 0;
+      var len = evt.detail.value.length;
+      for (; i<len; i++) {
+        if (!evt.detail.value[i].index) {
+          evt.detail.value[i].index = i;
+        }
+      }
     }
   });
 </script>

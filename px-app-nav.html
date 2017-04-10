@@ -62,14 +62,15 @@ Custom property | Description | Default
               attr-for-selected="path"
               activate-event="px-app-nav-item-selected"
               selected="{{_selectedPath}}"
-              selected-item="{{_selectedItem}}">
+              selected-item="{{_selectedItem}}"
+              on-items-changed="_indexItems"
+              id="selector">
             <template is="dom-repeat" items="{{navItems}}">
-
               <!-- Stamp groups, which hold subitems -->
               <template is="dom-if" if="{{_hasSubitems(item)}}">
                 <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-subitem>
+                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-item>
                   </template>
                 </px-app-nav-group>
               </template>
@@ -79,40 +80,11 @@ Custom property | Description | Default
                 <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
                 </px-app-nav-item>
               </template>
-
             </template>
           </iron-selector>
         </app-toolbar>
       </app-header>
     </section>
-
-<!--
-      <button class="btn btn--bare btn--svg" on-click="toggleNav">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="291 489.4 20 16">
-          <path fill="#ffffff" d="M291 489.4v4h20v-4h-20zm0 10h20v-4h-20v4zm0 6h20v-4h-20v4z"/>
-        </svg>
-      </button>
-      <ul id="navitemlist" class="navbar__item list-bare">
-        <template is="dom-repeat" items="{{navItems}}" as="navitem">
-          <li>
-            <a class$="{{navitem.class}}" href$="{{navitem.href}}" event-name$="{{navitem.eventName}}" on-click="navClickHandler" target$="_is NewTarget(item  )">
-              <iron-icon class="u-mr-- nav-item--icon" icon$="fa:{{navitem.icon}}" id$="nav-item-{{index}}"></iron-icon>
-              <span class="u-ml--">{{navitem.label}}</span>
-              <px-tooltip for$="nav-item-{{index}}" orientation="right" tooltip-message="{{navitem.label}}" hidden$="{{_navExpanded}}"></px-tooltip>
-            </a>
-            <ul class$="{{navitem.subitemlistclass}}">
-              <template is="dom-repeat" items="{{navitem.subitems}}">
-                <li>
-                  <a href$="{{item.href}}" class$="{{item.class}}" event-name$="{{item.eventName}}" on-click="subnavClickHandler"><span class$="{{navitem.subitemclass}}">{{item.label}}</span></a>
-                </li>
-              </template>
-            </ul>
-          </li>
-        </template>
-      </ul>
-    </nav> -->
-
-    <content></content>
   </template>
 </dom-module>
 
@@ -223,8 +195,162 @@ Custom property | Description | Default
       }
     },
 
+    attached: function() {
+      this.listen(this, 'px-app-nav-item-selected', '_handlePathSelected');
+    },
+
+    detached: function() {
+      this.unlisten(this, 'px-app-nav-item-selected', '_handlePathSelected');
+    },
+
+    /**
+     * Handles selection events that bubble up from subcomponents.
+     */
+    _handlePathSelected: function(evt) {
+      // var path = evt.detail.path || [];
+      // if (path.length) {
+      //   var pathStr = '';
+      // }
+    },
+
+    /**
+     * When new items are added to the group, automatically add an index to assist
+     * in keeping track of items without paths.
+     */
+    _indexItems(evt) {
+      if (!evt.detail || !evt.detail.value || !Array.isArray(evt.detail.value) || !evt.detail.value.length) return;
+
+      var i = 0;
+      var len = evt.detail.value.length;
+      for (; i<len; i++) {
+        if (!evt.detail.value[i].index) {
+          evt.detail.value[i].index = i;
+        }
+      }
+    },
+
     _selectedPathChanged: function(nextPath, lastPath) {
 
+    },
+
+    /**
+     * Selects an item by its path or its index.
+     *
+     * To select an item, just provide its path. For example, select the Dashboards
+     * item (which has path 'dashboards') with `select('dashboards')`
+     *
+     * To select an item inside a group, provide a sub-path. For example, select
+     * the first case (which has path 'case1') inside the Cases group (which has
+     * path 'cases') with `select('cases.case1')`.
+     *
+     * Note that individual path names cannot have dots ('.') in them or they
+     * cannot be selected.
+     *
+     * If an item is found, it will be returned after it is selected. If no item
+     * is found, return will be undefined.
+     *
+     * @param {Number|String} item
+     * @return {HTMLElement|undefined}
+     */
+    select: function(item) {
+      var selectedItem;
+
+      // If a string as a trailing dot ('foo.') clean the dot off
+      if (typeof item === 'string' && item.length > 0 && item.indexOf('.') === (item.length - 1)) {
+        item = item.substr(0, (item.length - 1));
+      }
+      // If the item is a string with subpaths, split and select each
+      if (typeof item === 'string' && item.length && item.indexOf('.') !== -1) {
+        item = item.split('.');
+        selectedItem = this._selectItems(item);
+      }
+      else if (typeof item === 'string' && item.length) {
+        selectedItem = this._selectItem(item, 'path');
+      }
+      else if (typeof item === 'number') {
+        selectedItem = this._selectItem(item, 'index');
+      }
+
+      return selectedItem;
+    },
+
+    /**
+     * Selects an item directly. If an (item[prop] === val), the item will be
+     * selected. If an item is found, it will be returned after it is selected.
+     * If no item is found, return will be undefined.
+     *
+     * @return {HTMLElement|undefined}
+     */
+    _selectItem(val, prop) {
+      var items = this.$.selector.items;
+      if (!items || !items.length) return;
+
+      var itemToSelect = this._findItem(items, val, prop);
+      if (itemToSelect && !itemToSelect.selected) {
+        itemToSelect.set('selected', true);
+      }
+
+      return itemToSelect;
+    },
+
+    /**
+     * Selects an item inside a group. `refs[0]` should be an index or path of
+     * a group. `refs[1]` should be an index or path of an item in that group.
+     *
+     * If an item is found, it will be returned after it is selected. If no item
+     * is found, return will be undefined.
+     *
+     * @return {HTMLElement|undefined}
+     */
+    _selectItems(refs) {
+      var items = this.$.selector.items;
+      if (!items || !items.length) return;
+
+      // Convert the group or item ref to a number, if it can be converted.
+      // Otherwise it will stay a string.
+      var groupRef = this._castStrToNum(refs[0]);
+      var itemRef = this._castStrToNum(refs[1]);
+
+      var groupToSelect = this._findItem(items, groupRef, (typeof groupRef === 'string') ? 'path' : 'index');
+      var itemToSelect;
+      if (groupToSelect && (typeof groupToSelect.select === 'function')) {
+        selectItem = groupToSelect.select(itemRef);
+      }
+
+      return itemToSelect;
+    },
+
+    /**
+     * Finds and returns an item that passes the test `item[prop] === val` or
+     * returns undefined.
+     *
+     * @param {Array} items - An array of `HTMLElement` to search
+     * @param {String|Number} val
+     * @param {String} prop - The property to check
+     * @returns {HTMLElement|undefined}
+     *
+     */
+    _findItem(items, val, prop) {
+      var found;
+      var i = 0;
+      var len = items.length;
+
+      for (; i<len; i++) {
+        if (typeof items[i][prop] !== 'undefined' && items[i][prop] === val) {
+          found = items[i];
+          break;
+        }
+      }
+
+      return found;
+    },
+
+    /**
+     * If the string can be casted to a number, casts it. Otherwise, returns
+     * the original string.
+     */
+    _castStrToNum: function(str) {
+      return (typeof str === 'string' && !isNaN(str)) ? parseInt(str) : str;
     },
 
     _protocolRE: new RegExp('(http|https)://'),
