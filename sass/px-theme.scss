@@ -78,6 +78,14 @@ $predix-load-local-fonts : true;
   // --px-code-background-color:
   // --px-code-border-color:
   //
+  // Headings
+  --px-headings-header-page-color: $gray15;
+  --px-headings-header-section-color: $gray10;
+  --px-headings-header-sub-section-color: $gray15;
+  --px-header-sub-section-background: $gray2;
+  --px-headings-label-color: $gray10;
+  --px-headings-value-color: $gray15;
+
   // // Forms
   // --px-input-text-color:
   // --px-input-text-color--placeholder:
