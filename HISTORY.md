@@ -1,10 +1,7 @@
-v3.1.0
-=================
-* Added new headings classes for redesign
-
-v3.0.0
+v3.0.0-prerelease
 =================
 * Release with new typography and colour dependencies
+* Added new headings classes for redesign
 
 v2.0.3
 =================
