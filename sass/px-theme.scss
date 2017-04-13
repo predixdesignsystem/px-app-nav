@@ -23,61 +23,61 @@ $predix-load-local-fonts : true;
   @import "px-defaults-design/_settings.defaults.scss";
   @import "px-mixins-design/_tools.mixins.scss";
 
-  // // Actionable Text & Icons
-  // --px-actionable-text-color:
-  // --px-actionable-text-color--hover:
-  // --px-actionable-text-color--active:
-  // --px-selectable-text-color:
-  // --px-selectable-text-color--hover:
-  // --px-selectable-text-color--active:
-  // --px-actionable-alt-text-color:
-  // --px-actionable-alt-text-color--hover:
-  // --px-actionable-alt-text-color--active:
-  // --px-disabled-text-color:
-  //
-  // // Button Group
-  // --px-btn-group-text-color:
-  // --px-btn-group-background-color:
-  // --px-btn-group-background-color--hover:
-  // --px-btn-group-background-color--pressed:
-  // --px-btn-group-border-color:
-  // --px-btn-group-border-color--hover:
-  // --px-btn-group-border-color--pressed:
-  //
-  // // Buttons
-  // --px-btn-border-color:
-  // --px-btn-border-color--hover:
-  // --px-btn-border-color--pressed:
-  // --px-btn-shadow--light:
-  // --px-btn-background:
-  // --px-btn-background--hover:
-  // --px-btn-background--pressed:
-  // --px-btn-color:
-  // --px-btn-shadow:
-  // --px-btn-bare-color--visited:
-  // --px-btn-bare-color--hover:
-  // --px-btn-bare-color--pressed:
-  // --px-btn-primary-bare-color--visited:
-  // --px-btn-primary-bare-color--hover:
-  // --px-btn-primary-bare-color--pressed:
-  // --px-btn-primary-border-color:
-  // --px-btn-primary-background:
-  // --px-btn-primary-background--hover:
-  // --px-btn-primary-background--pressed:
-  // --px-btn-primary-color:
-  // --px-btn-tertiary-background:
-  // --px-btn-tertiary-color:
-  // --px-btn-tertiary-background--hover:
-  // --px-btn-tertiary-background--pressed:
-  // --px-btn-disabled-border-color:
-  // --px-btn-disabled-background:
-  // --px-btn-disabled-color:
-  //
-  // // Code
-  // --px-code-text-color:
-  // --px-code-background-color:
-  // --px-code-border-color:
-  //
+  // Actionable Text & Icons
+  --px-actionable-text-color: $primary-default;
+  --px-actionable-text-color--hover: $primary-hover;
+  --px-actionable-text-color--active: $primary-pressed;
+  --px-selectable-text-color: $select-default;
+  --px-selectable-text-color--hover: $select-hover;
+  --px-selectable-text-color--active: $select-pressed;
+  --px-actionable-alt-text-color: $gray8;
+  --px-actionable-alt-text-color--hover: $primary-default;
+  --px-actionable-alt-text-color--active: $primary-pressed;
+  --px-disabled-text-color: $gray4;
+
+  // Button Group
+  --px-btn-group-text-color: $white;
+  --px-btn-group-background-color: $select-default;
+  --px-btn-group-background-color--hover: $select-hover;
+  --px-btn-group-background-color--pressed: $select-pressed;
+  --px-btn-group-border-color: transparent;
+  --px-btn-group-border-color--hover: transparent;
+  --px-btn-group-border-color--pressed: transparent;
+
+  // Buttons
+  --px-btn-border-color: transparent;
+  --px-btn-border-color--hover: transparent;
+  --px-btn-border-color--pressed: transparent;
+  --px-btn-shadow--light: none;
+  --px-btn-background: $gray3;
+  --px-btn-background--hover: $gray6;
+  --px-btn-background--pressed: $gray8;
+  --px-btn-color: $gray15;
+  --px-btn-shadow: none;
+  --px-btn-bare-color--visited: $gray8;
+  --px-btn-bare-color--hover: $primary-default;
+  --px-btn-bare-color--pressed: $primary-pressed;
+  --px-btn-primary-bare-color--visited: $primary-default;
+  --px-btn-primary-bare-color--hover: $primary-hover;
+  --px-btn-primary-bare-color--pressed: $primary-pressed;
+  --px-btn-primary-border-color: transparent;
+  --px-btn-primary-background: $gray14;
+  --px-btn-primary-background--hover: $gray16;
+  --px-btn-primary-background--pressed: $gray18;
+  --px-btn-primary-color: $white;
+  --px-btn-tertiary-background: $white;
+  --px-btn-tertiary-color: $primary-default;
+  --px-btn-tertiary-background--hover: $gray4;
+  --px-btn-tertiary-background--pressed: $gray7;
+  --px-btn-disabled-border-color: $gray4;
+  --px-btn-disabled-background: $white;
+  --px-btn-disabled-color: $gray4;
+
+  // Code
+  --px-code-text-color: $primary-pressed;
+  --px-code-background-color: $gray1;
+  --px-code-border-color: $gray3;
+
   // Headings
   --px-headings-header-page-color: $gray15;
   --px-headings-header-section-color: $gray10;
@@ -86,48 +86,36 @@ $predix-load-local-fonts : true;
   --px-headings-label-color: $gray10;
   --px-headings-value-color: $gray15;
 
-  // // Forms
-  // --px-input-text-color:
-  // --px-input-text-color--placeholder:
-  // --px-input-background-color:
-  // --px-input-border-color--inner:
-  // --px-input-border-color--outer:
-  // --px-input-border-color--inner--focused:
-  // --px-input-border-color--outer--focused:
-  // --px-input-text-color--disabled:
-  // --px-input-background-color--disabled:
-  // --px-input-border-color--disabled:
-  // // --px-input-text-color--readonly: TODO;
-  // // --px-input-background-color--readonly: TODO;
-  // // --px-input-border-color--readonly: TODO;
-  // // --px-input-text-color--help: TODO;
-  // --px-select-background-color:
-  // --px-select-text-color:
-  // // --px-select-chevron-color:
-  // --px-select-shadow-color--dark:
-  // --px-select-shadow-color--light:
-  // --px-select-text-color--disabled:
-  // // --px-select-chevron-color--disabled:
-  // --px-select-background-color--disabled:
-  // --px-select-background-color--hover:
-  // --px-select-border-color--hover:
-  // --px-select-background-color--pressed:
-  // --px-select-border-color--pressed:
-  // --px-multiselect-background-color:
-  // --px-validation-warning-text-color:
-  // --px-validation-error-text-color:
-  // --px-validation-success-text-color:
-  //
+  // Forms
+  --px-input-text-color: $gray15;
+  --px-input-text-color--placeholder: $gray5;
+  --px-input-background-color: transparent;
+  --px-input-background-color--hover: $gray3;
+  --px-input-background-color--disabled: transparent;
+  --px-input-border-color--outer: $gray8;
+  --px-input-border-color--outer--focused: $primary-default;
+  --px-input-text-color--disabled: $gray4;
+  --px-input-border-color--disabled: $gray4;
+  --px-input-text-color--help: $gray5;
+  --px-select-background-color: $gray4;
+  --px-multiselect-background-color: $gray1;
+  --px-validation-warning-text-color: $status-orange3;
+  --px-validation-warning-background-color: $status-orange1;
+  --px-validation-error-text-color: $status-red3;
+  --px-validation-error-background-color: $status-red1;
+  --px-validation-success-text-color: $status-green3;
+  --px-validation-success-background-color: $status-green1;
+
   // // Input Group
   // --px-input-group-text-color:
   // --px-input-group-icon-color:
-  //
-  // // List UI
-  // --px-list-ui-border-color:
-  //
-  // // Tables
-  // --px-table-border-color:
-  //
+
+  // List UI
+  --px-list-ui-border-color: $gray4;
+
+  // Tables
+  --px-table-border-color: $gray4;
+
   // // Toggle
   // --px-toggle-switch-color:
   // --px-toggle-switch-border-color:
@@ -138,9 +126,9 @@ $predix-load-local-fonts : true;
   // --px-toggle-border-color--on:
 
 
-  /********************************/
-  /* Dark Theme for Px Components */
-  /********************************/
+  /***********************************/
+  /* Default Theme for Px Components */
+  /***********************************/
 
   // Alert Label
   // --px-alert-label-text-color--alert:
