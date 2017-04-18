@@ -17,8 +17,8 @@ $predix-load-local-fonts : true;
 @import "px-iconography-design/_base.iconography.scss";
 
   // Defaults
-  // --px-base-text-color:
-  // --px-base-background-color:
+  --px-base-text-color: $gray15;
+  --px-base-background-color: $white;
 
   @import "px-defaults-design/_settings.defaults.scss";
   @import "px-mixins-design/_tools.mixins.scss";
