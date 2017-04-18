@@ -1,0 +1,158 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
+
+<link rel="import" href="css/px-app-nav-item-styles.html">
+
+<dom-module id="px-app-nav-collapsed">
+  <template>
+    <style include="px-app-nav-item-styles"></style>
+
+    <div class="app-nav-item dropdown-trigger" id="itemButton">
+      <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
+        <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
+      </template>
+
+      <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
+        <p class="app-nav-item__label">{{label}}</p>
+      </template>
+
+      <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
+    </div>
+
+    <iron-dropdown
+        id="group"
+        no-overlap
+        dynamic-align
+        no-animations
+        auto-fit-on-attached
+        opened="{{opened}}"
+        position-target="[[_getPositionTarget()]]"
+        on-iron-overlay-canceled="_handleGroupCanceled">
+      <div class="dropdown-content app-nav-group" id="groupcontent">
+        <px-app-nav-list type="collapselist">
+          <content select="*"></content>
+        </px-app-nav-list>
+      </div>
+    </iron-dropdown>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-app-nav-collapsed',
+
+    properties: {
+      /**
+       * The label text active item.
+       */
+      label: {
+        type: String
+      },
+
+      /**
+       * The icon for the active item.
+       */
+      icon: {
+        type: String
+      },
+
+      /**
+       * If `true` the group is expanded so the user can select a subitem.
+       */
+      opened: {
+        type: Boolean
+      }
+    },
+
+    attached: function() {
+      this.listen(this.$.itemButton, 'tap', '_handleButtonTapped');
+      this.listen(this.$.group, 'px-app-nav-item-selected', '_handleItemSelected');
+    },
+
+    detached: function() {
+      this.unlisten(this, 'tap', '_handleButtonTapped');
+      this.unlisten(this.$.group, 'px-app-nav-item-selected', '_handleItemSelected');
+    },
+
+    /**
+     * Checks if a property is the desired `type`.
+     *
+     * @param {*} prop
+     * @returns {Boolean}
+     */
+    _propIsTypeOf(prop, type) {
+      return prop && type && (typeof prop === type);
+    },
+
+    openGroup() {
+      // Measure the size of the group's container before trying to open it,
+      // so we can set the min width of the group's dropdown
+      //
+      // Ben says this is OK.
+      var button = this.$$('#itemButton');
+      var minWidth = button.getBoundingClientRect().width + 'px';
+      var content = this.$$('#groupcontent');
+      if (content.style.minWidth !== minWidth) {
+        content.style.minWidth = minWidth;
+      }
+
+      this.set('opened', true);
+    },
+
+    closeGroup() {
+      this.set('opened', false);
+    },
+
+    _toggleGroup() {
+      if (this.opened) {
+        this.async(function(){
+          // Wait a tick before closing for the group to clear its event queue
+          // after we stopped the original cancel event
+          this.closeGroup();
+        });
+      }
+      if (!this.opened) {
+        this.openGroup();
+      }
+    },
+
+    /**
+     * When the user clicks on a group, toggle the group's dropdown menu
+     * so the user can to select a subitem.
+     */
+    _handleButtonTapped(evt) {
+      this._toggleGroup();
+    },
+
+    /**
+     * If the dropdown is cancelled (about to close) but the cancel event comes
+     * from a click on target element, stop the cancel so we can handle it
+     * through the click handler on the target element.
+     *
+     * Thanks to paper-menu-button for the guidance on how to best handle this.
+     */
+    _handleGroupCanceled(evt) {
+      var uiEvt = evt.detail;
+      var target = Polymer.dom(uiEvt).rootTarget;
+      var trigger = this;
+      var path = Polymer.dom(uiEvt).path;
+
+      if (path.indexOf(trigger) > -1) {
+        evt.preventDefault();
+      }
+    },
+
+    /**
+     * Close the menu if it open when a new item is selected.
+     */
+    _handleItemSelected(evt) {
+      if (this.opened === true) {
+        this.set('opened', false);
+      }
+    },
+
+    _getPositionTarget() {
+      return this.$.itemButton;
+    }
+  });
+</script>

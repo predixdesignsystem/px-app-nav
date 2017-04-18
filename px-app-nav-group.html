@@ -19,7 +19,8 @@
       <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
     </div>
 
-    <iron-dropdown id="group" class=""
+    <iron-dropdown
+        id="group"
         no-overlap
         dynamic-align
         no-animations
@@ -28,16 +29,9 @@
         position-target="[[_getPositionTarget()]]"
         on-iron-overlay-canceled="_handleGroupCanceled">
       <div class="dropdown-content app-nav-group" id="groupcontent">
-        <iron-selector
-            selected-attribute="selected"
-            selected="{{selectedSubpath}}"
-            selected-item="{{selectedSubitem}}"
-            activate-event="px-app-nav-item-selected"
-            attr-for-selected="path"
-            on-items-changed="_indexItems"
-            id="selector">
+        <px-app-nav-list selected-item="{{selectedSubitem}}" selected-path="{{selectedSubpath}}" type="sublist">
           <content select="*"></content>
-        </iron-selector>
+        </px-app-nav-list>
       </div>
     </iron-dropdown>
   </template>
@@ -117,16 +111,11 @@
     attached: function() {
       this.listen(this, 'tap', '_handleSelfTapped');
       this.listen(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
-
-      // var itemsObserveFn = this._handleItemsChanged.bind(this);
-      // this._itemsObserver = Polymer.dom(this.$.selector).observeNodes(itemsObserveFn);
     },
 
     detached: function() {
       this.unlisten(this, 'tap', '_handleSelfTapped');
       this.unlisten(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
-
-      // Polymer.dom(this.$.selector).unobserveNodes(this._itemsObserver);
     },
 
     /**
@@ -240,11 +229,14 @@
       evt.stopPropagation();
 
       var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
+      var localItem = {label: this.label, icon: this.icon, path: this.path, index: this.index};
       var path = (evt.detail.path && Array.isArray(evt.detail.path)) ? [localPath].concat(evt.detail.path) : [localPath];
+      var items = (evt.detail.path && Array.isArray(evt.detail.items)) ? [localItem].concat(evt.detail.items) : [localItem];
 
       this.fire('px-app-nav-item-selected', {
         group: true,
-        path: path
+        path: path,
+        items: items
       });
     },
 
@@ -268,22 +260,6 @@
 
     _getPositionTarget() {
       return this.$.itemButton;
-    },
-
-    /**
-     * When new items are added to the group, automatically add an index to assist
-     * in keeping track of items without paths.
-     */
-    _indexItems(evt) {
-      if (!evt.detail || !evt.detail.value || !Array.isArray(evt.detail.value) || !evt.detail.value.length) return;
-
-      var i = 0;
-      var len = evt.detail.value.length;
-      for (; i<len; i++) {
-        if (!evt.detail.value[i].index) {
-          evt.detail.value[i].index = i;
-        }
-      }
     }
   });
 </script>

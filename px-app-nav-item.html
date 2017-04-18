@@ -105,7 +105,8 @@
       if (nextState === true) {
         var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
         this.fire('px-app-nav-item-selected', {
-          path: [path]
+          path: [path],
+          items: [{label: this.label, icon: this.icon, path: this.path, index: this.index}]
         }, {cancelable:true});
         this.toggleClass('app-nav-item--selected', true, this.$.item);
       }

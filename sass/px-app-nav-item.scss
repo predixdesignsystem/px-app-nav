@@ -65,7 +65,7 @@
   }
 }
 
-:host-context(.app-nav-group) .app-nav-item {
+:host-context(.app-nav-sublist) .app-nav-item {
   display: block;
   height: 30px;
   padding-left: $inuit-base-spacing-unit;
@@ -73,12 +73,20 @@
   line-height: 30px;
 }
 
-:host-context(.app-nav-group) .app-nav-item.app-nav-item--selected {
+:host-context(.app-nav-sublist) .app-nav-item.app-nav-item--selected {
   background-color: inherit;
   color: rgb(21,163,196);
   &:before {
     display: none;
   }
+}
+
+:host-context(.app-nav-collapselist) .app-nav-item.app-nav-item--selected {
+  background-color: orange;
+  // color: rgb(21,163,196);
+  // &:before {
+  //   display: none;
+  // }
 }
 
 // :host([selected]) .app-nav-item {
@@ -112,6 +120,7 @@
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
   display: block;
   max-width: 632px;
+  z-index: 399;
 }
 
 .app-nav-item__group {

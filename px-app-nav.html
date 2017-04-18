@@ -14,7 +14,11 @@
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
 <link rel="import" href="../iron-selector/iron-selector.html" />
 
+<link rel="import" href="px-app-nav-horizontal.html" />
+<link rel="import" href="px-app-nav-collapsed.html" />
+<link rel="import" href="px-app-nav-list.html" />
 <link rel="import" href="px-app-nav-group.html" />
+
 <link rel="import" href="px-app-nav-item.html" />
 <link rel="import" href="px-app-nav-subitem.html" />
 
@@ -53,48 +57,91 @@ Custom property | Description | Default
 <dom-module id="px-app-nav">
   <template>
     <style include="px-app-nav-styles"></style>
+    <style>
+      #root {
+        display: none;
+      }
+      .app-nav-toolbar-collapsed {
+        display: none;
+      }
+      .app-nav--collapsed .app-nav-toolbar-collapsed {
+        display: inherit;
+      }
+    </style>
 
-    <section class="app-nav app-nav--horizontal">
+    <section class$="{{_getNavClasses(type, collapseAll)}}">
       <app-header fixed>
-        <app-toolbar class="app-nav-toolbar">
-          <iron-selector class="app-nav-selector"
-              selected-attribute="selected"
-              attr-for-selected="path"
-              activate-event="px-app-nav-item-selected"
-              selected="{{_selectedPath}}"
-              selected-item="{{_selectedItem}}"
-              on-items-changed="_indexItems"
-              id="selector">
-            <template is="dom-repeat" items="{{navItems}}">
-              <!-- Stamp groups, which hold subitems -->
-              <template is="dom-if" if="{{_hasSubitems(item)}}">
-                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
-                  <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-item>
-                  </template>
-                </px-app-nav-group>
-              </template>
+        <app-toolbar class="app-nav-toolbar" id="toolbar">
+          <!-- If nav `type` is horizontal and `collapseAll` is false it will be placed here -->
+          <div class="app-nav-toolbar-horizontal">
+            <px-app-nav-horizontal id="horizontal"></px-app-nav-horizontal>
+          </div>
 
-              <!-- Stamp plain old items, which hold subitems -->
-              <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
-                </px-app-nav-item>
-              </template>
-            </template>
-          </iron-selector>
+          <!-- If nav `type` is horizontal and `collapseAll` is true it will be placed here -->
+          <div class="app-nav-toolbar-collapsed">
+            <px-app-nav-collapsed id="collapsed" label="{{selectedItem.label}}" icon="{{selectedItem.icon}}"></px-app-nav-collapsed>
+          </div>
+
+          <!-- If nav `type` is vertical it will be placed here -->
+          <div class="app-nav-toolbar-vertical" id="vertical">
+          </div>
         </app-toolbar>
       </app-header>
     </section>
+
+    <section id="root">
+      <!-- Distribute nav items passed as light DOM children -->
+      <content select="*"></content>
+
+      <!-- Create nav items from data -->
+      <template is="dom-repeat" items="{{navItems}}">
+        <!-- Stamp groups, which hold subitems -->
+        <template is="dom-if" if="{{_hasSubitems(item)}}">
+          <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
+            <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
+              <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-item>
+            </template>
+          </px-app-nav-group>
+        </template>
+
+        <!-- Stamp plain old items, which hold subitems -->
+        <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+          <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
+          </px-app-nav-item>
+        </template>
+      </template>
+    </section>
+
   </template>
 </dom-module>
 
 <script>
-
   Polymer({
-
     is: 'px-app-nav',
 
     properties: {
+      /**
+       * Set to 'horizontal' to display nav across the top of the screen, or set
+       * to 'vertical' to display navigation along the side of the screen.
+       */
+      type: {
+        type: String,
+        value: 'horizontal',
+        observer: 'rebuild'
+      },
+
+      /**
+       * Set to `true` to collapse all nav items (including top-level items)
+       * into a dropdown and only show the active item in the nav.
+       *
+       * Only works if the the nav `type` is horizontal.
+       */
+      collapseAll: {
+        type: Boolean,
+        value: false,
+        observer: 'rebuild'
+      },
+
       /**
        * Selects a path.
        */
@@ -116,8 +163,7 @@ Custom property | Description | Default
         notify: true,
         value: function() {
           return [{}];
-        },
-        observer: '_observeChanged'
+        }
       },
 
       /**
@@ -142,65 +188,114 @@ Custom property | Description | Default
         value: 'path',
         type: String
       },
-      /**
-       * Whether the navigation is expanded. Reflected to an attribute (reflectToAttribute: true) so the application can
-       * bind to it and maintain state as needed. Valid values are "false" or "true" (because boolean values cannot be passed into Polymer elements as strings "false")
-       *
-       * @type {String}
-       * @default [true]
-       */
-      navExpanded: {
-        value: "true",
-        type: String,
-        reflectToAttribute: true,
+
+      selectedItem: {
+        type: Object,
         notify: true
       },
 
-      /**
-       * Internal representation of navExpanded as a Boolean because boolean values cannot
-       * be passed into Polymer elements as strings "false"
-       *
-       * @type {Boolean}
-       * @default [true]
-       */
-      _navExpanded: {
-        value: true,
-        type: Boolean,
-        computed: "_computeNavExpanded(navExpanded)"
-      },
-
-      /**
-       * Whether the navigation is contracting. Reflected to an attribute (reflectToAttribute: true) so the application can
-       * bind to it and maintain state as needed.
-       *
-       * @type {Boolean}
-       * @default [true]
-       */
-      navContracting: {
-        value: true,
-        type: Boolean,
-        reflectToAttribute: true
-      },
-
-      /**
-       * Animation function
-       *
-       * @type {Function}
-       * @default [function(){ return {};}]
-       * @private
-       */
-      ani:{
+      selectedSubitem: {
         type: Object,
-        value:function(){ return {};}
-      }
+        notify: true
+      },
+    },
+
+    created: function() {
+      this._navAttached = false;
+      this._navTarget;
+      this._knownItems;
     },
 
     attached: function() {
-      this.listen(this, 'px-app-nav-item-selected', '_handlePathSelected');
+      this._knownItems = [];
+      var boundItemHandler = this._handleItemsUpdated.bind(this);
+      this._itemObserver = Polymer.dom(this.$.root).observeNodes(boundItemHandler);
     },
 
     detached: function() {
-      this.unlisten(this, 'px-app-nav-item-selected', '_handlePathSelected');
+      this._knownItems = null;
+      Polymer.dom(this.$.root).unobserveNodes(this._itemObserver);
+    },
+
+    _handleItemsUpdated: function(info) {
+      if (Array.isArray(info.addedNodes) && info.addedNodes.length) {
+        var addedItems = this._findItemNodes(info.addedNodes);
+        this._knownItems = this._trackItems(addedItems, this._knownItems);
+      }
+      this.rebuild();
+      // if (Array.isArray(info.removedNodes) && info.removedNodes.length) {
+      //   var removedItems = this._findItemNodes(info.removedNodes);
+      //   this._knownItems = this._untrackItems(removedItems);
+      // }
+    },
+
+    _trackItems(items, knownItems) {
+      return items.reduce(function(accum, item) {
+        if (accum.indexOf(item) === -1) {
+          accum.push(item);
+        }
+        return accum;
+      }, knownItems);
+    },
+
+    _untrackItems(items, knownItems) {
+      return knownItems.filter(function(item) {
+        return items.indexOf(item) === -1;
+      });
+    },
+
+    _findItemNodes(nodes) {
+      var found = [];
+      var i = 0;
+      var len = nodes.length;
+      for (; i < len; i++) {
+        if (nodes[i].nodeType === Node.ELEMENT_NODE && (nodes[i].nodeName === 'PX-APP-NAV-GROUP' || nodes[i].nodeName === 'PX-APP-NAV-ITEM')) {
+          found.push(nodes[i]);
+        }
+      }
+      return found;
+    },
+
+    /**
+     * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
+     */
+    rebuild: function() {
+      if (typeof this.type !== 'string' || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
+
+      var target = this._getNavTarget(this.type, this.collapseAll);
+      this._ensureItemsInTarget(this._knownItems, target);
+    },
+
+    _ensureItemsInTarget(items, target) {
+      var i = 0;
+      var len = items.length;
+      var parentNode;
+      var anyMoved = false;
+
+      for (; i < len; i++) {
+        parentNode = Polymer.dom(items[i]).parentNode;
+        if (parentNode && parentNode !== target) {
+          Polymer.dom(parentNode).removeChild(items[i]);
+          Polymer.dom(target).appendChild(items[i]);
+          anyMoved = true;
+        }
+      }
+
+      if (anyMoved) {
+        Polymer.dom.flush();
+      }
+    },
+
+    _getNavTarget: function(type, collapsed) {
+      if (collapsed && type === 'horizontal') {
+        return this.$.collapsed;
+      }
+      if (!collapsed && type === 'horizontal') {
+        return this.$.horizontal;
+      }
+      if (type === 'vertical') {
+        return this.$.vertical;
+      }
     },
 
     /**
@@ -211,22 +306,6 @@ Custom property | Description | Default
       // if (path.length) {
       //   var pathStr = '';
       // }
-    },
-
-    /**
-     * When new items are added to the group, automatically add an index to assist
-     * in keeping track of items without paths.
-     */
-    _indexItems(evt) {
-      if (!evt.detail || !evt.detail.value || !Array.isArray(evt.detail.value) || !evt.detail.value.length) return;
-
-      var i = 0;
-      var len = evt.detail.value.length;
-      for (; i<len; i++) {
-        if (!evt.detail.value[i].index) {
-          evt.detail.value[i].index = i;
-        }
-      }
     },
 
     _selectedPathChanged: function(nextPath, lastPath) {
@@ -353,492 +432,6 @@ Custom property | Description | Default
       return (typeof str === 'string' && !isNaN(str)) ? parseInt(str) : str;
     },
 
-    _protocolRE: new RegExp('(http|https)://'),
-
-    _observeChanged: function(newValue) {
-      if (!newValue){
-        this.navItems = [];
-      }
-      else{
-        this.navItems.forEach(this._computeHref, this);
-        this.markSelected(window.location.href);
-        this._setSubNavVisibility();
-        this._potentiallyAdjustAccordion();
-      }
-    },
-
-    _potentiallyAdjustAccordion: function() {
-      this.navItems.forEach(function(item){
-        var navSubitems = item.subitems;
-        if (navSubitems && navSubitems.length >= 1 && item.subSelected) { // if subselected && has subitems
-          var parentA = Polymer.dom(this.$.navitemlist).querySelector('a.subselected');
-          if (parentA) {
-            var parent = parentA.parentElement.querySelector('ul'),
-              heightAfter = (navSubitems.length) * (parentA.clientHeight * 0.6666) + 'px',
-              listResizeAnimation = new SequenceEffect([
-                new KeyframeEffect(parent, [
-                   {height: parent.clientHeight},
-                   {height: heightAfter}
-                  ],
-                  {duration: 200,fill: 'forwards'})
-                ]);
-
-            document.timeline.play(listResizeAnimation);
-          }
-        }
-      }, this);
-    },
-
-    _computeNavExpanded: function() {
-      // ensure that internal representation matches external property
-      if(this.navExpanded === "false") {
-        return false;
-      } else if(this.navExpanded === "true") {
-        return true;
-      } else {
-        return true;
-      }
-    },
-
-    _checkNavExpandedState: function() {
-      if(this._navExpanded) {
-        this.debounce('checkNav', function() {
-          this._expandNav();
-        }, 5);
-      } else {
-        this.debounce('checkNav', function() {
-          this._contractNav();
-        }, 5);
-      }
-    },
-
-    _checkMediaMatches: function(matches) {
-      if (matches) {
-        // width is less than 63.9rem in width
-        if (this._navExpanded) {
-          this.set('navExpanded', 'false');
-          this._checkNavExpandedState();
-        }
-      } else {
-        // width is greater than 63.9rem
-        if (!this._navExpanded) {
-          this.set('navExpanded', 'true');
-          this._checkNavExpandedState();
-        }
-      }
-    },
-
-    /**
-     * Parse navItemsStrings and navItemsPaths to create unified navItems
-     */
-    ready: function() {
-
-      if (this._navExpanded === false) { this._contractNav(); }
-
-      //check to see if navitems have been initialised.
-      if (this.navItems && (this.navItems.length > 0 && !this.navItems[0].href)){
-        this.navItems.forEach(this._computeHref, this);
-        this._setSubNavVisibility();
-        this._potentiallyAdjustAccordion();
-      }
-
-      this._media = window.matchMedia('screen and (max-width: 63.9rem)');
-      // this._checkMediaMatches(this._media.matches);
-
-      this.markSelected(window.location.href);
-
-      var _this = this;
-
-      // add listener on screen width change
-      this._media.addListener(function(data) {
-        _this._checkMediaMatches(data.matches);
-      });
-
-      // add listener for history change event (back button)
-      window.addEventListener('popstate', function(event) {
-        _this.markSelected(window.location.href);
-      });
-
-    },
-
-    /**
-     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
-     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
-     *
-     * @see #markSelected
-     * @param {Event} evt The click event.
-     * @private
-     */
-
-    navClickHandler: function(evt) {
-      var el = evt.currentTarget;
-      var event = el.getAttribute('event-name')
-
-      if (event) {
-        var navItem = evt.model.dataHost.itemForElement(el);
-        this.fire(event, navItem);
-      }
-      var href = el.getAttribute("href");
-      this.markSelected(href);
-    },
-
-    _closeOpenSubnav: function(openUl) {
-      // find open subnavs and close them
-      var closeAnimation = null,
-          uls = Polymer.dom(this.$.navitemlist).querySelectorAll("ul"),
-          navToHide,
-          navToHideSpans;
-      for (var i=0; i<uls.length; i++) {
-        var ulIsHidden = uls[i].classList.contains('visuallyhidden');
-        if(!ulIsHidden && uls[i] !== openUl){
-          navToHide = uls[i];
-          navToHideSpans = Polymer.dom(navToHide).querySelectorAll("span");
-          closeAnimation = this._closeAccordionEffectAnimation(navToHide, navToHideSpans);
-        }
-      }
-      return closeAnimation;
-    },
-
-    _newAnimateMenuItem: function(navElement) {
-      var _this = this;
-      var subnavUl = Polymer.dom(navElement.parentElement).querySelector('ul');
-      var ulIsHidden = subnavUl.classList.contains('visuallyhidden');
-      var subnavSpans = Polymer.dom(subnavUl).querySelectorAll("span");
-      var openAnimation = null;
-      var animations = [];
-      // returns null if no subnavs are open
-      if(ulIsHidden) {
-        openAnimation = this._openAccordionEffectAnimation(subnavUl, subnavSpans);
-      }
-      var closeAnimation = this._closeOpenSubnav(subnavUl);
-      if(closeAnimation) {
-        animations.push(closeAnimation);
-      }
-      if(openAnimation) {
-        animations.push(openAnimation);
-      }
-      var animation = new SequenceEffect(animations);
-
-      // play the animations
-      var accordionAnimationPlayer = document.timeline.play(animation);
-
-      accordionAnimationPlayer.addEventListener('finish', function(){
-        _this._navResized();
-        if(!_this._navExpanded){
-          _this.toggleNav();
-        }
-      });
-    },
-
-    _navResized: function() {
-      this.fire('nav-height-changed');
-    },
-
-    /**
-     * When a nav item is selected, calls markSelected(). The actual navigation is accomplished without JavaScript using
-     * an HTML anchor tag unless the passed click event is cancelled / stopPropagation().
-     *
-     * @see #markSelected
-     * @param {Event} evt The click event.
-     * @private
-     */
-     subnavClickHandler: function(evt){
-       var el = evt.currentTarget;
-       var event = el.getAttribute('event-name')
-
-       if (event) {
-         var navItem = evt.model.dataHost.itemForElement(el);
-         this.fire(event, navItem);
-       }
-       var href = el.getAttribute("href");
-       this.markSelected(href);
-       var self = this;
-       // We need a short delay for Safari to fire navResized after nav resize.
-       this.async(function() {
-          self._navResized();
-        }, 100);
-     },
-
-    /**
-     * Marks the nav item with the given path as selected, and all others as unselected.
-     *
-     * @param {String} path The selected path
-     */
-    markSelected: function(path) {
-      var resolvedPath = this._parseOutPathPrefix(path);
-      var topLevelNavElems = Polymer.dom(this.root).querySelectorAll("#navitemlist>li");
-
-      if (this.navItems){
-        for (var i = 0; i < this.navItems.length; i++) {
-          var item = this.navItems[i];
-          item.selected = (item[this.pathKey] === resolvedPath);
-          item.subSelected = false;
-          item.class = item.selected ? "selected" : "";
-          if (item.subitems) {
-            item.subitems.forEach(function(subitem, idx) {
-              subitem.selected = subitem[this.pathKey] === resolvedPath;
-              subitem.class = subitem.selected ? "selected" : "";
-              if(topLevelNavElems.length > 0){
-                if(idx < Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li').length) {
-                  this.toggleClass("selected", subitem.selected, Polymer.dom(topLevelNavElems[i]).querySelectorAll('ul>li')[idx].querySelector('a'));
-                }
-              }
-              item.subSelected = subitem.selected ? true : item.subSelected;
-            }, this);
-          }
-          var topLevelLink = Polymer.dom(topLevelNavElems[i]).querySelector('a');
-          this.toggleClass("selected", item.selected, topLevelLink);
-          this.toggleClass("subselected", item.subSelected, topLevelLink);
-
-          if( (item.subSelected || item.selected ) && typeof topLevelNavElems[i] !== 'undefined') {
-            this._newAnimateMenuItem(topLevelNavElems[i].querySelector('a'));
-          }
-        }
-      }
-
-    },
-
-    _setSubNavVisibility: function(){
-      this.navItems.forEach( function(item){
-        if (item.subSelected){
-          item.subitemlistclass = "list-bare";
-          item.subitemclass = "";
-          item.class = "subselected";
-        }
-        else{
-          item.subitemlistclass = "visuallyhidden list-bare";
-          item.subitemclass = "visuallyhidden";
-        }
-      }, this);
-    },
-
-    _parseOutPathPrefix: function(fullPath) {
-      if (!fullPath) {
-          return null;
-      }
-      var resolvedPath = fullPath.replace(this._protocolRE, '');
-      var idx = resolvedPath.indexOf(this.pathPrefix);
-      var argsIdx = resolvedPath.indexOf('?');
-
-      if (argsIdx === -1){
-        argsIdx = resolvedPath.length;
-      }
-
-      return resolvedPath.substring(idx + 1, argsIdx);
-    },
-
-    _computeHref: function(item) {
-      if (item.externalLink && item[this.pathKey]) {
-          item.href = item[this.pathKey];
-      } else {
-        item.href = item[this.pathKey] ? this.pathPrefix + item[this.pathKey] : null;
-      }
-
-      if (!item.class){
-        item.subitemlistclass = item.subitemclass = item.class = "";
-
-      }
-      if (item.subitems) {
-        item.subitems.forEach(function(subitem) {
-          this._computeHref(subitem);
-        }, this);
-      }
-    },
-
-    _keyframeFadeIn: function(el) {
-      return new KeyframeEffect(el, [ {opacity: 0}, {opacity: 1} ], 100);
-    },
-
-    _keyframeFadeOut: function(el) {
-      return new KeyframeEffect(el, [ {opacity: 1}, {opacity: 0} ], 100);
-    },
-
-    _keyframeFadeInAll: function(els) {
-      var _this = this;
-      return new GroupEffect(els.map(function(el) {
-        return _this._keyframeFadeIn(el);
-      }));
-    },
-
-    _keyframeFadeOutAll: function(els) {
-      var _this = this;
-      return new GroupEffect(els.map(function(el) {
-        return _this._keyframeFadeOut(el);
-      }));
-    },
-
-    _keyframeContractWidth: function(el) {
-      return new KeyframeEffect(el, [{ width: '219px'}, { width:  '56px' }], 200);
-    },
-
-    _keyframeExpandWidth: function(el) {
-      return new KeyframeEffect(el, [{ width: '56px' }, { width: '219px' }], 200);
-    },
-
-    _keyframeRemoveClass: function(el, className) {
-      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
-      myEffect.onsample = function(timeFraction, effect, animation) {
-         el.classList.remove(className);
-      };
-
-      return myEffect;
-    },
-
-    _keyframeRemoveClassAll: function(els, className) {
-      var _this = this;
-      return new GroupEffect(els.map(function(el) {
-        return _this._keyframeRemoveClass(el, className);
-      }));
-    },
-
-    _keyframeAddClass: function(el, className) {
-      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
-      myEffect.onsample = function(timeFraction, effect, animation) {
-         el.classList.add(className);
-      };
-
-      return myEffect;
-    },
-
-    _keyframeAddClassAll: function(els, className) {
-      var _this = this;
-      return new GroupEffect(els.map(function(el) {
-        return _this._keyframeAddClass(el, className);
-      }));
-    },
-
-    _keyframeToggleClass: function(el, className, applyClass) {
-      var myEffect = new KeyframeEffect(el, [], { duration: 0, fill: 'forwards' });
-      myEffect.onsample = function(timeFraction, effect, animation) {
-        if (timeFraction == null) {
-          return;
-        } else {
-          if(!applyClass) {
-            applyClass = null;
-          }
-          el.classList.toggle(className, applyClass);
-        }
-      };
-
-      return myEffect;
-    },
-
-    _keyframeToggleClassAll: function(els, className) {
-      var _this = this;
-      return new GroupEffect(els.map(function(el) {
-        return _this._keyframeToggleClass(el, className);
-      }));
-    },
-
-    _keyframeContractAccordian: function(el) {
-      var accordionHeight = el.clientHeight + 'px';
-      return new KeyframeEffect(el, [{ height: accordionHeight }, { height: '0px' }], { duration: 200, fill: 'forwards' });
-    },
-
-    _keyframeExpandAccordian: function(el, textEls) {
-      var accordionHeight = textEls.length * (el.parentElement.clientHeight * 0.6666) + 'px';
-      return new KeyframeEffect(el, [{ height: '0px' }, { height: accordionHeight }], { duration: 200, fill: 'forwards' });
-    },
-
-    _closeAccordionEffectAnimation: function(mainEl, textEls){
-      var _this = this;
-      // animate close the open accordion
-      return new SequenceEffect([
-        _this._keyframeFadeOutAll(textEls),
-        _this._keyframeAddClassAll(textEls, 'visuallyhidden'),
-        _this._keyframeContractAccordian(mainEl),
-        _this._keyframeAddClass(mainEl, 'visuallyhidden'),
-      ]);
-    },
-
-    _openAccordionEffectAnimation: function(mainEl, textEls){
-      //animate open the clicked accordion
-      var _this = this;
-      //animate close the open accordion
-      return new SequenceEffect([
-        _this._keyframeToggleClass(mainEl, 'visuallyhidden'),
-        _this._keyframeExpandAccordian(mainEl, textEls),
-        _this._keyframeToggleClassAll(textEls, 'visuallyhidden'),
-        _this._keyframeFadeInAll(textEls)
-      ]);
-    },
-
-    _contractNavAnimation: function(navEl, textEls) {
-      var _this = this;
-      return new SequenceEffect([
-        _this._keyframeFadeOutAll(textEls),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', true),
-        _this._keyframeContractWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', true)
-      ]);
-    },
-
-    _expandNavAnimation: function(navEl, textEls) {
-      var _this = this;
-      return new SequenceEffect([
-        _this._keyframeToggleClass(navEl, 'navbar--collapsed', false),
-        _this._keyframeExpandWidth(navEl),
-        _this._keyframeToggleClass(navEl, 'navbar--text-hidden', false),
-        _this._keyframeFadeInAll(textEls)
-      ]);
-    },
-
-    _getTextEls: function() {
-      return Polymer.dom(this.root).querySelectorAll("span");
-    },
-
-    _expandNav: function() {
-      this.set('navExpanded', 'true');
-      this.fire('nav-expanding');
-      var navAnimation = this._expandNavAnimation(this, this._getTextEls());
-      this.ani = document.timeline.play(navAnimation);
-      this.ani.addEventListener('finish', function(){
-        //raise event once we've expanded;
-        this.fire('nav-expanded');
-        // let the nav bar animation truly finish before broadcasting a window resize event
-        // so other components can react after the animation
-        this.async(function(){
-          window.dispatchEvent(new Event('resize'));
-        }, 50);
-      }.bind(this));
-    },
-
-    _contractNav: function() {
-      //raise event we're about to close.
-      this.set('navExpanded','false');
-      this.fire('nav-collapsing');
-      this.navContracting = true;
-      var navAnimation = this._contractNavAnimation(this, this._getTextEls());
-      this.ani = document.timeline.play(navAnimation);
-      this.ani.addEventListener('finish', function(){
-        this.navContracting = false;
-        this.fire('nav-collapsed');
-        // let the nav bar animation truly finish before broadcasting a window resize event
-        // so other components can react after the animation
-        this.async(function(){
-          window.dispatchEvent(new Event('resize'));
-        }, 50);
-      }.bind(this));
-    },
-
-    _toggleNavExpanded: function() {
-      if(this.navExpanded === 'true') {
-        this.set('navExpanded', 'false');
-      } else {
-        this.set('navExpanded','true');
-      }
-    },
-
-    /**
-     * Called when the nav expander control is clicked.
-     *
-     * @param {Event} evt The click event.
-     * @private
-     */
-    toggleNav: function(evt){
-      this._toggleNavExpanded();
-      this._checkNavExpandedState();
-    },
 
     /**
      * Helps check if items generated from data have subitems.
@@ -853,5 +446,36 @@ Custom property | Description | Default
     _hasNoSubitems(item) {
       return !item.hasOwnProperty('subitems');
     },
+
+    _getNavClasses(type, collapsed) {
+      var className = 'app-nav';
+
+      if (type === 'horizontal') {
+        className += ' app-nav--horizontal'
+      }
+      if (collapsed === true && type === 'horizontal') {
+        className += ' app-nav--collapsed'
+      }
+      if (type === 'vertical') {
+        className += ' app-nav--vertical'
+      }
+
+      return className;
+    },
+
+    _navIs(isType, wantedType, isCollapsed, wantedCollapsed) {
+      // If nav should be collapsed and it is not, return false...
+      if (typeof wantedCollapsed === 'string' && wantedCollapsed === 'collapsed' && !isCollapsed) {
+        return false;
+      }
+      // Next, check type
+      if (wantedType === 'horizontal' && isType !== 'horizontal') {
+        return false;
+      }
+      if (wantedType === 'vertical' && isType !== 'vertical') {
+        return false;
+      }
+      return true;
+    }
   });
 </script>
