@@ -30,7 +30,7 @@ $predix-load-local-fonts : true;
   --px-selectable-text-color: $select-default;
   --px-selectable-text-color--hover: $select-hover;
   --px-selectable-text-color--active: $select-pressed;
-  --px-actionable-alt-text-color: $gray8;
+  --px-actionable-alt-text-color: $gray15;
   --px-actionable-alt-text-color--hover: $primary-default;
   --px-actionable-alt-text-color--active: $primary-pressed;
   --px-disabled-text-color: $gray4;
@@ -116,14 +116,21 @@ $predix-load-local-fonts : true;
   // Tables
   --px-table-border-color: $gray4;
 
-  // // Toggle
-  // --px-toggle-switch-color:
-  // --px-toggle-switch-border-color:
-  // --px-toggle-switch-shadow-color:
-  // --px-toggle-backgound-color--off:
-  // --px-toggle-border-color--off:
-  // --px-toggle-background-color--on:
-  // --px-toggle-border-color--on:
+  // Toggle
+  --px-toggle-switch-color: $white;
+  --px-toggle-switch-color-hover: $gray4;
+  --px-toggle-switch-color-pressed: $gray7;
+  --px-toggle-switch-border-color: $gray8;
+  --px-toggle-switch-shadow-color: rgba($black, .15);
+  --px-toggle-backgound-color-off: $white;
+  --px-toggle-border-color-off: $gray8;
+  --px-toggle-background-color-on: $primary-default;
+  --px-toggle-border-color-on: $primary-default;
+  --px-toggle-background-color-on-hover: $primary-hover;
+  --px-toggle-background-color-on-pressed: $primary-pressed;
+  --px-toggle-disabled-background: $white;
+  --px-toggle-checked-disabled-background: $gray4;
+  --px-toggle-disabled-border-color: $gray4;
 
 
   /***********************************/
