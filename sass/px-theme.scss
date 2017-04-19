@@ -33,7 +33,7 @@ $predix-load-local-fonts : true;
   --px-actionable-alt-text-color: $gray15;
   --px-actionable-alt-text-color--hover: $primary-default;
   --px-actionable-alt-text-color--active: $primary-pressed;
-  --px-disabled-text-color: $gray4;
+  --px-actionable-disabled-text-color: rgba($black, 0.2);
 
   // Button Group
   --px-btn-group-text-color: $white;
