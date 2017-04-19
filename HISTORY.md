@@ -1,3 +1,7 @@
+v3.0.0-prerelease-1
+=================
+* updated with redesigned forms, list ui, tabs
+
 v3.0.0-prerelease
 =================
 * Release with new typography and colour dependencies

@@ -92,12 +92,17 @@ $predix-load-local-fonts : true;
   --px-input-background-color: transparent;
   --px-input-background-color--hover: $gray3;
   --px-input-background-color--disabled: transparent;
+  --px-input-background-color--focused: $primary-light;
   --px-input-border-color--outer: $gray8;
   --px-input-border-color--outer--focused: $primary-default;
   --px-input-text-color--disabled: $gray4;
   --px-input-border-color--disabled: $gray4;
   --px-input-text-color--help: $gray5;
-  --px-select-background-color: $gray4;
+  --px-select-background-color: $gray3;
+  --px-select-background-color--hover: $gray6;
+  --px-select-background-color--active: $gray8;
+  --px-select-border-color: transparent;
+  --px-select-text-color: $gray15;
   --px-multiselect-background-color: $gray1;
   --px-validation-warning-text-color: $status-orange3;
   --px-validation-warning-background-color: $status-orange1;
@@ -111,7 +116,8 @@ $predix-load-local-fonts : true;
   // --px-input-group-icon-color:
 
   // List UI
-  --px-list-ui-border-color: $gray4;
+  --px-list-ui-border-color: $gray10;
+  --px-list-ui-separator-color: $gray5;
 
   // Tables
   --px-table-border-color: $gray4;
@@ -400,17 +406,13 @@ $predix-load-local-fonts : true;
   // // Spinner
   // --px-spinner-fill-color:
   // --px-spinner-background-color:
-  //
-  // // Tabs
-  // --px-tab-background-color:
-  // --px-tab-background-color--selected:
-  // --px-tab-text-color:
-  // --px-tab-text-color--selected:
-  // --px-tab-text-color--bare:
-  // --px-tab-border-color:
-  // --px-tab-border-color--bare:
-  // --px-tab-border-color--selected:
-  //
+
+  // Tabs
+  --px-tab-text-color: $gray15;
+  --px-tab-text-color--selected: $select-default;
+  --px-tab-border-color: $gray5;
+  --px-tab-outline-style: none;
+
   // // Tooltip
   // --px-tooltip-background-color:
   // --px-tooltip-text-color:
