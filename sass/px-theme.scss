@@ -381,12 +381,13 @@ $predix-load-local-fonts : true;
   // // Overlay
   // --px-overlay-light-color:
   // --px-overlay-dark-color:
-  //
-  // // Popover
-  // --px-popover-background-color:
-  // --px-popover-border-color:
-  // --px-popover-text-color:
-  //
+
+  // Popover
+  --px-popover-background-color: $white;
+  --px-popover-border-color: $gray3;
+  --px-popover-text-color: $gray15;
+  --px-popover-shadow-color: rgba($black,0.15);
+
   // // Progress Bar
   // --px-progress-bar-fill-color:
   // --px-progress-bar-stripe-color:
@@ -414,14 +415,12 @@ $predix-load-local-fonts : true;
   --px-tab-border-color: $gray5;
   --px-tab-outline-style: none;
 
-  // // Tooltip
-  // --px-tooltip-background-color:
-  // --px-tooltip-text-color:
-  //
-  // --px-tooltip-light-background-color:
-  // --px-tooltip-light-text-color:
-  // --px-tooltip-light-border-color:
-  //
+  // Tooltip
+  --px-tooltip-background-color: $white;
+  --px-tooltip-text-color: $gray15;
+  --px-tooltip-border-color: $gray3;
+  --px-tooltip-shadow-color: rgba($black,0.15);
+
   // // Typeahead
   // --px-typeahead-background-color:
   // --px-typeahead-background-color--selected:
