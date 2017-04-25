@@ -5,6 +5,7 @@
     "px-app-nav.html"
   ],
   "ignore": [
+    "*.enc",
     ".*",
     "npm-debug.log",
     "gulpfile.js",
