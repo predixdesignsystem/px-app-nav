@@ -5,6 +5,7 @@
     "px-theme.html"
   ],
   "ignore": [
+    "*.enc",
     ".*",
     "npm-debug.log",
     "gulpfile.js",
