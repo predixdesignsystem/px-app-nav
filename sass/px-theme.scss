@@ -408,8 +408,10 @@ $predix-load-local-fonts : true;
   // Slider
   --px-slider-border-color: $gray6;
   --px-slider-background-color: $gray1;
-  --px-slider-border-color--selected: $primary-pressed;
+  --px-slider-border-color--selected: $primary-default;
   --px-slider-background-color--selected: $primary-default;
+  --px-slider-background-color--hover: $primary-hover;
+  --px-slider-background-color--pressed: $primary-pressed;
   --px-handle-stroke-color: $gray8;
   --px-handle-color--disabled: $gray4;
   --px-handle-background-color: $white;
