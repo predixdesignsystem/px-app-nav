@@ -405,19 +405,19 @@ $predix-load-local-fonts : true;
   // --px-progress-bar-fill-color:
   // --px-progress-bar-stripe-color:
   // --px-progress-bar-background-color:
-  //
-  // // Slider
-  // --px-slider-border-color:
-  // --px-slider-background-color:
-  // --px-slider-border-color--selected:
-  // --px-slider-background-color--selected:
-  // --px-handle-border-color:
-  // --px-handle-border-color--disabled:
-  // --px-handle-stroke-color:
-  // --px-handle-background-color:
-  // --px-handle-background-color--hover:
-  // --px-handle-shadow-color:
-  //
+
+  // Slider
+  --px-slider-border-color: $gray6;
+  --px-slider-background-color: $gray1;
+  --px-slider-border-color--selected: $primary-default;
+  --px-slider-background-color--selected: $primary-default;
+  --px-slider-background-color--hover: $primary-hover;
+  --px-slider-background-color--pressed: $primary-pressed;
+  --px-handle-stroke-color: $gray8;
+  --px-handle-color--disabled: $gray4;
+  --px-handle-background-color: $white;
+  --px-handle-background-color--active: $gray7;
+
   // // Spinner
   // --px-spinner-fill-color:
   // --px-spinner-background-color:
