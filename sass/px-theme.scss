@@ -88,7 +88,7 @@ $predix-load-local-fonts : true;
   // Code
   --px-code-text-color: $primary-pressed;
   --px-code-background-color: $gray1;
-  --px-code-border-color: $gray3;
+  --px-code-border-color: transparent;
 
   // Headings
   --px-headings-header-page-color: $gray15;
@@ -100,7 +100,9 @@ $predix-load-local-fonts : true;
 
   // Forms
   --px-input-text-color: $gray15;
+  --px-input-label-text-color: $gray10;
   --px-input-text-color--placeholder: $gray5;
+  --px-input-text-color--help: $gray10;
   --px-input-background-color: transparent;
   --px-input-background-color--hover: $gray3;
   --px-input-background-color--disabled: transparent;
@@ -109,7 +111,6 @@ $predix-load-local-fonts : true;
   --px-input-border-color--outer--focused: $primary-default;
   --px-input-text-color--disabled: $gray4;
   --px-input-border-color--disabled: $gray4;
-  --px-input-text-color--help: $gray5;
   --px-select-background-color: $gray3;
   --px-select-background-color--hover: $gray6;
   --px-select-background-color--active: $gray8;
