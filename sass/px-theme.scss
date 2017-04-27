@@ -407,8 +407,11 @@ $predix-load-local-fonts : true;
   --px-slider-progress-border-color--disabled: $gray4;
   --px-slider-progress-background-color--disabled: $gray4;
   --px-handle-stroke-color: $gray8;
+  --px-handle-stroke-color--hover: $gray8;
+  --px-handle-stroke-color--active: $gray8;
   --px-handle-color--disabled: $gray4;
   --px-handle-background-color: $white;
+  --px-handle-background-color--hover: $gray4;
   --px-handle-background-color--active: $gray7;
 
   // // Spinner
@@ -427,16 +430,16 @@ $predix-load-local-fonts : true;
   --px-tooltip-border-color: $gray3;
   --px-tooltip-shadow-color: rgba($black,0.15);
 
-  // // Typeahead
-  // --px-typeahead-background-color:
-  // --px-typeahead-background-color--selected:
-  // --px-typeahead-border-color:
-  // --px-typeahead-border-color--focus:
-  // --px-typeahead-box-shadow-color:
-  // --px-typeahead-box-shadow-color--focus:
-  // --px-typeahead-text-color:
-  // --px-typeahead-text-color--selected:
-  //
+  // Typeahead
+  --px-typeahead-background-color: $white;
+  --px-typeahead-background-color--hover: $gray1;
+  --px-typeahead-background-color--selected: $select-default;
+  --px-typeahead-border-color: $gray3;
+  --px-typeahead-box-shadow-color: rgba($black,0.15);
+  --px-typeahead-text-color: $gray15;
+  --px-typeahead-text-color--hover: $gray15;
+  --px-typeahead-text-color--selected: $white;
+
   // // View Header
   // --px-view-header-background-color:
   //
