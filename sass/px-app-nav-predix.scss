@@ -8,52 +8,105 @@
  * under which the software has been supplied.
  */
 
-//
-// Sass for the Predix notion of the px-app-nav component
-//
-// @author
-//
+// Settings
+@import "px-defaults-design/_settings.defaults.scss";
+@import "px-mixins-design/_tools.mixins.scss";
 
-/*
-THIS FILE SHOULD CONTAIN ONLY RULES SPECIFIC TO PREDIX BRANDING
-common/abstract rules go in px-app-nav-sketch.scss, not in this file.
-*/
+// Generic
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
 
-@import 'px-app-nav-sketch.scss';
+// Base
+@import "px-flexbox-design/_base.flexbox.scss";
 
+// Objects
+@import "px-list-bare-design/_objects.list-bare.scss";
+
+$inuit-enable-btn--bare                 : true;
+@import "px-buttons-design/_objects.buttons.scss";
+
+// Component
 :host {
-  background-color: var(--px-app-nav-background-color); //$gray-darkest;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: none;
+  width: calculateRem(219px);
+  padding: 1em;
+  background-color: var(--px-app-nav-background-color, black);
+  @include media-query(desk) {
+    position: relative;
+  }
+  @media screen and (min-height:100vh) {
+    min-height: 100%;
+  }
+  ::content {
+    .login {
+      width: calculateRem(219px);
+    }
+  }
+}
+
+:host[nav-expanded], :host[nav-contracting] {
+  z-index: 2;
+  @include media-query(desk) {
+    z-index: auto;
+  }
+}
+
+:host(.navbar--collapsed) {
+  width: calculateRem(55px);
+  ::content {
+    .fa + span, span + .fa {
+      @include accessibility;
+    }
+    .login {
+      width: calculateRem(55px);
+    }
+  }
+}
+
+:host(.navbar--text-hidden) {
+  .navbar__item {
+    > li {
+      > a span, ul {
+        @include accessibility;
+      }
+    }
+  }
+}
+
+:host > nav {
+  height: 100%;
 }
 
 span {
-  color: var(--px-app-nav-link-text-color);
-} 
+  color: var(--px-app-nav-link-text-color, white);
+}
 
 iron-icon, a{
   text-decoration: none;
-  color: var(--px-app-nav-link-text-color);
+  color: var(--px-app-nav-link-text-color, white);
   &.selected {
     &, &:hover {
-      background-color: var(--px-app-nav-link-selected-color);
+      background-color: var(--px-app-nav-link-selected-color, gray);
     }
   }
   &.subselected {
-    background-color: var(--px-app-nav-link-hover-color);
+    background-color: var(--px-app-nav-link-hover-color, gray);
   }
   &:hover {
-    background-color: var(--px-app-nav-link-hover-color);
-    color: var(--px-app-nav-link-text-color);
+    background-color: var(--px-app-nav-link-hover-color, gray);
+    color: var(--px-app-nav-link-text-color, white);
   }
   &:active {
-    background-color: var(--px-app-nav-link-selected-active-color);
+    background-color: var(--px-app-nav-link-selected-active-color, gray);
   }
   &:visited{
-    color: var(--px-app-nav-link-text-color);
+    color: var(--px-app-nav-link-text-color, white);
   }
-}
-
-.btn--svg path {
-  fill: var(--px-app-nav-hamburger-button-color, $white);
 }
 
 .nav-item--icon {
@@ -62,3 +115,42 @@ iron-icon, a{
   margin-bottom: calculateRem(2px);
   margin-left: calculateRem(4px);
 }
+
+
+.navbar__item {
+  > li {
+    margin-right: -1em;
+    margin-left: -1em;
+    line-height: 3;
+    a {
+      padding-right: 1em;
+      padding-left: 1.0666666667em;
+    }
+    .fa {
+      width: calculateRem(23px);
+      text-align: center;
+    }
+    li {
+      line-height: 2;
+      a {
+        padding-left: 2.7333333333em;
+      }
+    }
+  }
+  a {
+    display: block;
+  }
+}
+
+.btn--svg {
+  width: calculateRem(24px);
+  height: calculateRem(16px);
+  margin-bottom: calculateRem(24px);
+  fill: var(--px-app-nav-hamburger-button-color, white);
+}
+
+// Trumps
+$inuit-enable-margins--tiny:            true;
+$inuit-enable-margins--rtl:             true;
+
+@import "px-spacing-design/_trumps.spacing.scss";

@@ -1,3 +1,7 @@
+v1.10.11
+==================
+* fix #41 (debounce clicks), simplify sass
+
 v1.10.10
 ==================
 * update docs
