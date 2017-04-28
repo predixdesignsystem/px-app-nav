@@ -342,7 +342,7 @@ $predix-load-local-fonts : true;
   // Dropdown
   --px-dropdown-bg-color: $white;
   --px-dropdown-bg-color--hover: $gray1;
-  --px-dropdown-bg-color--selected: $gray1;
+  --px-dropdown-bg-color--selected: $select-default;
   --px-dropdown-text-color--disabled: $gray4;
   --px-dropdown-text-color--selected: $white;
   --px-dropdown-border-color: $gray3;
@@ -420,8 +420,12 @@ $predix-load-local-fonts : true;
   // --px-spinner-background-color:
 
   // Tabs
-  --px-tab-text-color: $gray15;
-  --px-tab-text-color--selected: $select-default;
+  --px-tab-color: $gray10;
+  --px-tab-color--hover: $select-default;
+  --px-tab-color--active: $select-pressed;
+  --px-tab-color--selected: $select-default;
+  --px-tab-color--selected--hover: $select-hover;
+  --px-tab-color--selected--active: $select-pressed;
   --px-tab-border-color: $gray5;
   --px-tab-outline-style: none;
 
