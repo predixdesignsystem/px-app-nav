@@ -1,3 +1,7 @@
+v3.0.0-prerelease-2
+=================
+* run gulp sass to update primary-default color
+
 v3.0.0-prerelease-1
 =================
 * updated with redesigned forms, list ui, tabs
