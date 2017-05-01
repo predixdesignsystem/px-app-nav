@@ -100,12 +100,13 @@
 .app-nav-item__icon {
   --iron-icon-height: 30px;
   --iron-icon-width: 30px;
-  padding-right: $inuit-base-spacing-unit;
+  padding-right: 10px;
 }
 
 .app-nav-item__open-icon {
-  --iron-icon-height: 20px;
-  --iron-icon-width: 20px;
+  --iron-icon-height: 15px;
+  --iron-icon-width: 15px;
+  padding-left: 5px;
 }
 
 .app-nav-item__subitems {

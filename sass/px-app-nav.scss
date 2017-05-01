@@ -29,13 +29,13 @@
 
 // Component
 
-.app-nav-toolbar {
-  background-color: rgb(223, 230, 234);
-  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
-  height: 60px;
-  padding-left: 0;
-  align-items: flex-start;
-}
+// .app-nav-toolbar {
+//   background-color: rgb(223, 230, 234);
+//   box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
+//   height: 60px;
+//   padding-left: 0;
+//   align-items: flex-start;
+// }
 
 // px-app-nav-item {
 //   color: #425866;
@@ -48,6 +48,20 @@
 //   cursor: pointer;
 //   position: relative;
 // }
+
+@import "app-nav-shared";
+.app-nav-items__collapse-button {
+  @extend %app-nav-button;
+  display: none;
+  --iron-icon-height: 30px;
+  --iron-icon-width: 30px;
+}
+.app-nav-items__collapse-button--selected {
+  @extend %app-nav-button--selected;
+}
+.app-nav-items__collapse-button--visible {
+  display: inherit;
+}
 
 // Trumps
 @import "inuit-clearfix/_trumps.clearfix.scss";

@@ -26,7 +26,8 @@
     "app-layout": "PolymerElements/app-layout#^0.10.7",
     "iron-dropdown": "PolymerElements/iron-dropdown#^1.5.5",
     "iron-selector": "PolymerElements/iron-selector#^1.5.2",
-    "px-overlay": "^0.4.4"
+    "px-overlay": "^0.4.4",
+    "iron-resizable-behavior": "^1.0.6"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.4",

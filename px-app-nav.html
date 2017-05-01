@@ -13,6 +13,7 @@
 <link rel="import" href="../app-layout/app-header/app-header.html" />
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
 <link rel="import" href="../iron-selector/iron-selector.html" />
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
 
 <link rel="import" href="px-app-nav-horizontal.html" />
 <link rel="import" href="px-app-nav-collapsed.html" />
@@ -56,8 +57,7 @@ Custom property | Description | Default
 
 <dom-module id="px-app-nav">
   <template>
-    <style include="px-app-nav-styles"></style>
-    <style>
+    <style include="px-app-nav-styles">
       #root {
         display: none;
       }
@@ -67,49 +67,42 @@ Custom property | Description | Default
       .app-nav--collapsed .app-nav-toolbar-collapsed {
         display: inherit;
       }
+      .app-nav-visible {
+        display: flex;
+      }
+      .app-nav-collapsed {
+        display: none;
+      }
+      .app-nav-toolbar {
+        background-color: rgb(223, 230, 234);
+        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
+        height: 60px;
+        padding-left: 0;
+        padding-right: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        max-width: 100%;
+      }
+      .app-nav-items {
+        height: 60px;
+        flex: 1;
+        display: flex;
+        max-width: 100%;
+      }
     </style>
-
     <section class$="{{_getNavClasses(type, collapseAll)}}">
       <app-header fixed>
         <app-toolbar class="app-nav-toolbar" id="toolbar">
-          <!-- If nav `type` is horizontal and `collapseAll` is false it will be placed here -->
-          <div class="app-nav-toolbar-horizontal">
-            <px-app-nav-horizontal id="horizontal"></px-app-nav-horizontal>
-          </div>
-
-          <!-- If nav `type` is horizontal and `collapseAll` is true it will be placed here -->
-          <div class="app-nav-toolbar-collapsed">
-            <px-app-nav-collapsed id="collapsed" label="{{selectedItem.label}}" icon="{{selectedItem.icon}}"></px-app-nav-collapsed>
-          </div>
-
-          <!-- If nav `type` is vertical it will be placed here -->
-          <div class="app-nav-toolbar-vertical" id="vertical">
-          </div>
+          <section class="app-nav-items" id="items">
+            <div class="app-nav-visible" id="visible"></div>
+            <div class="app-nav-collapsed" id="collapsed"></div>
+            <div class$="app-nav-items__collapse-button {{_getCollapsedButtonClasses(collapsedItems)}}">
+              <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
+            </div>
+          </section>
         </app-toolbar>
       </app-header>
-    </section>
-
-    <section id="root">
-      <!-- Distribute nav items passed as light DOM children -->
-      <content select="*"></content>
-
-      <!-- Create nav items from data -->
-      <template is="dom-repeat" items="{{navItems}}">
-        <!-- Stamp groups, which hold subitems -->
-        <template is="dom-if" if="{{_hasSubitems(item)}}">
-          <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
-            <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-              <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}"></px-app-nav-item>
-            </template>
-          </px-app-nav-group>
-        </template>
-
-        <!-- Stamp plain old items, which hold subitems -->
-        <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-          <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}">
-          </px-app-nav-item>
-        </template>
-      </template>
     </section>
 
   </template>
@@ -118,8 +111,14 @@ Custom property | Description | Default
 <script>
   Polymer({
     is: 'px-app-nav',
+    behaviors: [Polymer.IronResizableBehavior],
 
     properties: {
+      initialCount: {
+        type: Number,
+        value: 3
+      },
+
       /**
        * Set to 'horizontal' to display nav across the top of the screen, or set
        * to 'vertical' to display navigation along the side of the screen.
@@ -161,9 +160,7 @@ Custom property | Description | Default
       navItems: {
         type: Array,
         notify: true,
-        value: function() {
-          return [{}];
-        }
+        observer: '_handleNavItemsChanged'
       },
 
       /**
@@ -198,31 +195,143 @@ Custom property | Description | Default
         type: Object,
         notify: true
       },
+
+      _availableWidth: {
+        type: Number,
+        observer: 'rebuild'
+      },
+
+      visibleItems: {
+        type: Array,
+        notify: true,
+        readOnly: true
+      },
+
+      collapsedItems: {
+        type: Array,
+        notify: true,
+        readOnly: true
+      }
+    },
+
+    statics: {
+      ITEM_FONT_NAME: 'GE Inspira Sans',
+      ITEM_FONT_SIZE: 15,
+      ITEM_PADDING: 32, /* 16+16 */
+      ITEM_ICON_WIDTH: 30,
+      ITEM_ICON_PADDING: 10,
+      OPEN_ICON_WIDTH: 15,
+      OPEN_ICON_PADDING: 5,
+      OVERFLOW_ICON_SIZE: 30,
+      OVERFLOW_ICON_PADDING: 32 /*16+16*/
+    },
+
+    listeners: {
+      'iron-resize' : '_handleResize'
     },
 
     created: function() {
       this._navAttached = false;
       this._navTarget;
-      this._knownItems;
     },
 
     attached: function() {
+      this._navAttached = true;
       this._knownItems = [];
-      var boundItemHandler = this._handleItemsUpdated.bind(this);
-      this._itemObserver = Polymer.dom(this.$.root).observeNodes(boundItemHandler);
+      this._detachedItems = [];
+      // var boundItemHandler = this._handleItemsDistributed.bind(this);
+      // this._itemObserver = Polymer.dom(this.$.new).observeNodes(boundItemHandler);
     },
 
     detached: function() {
+      this._navAttached = false;
       this._knownItems = null;
-      Polymer.dom(this.$.root).unobserveNodes(this._itemObserver);
+      this._detachedItems = null;
+      // Polymer.dom(this.$.new).unobserveNodes(this._itemObserver);
     },
 
-    _handleItemsUpdated: function(info) {
-      if (Array.isArray(info.addedNodes) && info.addedNodes.length) {
-        var addedItems = this._findItemNodes(info.addedNodes);
-        this._knownItems = this._trackItems(addedItems, this._knownItems);
+    _handleResize: function(evt) {
+      const debouncer = 'measure-available-width';
+      if (typeof this._availableWidth !== 'number') {
+        this._getAvailableWidth();
+        return;
       }
+      if (this.isDebouncerActive(debouncer)) {
+        this.cancelDebouncer(debouncer);
+      }
+      this.debounce(debouncer, this._getAvailableWidth.bind(this), 100);
+    },
+
+    _getAvailableWidth: function() {
+      window.requestAnimationFrame(() => {
+        const el = this.$.items;
+        if (!el) return;
+        const width = el.getBoundingClientRect().width;
+        if (this._availableWidth !== width) this.set('_availableWidth', width);
+      });
+    },
+
+    _handleNavItemsChanged(items) {
+      Polymer.RenderStatus.afterNextRender(this, this._buildNodesFromData, [items]);
+    },
+
+    _buildNodesFromData: function(items) {
+      var nodes = items.map(this._buildNode.bind(this));
+      this._detachedItems = this._detachedItems.concat(nodes);
+      this._knownItems = this._knownItems.concat(nodes);
       this.rebuild();
+    },
+
+    _buildNode: function(item, parent) {
+      var el;
+      if (Array.isArray(item.subitems) && item.subitems.length) {
+        el = document.createElement('px-app-nav-group');
+        for (let subitem of item.subitems) {
+          Polymer.dom(el).appendChild(this._buildNode(subitem, parent));
+        }
+      }
+      else {
+        el = document.createElement('px-app-nav-item');
+      }
+      if (item.label) el.setAttribute('label', item.label);
+      if (item.icon)  el.setAttribute('icon', item.icon);
+      if (item.path)  el.setAttribute('path', item.path);
+      return el;
+    },
+
+    // _buildNodesInParent: function(items, parent) {
+    //   var el;
+    //   for (var i = 0, len = items.length; i < len; i++) {
+    //     el = this._createNode(items[i]);
+    //     if (Array.isArray(items[i].subitems) && items[i].subitems.length) {
+    //       this._buildNodesInParent(items[i].subitems, el);
+    //     }
+    //     Polymer.dom(parent).appendChild(el);
+    //   }
+    //   return parent;
+    // },
+    //
+    // _createNode: function(item) {
+    //   var el;
+    //   if (Array.isArray(item.subitems) && item.subitems.length) {
+    //     el = document.createElement('px-app-nav-group');
+    //   }
+    //   else {
+    //     el = document.createElement('px-app-nav-item');
+    //   }
+    //   if (item.label) el.setAttribute('label', item.label);
+    //   if (item.icon)  el.setAttribute('icon', item.icon);
+    //   if (item.path)
+    //   return el;
+    // },
+
+    _handleItemsDistributed: function(info) {
+      // if (Array.isArray(info.addedNodes) && info.addedNodes.length) {
+      //   var addedItems = this._findItemNodes(info.addedNodes);
+      //   this._newItems = this._newItems.concat(addedItems);
+      //   this.rebuild();
+      // }
+      //
       // if (Array.isArray(info.removedNodes) && info.removedNodes.length) {
       //   var removedItems = this._findItemNodes(info.removedNodes);
       //   this._knownItems = this._untrackItems(removedItems);
@@ -230,60 +339,199 @@ Custom property | Description | Default
     },
 
     _trackItems(items, knownItems) {
-      return items.reduce(function(accum, item) {
-        if (accum.indexOf(item) === -1) {
-          accum.push(item);
-        }
-        return accum;
-      }, knownItems);
+      // return items.reduce(function(accum, item) {
+      //   if (accum.indexOf(item) === -1) {
+      //     accum.push(item);
+      //   }
+      //   return accum;
+      // }, knownItems);
     },
 
     _untrackItems(items, knownItems) {
-      return knownItems.filter(function(item) {
-        return items.indexOf(item) === -1;
-      });
+      // return knownItems.filter(function(item) {
+      //   return items.indexOf(item) === -1;
+      // });
     },
 
     _findItemNodes(nodes) {
-      var found = [];
-      var i = 0;
-      var len = nodes.length;
-      for (; i < len; i++) {
-        if (nodes[i].nodeType === Node.ELEMENT_NODE && (nodes[i].nodeName === 'PX-APP-NAV-GROUP' || nodes[i].nodeName === 'PX-APP-NAV-ITEM')) {
-          found.push(nodes[i]);
-        }
-      }
-      return found;
+      // var found = [];
+      // var i = 0;
+      // var len = nodes.length;
+      // for (; i < len; i++) {
+      //   if (nodes[i].nodeType === Node.ELEMENT_NODE && (nodes[i].nodeName === 'PX-APP-NAV-GROUP' || nodes[i].nodeName === 'PX-APP-NAV-ITEM')) {
+      //     found.push(nodes[i]);
+      //   }
+      // }
+      // return found;
     },
 
     /**
      * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
      */
     rebuild: function() {
-      if (typeof this.type !== 'string' || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
+      if (this._pendingRender || typeof this.type !== 'string' || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length || !this._availableWidth) return;
+      this._pendingRender = true;
 
-      var target = this._getNavTarget(this.type, this.collapseAll);
-      this._ensureItemsInTarget(this._knownItems, target);
+      const items = this._knownItems;
+      const width = this._availableWidth;
+      const pMeasure = () => this._measureItems(items);
+      const pFit = (measurements) => this._fitItems(items, width, measurements);
+      const pRender = ({visible, collapsed}) => this._renderItems(items, visible, collapsed);
+      const pFinish = ({visible, collapsed}) => {
+        this._pendingRender = false;
+        this._updateItemsProp('visibleItems', visible, true);
+        this._updateItemsProp('collapsedItems', collapsed, true);
+        return Promise.resolve();
+      };
+      const pAll = () => pMeasure().then(pFit).then(pRender).then(pFinish);
+
+      // Polymer.RenderStatus.afterNextRender(this, pAll);
+      pAll.call();
+    },
+
+    _updateItemsProp: function(propName, items, readOnly) {
+      const setter = readOnly ? this[`_set${propName.slice(0,1).toUpperCase()}${propName.slice(1)}`].bind(this) : this.set.bind(this, propName);
+      if (items.length) {
+        setter(items);
+      } else {
+        setter([]);
+      }
+      if (this[propName] && Array.isArray(this[propName])) {
+        const splices = Polymer.ArraySplice.calculateSplices(this[propName], items);
+      }
+    },
+
+    _renderItems: function(items, visible, collapsed) {
+      const renderers = items.map(item =>
+        this._renderItem(item, (collapsed.indexOf(item) > -1))
+      );
+      return Promise.all(renderers).then(() => ({ items: items, visible: visible, collapsed: collapsed }));
+    },
+
+    _renderItem: function(item, isCollapsed=false) {
+      const newParent = isCollapsed ? this.$.collapsed : this.$.visible;
+      const currentParent = Polymer.dom(item).parentNode;
+      if (!currentParent) {
+        Polymer.dom(newParent).appendChild(item);
+      }
+      if (currentParent && currentParent !== newParent) {
+        Polymer.dom(currentParent).appendChild(item);
+        Polymer.dom(newParent).appendChild(item);
+      }
+      return Promise.resolve();
+    },
+
+    _fitItems: function(items, width, measurements) {
+      return new Promise((resolve, reject) => {
+        console.time('fit');
+        let available = width;
+
+        // If the first item is larger than the available, collapse all
+        if (available < measurements[0]) {
+          return resolve({ visible: [], collapsed: items.slice(0) });
+        }
+
+        // Try to fit items in the available space
+        let i = 0;
+        let len = items.length;
+
+        while (i<len && available>0) {
+          if (measurements[i] > available) {
+            break;
+          }
+          available -= measurements[i];
+          i++;
+        }
+
+        // If any overflow, ensure the overflow icon can fit
+        let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
+        if (i !== len && available < overflowSize) {
+          available -= overflowSize;
+          while (i>0 && available<0) {
+            available += measurements[i];
+            i--;
+          }
+        }
+        console.timeEnd('fit');
+        return resolve({ visible: items.slice(0,i), collapsed: items.slice(i) });
+      })
+    },
+
+    _measureItems: function(items) {
+      const boundMeasureFn = this._measureItem.bind(this);
+      const measurements = items.map(boundMeasureFn);
+      return Promise.all(measurements);
+    },
+
+    _measureItem: function(item) {
+      const getLength = this._measureTextAsync(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
+      return getLength.then((textLength) => {
+        if (!textLength) return Promise.reject(`The text ${item.label} could not be measured.`);
+        let totalLength = textLength; /* start with text size */
+        totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
+        if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
+        if (item.nodeName === 'PX-APP-NAV-GROUP') totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
+        return Promise.resolve(totalLength);
+      });
+    },
+
+    _measureTextAsync: function(text, fontName, fontSize) {
+      return new Promise(function(resolve, reject) {
+        return resolve(this._measureText(text, fontName, fontSize));
+      }.bind(this));
+    },
+
+    _measureText: function(text, fontName, fontSize) {
+      var cv = this._get2dMeasureCanvas(fontName, fontSize);
+      var size = cv.measureText(text).width;
+      return isNaN(size) ? undefined : Math.round(size);
+    },
+
+    _get2dMeasureCanvas: function(fontName, fontSize) {
+      this.__measureCanvasCache = this.__measureCanvasCache || {};
+      var fontInfo = fontSize + ' ' + fontName;
+      if (this.__measureCanvasCache[fontInfo]) return this.__measureCanvasCache[fontInfo];
+      var cv = document.createElement('canvas');
+      cv.height = 999;
+      cv.width = 999;
+      var ctx = cv.getContext('2d');
+      ctx.font = fontInfo;
+      return (this.__measureCanvasCache[fontInfo] = ctx);
+    },
+
+    _attachChild(child) {
+      Polymer.dom(this.$.visible).appendChild(child);
+    },
+
+    _rebuildItems: function() {
+
+    },
+
+    _moveToTarget: function(el, lastParent, nextParent) {
+      // if (!el || !lastParent || !nextParent) return;
+      //
+      // Polymer.dom(lastParent).removeChild(el);
+      // Polymer.dom(nextParent).appendChild(el);
     },
 
     _ensureItemsInTarget(items, target) {
-      var i = 0;
-      var len = items.length;
-      var parentNode;
-      var anyMoved = false;
-
-      for (; i < len; i++) {
-        parentNode = Polymer.dom(items[i]).parentNode;
-        if (parentNode && parentNode !== target) {
-          Polymer.dom(parentNode).removeChild(items[i]);
-          Polymer.dom(target).appendChild(items[i]);
-          anyMoved = true;
-        }
-      }
-
-      if (anyMoved) {
-        Polymer.dom.flush();
-      }
+      // var i = 0;
+      // var len = items.length;
+      // var parentNode;
+      // var anyMoved = false;
+      //
+      // for (; i < len; i++) {
+      //   parentNode = Polymer.dom(items[i]).parentNode;
+      //   if (parentNode && parentNode !== target) {
+      //     Polymer.dom(parentNode).removeChild(items[i]);
+      //     Polymer.dom(target).appendChild(items[i]);
+      //     anyMoved = true;
+      //   }
+      // }
+      //
+      // if (anyMoved) {
+      //   Polymer.dom.flush();
+      // }
     },
 
     _getNavTarget: function(type, collapsed) {
@@ -476,6 +724,17 @@ Custom property | Description | Default
         return false;
       }
       return true;
+    },
+
+    _getCollapsedButtonClasses(collapsedItems, selectedItem) {
+      let classNames = [];
+      if (collapsedItems && Array.isArray(collapsedItems) && collapsedItems.length) {
+        classNames.push('app-nav-items__collapse-button--visible');
+      }
+      if (selectedItem && collapsedItems && Array.isArray(collapsedItems) && collapsedItems.indexOf(selectedItem) !== -1) {
+        classNames.push('app-nav-items__collapse-button--selected');
+      }
+      return classNames.join(' ');
     }
   });
 </script>
