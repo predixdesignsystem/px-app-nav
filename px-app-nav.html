@@ -91,13 +91,13 @@ Custom property | Description | Default
         max-width: 100%;
       }
     </style>
-    <section class$="{{_getNavClasses(type, collapseAll)}}">
+    <section class$="{{_getNavClasses(collapseAll, vertical)}}">
       <app-header fixed>
         <app-toolbar class="app-nav-toolbar" id="toolbar">
           <section class="app-nav-items" id="items">
             <div class="app-nav-visible" id="visible"></div>
             <div class="app-nav-collapsed" id="collapsed"></div>
-            <div class$="app-nav-items__collapse-button {{_ifAnyCollapsed('app-nav-items__collapse-button--visible', collapsedItems)}} {{_ifSelectedCollapsed('app-nav-items__collapse-button--selected', selectedItem, collapsedItems, selectedItem)}}">
+            <div class$="app-nav-items__collapse-button {{_ifAnyCollapsed('app-nav-items__collapse-button--visible', collapsedItems)}} {{_ifSelectedCollapsed('app-nav-items__collapse-button--selected', selectedItem, collapsedItems)}}">
               <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
             </div>
           </section>
@@ -123,9 +123,15 @@ Custom property | Description | Default
        * Set to 'horizontal' to display nav across the top of the screen, or set
        * to 'vertical' to display navigation along the side of the screen.
        */
-      type: {
-        type: String,
-        value: 'horizontal',
+      // type: {
+      //   type: String,
+      //   value: 'horizontal',
+      //   observer: 'rebuild'
+      // },
+
+      vertical: {
+        type: Boolean,
+        value: false,
         observer: 'rebuild'
       },
 
@@ -138,7 +144,7 @@ Custom property | Description | Default
       collapseAll: {
         type: Boolean,
         value: false,
-        observer: 'rebuild'
+        observer: '_sizeChanged'
       },
 
       /**
@@ -232,7 +238,7 @@ Custom property | Description | Default
     },
 
     listeners: {
-      'iron-resize' : '_handleResize',
+      'iron-resize' : '_sizeChanged',
       'px-app-nav-item-tapped' : '_handleItemTapped'
     },
 
@@ -353,7 +359,9 @@ Custom property | Description | Default
       // Polymer.dom(this.$.new).unobserveNodes(this._itemObserver);
     },
 
-    _handleResize: function(evt) {
+    _sizeChanged: function(evt) {
+      if (this.collapseAll) return;
+
       const debouncer = 'measure-available-width';
       if (typeof this._availableWidth !== 'number') {
         this._getAvailableWidth();
@@ -473,7 +481,7 @@ Custom property | Description | Default
      * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
      */
     rebuild: function() {
-      if (this._pendingRender || typeof this.type !== 'string' || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length || !this._availableWidth) return;
+      if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length || !this._availableWidth) return;
       this._pendingRender = true;
 
       const items = this._knownItems;
@@ -638,16 +646,14 @@ Custom property | Description | Default
       // }
     },
 
-    _getNavTarget: function(type, collapsed) {
-      if (collapsed && type === 'horizontal') {
-        return this.$.collapsed;
-      }
-      if (!collapsed && type === 'horizontal') {
-        return this.$.horizontal;
-      }
-      if (type === 'vertical') {
-        return this.$.vertical;
-      }
+    _getNavTarget: function(collapseAll, vertical) {
+      // if (collapseAll && !vertical) {
+      //   return this.$.collapseAll;
+      // }
+      // if (!collapseAll && !vertical) {
+      //   return this.$.horizontal;
+      // }
+      // return this.$.vertical;
     },
 
     /**
@@ -795,20 +801,20 @@ Custom property | Description | Default
       return !item.hasOwnProperty('subitems');
     },
 
-    _getNavClasses(type, collapsed) {
-      var className = 'app-nav';
+    _getNavClasses(collapseAll, vertical) {
+      let className = ['app-nav'];
 
-      if (type === 'horizontal') {
-        className += ' app-nav--horizontal'
+      if (vertical) {
+        className.push('app-nav--vertical');
       }
-      if (collapsed === true && type === 'horizontal') {
-        className += ' app-nav--collapsed'
+      if (!vertical) {
+        className.push('app-nav--horizontal');
       }
-      if (type === 'vertical') {
-        className += ' app-nav--vertical'
+      if (collapseAll === true) {
+        className.push('app-nav--horizontal');
       }
 
-      return className;
+      return className.join(' ');
     },
 
     _navIs(isType, wantedType, isCollapsed, wantedCollapsed) {
