@@ -53,6 +53,7 @@
 .app-nav-items__collapse-button {
   @extend %app-nav-button;
   display: none;
+  position: relative;
   --iron-icon-height: 30px;
   --iron-icon-width: 30px;
 }

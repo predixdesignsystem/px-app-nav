@@ -97,7 +97,7 @@ Custom property | Description | Default
           <section class="app-nav-items" id="items">
             <div class="app-nav-visible" id="visible"></div>
             <div class="app-nav-collapsed" id="collapsed"></div>
-            <div class$="app-nav-items__collapse-button {{_getCollapsedButtonClasses(collapsedItems)}}">
+            <div class$="app-nav-items__collapse-button {{_ifAnyCollapsed('app-nav-items__collapse-button--visible', collapsedItems)}} {{_ifSelectedCollapsed('app-nav-items__collapse-button--selected', selectedItem, collapsedItems, selectedItem)}}">
               <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
             </div>
           </section>
@@ -483,8 +483,8 @@ Custom property | Description | Default
       const pRender = ({visible, collapsed}) => this._renderItems(items, visible, collapsed);
       const pFinish = ({visible, collapsed}) => {
         this._pendingRender = false;
-        this._updateItemsProp('visibleItems', visible, true);
-        this._updateItemsProp('collapsedItems', collapsed, true);
+        this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+        this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
         return Promise.resolve();
       };
       const pAll = () => pMeasure().then(pFit).then(pRender).then(pFinish);
@@ -826,15 +826,16 @@ Custom property | Description | Default
       return true;
     },
 
-    _getCollapsedButtonClasses(collapsedItems, selectedItem) {
-      let classNames = [];
+    _ifAnyCollapsed(className, collapsedItems) {
       if (collapsedItems && Array.isArray(collapsedItems) && collapsedItems.length) {
-        classNames.push('app-nav-items__collapse-button--visible');
+        return className;
       }
+    },
+
+    _ifSelectedCollapsed(className, selectedItem, collapsedItems) {
       if (selectedItem && collapsedItems && Array.isArray(collapsedItems) && collapsedItems.indexOf(selectedItem) !== -1) {
-        classNames.push('app-nav-items__collapse-button--selected');
+        return className;
       }
-      return classNames.join(' ');
     }
   });
 </script>
