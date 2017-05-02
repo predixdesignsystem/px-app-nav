@@ -40,6 +40,10 @@
         observer: '_handleSelectedChanged'
       },
 
+      item: {
+        type: Object
+      },
+
       /**
        * Used as the label text for the item.
        */
@@ -90,7 +94,11 @@
      */
     _handleSelfTapped(evt) {
       if (!this.selected) {
-        this.set('selected', true);
+        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+        this.fire('px-app-nav-item-tapped', {
+          path: [path],
+          items: [this.item]
+        }, {cancelable:true});
       }
     },
 
@@ -101,21 +109,7 @@
      * or deselect this item.
      */
     _handleSelectedChanged(nextState, lastState) {
-      if (nextState === true) {
-        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
-        this.fire('px-app-nav-item-selected', {
-          path: [path],
-          items: [{label: this.label, icon: this.icon, path: this.path, index: this.index}]
-        }, {cancelable:true});
-        this.toggleClass('app-nav-item--selected', true, this.$.item);
-      }
-      if (nextState === false) {
-        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
-        this.fire('px-app-nav-item-deselected', {
-          path: [path]
-        }, {cancelable:true});
-        this.toggleClass('app-nav-item--selected', false, this.$.item);
-      }
+      this.toggleClass('app-nav-item--selected', nextState, this.$.item);
     }
   });
 </script>

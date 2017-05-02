@@ -111,12 +111,12 @@
 
     attached: function() {
       this.listen(this, 'tap', '_handleSelfTapped');
-      this.listen(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
+      this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemTapped');
     },
 
     detached: function() {
       this.unlisten(this, 'tap', '_handleSelfTapped');
-      this.unlisten(this.$.group, 'px-app-nav-item-selected', '_handleSubitemSelected');
+      this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemTapped');
     },
 
     /**
@@ -225,16 +225,15 @@
      * If a group's subitem is selected, it should also be selected. Fire an event
      * to ask this item's parent to select it when its subitem is selected.
      */
-    _handleSubitemSelected(evt) {
+    _handleSubitemTapped(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this);
-      var localItem = {label: this.label, icon: this.icon, path: this.path, index: this.index};
-      var path = (evt.detail.path && Array.isArray(evt.detail.path)) ? [localPath].concat(evt.detail.path) : [localPath];
-      var items = (evt.detail.path && Array.isArray(evt.detail.items)) ? [localItem].concat(evt.detail.items) : [localItem];
+      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+      var path = [localPath].concat(evt.detail.path);
+      var items = [this.item].concat(evt.detail.items);
 
-      this.fire('px-app-nav-item-selected', {
+      this.fire('px-app-nav-item-tapped', {
         group: true,
         path: path,
         items: items
@@ -251,12 +250,7 @@
         this.set('selectedSubpath', null);
         this.closeGroup();
       }
-      if (nextState === true) {
-        this.toggleClass('app-nav-item--selected', true, this.$.itemButton);
-      }
-      if (nextState === false) {
-        this.toggleClass('app-nav-item--selected', false, this.$.itemButton);
-      }
+      this.toggleClass('app-nav-item--selected', nextState, this.$.itemButton);
     },
 
     _getPositionTarget() {

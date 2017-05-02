@@ -142,15 +142,6 @@ Custom property | Description | Default
       },
 
       /**
-       * Selects a path.
-       */
-      selectedPath: {
-        type: String,
-        notify: true,
-        observer: '_selectedPathChanged'
-      },
-
-      /**
        * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
        * 'eventName', and 'subitems', which is another Array.
        *
@@ -188,12 +179,26 @@ Custom property | Description | Default
 
       selectedItem: {
         type: Object,
-        notify: true
+        notify: true,
+        readOnly: true
       },
 
       selectedSubitem: {
         type: Object,
-        notify: true
+        notify: true,
+        readOnly: true
+      },
+
+      selectedPath: {
+        type: String,
+        notify: true,
+        observer: '_selectedPathChanged'
+      },
+
+      selectedSubpath: {
+        type: String,
+        notify: true,
+        observer: '_selectedPathChanged'
       },
 
       _availableWidth: {
@@ -227,7 +232,105 @@ Custom property | Description | Default
     },
 
     listeners: {
-      'iron-resize' : '_handleResize'
+      'iron-resize' : '_handleResize',
+      'px-app-nav-item-tapped' : '_handleItemTapped'
+    },
+
+    _handleItemTapped: function(evt) {
+      if (!evt.detail.path || !Array.isArray(evt.detail.path) || !evt.detail.path.length) return;
+
+      if (evt.detail.path.length === 1) {
+        this.set('selectedPath', evt.detail.items[0].path);
+        this.set('selectedSubpath', null);
+      }
+      if (evt.detail.path.length === 2) {
+        this.set('selectedPath', evt.detail.items[0].path);
+        this.set('selectedSubpath', evt.detail.items[1].path);
+      }
+    },
+
+    _selectedPathChanged() {
+      this.debounce('selected-changed', () => {
+        const nextPath = this.selectedPath;
+        const nextSubpath = this.selectedSubpath;
+        const lastItem = this.selectedItem;
+        const lastSubitem = this.selectedSubitem;
+        let changed = false;
+
+        if (typeof nextPath !== 'string' || !nextPath.length) return;
+
+        if (!lastItem) {
+          changed = true;
+        }
+
+        if (lastItem && lastItem.path !== nextPath) {
+          changed = true;
+          this._deselectByItem(lastItem);
+        }
+
+        const hasSubpath = (typeof nextSubpath === 'string' && nextSubpath.length > 0);
+        if (lastSubitem && (!hasSubpath || lastSubitem.path !== nextSubpath)) {
+          changed = true;
+          this._deselectByItem(lastSubitem);
+        }
+
+        if (changed) {
+          this._selectPath(nextPath, nextSubpath);
+        }
+      });
+    },
+
+    _selectPath(path, subpath) {
+      const [selectedNode, selectedSubnode] = this._findNodesByPath(path, subpath) || [];
+      if (!selectedNode && !selectedSubnode) {
+        let errPath = nextPath + (hasSubpath) ? '.' + nextSubpath : '';
+        console.log(`PX-APP-NAV CONFIGURATION ERROR:
+          The path '${errPath}' cannot be found. Enter a valid path.`);
+        return;
+      }
+      if (selectedNode && this.selectedItem !== selectedNode.item) {
+        this._setSelectedItem(selectedNode.item);
+        selectedNode.set('selected', true);
+      }
+      if (selectedSubnode && this.selectedSubitem !== selectedSubnode.item) {
+        this._setSelectedSubitem(selectedSubnode.item);
+        selectedSubnode.set('selected', true);
+      }
+    },
+
+    _deselectByItem(item) {
+      const node = this._findNodeByProperty('item', item);
+      if (node) {
+        node.set('selected', false);
+      }
+    },
+
+    _findNodeByProperty(propName, val, parent) {
+      const nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
+      if (!nodes || !nodes.length) return;
+      let itemNode;
+
+      for (let node of nodes) {
+        if (node[propName] === val) {
+          itemNode = node;
+          break;
+        }
+      }
+
+      return itemNode;
+    },
+
+    _findNodesByPath(path, subpath) {
+      let item, subitem;
+      if (typeof path === 'string' && path.length) {
+        node = this._findNodeByProperty('path', path);
+        item = node ? node : undefined;
+      }
+      if (node && typeof subpath === 'string' && subpath.length) {
+        childNode = this._findNodeByProperty('path', subpath, node);
+        subitem = childNode ? childNode : undefined;
+      }
+      return [item, subitem];
     },
 
     created: function() {
@@ -296,6 +399,7 @@ Custom property | Description | Default
       if (item.label) el.setAttribute('label', item.label);
       if (item.icon)  el.setAttribute('icon', item.icon);
       if (item.path)  el.setAttribute('path', item.path);
+      el.item = item;
       return el;
     },
 
@@ -554,10 +658,6 @@ Custom property | Description | Default
       // if (path.length) {
       //   var pathStr = '';
       // }
-    },
-
-    _selectedPathChanged: function(nextPath, lastPath) {
-
     },
 
     /**
