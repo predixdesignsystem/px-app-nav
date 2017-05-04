@@ -137,6 +137,29 @@ $predix-load-local-fonts : true;
   --px-table-separator-color: $gray5;
 
   // Toggle
+  --px-toggle__background--checked: $primary-default;
+  --px-toggle__background--checked--hover: $primary-hover;
+  --px-toggle__background--checked--pressed: $primary-pressed;
+  --px-toggle__background--checked--disabled: rgba($black,0.2);
+
+  --px-toggle__background--unchecked: $gray8;
+  --px-toggle__background--unchecked--disabled: $white;
+
+  --px-toggle__background-border--unchecked: $gray3;
+  --px-toggle__background-border--unchecked--disabled: rgba($black,0.2);
+
+  --px-toggle__switch: $white;
+  --px-toggle__switch--hover: $gray4;
+  --px-toggle__switch--pressed: $gray7;
+  --px-toggle__switch--disabled: $white;
+
+  --px-toggle__switch-border: $gray8;
+  --px-toggle__switch-border--hover: $gray8;
+  --px-toggle__switch-border--pressed: $gray8;
+  --px-toggle__switch-border--disabled: rgba($black,0.2);
+
+
+
   --px-toggle-switch-color: $white;
   --px-toggle-switch-color-hover: $gray4;
   --px-toggle-switch-color-pressed: $gray7;
