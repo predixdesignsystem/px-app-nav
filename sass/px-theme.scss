@@ -258,36 +258,31 @@ $predix-load-local-fonts : true;
   // --px-cb-background-color--selected:
   // --px-cb-text-color--selected:
   // --px-cb-background-color--secondary:
-  //
-  // // Data Table
-  // --px-data-table-border-color:
-  // --px-data-table-cell-border-color:
-  // --px-data-table-cell-border-validation--failed:
-  // --px-data-table-cell-border-color--edit:
-  // --px-data-table-cell-border-color--selected:
-  // --px-data-table-cell--selected:
-  // --px-data-table-cell-background-color--selected:
-  // --px-data-table-cell-background-color--edit:
-  // --px-data-table-background-color-striped--even:
-  // --px-data-table-row-border-top-color--selected:
-  // --px-data-table-row-border-bottom-color--selected:
-  // --px-data-table-cell-text-color--selected:
-  // --px-data-table-cell-text-color-validation--failed:
-  // --px-data-table-cell-text-color--sorted:
-  // --px-data-table-cell-border-validation--failed:
-  // --px-data-table-results-text-color--none:
-  // --px-data-table-btn-pagination-number-background-color:
-  // --px-data-table-btn-pagination-number-text-color:
-  // --px-data-table-btn-pagination-number-background-color--hover:
-  // --px-data-table-btn-pagination-number-text-color--hover:
-  // --px-data-table-insertion-indicator-td-background-color:
-  // --px-data-table-text-input-background-color--filter:
-  // --px-data-table-tr--filter:
-  // --px-data-table-text-color--dragged:
-  // --cell--value__highlight--color__high:
-  // --cell--value__highlight--color__medium:
-  // --cell--value__highlight--color__low:
-  //
+
+  // Data Table
+  --px-data-table-border-color: $gray10;
+  --px-data-table-separator-color: $gray5;
+  --px-data-table-header-text-color: inherit;
+  --px-data-table-header-background-color: inherit;
+  --px-data-table-cell-border-validation--failed: $status-red3;
+  --px-data-table-cell-border-color--edit: $primary-default;
+  --px-data-table-cell-border-color--selected: $select-default;
+  --px-data-table-cell-background-color--selected: $select-default;
+  --px-data-table-cell-background-color--edit: transparent;
+  --px-data-table-background-color-striped--even: rgba($black,0.07);
+  --px-data-table-cell-text-color--selected: $white;
+  --px-data-table-cell-text-color-validation--failed: $status-red3;
+  --px-data-table-cell-text-color--sorted: $select-default;
+  --px-data-table-cell-border-validation--failed: $status-red3;
+  --px-data-table-results-text-color--none: $gray8;
+  --px-data-table-insertion-indicator-td-background-color: $primary-default;
+  --px-data-table-text-input-background-color--filter: $white;
+  --px-data-table-tr--filter: $white;
+  --px-data-table-text-color--dragged: $primary-default;
+  --px-data-table-highlight--high: rgba($status-red3,0.25);
+  --px-data-table-highlight--medium: rgba($status-yellow3,0.25);
+  --px-data-table-highlight--low: rgba($status-blue3,0.25);
+
   // //// Datetime Components
   //
   // // Calendar Picker
