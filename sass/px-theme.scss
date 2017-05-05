@@ -142,10 +142,14 @@ $predix-load-local-fonts : true;
   --px-toggle__background--checked--pressed: $primary-pressed;
   --px-toggle__background--checked--disabled: rgba($black,0.2);
 
-  --px-toggle__background--unchecked: $gray8;
+  --px-toggle__background--unchecked: $gray3;
+  --px-toggle__background--unchecked--hover: $gray5;
+  --px-toggle__background--unchecked--pressed: $gray9;
   --px-toggle__background--unchecked--disabled: $white;
 
-  --px-toggle__background-border--unchecked: $gray3;
+  --px-toggle__background-border--unchecked: $gray8;
+  --px-toggle__background-border--unchecked--hover: $gray10;
+  --px-toggle__background-border--unchecked--pressed: $gray12;
   --px-toggle__background-border--unchecked--disabled: rgba($black,0.2);
 
   --px-toggle__switch: $white;
@@ -154,27 +158,9 @@ $predix-load-local-fonts : true;
   --px-toggle__switch--disabled: $white;
 
   --px-toggle__switch-border: $gray8;
-  --px-toggle__switch-border--hover: $gray8;
-  --px-toggle__switch-border--pressed: $gray8;
+  --px-toggle__switch-border--hover: $gray10;
+  --px-toggle__switch-border--pressed: $gray12;
   --px-toggle__switch-border--disabled: rgba($black,0.2);
-
-
-
-  --px-toggle-switch-color: $white;
-  --px-toggle-switch-color-hover: $gray4;
-  --px-toggle-switch-color-pressed: $gray7;
-  --px-toggle-switch-border-color: $gray8;
-  --px-toggle-switch-shadow-color: rgba($black, .15);
-  --px-toggle-backgound-color-off: $gray3;
-  --px-toggle-border-color-off: $gray8;
-  --px-toggle-background-color-on: $primary-default;
-  --px-toggle-border-color-on: $primary-default;
-  --px-toggle-background-color-on-hover: $primary-hover;
-  --px-toggle-background-color-on-pressed: $primary-pressed;
-  --px-toggle-disabled-background: $white;
-  --px-toggle-checked-disabled-background: $gray4;
-  --px-toggle-disabled-border-color: $gray4;
-
 
   /***********************************/
   /* Default Theme for Px Components */
