@@ -64,7 +64,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-btn-tertiary-background--pressed: $gray7;
   --px-btn-tertiary-border-color: $gray8;
   --px-btn-disabled-color: $gray4;
-  --px-btn-disabled-background: $white;
+  --px-btn-disabled-background: transparent;
   --px-btn-disabled-border-color: $gray4;
   --px-btn-call-to-action-color: $white;
   --px-btn-call-to-action-background: $primary-default;
@@ -267,16 +267,16 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-data-table-separator-color: $gray5;
   --px-data-table-header-text-color: inherit;
   --px-data-table-header-background-color: inherit;
+  --px-data-table-background-color-striped--even: rgba($black,0.07);
   --px-data-table-cell-border-validation--failed: $status-red3;
   --px-data-table-cell-border-color--edit: $primary-default;
   --px-data-table-cell-border-color--selected: $select-default;
+  --px-data-table-cell-border-validation--failed: $status-red3;
   --px-data-table-cell-background-color--selected: $select-default;
   --px-data-table-cell-background-color--edit: transparent;
-  --px-data-table-background-color-striped--even: rgba($black,0.07);
   --px-data-table-cell-text-color--selected: $white;
   --px-data-table-cell-text-color-validation--failed: $status-red3;
   --px-data-table-cell-text-color--sorted: $select-default;
-  --px-data-table-cell-border-validation--failed: $status-red3;
   --px-data-table-results-text-color--none: $gray8;
   --px-data-table-insertion-indicator-td-background-color: $primary-default;
   --px-data-table-text-input-background-color--filter: $white;
@@ -379,9 +379,8 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-modal-text-color: $gray15;
   --px-modal-btn--disabled: $gray4;
 
-  // // Overlay
-  // --px-overlay-light-color:
-  // --px-overlay-dark-color:
+  // Overlay
+  --px-overlay-color: rgba($black, .65);
 
   // Popover
   --px-popover-background-color: $white;
@@ -389,10 +388,9 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-popover-text-color: $gray15;
   --px-popover-shadow-color: rgba($black,0.15);
 
-  // // Progress Bar
-  // --px-progress-bar-fill-color:
-  // --px-progress-bar-stripe-color:
-  // --px-progress-bar-background-color:
+  // Progress Bar
+  --px-progress-bar-fill-color: $primary-default;
+  --px-progress-bar-background-color: $cyan1;
 
   // Slider
   --px-slider-border-color: $gray6;
@@ -412,6 +410,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-handle-background-color: $white;
   --px-handle-background-color--hover: $gray4;
   --px-handle-background-color--active: $gray7;
+  --px-handle-background-color--disabled: $white;
 
   // Spinner
   --px-spinner-fill-color: $primary-default;
@@ -443,13 +442,9 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-typeahead-text-color--hover: $gray15;
   --px-typeahead-text-color--selected: $white;
 
-  // // View Header
-  // --px-view-header-background-color:
-  //
-  //
-  // --px-font-family: $predix-font-family;
-  //
-  //
+  // View Header
+  --px-view-header-background-color: $white;
+
   // // Vis
   // --px-vis-axis-brush-outline-color:
   // --px-vis-axis-brush-fill-color:
