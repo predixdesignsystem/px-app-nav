@@ -102,6 +102,7 @@ $predix-load-local-fonts : true;
   --px-input-text-color: $gray15;
   --px-input-label-text-color: $gray10;
   --px-input-text-color--placeholder: $gray5;
+  --px-input-text-color--placeholder--focused: $gray5;
   --px-input-text-color--help: $gray10;
   --px-input-background-color: transparent;
   --px-input-background-color--hover: $gray3;
@@ -109,8 +110,11 @@ $predix-load-local-fonts : true;
   --px-input-background-color--focused: $primary-light;
   --px-input-border-color--outer: $gray8;
   --px-input-border-color--outer--focused: $primary-default;
+  --px-input-text-color--focused: $gray15;
   --px-input-text-color--disabled: $gray4;
   --px-input-border-color--disabled: $gray4;
+  --px-input-textarea-background--focused: $gray3;
+  --px-select-text-color: $gray15;
   --px-select-background-color: $gray3;
   --px-select-background-color--hover: $gray6;
   --px-select-background-color--active: $gray8;
@@ -410,9 +414,9 @@ $predix-load-local-fonts : true;
   --px-handle-background-color--hover: $gray4;
   --px-handle-background-color--active: $gray7;
 
-  // // Spinner
-  // --px-spinner-fill-color:
-  // --px-spinner-background-color:
+  // Spinner
+  --px-spinner-fill-color: $primary-default;
+  --px-spinner-background-color: $cyan1;
 
   // Tabs
   --px-tab-color: $gray10;
