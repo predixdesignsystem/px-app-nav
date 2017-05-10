@@ -30,7 +30,6 @@ $inuit-enable-btn--bare                 : true;
 :host {
   position: absolute;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   flex: none;
   width: calculateRem(219px);
