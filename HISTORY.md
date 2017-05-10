@@ -1,3 +1,7 @@
+v1.10.12
+==================
+* sass fix for safari 9
+
 v1.10.11
 ==================
 * fix #41 (debounce clicks), simplify sass
