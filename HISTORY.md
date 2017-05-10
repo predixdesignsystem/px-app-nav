@@ -1,5 +1,6 @@
 v3.0.0-prerelease
 =================
+* update px-toggle-design classes
 * run gulp sass to update primary-default color
 * updated with redesigned forms, list ui, tabs
 * Release with new typography and colour dependencies
