@@ -50,19 +50,35 @@
 // }
 
 @import "app-nav-shared";
-.app-nav-items__collapse-button {
+.app-nav-button {
   @extend %app-nav-button;
-  display: none;
   position: relative;
+}
+.app-nav-button__icon {
+  --iron-icon-height: 30px;
+  --iron-icon-width: 30px;
+  margin-right: 10px;
+}
+.app-nav-button__icon--empty {
+  background-color: $gray6;
+  width: 30px;
+  height: 30px;
+}
+.app-nav-button__dropdown {
+  --iron-icon-height: 15px;
+  --iron-icon-width: 15px;
+  margin-left: 5px;
+}
+.app-nav-button--icon {
   --iron-icon-height: 30px;
   --iron-icon-width: 30px;
 }
-.app-nav-items__collapse-button--selected {
+.app-nav-button--selected {
   @extend %app-nav-button--selected;
 }
-.app-nav-items__collapse-button--visible {
-  display: inherit;
-}
+// .app-nav-items__collapse-button--visible {
+//   display: inherit;
+// }
 
 // Trumps
 @import "inuit-clearfix/_trumps.clearfix.scss";

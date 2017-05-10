@@ -97,9 +97,42 @@ Custom property | Description | Default
           <section class="app-nav-items" id="items">
             <div class="app-nav-visible" id="visible"></div>
             <div class="app-nav-collapsed" id="collapsed"></div>
-            <div class$="app-nav-items__collapse-button {{_ifAnyCollapsed('app-nav-items__collapse-button--visible', collapsedItems)}} {{_ifSelectedCollapsed('app-nav-items__collapse-button--selected', selectedItem, collapsedItems)}}">
-              <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
-            </div>
+
+            <!-- STATE: Some nav items collapsed -->
+            <template is="dom-if" if="{{_someCollapsed(collapsedItems, visibleItems)}}">
+              <div class$="app-nav-button app-nav-button--icon {{_ifSelectedCollapsed('app-nav-button--selected', selectedItem, collapsedItems)}}">
+                <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
+              </div>
+            </template>
+
+            <!-- STATE: All nav items collapsed -->
+            <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
+              <div class="app-nav-button">
+                <template is="dom-if" if="{{!selectedItem}}">
+                  <i class="app-nav-button__icon app-nav-button__icon--empty"></i>
+                  <p class="app-nav-button__label app-nav-button__label--empty">{{unselectedText}}</p>
+                </template>
+                <template is="dom-if" if="{{selectedItem.icon}}">
+                  <iron-icon class="app-nav-button__icon" icon="fa:{{selectedItem.icon}}"></iron-icon>
+                </template>
+                <template is="dom-if" if="{{selectedItem.label}}">
+                  <p class="app-nav-button__label">{{selectedItem.label}}</p>
+                </template>
+                <iron-icon class="app-nav-button__dropdown" icon="fa:fa-angle-down"></iron-icon>
+              </div>
+              <iron-dropdown
+                  id="group"
+                  no-overlap
+                  dynamic-align
+                  no-animations
+                  auto-fit-on-attached
+                  opened="{{opened}}"
+                  position-target="[[_getPositionTarget()]]"
+                  on-iron-overlay-canceled="_handleGroupCanceled">
+                <div class="dropdown-content app-nav-group" id="collapsedDropdown"></div>
+              </iron-dropdown>
+            </template>
+
           </section>
         </app-toolbar>
       </app-header>
@@ -144,7 +177,7 @@ Custom property | Description | Default
       collapseAll: {
         type: Boolean,
         value: false,
-        observer: '_sizeChanged'
+        observer: '_handleCollapseAllChanged'
       },
 
       /**
@@ -186,7 +219,8 @@ Custom property | Description | Default
       selectedItem: {
         type: Object,
         notify: true,
-        readOnly: true
+        readOnly: true,
+        value: null
       },
 
       selectedSubitem: {
@@ -222,6 +256,19 @@ Custom property | Description | Default
         type: Array,
         notify: true,
         readOnly: true
+      },
+
+      unselectedText: {
+        type: String,
+        value: 'Choose item'
+      },
+
+      fallbackPath: {
+        type: String
+      },
+
+      fallbackSubpath: {
+        type: String
       }
     },
 
@@ -237,9 +284,23 @@ Custom property | Description | Default
       OVERFLOW_ICON_PADDING: 32 /*16+16*/
     },
 
+    observers: [
+      '_selectedPathChanged(fallbackPath, visibleItems, collapsedItems)'
+    ],
+
     listeners: {
       'iron-resize' : '_sizeChanged',
       'px-app-nav-item-tapped' : '_handleItemTapped'
+    },
+
+    _handleCollapseAllChanged: function(nextVal, lastVal) {
+      if (this.collapseAll) {
+        this.rebuild();
+      }
+      if (!this.collapseAll) {
+        this._availableWidth = null; // Forces width to notify changes
+        this._sizeChanged();
+      }
     },
 
     _handleItemTapped: function(evt) {
@@ -257,13 +318,24 @@ Custom property | Description | Default
 
     _selectedPathChanged() {
       this.debounce('selected-changed', () => {
-        const nextPath = this.selectedPath;
-        const nextSubpath = this.selectedSubpath;
+        // If no items have been distributed, wait until later
+        if (!Polymer.dom(this.root).querySelectorAll('px-app-nav-item, px-app-nav-group').length) return;
+
+        const fallbackPath = this.fallbackPath;
+        const fallbackSubpath = this.fallbackSubpath;
         const lastItem = this.selectedItem;
         const lastSubitem = this.selectedSubitem;
+        let nextPath = this.selectedPath;
+        let nextSubpath = this.selectedSubpath;
         let changed = false;
 
-        if (typeof nextPath !== 'string' || !nextPath.length) return;
+        if (!nextPath && !fallbackPath) return;
+
+        if (!nextPath && fallbackPath) {
+          changed = true;
+          nextPath = fallbackPath;
+          nextSubpath = fallbackSubpath ? fallbackSubpath : undefined;
+        };
 
         if (!lastItem) {
           changed = true;
@@ -289,9 +361,15 @@ Custom property | Description | Default
     _selectPath(path, subpath) {
       const [selectedNode, selectedSubnode] = this._findNodesByPath(path, subpath) || [];
       if (!selectedNode && !selectedSubnode) {
-        let errPath = nextPath + (hasSubpath) ? '.' + nextSubpath : '';
+        let errSubpath = typeof subpath === 'string' ? `.${subpath}` : '';
         console.log(`PX-APP-NAV CONFIGURATION ERROR:
-          The path '${errPath}' cannot be found. Enter a valid path.`);
+          The path '${path}${errSubpath}' cannot be found. Enter a valid path.`);
+        return;
+      }
+      if (selectedNode && !selectedSubnode && selectedNode.nodeName === 'PX-APP-NAV-GROUP') {
+        console.log(`PX-APP-NAV CONFIGURATION ERROR:
+          Cannot select path ${path} with no subpath. The path refers to a group,
+          and a valid subpath must be provided for a group to be selected.`);
         return;
       }
       if (selectedNode && this.selectedItem !== selectedNode.item) {
@@ -359,7 +437,7 @@ Custom property | Description | Default
       // Polymer.dom(this.$.new).unobserveNodes(this._itemObserver);
     },
 
-    _sizeChanged: function(evt) {
+    _sizeChanged: function() {
       if (this.collapseAll) return;
 
       const debouncer = 'measure-available-width';
@@ -370,7 +448,7 @@ Custom property | Description | Default
       if (this.isDebouncerActive(debouncer)) {
         this.cancelDebouncer(debouncer);
       }
-      this.debounce(debouncer, this._getAvailableWidth.bind(this), 100);
+      this.debounce(debouncer, this._getAvailableWidth.bind(this, force), 100);
     },
 
     _getAvailableWidth: function() {
@@ -481,27 +559,50 @@ Custom property | Description | Default
      * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
      */
     rebuild: function() {
-      if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length || !this._availableWidth) return;
+      if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
       this._pendingRender = true;
 
       const items = this._knownItems;
-      const width = this._availableWidth;
-      const pMeasure = () => this._measureItems(items);
-      const pFit = (measurements) => this._fitItems(items, width, measurements);
-      const pRender = ({visible, collapsed}) => this._renderItems(items, visible, collapsed);
-      const pFinish = ({visible, collapsed}) => {
-        this._pendingRender = false;
-        this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-        this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-        return Promise.resolve();
-      };
-      const pAll = () => pMeasure().then(pFit).then(pRender).then(pFinish);
+      const width = this.collapseAll ? 0 : this._availableWidth;
 
-      // Polymer.RenderStatus.afterNextRender(this, pAll);
-      pAll.call();
+      this._getFittedItems(items, width)
+        .then(({visible, collapsed}) => {
+          this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+          this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
+          return Promise.resolve({visible, collapsed});
+        })
+        .then(({visible, collapsed}) => this._renderItems(items, visible, collapsed))
+        .then(({visible, collapsed}) => {
+          this._pendingRender = false;
+          // this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+          // this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
+          return Promise.resolve();
+        });
+
+      //
+      // const pMeasure = () => (width>0) ? this._measureItems(items);
+      // const pFit = (measurements) => this._fitItems(items, width, measurements);
+      // const pRender = ({visible, collapsed}) => this._renderItems(items, visible, collapsed);
+      // const pFinish = ({visible, collapsed}) => {
+      //   this._pendingRender = false;
+      //   this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+      //   this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
+      //   return Promise.resolve();
+      // };
+      // const pAll = () => pMeasure().then(pFit).then(pRender).then(pFinish);
+      //
+      // // Polymer.RenderStatus.afterNextRender(this, pAll);
+      // pAll.call();
     },
 
-    _updateItemsProp: function(propName, items, readOnly) {
+    _getFittedItems(items, width) {
+      if (width <= 0) {
+        return Promise.resolve({ visible: [], collapsed: items.slice(0) })
+      }
+      return this._measureItems(items).then(measurements => this._fitItems(items, width, measurements));
+    },
+
+    _updateItemsProp(propName, items, readOnly) {
       const setter = readOnly ? this[`_set${propName.slice(0,1).toUpperCase()}${propName.slice(1)}`].bind(this) : this.set.bind(this, propName);
       if (items.length) {
         setter(items);
@@ -514,28 +615,50 @@ Custom property | Description | Default
     },
 
     _renderItems: function(items, visible, collapsed) {
-      const renderers = items.map(item =>
-        this._renderItem(item, (collapsed.indexOf(item) > -1))
-      );
+      let renderers;
+      if (items.length && !visible.length && collapsed.length) {
+        // If all items are collapsed, move to the dropdown
+        let parent = this.$$('#collapsedDropdown');
+        renderers = items.map(item => this._moveToParent(item, parent));
+      }
+      else {
+        // Otherwise distribute to the right location
+        let collapsedParent = this.$.collapsed;
+        let visibleParent = this.$.visible;
+        renderers = items.map(item =>
+          this._moveToParent(item, (collapsed.indexOf(item) === -1) ? visibleParent : collapsedParent)
+        );
+      }
       return Promise.all(renderers).then(() => ({ items: items, visible: visible, collapsed: collapsed }));
     },
 
     _renderItem: function(item, isCollapsed=false) {
-      const newParent = isCollapsed ? this.$.collapsed : this.$.visible;
-      const currentParent = Polymer.dom(item).parentNode;
+      // const newParent = isCollapsed ? this.$.collapsed : this.$.visible;
+      // const currentParent = Polymer.dom(item).parentNode;
+      // if (!currentParent) {
+      //   Polymer.dom(newParent).appendChild(item);
+      // }
+      // if (currentParent && currentParent !== newParent) {
+      //   Polymer.dom(currentParent).appendChild(item);
+      //   Polymer.dom(newParent).appendChild(item);
+      // }
+      // return Promise.resolve();
+    },
+
+    _moveToParent(node, newParent) {
+      const currentParent = Polymer.dom(node).parentNode;
       if (!currentParent) {
-        Polymer.dom(newParent).appendChild(item);
+        Polymer.dom(newParent).appendChild(node);
       }
       if (currentParent && currentParent !== newParent) {
-        Polymer.dom(currentParent).appendChild(item);
-        Polymer.dom(newParent).appendChild(item);
+        Polymer.dom(currentParent).removeChild(node);
+        Polymer.dom(newParent).appendChild(node);
       }
       return Promise.resolve();
     },
 
     _fitItems: function(items, width, measurements) {
       return new Promise((resolve, reject) => {
-        console.time('fit');
         let available = width;
 
         // If the first item is larger than the available, collapse all
@@ -564,7 +687,6 @@ Custom property | Description | Default
             i--;
           }
         }
-        console.timeEnd('fit');
         return resolve({ visible: items.slice(0,i), collapsed: items.slice(i) });
       })
     },
@@ -832,10 +954,18 @@ Custom property | Description | Default
       return true;
     },
 
+    _someCollapsed(collapsed, visible) {
+      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length > 0;
+    },
+
+    _allCollapsed(collapsed, visible) {
+      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length === 0;
+    },
+
     _ifAnyCollapsed(className, collapsedItems) {
-      if (collapsedItems && Array.isArray(collapsedItems) && collapsedItems.length) {
-        return className;
-      }
+      // if (collapsedItems && Array.isArray(collapsedItems) && collapsedItems.length) {
+      //   return className;
+      // }
     },
 
     _ifSelectedCollapsed(className, selectedItem, collapsedItems) {
