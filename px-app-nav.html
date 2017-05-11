@@ -107,30 +107,13 @@ Custom property | Description | Default
 
             <!-- STATE: All nav items collapsed -->
             <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
-              <div class="app-nav-button">
-                <template is="dom-if" if="{{!selectedItem}}">
-                  <i class="app-nav-button__icon app-nav-button__icon--empty"></i>
-                  <p class="app-nav-button__label app-nav-button__label--empty">{{unselectedText}}</p>
-                </template>
-                <template is="dom-if" if="{{selectedItem.icon}}">
-                  <iron-icon class="app-nav-button__icon" icon="fa:{{selectedItem.icon}}"></iron-icon>
-                </template>
-                <template is="dom-if" if="{{selectedItem.label}}">
-                  <p class="app-nav-button__label">{{selectedItem.label}}</p>
-                </template>
-                <iron-icon class="app-nav-button__dropdown" icon="fa:fa-angle-down"></iron-icon>
-              </div>
-              <iron-dropdown
-                  id="group"
-                  no-overlap
-                  dynamic-align
-                  no-animations
-                  auto-fit-on-attached
-                  opened="{{opened}}"
-                  position-target="[[_getPositionTarget()]]"
-                  on-iron-overlay-canceled="_handleGroupCanceled">
-                <div class="dropdown-content app-nav-group" id="collapsedDropdown"></div>
-              </iron-dropdown>
+              <px-app-nav-group
+                  superlist
+                  min-width="320"
+                  id="collapsedGroup"
+                  label="{{_getSelectedItemLabel(selectedItem.label)}}"
+                  icon="{{selectedItem.icon}}">
+              </px-app-nav-group>
             </template>
 
           </section>
@@ -293,6 +276,34 @@ Custom property | Description | Default
       'px-app-nav-item-tapped' : '_handleItemTapped'
     },
 
+    _getSelectedItemLabel: function() {
+       return (this.selectedItem && this.selectedItem.label) ? this.selectedItem.label : this.unselectedText;
+    },
+
+    _getCollapsedDropdownTarget: function() {
+      return this.$.collapsedButton;
+    },
+
+    _handleCollapsedGroupCanceled: function() {
+
+    },
+
+    _handleCollapsedButtonTapped: function() {
+      var dropdown = Polymer.dom(this.root).querySelector('#collapsedDropdown');
+      setTimeout(() => {
+        console.log(dropdown.opened);
+        if (!dropdown.opened) {
+          dropdown.open();
+        }
+      },2);
+      // if (dropdown.opened) {
+      //   this.async(function(){dropdown.close()});
+      // }
+      // if (!dropdown.opened) {
+      //   dropdown.open();
+      // }
+    },
+
     _handleCollapseAllChanged: function(nextVal, lastVal) {
       if (this.collapseAll) {
         this.rebuild();
@@ -389,8 +400,22 @@ Custom property | Description | Default
       }
     },
 
+    _getAllItemNodes(parent) {
+      let nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
+      const collapsedGroup = this.$$('#collapsedGroup');
+      if (!parent && collapsedGroup) {
+        nodes = nodes.concat(Polymer.dom(collapsedGroup).querySelectorAll('px-app-nav-item, px-app-nav-group'));
+      }
+      return nodes;
+    },
+
     _findNodeByProperty(propName, val, parent) {
-      const nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
+      let nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
+      if (!parent) {
+        const collapsedGroup = Polymer.dom(this.root).querySelector('#collapsedGroup');
+        if (collapsedGroup) nodes = nodes.concat(Polymer.dom(collapsedGroup).querySelectorAll('px-app-nav-item, px-app-nav-group'));
+      }
+      // const nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
       if (!nodes || !nodes.length) return;
       let itemNode;
 
@@ -448,7 +473,7 @@ Custom property | Description | Default
       if (this.isDebouncerActive(debouncer)) {
         this.cancelDebouncer(debouncer);
       }
-      this.debounce(debouncer, this._getAvailableWidth.bind(this, force), 100);
+      this.debounce(debouncer, this._getAvailableWidth.bind(this), 100);
     },
 
     _getAvailableWidth: function() {
@@ -618,7 +643,7 @@ Custom property | Description | Default
       let renderers;
       if (items.length && !visible.length && collapsed.length) {
         // If all items are collapsed, move to the dropdown
-        let parent = this.$$('#collapsedDropdown');
+        let parent = this.$$('#collapsedGroup');
         renderers = items.map(item => this._moveToParent(item, parent));
       }
       else {

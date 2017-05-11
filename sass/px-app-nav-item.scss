@@ -31,6 +31,12 @@
   // flex-direction: column;
   // align-items: center;
   position: relative;
+  height: 60px;
+  display: block;
+}
+
+:host-context(.app-nav-sublist) {
+  height: 30px;
 }
 
 .app-nav-item {
@@ -122,6 +128,11 @@
   display: block;
   max-width: 632px;
   z-index: 399;
+}
+
+:host-context(.app-nav-superlist) .dropdown-content {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .app-nav-item__group {

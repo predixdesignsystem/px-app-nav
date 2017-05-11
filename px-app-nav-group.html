@@ -8,7 +8,7 @@
   <template>
     <style include="px-app-nav-item-styles"></style>
 
-    <div class="app-nav-item dropdown-trigger" id="itemButton">
+    <div class="app-nav-item app-nav-item--group dropdown-trigger" id="itemButton">
       <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
         <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
       </template>
@@ -29,10 +29,8 @@
         opened="{{opened}}"
         position-target="[[_getPositionTarget()]]"
         on-iron-overlay-canceled="_handleGroupCanceled">
-      <div class="dropdown-content app-nav-group" id="groupcontent">
-        <px-app-nav-list selected-item="{{selectedSubitem}}" selected-path="{{selectedSubpath}}" type="sublist">
-          <content select="*"></content>
-        </px-app-nav-list>
+      <div class$="dropdown-content app-nav-group {{_getGroupClasses(superlist)}}" id="groupcontent">
+        <content select="*"></content>
       </div>
     </iron-dropdown>
   </template>
@@ -106,17 +104,90 @@
        */
       opened: {
         type: Boolean
+      },
+
+      superlist: {
+        type: Boolean,
+        value: false
+      },
+
+      minWidth: {
+        type: Number
       }
     },
 
     attached: function() {
-      this.listen(this, 'tap', '_handleSelfTapped');
-      this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemTapped');
+      this._lastOpenedSubgroup = null;
+      this._openedSubgroup = null;
+      this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
+      this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+      this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      this.listen(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
+      this.listen(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
     },
 
     detached: function() {
-      this.unlisten(this, 'tap', '_handleSelfTapped');
-      this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemTapped');
+      this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
+      this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+      this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      this.unlisten(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
+      this.unlisten(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
+    },
+
+    _handleDropdownOpened(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      const content = Polymer.dom(this.root).querySelector('#groupcontent');
+      const detail = {};
+      if (content) {
+        const rect = content.getBoundingClientRect()
+        detail.dropdownHeight = rect.height;
+        detail.dropdownWidth = rect.width;
+      }
+
+      this.fire('px-app-nav-group-opened', detail);
+    },
+
+    _handleDropdownClosed(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+
+      this.fire('px-app-nav-group-closed');
+    },
+
+    _handleSubgroupOpened(evt) {
+      if (!this.superlist) return;
+
+      const subgroup = Polymer.dom(evt).rootTarget;
+
+      if (this._openedSubgroup && this._openedSubgroup !== subgroup) {
+        this._lastOpenedSubgroup = this._openedSubgroup;
+        this._openedSubgroup.closeGroup();
+      }
+
+      this._openedSubgroup = subgroup;
+      subgroup.style.marginBottom = (evt.detail.dropdownHeight || 0) + 'px';
+    },
+
+    _handleSubgroupClosed(evt) {
+      if (!this.superlist) return;
+      const subgroup = Polymer.dom(evt).rootTarget;
+      subgroup.style.marginBottom = null;
+      if (this._openedSubgroup !== subgroup) {
+        this._openedSubgroup.position();
+      } else {
+        this._openedSubgroup = null;
+      }
+    },
+
+    _getGroupClasses() {
+      if (this.superlist) {
+        return 'app-nav-superlist';
+      }
+      return 'app-nav-sublist';
     },
 
     /**
@@ -179,8 +250,13 @@
       //
       // Ben says this is OK.
       var button = this.$$('#itemButton');
-      var minWidth = button.getBoundingClientRect().width + 'px';
       var content = this.$$('#groupcontent');
+      var minWidth;
+      if (typeof this.minWidth !== 'number') {
+        minWidth = button.getBoundingClientRect().width + 'px';
+      } else {
+        minWidth = this.minWidth + 'px';
+      }
       if (content.style.minWidth !== minWidth) {
         content.style.minWidth = minWidth;
       }
@@ -193,6 +269,13 @@
       if (!group) return;
 
       group.close();
+    },
+
+    position() {
+      var group = this.$$('#group');
+      if (!group) return;
+
+      group.position();
     },
 
     /**
@@ -225,19 +308,23 @@
      * If a group's subitem is selected, it should also be selected. Fire an event
      * to ask this item's parent to select it when its subitem is selected.
      */
-    _handleSubitemTapped(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
+    _handleSubitemSelected(evt) {
+      if (!this.superlist) {
+        evt.preventDefault();
+        evt.stopPropagation();
 
-      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-      var path = [localPath].concat(evt.detail.path);
-      var items = [this.item].concat(evt.detail.items);
+        var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+        var path = [localPath].concat(evt.detail.path);
+        var items = [this.item].concat(evt.detail.items);
 
-      this.fire('px-app-nav-item-tapped', {
-        group: true,
-        path: path,
-        items: items
-      });
+        this.fire('px-app-nav-item-tapped', {
+          group: true,
+          path: path,
+          items: items
+        });
+      }
+
+      this.closeGroup();
     },
 
     /**
