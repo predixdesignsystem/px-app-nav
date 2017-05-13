@@ -254,13 +254,13 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-win-loss-background-color:
   // --px-win-loss-positive-fill-color:
   // --px-win-loss-negative-fill-color:
-  //
-  // // Clipboard
-  // --px-clipboard-icon-color:
-  // --px-clipboard-icon-color--hover:
-  // --px-clipboard-icon-color--pressed:
-  // --px-clipboard-icon-color--copied:
-  //
+
+  // Clipboard
+  --px-clipboard-icon-color: $gray15;
+  --px-clipboard-icon-color--hover: $primary-default;
+  --px-clipboard-icon-color--pressed: $primary-pressed;
+  --px-clipboard-icon-color--copied: $status-green3;
+
   // // Context Browser
   // --px-cb-background-color:
   // --px-cb-modal-color:
