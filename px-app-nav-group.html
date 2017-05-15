@@ -8,7 +8,7 @@
   <template>
     <style include="px-app-nav-item-styles"></style>
 
-    <div class="app-nav-item app-nav-item--group dropdown-trigger" id="itemButton">
+    <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
       <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
         <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
       </template>
@@ -341,14 +341,19 @@
      */
     _handleSelectedChanged(nextState, lastState) {
       if (lastState === true && nextState === false) {
-        this.set('selectedSubpath', null);
         this.closeGroup();
       }
-      this.toggleClass('app-nav-item--selected', nextState, this.$.itemButton);
     },
 
     _getPositionTarget() {
       return this.$.itemButton;
+    },
+
+    _getSelectedItemClasses(isSelected, isSuperlist) {
+      if (isSelected && !isSuperlist) {
+        return 'app-nav-item--selected';
+      }
+      return '';
     }
   });
 </script>
