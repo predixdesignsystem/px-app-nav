@@ -35,6 +35,10 @@
   display: block;
 }
 
+:host([collapsed]) {
+  display: none;
+}
+
 :host-context(.app-nav-sublist) {
   height: 30px;
 }

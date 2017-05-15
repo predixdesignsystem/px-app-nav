@@ -95,18 +95,56 @@ Custom property | Description | Default
       <app-header fixed>
         <app-toolbar class="app-nav-toolbar" id="toolbar">
           <section class="app-nav-items" id="items">
-            <div class="app-nav-visible" id="visible"></div>
-            <div class="app-nav-collapsed" id="collapsed"></div>
+            <template is="dom-repeat" items="{{navItems}}" filter="_isItemVisible" id="visible">
+              <!-- Stamp groups, which hold subitems -->
+              <template is="dom-if" if="{{_hasSubitems(item)}}">
+                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                  <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
+                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-item>
+                  </template>
+                </px-app-nav-group>
+              </template>
+
+              <!-- Stamp plain old items, which hold subitems -->
+              <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                </px-app-nav-item>
+              </template>
+            </template>
+
+            <!-- <div class="app-nav-visible" id="visible"></div>
+            <div class="app-nav-collapsed" id="collapsed"></div> -->
 
             <!-- STATE: Some nav items collapsed -->
             <template is="dom-if" if="{{_someCollapsed(collapsedItems, visibleItems)}}">
-              <div class$="app-nav-button app-nav-button--icon {{_ifSelectedCollapsed('app-nav-button--selected', selectedItem, collapsedItems)}}">
-                <iron-icon icon="fa:fa-angle-double-right"></iron-icon>
-              </div>
+              <px-app-nav-group
+                  superlist
+                  min-width="320"
+                  id="collapsedGroup"
+                  label="{{_getCollapsedLabel(selectedItem, collapsedItems, visibleItems)}}"
+                  icon="{{_getCollapsedIcon(selectedItem, collapsedItems, visibleItems)}}"
+                  selected$="{{_ifSelectedCollapsed(selectedItem, collapsedItems)}}">
+                <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
+                  <!-- Stamp groups, which hold subitems -->
+                  <template is="dom-if" if="{{_hasSubitems(item)}}">
+                    <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                      <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
+                        <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-item>
+                      </template>
+                    </px-app-nav-group>
+                  </template>
+
+                  <!-- Stamp plain old items, which hold subitems -->
+                  <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+                    <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                    </px-app-nav-item>
+                  </template>
+                </template>
+              </px-app-nav-group>
             </template>
 
             <!-- STATE: All nav items collapsed -->
-            <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
+            <!-- <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
               <px-app-nav-group
                   superlist
                   min-width="320"
@@ -114,7 +152,7 @@ Custom property | Description | Default
                   label="{{_getSelectedItemLabel(selectedItem.label)}}"
                   icon="{{selectedItem.icon}}">
               </px-app-nav-group>
-            </template>
+            </template> -->
 
           </section>
         </app-toolbar>
@@ -268,7 +306,8 @@ Custom property | Description | Default
     },
 
     observers: [
-      '_selectedPathChanged(fallbackPath, visibleItems, collapsedItems)'
+      '_selectedPathChanged(fallbackPath, navItems)',
+      '_itemVisibilityChanged(visibleItems, collapsedItems, visibleItems.*, collapsedItems.*)'
     ],
 
     listeners: {
@@ -276,32 +315,63 @@ Custom property | Description | Default
       'px-app-nav-item-tapped' : '_handleItemTapped'
     },
 
+    _getCollapsedLabel: function(selectedItem, collapsed, visible) {
+      const someCollapsed = this._someCollapsed(collapsed, visible);
+      const allCollapsed = this._allCollapsed(collapsed, visible);
+      if (someCollapsed && !allCollapsed) {
+        return undefined;
+      }
+      if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
+        return selectedItem.label;
+      }
+      if (allCollapsed && !selectedItem) {
+        return this.unselectedText;
+      }
+    },
+
+    _getCollapsedIcon: function(selectedItem, collapsed, visible) {
+      const someCollapsed = this._someCollapsed(collapsed, visible);
+      const allCollapsed = this._allCollapsed(collapsed, visible);
+      if (someCollapsed && !allCollapsed) {
+        return 'fa:fa-angle-double-right';
+      }
+      if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
+        return selectedItem.icon;
+      }
+      if (allCollapsed && !selectedItem) {
+        return undefined;
+      }
+    },
+
+    _isItemSelected: function(item, selectedItem) {
+      return item && selectedItem && item === selectedItem;
+    },
+
+    _isItemVisible: function(item) {
+      if (!item || !this.visibleItems || !Array.isArray(this.visibleItems)) return false;
+      return this.visibleItems.indexOf(item) !== -1;
+    },
+
+    _isItemCollapsed: function(item) {
+      if (!item || !this.collapsedItems || !Array.isArray(this.collapsedItems)) return false;
+      return this.collapsedItems.indexOf(item) !== -1;
+    },
+
+    _itemVisibilityChanged: function() {
+      this.debounce('item-visibility-changed', function(){
+        const visibleEl = Polymer.dom(this.root).querySelector('#visible');
+        const collapsedEl = Polymer.dom(this.root).querySelector('#collapsed');
+        if (visibleEl) visibleEl.render();
+        if (collapsedEl) collapsedEl.render();
+      });
+      // if (this.$.visible)   this.async(function(){ this.$.visible.render(); });
+      // if (this.$.collapsed) this.async(function(){ this.$.collapsed.render(); });
+      // if (this.$.visible)   this.$.visible.render();
+      // if (this.$.collapsed) this.$.collapsed.render();
+    },
+
     _getSelectedItemLabel: function() {
        return (this.selectedItem && this.selectedItem.label) ? this.selectedItem.label : this.unselectedText;
-    },
-
-    _getCollapsedDropdownTarget: function() {
-      return this.$.collapsedButton;
-    },
-
-    _handleCollapsedGroupCanceled: function() {
-
-    },
-
-    _handleCollapsedButtonTapped: function() {
-      var dropdown = Polymer.dom(this.root).querySelector('#collapsedDropdown');
-      setTimeout(() => {
-        console.log(dropdown.opened);
-        if (!dropdown.opened) {
-          dropdown.open();
-        }
-      },2);
-      // if (dropdown.opened) {
-      //   this.async(function(){dropdown.close()});
-      // }
-      // if (!dropdown.opened) {
-      //   dropdown.open();
-      // }
     },
 
     _handleCollapseAllChanged: function(nextVal, lastVal) {
@@ -318,147 +388,63 @@ Custom property | Description | Default
       if (!evt.detail.path || !Array.isArray(evt.detail.path) || !evt.detail.path.length) return;
 
       if (evt.detail.path.length === 1) {
-        this.set('selectedPath', evt.detail.items[0].path);
+        this.set('selectedPath', evt.detail.path[0]);
         this.set('selectedSubpath', null);
       }
       if (evt.detail.path.length === 2) {
-        this.set('selectedPath', evt.detail.items[0].path);
-        this.set('selectedSubpath', evt.detail.items[1].path);
+        this.set('selectedPath', evt.detail.path[0]);
+        this.set('selectedSubpath', evt.detail.path[1]);
       }
     },
 
     _selectedPathChanged() {
-      this.debounce('selected-changed', () => {
-        // If no items have been distributed, wait until later
-        if (!Polymer.dom(this.root).querySelectorAll('px-app-nav-item, px-app-nav-group').length) return;
-
-        const fallbackPath = this.fallbackPath;
-        const fallbackSubpath = this.fallbackSubpath;
-        const lastItem = this.selectedItem;
-        const lastSubitem = this.selectedSubitem;
-        let nextPath = this.selectedPath;
-        let nextSubpath = this.selectedSubpath;
-        let changed = false;
-
-        if (!nextPath && !fallbackPath) return;
-
-        if (!nextPath && fallbackPath) {
-          changed = true;
-          nextPath = fallbackPath;
-          nextSubpath = fallbackSubpath ? fallbackSubpath : undefined;
-        };
-
-        if (!lastItem) {
-          changed = true;
+      this.debounce('selected-path-changed', ()=>{
+        // 1. Find the items
+        let path = !this.selectedSubpath ? this.selectedPath : `${this.selectedPath}.${this.selectedSubpath}`;
+        let [item, subitem] = this._findItemByPath(path);
+        if (item) {
+          this._setSelectedItem(item);
+          this._setSelectedSubitem(subitem);
+          return;
         }
 
-        if (lastItem && lastItem.path !== nextPath) {
-          changed = true;
-          this._deselectByItem(lastItem);
+        // 2. If no items found, try the fallback
+        if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
+          this.set('selectedPath', this.fallbackPath);
+          this.set('selectedSubpath', this.fallbackSubpath || null);
         }
 
-        const hasSubpath = (typeof nextSubpath === 'string' && nextSubpath.length > 0);
-        if (lastSubitem && (!hasSubpath || lastSubitem.path !== nextSubpath)) {
-          changed = true;
-          this._deselectByItem(lastSubitem);
-        }
-
-        if (changed) {
-          this._selectPath(nextPath, nextSubpath);
-        }
+        // 3. Fallback path can't be found either
+        console.log(`Could not find an item matching the path ${path}.`)
       });
     },
 
-    _selectPath(path, subpath) {
-      const [selectedNode, selectedSubnode] = this._findNodesByPath(path, subpath) || [];
-      if (!selectedNode && !selectedSubnode) {
-        let errSubpath = typeof subpath === 'string' ? `.${subpath}` : '';
-        console.log(`PX-APP-NAV CONFIGURATION ERROR:
-          The path '${path}${errSubpath}' cannot be found. Enter a valid path.`);
-        return;
+    _findItemByPath(pathStr) {
+      let items = [null,null];
+      if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
+        items[0] = this._paths[pathStr][0];
+        items[1] = this._paths[pathStr][1] || null;
       }
-      if (selectedNode && !selectedSubnode && selectedNode.nodeName === 'PX-APP-NAV-GROUP') {
-        console.log(`PX-APP-NAV CONFIGURATION ERROR:
-          Cannot select path ${path} with no subpath. The path refers to a group,
-          and a valid subpath must be provided for a group to be selected.`);
-        return;
-      }
-      if (selectedNode && this.selectedItem !== selectedNode.item) {
-        this._setSelectedItem(selectedNode.item);
-        selectedNode.set('selected', true);
-      }
-      if (selectedSubnode && this.selectedSubitem !== selectedSubnode.item) {
-        this._setSelectedSubitem(selectedSubnode.item);
-        selectedSubnode.set('selected', true);
-      }
-    },
-
-    _deselectByItem(item) {
-      const node = this._findNodeByProperty('item', item);
-      if (node) {
-        node.set('selected', false);
-      }
-    },
-
-    _getAllItemNodes(parent) {
-      let nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
-      const collapsedGroup = this.$$('#collapsedGroup');
-      if (!parent && collapsedGroup) {
-        nodes = nodes.concat(Polymer.dom(collapsedGroup).querySelectorAll('px-app-nav-item, px-app-nav-group'));
-      }
-      return nodes;
-    },
-
-    _findNodeByProperty(propName, val, parent) {
-      let nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
-      if (!parent) {
-        const collapsedGroup = Polymer.dom(this.root).querySelector('#collapsedGroup');
-        if (collapsedGroup) nodes = nodes.concat(Polymer.dom(collapsedGroup).querySelectorAll('px-app-nav-item, px-app-nav-group'));
-      }
-      // const nodes = Polymer.dom(parent ? parent : this.root).querySelectorAll('px-app-nav-item, px-app-nav-group');
-      if (!nodes || !nodes.length) return;
-      let itemNode;
-
-      for (let node of nodes) {
-        if (node[propName] === val) {
-          itemNode = node;
-          break;
-        }
-      }
-
-      return itemNode;
-    },
-
-    _findNodesByPath(path, subpath) {
-      let item, subitem;
-      if (typeof path === 'string' && path.length) {
-        node = this._findNodeByProperty('path', path);
-        item = node ? node : undefined;
-      }
-      if (node && typeof subpath === 'string' && subpath.length) {
-        childNode = this._findNodeByProperty('path', subpath, node);
-        subitem = childNode ? childNode : undefined;
-      }
-      return [item, subitem];
+      return items;
     },
 
     created: function() {
       this._navAttached = false;
-      this._navTarget;
+      // this._navTarget;
     },
 
     attached: function() {
       this._navAttached = true;
-      this._knownItems = [];
-      this._detachedItems = [];
+      // this._knownItems = [];
+      // this._detachedItems = [];
       // var boundItemHandler = this._handleItemsDistributed.bind(this);
       // this._itemObserver = Polymer.dom(this.$.new).observeNodes(boundItemHandler);
     },
 
     detached: function() {
       this._navAttached = false;
-      this._knownItems = null;
-      this._detachedItems = null;
+      // this._knownItems = null;
+      // this._detachedItems = null;
       // Polymer.dom(this.$.new).unobserveNodes(this._itemObserver);
     },
 
@@ -486,59 +472,30 @@ Custom property | Description | Default
     },
 
     _handleNavItemsChanged(items) {
-      Polymer.RenderStatus.afterNextRender(this, this._buildNodesFromData, [items]);
-    },
-
-    _buildNodesFromData: function(items) {
-      var nodes = items.map(this._buildNode.bind(this));
-      this._detachedItems = this._detachedItems.concat(nodes);
-      this._knownItems = this._knownItems.concat(nodes);
+      const paths = this._paths = this._getItemPaths(items);
       this.rebuild();
     },
 
-    _buildNode: function(item, parent) {
-      var el;
-      if (Array.isArray(item.subitems) && item.subitems.length) {
-        el = document.createElement('px-app-nav-group');
-        for (let subitem of item.subitems) {
-          Polymer.dom(el).appendChild(this._buildNode(subitem, parent));
+    _getItemPaths(items, parent, paths={}) {
+      for (let item of items) {
+        let pathKey = parent ? `${parent.path}.${item.path}` : item.path;
+        if (paths[pathKey]) {
+          console.log(`ERR: Path ${pathKey} is not unique. All paths must be unique.`);
+        }
+        else if (parent) {
+          paths[pathKey] = [parent, item];
+        }
+        else {
+          paths[pathKey] = [item];
+        }
+
+        if (item.subitems) {
+          this._getItemPaths(item.subitems, item, paths);
         }
       }
-      else {
-        el = document.createElement('px-app-nav-item');
-      }
-      if (item.label) el.setAttribute('label', item.label);
-      if (item.icon)  el.setAttribute('icon', item.icon);
-      if (item.path)  el.setAttribute('path', item.path);
-      el.item = item;
-      return el;
-    },
 
-    // _buildNodesInParent: function(items, parent) {
-    //   var el;
-    //   for (var i = 0, len = items.length; i < len; i++) {
-    //     el = this._createNode(items[i]);
-    //     if (Array.isArray(items[i].subitems) && items[i].subitems.length) {
-    //       this._buildNodesInParent(items[i].subitems, el);
-    //     }
-    //     Polymer.dom(parent).appendChild(el);
-    //   }
-    //   return parent;
-    // },
-    //
-    // _createNode: function(item) {
-    //   var el;
-    //   if (Array.isArray(item.subitems) && item.subitems.length) {
-    //     el = document.createElement('px-app-nav-group');
-    //   }
-    //   else {
-    //     el = document.createElement('px-app-nav-item');
-    //   }
-    //   if (item.label) el.setAttribute('label', item.label);
-    //   if (item.icon)  el.setAttribute('icon', item.icon);
-    //   if (item.path)
-    //   return el;
-    // },
+      return paths;
+    },
 
     _handleItemsDistributed: function(info) {
       // if (Array.isArray(info.addedNodes) && info.addedNodes.length) {
@@ -553,56 +510,44 @@ Custom property | Description | Default
       // }
     },
 
-    _trackItems(items, knownItems) {
-      // return items.reduce(function(accum, item) {
-      //   if (accum.indexOf(item) === -1) {
-      //     accum.push(item);
-      //   }
-      //   return accum;
-      // }, knownItems);
-    },
-
-    _untrackItems(items, knownItems) {
-      // return knownItems.filter(function(item) {
-      //   return items.indexOf(item) === -1;
-      // });
-    },
-
-    _findItemNodes(nodes) {
-      // var found = [];
-      // var i = 0;
-      // var len = nodes.length;
-      // for (; i < len; i++) {
-      //   if (nodes[i].nodeType === Node.ELEMENT_NODE && (nodes[i].nodeName === 'PX-APP-NAV-GROUP' || nodes[i].nodeName === 'PX-APP-NAV-ITEM')) {
-      //     found.push(nodes[i]);
-      //   }
-      // }
-      // return found;
-    },
-
     /**
      * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
      */
     rebuild: function() {
-      if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
-      this._pendingRender = true;
+      if (!this.navItems || !Array.isArray(this.navItems) || this._pendingRender || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
 
-      const items = this._knownItems;
-      const width = this.collapseAll ? 0 : this._availableWidth;
+      if (this.collapseAll || this._availableWidth === 0) {
+        this._setVisibleItems([]);
+        this._setCollapsedItems(this.navItems.slice(0));
+        return;
+      }
 
-      this._getFittedItems(items, width)
-        .then(({visible, collapsed}) => {
-          this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-          this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-          return Promise.resolve({visible, collapsed});
-        })
-        .then(({visible, collapsed}) => this._renderItems(items, visible, collapsed))
-        .then(({visible, collapsed}) => {
-          this._pendingRender = false;
-          // this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-          // this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-          return Promise.resolve();
-        });
+      const measurements = this._measureItems(this.navItems);
+      const {visible, collapsed} = this._fitItems(this.navItems, this._availableWidth, measurements);
+      this._setVisibleItems(visible);
+      this._setCollapsedItems(collapsed);
+      this.notifyPath('visibleItems.*');
+      this.notifyPath('collapsedItems.*');
+
+      // if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
+      // this._pendingRender = true;
+      //
+      // const items = this._knownItems;
+      // const width = this.collapseAll ? 0 : this._availableWidth;
+      //
+      // this._getFittedItems(items, width)
+      //   .then(({visible, collapsed}) => {
+      //     this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+      //     this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
+      //     return Promise.resolve({visible, collapsed});
+      //   })
+      //   .then(({visible, collapsed}) => this._renderItems(items, visible, collapsed))
+      //   .then(({visible, collapsed}) => {
+      //     this._pendingRender = false;
+      //     // this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
+      //     // this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
+      //     return Promise.resolve();
+      //   });
 
       //
       // const pMeasure = () => (width>0) ? this._measureItems(items);
@@ -683,61 +628,50 @@ Custom property | Description | Default
     },
 
     _fitItems: function(items, width, measurements) {
-      return new Promise((resolve, reject) => {
-        let available = width;
+      let available = width;
 
-        // If the first item is larger than the available, collapse all
-        if (available < measurements[0]) {
-          return resolve({ visible: [], collapsed: items.slice(0) });
+      // If the first item is larger than the available, collapse all
+      if (available < measurements[0]) {
+        return { visible: [], collapsed: items.slice(0) };
+      }
+
+      // Try to fit items in the available space
+      let i = 0;
+      let len = items.length;
+
+      while (i<len && available>0) {
+        if (measurements[i] > available) {
+          break;
         }
+        available -= measurements[i];
+        i++;
+      }
 
-        // Try to fit items in the available space
-        let i = 0;
-        let len = items.length;
-
-        while (i<len && available>0) {
-          if (measurements[i] > available) {
-            break;
-          }
-          available -= measurements[i];
-          i++;
+      // If any overflow, ensure the overflow icon can fit
+      let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
+      if (i !== len && available < overflowSize) {
+        available -= overflowSize;
+        while (i>0 && available<0) {
+          available += measurements[i];
+          i--;
         }
-
-        // If any overflow, ensure the overflow icon can fit
-        let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
-        if (i !== len && available < overflowSize) {
-          available -= overflowSize;
-          while (i>0 && available<0) {
-            available += measurements[i];
-            i--;
-          }
-        }
-        return resolve({ visible: items.slice(0,i), collapsed: items.slice(i) });
-      })
+      }
+      return { visible: items.slice(0,i), collapsed: items.slice(i) };
     },
 
     _measureItems: function(items) {
       const boundMeasureFn = this._measureItem.bind(this);
-      const measurements = items.map(boundMeasureFn);
-      return Promise.all(measurements);
+      return items.map(boundMeasureFn);
     },
 
     _measureItem: function(item) {
-      const getLength = this._measureTextAsync(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
-      return getLength.then((textLength) => {
-        if (!textLength) return Promise.reject(`The text ${item.label} could not be measured.`);
-        let totalLength = textLength; /* start with text size */
-        totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
-        if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
-        if (item.nodeName === 'PX-APP-NAV-GROUP') totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
-        return Promise.resolve(totalLength);
-      });
-    },
-
-    _measureTextAsync: function(text, fontName, fontSize) {
-      return new Promise(function(resolve, reject) {
-        return resolve(this._measureText(text, fontName, fontSize));
-      }.bind(this));
+      const textLength = this._measureText(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
+      if (!textLength) return;
+      let totalLength = textLength; /* start with text size */
+      totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
+      if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
+      if (item.subitems && item.subitems.length) totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
+      return totalLength;
     },
 
     _measureText: function(text, fontName, fontSize) {
@@ -980,7 +914,7 @@ Custom property | Description | Default
     },
 
     _someCollapsed(collapsed, visible) {
-      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length > 0;
+      return Array.isArray(collapsed) && collapsed.length > 0;
     },
 
     _allCollapsed(collapsed, visible) {
@@ -993,10 +927,9 @@ Custom property | Description | Default
       // }
     },
 
-    _ifSelectedCollapsed(className, selectedItem, collapsedItems) {
-      if (selectedItem && collapsedItems && Array.isArray(collapsedItems) && collapsedItems.indexOf(selectedItem) !== -1) {
-        return className;
-      }
+    _ifSelectedCollapsed(selectedItem, collapsedItems) {
+      if (!selectedItem || !collapsedItems || !Array.isArray(collapsedItems) || !collapsedItems.length) return false;
+      return collapsedItems.indexOf(selectedItem) !== -1;
     }
   });
 </script>

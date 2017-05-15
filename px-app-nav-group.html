@@ -17,7 +17,9 @@
         <p class="app-nav-item__label">{{label}}</p>
       </template>
 
-      <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
+      <template is="dom-if" if="{{!hideDropdownIcon}}">
+        <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
+      </template>
     </div>
 
     <iron-dropdown
@@ -113,6 +115,11 @@
 
       minWidth: {
         type: Number
+      },
+
+      hideDropdownIcon: {
+        type: Boolean,
+        value: false
       }
     },
 
