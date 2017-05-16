@@ -1,14 +1,17 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
+<link rel="import" href="px-app-nav-item.html" />
 
-<link rel="import" href="css/px-app-nav-item-styles.html">
+<link rel="import" href="css/px-app-nav-group-styles.html">
 
 <dom-module id="px-app-nav-group">
   <template>
-    <style include="px-app-nav-item-styles"></style>
+    <style include="px-app-nav-group-styles"></style>
 
-    <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
+    <px-app-nav-item id="itemButton" icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" collapsed$="{{collapsed}}"></px-app-nav-item>
+
+    <!-- <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
       <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
         <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
       </template>
@@ -20,7 +23,7 @@
       <template is="dom-if" if="{{!hideDropdownIcon}}">
         <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
       </template>
-    </div>
+    </div> -->
 
     <iron-dropdown
         id="group"
@@ -31,7 +34,7 @@
         opened="{{opened}}"
         position-target="[[_getPositionTarget()]]"
         on-iron-overlay-canceled="_handleGroupCanceled">
-      <div class$="dropdown-content app-nav-group {{_getGroupClasses(superlist)}}" id="groupcontent">
+      <div class$="dropdown-content app-nav-group__dropdown {{_getGroupClasses(superlist)}}" id="groupcontent">
         <content select="*"></content>
       </div>
     </iron-dropdown>
@@ -120,6 +123,19 @@
       hideDropdownIcon: {
         type: Boolean,
         value: false
+      },
+
+      collapsed: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Disables highlighting the group when it is selected.
+       */
+      noHighlight: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -192,9 +208,9 @@
 
     _getGroupClasses() {
       if (this.superlist) {
-        return 'app-nav-superlist';
+        return 'app-nav-group__dropdown--superlist';
       }
-      return 'app-nav-sublist';
+      return 'app-nav-group__dropdown--sublist';
     },
 
     /**
@@ -349,11 +365,11 @@
       return this.$.itemButton;
     },
 
-    _getSelectedItemClasses(isSelected, isSuperlist) {
-      if (isSelected && !isSuperlist) {
-        return 'app-nav-item--selected';
+    _isGroupSelected(isSelected, noHighlight) {
+      if (isSelected && !noHighlight) {
+        return true;
       }
-      return '';
+      return false;
     }
   });
 </script>

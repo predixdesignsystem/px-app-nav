@@ -14,7 +14,6 @@
 // Tools
 
 // Generic
-@import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
 // Base
@@ -26,121 +25,131 @@
 
 // Component
 
+////// Shared styles
+@import "app-nav-shared";
+
+////// Component styles
+/* Item State: Default */
+$px-app-nav-item-height: var(--px-app-nav-height, rem(60px));
+$px-app-nav-item-icon-size: var(--px-app-nav-item-icon-size, rem(30px));
+$px-app-nav-item-icon-color: var(--px-app-nav-item-icon-color, $gray15);
+$px-app-nav-item-text-color: var(--px-app-nav-item-text-color, $gray15);
+$px-app-nav-item-background-color: var(--px-app-nav-item-background-color, $gray2);
 :host {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
   position: relative;
-  height: 60px;
-  display: block;
+  display: flex;
+  align-items: center;
+  height: $px-app-nav-item-height;
+  padding-left: $inuit-base-spacing-unit;
+  padding-right: $inuit-base-spacing-unit;
+  cursor: pointer;
+  color: $px-app-nav-item-text-color;
+  background-color: $px-app-nav-item-background-color;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color;
 }
 
-:host([collapsed]) {
+/* Item State: Pressed */
+$px-app-nav-item-icon-color--pressed: var(--px-app-nav-item-icon-color--pressed, $gray15);
+$px-app-nav-item-text-color--pressed: var(--px-app-nav-item-text-color--pressed, $gray15);
+$px-app-nav-item-background-color--pressed: var(--px-app-nav-item-background-color--pressed, $gray5);
+:host(:active) {
+  color: $px-app-nav-item-text-color--pressed;
+  background-color: $px-app-nav-item-background-color--pressed;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--pressed;
+}
+
+/* Item State: Hover */
+$px-app-nav-item-icon-color--hover: var(--px-app-nav-item-icon-color--hover, $gray15);
+$px-app-nav-item-text-color--hover: var(--px-app-nav-item-text-color--hover, $gray15);
+$px-app-nav-item-background-color--hover: var(--px-app-nav-item-background-color--hover, $gray4);
+:host(:hover) {
+  color: $px-app-nav-item-text-color--hover;
+  background-color: $px-app-nav-item-background-color--hover;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--hover;
+}
+
+/* Item State: Selected */
+$px-app-nav-item-icon-color--selected: var(--px-app-nav-item-icon-color--selected, $gray15);
+$px-app-nav-item-text-color--selected: var(--px-app-nav-item-text-color--selected, $gray15);
+$px-app-nav-item-background-color--selected: var(--px-app-nav-item-background-color--selected, $white);
+$px-app-nav-item-stripe-height--selected: var(--px-app-nav-item-stripe-height--selected, rem(2px));
+$px-app-nav-item-stripe-color--selected: var(--px-app-nav-item-stripe-color--selected, $select-default);
+:host([selected]) {
+  color: $px-app-nav-item-text-color--selected;
+  background-color: $px-app-nav-item-background-color--selected;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--selected;
+}
+:host([selected]):before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 100%;
+  height: $px-app-nav-item-stripe-height--selected;
+  background-color: $px-app-nav-item-stripe-color--selected;
+}
+
+/* Item State: Selected+Collapsed */
+$px-app-nav-item-icon-color--collapsed: var(--px-app-nav-item-icon-color--collapsed, $white);
+$px-app-nav-item-text-color--collapsed: var(--px-app-nav-item-text-color--collapsed, $white);
+$px-app-nav-item-background-color--collapsed: var(--px-app-nav-item-background-color--collapsed, $select-default);
+:host([selected][collapsed]) {
+  color: $px-app-nav-item-text-color--collapsed;
+  background-color: $px-app-nav-item-background-color--collapsed;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--collapsed;
+}
+
+/* Subitem State: Default */
+$px-app-nav-subitem-height: var(--px-app-nav-subitem-height, rem(30px));
+$px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, $gray15);
+$px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color, $white);
+:host([subitem]) {
+  height: $px-app-nav-subitem-height;
+  color: $px-app-nav-subitem-text-color;
+  background-color: $px-app-nav-subitem-background-color;
+}
+
+/* Subitem State: Hover */
+$px-app-nav-subitem-text-color--hover: var(--px-app-nav-subitem-text-color--hover, $gray15);
+$px-app-nav-subitem-background-color--hover: var(--px-app-nav-subitem-background-color--hover, $gray1);
+:host([subitem]:hover) {
+  color: $px-app-nav-subitem-text-color--hover;
+  background-color: $px-app-nav-subitem-background-color--hover;
+}
+
+/* Subitem State: Selected */
+$px-app-nav-subitem-text-color--selected: var(--px-app-nav-subitem-text-color--selected, $white);
+$px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-background-color--selected, $select-default);
+:host([subitem][selected]) {
+  color: $px-app-nav-subitem-text-color--selected;
+  background-color: $px-app-nav-subitem-background-color--selected;
+}
+:host([subitem][selected]):before {
   display: none;
 }
 
-:host-context(.app-nav-sublist) {
-  height: 30px;
-}
-
-.app-nav-item {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  padding-left: $inuit-base-spacing-unit;
-  padding-right: $inuit-base-spacing-unit;
-  font-size: $inuit-base-font-size;
-  cursor: pointer;
-  color: #425866;
-  height: 60px;
-}
-
-.app-nav-item:hover {
-  background-color: rgb(239, 242, 245);
-}
-
-.app-nav-item.app-nav-item--selected {
-  background-color: #FFFFFF;
-
-  &:before {
-    background-color: rgb(239, 242, 245);
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #0986A4;
-  }
-}
-
-:host-context(.app-nav-sublist) .app-nav-item {
-  display: block;
-  height: 30px;
-  padding-left: $inuit-base-spacing-unit;
-  padding-right: $inuit-base-spacing-unit;
-  line-height: 30px;
-}
-
-:host-context(.app-nav-sublist) .app-nav-item.app-nav-item--selected {
-  background-color: inherit;
-  color: rgb(21,163,196);
-  &:before {
-    display: none;
-  }
-}
-
-:host-context(.app-nav-collapselist) .app-nav-item.app-nav-item--selected {
-  background-color: orange;
-  // color: rgb(21,163,196);
-  // &:before {
-  //   display: none;
-  // }
-}
-
-// :host([selected]) .app-nav-item {
-//   color: red;
-// }
-
+/* Sub-components */
 .app-nav-item__label {
   margin: 0;
 }
+:host([collapsed]) .app-nav-item__label {
+  flex: 1;
+}
 
 .app-nav-item__icon {
-  --iron-icon-height: 30px;
-  --iron-icon-width: 30px;
-  padding-right: 10px;
+  --iron-icon-height: $px-app-nav-item-icon-size;
+  --iron-icon-width: $px-app-nav-item-icon-size;
+}
+.app-nav-item__icon--with-label {
+  margin-right: rem(10px); //@TODO: confirm deviation from spec (5px)
 }
 
-.app-nav-item__open-icon {
-  --iron-icon-height: 15px;
-  --iron-icon-width: 15px;
-  padding-left: 5px;
-}
-
-.app-nav-item__subitems {
-  display: flex;
-  position: absolute;
-  left: 0;
-  width: 100%;
-}
-
-.dropdown-content {
-  background-color: white;
-  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
-  display: block;
-  max-width: 632px;
-  z-index: 399;
-}
-
-:host-context(.app-nav-superlist) .dropdown-content {
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.app-nav-item__group {
-
+.app-nav-item__dropdown-icon {
+  --iron-icon-height: rem(20px);
+  --iron-icon-width: rem(20px);
+  margin-left: rem(5px);
 }
 
 // Trumps

@@ -1,20 +1,21 @@
 <link rel="import" href="../polymer/polymer.html">
-
 <link rel="import" href="css/px-app-nav-item-styles.html">
 
 <dom-module id="px-app-nav-item">
   <template>
     <style include="px-app-nav-item-styles"></style>
 
-    <div class="app-nav-item" id="item" on-tap="_handleSelfTapped">
-      <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
-        <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
-      </template>
+    <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
+      <iron-icon class$="app-nav-item__icon {{_getIconAndLabelClasses(label)}}" icon="fa:{{icon}}"></iron-icon>
+    </template>
 
-      <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
-        <p class="app-nav-item__label">{{label}}</p>
-      </template>
-    </div>
+    <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
+      <p class$="app-nav-item__label">{{label}}</p>
+    </template>
+
+    <template is="dom-if" if="{{dropdown}}">
+      <iron-icon class="app-nav-item__dropdown-icon" icon="fa:fa-angle-down"></iron-icon>
+    </template>
   </template>
 </dom-module>
 
@@ -23,27 +24,6 @@
     is: 'px-app-nav-item',
 
     properties: {
-      /**
-       * If `true` the item is selected.
-       *
-       * Watch for updates to find out when the item becomes selected through
-       * user interaction or through automatic selection.
-       *
-       * Set the `selected` attribute to `true` or `false` to automatically
-       * select or deselect the item.
-       */
-      selected: {
-        type: Boolean,
-        value: false,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_handleSelectedChanged'
-      },
-
-      item: {
-        type: Object
-      },
-
       /**
        * Used as the label text for the item.
        */
@@ -69,6 +49,15 @@
       },
 
       /**
+       * Shows a dropdown arrow icon to indicate this item can be tapped to
+       * open a subgroup.
+       */
+      dropdown: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
        * Optional. The index of the item in a group of other items. Helps with
        * selecting an item when no paths are provided. If you provide a path,
        * you do not need to set this. If possible, items will be automatically
@@ -76,7 +65,35 @@
        */
       index: {
         type: Number
+      },
+
+      /**
+       * Set to `true` if the item is inside a collapsed dropdown.
+       */
+      collapsed: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
+      },
+
+      /**
+       * Set to `true` if the item is selected.
+       */
+      selected: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
       }
+    },
+
+    attached() {
+      this.listen(this, 'tap', '_handleSelfTapped');
+    },
+
+    detached() {
+      this.unlisten(this, 'tap', '_handleSelfTapped');
     },
 
     /**
@@ -93,23 +110,19 @@
      * Fire the select event so this item's parent will mark it as selected.
      */
     _handleSelfTapped(evt) {
-      if (!this.selected) {
-        var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-        this.fire('px-app-nav-item-tapped', {
-          path: [path],
-          items: [this.item]
-        }, {cancelable:true});
-      }
+      if (!this.path) return;
+      var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+      this.fire('px-app-nav-item-tapped', {
+        path: [path],
+        items: [this.item]
+      }, {cancelable:true});
     },
 
     /**
-     * When the selected state is updated interally (e.g. by one of the methods
-     * of this item) or externally (e.g. through another component setting
-     * the selected state), fire events that will cause the parent to select
-     * or deselect this item.
+     * If an item has an icon and a label, get class to add margin between them.
      */
-    _handleSelectedChanged(nextState, lastState) {
-      this.toggleClass('app-nav-item--selected', nextState, this.$.item);
+    _getIconAndLabelClasses(labelStr) {
+      return (typeof labelStr === 'string' && labelStr.length) ? 'app-nav-item__icon--with-label' : '';
     }
   });
 </script>

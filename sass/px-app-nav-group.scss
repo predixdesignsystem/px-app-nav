@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+// Settings
+@import "px-colors-design/_settings.colors.scss";
+
+// Tools
+
+// Generic
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+
+// Base
+@import "px-typography-design/_base.typography.scss";
+
+// Meta
+
+// Objects
+
+// Component
+
+////// Shared styles
+@import "app-nav-shared";
+
+////// Component styles
+$px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, $white); // Same background color as subitem
+$px-app-nav-group-border-color: var(--px-app-nav-group-border-color, $gray3);
+.app-nav-group__dropdown {
+  background-color: $px-app-nav-group-background-color;
+  border: 1px solid;
+  border-color: $px-app-nav-group-border-color;
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
+  display: block;
+  max-width: 632px;
+  z-index: 399;
+}
+
+:host([collapsed]) .app-nav-group__dropdown {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.app-nav-item__group {
+
+}
+
+// Trumps
+@import "inuit-clearfix/_trumps.clearfix.scss";

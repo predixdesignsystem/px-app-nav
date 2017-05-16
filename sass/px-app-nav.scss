@@ -14,13 +14,9 @@
 // Tools
 
 // Generic
-@import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
-@import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-@import "px-flexbox-design/_base.flexbox.scss";
-@import "px-viewport-design/_base.viewport.scss";
 @import "px-typography-design/_base.typography.scss";
 
 // Meta
@@ -28,6 +24,24 @@
 // Objects
 
 // Component
+
+////// Shared styles
+@import "app-nav-shared";
+
+////// Theming
+$px-app-nav-height: var(--px-app-nav-height, rem(60px));
+$px-app-nav-background-color: var(--px-app-nav-background-color, $gray2);
+$px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 rem(2px) rem(4px) 0 rgba(0,0,0,0.2));
+
+////// Component styles
+:host {
+  height: $px-app-nav-height;
+  background-color: $px-app-nav-background-color;
+  box-shadow: $px-app-nav-box-shadow;
+  display: block;
+  position: absolute;
+  width: 100%;
+}
 
 // .app-nav-toolbar {
 //   background-color: rgb(223, 230, 234);
@@ -82,5 +96,3 @@
 
 // Trumps
 @import "inuit-clearfix/_trumps.clearfix.scss";
-@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
-@import "px-widths-responsive-design/_trumps.widths-responsive.scss";

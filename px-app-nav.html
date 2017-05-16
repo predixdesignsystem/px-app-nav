@@ -91,72 +91,70 @@ Custom property | Description | Default
         max-width: 100%;
       }
     </style>
-    <section class$="{{_getNavClasses(collapseAll, vertical)}}">
-      <app-header fixed>
-        <app-toolbar class="app-nav-toolbar" id="toolbar">
-          <section class="app-nav-items" id="items">
-            <template is="dom-repeat" items="{{navItems}}" filter="_isItemVisible" id="visible">
+    <section class$="app-nav {{_getNavClasses(collapseAll, vertical)}}">
+      <section class="app-nav-items" id="items">
+        <template is="dom-repeat" items="{{navItems}}" filter="_isItemVisible" id="visible">
+          <!-- Stamp groups, which hold subitems -->
+          <template is="dom-if" if="{{_hasSubitems(item)}}">
+            <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+              <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
+                <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
+              </template>
+            </px-app-nav-group>
+          </template>
+
+          <!-- Stamp plain old items, which hold subitems -->
+          <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+            <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+            </px-app-nav-item>
+          </template>
+        </template>
+
+        <!-- <div class="app-nav-visible" id="visible"></div>
+        <div class="app-nav-collapsed" id="collapsed"></div> -->
+
+        <!-- STATE: Some nav items collapsed -->
+        <template is="dom-if" if="{{_anyCollapsed(collapsedItems, visibleItems)}}">
+          <px-app-nav-group
+              superlist
+              min-width="320"
+              id="collapsedGroup"
+              label="{{_getCollapsedLabel(selectedItem, collapsedItems, visibleItems)}}"
+              icon="{{_getCollapsedIcon(selectedItem, collapsedItems, visibleItems)}}"
+              selected$="{{_ifSelectedCollapsed(selectedItem, collapsedItems)}}"
+              hide-dropdown-icon="{{!_allCollapsed(collapsedItems, visibleItems)}}"
+              no-highlight="{{_allCollapsed(collapsedItems, visibleItems)}}">
+            <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
               <!-- Stamp groups, which hold subitems -->
               <template is="dom-if" if="{{_hasSubitems(item)}}">
-                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-item>
+                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
                   </template>
                 </px-app-nav-group>
               </template>
 
               <!-- Stamp plain old items, which hold subitems -->
               <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
+                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
                 </px-app-nav-item>
               </template>
             </template>
+          </px-app-nav-group>
+        </template>
 
-            <!-- <div class="app-nav-visible" id="visible"></div>
-            <div class="app-nav-collapsed" id="collapsed"></div> -->
+        <!-- STATE: All nav items collapsed -->
+        <!-- <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
+          <px-app-nav-group
+              superlist
+              min-width="320"
+              id="collapsedGroup"
+              label="{{_getSelectedItemLabel(selectedItem.label)}}"
+              icon="{{selectedItem.icon}}">
+          </px-app-nav-group>
+        </template> -->
 
-            <!-- STATE: Some nav items collapsed -->
-            <template is="dom-if" if="{{_someCollapsed(collapsedItems, visibleItems)}}">
-              <px-app-nav-group
-                  superlist
-                  min-width="320"
-                  id="collapsedGroup"
-                  label="{{_getCollapsedLabel(selectedItem, collapsedItems, visibleItems)}}"
-                  icon="{{_getCollapsedIcon(selectedItem, collapsedItems, visibleItems)}}"
-                  selected$="{{_ifSelectedCollapsed(selectedItem, collapsedItems)}}">
-                <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
-                  <!-- Stamp groups, which hold subitems -->
-                  <template is="dom-if" if="{{_hasSubitems(item)}}">
-                    <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
-                      <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                        <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-item>
-                      </template>
-                    </px-app-nav-group>
-                  </template>
-
-                  <!-- Stamp plain old items, which hold subitems -->
-                  <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-                    <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
-                    </px-app-nav-item>
-                  </template>
-                </template>
-              </px-app-nav-group>
-            </template>
-
-            <!-- STATE: All nav items collapsed -->
-            <!-- <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
-              <px-app-nav-group
-                  superlist
-                  min-width="320"
-                  id="collapsedGroup"
-                  label="{{_getSelectedItemLabel(selectedItem.label)}}"
-                  icon="{{selectedItem.icon}}">
-              </px-app-nav-group>
-            </template> -->
-
-          </section>
-        </app-toolbar>
-      </app-header>
+      </section>
     </section>
 
   </template>
@@ -316,7 +314,7 @@ Custom property | Description | Default
     },
 
     _getCollapsedLabel: function(selectedItem, collapsed, visible) {
-      const someCollapsed = this._someCollapsed(collapsed, visible);
+      const someCollapsed = this._anyCollapsed(collapsed, visible);
       const allCollapsed = this._allCollapsed(collapsed, visible);
       if (someCollapsed && !allCollapsed) {
         return undefined;
@@ -330,7 +328,7 @@ Custom property | Description | Default
     },
 
     _getCollapsedIcon: function(selectedItem, collapsed, visible) {
-      const someCollapsed = this._someCollapsed(collapsed, visible);
+      const someCollapsed = this._anyCollapsed(collapsed, visible);
       const allCollapsed = this._allCollapsed(collapsed, visible);
       if (someCollapsed && !allCollapsed) {
         return 'fa:fa-angle-double-right';
@@ -883,7 +881,7 @@ Custom property | Description | Default
     },
 
     _getNavClasses(collapseAll, vertical) {
-      let className = ['app-nav'];
+      let className = [];
 
       if (vertical) {
         className.push('app-nav--vertical');
@@ -913,7 +911,7 @@ Custom property | Description | Default
       return true;
     },
 
-    _someCollapsed(collapsed, visible) {
+    _anyCollapsed(collapsed, visible) {
       return Array.isArray(collapsed) && collapsed.length > 0;
     },
 

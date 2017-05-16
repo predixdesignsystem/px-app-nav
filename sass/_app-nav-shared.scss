@@ -1,13 +1,22 @@
-/* theming: nav item background color */
+@function rem($size) {
+  $rem: $size / $inuit-base-font-size;
+  @return $rem * 1rem;
+}
+
+
+// Theming: px-app-nav-item
+// ...
+
+/* Theming: nav item background color */
 $nav-button-background-color: var(--px-app-nav-item-background-color, $gray2);
 $nav-button-background-color--hover: var(--px-app-nav-item-background-color--hover, $gray4);
 $nav-button-background-color--pressed: var(--px-app-nav-item-background-color--pressed, $gray5);
 $nav-button-background-color--active: var(--px-app-nav-item-background-color--active, $white);
-/* theming: nav item icon fill color */
+/* Theming: nav item icon fill color */
 $nav-button-icon-fill-color: var(--px-app-nav-item-icon-fill-color, $gray8); /*@TODO: change to $gray15*/
 $nav-button-icon-fill-color--hover: var(--px-app-nav-item-icon-fill-color--hover, $gray8); /*@TODO: change to $gray15*/
 $nav-button-icon-fill-color--pressed: var(--px-app-nav-item-icon-fill-color--pressed, $gray8); /*@TODO: change to $gray15*/
-/* theming: nav item text color */
+/* Theming: nav item text color */
 $nav-button-text-color: var(--px-app-nav-item-text-color, $gray8); /*@TODO: change to $gray15*/
 $nav-button-text-color--hover: var(--px-app-nav-item-text-color--hover, $gray8); /*@TODO: change to $gray15*/
 $nav-button-text-color--pressed: var(--px-app-nav-item-text-color--pressed, $gray8); /*@TODO: change to $gray15*/
