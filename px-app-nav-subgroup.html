@@ -16,8 +16,8 @@
         id="itemButton"
         icon="{{icon}}"
         label="{{label}}"
-        dropdown="{{!hideDropdownIcon}}"
-        selected$="{{_isGroupSelected(selected, noHighlight)}}"
+        dropdown
+        selected$="{{selected}}"
         collapsed$="{{collapsed}}">
     </px-app-nav-item>
 
@@ -38,21 +38,11 @@
     ],
 
     properties: {
-      /**
-       * If `true`, one of the group's subitems is selected.
-       *
-       * Watch for updates to find out when the group becomes selected through
-       * user interaction or through automatic selection.
-       *
-       * Set the `selected` attribute on one of the group's subitems to select
-       * this group.
-       */
       selected: {
         type: Boolean,
         value: false,
         notify: true,
-        reflectToAttribute: true,
-        observer: '_handleSelectedChanged'
+        reflectToAttribute: true
       },
 
       /**
@@ -63,8 +53,7 @@
       },
 
       /**
-       * The icon for the group's button. Should be a valid font awesome icon
-       * name (e.g. 'fa-briefcase').
+       * The icon for the group's button.
        */
       icon: {
         type: String
@@ -81,35 +70,10 @@
       },
 
       /**
-       * The select subitem's element, if a subitem is selected.
-       */
-      selectedSubitem: {
-        type: HTMLElement,
-        notify: true
-      },
-
-      /**
-       * The selected subitem's path, if a subitem is selected.
-       */
-      selectedSubpath: {
-        type: (String|Number),
-        notify: true
-      },
-
-      /**
        * If `true` the group is expanded so the user can select a subitem.
        */
       opened: {
         type: Boolean
-      },
-
-      minWidth: {
-        type: Number
-      },
-
-      hideDropdownIcon: {
-        type: Boolean,
-        value: false
       },
 
       animationConfig: {
@@ -144,103 +108,13 @@
     },
 
     attached: function() {
-      this._lastOpenedSubgroup = null;
-      this._openedSubgroup = null;
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
-      // this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
-      // this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      // this.listen(this.$.group, 'iron-dropdown-animating-open', '_handleDropdownWillOpen');
-      // this.listen(this.$.group, 'iron-dropdown-animating-closed', '_handleDropdownWillClose');
       this.listen(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      // this.listen(this.$.group, 'px-app-nav-subgroup-opened', '_handleSubgroupOpened');
-      // this.listen(this.$.group, 'px-app-nav-subgroup-closed', '_handleSubgroupClosed');
     },
 
     detached: function() {
       this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
-      // this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
-      // this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      // this.unlisten(this.$.group, 'iron-dropdown-animating-open', '_handleDropdownWillOpen');
-      // this.unlisten(this.$.group, 'iron-dropdown-animating-closed', '_handleDropdownWillClose');
       this.unlisten(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      // this.unlisten(this.$.group, 'px-app-nav-subgroup-opened', '_handleSubgroupOpened');
-      // this.unlisten(this.$.group, 'px-app-nav-subgroup-closed', '_handleSubgroupClosed');
-    },
-
-    _handleDropdownOpened(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      const content = Polymer.dom(this.root).querySelector('#groupcontent');
-      const detail = {};
-      if (content) {
-        const rect = content.getBoundingClientRect()
-        detail.dropdownHeight = rect.height;
-        detail.dropdownWidth = rect.width;
-      }
-
-      this.fire('px-app-nav-subgroup-opened', detail);
-    },
-
-    _handleDropdownClosed(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      this.fire('px-app-nav-subgroup-closed');
-    },
-
-    _handleSubgroupOpened(evt) {
-      if (!this.superlist) return;
-
-      const subgroup = Polymer.dom(evt).rootTarget;
-
-      if (this._openedSubgroup && this._openedSubgroup !== subgroup) {
-        this._lastOpenedSubgroup = this._openedSubgroup;
-        this._openedSubgroup.closeGroup();
-      }
-
-      this._openedSubgroup = subgroup;
-      subgroup.style.marginBottom = (evt.detail.dropdownHeight || 0) + 'px';
-    },
-
-    _handleSubgroupClosed(evt) {
-      if (!this.superlist) return;
-      const subgroup = Polymer.dom(evt).rootTarget;
-      subgroup.style.marginBottom = null;
-      if (this._openedSubgroup !== subgroup) {
-        this._openedSubgroup.position();
-      } else {
-        this._openedSubgroup = null;
-      }
-    },
-
-    _handleDropdownWillOpen(evt) {
-      if (!this.collapsed) return;
-      this.animationConfig.open.addHeight = evt.detail.newHeight;
-      this.playAnimation('open');
-    },
-
-    _handleDropdownWillClose(evt) {
-      if (!this.collapsed) return;
-      this.animationConfig.close.subtractHeight = evt.detail.oldHeight;
-      this.playAnimation('close');
-    },
-
-    _getGroupClasses() {
-      if (this.superlist) {
-        return 'app-nav-group__dropdown--superlist';
-      }
-      return 'app-nav-group__dropdown--sublist';
-    },
-
-    /**
-     * Checks if a property is the desired `type`.
-     *
-     * @param {*} prop
-     * @returns {Boolean}
-     */
-    _propIsTypeOf(prop, type) {
-      return prop && type && (typeof prop === type);
     },
 
     _toggleGroup() {
@@ -278,68 +152,22 @@
     },
 
     /**
-     * If the dropdown is cancelled (about to close) but the cancel event comes
-     * from a click on target element, stop the cancel so we can handle it
-     * through the click handler on the target element.
-     *
-     * Thanks to paper-menu-button for the guidance on how to best handle this.
-     */
-    _handleGroupCanceled(evt) {
-      var uiEvt = evt.detail;
-      var target = Polymer.dom(uiEvt).rootTarget;
-      var trigger = this;
-      var path = Polymer.dom(uiEvt).path;
-
-      if (path.indexOf(trigger) > -1) {
-        evt.preventDefault();
-      }
-    },
-
-    /**
      * If a group's subitem is selected, it should also be selected. Fire an event
      * to ask this item's parent to select it when its subitem is selected.
      */
     _handleSubitemSelected(evt) {
-      if (!this.superlist) {
-        evt.preventDefault();
-        evt.stopPropagation();
+      evt.preventDefault();
+      evt.stopPropagation();
 
-        var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-        var path = [localPath].concat(evt.detail.path);
-        var items = [this.item].concat(evt.detail.items);
+      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+      var path = [localPath].concat(evt.detail.path);
+      var items = [this.item].concat(evt.detail.items);
 
-        this.fire('px-app-nav-item-tapped', {
-          group: true,
-          path: path,
-          items: items
-        });
-      }
-
-      if (!this.collapsed) {
-        this.closeGroup();
-      }
-    },
-
-    /**
-     * If a group is goes from being selected to deselected, set its selected
-     * subitem to null to clear the selected and call closeGroup to ensure
-     * it is closed.
-     */
-    _handleSelectedChanged(nextState, lastState) {
-      if (lastState === true && nextState === false) {
-        this.closeGroup();
-      }
-    },
-
-    _getPositionTarget() {
-      return this.$.itemButton;
-    },
-
-    _isGroupSelected(isSelected, noHighlight) {
-      if (isSelected && !noHighlight) {
-        return true;
-      }
-      return false;
+      this.fire('px-app-nav-item-tapped', {
+        group: true,
+        path: path,
+        items: items
+      });
     }
   });
 
@@ -352,10 +180,6 @@
       var node = config.node;
       var endHeightNode = config.endHeightNode;
       var height = endHeightNode.getBoundingClientRect().height;
-      // var group = config.groupNode;
-      // var currentHeight = node.getBoundingClientRect().height;
-      // var hiddenGroupHeight = group.getBoundingClientRect().height;
-      // var targetHeight = currentHeight + hiddenGroupHeight;
       this._effect = new KeyframeEffect(node, [{
         height: '0px'
       }, {
@@ -374,10 +198,6 @@
       var node = config.node;
       var startHeightNode = config.startHeightNode;
       var height = startHeightNode.getBoundingClientRect().height;
-      // var group = config.groupNode;
-      // var currentHeight = node.getBoundingClientRect().height;
-      // var visibleGroupHeight = group.getBoundingClientRect().height;
-      // var targetHeight = currentHeight - visibleGroupHeight;
       this._effect = new KeyframeEffect(node, [{
         height: height + 'px'
       }, {
