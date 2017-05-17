@@ -1,4 +1,4 @@
-v3.0.0-prerelease
+v3.0.0
 =================
 * add styles for px-clipboard
 * update px-toggle-design classes
