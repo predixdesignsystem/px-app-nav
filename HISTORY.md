@@ -1,11 +1,6 @@
 v3.0.0
 =================
-* add styles for px-clipboard
-* update px-toggle-design classes
-* run gulp sass to update primary-default color
-* updated with redesigned forms, list ui, tabs
-* Release with new typography and colour dependencies
-* Added new headings classes for redesign
+* add and update styles for px redesign
 
 v2.0.3
 =================
