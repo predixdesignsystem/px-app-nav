@@ -133,6 +133,9 @@ $px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-backgro
 /* Sub-components */
 .app-nav-item__label {
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 :host([collapsed]) .app-nav-item__label {
   flex: 1;
