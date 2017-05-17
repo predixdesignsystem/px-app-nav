@@ -209,15 +209,18 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // Card
   // --px-card-border-color:
   // --px-card-background-color:
-  //
-  // // Deck Selector
-  // --px-deck-selector-border-color:
-  // --px-deck-selector-background-color:
-  // --px-deck-selector-text-color:
-  // --px-deck-selector-hover-background-color:
-  // --px-deck-selector-hover-text-color:
-  // --px-deck-selector-li-border:
-  //
+
+  // Deck Selector
+  --px-deck-selector-border-color: $gray3;
+  --px-deck-selector-shadow-color: rgba($black, 0.2);
+  --px-deck-selector-background-color: $white;
+  --px-deck-selector-text-color: $gray15;
+  --px-deck-selector-background-color--hover: $gray1;
+  --px-deck-selector-text-color--hover: $gray15;
+  --px-deck-selector-background-color--selected: $select-default;
+  --px-deck-selector-text-color--selected: $white;
+  --px-deck-selector-li-border: $gray2;
+
   // // Widget Cards
   // --px-widget-border-color:
   //
