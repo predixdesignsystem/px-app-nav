@@ -1,57 +1,37 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html" />
-<link rel="import" href="../iron-dropdown/iron-dropdown.html" />
-<link rel="import" href="../neon-animation/neon-animations.html">
-<link rel="import" href="../neon-animation/neon-animation-behavior.html">
-<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-polymer-font-awesome.html"/>
+<link rel="import" href="../iron-dropdown/iron-dropdown.html"/>
+<link rel="import" href="../neon-animation/neon-animations.html"/>
+<link rel="import" href="../neon-animation/neon-animation-behavior.html"/>
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html"/>
 
-<link rel="import" href="px-app-nav-item.html" />
+<link rel="import" href="px-app-nav-item.html"/>
+<link rel="import" href="css/px-app-nav-subgroup-styles.html"/>
 
-
-<link rel="import" href="css/px-app-nav-group-styles.html">
-
-<dom-module id="px-app-nav-group">
+<dom-module id="px-app-nav-subgroup">
   <template>
-    <style include="px-app-nav-group-styles"></style>
+    <style include="px-app-nav-subgroup-styles"></style>
 
-    <px-app-nav-item id="itemButton" icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" collapsed$="{{collapsed}}"></px-app-nav-item>
+    <px-app-nav-item
+        id="itemButton"
+        icon="{{icon}}"
+        label="{{label}}"
+        dropdown="{{!hideDropdownIcon}}"
+        selected$="{{_isGroupSelected(selected, noHighlight)}}"
+        collapsed$="{{collapsed}}">
+    </px-app-nav-item>
 
-    <!-- <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
-      <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
-        <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
-      </template>
-
-      <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
-        <p class="app-nav-item__label">{{label}}</p>
-      </template>
-
-      <template is="dom-if" if="{{!hideDropdownIcon}}">
-        <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
-      </template>
-    </div> -->
-    <div class="app-nav-group__target" id="grouptarget"></div>
-
-    <iron-dropdown
-        id="group"
-        no-overlap
-        dynamic-align
-        opened="{{opened}}"
-        position-target="[[_getPositionTarget()]]"
-        on-iron-overlay-canceled="_handleGroupCanceled"
-        open-animation-config="{{_openAnimation}}"
-        close-animation-config="{{_closeAnimation}}">
-      <div class$="dropdown-content app-nav-group__dropdown {{_getGroupClasses(superlist)}}" id="groupcontainer">
-        <div class="app-nav-group__dropdown__content" id="groupcontent">
-          <content select="*"></content>
-        </div>
+    <div class="app-nav-subgroup__dropdown" id="groupcontainer">
+      <div class="app-nav-subgroup__dropdown__content" id="groupcontent">
+        <content select="*"></content>
       </div>
-    </iron-dropdown>
+    </div>
   </template>
 </dom-module>
 
 <script>
   Polymer({
-    is: 'px-app-nav-group',
+    is: 'px-app-nav-subgroup',
 
     behaviors: [
       Polymer.NeonAnimationRunnerBehavior
@@ -123,11 +103,6 @@
         type: Boolean
       },
 
-      superlist: {
-        type: Boolean,
-        value: false
-      },
-
       minWidth: {
         type: Number
       },
@@ -137,73 +112,66 @@
         value: false
       },
 
-      collapsed: {
-        type: Boolean,
-        value: false
-      },
-
-      /**
-       * Disables highlighting the group when it is selected.
-       */
-      noHighlight: {
-        type: Boolean,
-        value: false
-      },
-
-      _openAnimation: {
-        type: Object,
+      animationConfig: {
+        type: Array,
         value: function() {
           return {
-            name: 'expand-animation',
-            timing: {
-              duration: 200,
-              easing: 'ease-in'
+            'open' : {
+              name: 'expand-subgroup-animation',
+              node: this.$.groupcontainer,
+              endHeightNode: this.$.groupcontent,
+              timing: {
+                duration: 200,
+                easing: 'ease-in'
+              }
             },
-            endHeightNode: this.$.groupcontent
-          }
-        }
-      },
-
-      _closeAnimation: {
-        type: Object,
-        value: function() {
-          return {
-            name: 'contract-animation',
-            timing: {
-              duration: 200,
-              easing: 'ease-out'
-            },
-            startHeightNode: this.$.groupcontent
+            'close' : {
+              name: 'contract-subgroup-animation',
+              node: this.$.groupcontainer,
+              startHeightNode: this.$.groupcontent,
+              timing: {
+                duration: 200,
+                easing: 'ease-out'
+              }
+            }
           }
         }
       }
+    },
+
+    listeners: {
+      'neon-animation-finish': '_onNeonAnimationFinish'
     },
 
     attached: function() {
       this._lastOpenedSubgroup = null;
       this._openedSubgroup = null;
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
-      this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
-      this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      this.listen(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
-      this.listen(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
+      // this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+      // this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      // this.listen(this.$.group, 'iron-dropdown-animating-open', '_handleDropdownWillOpen');
+      // this.listen(this.$.group, 'iron-dropdown-animating-closed', '_handleDropdownWillClose');
+      this.listen(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      // this.listen(this.$.group, 'px-app-nav-subgroup-opened', '_handleSubgroupOpened');
+      // this.listen(this.$.group, 'px-app-nav-subgroup-closed', '_handleSubgroupClosed');
     },
 
     detached: function() {
       this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
-      this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
-      this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      this.unlisten(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
-      this.unlisten(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
+      // this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+      // this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      // this.unlisten(this.$.group, 'iron-dropdown-animating-open', '_handleDropdownWillOpen');
+      // this.unlisten(this.$.group, 'iron-dropdown-animating-closed', '_handleDropdownWillClose');
+      this.unlisten(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      // this.unlisten(this.$.group, 'px-app-nav-subgroup-opened', '_handleSubgroupOpened');
+      // this.unlisten(this.$.group, 'px-app-nav-subgroup-closed', '_handleSubgroupClosed');
     },
 
     _handleDropdownOpened(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      const content = Polymer.dom(this.root).querySelector('#groupcontainer');
+      const content = Polymer.dom(this.root).querySelector('#groupcontent');
       const detail = {};
       if (content) {
         const rect = content.getBoundingClientRect()
@@ -211,14 +179,14 @@
         detail.dropdownWidth = rect.width;
       }
 
-      this.fire('px-app-nav-group-opened', detail);
+      this.fire('px-app-nav-subgroup-opened', detail);
     },
 
     _handleDropdownClosed(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      this.fire('px-app-nav-group-closed');
+      this.fire('px-app-nav-subgroup-closed');
     },
 
     _handleSubgroupOpened(evt) {
@@ -246,6 +214,18 @@
       }
     },
 
+    _handleDropdownWillOpen(evt) {
+      if (!this.collapsed) return;
+      this.animationConfig.open.addHeight = evt.detail.newHeight;
+      this.playAnimation('open');
+    },
+
+    _handleDropdownWillClose(evt) {
+      if (!this.collapsed) return;
+      this.animationConfig.close.subtractHeight = evt.detail.oldHeight;
+      this.playAnimation('close');
+    },
+
     _getGroupClasses() {
       if (this.superlist) {
         return 'app-nav-group__dropdown--superlist';
@@ -265,52 +245,28 @@
 
     _toggleGroup() {
       if (this.opened) {
-        this.async(function(){
-          // Wait a tick before closing for the group to clear its event queue
-          // after we stopped the original cancel event
-          this.closeGroup();
-        });
-      }
-      if (!this.opened) {
+        this.closeGroup();
+      } else {
         this.openGroup();
       }
     },
 
     openGroup() {
-      var group = this.$$('#group');
-      if (!group) return;
-
-      // Measure the size of the group's container before trying to open it,
-      // so we can set the min width of the group's dropdown
-      //
-      // Ben says this is OK.
-      var button = this.$$('#itemButton');
-      var content = this.$$('#groupcontainer');
-      var minWidth;
-      if (typeof this.minWidth !== 'number') {
-        minWidth = button.getBoundingClientRect().width + 'px';
-      } else {
-        minWidth = this.minWidth + 'px';
-      }
-      if (content.style.minWidth !== minWidth) {
-        content.style.minWidth = minWidth;
-      }
-
-      group.open();
+      this.opened = true;
+      this.playAnimation('open');
     },
 
     closeGroup() {
-      var group = this.$$('#group');
-      if (!group) return;
-
-      group.close();
+      this.opened = false;
+      this.playAnimation('close');
     },
 
-    position() {
-      var group = this.$$('#group');
-      if (!group) return;
-
-      group.position();
+    _onNeonAnimationFinish(evt) {
+      if (this.opened) {
+        this.$.groupcontainer.style.height = this.$.groupcontent.getBoundingClientRect().height + 'px';
+      } else {
+        this.$.groupcontainer.style.height = '0px';
+      }
     },
 
     /**
@@ -359,7 +315,9 @@
         });
       }
 
-      this.closeGroup();
+      if (!this.collapsed) {
+        this.closeGroup();
+      }
     },
 
     /**
@@ -386,7 +344,7 @@
   });
 
   Polymer({
-    is: 'expand-animation',
+    is: 'expand-subgroup-animation',
     behaviors: [
       Polymer.NeonAnimationBehavior
     ],
@@ -394,6 +352,10 @@
       var node = config.node;
       var endHeightNode = config.endHeightNode;
       var height = endHeightNode.getBoundingClientRect().height;
+      // var group = config.groupNode;
+      // var currentHeight = node.getBoundingClientRect().height;
+      // var hiddenGroupHeight = group.getBoundingClientRect().height;
+      // var targetHeight = currentHeight + hiddenGroupHeight;
       this._effect = new KeyframeEffect(node, [{
         height: '0px'
       }, {
@@ -404,7 +366,7 @@
   });
 
   Polymer({
-    is: 'contract-animation',
+    is: 'contract-subgroup-animation',
     behaviors: [
       Polymer.NeonAnimationBehavior
     ],
@@ -412,6 +374,10 @@
       var node = config.node;
       var startHeightNode = config.startHeightNode;
       var height = startHeightNode.getBoundingClientRect().height;
+      // var group = config.groupNode;
+      // var currentHeight = node.getBoundingClientRect().height;
+      // var visibleGroupHeight = group.getBoundingClientRect().height;
+      // var targetHeight = currentHeight - visibleGroupHeight;
       this._effect = new KeyframeEffect(node, [{
         height: height + 'px'
       }, {

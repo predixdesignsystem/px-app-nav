@@ -18,7 +18,9 @@
 <link rel="import" href="px-app-nav-horizontal.html" />
 <link rel="import" href="px-app-nav-collapsed.html" />
 <link rel="import" href="px-app-nav-list.html" />
+
 <link rel="import" href="px-app-nav-group.html" />
+<link rel="import" href="px-app-nav-subgroup.html" />
 
 <link rel="import" href="px-app-nav-item.html" />
 <link rel="import" href="px-app-nav-subitem.html" />
@@ -127,11 +129,11 @@ Custom property | Description | Default
             <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
               <!-- Stamp groups, which hold subitems -->
               <template is="dom-if" if="{{_hasSubitems(item)}}">
-                <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
+                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
                     <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
                   </template>
-                </px-app-nav-group>
+                </px-app-nav-subgroup>
               </template>
 
               <!-- Stamp plain old items, which hold subitems -->
