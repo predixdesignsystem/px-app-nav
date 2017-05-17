@@ -14,7 +14,7 @@
   <template>
     <style include="px-app-nav-group-styles"></style>
 
-    <px-app-nav-item id="itemButton" icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" collapsed$="{{collapsed}}"></px-app-nav-item>
+    <px-app-nav-item id="itemButton" cancel-select icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" collapsed$="{{collapsed}}"></px-app-nav-item>
 
     <!-- <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
       <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">

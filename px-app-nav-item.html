@@ -85,6 +85,14 @@
         value: false,
         reflectToAttribute: true,
         observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
+      },
+
+      /**
+       * Cancels events that trigger selection.
+       */
+      cancelSelect: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -110,11 +118,10 @@
      * Fire the select event so this item's parent will mark it as selected.
      */
     _handleSelfTapped(evt) {
-      if (!this.path) return;
+      if (this.cancelSelect) return;
       var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
       this.fire('px-app-nav-item-tapped', {
-        path: [path],
-        items: [this.item]
+        path: [path]
       }, {cancelable:true});
     },
 

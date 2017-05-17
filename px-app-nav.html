@@ -59,42 +59,10 @@ Custom property | Description | Default
 
 <dom-module id="px-app-nav">
   <template>
-    <style include="px-app-nav-styles">
-      #root {
-        display: none;
-      }
-      .app-nav-toolbar-collapsed {
-        display: none;
-      }
-      .app-nav--collapsed .app-nav-toolbar-collapsed {
-        display: inherit;
-      }
-      .app-nav-visible {
-        display: flex;
-      }
-      .app-nav-collapsed {
-        display: none;
-      }
-      .app-nav-toolbar {
-        background-color: rgb(223, 230, 234);
-        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
-        height: 60px;
-        padding-left: 0;
-        padding-right: 0;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        max-width: 100%;
-      }
-      .app-nav-items {
-        height: 60px;
-        flex: 1;
-        display: flex;
-        max-width: 100%;
-      }
-    </style>
-    <section class$="app-nav {{_getNavClasses(collapseAll, vertical)}}">
-      <section class="app-nav-items" id="items">
+    <style include="px-app-nav-styles"></style>
+
+    <section class$="app-nav {{_getNavClasses(collapseAll, vertical)}}" id="container">
+      <section class="app-nav__items" id="items">
         <template is="dom-repeat" items="{{navItems}}" filter="_isItemVisible" id="visible">
           <!-- Stamp groups, which hold subitems -->
           <template is="dom-if" if="{{_hasSubitems(item)}}">
@@ -142,6 +110,7 @@ Custom property | Description | Default
                 </px-app-nav-item>
               </template>
             </template>
+
           </px-app-nav-group>
         </template>
 
@@ -156,6 +125,9 @@ Custom property | Description | Default
           </px-app-nav-group>
         </template> -->
 
+      </section>
+      <section class="app-nav__actions" id="actions">
+        <slot id="actionsvisible" name="actions"></slot>
       </section>
     </section>
 
@@ -464,9 +436,12 @@ Custom property | Description | Default
 
     _getAvailableWidth: function() {
       window.requestAnimationFrame(() => {
-        const el = this.$.items;
-        if (!el) return;
-        const width = el.getBoundingClientRect().width;
+        const containerEl = this.$.container;
+        const actionsEl = this.$.actions;
+        if (!containerEl || !actionsEl) return;
+        const containerWidth = containerEl.getBoundingClientRect().width;
+        const actionsWidth = actionsEl.getBoundingClientRect().width;
+        const width = containerWidth - actionsWidth;
         if (this._availableWidth !== width) this.set('_availableWidth', width);
       });
     },

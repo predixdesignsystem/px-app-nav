@@ -43,6 +43,17 @@ $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 rem(2px) rem(4px) 0 rgba(
   width: 100%;
 }
 
+.app-nav {
+  display: flex;
+}
+
+.app-nav__items {
+  height: $px-app-nav-height;
+  flex: 1;
+  display: flex;
+  max-width: 100%;
+}
+
 // .app-nav-toolbar {
 //   background-color: rgb(223, 230, 234);
 //   box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
