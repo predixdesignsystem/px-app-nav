@@ -87,7 +87,7 @@ Custom property | Description | Default
         <template is="dom-if" if="{{_anyCollapsed(collapsedItems, visibleItems)}}">
           <px-app-nav-group
               superlist
-              min-width="320"
+              dropdown-max-width="[[collapseWidth]]"
               id="collapsedGroup"
               label="{{_getCollapsedLabel(selectedItem, collapsedItems, visibleItems)}}"
               icon="{{_getCollapsedIcon(selectedItem, collapsedItems, visibleItems)}}"
@@ -97,16 +97,16 @@ Custom property | Description | Default
             <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
               <!-- Stamp groups, which hold subitems -->
               <template is="dom-if" if="{{_hasSubitems(item)}}">
-                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
+                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{fewCollapsed}}" fixed$="{{allCollapsed}}">
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
+                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" subitem fixed$="{{allCollapsed}}"></px-app-nav-item>
                   </template>
                 </px-app-nav-subgroup>
               </template>
 
               <!-- Stamp plain old items, which hold subitems -->
               <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed>
+                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{fewCollapsed}}" fixed$="{{allCollapsed}}">
                 </px-app-nav-item>
               </template>
             </template>
@@ -140,11 +140,6 @@ Custom property | Description | Default
     behaviors: [Polymer.IronResizableBehavior],
 
     properties: {
-      initialCount: {
-        type: Number,
-        value: 3
-      },
-
       /**
        * Set to 'horizontal' to display nav across the top of the screen, or set
        * to 'vertical' to display navigation along the side of the screen.
@@ -171,6 +166,16 @@ Custom property | Description | Default
         type: Boolean,
         value: false,
         observer: '_handleCollapseAllChanged'
+      },
+
+      /**
+       * The width of the collapsed menu dropdown. Use a number (e.g. `60`) which
+       * will be converted to a pixel value (e.g. '60px'). If the window is smaller
+       * than the width provided, the dropdown will shrink to fit the window.
+       */
+      collapseWidth: {
+        type: Number,
+        value: 320
       },
 
       /**
@@ -262,6 +267,39 @@ Custom property | Description | Default
 
       fallbackSubpath: {
         type: String
+      },
+
+      /**
+       * True if all items are collapsed.
+       */
+      allCollapsed: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        readOnly: true,
+        computed: '_allCollapsed(collapsedItems,visibleItems)'
+      },
+
+      /**
+       * True if some items or all items are collapsed.
+       */
+      anyCollapsed: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        readOnly: true,
+        computed: '_anyCollapsed(collapsedItems,visibleItems)'
+      },
+
+      /**
+       * True if some items are collapsed AND some items are visible.
+       */
+      fewCollapsed: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        readOnly: true,
+        computed: '_fewCollapsed(collapsedItems,visibleItems)'
       }
     },
 
@@ -384,6 +422,7 @@ Custom property | Description | Default
         if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
           this.set('selectedPath', this.fallbackPath);
           this.set('selectedSubpath', this.fallbackSubpath || null);
+          return;
         }
 
         // 3. Fallback path can't be found either
@@ -894,6 +933,10 @@ Custom property | Description | Default
 
     _allCollapsed(collapsed, visible) {
       return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length === 0;
+    },
+
+    _fewCollapsed(collapsed, visible) {
+      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length > 0;
     },
 
     _ifAnyCollapsed(className, collapsedItems) {

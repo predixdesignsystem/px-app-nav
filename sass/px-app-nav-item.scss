@@ -72,7 +72,7 @@ $px-app-nav-item-background-color--hover: var(--px-app-nav-item-background-color
 $px-app-nav-item-icon-color--selected: var(--px-app-nav-item-icon-color--selected, $gray15);
 $px-app-nav-item-text-color--selected: var(--px-app-nav-item-text-color--selected, $gray15);
 $px-app-nav-item-background-color--selected: var(--px-app-nav-item-background-color--selected, $white);
-$px-app-nav-item-stripe-height--selected: var(--px-app-nav-item-stripe-height--selected, rem(2px));
+$px-app-nav-item-stripe-size--selected: var(--px-app-nav-item-stripe-size--selected, rem(2px));
 $px-app-nav-item-stripe-color--selected: var(--px-app-nav-item-stripe-color--selected, $select-default);
 :host([selected]) {
   color: $px-app-nav-item-text-color--selected;
@@ -87,7 +87,7 @@ $px-app-nav-item-stripe-color--selected: var(--px-app-nav-item-stripe-color--sel
   right: 0;
   display: block;
   width: 100%;
-  height: $px-app-nav-item-stripe-height--selected;
+  height: $px-app-nav-item-stripe-size--selected;
   background-color: $px-app-nav-item-stripe-color--selected;
 }
 
@@ -101,6 +101,24 @@ $px-app-nav-item-background-color--collapsed: var(--px-app-nav-item-background-c
   --iron-icon-fill-color: $px-app-nav-item-icon-color--collapsed;
 }
 
+/* Item State: Selected+Fixed */
+$px-app-nav-item-icon-color--fixed: var(--px-app-nav-item-icon-color--fixed, $gray15);
+$px-app-nav-item-text-color--fixed: var(--px-app-nav-item-text-color--fixed, $gray15);
+$px-app-nav-item-background-color--fixed: var(--px-app-nav-item-background-color--fixed, $white);
+:host([selected][fixed]) {
+  color: $px-app-nav-item-text-color--fixed;
+  background-color: $px-app-nav-item-background-color--fixed;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--fixed;
+}
+:host([selected][fixed]):before {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  height: 100%;
+  width: $px-app-nav-item-stripe-size--selected;
+}
+
 /* Subitem State: Default */
 $px-app-nav-subitem-height: var(--px-app-nav-subitem-height, rem(30px));
 $px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, $gray15);
@@ -108,6 +126,7 @@ $px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color,
 :host([subitem]) {
   height: $px-app-nav-subitem-height;
   color: $px-app-nav-subitem-text-color;
+  background-color: var(--px-app-nav-subitem-background-color, transparent);
   background-color: $px-app-nav-subitem-background-color;
 }
 
@@ -128,6 +147,48 @@ $px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-backgro
 }
 :host([subitem][selected]):before {
   display: none;
+}
+
+/* Subitem State: Fixed */
+$px-app-nav-subitem-text-color--fixed: var(--px-app-nav-subitem-text-color--fixed, $gray15);
+:host([subitem][fixed]) {
+  color: $px-app-nav-subitem-text-color--fixed;
+  background-color: $gray2;
+  padding-left: rem(55px);
+}
+:host([subitem][fixed]:hover) {
+  background-color: $gray4;
+}
+
+/* Subitem State: Fixed+Parent Selected+NOT selected */
+:host([subitem][fixed][parent-selected]) {
+  color: $gray15;
+  background-color: $white;
+}
+:host([subitem][fixed][parent-selected]):before {
+  content: '';
+  display: block;
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 100%;
+  background-color: $select-default;
+}
+:host([subitem][fixed][parent-selected]:hover) {
+  background-color: $gray1;
+}
+
+/* Subitem State: Fixed+Parent Selected+Selected */
+:host([subitem][fixed][parent-selected][selected]) {
+  color: $white;
+  background-color: $select-default;
+}
+:host([subitem][fixed][parent-selected][selected]:hover) {
+  color: $white;
+  background-color: $select-default;
 }
 
 /* Sub-components */

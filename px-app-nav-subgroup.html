@@ -19,12 +19,13 @@
         icon="{{icon}}"
         label="{{label}}"
         selected$="{{selected}}"
-        collapsed$="{{collapsed}}">
+        collapsed$="{{collapsed}}"
+        fixed$="{{fixed}}">
     </px-app-nav-item>
 
     <div class="app-nav-subgroup__dropdown" id="groupcontainer">
       <div class="app-nav-subgroup__dropdown__content" id="groupcontent">
-        <content select="*"></content>
+        <slot></slot>
       </div>
     </div>
   </template>
@@ -43,6 +44,18 @@
         type: Boolean,
         value: false,
         notify: true,
+        reflectToAttribute: true
+      },
+
+      fixed: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+
+      collapsed: {
+        type: Boolean,
+        value: false,
         reflectToAttribute: true
       },
 

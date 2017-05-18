@@ -128,7 +128,7 @@
         value: false
       },
 
-      minWidth: {
+      dropdownMaxWidth: {
         type: Number
       },
 
@@ -285,15 +285,14 @@
       //
       // Ben says this is OK.
       var button = this.$$('#itemButton');
-      var content = this.$$('#groupcontainer');
-      var minWidth;
-      if (typeof this.minWidth !== 'number') {
-        minWidth = button.getBoundingClientRect().width + 'px';
-      } else {
-        minWidth = this.minWidth + 'px';
-      }
+      var container = this.$$('#groupcontainer');
+      var content = this.$$('#groupcontent');
+      var minWidth = button.getBoundingClientRect().width + 'px';
       if (content.style.minWidth !== minWidth) {
-        content.style.minWidth = minWidth;
+        container.style.minWidth = minWidth;
+      }
+      if (typeof this.dropdownMaxWidth === 'number') {
+        content.style.maxWidth = this.dropdownMaxWidth + 'px';
       }
 
       group.open();

@@ -78,6 +78,16 @@
       },
 
       /**
+       * Set to `true` if the item is in a fixed dropdown.
+       */
+      fixed: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+        observer: 'updateStyles'
+      },
+
+      /**
        * Set to `true` if the item is selected.
        */
       selected: {
