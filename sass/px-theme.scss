@@ -207,8 +207,13 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-app-nav-hamburger-button-color:      $white;
 
   // Card
-  // --px-card-border-color:
-  // --px-card-background-color:
+  --px-card-background-color: $gray1;
+  --px-card-border-color: $gray3;
+  --px-card-header-color: $gray10;
+  --px-card-icon-color: $gray10;
+  --px-card-action-icon-color: $gray10;
+  --px-card-action-icon-color--hover: $primary-hover;
+  --px-card-action-icon-color--pressed: $primary-pressed;
 
   // Deck Selector
   --px-deck-selector-border-color: $gray3;
@@ -221,9 +226,6 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-deck-selector-text-color--selected: $white;
   --px-deck-selector-li-border: $gray2;
 
-  // // Widget Cards
-  // --px-widget-border-color:
-  //
   // //// Charts
   //
   // // Percent Circle
