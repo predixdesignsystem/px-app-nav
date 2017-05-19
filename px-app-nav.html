@@ -61,9 +61,10 @@ Custom property | Description | Default
   <template>
     <style include="px-app-nav-styles"></style>
 
-    <section class$="app-nav {{_getNavClasses(collapseAll, vertical)}}" id="container">
+    <section class="app-nav" id="container">
       <section class="app-nav__items" id="items">
-        <template is="dom-repeat" items="{{navItems}}" filter="_isItemVisible" id="visible">
+        <!-- First item stamp: visible items -->
+        <template is="dom-repeat" items="{{items}}" filter="_isItemVisible" id="visible">
           <!-- Stamp groups, which hold subitems -->
           <template is="dom-if" if="{{_hasSubitems(item)}}">
             <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
@@ -185,7 +186,7 @@ Custom property | Description | Default
        * @type {Array}
        * @default [{}]
        */
-      navItems: {
+      items: {
         type: Array,
         notify: true,
         observer: '_handleNavItemsChanged'
