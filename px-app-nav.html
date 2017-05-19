@@ -16,7 +16,6 @@
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
 
 <link rel="import" href="px-app-nav-horizontal.html" />
-<link rel="import" href="px-app-nav-collapsed.html" />
 <link rel="import" href="px-app-nav-list.html" />
 
 <link rel="import" href="px-app-nav-group.html" />
@@ -81,52 +80,38 @@ Custom property | Description | Default
           </template>
         </template>
 
-        <!-- <div class="app-nav-visible" id="visible"></div>
-        <div class="app-nav-collapsed" id="collapsed"></div> -->
-
-        <!-- STATE: Some nav items collapsed -->
-        <template is="dom-if" if="{{_anyCollapsed(collapsedItems, visibleItems)}}">
+        <!-- STATE: Items overflowed or collapsed -->
+        <template is="dom-if" if="{{_anyOverflowed(overflowedItems, visibleItems)}}">
           <px-app-nav-group
               superlist
               dropdown-max-width="[[collapseWidth]]"
-              id="collapsedGroup"
-              label="{{_getCollapsedLabel(selectedItem, collapsedItems, visibleItems)}}"
-              icon="{{_getCollapsedIcon(selectedItem, collapsedItems, visibleItems)}}"
-              selected$="{{_ifSelectedCollapsed(selectedItem, collapsedItems)}}"
-              hide-dropdown-icon="{{!_allCollapsed(collapsedItems, visibleItems)}}"
-              no-highlight="{{_allCollapsed(collapsedItems, visibleItems)}}">
-            <template is="dom-repeat" items="{{navItems}}" filter="_isItemCollapsed" id="collapsed">
+              id="overflowedGroup"
+              label="{{_getDropdownLabel(selectedItem, overflowedItems, visibleItems)}}"
+              icon="{{_getDropdownIcon(selectedItem, overflowedItems, visibleItems)}}"
+              selected$="{{_ifSelectedOverflowed(selectedItem, overflowedItems)}}"
+              hide-dropdown-icon="{{!_allCollapsed(overflowedItems, visibleItems)}}"
+              no-highlight="{{_allCollapsed(overflowedItems, visibleItems)}}">
+            <!-- Second item stamp: overflowed/collapsed items -->
+            <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold subitems -->
               <template is="dom-if" if="{{_hasSubitems(item)}}">
-                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{fewCollapsed}}" fixed$="{{allCollapsed}}">
+                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" subitem fixed$="{{allCollapsed}}"></px-app-nav-item>
+                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" subitem collapsed$="{{allCollapsed}}"></px-app-nav-item>
                   </template>
                 </px-app-nav-subgroup>
               </template>
 
               <!-- Stamp plain old items, which hold subitems -->
               <template is="dom-if" if="{{_hasNoSubitems(item)}}">
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{fewCollapsed}}" fixed$="{{allCollapsed}}">
+                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
                 </px-app-nav-item>
               </template>
             </template>
-
           </px-app-nav-group>
         </template>
-
-        <!-- STATE: All nav items collapsed -->
-        <!-- <template is="dom-if" if="{{_allCollapsed(collapsedItems, visibleItems)}}">
-          <px-app-nav-group
-              superlist
-              min-width="320"
-              id="collapsedGroup"
-              label="{{_getSelectedItemLabel(selectedItem.label)}}"
-              icon="{{selectedItem.icon}}">
-          </px-app-nav-group>
-        </template> -->
-
       </section>
+
       <section class="app-nav__actions" id="actions">
         <slot id="actionsvisible" name="actions"></slot>
       </section>
@@ -141,22 +126,6 @@ Custom property | Description | Default
     behaviors: [Polymer.IronResizableBehavior],
 
     properties: {
-      /**
-       * Set to 'horizontal' to display nav across the top of the screen, or set
-       * to 'vertical' to display navigation along the side of the screen.
-       */
-      // type: {
-      //   type: String,
-      //   value: 'horizontal',
-      //   observer: 'rebuild'
-      // },
-
-      vertical: {
-        type: Boolean,
-        value: false,
-        observer: 'rebuild'
-      },
-
       /**
        * Set to `true` to collapse all nav items (including top-level items)
        * into a dropdown and only show the active item in the nav.
@@ -192,29 +161,6 @@ Custom property | Description | Default
         observer: '_handleNavItemsChanged'
       },
 
-      /**
-       * When navigating, this prefix is appended to the relative URL. Defaults to '#', indicating paths are routed via the
-       * hash part of the URL.  To make them relative to current directory, use '/'.
-       *
-       * @type {String}
-       * @default ["#"]
-       */
-      pathPrefix: {
-        value : '#',
-        type: String
-      },
-
-      /**
-       * Allows a level of indirection in the Array of navItems passed in to resolve paths
-       *
-       * @type {String}
-       * @default ["path"]
-       */
-      pathKey: {
-        value: 'path',
-        type: String
-      },
-
       selectedItem: {
         type: Object,
         notify: true,
@@ -240,9 +186,12 @@ Custom property | Description | Default
         observer: '_selectedPathChanged'
       },
 
-      _availableWidth: {
-        type: Number,
-        observer: 'rebuild'
+      fallbackPath: {
+        type: String
+      },
+
+      fallbackSubpath: {
+        type: String
       },
 
       visibleItems: {
@@ -251,7 +200,7 @@ Custom property | Description | Default
         readOnly: true
       },
 
-      collapsedItems: {
+      overflowedItems: {
         type: Array,
         notify: true,
         readOnly: true
@@ -262,14 +211,6 @@ Custom property | Description | Default
         value: 'Choose item'
       },
 
-      fallbackPath: {
-        type: String
-      },
-
-      fallbackSubpath: {
-        type: String
-      },
-
       /**
        * True if all items are collapsed.
        */
@@ -278,30 +219,35 @@ Custom property | Description | Default
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_allCollapsed(collapsedItems,visibleItems)'
+        computed: '_allCollapsed(overflowedItems,visibleItems)'
       },
 
       /**
-       * True if some items or all items are collapsed.
+       * True if some items are overflowed, or all items are collapsed.
        */
-      anyCollapsed: {
+      anyOverflowed: {
         type: Boolean,
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_anyCollapsed(collapsedItems,visibleItems)'
+        computed: '_anyOverflowed(overflowedItems,visibleItems)'
       },
 
       /**
-       * True if some items are collapsed AND some items are visible.
+       * True if some items are overflowed, and some items are visible.
        */
-      fewCollapsed: {
+      someOverflowed: {
         type: Boolean,
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_fewCollapsed(collapsedItems,visibleItems)'
-      }
+        computed: '_someOverflowed(overflowedItems,visibleItems)'
+      },
+
+      _availableWidth: {
+        type: Number,
+        observer: 'rebuild'
+      },
     },
 
     statics: {
@@ -317,8 +263,8 @@ Custom property | Description | Default
     },
 
     observers: [
-      '_selectedPathChanged(fallbackPath, navItems)',
-      '_itemVisibilityChanged(visibleItems, collapsedItems, visibleItems.*, collapsedItems.*)'
+      '_selectedPathChanged(fallbackPath, items)',
+      '_itemVisibilityChanged(visibleItems, overflowedItems, visibleItems.*, overflowedItems.*)'
     ],
 
     listeners: {
@@ -326,10 +272,10 @@ Custom property | Description | Default
       'px-app-nav-item-tapped' : '_handleItemTapped'
     },
 
-    _getCollapsedLabel: function(selectedItem, collapsed, visible) {
-      const someCollapsed = this._anyCollapsed(collapsed, visible);
-      const allCollapsed = this._allCollapsed(collapsed, visible);
-      if (someCollapsed && !allCollapsed) {
+    _getDropdownLabel: function(selectedItem, overflowed, visible) {
+      const anyOverflowed = this._anyOverflowed(overflowed, visible);
+      const allCollapsed = this._allCollapsed(overflowed, visible);
+      if (anyOverflowed && !allCollapsed) {
         return undefined;
       }
       if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
@@ -340,10 +286,10 @@ Custom property | Description | Default
       }
     },
 
-    _getCollapsedIcon: function(selectedItem, collapsed, visible) {
-      const someCollapsed = this._anyCollapsed(collapsed, visible);
-      const allCollapsed = this._allCollapsed(collapsed, visible);
-      if (someCollapsed && !allCollapsed) {
+    _getDropdownIcon: function(selectedItem, overflowed, visible) {
+      const anyOverflowed = this._anyOverflowed(overflowed, visible);
+      const allCollapsed = this._allCollapsed(overflowed, visible);
+      if (anyOverflowed && !allCollapsed) {
         return 'fa:fa-angle-double-right';
       }
       if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
@@ -363,22 +309,18 @@ Custom property | Description | Default
       return this.visibleItems.indexOf(item) !== -1;
     },
 
-    _isItemCollapsed: function(item) {
-      if (!item || !this.collapsedItems || !Array.isArray(this.collapsedItems)) return false;
-      return this.collapsedItems.indexOf(item) !== -1;
+    _isItemOverflowed: function(item) {
+      if (!item || !this.overflowedItems || !Array.isArray(this.overflowedItems)) return false;
+      return this.overflowedItems.indexOf(item) !== -1;
     },
 
     _itemVisibilityChanged: function() {
       this.debounce('item-visibility-changed', function(){
         const visibleEl = Polymer.dom(this.root).querySelector('#visible');
-        const collapsedEl = Polymer.dom(this.root).querySelector('#collapsed');
+        const overflowedEl = Polymer.dom(this.root).querySelector('#overflowed');
         if (visibleEl) visibleEl.render();
-        if (collapsedEl) collapsedEl.render();
+        if (overflowedEl) overflowedEl.render();
       });
-      // if (this.$.visible)   this.async(function(){ this.$.visible.render(); });
-      // if (this.$.collapsed) this.async(function(){ this.$.collapsed.render(); });
-      // if (this.$.visible)   this.$.visible.render();
-      // if (this.$.collapsed) this.$.collapsed.render();
     },
 
     _getSelectedItemLabel: function() {
@@ -512,134 +454,24 @@ Custom property | Description | Default
       return paths;
     },
 
-    _handleItemsDistributed: function(info) {
-      // if (Array.isArray(info.addedNodes) && info.addedNodes.length) {
-      //   var addedItems = this._findItemNodes(info.addedNodes);
-      //   this._newItems = this._newItems.concat(addedItems);
-      //   this.rebuild();
-      // }
-      //
-      // if (Array.isArray(info.removedNodes) && info.removedNodes.length) {
-      //   var removedItems = this._findItemNodes(info.removedNodes);
-      //   this._knownItems = this._untrackItems(removedItems);
-      // }
-    },
-
     /**
      * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
      */
     rebuild: function() {
-      if (!this.navItems || !Array.isArray(this.navItems) || this._pendingRender || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
+      if (!this.items || !Array.isArray(this.items) || this._pendingRender || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
 
       if (this.collapseAll || this._availableWidth === 0) {
         this._setVisibleItems([]);
-        this._setCollapsedItems(this.navItems.slice(0));
+        this._setOverflowedItems(this.items.slice(0));
         return;
       }
 
-      const measurements = this._measureItems(this.navItems);
-      const {visible, collapsed} = this._fitItems(this.navItems, this._availableWidth, measurements);
+      const measurements = this._measureItems(this.items);
+      const {visible, overflowed} = this._fitItems(this.items, this._availableWidth, measurements);
       this._setVisibleItems(visible);
-      this._setCollapsedItems(collapsed);
+      this._setOverflowedItems(overflowed);
       this.notifyPath('visibleItems.*');
-      this.notifyPath('collapsedItems.*');
-
-      // if (this._pendingRender || typeof this.collapseAll !== 'boolean' || !Array.isArray(this._knownItems) || !this._knownItems.length) return;
-      // this._pendingRender = true;
-      //
-      // const items = this._knownItems;
-      // const width = this.collapseAll ? 0 : this._availableWidth;
-      //
-      // this._getFittedItems(items, width)
-      //   .then(({visible, collapsed}) => {
-      //     this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-      //     this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-      //     return Promise.resolve({visible, collapsed});
-      //   })
-      //   .then(({visible, collapsed}) => this._renderItems(items, visible, collapsed))
-      //   .then(({visible, collapsed}) => {
-      //     this._pendingRender = false;
-      //     // this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-      //     // this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-      //     return Promise.resolve();
-      //   });
-
-      //
-      // const pMeasure = () => (width>0) ? this._measureItems(items);
-      // const pFit = (measurements) => this._fitItems(items, width, measurements);
-      // const pRender = ({visible, collapsed}) => this._renderItems(items, visible, collapsed);
-      // const pFinish = ({visible, collapsed}) => {
-      //   this._pendingRender = false;
-      //   this._updateItemsProp('visibleItems', visible.map(node=>node.item), true);
-      //   this._updateItemsProp('collapsedItems', collapsed.map(node=>node.item), true);
-      //   return Promise.resolve();
-      // };
-      // const pAll = () => pMeasure().then(pFit).then(pRender).then(pFinish);
-      //
-      // // Polymer.RenderStatus.afterNextRender(this, pAll);
-      // pAll.call();
-    },
-
-    _getFittedItems(items, width) {
-      if (width <= 0) {
-        return Promise.resolve({ visible: [], collapsed: items.slice(0) })
-      }
-      return this._measureItems(items).then(measurements => this._fitItems(items, width, measurements));
-    },
-
-    _updateItemsProp(propName, items, readOnly) {
-      const setter = readOnly ? this[`_set${propName.slice(0,1).toUpperCase()}${propName.slice(1)}`].bind(this) : this.set.bind(this, propName);
-      if (items.length) {
-        setter(items);
-      } else {
-        setter([]);
-      }
-      if (this[propName] && Array.isArray(this[propName])) {
-        const splices = Polymer.ArraySplice.calculateSplices(this[propName], items);
-      }
-    },
-
-    _renderItems: function(items, visible, collapsed) {
-      let renderers;
-      if (items.length && !visible.length && collapsed.length) {
-        // If all items are collapsed, move to the dropdown
-        let parent = this.$$('#collapsedGroup');
-        renderers = items.map(item => this._moveToParent(item, parent));
-      }
-      else {
-        // Otherwise distribute to the right location
-        let collapsedParent = this.$.collapsed;
-        let visibleParent = this.$.visible;
-        renderers = items.map(item =>
-          this._moveToParent(item, (collapsed.indexOf(item) === -1) ? visibleParent : collapsedParent)
-        );
-      }
-      return Promise.all(renderers).then(() => ({ items: items, visible: visible, collapsed: collapsed }));
-    },
-
-    _renderItem: function(item, isCollapsed=false) {
-      // const newParent = isCollapsed ? this.$.collapsed : this.$.visible;
-      // const currentParent = Polymer.dom(item).parentNode;
-      // if (!currentParent) {
-      //   Polymer.dom(newParent).appendChild(item);
-      // }
-      // if (currentParent && currentParent !== newParent) {
-      //   Polymer.dom(currentParent).appendChild(item);
-      //   Polymer.dom(newParent).appendChild(item);
-      // }
-      // return Promise.resolve();
-    },
-
-    _moveToParent(node, newParent) {
-      const currentParent = Polymer.dom(node).parentNode;
-      if (!currentParent) {
-        Polymer.dom(newParent).appendChild(node);
-      }
-      if (currentParent && currentParent !== newParent) {
-        Polymer.dom(currentParent).removeChild(node);
-        Polymer.dom(newParent).appendChild(node);
-      }
-      return Promise.resolve();
+      this.notifyPath('overflowedItems.*');
     },
 
     _fitItems: function(items, width, measurements) {
@@ -647,7 +479,7 @@ Custom property | Description | Default
 
       // If the first item is larger than the available, collapse all
       if (available < measurements[0]) {
-        return { visible: [], collapsed: items.slice(0) };
+        return { visible: [], overflowed: items.slice(0) };
       }
 
       // Try to fit items in the available space
@@ -671,7 +503,7 @@ Custom property | Description | Default
           i--;
         }
       }
-      return { visible: items.slice(0,i), collapsed: items.slice(i) };
+      return { visible: items.slice(0,i), overflowed: items.slice(i) };
     },
 
     _measureItems: function(items) {
@@ -707,148 +539,6 @@ Custom property | Description | Default
       return (this.__measureCanvasCache[fontInfo] = ctx);
     },
 
-    _attachChild(child) {
-      Polymer.dom(this.$.visible).appendChild(child);
-    },
-
-    _rebuildItems: function() {
-
-    },
-
-    _moveToTarget: function(el, lastParent, nextParent) {
-      // if (!el || !lastParent || !nextParent) return;
-      //
-      // Polymer.dom(lastParent).removeChild(el);
-      // Polymer.dom(nextParent).appendChild(el);
-    },
-
-    _ensureItemsInTarget(items, target) {
-      // var i = 0;
-      // var len = items.length;
-      // var parentNode;
-      // var anyMoved = false;
-      //
-      // for (; i < len; i++) {
-      //   parentNode = Polymer.dom(items[i]).parentNode;
-      //   if (parentNode && parentNode !== target) {
-      //     Polymer.dom(parentNode).removeChild(items[i]);
-      //     Polymer.dom(target).appendChild(items[i]);
-      //     anyMoved = true;
-      //   }
-      // }
-      //
-      // if (anyMoved) {
-      //   Polymer.dom.flush();
-      // }
-    },
-
-    _getNavTarget: function(collapseAll, vertical) {
-      // if (collapseAll && !vertical) {
-      //   return this.$.collapseAll;
-      // }
-      // if (!collapseAll && !vertical) {
-      //   return this.$.horizontal;
-      // }
-      // return this.$.vertical;
-    },
-
-    /**
-     * Handles selection events that bubble up from subcomponents.
-     */
-    _handlePathSelected: function(evt) {
-      // var path = evt.detail.path || [];
-      // if (path.length) {
-      //   var pathStr = '';
-      // }
-    },
-
-    /**
-     * Selects an item by its path or its index.
-     *
-     * To select an item, just provide its path. For example, select the Dashboards
-     * item (which has path 'dashboards') with `select('dashboards')`
-     *
-     * To select an item inside a group, provide a sub-path. For example, select
-     * the first case (which has path 'case1') inside the Cases group (which has
-     * path 'cases') with `select('cases.case1')`.
-     *
-     * Note that individual path names cannot have dots ('.') in them or they
-     * cannot be selected.
-     *
-     * If an item is found, it will be returned after it is selected. If no item
-     * is found, return will be undefined.
-     *
-     * @param {Number|String} item
-     * @return {HTMLElement|undefined}
-     */
-    select: function(item) {
-      var selectedItem;
-
-      // If a string as a trailing dot ('foo.') clean the dot off
-      if (typeof item === 'string' && item.length > 0 && item.indexOf('.') === (item.length - 1)) {
-        item = item.substr(0, (item.length - 1));
-      }
-      // If the item is a string with subpaths, split and select each
-      if (typeof item === 'string' && item.length && item.indexOf('.') !== -1) {
-        item = item.split('.');
-        selectedItem = this._selectItems(item);
-      }
-      else if (typeof item === 'string' && item.length) {
-        selectedItem = this._selectItem(item, 'path');
-      }
-      else if (typeof item === 'number') {
-        selectedItem = this._selectItem(item, 'index');
-      }
-
-      return selectedItem;
-    },
-
-    /**
-     * Selects an item directly. If an (item[prop] === val), the item will be
-     * selected. If an item is found, it will be returned after it is selected.
-     * If no item is found, return will be undefined.
-     *
-     * @return {HTMLElement|undefined}
-     */
-    _selectItem(val, prop) {
-      var items = this.$.selector.items;
-      if (!items || !items.length) return;
-
-      var itemToSelect = this._findItem(items, val, prop);
-      if (itemToSelect && !itemToSelect.selected) {
-        itemToSelect.set('selected', true);
-      }
-
-      return itemToSelect;
-    },
-
-    /**
-     * Selects an item inside a group. `refs[0]` should be an index or path of
-     * a group. `refs[1]` should be an index or path of an item in that group.
-     *
-     * If an item is found, it will be returned after it is selected. If no item
-     * is found, return will be undefined.
-     *
-     * @return {HTMLElement|undefined}
-     */
-    _selectItems(refs) {
-      var items = this.$.selector.items;
-      if (!items || !items.length) return;
-
-      // Convert the group or item ref to a number, if it can be converted.
-      // Otherwise it will stay a string.
-      var groupRef = this._castStrToNum(refs[0]);
-      var itemRef = this._castStrToNum(refs[1]);
-
-      var groupToSelect = this._findItem(items, groupRef, (typeof groupRef === 'string') ? 'path' : 'index');
-      var itemToSelect;
-      if (groupToSelect && (typeof groupToSelect.select === 'function')) {
-        selectItem = groupToSelect.select(itemRef);
-      }
-
-      return itemToSelect;
-    },
-
     /**
      * Finds and returns an item that passes the test `item[prop] === val` or
      * returns undefined.
@@ -875,19 +565,15 @@ Custom property | Description | Default
     },
 
     /**
-     * If the string can be casted to a number, casts it. Otherwise, returns
-     * the original string.
-     */
-    _castStrToNum: function(str) {
-      return (typeof str === 'string' && !isNaN(str)) ? parseInt(str) : str;
-    },
-
-
-    /**
      * Helps check if items generated from data have subitems.
      */
     _hasSubitems(item) {
       return item && Array.isArray(item.subitems) && item.subitems.length;
+    },
+
+    _ifSelectedOverflowed(selectedItem, overflowedItems) {
+      if (!selectedItem || !overflowedItems || !Array.isArray(overflowedItems) || !overflowedItems.length) return false;
+      return overflowedItems.indexOf(selectedItem) !== -1;
     },
 
     /**
@@ -897,58 +583,16 @@ Custom property | Description | Default
       return !item.hasOwnProperty('subitems');
     },
 
-    _getNavClasses(collapseAll, vertical) {
-      let className = [];
-
-      if (vertical) {
-        className.push('app-nav--vertical');
-      }
-      if (!vertical) {
-        className.push('app-nav--horizontal');
-      }
-      if (collapseAll === true) {
-        className.push('app-nav--horizontal');
-      }
-
-      return className.join(' ');
+    _anyOverflowed(overflowed, visible) {
+      return Array.isArray(overflowed) && overflowed.length > 0;
     },
 
-    _navIs(isType, wantedType, isCollapsed, wantedCollapsed) {
-      // If nav should be collapsed and it is not, return false...
-      if (typeof wantedCollapsed === 'string' && wantedCollapsed === 'collapsed' && !isCollapsed) {
-        return false;
-      }
-      // Next, check type
-      if (wantedType === 'horizontal' && isType !== 'horizontal') {
-        return false;
-      }
-      if (wantedType === 'vertical' && isType !== 'vertical') {
-        return false;
-      }
-      return true;
+    _allCollapsed(overflowed, visible) {
+      return Array.isArray(overflowed) && overflowed.length > 0 && Array.isArray(visible) && visible.length === 0;
     },
 
-    _anyCollapsed(collapsed, visible) {
-      return Array.isArray(collapsed) && collapsed.length > 0;
-    },
-
-    _allCollapsed(collapsed, visible) {
-      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length === 0;
-    },
-
-    _fewCollapsed(collapsed, visible) {
-      return Array.isArray(collapsed) && collapsed.length > 0 && Array.isArray(visible) && visible.length > 0;
-    },
-
-    _ifAnyCollapsed(className, collapsedItems) {
-      // if (collapsedItems && Array.isArray(collapsedItems) && collapsedItems.length) {
-      //   return className;
-      // }
-    },
-
-    _ifSelectedCollapsed(selectedItem, collapsedItems) {
-      if (!selectedItem || !collapsedItems || !Array.isArray(collapsedItems) || !collapsedItems.length) return false;
-      return collapsedItems.indexOf(selectedItem) !== -1;
+    _someOverflowed(overflowed, visible) {
+      return Array.isArray(overflowed) && overflowed.length > 0 && Array.isArray(visible) && visible.length > 0;
     }
   });
 </script>

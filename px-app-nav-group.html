@@ -13,22 +13,8 @@
 <dom-module id="px-app-nav-group">
   <template>
     <style include="px-app-nav-group-styles"></style>
+    <px-app-nav-item id="itemButton" cancel-select icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" overflowed$="{{overflowed}}"></px-app-nav-item>
 
-    <px-app-nav-item id="itemButton" cancel-select icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" collapsed$="{{collapsed}}"></px-app-nav-item>
-
-    <!-- <div class$="app-nav-item app-nav-item--group {{_getSelectedItemClasses(selected, superlist)}}" id="itemButton">
-      <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
-        <iron-icon class="app-nav-item__icon" icon="fa:{{icon}}"></iron-icon>
-      </template>
-
-      <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
-        <p class="app-nav-item__label">{{label}}</p>
-      </template>
-
-      <template is="dom-if" if="{{!hideDropdownIcon}}">
-        <iron-icon class="app-nav-item__open-icon" icon="fa:fa-angle-down"></iron-icon>
-      </template>
-    </div> -->
     <div class="app-nav-group__target" id="grouptarget"></div>
 
     <iron-dropdown
@@ -137,7 +123,7 @@
         value: false
       },
 
-      collapsed: {
+      overflowed: {
         type: Boolean,
         value: false
       },

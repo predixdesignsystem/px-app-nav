@@ -19,8 +19,8 @@
         icon="{{icon}}"
         label="{{label}}"
         selected$="{{selected}}"
-        collapsed$="{{collapsed}}"
-        fixed$="{{fixed}}">
+        overflowed$="{{overflowed}}"
+        collapsed$="{{collapsed}}">
     </px-app-nav-item>
 
     <div class="app-nav-subgroup__dropdown" id="groupcontainer">
@@ -47,13 +47,13 @@
         reflectToAttribute: true
       },
 
-      fixed: {
+      collapsed: {
         type: Boolean,
         value: false,
         reflectToAttribute: true
       },
 
-      collapsed: {
+      overflowed: {
         type: Boolean,
         value: false,
         reflectToAttribute: true
