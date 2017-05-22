@@ -14,6 +14,7 @@
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
 <link rel="import" href="../iron-selector/iron-selector.html" />
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
+<link rel="import" href="../iron-media-query/iron-media-query.html" />
 
 <link rel="import" href="px-app-nav-horizontal.html" />
 <link rel="import" href="px-app-nav-list.html" />
@@ -59,6 +60,10 @@ Custom property | Description | Default
 <dom-module id="px-app-nav">
   <template>
     <style include="px-app-nav-styles"></style>
+
+    <template is="dom-if" if="{{collapseAt}}" restamp>
+      <iron-media-query query="{{collapseAt}}" query-matches="{{collapseAll}}"></iron-media-query>
+    </template>
 
     <section class="app-nav" id="container">
       <section class="app-nav__items" id="items">
@@ -127,15 +132,29 @@ Custom property | Description | Default
 
     properties: {
       /**
-       * Set to `true` to collapse all nav items (including top-level items)
-       * into a dropdown and only show the active item in the nav.
+       * Set to `true` to collapse all nav items into a dropdown. Makes the nav
+       * more accessible on mobile devices.
        *
-       * Only works if the the nav `type` is horizontal.
+       * Use `collapseAt` instead to dynamically collapse the nav based on the
+       * current window size.
        */
       collapseAll: {
         type: Boolean,
         value: false,
-        observer: '_handleCollapseAllChanged'
+        observer: '_handleCollapseAllChanged',
+        notify: true
+      },
+
+      /**
+       * Pass a CSS media query that will collapse all nav items when it is
+       * evaluated to true. For example, pass '(max-width: 450px)' to collapse
+       * the nav when the window is less than 450px wide.
+       *
+       * This property will overwrite the `collapseAll` property. Avoid data
+       * binding in to both properties at the same time.
+       */
+      collapseAt: {
+        type: String
       },
 
       /**
