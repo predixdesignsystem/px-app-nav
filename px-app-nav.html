@@ -94,8 +94,8 @@ Custom property | Description | Default
               label="{{_getDropdownLabel(selectedItem, overflowedItems, visibleItems)}}"
               icon="{{_getDropdownIcon(selectedItem, overflowedItems, visibleItems)}}"
               selected$="{{_ifSelectedOverflowed(selectedItem, overflowedItems)}}"
-              hide-dropdown-icon="{{!_allCollapsed(overflowedItems, visibleItems)}}"
-              no-highlight="{{_allCollapsed(overflowedItems, visibleItems)}}">
+              hide-dropdown-icon="{{!allCollapsed}}"
+              no-highlight="{{allCollapsed}}">
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold subitems -->
