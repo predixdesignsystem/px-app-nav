@@ -164,8 +164,7 @@ Custom property | Description | Default
       selectedItem: {
         type: Object,
         notify: true,
-        readOnly: true,
-        value: null
+        readOnly: true
       },
 
       selectedSubitem: {
@@ -192,6 +191,13 @@ Custom property | Description | Default
 
       fallbackSubpath: {
         type: String
+      },
+
+      fallbackSelected: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        readOnly: true
       },
 
       visibleItems: {
@@ -342,7 +348,7 @@ Custom property | Description | Default
 
       if (evt.detail.path.length === 1) {
         this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', null);
+        this.set('selectedSubpath', undefined);
       }
       if (evt.detail.path.length === 2) {
         this.set('selectedPath', evt.detail.path[0]);
@@ -361,11 +367,16 @@ Custom property | Description | Default
           return;
         }
 
-        // 2. If no items found, try the fallback
+        // 2. If no items found and fallback is defined, try the fallback
         if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
-          this.set('selectedPath', this.fallbackPath);
-          this.set('selectedSubpath', this.fallbackSubpath || null);
-          return;
+          let path = !this.fallbackSubpath ? this.fallbackPath : `${this.fallbackPath}.${this.fallbackSubpath}`;
+          let [item, subitem] = this._findItemByPath(path);
+          if (item) {
+            this._setSelectedItem(item);
+            this._setSelectedSubitem(subitem);
+            this._setFallbackSelected(true);
+            return;
+          }
         }
 
         // 3. Fallback path can't be found either
@@ -374,10 +385,10 @@ Custom property | Description | Default
     },
 
     _findItemByPath(pathStr) {
-      let items = [null,null];
+      let items = [undefined,undefined];
       if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
         items[0] = this._paths[pathStr][0];
-        items[1] = this._paths[pathStr][1] || null;
+        items[1] = this._paths[pathStr][1] || undefined;
       }
       return items;
     },
