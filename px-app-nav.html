@@ -91,11 +91,12 @@ Custom property | Description | Default
               superlist
               dropdown-max-width="[[collapseWidth]]"
               id="overflowedGroup"
-              label="{{_getDropdownLabel(selectedItem, overflowedItems, visibleItems)}}"
-              icon="{{_getDropdownIcon(selectedItem, overflowedItems, visibleItems)}}"
+              label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"
+              icon="{{_getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)}}"
               selected$="{{_ifSelectedOverflowed(selectedItem, overflowedItems)}}"
-              hide-dropdown-icon="{{!allCollapsed}}"
-              no-highlight="{{allCollapsed}}">
+              hide-dropdown-icon="{{_shouldHideDropdownCarat(allCollapsed, collapseWithIcon)}}"
+              no-highlight="{{allCollapsed}}"
+              opened="{{collapseOpened}}">
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold subitems -->
@@ -165,6 +166,25 @@ Custom property | Description | Default
       collapseWidth: {
         type: Number,
         value: 320
+      },
+
+      /**
+       * Set to `true` to show an open/close icon for the collapsed menu instead
+       * of the selected item.
+       */
+      collapseWithIcon: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * When `true`, the collapse dropdown is open. When `false`, it is closed
+       * or does not exist.
+       */
+      collapseOpened: {
+        type: Boolean,
+        value: false,
+        notify: true
       },
 
       /**
@@ -297,32 +317,72 @@ Custom property | Description | Default
       'px-app-nav-item-tapped' : '_handleItemTapped'
     },
 
-    _getDropdownLabel: function(selectedItem, overflowed, visible) {
-      const anyOverflowed = this._anyOverflowed(overflowed, visible);
-      const allCollapsed = this._allCollapsed(overflowed, visible);
-      if (anyOverflowed && !allCollapsed) {
-        return undefined;
-      }
-      if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
+    /**
+     * Gets the dropdown label text.
+     *
+     * There is no label text if:
+     * - the menu is not collapsed
+     * - the menu is collapsed and `collapseWithIcon` is true
+     * - the menu is collapsed and there is no selected item
+     *
+     * If the menu is collapsed and an item is selected, returns the selected
+     * item's label text.
+     *
+     * @param  {Object|undefined} selectedItem
+     * @param  {Boolean} collapseWithIcon
+     * @param  {Boolean} allCollapsed
+     * @return {String|undefined}
+     */
+    _getDropdownLabel: function(selectedItem, collapseWithIcon, allCollapsed) {
+      if (allCollapsed && selectedItem && typeof selectedItem === 'object' && !collapseWithIcon) {
         return selectedItem.label;
       }
-      if (allCollapsed && !selectedItem) {
-        return this.unselectedText;
-      }
+      return undefined;
     },
 
-    _getDropdownIcon: function(selectedItem, overflowed, visible) {
-      const anyOverflowed = this._anyOverflowed(overflowed, visible);
-      const allCollapsed = this._allCollapsed(overflowed, visible);
+    /**
+     * Gets the dropdown icon.
+     *
+     * 1. If some items are overflowed but the menu is not collapsed, returns
+     * the double-right-arrow icon.
+     * 2. If all items are overflowed, `collapseWithIcon` is true, and the collapse
+     * dropdown is closed, returns the hamburger icon.
+     * 3. If all items are overflowed, `collapseWithIcon` is true, and the collapse
+     * dropdown is opened, returns the X (close) icon.
+     * 4. If all items are overflowed, and an item is selected, returns
+     * the selected item's icon (if it exists).
+     *
+     * Otherwise, returns undefined.
+     *
+     * @param  {Object|undefined} selectedItem
+     * @param  {Boolean} collapseWithIcon
+     * @param  {Boolean} allCollapsed
+     * @param  {Boolean} anyOverflowed
+     * @param  {Boolean} collapseOpened
+     * @return {String|undefined}
+     */
+    _getDropdownIcon: function(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
       if (anyOverflowed && !allCollapsed) {
         return 'fa:fa-angle-double-right';
+      }
+      if (allCollapsed && collapseWithIcon && !collapseOpened) {
+        return 'fa:fa-bars';
+      }
+      if (allCollapsed && collapseWithIcon && collapseOpened) {
+        return 'fa:fa-times';
       }
       if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
         return selectedItem.icon;
       }
-      if (allCollapsed && !selectedItem) {
-        return undefined;
-      }
+      return undefined;
+    },
+
+    /**
+     * If all items are not collapsed, or if collapseWithIcon is true, hide
+     * the dropdown carat.
+     */
+    _shouldHideDropdownCarat: function(allCollapsed, collapseWithIcon) {
+      return (!allCollapsed || collapseWithIcon);
     },
 
     _isItemSelected: function(item, selectedItem) {
