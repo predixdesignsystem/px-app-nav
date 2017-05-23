@@ -13,7 +13,16 @@
 <dom-module id="px-app-nav-group">
   <template>
     <style include="px-app-nav-group-styles"></style>
-    <px-app-nav-item id="itemButton" cancel-select icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected$="{{_isGroupSelected(selected, noHighlight)}}" overflowed$="{{overflowed}}"></px-app-nav-item>
+    <px-app-nav-item
+        id="itemButton"
+        cancel-select
+        icon="{{icon}}"
+        label="{{label}}"
+        dropdown="{{!hideDropdownIcon}}"
+        selected$="{{_isGroupSelected(selected, noHighlight)}}"
+        overflowed$="{{overflowed}}"
+        empty$="{{empty}}">
+    </px-app-nav-item>
 
     <div class="app-nav-group__target" id="grouptarget"></div>
 
@@ -133,6 +142,14 @@
        * Disables highlighting the group when it is selected.
        */
       noHighlight: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If `true` the group item button should have an empty state.
+       */
+      empty: {
         type: Boolean,
         value: false
       },

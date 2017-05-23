@@ -13,6 +13,11 @@
       <p class="app-nav-item__label">{{label}}</p>
     </template>
 
+    <template is="dom-if" if="{{empty}}">
+      <div class="app-nav-item__icon app-nav-item__icon--with-label app-nav-item__icon--empty"></div>
+      <div class="app-nav-item__label app-nav-item__label--empty"></div>
+    </template>
+
     <template is="dom-if" if="{{dropdown}}">
       <iron-icon class="app-nav-item__dropdown-icon" icon="fa:fa-angle-down"></iron-icon>
     </template>
@@ -95,6 +100,15 @@
         value: false,
         reflectToAttribute: true,
         observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
+      },
+
+      /**
+       * Shows an empty state outline for the button instead of a label/icon.
+       */
+      empty: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
       },
 
       /**

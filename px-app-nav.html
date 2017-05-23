@@ -96,6 +96,7 @@ Custom property | Description | Default
               selected$="{{_ifSelectedOverflowed(selectedItem, overflowedItems)}}"
               hide-dropdown-icon="{{_shouldHideDropdownCarat(allCollapsed, collapseWithIcon)}}"
               no-highlight="{{allCollapsed}}"
+              empty="{{_isDropdownEmpty(allCollapsed, selectedItem)}}"
               opened="{{collapseOpened}}">
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
@@ -203,13 +204,15 @@ Custom property | Description | Default
       selectedItem: {
         type: Object,
         notify: true,
-        readOnly: true
+        readOnly: true,
+        value: null
       },
 
       selectedSubitem: {
         type: Object,
         notify: true,
-        readOnly: true
+        readOnly: true,
+        value: null
       },
 
       selectedPath: {
@@ -380,9 +383,18 @@ Custom property | Description | Default
     /**
      * If all items are not collapsed, or if collapseWithIcon is true, hide
      * the dropdown carat.
+     *
+     * @return {Boolean}
      */
     _shouldHideDropdownCarat: function(allCollapsed, collapseWithIcon) {
-      return (!allCollapsed || collapseWithIcon);
+      return !allCollapsed || collapseWithIcon;
+    },
+
+    /**
+     * If the nav is collapsed, but no item is selected, show the empty state.
+     */
+    _isDropdownEmpty: function(allCollapsed, selectedItem) {
+      return allCollapsed && (!selectedItem || typeof selectedItem !== 'object');
     },
 
     _isItemSelected: function(item, selectedItem) {
@@ -427,7 +439,7 @@ Custom property | Description | Default
 
       if (evt.detail.path.length === 1) {
         this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', undefined);
+        this.set('selectedSubpath', null);
       }
       if (evt.detail.path.length === 2) {
         this.set('selectedPath', evt.detail.path[0]);
@@ -464,10 +476,10 @@ Custom property | Description | Default
     },
 
     _findItemByPath(pathStr) {
-      let items = [undefined,undefined];
+      let items = [null,null];
       if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
         items[0] = this._paths[pathStr][0];
-        items[1] = this._paths[pathStr][1] || undefined;
+        items[1] = this._paths[pathStr][1] || null;
       }
       return items;
     },
