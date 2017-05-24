@@ -15,10 +15,11 @@
 @import "px-typography-design/_base.typography.scss";
 
 // Component
-////// Shared styles
-@import "app-nav-shared";
+@function rem($size) {
+  $rem: $size / $inuit-base-font-size;
+  @return $rem * 1rem;
+}
 
-////// Component styles
 $px-app-nav-group-height: var(--px-app-nav-height, rem(60px));
 :host {
   position: relative;

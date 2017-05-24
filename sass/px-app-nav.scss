@@ -11,22 +11,14 @@
 // Settings
 @import "px-colors-design/_settings.colors.scss";
 
-// Tools
-
-// Generic
-@import "px-box-sizing-design/_generic.box-sizing.scss";
-
 // Base
 @import "px-typography-design/_base.typography.scss";
 
-// Meta
-
-// Objects
-
 // Component
-
-////// Shared styles
-@import "app-nav-shared";
+@function rem($size) {
+  $rem: $size / $inuit-base-font-size;
+  @return $rem * 1rem;
+}
 
 ////// Theming
 $px-app-nav-height: var(--px-app-nav-height, rem(60px));
@@ -52,57 +44,3 @@ $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 rem(2px) rem(4px) 0 rgba(
   display: flex;
   max-width: 100%;
 }
-
-// .app-nav-toolbar {
-//   background-color: rgb(223, 230, 234);
-//   box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 3px;
-//   height: 60px;
-//   padding-left: 0;
-//   align-items: flex-start;
-// }
-
-// px-app-nav-item {
-//   color: #425866;
-//   height: 60px;
-//   display: flex;
-//   align-items: center;
-//   padding-left: 15px;
-//   padding-right: 15px;
-//   font-size: 15px;
-//   cursor: pointer;
-//   position: relative;
-// }
-
-@import "app-nav-shared";
-.app-nav-button {
-  @extend %app-nav-button;
-  position: relative;
-}
-.app-nav-button__icon {
-  --iron-icon-height: 30px;
-  --iron-icon-width: 30px;
-  margin-right: 10px;
-}
-.app-nav-button__icon--empty {
-  background-color: $gray6;
-  width: 30px;
-  height: 30px;
-}
-.app-nav-button__dropdown {
-  --iron-icon-height: 15px;
-  --iron-icon-width: 15px;
-  margin-left: 5px;
-}
-.app-nav-button--icon {
-  --iron-icon-height: 30px;
-  --iron-icon-width: 30px;
-}
-.app-nav-button--selected {
-  @extend %app-nav-button--selected;
-}
-// .app-nav-items__collapse-button--visible {
-//   display: inherit;
-// }
-
-// Trumps
-@import "inuit-clearfix/_trumps.clearfix.scss";

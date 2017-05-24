@@ -24,11 +24,11 @@
 // Objects
 
 // Component
+@function rem($size) {
+  $rem: $size / $inuit-base-font-size;
+  @return $rem * 1rem;
+}
 
-////// Shared styles
-@import "app-nav-shared";
-
-////// Component styles
 /* Item State: Default */
 $px-app-nav-item-height: var(--px-app-nav-height, rem(60px));
 $px-app-nav-item-icon-size: var(--px-app-nav-item-icon-size, rem(30px));
