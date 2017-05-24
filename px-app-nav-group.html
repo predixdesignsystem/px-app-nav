@@ -124,7 +124,7 @@
         value: false
       },
 
-      dropdownMaxWidth: {
+      fixedWidth: {
         type: Number
       },
 
@@ -295,8 +295,8 @@
       if (content.style.minWidth !== minWidth) {
         container.style.minWidth = minWidth;
       }
-      if (typeof this.dropdownMaxWidth === 'number') {
-        content.style.maxWidth = this.dropdownMaxWidth + 'px';
+      if (typeof this.fixedWidth === 'number') {
+        content.style.width = this.fixedWidth + 'px';
       }
 
       group.open();

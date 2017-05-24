@@ -89,7 +89,7 @@ Custom property | Description | Default
         <template is="dom-if" if="{{_anyOverflowed(overflowedItems, visibleItems)}}">
           <px-app-nav-group
               superlist
-              dropdown-max-width="[[collapseWidth]]"
+              fixed-width="[[_getDropdownWidth(collapseWidth, allCollapsed)]]"
               id="overflowedGroup"
               label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"
               icon="{{_getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)}}"
@@ -161,8 +161,7 @@ Custom property | Description | Default
 
       /**
        * The width of the collapsed menu dropdown. Use a number (e.g. `60`) which
-       * will be converted to a pixel value (e.g. '60px'). If the window is smaller
-       * than the width provided, the dropdown will shrink to fit the window.
+       * will be converted to a pixel value (e.g. '60px').
        */
       collapseWidth: {
         type: Number,
@@ -378,6 +377,16 @@ Custom property | Description | Default
         return selectedItem.icon;
       }
       return undefined;
+    },
+
+    /**
+     * If the dropdown is collapsed, return the `collapseWidth` value. Otherwise,
+     * return undefined.
+     *
+     * @return {Number|undefined}
+     */
+    _getDropdownWidth: function(collapseWidth, allCollapsed) {
+      return allCollapsed ? collapseWidth : undefined;
     },
 
     /**

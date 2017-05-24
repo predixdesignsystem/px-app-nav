@@ -44,4 +44,5 @@ $px-app-nav-group-border-color: var(--px-app-nav-group-border-color, $gray3);
   border: 1px solid;
   border-color: $px-app-nav-group-border-color;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
+  max-width: inherit;
 }
