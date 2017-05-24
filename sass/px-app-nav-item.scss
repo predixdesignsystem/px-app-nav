@@ -201,7 +201,8 @@ $px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-:host([overflowed]) .app-nav-item__label {
+:host([overflowed]) .app-nav-item__label,
+:host([collapsed]) .app-nav-item__label {
   flex: 1;
 }
 .app-nav-item__label--empty {
