@@ -11,6 +11,12 @@
 // Settings
 @import "px-colors-design/_settings.colors.scss";
 
+// Generic
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+
+// Base
+@import "px-typography-design/_base.typography.scss";
+
 // Component
 :host {
   display: block;

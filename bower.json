@@ -19,21 +19,17 @@
   ],
   "dependencies": {
     "polymer": "^1.8.1",
-    "px-theme": "^2.0.4",
-    "px-tooltip": "^0.10.17",
-    "px-polymer-font-awesome": "^1.1.5",
+    "px-polymer-font-awesome": "^2.0.0",
     "neon-animation": "^1.2.4",
-    "app-layout": "PolymerElements/app-layout#^0.10.7",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.0",
     "iron-dropdown": "PolymerElements/iron-dropdown#^1.5.5",
-    "iron-selector": "PolymerElements/iron-selector#^1.5.2",
-    "px-overlay": "^0.4.4",
     "iron-resizable-behavior": "^1.0.6",
     "iron-media-query": "^1.0.8"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.4",
-    "px-demo": "^1.5.2",
-    "px-buttons-design": "^1.1.7",
-    "px-colors-design": "^1.0.0"
+    "px-box-sizing-design": "^1.0.0",
+    "px-colors-design": "^1.0.0",
+    "px-demo": "^2.0.0",
+    "px-typography-design": "^2.0.0"
   }
 }
