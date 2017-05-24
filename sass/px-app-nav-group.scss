@@ -45,8 +45,9 @@ $px-app-nav-group-border-color: var(--px-app-nav-group-border-color, $gray3);
 
 .app-nav-group__dropdown__content {
   background-color: $px-app-nav-group-background-color;
-  border: 1px solid;
-  border-color: $px-app-nav-group-border-color;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
   max-width: inherit;
+  margin: 1px;
+  position: relative;
+  top: -1px;
 }
