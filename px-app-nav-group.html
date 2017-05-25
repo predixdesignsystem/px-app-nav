@@ -185,6 +185,7 @@
       this._lastOpenedSubgroup = null;
       this._openedSubgroup = null;
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
+      this.listen(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
@@ -194,6 +195,7 @@
 
     detached: function() {
       this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
+      this.unlisten(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
@@ -320,6 +322,19 @@
      */
     _handleSelfTapped(evt) {
       this._toggleGroup();
+    },
+
+    /**
+     * When the user clicks on a group container but not on the group content,
+     * close the dropdown.
+     */
+    _handleGroupContainerTapped(evt) {
+      var path = Polymer.dom(evt).path;
+      var content = Polymer.dom(this.root).querySelector('#groupcontent');
+
+      if (path.indexOf(content) === -1) {
+        this.closeGroup();
+      }
     },
 
     /**
