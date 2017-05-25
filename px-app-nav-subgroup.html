@@ -31,6 +31,7 @@
 </dom-module>
 
 <script>
+(function(){
   Polymer({
     is: 'px-app-nav-subgroup',
 
@@ -98,7 +99,6 @@
               node: this.$.groupcontainer,
               endHeightNode: this.$.groupcontent,
               timing: {
-                duration: 200,
                 easing: 'ease-in'
               }
             },
@@ -107,7 +107,6 @@
               node: this.$.groupcontainer,
               startHeightNode: this.$.groupcontent,
               timing: {
-                duration: 200,
                 easing: 'ease-out'
               }
             }
@@ -193,11 +192,14 @@
       var node = config.node;
       var endHeightNode = config.endHeightNode;
       var height = endHeightNode.getBoundingClientRect().height;
+      var timing = Object.assign({}, this.timingFromConfig(config), {
+        duration: calculateAnimationDuration(height)
+      });
       this._effect = new KeyframeEffect(node, [{
         height: '0px'
       }, {
         height: height + 'px'
-      }], this.timingFromConfig(config));
+      }], timing);
       return this._effect;
     }
   });
@@ -211,12 +213,25 @@
       var node = config.node;
       var startHeightNode = config.startHeightNode;
       var height = startHeightNode.getBoundingClientRect().height;
+      var timing = Object.assign({}, this.timingFromConfig(config), {
+        duration: calculateAnimationDuration(height)
+      });
+      timing.duration = calculateAnimationDuration(height);
       this._effect = new KeyframeEffect(node, [{
         height: height + 'px'
       }, {
         height: '0px'
-      }], this.timingFromConfig(config));
+      }], timing);
       return this._effect;
     }
   });
+
+  /**
+   * Takes a pixel-based height as a number and returns a duration in milliseconds
+   * for the animation to run.
+   */
+  function calculateAnimationDuration(height) {
+    return (1000 * height) / 800;
+  }
+})();
 </script>
