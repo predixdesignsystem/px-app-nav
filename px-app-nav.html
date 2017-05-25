@@ -528,6 +528,7 @@ Custom property | Description | Default
     },
 
     _handleNavItemsChanged(items) {
+      if (!items || !Array.isArray(items)) return;
       const paths = this._paths = this._getItemPaths(items);
       this.rebuild();
     },
