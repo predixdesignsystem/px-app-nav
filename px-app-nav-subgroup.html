@@ -229,6 +229,9 @@
   /**
    * Takes a pixel-based height as a number and returns a duration in milliseconds
    * for the animation to run.
+   *
+   * @param {Number} height - Pixel-based height, parsed to an integer
+   * @return {Number} - Animation duration in milliseconds
    */
   function calculateAnimationDuration(height) {
     return (1000 * height) / 800;
