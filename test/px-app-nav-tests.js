@@ -3,6 +3,124 @@ document.addEventListener("WebComponentsReady", function() {
 });
 
 function runCustomTests() {
+
+  describe('px-app-nav [selection API]', function() {
+    var sandbox;
+
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create();
+    });
+
+    afterEach(function() {
+      sandbox.restore();
+    });
+
+    it('selects an item by path when the `selectedPath` attribute is initially set', function(done) {
+      var fx = fixture('AppNavFixtureInitialSelectedPath');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var pathItem = appNavEl.items[1];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItem).to.equal(pathItem);
+        var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
+        var pathItemEl = itemEls.filter(item => item.path === 'alerts')[0];
+        expect(pathItemEl.selected).to.equal(true);
+        done();
+      }, 50);
+    });
+
+    it('selects an item by path when the `selectedPath` and `selectedSubpath` attributes are initially set', function(done) {
+      var fx = fixture('AppNavFixtureInitialSelectedSubpath');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var pathItem = appNavEl.items[2];
+      var subpathItem = appNavEl.items[2].subitems[1];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItem).to.equal(pathItem);
+        expect(appNavEl.selectedSubitem).to.equal(subpathItem);
+        var pathItemEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+        var subpathItemEl = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item').filter(item => item.path === 'orders')[0];
+        expect(pathItemEl.selected).to.equal(true);
+        expect(subpathItemEl.selected).to.equal(true);
+        done();
+      }, 50);
+    });
+
+    it('dynamically changes the selected item and subitem when the `selectedItem` or `selectedSubitem` attributes are updated later', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        appNavEl.selectedPath = 'home';
+      }, 50);
+      setTimeout(function() {
+        var homeItem = appNavEl.items[0];
+        expect(appNavEl.selectedItem).to.equal(homeItem);
+        appNavEl.selectedPath = 'dashboards';
+        appNavEl.selectedSubpath = 'trucks';
+      }, 60);
+      setTimeout(function() {
+        var dashboardsItem = appNavEl.items[2];
+        var trucksItem = appNavEl.items[2].subitems[0];
+        expect(appNavEl.selectedItem).to.equal(dashboardsItem);
+        expect(appNavEl.selectedSubitem).to.equal(trucksItem);
+        appNavEl.selectedPath = 'alerts';
+        appNavEl.selectedSubpath = null;
+      }, 70);
+      setTimeout(function() {
+        var alertsItem = appNavEl.items[1];
+        expect(appNavEl.selectedItem).to.equal(alertsItem);
+        expect(appNavEl.selectedSubitem).to.be.null;
+        done();
+      }, 90);
+    });
+
+    it('selects a fallback item when the `fallbackPath` attribute is initially set, and no `selectedPath` is provided', function(done) {
+      var fx = fixture('AppNavFixtureFallbackPath');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var fallbackItem = appNavEl.items[0];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItem).to.equal(fallbackItem);
+        done();
+      }, 50);
+    });
+
+    it('does not update the `selectedPath` property when the `fallbackPath` item is selected', function(done) {
+      var fx = fixture('AppNavFixtureFallbackPath');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        expect(appNavEl.selectedPath).to.be.undefined;
+        done();
+      }, 50);
+    });
+
+    it('selects a fallback subitem when the `fallbackPath` and `fallbackSubpath` are initially set, and no `selectedPath` or `selectedSubpath` is provided', function(done) {
+      var fx = fixture('AppNavFixtureFallbackSubpath');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var fallbackItem = appNavEl.items[2];
+      var fallbackSubitem = appNavEl.items[2].subitems[2];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItem).to.equal(fallbackItem);
+        expect(appNavEl.selectedSubitem).to.equal(fallbackSubitem);
+        done();
+      }, 50);
+    });
+
+    it('does not update the `selectedPath` or `selectedSubpath` properties when the `fallbackPath` and `fallbackSubpath` items are selected', function(done) {
+      var fx = fixture('AppNavFixtureFallbackSubpath');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        expect(appNavEl.selectedPath).to.be.undefined;
+        expect(appNavEl.selectedSubpath).to.be.undefined;
+        done();
+      }, 50);
+    });
+  });
+
   describe('px-app-nav [horizontal]', function() {
     var sandbox;
 
@@ -56,6 +174,32 @@ function runCustomTests() {
         expect(itemEl.selected).to.equal(true);
         expect(appNavEl.selectedPath).to.equal('home');
         expect(appNavEl.selectedItem).to.equal(homeItem);
+        done();
+      }, 100);
+    });
+
+    it('selects a new item when it is tapped, deselecting the last selected item', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var alertsItem = appNavEl.items[1];
+      var itemEls;
+      var firstSelectedEl;
+      var secondSelectedEl;
+
+      setTimeout(function() {
+        itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
+        firstSelectedEl = itemEls.filter(item => item.path === 'home')[0];
+        firstSelectedEl.click();
+      }, 50);
+      setTimeout(function() {
+        secondSelectedEl = itemEls.filter(item => item.path === 'alerts')[0];
+        secondSelectedEl.click();
+      }, 60);
+      setTimeout(function() {
+        expect(firstSelectedEl.selected).to.equal(false);
+        expect(secondSelectedEl.selected).to.equal(true);
+        expect(appNavEl.selectedPath).to.equal('alerts');
+        expect(appNavEl.selectedItem).to.equal(alertsItem);
         done();
       }, 100);
     });
@@ -151,6 +295,12 @@ function runCustomTests() {
         appNavEl.notifyResize();
       }, 50);
       setTimeout(function() {
+        // Tests internal read-only APIs
+        expect(appNavEl.someOverflowed).to.equal(true);
+        expect(appNavEl.anyOverflowed).to.equal(true);
+        expect(appNavEl.overflowedItems.length).to.equal(1);
+        expect(appNavEl.visibleItems.length).to.equal(2);
+        // Tests that the items actually end up in the DOM
         var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-item');
         var groupEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-group');
         var overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
