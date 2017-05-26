@@ -117,6 +117,51 @@ Custom property | Description | Default
 
     properties: {
       /**
+       * An array of objects that will be used to build the nav. Top-level items
+       * can have one level of subitems beneath them, turning the parent item
+       * into a dropdown group.
+       *
+       * All items and subitems should have at least the following properties:
+       *
+       * - {String} path - A unique string that identifies the item. Should only
+       * contain alphanumeric characters matching A-Z, a-z, or 0-9. Avoid using
+       * special characters that must be encoded or decoded in URLs. The path
+       * must not contain any dots (`.`). Examples: 'home' or 'alerts'
+       * - {String} label - A short, human-readable text label for the item
+       *
+       * The following optional properties can be used for top-level items only:
+       *
+       * - {String} icon - The name of a valid iron-icon that will be placed
+       * next to the text label for the item. Use a valid icon from px-icon-set
+       * or define your own using the iron-iconset or iron-iconset-svg elements.
+       * - {Array} subitems - An array of subitem objects that will placed in a
+       * dropdown under the top-level item. Each subitem must have a `path`
+       * and `label` defined. If an `icon` or `subitems` property is defined
+       * on a subitem, those properties will be ignored.
+       *
+       * Note that top-level items with subitems cannot be directly selected
+       * by the user. They will only be selected when one of their subitems
+       * is tapped.
+       *
+       * The following is an example of a list of valid nav items:
+       *
+       *     [
+       *       { "label" : "Home",   "path" : "home",   "icon" : "px:home" },
+       *       { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
+       *       { "label" : "Assets", "path" : "assets", "icon" : "px:asset", subitems: [
+       *         { "label" : "Asset #1", "path" : "a1" },
+       *         { "label" : "Asset #2", "path" : "a2" }
+       *       ] }
+       *     ]
+       *
+       */
+      items: {
+        type: Array,
+        notify: true,
+        observer: '_handleNavItemsChanged'
+      },
+
+      /**
        * Set to `true` to collapse all nav items into a dropdown. Makes the nav
        * more accessible on mobile devices.
        *
@@ -171,18 +216,18 @@ Custom property | Description | Default
       },
 
       /**
-       * Object array of items and sub-items in the nav. Each object in the Array can specify '[path-key]', 'label', 'icon'
-       * 'eventName', and 'subitems', which is another Array.
+       * A reference to the currently selected item's object. This is a read-only
+       * value you can bind to and use to update your app's state, e.g. to
+       * change the current page to some value stored in the selected item's
+       * object. To change the selected item, use the `selectedPath` attribute.
        *
-       * @type {Array}
-       * @default [{}]
+       * This is a direct reference to the item that was passed into the `items`
+       * list, and can be compared with its `items` entry using reference equality.
+       *
+       * Note that the `selectedItem` may initially notify its value as `null`
+       * if no `selectedPath` is initially set, or if the `selectedPath` is
+       * set late.
        */
-      items: {
-        type: Array,
-        notify: true,
-        observer: '_handleNavItemsChanged'
-      },
-
       selectedItem: {
         type: Object,
         notify: true,
@@ -190,6 +235,19 @@ Custom property | Description | Default
         value: null
       },
 
+      /**
+       * A reference to the currently selected subitem's object. This is a read-only
+       * value you can bind to and use to update your app's state, e.g. to
+       * change the current page to some value stored in the selected subitem's
+       * object. To change the selected subitem, use the `selectedSubpath` attribute.
+       *
+       * This is a direct reference to the subitem that was passed into the `items`
+       * list, and can be compared with its `items` entry using reference equality.
+       *
+       * Note that the `selectedSubitem` may initially notify its value as `null`
+       * if no `selectedSubath` is initially set, or if the `selectedSubpath` is
+       * set late.
+       */
       selectedSubitem: {
         type: Object,
         notify: true,
@@ -197,26 +255,63 @@ Custom property | Description | Default
         value: null
       },
 
+      /**
+       * The path of the currently selected item. Set this attribute to select
+       * an item. Listen for updates to this attribute to be notified when
+       * the user selects a new item.
+       */
       selectedPath: {
         type: String,
         notify: true,
         observer: '_selectedPathChanged'
       },
 
+      /**
+       * The path of the currently selected subitem. Set this attribute to select
+       * a subitem. Listen for updates to this attribute to be notified when
+       * the user selects a new subitem.
+       */
       selectedSubpath: {
         type: String,
         notify: true,
         observer: '_selectedPathChanged'
       },
 
+      /**
+       * The path to an item that will be visually selected and set as the
+       * `selectedItem` if no valid `selectedPath` is provided.
+       *
+       * Note that when the fallback path is used to select an item, the `selectedPath`
+       * attribute will not be updated. This ensures that data binding the
+       * `selectedPath` to your app router won't spam the window location
+       * with values when the page first loads. To initially select an item,
+       * use `selectedPath` instead.
+       */
       fallbackPath: {
         type: String
       },
 
+      /**
+       * The path to a subitem that will be visually selected and set as the
+       * `selectedSubitem` if no valid `selectedPath` is provided.
+       *
+       * If a valid `selectedPath` is provided and no valid `selectedSubpath` is
+       * provided, the fallbackSubpath will not be used.
+       *
+       * Note that when the fallback subpath is used to select a subitem, the `selectedSubpath`
+       * attribute will not be updated. This ensures that data binding the
+       * `selectedSubpath` to your app router won't spam the window location
+       * with values when the page first loads. To initially select an item,
+       * use `selectedSubpath` instead.
+       */
       fallbackSubpath: {
         type: String
       },
 
+      /**
+       * True if the fallbackPath and/or fallbackSubpath were used to initially
+       * select an item and/or subitem.
+       */
       fallbackSelected: {
         type: Boolean,
         value: false,
@@ -224,21 +319,24 @@ Custom property | Description | Default
         readOnly: true
       },
 
+      /**
+       * An array of items that are currently visible — they fit in the menu
+       * and are not overflowed or collapse.
+       */
       visibleItems: {
         type: Array,
         notify: true,
         readOnly: true
       },
 
+      /**
+       * An array of items that are currently hidden in the overflow dropdown
+       * or in the collapsed dropdown.
+       */
       overflowedItems: {
         type: Array,
         notify: true,
         readOnly: true
-      },
-
-      unselectedText: {
-        type: String,
-        value: 'Choose item'
       },
 
       /**
@@ -277,7 +375,7 @@ Custom property | Description | Default
       _availableWidth: {
         type: Number,
         observer: 'rebuild'
-      },
+      }
     },
 
     statics: {
