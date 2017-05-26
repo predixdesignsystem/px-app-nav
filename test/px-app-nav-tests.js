@@ -405,5 +405,48 @@ function runCustomTests() {
         done();
       }, 250);
     });
+
+    it('updates the `collapseOpened` property when the dropdown is open', function(done) {
+      var fx = fixture('AppNavFixtureCollapsedWithIconSelected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var collapsedGroupEl;
+      var collapsedGroupItemEl;
+
+      setTimeout(function() {
+        collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
+        expect(appNavEl.collapseOpened).to.equal(false);
+        collapsedGroupItemEl.click();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.collapseOpened).to.equal(true);
+        collapsedGroupItemEl.click();
+      }, 250);
+      setTimeout(function() {
+        expect(appNavEl.collapseOpened).to.equal(false);
+        done();
+      }, 450);
+    });
+
+    it('opens and closes the dropdown when the `collapseOpened` attribute is changed', function(done) {
+      var fx = fixture('AppNavFixtureCollapsedWithIconSelected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var collapsedGroupEl;
+      var dropdownEl;
+
+      setTimeout(function() {
+        collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        dropdownEl = Polymer.dom(collapsedGroupEl.root).querySelector('#groupcontent');
+        appNavEl.collapseOpened = true;
+      }, 50);
+      setTimeout(function() {
+        expect(dropdownEl.offsetLeft).to.be.greaterThan(0);
+        appNavEl.collapseOpened = false;
+      }, 250);
+      setTimeout(function() {
+        expect(dropdownEl.offsetLeft).to.equal(0);
+        done();
+      }, 450);
+    });
   });
 }
