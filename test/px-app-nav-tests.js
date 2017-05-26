@@ -1,197 +1,409 @@
-// This will be an automatically-generated variable based on the component
-// name provided to the pxtestkit yeoman generator
-var app_nav;
-
-// This is the bootstrapping function that will run the base and custom tests
-// upon the completion of web components construction by Polymer
 document.addEventListener("WebComponentsReady", function() {
-  runBaseTests();
   runCustomTests();
 });
 
-// This is a utility/wrapper function for the test() function of
-// web-component-tester;  the developer can use this to specify tests
-// through a configuration object instead of repeatedly writing the test
-// case construction and assertion code patterns
-/**
- *
- * testCase(options) :
- * Utility wrapper for web-component-tester's test() function to perform the
- * most common test cases.  Accepts a configuration object that determines
- * how test() will be called (e.g., synchronously/asynchronously, event string
- * to use, etc). Each call to testCase corresponds to exactly 1 call to test().
- *
- * options : test configuration object that accepts the following properties
- *
- *   description : optional
- *   The description for the test case
- *
- *   root : required
- *   The innermost HTML node which is ancestor to any and all nodes that are
- *   involved in the test case. root can be specified either as a CSS selector
- *   string or an HTMLElement.  For the former case, the element located by
- *   document.querySelector(root) will be used.
- *
- *   eventSource : optional
- *   The element from which the specified event will be dispatched.  eventSource
- *   can be specified either as a CSS selector string or an HTMLElement.  For
- *   the former case, the element located by root.querySelector(eventSource)
- *   will be used to dispatch the event from.  This means that if eventSource
- *   was specified as a CSS selector string, the event will be dispatched from
- *   and element that is a descendant of root.  For eventSource specified as
- *   an HTML element, the event source element can be any element in the DOM,
- *   and not necessarily a descendant of root.
- *
- *   eventChain: optional
- *   The eventChain is a collection/array of objects with the following
- *   structure: { eventSource, eventString, modifyFunction } that are processed
- *   in sequence by this function (testCase), to provide the simulation of tests
- *   that involve a series of interactions from the end user.
- *   At each stage of the series these steps are perfomed: an eventCallback is
- *   added as an event listener to eventSource for the eventString event,
- *   modifyFunction is called with rootElement as argument, then an event with
- *   eventString is dispatched from eventSource.  The eventCallback added
- *   earlier performs the same set of steps for the next stage.  If all stages
- *   (all elements of the eventChain array) have been processed, eventCallback
- *   finally calls assertFunction instead.
- *
- *   event : optional
- *   The event string for the event that will be dispatched from event source.
- *   Specifying the event string will run the test() function asynchronously
- *   (i.e., callback will have the 'done' parameter used by Mocha in
- *   asynchronous test cases).
- *
- *   modifyFunction : optional
- *   A function that will be called before the event is dispatched, for an
- *   asynchronous test.  The developer can use modifyFunction to perform
- *   anything such as modifying the DOM to set up the test.  modifyFunction is
- *   presently guaranteed to work only synchronously (i.e., no event or timer
- *   callbacks involved).
- *
- *   assertFunction :
- *   The assertion function that will used to test the case.  This function
- *   must return true or false.
-**/
+function runCustomTests() {
+  describe('px-app-nav [horizontal]', function() {
+    var sandbox;
 
-function testCase(options) {
-  var testDescription, rootElement, eventString, eventChain, modifyFunction, assertFunction;
-  var isAsync = false;
-  var eventStr, eventSrc, modFn, assertFn;
-  function _failTest(message) {
-    test(message, function() {
-      assert.isTrue(false);
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create();
     });
-  }
-  if (typeof options === 'object') {
-    testDescription = options['description'] || 'No test description provided';
-    rootElement = options['root'] || document;
-    eventString = options['event'] || '';
-    modifyFunction = options['modifyFunction'];
-    assertFunction = options['assertFunction'] || function() { return true; };
-    eventChain = options['eventChain'] ||
-      [{ 'eventSource': eventSource, 'eventString': eventString, 'modifyFunction': modifyFunction }];
-  }
-  // fail the test if options was not provided
-  else {
-    _failTest(testDescription + ' Invalid test spec');
-    return;
-  }
 
-  // if test is asynchronous (i.e., eventString is non-blank or non-empty eventChain was provided)
-  if (eventString !== '' || (eventChain instanceof Array && eventChain.length > 0)) {
-    isAsync = true;
-  }
-  // at this point eventSource is guaranteed to be an HTML element
-  if (isAsync) {
-    if (eventChain === []) {
-      eventChain = [{'eventSource': eventSource, 'eventString': eventString, 'modifyFunction': modifyFunction}];
-    }
-    test(testDescription, function(done) {
-      thisDone = done;
-      if (!(rootElement instanceof HTMLElement) && !(rootElement instanceof HTMLDocument)) {
-        assert.isTrue(false);
-        done();
-        return;
-      }
-
-      // Add the interactions specified in the eventChain argument:
-      // The interactions are added in reverse order of event dispatching
-      // because of the general fact that event listeners are added before
-      // corresponding events are dispatched.
-
-      // Utility function that uses closure to generate callbacks for each event
-      // Without closure the test infinite-loops on the 2nd event;
-      function createCallback(eventSource, eventString, modifyFunction, rootElement) {
-        return function() {
-          if (modifyFunction instanceof Function) {
-            modifyFunction(rootElement);
-          }
-          eventSource.dispatchEvent(new Event(eventString));
-        };
-      }
-      var assertTest = function() {
-        flush(function() {
-          assertFunction(rootElement);
-          thisDone();
-        });
-      };
-      // TODO: add validation on the eventChain structure and content types
-      for (var ecLength = eventChain.length, ecIndex = ecLength-1; ecIndex >= 0; ecIndex--) {
-        eventStr = eventChain[ecIndex].eventString;
-        eventSrc = rootElement;
-        if (ecIndex === (ecLength-1)) {
-          eventSrc.addEventListener(eventStr, assertTest);
-        }
-        else {
-          modFn = eventChain[ecIndex].modifyFunction;
-          var prevEventSrc = document.querySelector(eventChain[ecIndex+1].eventSource);
-          var prevEventStr = eventChain[ecIndex+1].eventString;
-          eventSrc.addEventListener(eventStr,
-            createCallback(
-              document.querySelector(eventChain[ecIndex+1].eventSource),
-              eventChain[ecIndex+1].eventString,
-              modFn,
-              rootElement
-            )
-          );
-        }
-      }
-      eventSrc.dispatchEvent(new Event(eventStr));
+    afterEach(function() {
+      sandbox.restore();
     });
-  }
-  else {
-    test(testDescription, function() {
-      _deriveRoot();
-      if (!(rootElement instanceof HTMLElement) && !(rootElement instanceof HTMLDocument)) {
-        assert.isTrue(false);
-        return;
-      }
-      assert.isTrue(assertFunction(rootElement));
-    });
-  }
-}
 
-// Wrapper for base automation tests.  This function is automatically
-// generated by the pxtestkit yeoman generator
-function runBaseTests() {
-  app_nav = document.getElementById('app_nav');
+    it('fills its container', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
 
-  suite('Base Automation Tests for px-app-nav', function() {
-
-    test('Polymer exists', function() {
-      assert.isTrue(Polymer !== null);
-    });
-    test('px-app-nav fixture is created', function() {
-      assert.isTrue(document.getElementById('app_nav') !== null);
-    });
-    test('First px-app-nav fixture is collapsed because nav-expanded="false"', function() {
-      // wait for the app-nav to collapse
       setTimeout(function() {
-        assert.isTrue(document.getElementById('app_nav').classList.contains('navbar--collapsed'));
+        var width = appNavEl.getBoundingClientRect().width;
+        var height = appNavEl.getBoundingClientRect().height;
+        expect(width).to.equal(1000);
+        expect(height).to.equal(60);
+        done();
+      }, 50);
+    });
+
+    it('paints all of the groups, items and subitems it is given', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
+        var groupEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group');
+        expect(itemEls.length).to.equal(5);
+        expect(groupEls.length).to.equal(1);
+        done();
+      }, 50);
+    });
+
+    it('selects an item when the item is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var homeItem = appNavEl.items[0];
+      var itemEls;
+      var itemEl;
+
+      setTimeout(function() {
+        itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
+        itemEl = itemEls.filter(item => item.path === 'home')[0];
+        itemEl.click();
+      }, 50);
+      setTimeout(function() {
+        expect(itemEl.selected).to.equal(true);
+        expect(appNavEl.selectedPath).to.equal('home');
+        expect(appNavEl.selectedItem).to.equal(homeItem);
+        done();
+      }, 100);
+    });
+
+    it('opens a dropdown when a group is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var groupEl;
+      var groupItemEl;
+
+      setTimeout(function() {
+        groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+        groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
+        groupItemEl.click();
+      }, 50);
+      setTimeout(function() {
+        expect(groupEl.opened).to.equal(true);
+        done();
+      }, 500);
+    });
+
+    it('closes an open dropdown when something else is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var groupEl;
+      var groupItemEl;
+
+      setTimeout(function() {
+        groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+        groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
+        groupItemEl.click();
+      }, 50);
+      setTimeout(function() {
+        appNavEl.click();
+      }, 500);
+      setTimeout(function() {
+        expect(groupEl.opened).to.equal(false);
+        done();
+      }, 500);
+    });
+
+    it('selects a subitem and its group when the subitem is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var groupItem = appNavEl.items[2];
+      var groupSubitem = groupItem.subitems[0];
+      var groupEl;
+      var groupItemEl;
+      var subitemEls;
+      var subitemEl;
+
+      setTimeout(function() {
+        groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+        groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
+        subitemEls = Polymer.dom(groupEl).querySelectorAll('px-app-nav-item');
+        subitemEl = subitemEls.filter(item => item.path === 'trucks')[0];
+        groupItemEl.click();
+      }, 50);
+      setTimeout(function() {
+        subitemEl.click();
+      }, 100);
+      setTimeout(function() {
+        expect(subitemEl.selected).to.equal(true);
+        expect(appNavEl.selectedPath).to.equal('dashboards');
+        expect(appNavEl.selectedItem).to.equal(groupItem);
+        expect(appNavEl.selectedSubpath).to.equal('trucks');
+        expect(appNavEl.selectedSubitem).to.equal(groupSubitem);
+        done();
       }, 200);
     });
-    test('Second px-app-nav fixture is expanded by default', function() {
-      assert.isFalse(document.getElementById('app_nav').classList.contains('navbar--collapsed'));
+
+    it('shows an overflow group when any of its items no longer fit', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        var overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        expect(overflowGroupEl).to.be.instanceof(HTMLElement);
+        done();
+      }, 500);
+    });
+
+    it('hides overflowed items from the main navigation and puts them in the overflowed dropdown', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-item');
+        var groupEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-group');
+        var overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        var subgroupEls = Polymer.dom(overflowGroupEl).querySelectorAll('px-app-nav-subgroup');
+        expect(itemEls.length).to.equal(2);
+        expect(groupEls.length).to.equal(1);
+        expect(subgroupEls.length).to.equal(1);
+        done();
+      }, 250);
+    });
+
+    it('opens the overflow dropdown when the overflow icon is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var overflowGroupEl;
+      var overflowIconEl;
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+        overflowIconEl.click();
+      }, 250);
+      setTimeout(function() {
+        expect(overflowGroupEl.opened).to.equal(true);
+        done();
+      }, 500);
+    });
+
+    it('closes the open overflow dropdown when something else is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var overflowGroupEl;
+      var overflowIconEl;
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+        overflowIconEl.click();
+      }, 250);
+      setTimeout(function() {
+        appNavEl.click();
+      }, 450);
+      setTimeout(function() {
+        expect(overflowGroupEl.opened).to.equal(false);
+        done();
+      }, 650);
+    });
+
+    it('opens a subgroup in the overflow dropdown when the subgroup is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var overflowGroupEl;
+      var overflowIconEl;
+      var subgroupEl;
+      var subgroupItemEl;
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+        overflowIconEl.click();
+      }, 250);
+      setTimeout(function() {
+        subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+        subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
+        subgroupItemEl.click();
+      }, 450);
+      setTimeout(function() {
+        expect(subgroupEl.opened).to.equal(true);
+        done();
+      }, 650);
+    });
+
+    it('keeps an opened subgroup open when the overflow dropdown is closed', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var overflowGroupEl;
+      var overflowIconEl;
+      var subgroupEl;
+      var subgroupItemEl;
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+        overflowIconEl.click();
+      }, 250);
+      setTimeout(function() {
+        subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+        subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
+        subgroupItemEl.click();
+      }, 450);
+      setTimeout(function() {
+        appNavEl.click();
+      }, 650);
+      setTimeout(function() {
+        overflowIconEl.click();
+        expect(subgroupEl.opened).to.equal(true);
+        done();
+      }, 850);
+    });
+
+    it('closes the overflow dropdown and selects the overflow icon, subgroup, and subitem when an overflowed subitem is tapped', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var overflowGroupEl;
+      var overflowIconEl;
+      var subgroupEl;
+      var subgroupItemEl;
+      var subitemEl;
+
+      setTimeout(function() {
+        fx.style.width = '300px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+        overflowIconEl.click();
+      }, 250);
+      setTimeout(function() {
+        subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+        subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
+        subgroupItemEl.click();
+      }, 450);
+      setTimeout(function() {
+        subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-item');
+        subitemEl.click();
+      }, 650);
+      setTimeout(function() {
+        expect(overflowGroupEl.opened).to.equal(false);
+        expect(subitemEl.selected).to.equal(true);
+        expect(overflowGroupEl.selected).to.equal(true);
+        expect(subgroupEl.selected).to.equal(true);
+        done();
+      }, 700);
+    });
+
+    it('collapses fully when only one item fits', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '180px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.allCollapsed).to.equal(true);
+        done();
+      }, 500);
+    });
+  });
+
+  describe('px-app-nav [collapsed]', function() {
+    var sandbox;
+
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create();
+    });
+
+    afterEach(function() {
+      sandbox.restore();
+    });
+
+    it('collapses when `collapseAll` attribute is true', function(done) {
+      var fx = fixture('AppNavFixtureCollapsed');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        expect(appNavEl.allCollapsed).to.equal(true);
+        done();
+      }, 50);
+    });
+
+    it('collapses when its container is smaller than the `collapseAt` size', function(done) {
+      var fx = fixture('AppNavFixtureCollapseAtWidth');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        expect(appNavEl.allCollapsed).to.equal(true);
+        done();
+      }, 50);
+    });
+
+    it('shows an empty outline in the collapsed button when collapsed with no item selected', function(done) {
+      var fx = fixture('AppNavFixtureCollapsed');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        var collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        var collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
+        expect(collapsedGroupEl.empty).to.equal(true);
+        expect(collapsedGroupItemEl.empty).to.equal(true);
+        done();
+      }, 50);
+    });
+
+    it('shows the selected item in the collapsed button when an item is selected', function(done) {
+      var fx = fixture('AppNavFixtureCollapsedSelected');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        var collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        var collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
+        expect(collapsedGroupItemEl.label).to.equal('Home');
+        expect(collapsedGroupItemEl.icon).to.equal('px:home');
+        done();
+      }, 50);
+    });
+
+    it('shows the open icon when the `collapseWithIcon` attribute is true and an item is selected', function(done) {
+      var fx = fixture('AppNavFixtureCollapsedWithIconSelected');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        var collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        var collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
+        expect(collapsedGroupItemEl.label).to.be.null;
+        expect(collapsedGroupItemEl.icon).to.equal('px:hamburger');
+        done();
+      }, 50);
+    });
+
+    it('shows the close icon when the `collapseWithIcon` attribute is true, the dropdown is open, and an item is selected', function(done) {
+      var fx = fixture('AppNavFixtureCollapsedWithIconSelected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var collapsedGroupEl;
+      var collapsedGroupItemEl;
+
+      setTimeout(function() {
+        collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
+        collapsedGroupItemEl.click();
+      }, 50);
+      setTimeout(function() {
+        expect(collapsedGroupItemEl.label).to.be.null;
+        expect(collapsedGroupItemEl.icon).to.equal('px:close');
+        done();
+      }, 250);
     });
   });
 }
