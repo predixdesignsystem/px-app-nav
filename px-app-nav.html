@@ -7,7 +7,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-dropdown/iron-dropdown.html" />
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
-<link rel="import" href="../iron-media-query/iron-media-query.html" />
 
 <link rel="import" href="px-app-nav-group.html" />
 <link rel="import" href="px-app-nav-subgroup.html" />
@@ -49,10 +48,6 @@ Custom property | Description | Default
   <template>
     <style include="px-app-nav-styles"></style>
 
-    <template is="dom-if" if="{{collapseAt}}" restamp>
-      <iron-media-query query="{{collapseAt}}" query-matches="{{collapseAll}}"></iron-media-query>
-    </template>
-
     <section class="app-nav" id="container">
       <section class="app-nav__items" id="items">
         <!-- First item stamp: visible items -->
@@ -77,7 +72,7 @@ Custom property | Description | Default
         <template is="dom-if" if="{{_anyOverflowed(overflowedItems, visibleItems)}}">
           <px-app-nav-group
               superlist
-              fixed-width="[[_getDropdownWidth(collapseWidth, allCollapsed)]]"
+              fixed-width="[[_getDropdownWidth(collapseDropdownWidth, allCollapsed)]]"
               id="overflowedGroup"
               label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"
               icon="{{_getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)}}"
@@ -136,22 +131,22 @@ Custom property | Description | Default
       },
 
       /**
-       * Pass a CSS media query that will collapse all nav items when it is
-       * evaluated to true. For example, pass '(max-width: 450px)' to collapse
-       * the nav when the window is less than 450px wide.
+       * The width below which the nav will automatically collapse. Use a number
+       * (e.g. `450`) which will be converted to a pixel value (e.g. '450px').
        *
        * This property will overwrite the `collapseAll` property. Avoid data
        * binding in to both properties at the same time.
        */
       collapseAt: {
-        type: String
+        type: Number,
+        observer: 'rebuild'
       },
 
       /**
        * The width of the collapsed menu dropdown. Use a number (e.g. `60`) which
        * will be converted to a pixel value (e.g. '60px').
        */
-      collapseWidth: {
+      collapseDropdownWidth: {
         type: Number,
         value: 320
       },
@@ -364,17 +359,17 @@ Custom property | Description | Default
       if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
         return selectedItem.icon;
       }
-      return undefined;
+      return null;
     },
 
     /**
-     * If the dropdown is collapsed, return the `collapseWidth` value. Otherwise,
+     * If the dropdown is collapsed, return the `collapseDropdownWidth` value. Otherwise,
      * return undefined.
      *
      * @return {Number|undefined}
      */
-    _getDropdownWidth: function(collapseWidth, allCollapsed) {
-      return allCollapsed ? collapseWidth : undefined;
+    _getDropdownWidth: function(collapseDropdownWidth, allCollapsed) {
+      return allCollapsed ? collapseDropdownWidth : undefined;
     },
 
     /**
@@ -560,7 +555,7 @@ Custom property | Description | Default
     rebuild: function() {
       if (!this.items || !Array.isArray(this.items) || this._pendingRender || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
 
-      if (this.collapseAll || this._availableWidth === 0) {
+      if (this.collapseAll || this._availableWidth === 0 || (typeof this.collapseAt === 'number' && this._availableWidth <= this.collapseAt)) {
         this._setVisibleItems([]);
         this._setOverflowedItems(this.items.slice(0));
         return;
@@ -568,6 +563,14 @@ Custom property | Description | Default
 
       const measurements = this._measureItems(this.items);
       const {visible, overflowed} = this._fitItems(this.items, this._availableWidth, measurements);
+
+      // If only one item can fit, switch to collapsed mode
+      if (visible.length === 1) {
+        this._setVisibleItems([]);
+        this._setOverflowedItems(this.items.slice(0));
+        return;
+      }
+
       this._setVisibleItems(visible);
       this._setOverflowedItems(overflowed);
       this.notifyPath('visibleItems.*');

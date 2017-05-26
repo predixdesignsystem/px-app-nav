@@ -21,10 +21,9 @@
     "polymer": "^1.8.1",
     "px-polymer-font-awesome": "^2.0.0",
     "neon-animation": "^1.2.4",
-    "iron-icon": "PolymerElements/iron-icon#^1.0.0",
-    "iron-dropdown": "PolymerElements/iron-dropdown#^1.5.5",
-    "iron-resizable-behavior": "^1.0.6",
-    "iron-media-query": "^1.0.8"
+    "iron-icon": "^1.0.0",
+    "iron-dropdown": "^1.5.5",
+    "iron-resizable-behavior": "^1.0.6"
   },
   "devDependencies": {
     "px-box-sizing-design": "^1.0.0",
