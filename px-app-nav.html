@@ -133,10 +133,10 @@ Custom property | Description | Default
               id="overflowedGroup"
               label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"
               icon="{{_getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)}}"
-              selected$="{{_ifSelectedOverflowed(selectedItem, overflowedItems)}}"
-              hide-dropdown-icon="{{_shouldHideDropdownCarat(allCollapsed, collapseWithIcon)}}"
+              selected$="{{_isSelectedOverflowed(selectedItem, overflowedItems)}}"
+              hide-dropdown-icon="{{_isCollapsedCaratHidden(allCollapsed, collapseWithIcon)}}"
               no-highlight="{{allCollapsed}}"
-              empty="{{_isDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon)}}"
+              empty="{{_isCollapsedDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon)}}"
               opened="{{collapseOpened}}">
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
@@ -435,6 +435,10 @@ Custom property | Description | Default
       }
     },
 
+    /**
+     * Static values we use to calculate the size of items when we do math to
+     * measure if they can fit in the nav.
+     */
     statics: {
       ITEM_FONT_NAME: 'GE Inspira Sans',
       ITEM_FONT_SIZE: 15,
@@ -470,7 +474,7 @@ Custom property | Description | Default
      *
      * Otherwise, returns null.
      *
-     * @param  {Object|undefined} selectedItem
+     * @param  {Object|null} selectedItem
      * @param  {Boolean} collapseWithIcon
      * @param  {Boolean} allCollapsed
      * @return {String|null}
@@ -496,7 +500,7 @@ Custom property | Description | Default
      *
      * Otherwise, returns null.
      *
-     * @param  {Object|undefined} selectedItem
+     * @param  {Object|null} selectedItem
      * @param  {Boolean} collapseWithIcon
      * @param  {Boolean} allCollapsed
      * @param  {Boolean} anyOverflowed
@@ -520,8 +524,8 @@ Custom property | Description | Default
     },
 
     /**
-     * If the dropdown is collapsed, return the `collapseDropdownWidth` value. Otherwise,
-     * return undefined.
+     * If the dropdown is collapsed, returns the `collapseDropdownWidth` value.
+     * Otherwise, returns undefined.
      *
      * @return {Number|undefined}
      */
@@ -530,36 +534,68 @@ Custom property | Description | Default
     },
 
     /**
-     * If all items are not collapsed, or if collapseWithIcon is true, hide
-     * the dropdown carat.
+     * Hides the dropdown carat if all nav items are not collapsed, or if
+     * the collapsed dropdown uses an open/closed icon.
      *
+     * @param  {Boolean} allCollapsed
+     * @param  {Boolean} collapseWithIcon
      * @return {Boolean}
      */
-    _shouldHideDropdownCarat: function(allCollapsed, collapseWithIcon) {
+    _isCollapsedCaratHidden: function(allCollapsed, collapseWithIcon) {
       return !allCollapsed || collapseWithIcon;
     },
 
     /**
-     * If the nav is collapsed, but no item is selected, show the empty state.
+     * Sets the collapsed dropdown to show an empty/unselected state if the
+     * nav is collapsed but no item is selected.
+     *
+     * @param  {Object|null} selectedItem
+     * @param  {Boolean} allCollapsed
+     * @return {Boolean} - `true` if no item is selected, `false` if an item is selected or the nav is not collapsed
      */
-    _isDropdownEmpty: function(selectedItem, allCollapsed, collapseWithIcon) {
+    _isCollapsedDropdownEmpty: function(selectedItem, allCollapsed, collapseWithIcon) {
       return allCollapsed && !collapseWithIcon && (!selectedItem || typeof selectedItem !== 'object');
     },
 
+    /**
+     * @param  {Boolean} item
+     * @param  {Object|null} selectedItem
+     * @return {Boolean}
+     */
     _isItemSelected: function(item, selectedItem) {
       return item && selectedItem && item === selectedItem;
     },
 
+    /**
+     * Triggered automatically when `visibleItems` changes. Filters the dom-repeats
+     * to show/collapse items.
+     *
+     * @param  {Object} item
+     * @return {Boolean}
+     */
     _isItemVisible: function(item) {
       if (!item || !this.visibleItems || !Array.isArray(this.visibleItems)) return false;
       return this.visibleItems.indexOf(item) !== -1;
     },
 
+    /**
+     * Triggered automatically when `overflowedItems` changes. Filters the dom-repeats
+     * to show/collapse items.
+     *
+     * @param  {Object} item
+     * @return {Boolean}
+     */
     _isItemOverflowed: function(item) {
       if (!item || !this.overflowedItems || !Array.isArray(this.overflowedItems)) return false;
       return this.overflowedItems.indexOf(item) !== -1;
     },
 
+    /**
+     * Calls the render methods on dom-repeats to force them to re-filter their
+     * items when `visibleItems` or `overflowedItems` changes.
+     *
+     * @return {undefined}
+     */
     _itemVisibilityChanged: function() {
       this.debounce('item-visibility-changed', function(){
         const visibleEl = Polymer.dom(this.root).querySelector('#visible');
@@ -567,10 +603,6 @@ Custom property | Description | Default
         if (visibleEl) visibleEl.render();
         if (overflowedEl) overflowedEl.render();
       });
-    },
-
-    _getSelectedItemLabel: function() {
-       return (this.selectedItem && this.selectedItem.label) ? this.selectedItem.label : this.unselectedText;
     },
 
     _handleCollapseAllChanged: function(nextVal, lastVal) {
@@ -831,7 +863,7 @@ Custom property | Description | Default
       return item && Array.isArray(item.subitems) && item.subitems.length;
     },
 
-    _ifSelectedOverflowed(selectedItem, overflowedItems) {
+    _isSelectedOverflowed(selectedItem, overflowedItems) {
       if (!selectedItem || !overflowedItems || !Array.isArray(overflowedItems) || !overflowedItems.length) return false;
       return overflowedItems.indexOf(selectedItem) !== -1;
     },
