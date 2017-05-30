@@ -38,9 +38,9 @@
       <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component>
-        <px-app-nav style="position:inherit" nav-items="[[props.navItems.value]]">
-</px-app-nav>
+      <px-demo-component style="width:100%;height:500px;">
+        <px-app-nav items="[[props.navItems.value]]">
+        </px-app-nav>
 </px-demo-component>
 <!-- END Component ------------------------------------------------------>
 
@@ -115,7 +115,7 @@
         defaultValue: [
           {
             "path": "tab1",
-            "icon": "fa-exclamation-triangle",
+            "icon": "px:alert",
             "eventName": "firstItem",
             "label": "Alerts",
             "subitems": [
@@ -134,7 +134,7 @@
           },
           {
             "path": "tab2",
-            "icon": "fa-briefcase",
+            "icon": "px:asset",
             "label": "Cases",
             "subitems": [
               {
@@ -150,12 +150,12 @@
           },
           {
             "path": "tab3",
-            "icon": "fa-bar-chart",
+            "icon": "px:chart",
             "label": "Analysis"
           },
           {
             "path": "tab4",
-            "icon": "fa-tachometer",
+            "icon": "px:dashboard",
             "label": "Dashboards"
           }
         ],
