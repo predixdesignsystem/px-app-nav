@@ -39,7 +39,7 @@ function runCustomTests() {
         expect(appNavEl.selectedItem).to.equal(pathItem);
         expect(appNavEl.selectedSubitem).to.equal(subpathItem);
         var pathItemEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
-        var subpathItemEl = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item').filter(item => item.path === 'orders')[0];
+        var subpathItemEl = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem').filter(item => item.path === 'orders')[0];
         expect(pathItemEl.selected).to.equal(true);
         expect(subpathItemEl.selected).to.equal(true);
         done();
@@ -152,10 +152,12 @@ function runCustomTests() {
       setTimeout(function() {
         var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
         var groupEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group');
-        expect(itemEls.length).to.equal(5);
+        var subitemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem');
+        expect(itemEls.length).to.equal(2);
         expect(groupEls.length).to.equal(1);
+        expect(subitemEls.length).to.equal(3);
         done();
-      }, 50);
+      }, 100);
     });
 
     it('selects an item when the item is tapped', function(done) {
@@ -254,7 +256,7 @@ function runCustomTests() {
       setTimeout(function() {
         groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
         groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        subitemEls = Polymer.dom(groupEl).querySelectorAll('px-app-nav-item');
+        subitemEls = Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem');
         subitemEl = subitemEls.filter(item => item.path === 'trucks')[0];
         groupItemEl.click();
       }, 50);
@@ -441,7 +443,7 @@ function runCustomTests() {
         subgroupItemEl.click();
       }, 450);
       setTimeout(function() {
-        subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-item');
+        subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-subitem');
         subitemEl.click();
       }, 650);
       setTimeout(function() {

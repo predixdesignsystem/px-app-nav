@@ -12,6 +12,7 @@
 <link rel="import" href="px-app-nav-group.html"/>
 <link rel="import" href="px-app-nav-subgroup.html"/>
 <link rel="import" href="px-app-nav-item.html"/>
+<link rel="import" href="px-app-nav-subitem.html"/>
 
 <!--
 px-app-nav is a navigation component that allows the user to browse app pages
@@ -114,7 +115,7 @@ Custom property | Description | Default
           <template is="dom-if" if="{{_isItemParent(item)}}">
             <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
               <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
+                <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-subitem>
               </template>
             </px-app-nav-group>
           </template>
@@ -145,7 +146,7 @@ Custom property | Description | Default
               <template is="dom-if" if="{{_isItemParent(item)}}">
                 <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" subitem collapsed$="{{allCollapsed}}"></px-app-nav-item>
+                    <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{allCollapsed}}"></px-app-nav-item>
                   </template>
                 </px-app-nav-subgroup>
               </template>

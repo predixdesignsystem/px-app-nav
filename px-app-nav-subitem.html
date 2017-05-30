@@ -1,0 +1,33 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-app-nav-behaviors.html"/>
+<link rel="import" href="css/px-app-nav-subitem-styles.html"/>
+
+<dom-module id="px-app-nav-subitem">
+  <template>
+    <style include="px-app-nav-subitem-styles"></style>
+
+    <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
+      <p class="app-nav-subitem__label">{{label}}</p>
+    </template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-app-nav-subitem',
+
+    behaviors: [PxAppNavBehavior.Item],
+
+    properties: {
+      /**
+       * Set to `true` if the subitem's parent is selected.
+       */
+      parentSelected: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+        observer: 'updateStyles'
+      }
+    }
+  });
+</script>

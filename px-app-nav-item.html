@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../iron-icon/iron-icon.html"/>
 <link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
+<link rel="import" href="px-app-nav-behaviors.html"/>
 <link rel="import" href="css/px-app-nav-item-styles.html"/>
 
 <dom-module id="px-app-nav-item">
@@ -30,38 +31,14 @@
   Polymer({
     is: 'px-app-nav-item',
 
+    behaviors: [PxAppNavBehavior.Item],
+
     properties: {
       /**
-       * Used as the label text for the item.
-       */
-      label: {
-        type: String
-      },
-
-      /**
-       * Used to set the icon for the item. Should be a valid font awesome icon name.
+       * Used to set the icon for the item.
        */
       icon: {
         type: String
-      },
-
-      /**
-       * A named path for this item. Used to select it programatically, e.g.
-       * by binding to the current URL route. Path names cannot have a dot
-       * ('.') in them or they will not work.
-       */
-      path: {
-        type: String
-      },
-
-      /**
-       * Set to `true` if the item is selected.
-       */
-      selected: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
       },
 
       /**
@@ -93,60 +70,13 @@
       },
 
       /**
-       * Set to `true` if the item is in a collapsed dropdown.
-       */
-      collapsed: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: 'updateStyles'
-      },
-
-      /**
        * Shows an empty state outline for the button instead of a label/icon.
        */
       empty: {
         type: Boolean,
         value: false,
         reflectToAttribute: true
-      },
-
-      /**
-       * Cancels events that trigger selection.
-       */
-      cancelSelect: {
-        type: Boolean,
-        value: false
       }
-    },
-
-    attached() {
-      this.listen(this, 'tap', '_handleSelfTapped');
-    },
-
-    detached() {
-      this.unlisten(this, 'tap', '_handleSelfTapped');
-    },
-
-    /**
-     * Checks if a property is the desired `type`.
-     *
-     * @param {*} prop
-     * @returns {Boolean}
-     */
-    _propIsTypeOf(prop, type) {
-      return prop && type && (typeof prop === type);
-    },
-
-    /**
-     * Fire the select event so this item's parent will mark it as selected.
-     */
-    _handleSelfTapped(evt) {
-      if (this.cancelSelect) return;
-      var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-      this.fire('px-app-nav-item-tapped', {
-        path: [path]
-      }, {cancelable:true});
     },
 
     /**

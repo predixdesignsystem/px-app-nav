@@ -1,0 +1,111 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+// Settings
+@import "px-colors-design/_settings.colors.scss";
+
+// Generic
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+
+// Base
+@import "px-typography-design/_base.typography.scss";
+
+// Component
+@function rem($size) {
+  $rem: $size / $inuit-base-font-size;
+  @return $rem * 1rem;
+}
+
+/* Subitem State: Default */
+$px-app-nav-subitem-height: var(--px-app-nav-subitem-height, rem(30px));
+$px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, $gray15);
+$px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color, $white);
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: $inuit-base-spacing-unit;
+  padding-right: $inuit-base-spacing-unit;
+  cursor: pointer;
+
+  height: $px-app-nav-subitem-height;
+  color: $px-app-nav-subitem-text-color;
+  background-color: var(--px-app-nav-subitem-background-color, transparent);
+  background-color: $px-app-nav-subitem-background-color;
+}
+
+/* Subitem State: Hover */
+$px-app-nav-subitem-text-color--hover: var(--px-app-nav-subitem-text-color--hover, $gray15);
+$px-app-nav-subitem-background-color--hover: var(--px-app-nav-subitem-background-color--hover, $gray1);
+:host(:hover) {
+  color: $px-app-nav-subitem-text-color--hover;
+  background-color: $px-app-nav-subitem-background-color--hover;
+}
+
+/* Subitem State: Selected */
+$px-app-nav-subitem-text-color--selected: var(--px-app-nav-subitem-text-color--selected, $white);
+$px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-background-color--selected, $select-default);
+:host([selected]) {
+  color: $px-app-nav-subitem-text-color--selected;
+  background-color: $px-app-nav-subitem-background-color--selected;
+}
+:host([selected]):before {
+  display: none;
+}
+
+/* Subitem State: Collapsed */
+$px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--collapsed, $gray15);
+:host([collapsed]) {
+  color: $px-app-nav-subitem-text-color--collapsed;
+  background-color: $gray2;
+  padding-left: rem(55px);
+}
+:host([collapsed]:hover) {
+  background-color: $gray4;
+}
+
+/* Subitem State: Collapsed+Parent Selected+NOT selected */
+:host([collapsed][parent-selected]) {
+  color: $gray15;
+  background-color: $white;
+}
+:host([collapsed][parent-selected]):before {
+  content: '';
+  display: block;
+  background-color: $white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 100%;
+  background-color: $select-default;
+}
+:host([collapsed][parent-selected]:hover) {
+  background-color: $gray1;
+}
+
+/* Subitem State: Collapsed+Parent Selected+Selected */
+:host([collapsed][parent-selected][selected]) {
+  color: $white;
+  background-color: $select-default;
+}
+:host([collapsed][parent-selected][selected]:hover) {
+  color: $white;
+  background-color: $select-default;
+}
+
+/* Sub-components */
+.app-nav-subitem__label {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
