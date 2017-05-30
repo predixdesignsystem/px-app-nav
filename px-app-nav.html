@@ -4,13 +4,14 @@
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-dropdown/iron-dropdown.html" />
-<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../iron-dropdown/iron-dropdown.html"/>
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html"/>
 
-<link rel="import" href="px-app-nav-group.html" />
-<link rel="import" href="px-app-nav-subgroup.html" />
-<link rel="import" href="px-app-nav-item.html" />
+<link rel="import" href="px-app-nav-behavior-measure-text.html"/>
+<link rel="import" href="px-app-nav-group.html"/>
+<link rel="import" href="px-app-nav-subgroup.html"/>
+<link rel="import" href="px-app-nav-item.html"/>
 
 <!--
 px-app-nav is a navigation component that allows the user to browse app pages
@@ -110,7 +111,7 @@ Custom property | Description | Default
         <!-- First item stamp: visible items -->
         <template is="dom-repeat" items="{{items}}" filter="_isItemVisible" id="visible">
           <!-- Stamp groups, which hold subitems -->
-          <template is="dom-if" if="{{_hasSubitems(item)}}">
+          <template is="dom-if" if="{{_isItemParent(item)}}">
             <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
               <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
                 <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" subitem></px-app-nav-item>
@@ -119,14 +120,14 @@ Custom property | Description | Default
           </template>
 
           <!-- Stamp plain old items, which hold subitems -->
-          <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+          <template is="dom-if" if="{{_isItemNotParent(item)}}">
             <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
             </px-app-nav-item>
           </template>
         </template>
 
         <!-- STATE: Items overflowed or collapsed -->
-        <template is="dom-if" if="{{_anyOverflowed(overflowedItems, visibleItems)}}">
+        <template is="dom-if" if="{{anyOverflowed}}">
           <px-app-nav-group
               superlist
               fixed-width="[[_getDropdownWidth(collapseDropdownWidth, allCollapsed)]]"
@@ -141,7 +142,7 @@ Custom property | Description | Default
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold subitems -->
-              <template is="dom-if" if="{{_hasSubitems(item)}}">
+              <template is="dom-if" if="{{_isItemParent(item)}}">
                 <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
                   <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
                     <px-app-nav-item label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" subitem collapsed$="{{allCollapsed}}"></px-app-nav-item>
@@ -150,7 +151,7 @@ Custom property | Description | Default
               </template>
 
               <!-- Stamp plain old items, which hold subitems -->
-              <template is="dom-if" if="{{_hasNoSubitems(item)}}">
+              <template is="dom-if" if="{{_isItemNotParent(item)}}">
                 <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
                 </px-app-nav-item>
               </template>
@@ -170,7 +171,8 @@ Custom property | Description | Default
 <script>
   Polymer({
     is: 'px-app-nav',
-    behaviors: [Polymer.IronResizableBehavior],
+
+    behaviors: [Polymer.IronResizableBehavior,PxAppNavBehavior.MeasureText],
 
     properties: {
       /**
@@ -320,7 +322,7 @@ Custom property | Description | Default
       selectedPath: {
         type: String,
         notify: true,
-        observer: '_selectedPathChanged'
+        observer: '_handleSelectedPathChanged'
       },
 
       /**
@@ -331,7 +333,7 @@ Custom property | Description | Default
       selectedSubpath: {
         type: String,
         notify: true,
-        observer: '_selectedPathChanged'
+        observer: '_handleSelectedPathChanged'
       },
 
       /**
@@ -404,7 +406,7 @@ Custom property | Description | Default
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_allCollapsed(overflowedItems,visibleItems)'
+        computed: '_computeAllCollapsed(overflowedItems,visibleItems)'
       },
 
       /**
@@ -415,7 +417,7 @@ Custom property | Description | Default
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_anyOverflowed(overflowedItems,visibleItems)'
+        computed: '_computeAnyOverflowed(overflowedItems,visibleItems)'
       },
 
       /**
@@ -426,7 +428,7 @@ Custom property | Description | Default
         value: false,
         notify: true,
         readOnly: true,
-        computed: '_someOverflowed(overflowedItems,visibleItems)'
+        computed: '_computeSomeOverflowed(overflowedItems,visibleItems)'
       },
 
       _availableWidth: {
@@ -452,13 +454,318 @@ Custom property | Description | Default
     },
 
     observers: [
-      '_selectedPathChanged(fallbackPath, items)',
-      '_itemVisibilityChanged(visibleItems, overflowedItems, visibleItems.*, overflowedItems.*)'
+      '_handleSelectedPathChanged(fallbackPath, items)',
+      '_handleItemVisibilityChanged(visibleItems, overflowedItems, visibleItems.*, overflowedItems.*)'
     ],
 
     listeners: {
-      'iron-resize' : '_sizeChanged',
-      'px-app-nav-item-tapped' : '_handleItemTapped'
+      'iron-resize' : '_handleResize',
+      'px-app-nav-item-tapped' : '_handleItemSelected'
+    },
+
+    /**
+     * When the `items` list changes, retraces and memoizes item paths so they
+     * can easily be found later during a selection.
+     */
+    _handleNavItemsChanged(items) {
+      if (!items || !Array.isArray(items)) return;
+      const paths = this._paths = this._traceItemPaths(items);
+      this.rebuild();
+    },
+
+    /**
+     * Calls the render methods on dom-repeats to force them to re-filter their
+     * items when `visibleItems` or `overflowedItems` changes.
+     */
+    _handleItemVisibilityChanged: function() {
+      this.debounce('item-visibility-changed', function(){
+        const visibleEl = Polymer.dom(this.root).querySelector('#visible');
+        const overflowedEl = Polymer.dom(this.root).querySelector('#overflowed');
+        if (visibleEl) visibleEl.render();
+        if (overflowedEl) overflowedEl.render();
+      });
+    },
+
+    /**
+     * Forces a rebuild to collapse all items when `collapseAll` becomes true.
+     * Forces a re-measure and rebuild to un-collapse all items when
+     * `collapseAll` becomes false.
+     *
+     * @param  {Boolean} collapseAll
+     */
+    _handleCollapseAllChanged: function(collapseAll) {
+      if (collapseAll) {
+        this.rebuild();
+      }
+      if (!collapseAll) {
+        this._availableWidth = null; // Forces width to notify changes
+        this._handleResize();
+      }
+    },
+
+    /**
+     * When the user taps on an item or subitem, a selection request event
+     * bubbles up with the new selected path. This method handles that selection
+     * request and syncs the newly selected path to the `selectedPath` and
+     * `selectedSubpath` properties, triggering selection.
+     */
+    _handleItemSelected: function(evt) {
+      if (!evt.detail.path || !Array.isArray(evt.detail.path) || !evt.detail.path.length) return;
+
+      if (evt.detail.path.length === 1) {
+        this.set('selectedPath', evt.detail.path[0]);
+        this.set('selectedSubpath', null);
+      }
+      if (evt.detail.path.length === 2) {
+        this.set('selectedPath', evt.detail.path[0]);
+        this.set('selectedSubpath', evt.detail.path[1]);
+      }
+    },
+
+    /**
+     * This is the single point-of-control that selects and deselects items.
+     * Selection can happen in the following ways:
+     *
+     * - The `selectedPath` and `selectedSubpath` properties can be changed from
+     * the outside through data binding
+     * - The user can tap an item or subitem, triggering a selection request
+     * event that that updates the `selectedPath` and `selectedSubpath`
+     * - If no `selectedPath` or `selectedSubpath` are initially present, the
+     * `fallbackPath` and `fallbackSubpath` are used to select an item
+     *
+     * This method handles all of those cases, ensuring that the selection state
+     * is always kept in sync across all APIs. It searches a memoized list of
+     * paths to find a reference to the item/subitem objects at the selected path,
+     * and sets the `selectedItem` and `selectedSubitem` properties, triggering
+     * template data binding that will tell those items to appear selected.
+     */
+    _handleSelectedPathChanged() {
+      this.debounce('selected-path-changed', ()=>{
+        // 1. Find the items
+        let path = !this.selectedSubpath ? this.selectedPath : `${this.selectedPath}.${this.selectedSubpath}`;
+        let [item, subitem] = this._findItemByPath(path);
+        if (item) {
+          this._setSelectedItem(item);
+          this._setSelectedSubitem(subitem);
+          return;
+        }
+
+        // 2. If no items found and fallback is defined, try the fallback
+        if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
+          let path = !this.fallbackSubpath ? this.fallbackPath : `${this.fallbackPath}.${this.fallbackSubpath}`;
+          let [item, subitem] = this._findItemByPath(path);
+          if (item) {
+            this._setSelectedItem(item);
+            this._setSelectedSubitem(subitem);
+            this._setFallbackSelected(true);
+            return;
+          }
+        }
+
+        // 3. Fallback path can't be found either
+        console.log(`Could not find an item matching the path ${path}.`)
+      });
+    },
+
+    /**
+     * Called when an `iron-resize` event notifies the element that its
+     * parent container size may have changed.
+     *
+     * Size changed events will be collapsed to only trigger a new measurement
+     * every 100ms. If the menu is currently collapsed, measure events
+     * will not be triggered.
+     */
+    _handleResize: function() {
+      if (this.collapseAll) return;
+
+      const debouncer = 'measure-available-width';
+      if (typeof this._availableWidth !== 'number') {
+        this._measureAvailableWidth();
+        return;
+      }
+      if (this.isDebouncerActive(debouncer)) {
+        this.cancelDebouncer(debouncer);
+      }
+      this.debounce(debouncer, this._measureAvailableWidth.bind(this), 100);
+    },
+
+    /**
+     * Measures the width the nav items may occupy, allowing the component to
+     * do math to see which items fit/are visible and which don't fit/will be
+     * overflowed. Measurements happen in the next animation frame, ensuring
+     * we don't trigger a premature reflow and that the tab is visible.
+     */
+    _measureAvailableWidth: function() {
+      window.requestAnimationFrame(() => {
+        const containerEl = this.$.container;
+        const actionsEl = this.$.actions;
+        if (!containerEl || !actionsEl) return;
+        const containerWidth = containerEl.getBoundingClientRect().width;
+        const actionsWidth = actionsEl.getBoundingClientRect().width;
+        const width = containerWidth - actionsWidth;
+        if (this._availableWidth !== width) this.set('_availableWidth', width);
+      });
+    },
+
+    /**
+     * Recursively traces the paths of a list of navigation items, returning
+     * an object with the stringified paths as keys and the corresponding
+     * item references as values.
+     */
+    _traceItemPaths(items, parent, paths={}) {
+      for (let item of items) {
+        let pathKey = parent ? `${parent.path}.${item.path}` : item.path;
+        if (paths[pathKey]) {
+          console.log(`PX-APP-NAV ERR: Path ${pathKey} is duplicated. All paths must be unique.`);
+        }
+        else if (parent) {
+          paths[pathKey] = [parent, item];
+        }
+        else {
+          paths[pathKey] = [item];
+        }
+
+        if (item.subitems) {
+          this._traceItemPaths(item.subitems, item, paths);
+        }
+      }
+
+      return paths;
+    },
+
+    /**
+     * Searches the memoized paths to find an item at a certain path.
+     * The `pathStr` should be formatted as a string. When there is only a path
+     * and no subpath, use the path directly (e.g. 'home' for path 'home').
+     * When there is a path and subpath, concatenate both with a dot in the middle
+     * (e.g. 'dashboards.trucks' for path 'dashboards' and subpath 'trucks').
+     *
+     * @param  {String} pathStr
+     * @return {Array.<Object|null>}
+     */
+    _findItemByPath(pathStr) {
+      let items = [null,null];
+      if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
+        items[0] = this._paths[pathStr][0];
+        items[1] = this._paths[pathStr][1] || null;
+      }
+      return items;
+    },
+
+    /**
+     * Rebuilds the navigation by measuring the expected length of each nav
+     * item and determining which items will fit in the available nav width.
+     * The items that fit are added to the `visibleItems` list, and the items
+     * that do not fit  are added to the `overflowedItems` list.
+     *
+     * This method will only run if some nav items have been passed to the
+     * `items` attribute or property.
+     *
+     *
+     *
+     * @return {Array.<Array>} - First item is the list of visible items (if any), second item is the list of overflowed items (if any)
+     */
+    rebuild: function() {
+      if (!this.items || !Array.isArray(this.items) || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
+
+      if (this.collapseAll || this._availableWidth === 0 || (typeof this.collapseAt === 'number' && this._availableWidth <= this.collapseAt)) {
+        this._setVisibleItems([]);
+        this._setOverflowedItems(this.items.slice(0));
+        return [this.visibleItems, this.overflowedItems];
+      }
+
+      const measurements = this._measureItems(this.items);
+      const {visible, overflowed} = this._fitItems(this.items, measurements, this._availableWidth);
+
+      // If only one item can fit, switch to collapsed mode
+      if (visible.length === 1) {
+        this._setVisibleItems([]);
+        this._setOverflowedItems(this.items.slice(0));
+        return [this.visibleItems, this.overflowedItems];
+      }
+
+      this._setVisibleItems(visible);
+      this._setOverflowedItems(overflowed);
+      this.notifyPath('visibleItems.*');
+      this.notifyPath('overflowedItems.*');
+
+      return [this.visibleItems, this.overflowedItems];
+    },
+
+    /**
+     * Iterates over a list of items and determines which will fit into the
+     * available width and which will not.
+     *
+     * If any items do not fit, backtracks and reduces the available width to
+     * ensure an overflowed icon will also fit.
+     *
+     * @param  {Array} items - A flat Array of items to fit
+     * @param  {Array} measurements - An Array of measurements for each item, in the same order as the items list
+     * @param  {Number} width - The width to fit the items into
+     * @return {Array.<Array>} - First entry is Array of items that fit, second entry is Array of items that do not fit
+     */
+    _fitItems: function(items, measurements, width) {
+      let available = width;
+
+      // If the first item is larger than the available, collapse all
+      if (available < measurements[0]) {
+        return { visible: [], overflowed: items.slice(0) };
+      }
+
+      // Try to fit items in the available space
+      let i = 0;
+      let len = items.length;
+
+      while (i<len && available>0) {
+        if (measurements[i] > available) {
+          break;
+        }
+        available -= measurements[i];
+        i++;
+      }
+
+      // If any overflow, ensure the overflow icon can fit
+      let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
+      if (i !== len && available < overflowSize) {
+        available -= overflowSize;
+        while (i>0 && available<0) {
+          available += measurements[i];
+          i--;
+        }
+      }
+      return { visible: items.slice(0,i), overflowed: items.slice(i) };
+    },
+
+    /**
+     * Measures the expected width for each item based on static values. This
+     * speeds up calculation on which items will fit — we do not have to
+     * paint items then measure and hide the overflowed items triggering
+     * another repaint. Instead, we can do math based off the items values
+     * and measure them using a canvas to come up with a good guess for their size.
+     *
+     * @param  {Array} items - A flat Array of items to fit
+     * @return {Array} - A list of measurements for each item, in the same order as the items list
+     */
+    _measureItems: function(items) {
+      const boundMeasureFn = this._measureItem.bind(this);
+      return items.map(boundMeasureFn);
+    },
+
+    /**
+     * Measures each item using the `_measureText` behavior and returns the
+     * expected length of the item in pixels as a number.
+     *
+     * @param  {Object} item
+     * @return {Number}
+     */
+    _measureItem: function(item) {
+      const textLength = this._measureText(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
+      if (!textLength) return;
+      let totalLength = textLength; /* start with text size */
+      totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
+      if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
+      if (item.subitems && item.subitems.length) totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
+      return totalLength;
     },
 
     /**
@@ -591,299 +898,61 @@ Custom property | Description | Default
     },
 
     /**
-     * Calls the render methods on dom-repeats to force them to re-filter their
-     * items when `visibleItems` or `overflowedItems` changes.
+     * Checks if the item is a parent of subitems.
      *
-     * @return {undefined}
+     * @param  {Object} item
+     * @return {Boolean}
      */
-    _itemVisibilityChanged: function() {
-      this.debounce('item-visibility-changed', function(){
-        const visibleEl = Polymer.dom(this.root).querySelector('#visible');
-        const overflowedEl = Polymer.dom(this.root).querySelector('#overflowed');
-        if (visibleEl) visibleEl.render();
-        if (overflowedEl) overflowedEl.render();
-      });
-    },
-
-    _handleCollapseAllChanged: function(nextVal, lastVal) {
-      if (this.collapseAll) {
-        this.rebuild();
-      }
-      if (!this.collapseAll) {
-        this._availableWidth = null; // Forces width to notify changes
-        this._sizeChanged();
-      }
-    },
-
-    _handleItemTapped: function(evt) {
-      if (!evt.detail.path || !Array.isArray(evt.detail.path) || !evt.detail.path.length) return;
-
-      if (evt.detail.path.length === 1) {
-        this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', null);
-      }
-      if (evt.detail.path.length === 2) {
-        this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', evt.detail.path[1]);
-      }
-    },
-
-    _selectedPathChanged() {
-      this.debounce('selected-path-changed', ()=>{
-        // 1. Find the items
-        let path = !this.selectedSubpath ? this.selectedPath : `${this.selectedPath}.${this.selectedSubpath}`;
-        let [item, subitem] = this._findItemByPath(path);
-        if (item) {
-          this._setSelectedItem(item);
-          this._setSelectedSubitem(subitem);
-          return;
-        }
-
-        // 2. If no items found and fallback is defined, try the fallback
-        if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
-          let path = !this.fallbackSubpath ? this.fallbackPath : `${this.fallbackPath}.${this.fallbackSubpath}`;
-          let [item, subitem] = this._findItemByPath(path);
-          if (item) {
-            this._setSelectedItem(item);
-            this._setSelectedSubitem(subitem);
-            this._setFallbackSelected(true);
-            return;
-          }
-        }
-
-        // 3. Fallback path can't be found either
-        console.log(`Could not find an item matching the path ${path}.`)
-      });
-    },
-
-    _findItemByPath(pathStr) {
-      let items = [null,null];
-      if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
-        items[0] = this._paths[pathStr][0];
-        items[1] = this._paths[pathStr][1] || null;
-      }
-      return items;
-    },
-
-    created: function() {
-      this._navAttached = false;
-      // this._navTarget;
-    },
-
-    attached: function() {
-      this._navAttached = true;
-      // this._knownItems = [];
-      // this._detachedItems = [];
-      // var boundItemHandler = this._handleItemsDistributed.bind(this);
-      // this._itemObserver = Polymer.dom(this.$.new).observeNodes(boundItemHandler);
-    },
-
-    detached: function() {
-      this._navAttached = false;
-      // this._knownItems = null;
-      // this._detachedItems = null;
-      // Polymer.dom(this.$.new).unobserveNodes(this._itemObserver);
-    },
-
-    _sizeChanged: function() {
-      if (this.collapseAll) return;
-
-      const debouncer = 'measure-available-width';
-      if (typeof this._availableWidth !== 'number') {
-        this._getAvailableWidth();
-        return;
-      }
-      if (this.isDebouncerActive(debouncer)) {
-        this.cancelDebouncer(debouncer);
-      }
-      this.debounce(debouncer, this._getAvailableWidth.bind(this), 100);
-    },
-
-    _getAvailableWidth: function() {
-      window.requestAnimationFrame(() => {
-        const containerEl = this.$.container;
-        const actionsEl = this.$.actions;
-        if (!containerEl || !actionsEl) return;
-        const containerWidth = containerEl.getBoundingClientRect().width;
-        const actionsWidth = actionsEl.getBoundingClientRect().width;
-        const width = containerWidth - actionsWidth;
-        if (this._availableWidth !== width) this.set('_availableWidth', width);
-      });
-    },
-
-    _handleNavItemsChanged(items) {
-      if (!items || !Array.isArray(items)) return;
-      const paths = this._paths = this._getItemPaths(items);
-      this.rebuild();
-    },
-
-    _getItemPaths(items, parent, paths={}) {
-      for (let item of items) {
-        let pathKey = parent ? `${parent.path}.${item.path}` : item.path;
-        if (paths[pathKey]) {
-          console.log(`ERR: Path ${pathKey} is not unique. All paths must be unique.`);
-        }
-        else if (parent) {
-          paths[pathKey] = [parent, item];
-        }
-        else {
-          paths[pathKey] = [item];
-        }
-
-        if (item.subitems) {
-          this._getItemPaths(item.subitems, item, paths);
-        }
-      }
-
-      return paths;
-    },
-
-    /**
-     * Rebuilds the nav to reflect its `type` and `collapseAll` settings.
-     */
-    rebuild: function() {
-      if (!this.items || !Array.isArray(this.items) || this._pendingRender || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
-
-      if (this.collapseAll || this._availableWidth === 0 || (typeof this.collapseAt === 'number' && this._availableWidth <= this.collapseAt)) {
-        this._setVisibleItems([]);
-        this._setOverflowedItems(this.items.slice(0));
-        return;
-      }
-
-      const measurements = this._measureItems(this.items);
-      const {visible, overflowed} = this._fitItems(this.items, this._availableWidth, measurements);
-
-      // If only one item can fit, switch to collapsed mode
-      if (visible.length === 1) {
-        this._setVisibleItems([]);
-        this._setOverflowedItems(this.items.slice(0));
-        return;
-      }
-
-      this._setVisibleItems(visible);
-      this._setOverflowedItems(overflowed);
-      this.notifyPath('visibleItems.*');
-      this.notifyPath('overflowedItems.*');
-    },
-
-    _fitItems: function(items, width, measurements) {
-      let available = width;
-
-      // If the first item is larger than the available, collapse all
-      if (available < measurements[0]) {
-        return { visible: [], overflowed: items.slice(0) };
-      }
-
-      // Try to fit items in the available space
-      let i = 0;
-      let len = items.length;
-
-      while (i<len && available>0) {
-        if (measurements[i] > available) {
-          break;
-        }
-        available -= measurements[i];
-        i++;
-      }
-
-      // If any overflow, ensure the overflow icon can fit
-      let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
-      if (i !== len && available < overflowSize) {
-        available -= overflowSize;
-        while (i>0 && available<0) {
-          available += measurements[i];
-          i--;
-        }
-      }
-      return { visible: items.slice(0,i), overflowed: items.slice(i) };
-    },
-
-    _measureItems: function(items) {
-      const boundMeasureFn = this._measureItem.bind(this);
-      return items.map(boundMeasureFn);
-    },
-
-    _measureItem: function(item) {
-      const textLength = this._measureText(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
-      if (!textLength) return;
-      let totalLength = textLength; /* start with text size */
-      totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
-      if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
-      if (item.subitems && item.subitems.length) totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
-      return totalLength;
-    },
-
-    _measureText: function(text, fontName, fontSize) {
-      var cv = this._get2dMeasureCanvas(fontName, fontSize);
-      var size = cv.measureText(text).width;
-      return isNaN(size) ? undefined : Math.round(size);
-    },
-
-    _get2dMeasureCanvas: function(fontName, fontSize) {
-      this.__measureCanvasCache = this.__measureCanvasCache || {};
-      var fontInfo = fontSize + ' ' + fontName;
-      if (this.__measureCanvasCache[fontInfo]) return this.__measureCanvasCache[fontInfo];
-      var cv = document.createElement('canvas');
-      cv.height = 999;
-      cv.width = 999;
-      var ctx = cv.getContext('2d');
-      ctx.font = fontInfo;
-      return (this.__measureCanvasCache[fontInfo] = ctx);
-    },
-
-    /**
-     * Finds and returns an item that passes the test `item[prop] === val` or
-     * returns undefined.
-     *
-     * @param {Array} items - An array of `HTMLElement` to search
-     * @param {String|Number} val
-     * @param {String} prop - The property to check
-     * @returns {HTMLElement|undefined}
-     *
-     */
-    _findItem(items, val, prop) {
-      var found;
-      var i = 0;
-      var len = items.length;
-
-      for (; i<len; i++) {
-        if (typeof items[i][prop] !== 'undefined' && items[i][prop] === val) {
-          found = items[i];
-          break;
-        }
-      }
-
-      return found;
-    },
-
-    /**
-     * Helps check if items generated from data have subitems.
-     */
-    _hasSubitems(item) {
+    _isItemParent(item) {
       return item && Array.isArray(item.subitems) && item.subitems.length;
     },
 
+    /**
+     * Checks if the item is NOT a parent of subitems.
+     *
+     * @param  {Object} item
+     * @return {Boolean}
+     */
+    _isItemNotParent(item) {
+      return !item.hasOwnProperty('subitems');
+    },
+
+    /**
+     * Checks if the selected item is in the overflow list.
+     *
+     * @param  {Object|null} selectedItem
+     * @param  {Array} overflowedItems
+     * @return {Boolean}
+     */
     _isSelectedOverflowed(selectedItem, overflowedItems) {
       if (!selectedItem || !overflowedItems || !Array.isArray(overflowedItems) || !overflowedItems.length) return false;
       return overflowedItems.indexOf(selectedItem) !== -1;
     },
 
     /**
-     * Helps check if items generated from data have subitems.
+     * @param  {Array} overflowed
+     * @param  {Array} visible
+     * @return {Boolean}
      */
-    _hasNoSubitems(item) {
-      return !item.hasOwnProperty('subitems');
-    },
-
-    _anyOverflowed(overflowed, visible) {
+    _computeAnyOverflowed(overflowed, visible) {
       return Array.isArray(overflowed) && overflowed.length > 0;
     },
 
-    _allCollapsed(overflowed, visible) {
+    /**
+     * @param  {Array} overflowed
+     * @param  {Array} visible
+     * @return {Boolean}
+     */
+    _computeAllCollapsed(overflowed, visible) {
       return Array.isArray(overflowed) && overflowed.length > 0 && Array.isArray(visible) && visible.length === 0;
     },
 
-    _someOverflowed(overflowed, visible) {
+    /**
+     * @param  {Array} overflowed
+     * @param  {Array} visible
+     * @return {Boolean}
+     */
+    _computeSomeOverflowed(overflowed, visible) {
       return Array.isArray(overflowed) && overflowed.length > 0 && Array.isArray(visible) && visible.length > 0;
     }
   });
