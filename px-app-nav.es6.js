@@ -379,6 +379,7 @@
         if (item) {
           this._setSelectedItem(item);
           this._setSelectedSubitem(subitem);
+          this._setFallbackSelected(false);
           return;
         }
 
