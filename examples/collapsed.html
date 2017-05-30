@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>App Nav Demo -- Collapsed</title>
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="../polymer/polymer-mini.html"/>
+  <link rel="import" href="../px-app-nav.html"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      font-size: 15px;
+      font-family: 'GE Inspira Sans';
+    }
+  </style>
+</head>
+<body>
+  <template is="dom-bind">
+    <px-app-nav
+        items='[
+          { "label" : "Home", "path" : "home", "icon" : "px:home" },
+          { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
+          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
+            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
+            { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
+            { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+          ]}
+        ]'
+        collapse-all
+        collapse-dropdown-width="275"
+        selected-path="{{selectedPath}}"
+        selected-subpath="{{selectedSubpath}}"
+        collapse-opened="{{collapseOpened}}">
+    </px-app-nav>
+
+    <div id="app">
+      <ul>
+        <li>Selected path: <strong>{{selectedPath}}</strong></li>
+        <li>Selected subpath: <strong>{{selectedSubpath}}</strong></li>
+        <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
+      </ul>
+    </div>
+  </template>
+</body>
+</html>
