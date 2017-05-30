@@ -38,23 +38,28 @@
 
     /**
      * Fetches a [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D)
-     * interface for the given `fontName` and `fontSize`. Caches the interface
-     * so it can retrieved later without rebuilding it.
+     * interface configured with the given `fontName` and `fontSize`. Caches the
+     * interface so it can retrieved later without rebuilding it.
      *
      * @param  {String} fontName   A valid [CSS font-family list](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family)
      * @param  {String} fontSize   A valid [CSS font-size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size?v=control)
      * @return {CanvasRenderingContext2D}
      */
     _get2dMeasureCanvas: function(fontName, fontSize) {
-      this.__measureCanvasCache = this.__measureCanvasCache || {};
+      var ctx = this.__measureContextCache;
+      if (!ctx) {
+        var cv = document.createElement('canvas');
+        cv.height = 999;
+        cv.width = 999;
+        ctx = this.__measureContextCache = cv.getContext('2d');
+      }
+
       var fontInfo = fontSize + ' ' + fontName;
-      if (this.__measureCanvasCache[fontInfo]) return this.__measureCanvasCache[fontInfo];
-      var cv = document.createElement('canvas');
-      cv.height = 999;
-      cv.width = 999;
-      var ctx = cv.getContext('2d');
-      ctx.font = fontInfo;
-      return (this.__measureCanvasCache[fontInfo] = ctx);
+      if (ctx.fontInfo !== fontInfo) {
+        ctx.font = fontInfo;
+      }
+
+      return ctx;
     }
   };
 })();
