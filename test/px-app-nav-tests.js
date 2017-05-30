@@ -489,6 +489,22 @@ function runCustomTests() {
       }, 50);
     });
 
+    it('sizes the collapsed dropdown from the `collapseDropdownWidth` attribute value', function(done) {
+      var fx = fixture('AppNavFixtureCollapsed');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        appNavEl.collapseOpened = true;
+      }, 50);
+      setTimeout(function() {
+        var collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+        var dropdownEl = Polymer.dom(collapsedGroupEl.root).querySelector('#groupcontent');
+        var width = dropdownEl.getBoundingClientRect().width;
+        expect(width).to.equal(275);
+        done();
+      }, 70);
+    });
+
     it('collapses when its container is smaller than the `collapseAt` size', function(done) {
       var fx = fixture('AppNavFixtureCollapseAtWidth');
       var appNavEl = fx.querySelector('px-app-nav');

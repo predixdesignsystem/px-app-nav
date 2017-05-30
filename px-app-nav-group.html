@@ -29,7 +29,7 @@
         id="group"
         no-overlap
         dynamic-align
-        opened="{{opened}}"
+        opened="{{_opened}}"
         position-target="[[_getPositionTarget()]]"
         on-iron-overlay-canceled="_handleGroupCanceled"
         open-animation-config="{{_openAnimation}}"
@@ -116,7 +116,18 @@
        */
       opened: {
         type: Boolean,
-        notify: true
+        notify: true,
+        observer: '_openedChangedFromOutside'
+      },
+
+      /**
+       * Internal representation of the `opened` state. Ensures changing `opened`
+       * flows through `openGroup` and `closeGroup` which are necessary to
+       * correctly size the resulting dropdown.
+       */
+      _opened: {
+        type: Boolean,
+        observer: '_openedChangedFromInside'
       },
 
       superlist: {
@@ -201,6 +212,24 @@
       this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
       this.unlisten(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
       this.unlisten(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
+    },
+
+    _openedChangedFromOutside: function(newVal) {
+      if (newVal === true && this._opened !== true) {
+        this.openGroup();
+      }
+      if (newVal === false && this._opened !== false) {
+        this.closeGroup();
+      }
+    },
+
+    _openedChangedFromInside: function(newVal) {
+      if (newVal === true && this.opened !== true) {
+        this.set('opened', true);
+      }
+      if (newVal === false && this.opened !== false) {
+        this.set('opened', false);
+      }
     },
 
     _handleDropdownOpened(evt) {
