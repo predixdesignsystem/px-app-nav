@@ -12,22 +12,4 @@
   </template>
 </dom-module>
 
-<script>
-  Polymer({
-    is: 'px-app-nav-subitem',
-
-    behaviors: [PxAppNavBehavior.Item],
-
-    properties: {
-      /**
-       * Set to `true` if the subitem's parent is selected.
-       */
-      parentSelected: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: 'updateStyles'
-      }
-    }
-  });
-</script>
+<script src="px-app-nav-subitem.es6.js"></script>
