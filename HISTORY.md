@@ -1,3 +1,15 @@
+v1.10.12
+==================
+* sass fix for safari 9
+
+v1.10.11
+==================
+* fix #41 (debounce clicks), simplify sass
+
+v1.10.10
+==================
+* update docs
+
 v1.10.9
 ==================
 * use neon-animation instead of web-animations-js direct. Plays nicer with paper/vis components
