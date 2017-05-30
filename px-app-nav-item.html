@@ -1,14 +1,14 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../iron-icon/iron-icon.html"/>
 <link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
-<link rel="import" href="css/px-app-nav-item-styles.html">
+<link rel="import" href="css/px-app-nav-item-styles.html"/>
 
 <dom-module id="px-app-nav-item">
   <template>
     <style include="px-app-nav-item-styles"></style>
 
     <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
-      <iron-icon class$="app-nav-item__icon {{_getIconAndLabelClasses(label)}}" icon="{{icon}}"></iron-icon>
+      <iron-icon class$="app-nav-item__icon {{_addClassIfHasLabel(label)}}" icon="{{icon}}"></iron-icon>
     </template>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
@@ -51,7 +51,25 @@
        * ('.') in them or they will not work.
        */
       path: {
-        type: String,
+        type: String
+      },
+
+      /**
+       * Set to `true` if the item is selected.
+       */
+      selected: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true,
+        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
+      },
+
+      /**
+       * Set to `true` if this is a subitem.
+       */
+      subitem: {
+        type: Boolean,
+        value: false,
         reflectToAttribute: true
       },
 
@@ -62,16 +80,6 @@
       dropdown: {
         type: Boolean,
         value: false
-      },
-
-      /**
-       * Optional. The index of the item in a group of other items. Helps with
-       * selecting an item when no paths are provided. If you provide a path,
-       * you do not need to set this. If possible, items will be automatically
-       * indexed as they're added to the navigation.
-       */
-      index: {
-        type: Number
       },
 
       /**
@@ -92,16 +100,6 @@
         value: false,
         reflectToAttribute: true,
         observer: 'updateStyles'
-      },
-
-      /**
-       * Set to `true` if the item is selected.
-       */
-      selected: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true,
-        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
       },
 
       /**
@@ -154,7 +152,7 @@
     /**
      * If an item has an icon and a label, get class to add margin between them.
      */
-    _getIconAndLabelClasses(labelStr) {
+    _addClassIfHasLabel(labelStr) {
       return (typeof labelStr === 'string' && labelStr.length) ? 'app-nav-item__icon--with-label' : '';
     }
   });

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Component Test : Fixture for px-app-nav-item</title>
+
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <!-- web-component-tester automatically provides local copy of brower.js below
+         for any URL ending with "/web-component-tester/browser.js"
+         when wct is run from the command line -->
+    <script src="../web-component-tester/browser.js"></script>
+    <!-- Retain this link for px-theme.html -->
+    <!-- px-theme is needed for WCT to run without errors -->
+    <link rel="import" href="../bower_components/px-theme/px-theme-styles.html" />
+    <!-- Load local components -->
+    <link rel="import" href="../px-app-nav-item.html" />
+    <!-- This script link will contain the generated script stub for custom, developer-added test cases -->
+    <script src="px-app-nav-item-tests.js"></script>
+    <!-- Load mocha test fixture setup -->
+    <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <link href="../../test-fixture/test-fixture.html" rel="import">
+  </head>
+  <body>
+    <style include="px-theme-styles" is="custom-style"></style>
+
+    <test-fixture id="AppNavItem">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-item
+              label="Home"
+              icon="px:home"
+              path="home">
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemCustomHeight">
+      <template>
+        <div style="width:300px">
+          <style is="custom-style">
+            px-app-nav-item#customHeight {
+              --px-app-nav-height: 73px;
+            }
+          </style>
+          <px-app-nav-item
+              id="customHeight"
+              label="Home"
+              icon="px:home"
+              path="home">
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemDropdown">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-item
+              label="Home"
+              icon="px:home"
+              path="home"
+              dropdown>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemIconOnly">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-item
+              icon="px:home"
+              path="home">
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemEmpty">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-item empty>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemCancelSelect">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-item cancel-select>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+  </body>
+</html>
