@@ -221,22 +221,18 @@
       evt.preventDefault();
       evt.stopPropagation();
 
-      const content = Polymer.dom(this.root).querySelector('#groupcontainer');
-      const detail = {};
-      if (content) {
-        const rect = content.getBoundingClientRect()
-        detail.dropdownHeight = rect.height;
-        detail.dropdownWidth = rect.width;
-      }
-
-      this.fire('px-app-nav-group-opened', detail);
+      this.fire('px-app-nav-group-opened', {
+        path: this.path
+      });
     },
 
     _handleDropdownClosed(evt) {
       evt.preventDefault();
       evt.stopPropagation();
 
-      this.fire('px-app-nav-group-closed');
+      this.fire('px-app-nav-group-closed', {
+        path: this.path
+      });
     },
 
     _toggleGroup() {
@@ -279,13 +275,6 @@
       if (!group) return;
 
       group.close();
-    },
-
-    position() {
-      var group = this.$.group;
-      if (!group) return;
-
-      group.position();
     },
 
     /**
