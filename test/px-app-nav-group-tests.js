@@ -102,7 +102,7 @@ function runCustomTests() {
         var width = contentEl.getBoundingClientRect().width;
         expect(width).to.equal(227);
         done();
-      }, 70);
+      }, 80);
     });
 
     it('dynamically sets its dropdown content width to be at least as wide as the group', function(done) {
@@ -119,7 +119,7 @@ function runCustomTests() {
         var width = contentEl.getBoundingClientRect().width;
         expect(width).to.be.closeTo(216, 2);
         done();
-      }, 70);
+      }, 80);
     });
 
     it('dynamically sets its dropdown content width grow to fit its largest item if it fits in the window', function(done) {
@@ -139,7 +139,7 @@ function runCustomTests() {
         var contentWidth = contentEl.getBoundingClientRect().width;
         expect(contentWidth).to.be.closeTo(subitemWidth, 2);
         done();
-      }, 70);
+      }, 80);
     });
 
     it('opens its dropdown when the `opened` attribute is set to true', function(done) {

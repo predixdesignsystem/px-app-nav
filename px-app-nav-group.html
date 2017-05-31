@@ -253,16 +253,16 @@
     },
 
     openGroup() {
-      var group = this.$$('#group');
+      var group = this.$.group;
       if (!group) return;
 
       // Measure the size of the group's container before trying to open it,
       // so we can set the min width of the group's dropdown
       //
       // Ben says this is OK.
-      var button = this.$$('#itemButton');
-      var container = this.$$('#groupcontainer');
-      var content = this.$$('#groupcontent');
+      var button = this.$.itemButton;
+      var container = this.$.groupcontainer;
+      var content = this.$.groupcontent;
       var minWidth = button.getBoundingClientRect().width + 'px';
       if (content.style.minWidth !== minWidth) {
         container.style.minWidth = minWidth;
@@ -275,14 +275,14 @@
     },
 
     closeGroup() {
-      var group = this.$$('#group');
+      var group = this.$.group;
       if (!group) return;
 
       group.close();
     },
 
     position() {
-      var group = this.$$('#group');
+      var group = this.$.group;
       if (!group) return;
 
       group.position();
