@@ -78,10 +78,9 @@
      * Fire the select event so this item's parent will mark it as selected.
      */
     _handleSelfTapped(evt) {
-      if (this.cancelSelect) return;
-      var path = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
+      if (this.cancelSelect || !this.path) return;
       this.fire('px-app-nav-item-tapped', {
-        path: [path]
+        path: [this.path]
       }, {cancelable:true});
     }
   };

@@ -34,7 +34,7 @@
         on-iron-overlay-canceled="_handleGroupCanceled"
         open-animation-config="{{_openAnimation}}"
         close-animation-config="{{_closeAnimation}}">
-      <div class$="dropdown-content app-nav-group__dropdown {{_getGroupClasses(superlist)}}" id="groupcontainer">
+      <div class="dropdown-content app-nav-group__dropdown" id="groupcontainer">
         <div class="app-nav-group__dropdown__content" id="groupcontent">
           <content select="*"></content>
         </div>
@@ -95,22 +95,6 @@
       },
 
       /**
-       * The select subitem's element, if a subitem is selected.
-       */
-      selectedSubitem: {
-        type: HTMLElement,
-        notify: true
-      },
-
-      /**
-       * The selected subitem's path, if a subitem is selected.
-       */
-      selectedSubpath: {
-        type: String,
-        notify: true
-      },
-
-      /**
        * If `true` the group is expanded so the user can select a subitem.
        */
       opened: {
@@ -129,15 +113,13 @@
         observer: '_openedChangedFromInside'
       },
 
-      superlist: {
-        type: Boolean,
-        value: false
-      },
-
       fixedWidth: {
         type: Number
       },
 
+      /**
+       * Disables the group's dropdown carat icon.
+       */
       hideDropdownIcon: {
         type: Boolean,
         value: false
@@ -160,6 +142,14 @@
        * If `true` the group item button should have an empty state.
        */
       empty: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Cancels events that trigger selection.
+       */
+      cancelSelect: {
         type: Boolean,
         value: false
       },
@@ -199,8 +189,6 @@
       this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      this.listen(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
-      this.listen(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
     },
 
     detached: function() {
@@ -209,8 +197,6 @@
       this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
-      this.unlisten(this.$.group, 'px-app-nav-group-opened', '_handleSubgroupOpened');
-      this.unlisten(this.$.group, 'px-app-nav-group-closed', '_handleSubgroupClosed');
     },
 
     _openedChangedFromOutside: function(newVal) {
@@ -251,48 +237,6 @@
       evt.stopPropagation();
 
       this.fire('px-app-nav-group-closed');
-    },
-
-    _handleSubgroupOpened(evt) {
-      if (!this.superlist) return;
-
-      const subgroup = Polymer.dom(evt).rootTarget;
-
-      if (this._openedSubgroup && this._openedSubgroup !== subgroup) {
-        this._lastOpenedSubgroup = this._openedSubgroup;
-        this._openedSubgroup.closeGroup();
-      }
-
-      this._openedSubgroup = subgroup;
-      subgroup.style.marginBottom = (evt.detail.dropdownHeight || 0) + 'px';
-    },
-
-    _handleSubgroupClosed(evt) {
-      if (!this.superlist) return;
-      const subgroup = Polymer.dom(evt).rootTarget;
-      subgroup.style.marginBottom = null;
-      if (this._openedSubgroup !== subgroup) {
-        this._openedSubgroup.position();
-      } else {
-        this._openedSubgroup = null;
-      }
-    },
-
-    _getGroupClasses() {
-      if (this.superlist) {
-        return 'app-nav-group__dropdown--superlist';
-      }
-      return 'app-nav-group__dropdown--sublist';
-    },
-
-    /**
-     * Checks if a property is the desired `type`.
-     *
-     * @param {*} prop
-     * @returns {Boolean}
-     */
-    _propIsTypeOf(prop, type) {
-      return prop && type && (typeof prop === type);
     },
 
     _toggleGroup() {
@@ -388,18 +332,15 @@
      * to ask this item's parent to select it when its subitem is selected.
      */
     _handleSubitemSelected(evt) {
-      if (!this.superlist) {
+      if (!this.cancelSelect && this.path) {
         evt.preventDefault();
         evt.stopPropagation();
 
-        var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-        var path = [localPath].concat(evt.detail.path);
-        var items = [this.item].concat(evt.detail.items);
+        var path = [this.path].concat(evt.detail.path);
 
         this.fire('px-app-nav-item-tapped', {
           group: true,
-          path: path,
-          items: items
+          path: path
         });
       }
 
@@ -407,9 +348,8 @@
     },
 
     /**
-     * If a group is goes from being selected to deselected, set its selected
-     * subitem to null to clear the selected and call closeGroup to ensure
-     * it is closed.
+     * If a group is goes from being selected to deselected, call closeGroup
+     * to ensure it is closed.
      */
     _handleSelectedChanged(nextState, lastState) {
       if (lastState === true && nextState === false) {

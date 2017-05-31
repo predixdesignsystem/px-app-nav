@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Component Test : Fixture for px-app-nav-group</title>
+
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <!-- web-component-tester automatically provides local copy of brower.js below
+         for any URL ending with "/web-component-tester/browser.js"
+         when wct is run from the command line -->
+    <script src="../web-component-tester/browser.js"></script>
+    <!-- Retain this link for px-theme.html -->
+    <!-- px-theme is needed for WCT to run without errors -->
+    <link rel="import" href="../bower_components/px-theme/px-theme-styles.html" />
+    <!-- Load local components -->
+    <link rel="import" href="../px-app-nav-group.html" />
+    <link rel="import" href="../px-app-nav-subitem.html" />
+    <!-- This script link will contain the generated script stub for custom, developer-added test cases -->
+    <script src="px-app-nav-group-tests.js"></script>
+    <!-- Load mocha test fixture setup -->
+    <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <link href="../../test-fixture/test-fixture.html" rel="import">
+  </head>
+  <body>
+    <style include="px-theme-styles" is="custom-style"></style>
+
+    <test-fixture id="AppNavGroup">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts">
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupSelected">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              selected>
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupSelectedNoHighlight">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              selected
+              no-highlight>
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupCancelSelect">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              cancel-select>
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupHideDropdownIcon">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              hide-dropdown-icon>
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupEmpty">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              empty>
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupFixedWidth">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts"
+              fixed-width="227">
+            <px-app-nav-subitem label="Generators" path="generators"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" path="turbines"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" path="trucks"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" path="airplanes"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupDynamicWidthMin">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts">
+            <px-app-nav-subitem label="Aaa" path="a"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Bbb" path="b"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ccc" path="c"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ddd" path="d"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavGroupDynamicWidthGrow">
+      <template>
+        <div style="width:300px">
+          <px-app-nav-group
+              label="Alerts"
+              icon="px:alert"
+              path="alerts">
+            <px-app-nav-subitem label="A very long item in here" path="long"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Bbb" path="b"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ccc" path="c"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ddd" path="d"></px-app-nav-subitem>
+          </px-app-nav-group>
+        </div>
+      </template>
+    </test-fixture>
+  </body>
+</html>

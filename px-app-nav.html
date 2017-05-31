@@ -130,7 +130,7 @@ Custom property | Description | Default
         <!-- STATE: Items overflowed or collapsed -->
         <template is="dom-if" if="{{anyOverflowed}}">
           <px-app-nav-group
-              superlist
+              cancel-select
               fixed-width="[[_getDropdownWidth(collapseDropdownWidth, allCollapsed)]]"
               id="overflowedGroup"
               label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"

@@ -26,6 +26,7 @@
   "suites": [
     "test/px-app-nav-fixture.html",
     "test/px-app-nav-item-fixture.html",
-    "test/px-app-nav-subitem-fixture.html"
+    "test/px-app-nav-subitem-fixture.html",
+    "test/px-app-nav-group-fixture.html"
   ]
 }
