@@ -30,7 +30,6 @@ $px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color,
 
   height: $px-app-nav-subitem-height;
   color: $px-app-nav-subitem-text-color;
-  background-color: var(--px-app-nav-subitem-background-color, transparent);
   background-color: $px-app-nav-subitem-background-color;
 }
 
@@ -48,9 +47,6 @@ $px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-backgro
 :host([selected]) {
   color: $px-app-nav-subitem-text-color--selected;
   background-color: $px-app-nav-subitem-background-color--selected;
-}
-:host([selected]):before {
-  display: none;
 }
 
 /* Subitem State: Collapsed */
@@ -72,14 +68,13 @@ $px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--
 :host([collapsed][parent-selected]):before {
   content: '';
   display: block;
-  background-color: $white;
+  background-color: $select-default;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   width: 2px;
   height: 100%;
-  background-color: $select-default;
 }
 :host([collapsed][parent-selected]:hover) {
   background-color: $gray1;
@@ -87,10 +82,6 @@ $px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--
 
 /* Subitem State: Collapsed+Parent Selected+Selected */
 :host([collapsed][parent-selected][selected]) {
-  color: $white;
-  background-color: $select-default;
-}
-:host([collapsed][parent-selected][selected]:hover) {
   color: $white;
   background-color: $select-default;
 }

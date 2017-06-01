@@ -15,7 +15,7 @@
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
-// Component\
+// Component
 /* Item State: Default */
 $px-app-nav-item-height: var(--px-app-nav-height, calculateRem(60px));
 $px-app-nav-item-padding: var(--px-app-nav-item-padding, calculateRem(15px));
@@ -36,16 +36,6 @@ $px-app-nav-item-background-color: var(--px-app-nav-item-background-color, $gray
   --iron-icon-fill-color: $px-app-nav-item-icon-color;
 }
 
-/* Item State: Pressed */
-$px-app-nav-item-icon-color--pressed: var(--px-app-nav-item-icon-color--pressed, $gray15);
-$px-app-nav-item-text-color--pressed: var(--px-app-nav-item-text-color--pressed, $gray15);
-$px-app-nav-item-background-color--pressed: var(--px-app-nav-item-background-color--pressed, $gray5);
-:host(:active) {
-  color: $px-app-nav-item-text-color--pressed;
-  background-color: $px-app-nav-item-background-color--pressed;
-  --iron-icon-fill-color: $px-app-nav-item-icon-color--pressed;
-}
-
 /* Item State: Hover */
 $px-app-nav-item-icon-color--hover: var(--px-app-nav-item-icon-color--hover, $gray15);
 $px-app-nav-item-text-color--hover: var(--px-app-nav-item-text-color--hover, $gray15);
@@ -54,6 +44,16 @@ $px-app-nav-item-background-color--hover: var(--px-app-nav-item-background-color
   color: $px-app-nav-item-text-color--hover;
   background-color: $px-app-nav-item-background-color--hover;
   --iron-icon-fill-color: $px-app-nav-item-icon-color--hover;
+}
+
+/* Item State: Pressed */
+$px-app-nav-item-icon-color--pressed: var(--px-app-nav-item-icon-color--pressed, $gray15);
+$px-app-nav-item-text-color--pressed: var(--px-app-nav-item-text-color--pressed, $gray15);
+$px-app-nav-item-background-color--pressed: var(--px-app-nav-item-background-color--pressed, $gray5);
+:host(:active) {
+  color: $px-app-nav-item-text-color--pressed;
+  background-color: $px-app-nav-item-background-color--pressed;
+  --iron-icon-fill-color: $px-app-nav-item-icon-color--pressed;
 }
 
 /* Item State: Selected */
