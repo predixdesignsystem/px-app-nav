@@ -31,6 +31,7 @@
     "px-box-sizing-design": "^1.0.0",
     "px-colors-design": "^1.0.0",
     "px-defaults-design": "^2.0.0",
-    "px-demo": "^2.0.0"
+    "px-demo": "^2.0.0",
+    "px-shadows-design": "^1.0.0"
   }
 }

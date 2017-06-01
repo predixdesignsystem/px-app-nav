@@ -15,10 +15,13 @@
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
+// Objects
+@import "px-shadows-design/_objects.shadows.scss";
+
 // Component
 $px-app-nav-height: var(--px-app-nav-height, calculateRem(60px));
 $px-app-nav-background-color: var(--px-app-nav-background-color, $gray2);
-$px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 calculateRem(2px) calculateRem(4px) 0 rgba(0,0,0,0.2));
+$px-app-nav-box-shadow: var(--px-app-nav-box-shadow, $inuit-shadow-navigation);
 
 :host {
   height: $px-app-nav-height;
