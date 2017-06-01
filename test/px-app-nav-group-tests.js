@@ -119,7 +119,7 @@ function runCustomTests() {
         var width = contentEl.getBoundingClientRect().width;
         expect(width).to.be.closeTo(216, 2);
         done();
-      }, 80);
+      }, 100);
     });
 
     it('dynamically sets its dropdown content width grow to fit its largest item if it fits in the window', function(done) {
