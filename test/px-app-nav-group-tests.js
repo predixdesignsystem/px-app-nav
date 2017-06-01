@@ -102,7 +102,7 @@ function runCustomTests() {
         var width = contentEl.getBoundingClientRect().width;
         expect(width).to.equal(227);
         done();
-      }, 80);
+      }, 100);
     });
 
     it('dynamically sets its dropdown content width to be at least as wide as the group', function(done) {

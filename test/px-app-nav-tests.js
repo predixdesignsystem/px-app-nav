@@ -434,7 +434,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(overflowGroupEl.opened).to.equal(false);
         done();
-      }, 650);
+      }, 750);
     });
 
     it('opens a subgroup in the overflow dropdown when the subgroup is tapped', function(done) {
@@ -530,7 +530,7 @@ function runCustomTests() {
         expect(overflowGroupEl.selected).to.equal(true);
         expect(subgroupEl.selected).to.equal(true);
         done();
-      }, 700);
+      }, 750);
     });
   });
 
@@ -568,7 +568,7 @@ function runCustomTests() {
         var width = dropdownEl.getBoundingClientRect().width;
         expect(width).to.equal(275);
         done();
-      }, 70);
+      }, 100);
     });
 
     it('collapses when its container is smaller than the `collapseAt` size', function(done) {
@@ -674,11 +674,11 @@ function runCustomTests() {
       setTimeout(function() {
         expect(dropdownEl.offsetLeft).to.be.greaterThan(0);
         appNavEl.collapseOpened = false;
-      }, 250);
+      }, 350);
       setTimeout(function() {
         expect(dropdownEl.offsetLeft).to.equal(0);
         done();
-      }, 450);
+      }, 650);
     });
   });
 
