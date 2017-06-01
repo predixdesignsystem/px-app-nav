@@ -16,13 +16,8 @@
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
 // Component
-@function rem($size) {
-  $rem: $size / $inuit-base-font-size;
-  @return $rem * 1rem;
-}
-
 /* Subitem State: Default */
-$px-app-nav-subitem-height: var(--px-app-nav-subitem-height, rem(30px));
+$px-app-nav-subitem-height: var(--px-app-nav-subitem-height, calculateRem(30px));
 $px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, $gray15);
 $px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color, $white);
 :host {
@@ -63,7 +58,7 @@ $px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--
 :host([collapsed]) {
   color: $px-app-nav-subitem-text-color--collapsed;
   background-color: $gray2;
-  padding-left: rem(55px);
+  padding-left: calculateRem(55px);
 }
 :host([collapsed]:hover) {
   background-color: $gray4;

@@ -16,12 +16,7 @@
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
 // Component
-@function rem($size) {
-  $rem: $size / $inuit-base-font-size;
-  @return $rem * 1rem;
-}
-
-$px-app-nav-group-height: var(--px-app-nav-height, rem(60px));
+$px-app-nav-group-height: var(--px-app-nav-height, calculateRem(60px));
 :host {
   position: relative;
   display: flex;

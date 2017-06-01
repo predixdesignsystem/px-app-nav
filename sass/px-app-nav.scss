@@ -16,17 +16,10 @@
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
 // Component
-@function rem($size) {
-  $rem: $size / $inuit-base-font-size;
-  @return $rem * 1rem;
-}
-
-////// Theming
-$px-app-nav-height: var(--px-app-nav-height, rem(60px));
+$px-app-nav-height: var(--px-app-nav-height, calculateRem(60px));
 $px-app-nav-background-color: var(--px-app-nav-background-color, $gray2);
-$px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 rem(2px) rem(4px) 0 rgba(0,0,0,0.2));
+$px-app-nav-box-shadow: var(--px-app-nav-box-shadow, 0 calculateRem(2px) calculateRem(4px) 0 rgba(0,0,0,0.2));
 
-////// Component styles
 :host {
   height: $px-app-nav-height;
   background-color: $px-app-nav-background-color;
