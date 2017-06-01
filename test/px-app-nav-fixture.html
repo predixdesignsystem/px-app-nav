@@ -121,6 +121,77 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="AppNavFixtureForMeasurements">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "path" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
+                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                ]},
+                { "label" : "Projects", "path" : "projects", "subitems" : [
+                  { "label" : "First Project", "path" : "project1" }
+                ]},
+                { "label" : "Assets", "path" : "assets" },
+                { "label" : "Users", "path" : "users" }
+              ]'>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavFixtureIconSizeVariable">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <style>
+            #iconSizeNav {
+              --px-app-nav-item-icon-size: 47px;
+            }
+          </style>
+          <px-app-nav
+              id="iconSizeNav"
+              items='[
+                { "label" : "Home", "path" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
+                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                ]}
+              ]'>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavFixtureItemPaddingVariable">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <style>
+            #itemPaddingNav {
+              --px-app-nav-item-padding: 4em;
+            }
+          </style>
+          <px-app-nav
+              id="itemPaddingNav"
+              items='[
+                { "label" : "Home", "path" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
+                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                ]}
+              ]'>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
     <test-fixture id="AppNavFixtureCollapsed">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
@@ -197,6 +268,22 @@
               collapse-with-icon
               selected-path="home">
           </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavMeasureTextStub">
+      <template>
+        <div>
+          <style>
+            #testText {
+              font-family: Arial;
+              font-size: 23px;
+              display: inline;
+            }
+          </style>
+          <px-app-nav-measure-text-stub></px-app-nav-measure-text-stub>
+          <p id="testText">The quick brown fox jumps over the lazy programmer</p>
         </div>
       </template>
     </test-fixture>

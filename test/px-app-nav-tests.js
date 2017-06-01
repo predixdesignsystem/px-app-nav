@@ -273,6 +273,89 @@ function runCustomTests() {
       }, 200);
     });
 
+    it('marks all of its items as visible if they all fit', function(done) {
+      var fx = fixture('AppNavFixtureForMeasurements');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '620px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.visibleItems.length).to.equal(6);
+        expect(appNavEl.overflowedItems.length).to.equal(0);
+        expect(appNavEl.someOverflowed).to.equal(false);
+        expect(appNavEl.anyOverflowed).to.equal(false);
+        done();
+      }, 70);
+    });
+
+    it('marks one of its items as overflowed if it no longer fits', function(done) {
+      var fx = fixture('AppNavFixtureForMeasurements');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '610px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.visibleItems.length).to.equal(5);
+        expect(appNavEl.overflowedItems.length).to.equal(1);
+        expect(appNavEl.someOverflowed).to.equal(true);
+        expect(appNavEl.anyOverflowed).to.equal(true);
+        done();
+      }, 250);
+    });
+
+    it('marks two of its items as overflowed if it they longer fits', function(done) {
+      var fx = fixture('AppNavFixtureForMeasurements');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '600px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.visibleItems.length).to.equal(4);
+        expect(appNavEl.overflowedItems.length).to.equal(2);
+        expect(appNavEl.someOverflowed).to.equal(true);
+        expect(appNavEl.anyOverflowed).to.equal(true);
+        done();
+      }, 250);
+    });
+
+    it('marks all of its items as overflowed and collapses fully when only one item fits', function(done) {
+      var fx = fixture('AppNavFixtureForMeasurements');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '180px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.visibleItems.length).to.equal(0);
+        expect(appNavEl.overflowedItems.length).to.equal(6);
+        expect(appNavEl.allCollapsed).to.equal(true);
+        done();
+      }, 250);
+    });
+
+    it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function() {
+      var fx = fixture('AppNavFixtureIconSizeVariable');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var item = { label: 'Home', path: 'home', icon: 'px:home' };
+      var measurement = appNavEl._measureItem(item);
+      expect(measurement).to.be.closeTo(120, 2);
+    });
+
+    it('measures items correctly when their padding is sized with the CSS style variable --px-app-nav-item-padding', function() {
+      var fx = fixture('AppNavFixtureItemPaddingVariable');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var item = { label: 'Home', path: 'home', icon: 'px:home' };
+      var measurement = appNavEl._measureItem(item);
+      expect(measurement).to.be.closeTo(193, 2);
+    });
+
     it('shows an overflow group when any of its items no longer fit', function(done) {
       var fx = fixture('AppNavFixtureHorizontal');
       var appNavEl = fx.querySelector('px-app-nav');
@@ -288,7 +371,7 @@ function runCustomTests() {
       }, 500);
     });
 
-    it('hides overflowed items from the main navigation and puts them in the overflowed dropdown', function(done) {
+    it('hides overflowed items from the main navigation and shows them in the overflowed dropdown', function(done) {
       var fx = fixture('AppNavFixtureHorizontal');
       var appNavEl = fx.querySelector('px-app-nav');
 
@@ -297,11 +380,6 @@ function runCustomTests() {
         appNavEl.notifyResize();
       }, 50);
       setTimeout(function() {
-        // Tests internal read-only APIs
-        expect(appNavEl.someOverflowed).to.equal(true);
-        expect(appNavEl.anyOverflowed).to.equal(true);
-        expect(appNavEl.overflowedItems.length).to.equal(1);
-        expect(appNavEl.visibleItems.length).to.equal(2);
         // Tests that the items actually end up in the DOM
         var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-item');
         var groupEls = Polymer.dom(appNavEl.root).querySelectorAll('#items > px-app-nav-group');
@@ -454,20 +532,6 @@ function runCustomTests() {
         done();
       }, 700);
     });
-
-    it('collapses fully when only one item fits', function(done) {
-      var fx = fixture('AppNavFixtureHorizontal');
-      var appNavEl = fx.querySelector('px-app-nav');
-
-      setTimeout(function() {
-        fx.style.width = '180px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        expect(appNavEl.allCollapsed).to.equal(true);
-        done();
-      }, 500);
-    });
   });
 
   describe('px-app-nav [collapsed]', function() {
@@ -615,6 +679,46 @@ function runCustomTests() {
         expect(dropdownEl.offsetLeft).to.equal(0);
         done();
       }, 450);
+    });
+  });
+
+  describe('px-app-nav-measure-text behavior', function() {
+    var sandbox;
+    var fx;
+    var stubEl;
+
+    before(function() {
+      Polymer({
+        is: 'px-app-nav-measure-text-stub',
+        behaviors: [PxAppNavBehavior.MeasureText]
+      });
+    });
+
+    beforeEach(function() {
+      sandbox = sinon.sandbox.create();
+      fx = fixture('AppNavMeasureTextStub');
+      stubEl = fx.querySelector('px-app-nav-measure-text-stub');
+    });
+
+    afterEach(function() {
+      sandbox.restore();
+    });
+
+    it('creates a 2d canvas interace', function() {
+      const canvasInterface = stubEl._get2dMeasureCanvas('Arial', '23px');
+      expect(canvasInterface).to.be.instanceof(CanvasRenderingContext2D);
+    });
+
+    it('configures the 2d canvas interface with the requested font-family and font-size', function() {
+      const canvasInterface = stubEl._get2dMeasureCanvas('Arial', '23px');
+      expect(canvasInterface.font).to.equal('23px Arial');
+    });
+
+    it('correctly measures a bit of text', function() {
+      const text = 'The quick brown fox jumps over the lazy programmer';
+      const textRenderedSize = fx.querySelector('p').getBoundingClientRect().width;
+      const textMeasuredSize = stubEl._measureText(text, 'Arial', '23px');
+      expect(textMeasuredSize).to.be.closeTo(textRenderedSize, 2);
     });
   });
 }

@@ -9,13 +9,11 @@
  */
 
 // Settings
+@import "px-defaults-design/_settings.defaults.scss";
 @import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
-
-// Base
-@import "px-typography-design/_base.typography.scss";
 
 // Component
 @function rem($size) {
@@ -25,6 +23,7 @@
 
 /* Item State: Default */
 $px-app-nav-item-height: var(--px-app-nav-height, rem(60px));
+$px-app-nav-item-padding: var(--px-app-nav-item-padding, rem(15px));
 $px-app-nav-item-icon-size: var(--px-app-nav-item-icon-size, rem(30px));
 $px-app-nav-item-icon-color: var(--px-app-nav-item-icon-color, $gray15);
 $px-app-nav-item-text-color: var(--px-app-nav-item-text-color, $gray15);
@@ -34,8 +33,8 @@ $px-app-nav-item-background-color: var(--px-app-nav-item-background-color, $gray
   display: flex;
   align-items: center;
   height: $px-app-nav-item-height;
-  padding-left: $inuit-base-spacing-unit;
-  padding-right: $inuit-base-spacing-unit;
+  padding-left: $px-app-nav-item-padding;
+  padding-right: $px-app-nav-item-padding;
   cursor: pointer;
   color: $px-app-nav-item-text-color;
   background-color: $px-app-nav-item-background-color;

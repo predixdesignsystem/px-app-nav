@@ -274,15 +274,11 @@
      * measure if they can fit in the nav.
      */
     statics: {
-      ITEM_FONT_NAME: 'GE Inspira Sans',
-      ITEM_FONT_SIZE: 15,
-      ITEM_PADDING: 32, /* 16+16 */
-      ITEM_ICON_WIDTH: 30,
-      ITEM_ICON_PADDING: 10,
-      OPEN_ICON_WIDTH: 15,
-      OPEN_ICON_PADDING: 5,
-      OVERFLOW_ICON_SIZE: 30,
-      OVERFLOW_ICON_PADDING: 32 /*16+16*/
+      ITEM_PADDING: '1rem', /*on both sides*/
+      ITEM_ICON_WIDTH: '2rem',
+      ITEM_ICON_PADDING: '0.33rem', /*only on one side*/
+      OPEN_ICON_WIDTH: '1.33rem',
+      OPEN_ICON_PADDING: '0.2rem' /*only on one side*/
     },
 
     observers: [
@@ -558,7 +554,8 @@
       }
 
       // If any overflow, ensure the overflow icon can fit
-      let overflowSize = this.statics.OVERFLOW_ICON_SIZE + this.statics.OVERFLOW_ICON_PADDING;
+      const {itemPadding, iconSize} = this._getItemStyles();
+      let overflowSize = (itemPadding*2) + iconSize;
       if (i !== len && available < overflowSize) {
         available -= overflowSize;
         while (i>0 && available<0) {
@@ -592,13 +589,76 @@
      * @return {Number}
      */
     _measureItem(item) {
-      const textLength = this._measureText(item.label, this.statics.ITEM_FONT_NAME, this.statics.ITEM_FONT_SIZE + 'px');
+      const {fontFamily, fontSize, itemPadding, iconSize, iconPadding, openIconSize, openIconPadding} = this._getItemStyles();
+      const textLength = this._measureText(item.label, fontFamily, fontSize);
       if (!textLength) return;
       let totalLength = textLength; /* start with text size */
-      totalLength += this.statics.ITEM_PADDING; /* add left pad + right pad */
-      if (item.icon && item.icon.length) totalLength += (this.statics.ITEM_ICON_WIDTH + this.statics.ITEM_ICON_PADDING); /* add icon size + icon right pad */
-      if (item.subitems && item.subitems.length) totalLength += (this.statics.OPEN_ICON_WIDTH + this.statics.OPEN_ICON_PADDING); /* add dropdown icon size + dropdown icon left pad */
+      totalLength += (itemPadding*2); /* add left pad + right pad */
+      if (item.icon && item.icon.length) totalLength += (iconSize + iconPadding); /* add icon size + icon right pad */
+      if (item.subitems && item.subitems.length) totalLength += (openIconSize + openIconPadding); /* add dropdown icon size + dropdown icon left pad */
       return totalLength;
+    },
+
+    /**
+     * Fetches the font styles for this element from the DOM. Caches the result
+     * so we only need to call the `CSSText` API once (this forces a reflow).
+     *
+     * @TODO: What if the font-size and font-family change at runtime? How should
+     * we balance performance of calling expensive DOM APIs and ensuring the
+     * component correctly reacts to its current CSS state at any time?
+     *
+     * @return {Object} styles
+     * @return {String} styles.fontName - The CSS 'font-name' of this element
+     * @return {String} styles.fontFamily - The CSS 'font-family' of this element
+     * @return {Number} styles.iconSize - The size of the icon in pixels as a number
+     */
+    _getItemStyles() {
+      if (!this._fontStyleCache) {
+        const {fontSize, fontFamily} = window.getComputedStyle(this);
+        const rem = (val) => this._remToPx(parseFloat(val));
+        const parse = (cssVar, fallbackRem) => this._parseSizeStyleVar(cssVar, rem(fallbackRem), parseInt(fontSize));
+        const itemPadding = parse('--px-app-nav-item-padding', this.statics.ITEM_PADDING);
+        const iconSize = parse('--px-app-nav-item-icon-size', this.statics.ITEM_ICON_WIDTH);
+        const iconPadding = rem(this.statics.ITEM_ICON_PADDING);
+        const openIconSize = rem(this.statics.OPEN_ICON_WIDTH);
+        const openIconPadding = rem(this.statics.OPEN_ICON_PADDING);
+        this._fontStyleCache = {fontSize, fontFamily, itemPadding, iconSize, iconPadding, openIconSize, openIconPadding};
+      }
+      return this._fontStyleCache;
+    },
+
+    /**
+     * Parses a CSS style variable. If the style variable is defined,
+     * parses it into a relative pixel value (for px, em, and rem only).
+     * If it is not defined, returns the fallback.
+     *
+     * @param  {String} cssVar - e.g. '--px-app-nav-item-padding'
+     * @param  {Number} fallback - Fallback if the style variable is undefined or can't be parsed
+     * @return {Number}
+     */
+    _parseSizeStyleVar(cssVar, fallback, emBase) {
+      const val = this.getComputedStyleValue(cssVar);
+      if (typeof val === 'string' && val.slice(-2) === 'px') {
+        return parseInt(val);
+      }
+      if (typeof val === 'string' && val.slice(-2) === 'em') {
+        return emBase * parseFloat(val);
+      }
+      if (typeof val === 'string' && val.slice(-2) === 'rem') {
+        return this._remToPx(parseFloat(val));
+      }
+      return fallback;
+    },
+
+    /**
+     * Converts a REM-based value to a pixel value and returns as a parsed number.
+     *
+     * @param  {Number} rem - A parsed rem integer or float
+     * @return {Number}
+     */
+    _remToPx(rem) {
+      const remBase = this._documentRemBaseCache = (this._documentRemBaseCache || parseInt(window.getComputedStyle(document.documentElement).fontSize));
+      return Math.round(rem * remBase);
     },
 
     /**
