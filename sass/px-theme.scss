@@ -361,11 +361,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-dropdown-text-color--selected: $white;
   --px-dropdown-border-color: $gray3;
 
-  // // File Upload
-  // --px-file-upload-validation-color:
-  // --px-file-upload-dropzone-background-color:
-  // --px-file-upload-dropzone-border-color:
-  //
+  // File Upload
+  --px-file-upload-file-list-color: $gray10;
+  --px-file-upload-validation-color: $status-red3;
+  --px-file-upload-dropzone-background-color: $primary-light;
+
   // // Inbox
   // --px-inbox-border-color:
   // --px-inbox-secondary-text-color:
