@@ -40,7 +40,6 @@ $px-app-nav-group-border-color: var(--px-app-nav-group-border-color, $gray3);
 .app-nav-group__dropdown {
   display: block;
   height: calc(100vh - #{$px-app-nav-group-height});
-  max-width: 632px;
   z-index: 399;
 }
 

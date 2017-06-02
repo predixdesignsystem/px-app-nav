@@ -27,10 +27,13 @@
 
     <iron-dropdown
         id="group"
-        no-overlap
+        horizontal-align="left"
+        vertical-align="top"
         dynamic-align
+        vertical-offset="{{_offsetHeight}}"
         opened="{{_opened}}"
         position-target="[[_getPositionTarget()]]"
+        fit-into="[[fitInto]]"
         on-iron-overlay-canceled="_handleGroupCanceled"
         open-animation-config="{{_openAnimation}}"
         close-animation-config="{{_closeAnimation}}">
@@ -154,6 +157,14 @@
         value: false
       },
 
+
+      /**
+       * A reference to the HTMLElement to fit the group dropdown into.
+       */
+      fitInto: {
+        type: HTMLElement
+      },
+
       _openAnimation: {
         type: Object,
         value: function() {
@@ -178,17 +189,20 @@
             startHeightNode: this.$.groupcontent
           }
         }
+      },
+
+      _offsetHeight: {
+        type: Number
       }
     },
 
     attached: function() {
-      this._lastOpenedSubgroup = null;
-      this._openedSubgroup = null;
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
       this.listen(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      this.set('_offsetHeight', this._getVerticalOffset());
     },
 
     detached: function() {
@@ -346,8 +360,19 @@
       }
     },
 
+    /**
+     * Sets the item button as the target the dropdown will position against.
+     */
     _getPositionTarget() {
       return this.$.itemButton;
+    },
+
+    /**
+     * Measures the size of the item button to position the dropdown at
+     * the bottom.
+     */
+    _getVerticalOffset() {
+      return this.getBoundingClientRect().height;
     },
 
     _isGroupSelected(isSelected, noHighlight) {

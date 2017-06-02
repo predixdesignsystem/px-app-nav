@@ -139,7 +139,8 @@ Custom property | Description | Default
               hide-dropdown-icon="{{_isCollapsedCaratHidden(allCollapsed, collapseWithIcon)}}"
               no-highlight="{{allCollapsed}}"
               empty="{{_isCollapsedDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon)}}"
-              opened="{{collapseOpened}}">
+              opened="{{collapseOpened}}"
+              fit-into="{{fitInto}}">
             <!-- Second item stamp: overflowed/collapsed items -->
             <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold subitems -->

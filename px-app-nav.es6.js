@@ -263,6 +263,23 @@
         computed: '_computeSomeOverflowed(overflowedItems,visibleItems)'
       },
 
+      /**
+       * Reference the HTMLElement to fit any nav dropdowns into. Dropdowns will
+       * automatically be constrained to fit their width and height inside
+       * this container element. If the nav items in the dropdown are wider than
+       * the container, they will be truncated with ellipses. If the nav items
+       * in the dropdown are taller than the container, the dropdown will show
+       * and scroll bar so users can see the overset items.
+       *
+       * By default, dropdowns will be fit into the `window`. If your nav is
+       * placed inside of another container, and should not expand to take
+       * up all available space in the window, use this property to constrain
+       * the dropdowns' sizes.
+       */
+      fitInto: {
+        type: HTMLElement
+      },
+
       _availableWidth: {
         type: Number,
         observer: 'rebuild'
