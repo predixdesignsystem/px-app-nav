@@ -304,10 +304,10 @@ function runCustomTests() {
         expect(appNavEl.someOverflowed).to.equal(true);
         expect(appNavEl.anyOverflowed).to.equal(true);
         done();
-      }, 250);
+      }, 500);
     });
 
-    it('marks two of its items as overflowed if it they longer fits', function(done) {
+    it('marks two of its items as overflowed if it they longer fit', function(done) {
       var fx = fixture('AppNavFixtureForMeasurements');
       var appNavEl = fx.querySelector('px-app-nav');
 
@@ -321,7 +321,7 @@ function runCustomTests() {
         expect(appNavEl.someOverflowed).to.equal(true);
         expect(appNavEl.anyOverflowed).to.equal(true);
         done();
-      }, 250);
+      }, 500);
     });
 
     it('marks all of its items as overflowed and collapses fully when only one item fits', function(done) {
@@ -337,7 +337,7 @@ function runCustomTests() {
         expect(appNavEl.overflowedItems.length).to.equal(6);
         expect(appNavEl.allCollapsed).to.equal(true);
         done();
-      }, 250);
+      }, 500);
     });
 
     it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function() {
@@ -389,7 +389,7 @@ function runCustomTests() {
         expect(groupEls.length).to.equal(1);
         expect(subgroupEls.length).to.equal(1);
         done();
-      }, 250);
+      }, 500);
     });
 
     it('opens the overflow dropdown when the overflow icon is tapped', function(done) {
@@ -481,20 +481,20 @@ function runCustomTests() {
         overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
         overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
         overflowIconEl.click();
-      }, 250);
+      }, 350);
       setTimeout(function() {
         subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
         subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
         subgroupItemEl.click();
-      }, 450);
+      }, 550);
       setTimeout(function() {
         appNavEl.click();
-      }, 650);
+      }, 750);
       setTimeout(function() {
         overflowIconEl.click();
         expect(subgroupEl.opened).to.equal(true);
         done();
-      }, 850);
+      }, 950);
     });
 
     it('closes the overflow dropdown and selects the overflow icon, subgroup, and subitem when an overflowed subitem is tapped', function(done) {
@@ -514,23 +514,23 @@ function runCustomTests() {
         overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
         overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
         overflowIconEl.click();
-      }, 250);
+      }, 350);
       setTimeout(function() {
         subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
         subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
         subgroupItemEl.click();
-      }, 450);
+      }, 550);
       setTimeout(function() {
         subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-subitem');
         subitemEl.click();
-      }, 650);
+      }, 750);
       setTimeout(function() {
         expect(overflowGroupEl.opened).to.equal(false);
         expect(subitemEl.selected).to.equal(true);
         expect(overflowGroupEl.selected).to.equal(true);
         expect(subgroupEl.selected).to.equal(true);
         done();
-      }, 750);
+      }, 950);
     });
   });
 
@@ -552,7 +552,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(appNavEl.allCollapsed).to.equal(true);
         done();
-      }, 50);
+      }, 100);
     });
 
     it('sizes the collapsed dropdown from the `collapseDropdownWidth` attribute value', function(done) {
@@ -578,7 +578,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(appNavEl.allCollapsed).to.equal(true);
         done();
-      }, 50);
+      }, 100);
     });
 
     it('shows an empty outline in the collapsed button when collapsed with no item selected', function(done) {
