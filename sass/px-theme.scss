@@ -459,7 +459,9 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-typeahead-text-color--selected: $white;
 
   // View Header
-  --px-view-header-background-color: $white;
+  --px-view-header-background-color: $gray2;
+  --px-view-header-title-color: $gray15;
+  --px-view-header-subtitle-color: $gray10;
 
   // // Vis
   // --px-vis-axis-brush-outline-color:
