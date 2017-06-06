@@ -366,18 +366,20 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-file-upload-validation-color: $status-red3;
   --px-file-upload-dropzone-background-color: $primary-light;
 
-  // // Inbox
-  // --px-inbox-border-color:
-  // --px-inbox-secondary-text-color:
-  // --px-inbox-li-background-color:
-  // --px-inbox-li-background-color--selected:
-  // --px-inbox-li-text-color--selected:
-  // --px-inbox-icon-outline-color:
-  // --px-inbox-alert-color:
-  // --px-inbox-warning-color:
-  // --px-inbox-error-color:
-  // --px-inbox-information-color:
-  //
+  // Inbox
+  --px-inbox-border-color: $gray3;
+  --px-inbox-secondary-text-color: $gray10;
+  --px-inbox-li-background-color: $gray1;
+  --px-inbox-li-background-color--selected: $select-default;
+  --px-inbox-li-text-color--selected: $white;
+  --px-inbox-icon-outline-color: $white;
+  --px-inbox-alert-color: $status-red3;
+  --px-inbox-warning-color: $status-orange3;
+  --px-inbox-error-color: $status-yellow3;
+  --px-inbox-information-color: $status-blue3;
+  --px-inbox-height: 100vh;
+  --px-inbox-list-width: 320px;
+
   // // KPI
   // --px-kpi-text-color:
   //
