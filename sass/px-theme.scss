@@ -434,6 +434,20 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-spinner-fill-color: $primary-default;
   --px-spinner-background-color: $cyan1;
 
+  // Table View
+  --px-table-row-color: inherit;
+  --px-table-row-background-color: transparent;
+  --px-table-row-selected-background-color: $select-default;
+  --px-table-row-selected-color: $white;
+  --px-table-row-title-color: inherit;
+  --px-table-row-subtitle-color: $gray8;
+  --px-table-row-body-color: $gray10;
+  --px-table-row-label-color: $gray10;
+  --px-table-row-header-color: inherit;
+  --px-table-row-header-background-color: $gray2;
+  --px-table-row-border-color: $gray10;
+  --px-table-row-separator-color: $gray5;
+
   // Tabs
   --px-tab-color: $gray10;
   --px-tab-color--hover: $primary-default;
