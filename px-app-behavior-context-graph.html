@@ -1,0 +1,123 @@
+<script>
+  (function() {
+    'use strict';
+
+    /* Ensures the behavior namespace is created */
+    window.PxAppBehavior = (window.PxAppBehavior || {});
+
+    /**
+     *
+     *
+     * @polymerBehavior PxAppBehavior.ContextGraph
+     */
+    PxAppBehavior.ContextGraph = {
+      _createContextGraph(nodes) {
+        return new PxApp.ContextGraph(nodes);
+      }
+    };
+
+    /* Ensures the class namespace is created */
+    window.PxApp = (window.PxApp || {});
+
+    class ContextGraph {
+      constructor(nodes, opts={}) {
+        this.nodes = nodes;
+        this._idKey = opts.idKey || 'id';
+        this._childrenKey = opts.childrenKey || 'children';
+        this._routeKey = opts.routeKey || 'route';
+        this._nodeCache = this._traceNodes(nodes, this._idKey, this._childrenKey, this._routeKey);
+      }
+
+      _traceNodes(nodes, idKey, childrenKey, routeKey) {
+        const traces = new WeakMap();
+        const routeFor = this._extractRoute.bind(this, idKey, routeKey);
+        let nodeQueue = nodes.map(n => ({ node: n, parent: null, path: [n], route: [routeFor(n)], siblings: nodes }));
+
+        while (nodeQueue.length) {
+          let {node, parent, path, route, siblings} = nodeQueue.shift();
+          let nodeInfo = {
+            node: node,
+            parent: parent,
+            children: node.hasOwnProperty(childrenKey) && Array.isArray(node[childrenKey]) ? node[childrenKey] : [],
+            id: node[idKey],
+            path: path,
+            route: route,
+            siblings: siblings
+          }
+          if (nodeInfo.children.length) {
+            let childNodes = nodeInfo.children.map(n => ({ node: n, parent: node, path: path.concat([n]), route: route.concat([routeFor(n)]), siblings: nodeInfo.children }));
+            nodeQueue = nodeQueue.concat(childNodes);
+          }
+          traces.set(node, nodeInfo);
+        }
+
+        return traces;
+      }
+
+      _extractRoute(idKey, routeKey, node) {
+        return node.hasOwnProperty(routeKey) ? node[routeKey] : node[idKey];
+      }
+
+      getNodeInfo(node) {
+        return this._nodeCache.get(node);
+      }
+
+      hasNode(node) {
+        return this._nodeCache.has(node);
+      }
+
+      getPathTo(node) {
+        let nodeInfo = this.getNodeInfo(node);
+        if (!nodeInfo) return undefined;
+        return nodeInfo.path.slice(0);
+      }
+
+      getRouteTo(node) {
+        let nodeInfo = this.getNodeInfo(node);
+        if (!nodeInfo) return undefined;
+        return nodeInfo.route.slice(0);
+      }
+
+      getParentOf(node) {
+        let nodeInfo = this.getNodeInfo(node);
+        if (!nodeInfo) return undefined;
+        return nodeInfo.parent;
+      }
+
+      getChildrenOf(node) {
+        let nodeInfo = this.getNodeInfo(node);
+        if (!nodeInfo) return undefined;
+        return nodeInfo.children;
+      }
+
+      getSiblingsOf(node) {
+        let nodeInfo = this.getNodeInfo(node);
+        if (!nodeInfo) return undefined;
+        return nodeInfo.siblings;
+      }
+
+      getNodeAtRoute(route) {
+        const routeFor = this._extractRoute.bind(this, this._idKey, this._routeKey)
+        const hasChildren = (item) => item.hasOwnProperty(this._childrenKey) && item[this._childrenKey].length > 0;
+        let foundItem;
+        let searchRoute = route.slice(0);
+        let items = this.nodes.slice(0);
+
+        while (!foundItem && items.length > 0 && searchRoute.length > 0) {
+          let item = items.shift();
+          if (routeFor(item) === searchRoute[0] && hasChildren(item) && searchRoute.length !== 1) {
+            searchRoute.shift();
+            items = item[this._childrenKey].slice(0);
+          }
+          if (routeFor(item) === searchRoute[0] && searchRoute.length === 1) {
+            foundItem = item;
+            break;
+          }
+        }
+
+        return foundItem;
+      }
+    }
+    PxApp.ContextGraph = ContextGraph;
+  })();
+</script>

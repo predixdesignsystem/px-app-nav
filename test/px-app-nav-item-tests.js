@@ -172,7 +172,7 @@ function runCustomTests() {
         expect(evtSpy).to.have.been.calledOnce;
         var evtArg = evtSpy.getCall(0).args[0];
         expect(evtArg.detail).to.be.instanceof(Object);
-        expect(evtArg.detail).to.deep.equal({ path: ['home'] });
+        expect(evtArg.detail.item).to.equal(itemEl.item);
         done();
       }, 60);
     });

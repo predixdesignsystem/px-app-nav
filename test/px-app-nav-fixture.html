@@ -25,56 +25,73 @@
   <body>
     <style include="px-theme-styles" is="custom-style"></style>
 
-    <test-fixture id="AppNavFixtureInitialSelectedPath">
+    <test-fixture id="AppNavFixtureUnselected">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
-              ]'
-              selected-path="alerts">
+              ]'>
           </px-app-nav>
         </div>
       </template>
     </test-fixture>
 
-    <test-fixture id="AppNavFixtureInitialSelectedSubpath">
+    <test-fixture id="AppNavFixtureSelectedRoute">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
-              selected-path="dashboards"
-              selected-subpath="orders">
+              selected-item-route='["alerts"]'>
           </px-app-nav>
         </div>
       </template>
     </test-fixture>
 
-    <test-fixture id="AppNavFixtureFallbackPath">
+    <test-fixture id="AppNavFixtureSelectedRouteNested">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
+                ]}
+              ]'
+              selected-item-route='["dashboards","orders"]'>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <!-- <test-fixture id="AppNavFixtureFallbackPath">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               fallback-path="home">
@@ -88,12 +105,12 @@
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               fallback-path="dashboards"
@@ -101,19 +118,19 @@
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture> -->
 
     <test-fixture id="AppNavFixtureHorizontal">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'>
           </px-app-nav>
@@ -126,18 +143,18 @@
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]},
-                { "label" : "Projects", "path" : "projects", "subitems" : [
-                  { "label" : "First Project", "path" : "project1" }
+                { "label" : "Projects", "id" : "projects", "children" : [
+                  { "label" : "First Project", "id" : "project1" }
                 ]},
-                { "label" : "Assets", "path" : "assets" },
-                { "label" : "Users", "path" : "users" }
+                { "label" : "Assets", "id" : "assets" },
+                { "label" : "Users", "id" : "users" }
               ]'>
           </px-app-nav>
         </div>
@@ -155,12 +172,12 @@
           <px-app-nav
               id="iconSizeNav"
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'>
           </px-app-nav>
@@ -179,12 +196,12 @@
           <px-app-nav
               id="itemPaddingNav"
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'>
           </px-app-nav>
@@ -197,12 +214,12 @@
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               collapse-all
@@ -217,12 +234,12 @@
         <div class="app-nav-container" style="width: 400px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               collapse-at="450">
@@ -236,16 +253,16 @@
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               collapse-all
-              selected-path="home">
+              selected-item-route='["home"]'>
           </px-app-nav>
         </div>
       </template>
@@ -256,17 +273,17 @@
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <px-app-nav
               items='[
-                { "label" : "Home", "path" : "home", "icon" : "px:home" },
-                { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-                { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-                  { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-                  { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-                  { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+                { "label" : "Home", "id" : "home", "icon" : "px:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
                 ]}
               ]'
               collapse-all
               collapse-with-icon
-              selected-path="home">
+              selected-item-route='["home"]'>
           </px-app-nav>
         </div>
       </template>

@@ -4,47 +4,49 @@
   Polymer({
     is: 'px-app-nav',
 
-    behaviors: [Polymer.IronResizableBehavior,PxAppNavBehavior.MeasureText],
+    behaviors: [Polymer.IronResizableBehavior, PxAppNavBehavior.MeasureText, PxAppBehavior.ContextGraph],
 
     properties: {
       /**
        * An array of objects that will be used to build the nav. Top-level items
-       * can have one level of subitems beneath them, turning the parent item
-       * into a dropdown group.
+       * can optionally have one level of children beneath them, turning the
+       * top-level item into a dropdown group.
        *
-       * All items and subitems should have at least the following properties:
+       * Selecting an item automatically selects its parent if it has one.
+       * For the navigation, top-level items with children cannot be selected
+       * directly - instead, users can select a child item and its parent will
+       * also be marked as selected (and set as the `selectedItemParent`).
        *
-       * - {String} path - A unique string that identifies the item. Should only
-       * contain alphanumeric characters matching A-Z, a-z, or 0-9. Avoid using
-       * special characters that must be encoded or decoded in URLs. The path
-       * must not contain any dots (`.`). Examples: 'home' or 'alerts'
-       * - {String} label - A short, human-readable text label for the item
+       * All items should have at least the following properties:
+       *
+       * - {String} id - A unique string that identifies the item. Should only
+       * contain valid ASCII characters. Its recommended to only use URI-safe
+       * characters to allow for easy binding to the URL. Examples: 'home' or 'alerts'
+       * - {String} label - A short, human-readable text label for the item.
        *
        * The following optional properties can be used for top-level items only:
        *
        * - {String} icon - The name of a valid iron-icon that will be placed
        * next to the text label for the item. Use a valid icon from px-icon-set
        * or define your own using the iron-iconset or iron-iconset-svg elements.
-       * - {Array} subitems - An array of subitem objects that will placed in a
+       * - {Array} children - An array of subitem objects that will placed in a
        * dropdown under the top-level item. Each subitem must have a `path`
-       * and `label` defined. If an `icon` or `subitems` property is defined
+       * and `label` defined. If an `icon` or `children` property is defined
        * on a subitem, those properties will be ignored.
-       *
-       * Note that top-level items with subitems cannot be directly selected
-       * by the user. They will only be selected when one of their subitems
-       * is tapped.
        *
        * The following is an example of a list of valid nav items:
        *
        *     [
-       *       { "label" : "Home",   "path" : "home",   "icon" : "px:home" },
-       *       { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-       *       { "label" : "Assets", "path" : "assets", "icon" : "px:asset", subitems: [
-       *         { "label" : "Asset #1", "path" : "a1" },
-       *         { "label" : "Asset #2", "path" : "a2" }
+       *       { "label" : "Home",   "id" : "home",   "icon" : "px:home" },
+       *       { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+       *       { "label" : "Assets", "id" : "assets", "icon" : "px:asset", "children": [
+       *         { "label" : "Asset #1", "id" : "a1" },
+       *         { "label" : "Asset #2", "id" : "a2" }
        *       ] }
        *     ]
        *
+       * The item property names can be changed, e.g. to choose a different item
+       * property to serve as a unique ID. See the `keys` property for details.
        */
       items: {
         type: Array,
@@ -107,39 +109,75 @@
       },
 
       /**
-       * A reference to the currently selected item's object. This is a read-only
-       * value you can bind to and use to update your app's state, e.g. to
-       * change the current page to some value stored in the selected item's
-       * object. To change the selected item, use the `selectedPath` attribute.
+       * A reference to the currently selected item. Use this property to set the
+       * selected item directly. The object passed to this property must be a
+       * direct reference to one of the `items` objects. Changing this property
+       * will automatically update the `selectedItemRoute`.
        *
-       * This is a direct reference to the item that was passed into the `items`
-       * list, and can be compared with its `items` entry using reference equality.
+       * Selecting an item automatically selects its parent if it has one.
+       * For the navigation, top-level items with children cannot be selected
+       * directly - instead, select a child item and its parent will also be
+       * marked as selected (and set as the `selectedItemParent`).
        *
-       * Note that the `selectedItem` may initially notify its value as `null`
-       * if no `selectedPath` is initially set, or if the `selectedPath` is
-       * set late.
+       * See `selectedItemRoute` for an alternative way to select items.
        */
       selectedItem: {
         type: Object,
         notify: true,
-        readOnly: true,
-        value: null
+        value: null,
+        observer: '_itemSelectedByReference'
       },
 
       /**
-       * A reference to the currently selected subitem's object. This is a read-only
-       * value you can bind to and use to update your app's state, e.g. to
-       * change the current page to some value stored in the selected subitem's
-       * object. To change the selected subitem, use the `selectedSubpath` attribute.
+       * The route to the selected item as an array of strings. Use this property
+       * to set the selected item by route, or to bind to updates when the
+       * selected item is changed. Changing this property will automatically
+       * update the `selectedItem`.
        *
-       * This is a direct reference to the subitem that was passed into the `items`
-       * list, and can be compared with its `items` entry using reference equality.
+       * The route array starts at the top of the graph and ends with the selected
+       * item. Each route entry is a string that corresponds to the unique ID
+       * of an item. The item property this unique ID will be taken from can be
+       * configured with the `key` property. By default, it will be `item.id`.
        *
-       * Note that the `selectedSubitem` may initially notify its value as `null`
-       * if no `selectedSubath` is initially set, or if the `selectedSubpath` is
-       * set late.
+       * Selecting an item automatically selects its parent if it has one.
+       * For the navigation, top-level items with children cannot be selected
+       * directly - instead, select a child item and its parent will also be
+       * marked as selected (and set as the `selectedItemParent`).
+       *
+       * For example, given the following graph:
+       *
+       *     [
+       *       {
+       *         "label" : "Dashboards",
+       *         "id" : "dash",
+       *         "children" : [
+       *           { "label" : "Truck Statuses", "id" : "trucks" },
+       *           { "label" : "Generator Alerts", "id" : "generators" }
+       *         ]
+       *       },
+       *     ]
+       *
+       * To select the "Truck Statuses" page, set the route array to:
+       *
+       *     ["dash", "trucks"]
+       *
+       * If the user then selects the "Generator Alerts" item, the route array
+       * would be replaced with a new array with the following entries:
+       *
+       *     ["dash", "generators"]
+       *
        */
-      selectedSubitem: {
+      selectedItemRoute: {
+        type: Array,
+        notify: true,
+        observer: '_itemSelectedByRoute'
+      },
+
+      /**
+       * [Read-only] A reference to the currently selected item's parent. `null`
+       * if the selected item has no parent or no item is selected.
+       */
+      selectedItemParent: {
         type: Object,
         notify: true,
         readOnly: true,
@@ -147,67 +185,83 @@
       },
 
       /**
-       * The path of the currently selected item. Set this attribute to select
-       * an item. Listen for updates to this attribute to be notified when
-       * the user selects a new item.
+       * [Read-only] A reference to the currenty selected item's siblings - the
+       * children of its parent. Array with only the selected item if the selected
+       * item has no siblings. `null` if no item is selected.
        */
-      selectedPath: {
-        type: String,
+      selectedItemSiblings: {
+        type: Array,
         notify: true,
-        observer: '_handleSelectedPathChanged'
+        readOnly: true,
+        value: null
       },
 
       /**
-       * The path of the currently selected subitem. Set this attribute to select
-       * a subitem. Listen for updates to this attribute to be notified when
-       * the user selects a new subitem.
+       * [Read-only] A reference to the currently selected item's children.
+       * Empty array (`[]`) if the selected item has no children. `null` if no
+       * item is selected.
        */
-      selectedSubpath: {
-        type: String,
+      selectedItemChildren: {
+        type: Array,
         notify: true,
-        observer: '_handleSelectedPathChanged'
+        readOnly: true,
+        value: null
       },
 
       /**
-       * The path to an item that will be visually selected and set as the
-       * `selectedItem` if no valid `selectedPath` is provided.
+       * [Read-only] The path to the selected item as an array. Begins with
+       * the top-most item in the graph and ends with the selected item. It
+       * the selected item is at the top of the graph, the array will include
+       * only the selected item.
        *
-       * Note that when the fallback path is used to select an item, the `selectedPath`
-       * attribute will not be updated. This ensures that data binding the
-       * `selectedPath` to your app router won't spam the window location
-       * with values when the page first loads. To initially select an item,
-       * use `selectedPath` instead.
+       * If no item is selected, set to null.
        */
-      fallbackPath: {
-        type: String
-      },
-
-      /**
-       * The path to a subitem that will be visually selected and set as the
-       * `selectedSubitem` if no valid `selectedPath` is provided.
-       *
-       * If a valid `selectedPath` is provided and no valid `selectedSubpath` is
-       * provided, the fallbackSubpath will not be used.
-       *
-       * Note that when the fallback subpath is used to select a subitem, the `selectedSubpath`
-       * attribute will not be updated. This ensures that data binding the
-       * `selectedSubpath` to your app router won't spam the window location
-       * with values when the page first loads. To initially select an item,
-       * use `selectedSubpath` instead.
-       */
-      fallbackSubpath: {
-        type: String
-      },
-
-      /**
-       * True if the fallbackPath and/or fallbackSubpath were used to initially
-       * select an item and/or subitem.
-       */
-      fallbackSelected: {
-        type: Boolean,
-        value: false,
+      selectedItemPath: {
+        type: Array,
         notify: true,
-        readOnly: true
+        readOnly: true,
+        value: null
+      },
+
+      /**
+       * Changes the item properties (keys) that will be used internally to find
+       * each item's unique ID, label, icon, and child list.
+       *
+       * Use this property if you already have a predefined data schema for your
+       * application and want to customize this component to match your schema.
+       * Otherwise, its recommended to leave the defaults.
+       *
+       * The following properties can be set:
+       *
+       * - id: [default='id'] a unique ID for the item
+       * - label: [default='label'] a human-readable label
+       * - icon: [default='icon'] an icon configuration string
+       * - children: [default='children'] an array of child items
+       *
+       * If you want to configure any keys, you must set all the keys. If any
+       * of the keys are not defined, the navigation will fail.
+       *
+       * For example, the schema could be changed to the following:
+       *
+       *     {
+       *       "id" : "assetId",
+       *       "label" : "assetName",
+       *       "icon" : "assetIcon",
+       *       "children" : "subAssets"
+       *     }
+       *
+       */
+      keys: {
+        type: Object,
+        value: function() {
+          return {
+            'id' : 'id',
+            'label' : 'label',
+            'icon' : 'icon',
+            'children' : 'children',
+            'route' : 'route'
+          }
+        }
       },
 
       /**
@@ -283,6 +337,21 @@
       _availableWidth: {
         type: Number,
         observer: 'rebuild'
+      },
+
+      _context: {
+        type: Object
+      },
+
+      _lastSelection: {
+        type: Object,
+        value: function() {
+          return {
+            source: null,
+            reason: null,
+            item: null
+          }
+        }
       }
     },
 
@@ -299,22 +368,27 @@
     },
 
     observers: [
-      '_handleSelectedPathChanged(fallbackPath, items)',
+      '_handleNavItemsChanged(items, keys)',
       '_handleItemVisibilityChanged(visibleItems, overflowedItems, visibleItems.*, overflowedItems.*)'
     ],
 
     listeners: {
       'iron-resize' : '_handleResize',
-      'px-app-nav-item-tapped' : '_handleItemSelected'
+      'px-app-nav-item-tapped' : '_itemSelectedByEvent'
     },
 
     /**
      * When the `items` list changes, retraces and memoizes item paths so they
      * can easily be found later during a selection.
      */
-    _handleNavItemsChanged(items) {
-      if (!items || !Array.isArray(items)) return;
-      const paths = this._paths = this._traceItemPaths(items);
+    _handleNavItemsChanged(items, keys) {
+      // @TODO: Handle when nav items is emptied later....
+      if (!items || !Array.isArray(items) || typeof keys !== 'object') return;
+      this._context = this._createContextGraph(items, {
+        idKey: keys.id,
+        childrenKey: keys.children,
+        routeKey: keys.route
+      });
       this.rebuild();
     },
 
@@ -349,69 +423,97 @@
     },
 
     /**
-     * When the user taps on an item or subitem, a selection request event
-     * bubbles up with the new selected path. This method handles that selection
-     * request and syncs the newly selected path to the `selectedPath` and
-     * `selectedSubpath` properties, triggering selection.
+     * Updates the selected item when the user taps on a nav item button.
      */
-    _handleItemSelected(evt) {
-      if (!evt.detail.path || !Array.isArray(evt.detail.path) || !evt.detail.path.length) return;
-
-      if (evt.detail.path.length === 1) {
-        this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', null);
-      }
-      if (evt.detail.path.length === 2) {
-        this.set('selectedPath', evt.detail.path[0]);
-        this.set('selectedSubpath', evt.detail.path[1]);
+    _itemSelectedByEvent(evt) {
+      if (evt.detail.item) {
+        this._selectItem(evt.detail.item, 'DOM_EVENT');
       }
     },
 
     /**
-     * This is the single point-of-control that selects and deselects items.
-     * Selection can happen in the following ways:
-     *
-     * - The `selectedPath` and `selectedSubpath` properties can be changed from
-     * the outside through data binding
-     * - The user can tap an item or subitem, triggering a selection request
-     * event that that updates the `selectedPath` and `selectedSubpath`
-     * - If no `selectedPath` or `selectedSubpath` are initially present, the
-     * `fallbackPath` and `fallbackSubpath` are used to select an item
-     *
-     * This method handles all of those cases, ensuring that the selection state
-     * is always kept in sync across all APIs. It searches a memoized list of
-     * paths to find a reference to the item/subitem objects at the selected path,
-     * and sets the `selectedItem` and `selectedSubitem` properties, triggering
-     * template data binding that will tell those items to appear selected.
+     * Updates the selected item properties when the `selectedItemRoute` changes.
      */
-    _handleSelectedPathChanged() {
-      this.debounce('selected-path-changed', ()=>{
-        // 1. Find the items
-        let path = !this.selectedSubpath ? this.selectedPath : `${this.selectedPath}.${this.selectedSubpath}`;
-        let [item, subitem] = this._findItemByPath(path);
-        if (item) {
-          this._setSelectedItem(item);
-          this._setSelectedSubitem(subitem);
-          this._setFallbackSelected(false);
-          return;
-        }
+    _itemSelectedByRoute(route) {
+      if (!route || this._lastSelection.route === route) return;
 
-        // 2. If no items found and fallback is defined, try the fallback
-        if (!item && this.fallbackPath && this.fallbackPath !== this.selectedPath) {
-          let path = !this.fallbackSubpath ? this.fallbackPath : `${this.fallbackPath}.${this.fallbackSubpath}`;
-          let [item, subitem] = this._findItemByPath(path);
-          if (item) {
-            this._setSelectedItem(item);
-            this._setSelectedSubitem(subitem);
-            this._setFallbackSelected(true);
-            return;
-          }
-        }
+      const item = this._context.getNodeAtRoute(route);
+      if (item) {
+        this._selectItem(item, 'ROUTE_CHANGED');
+      } else {
+        throw new Error(`The route ${JSON.stringify(route)} could not be found in the items graph.`)
+      }
+    },
 
-        // 3. Fallback path can't be found either
-        console.log(`Could not find an item matching the path ${path}.`)
+    /**
+     * Updates other selected item properties when the `selectedItem` changes.
+     */
+    _itemSelectedByReference(item) {
+      if (!item || this._lastSelection.item === item) return;
+
+      if (this._context.hasNode(item)) {
+        this._selectItem(item, 'ITEM_CHANGED');
+      } else {
+        throw new Error(`The following item could not be found in the items graph:
+        ${JSON.stringify(item)}`)
+      }
+    },
+
+    /**
+     * Gets item metadata from the ContextGraph and updates internaly APIs
+     */
+    _selectItem(item, source) {
+      const {path, route, parent, children, siblings} = this._context.getNodeInfo(item);
+      this._lastSelection = {
+        item: item,
+        source: source,
+        route: route
+      }
+      if (this.selectedItem !== item) {
+        this.set('selectedItem', item);
+      }
+      this.set('selectedItemRoute', route);
+      this._setSelectedItemPath(path);
+      this._setSelectedItemParent(parent);
+      this._setSelectedItemChildren(children);
+      this._setSelectedItemSiblings(siblings);
+
+      this.fire('px-app-nav-selected', {
+        selectionSource: source,
+        item: item,
+        route: route,
+        path: path,
+        parent: parent,
+        children: children,
+        siblings: siblings
       });
     },
+    /**
+     * Fired when a new navigation item is selected. Includes details about how
+     * the item was selected, and information about the new selected item.
+     *
+     * The `selectionSource` property is a string describing what triggered
+     * the selection:
+     *
+     *   * 'DOM_EVENT' - the user tapped on a navigation item
+     *   * 'ROUTE_CHANGED' - the array bound to `selectedItemRoute` changed
+     *   * 'ITEM_CHANGED' - the object bound to `selectedItem` changed
+     *   * 'SELECT_METHOD' - the `select()` method was called
+     *   * 'SELECT_ROUTE_METHOD' - the `selectRoute()` method was called
+     *
+     * The event will have the following properties:
+     *
+     *   * {Object} detail - Contains the event details
+     *   * {String} detail.selectionSource - Info about the change trigger, see above
+     *   * {Object} detail.item - Reference to the selected item
+     *   * {Array} detail.route - Route from the top of the graph to the selected item
+     *   * {Array} detail.path - Path from the top of the graph to the selected item
+     *   * {Object|null} detail.parent - Reference to the selected item's parent, or null if no parent defined
+     *   * {Array} detail.children - Reference to the the selected item's children, or an empty array if no children defined
+     *   * {Array} detail.siblings - Reference to the the selected item's siblings, or an array with only the selected item if no siblings defined
+     *
+     * @event px-app-nav-selected
+     */
 
     /**
      * Called when an `iron-resize` event notifies the element that its
@@ -451,51 +553,6 @@
         const width = containerWidth - actionsWidth;
         if (this._availableWidth !== width) this.set('_availableWidth', width);
       });
-    },
-
-    /**
-     * Recursively traces the paths of a list of navigation items, returning
-     * an object with the stringified paths as keys and the corresponding
-     * item references as values.
-     */
-    _traceItemPaths(items, parent, paths={}) {
-      for (let item of items) {
-        let pathKey = parent ? `${parent.path}.${item.path}` : item.path;
-        if (paths[pathKey]) {
-          console.log(`PX-APP-NAV ERR: Path ${pathKey} is duplicated. All paths must be unique.`);
-        }
-        else if (parent) {
-          paths[pathKey] = [parent, item];
-        }
-        else {
-          paths[pathKey] = [item];
-        }
-
-        if (item.subitems) {
-          this._traceItemPaths(item.subitems, item, paths);
-        }
-      }
-
-      return paths;
-    },
-
-    /**
-     * Searches the memoized paths to find an item at a certain path.
-     * The `pathStr` should be formatted as a string. When there is only a path
-     * and no subpath, use the path directly (e.g. 'home' for path 'home').
-     * When there is a path and subpath, concatenate both with a dot in the middle
-     * (e.g. 'dashboards.trucks' for path 'dashboards' and subpath 'trucks').
-     *
-     * @param  {String} pathStr
-     * @return {Array.<Object|null>}
-     */
-    _findItemByPath(pathStr) {
-      let items = [null,null];
-      if (typeof this._paths === 'object' && this._paths.hasOwnProperty(pathStr)) {
-        items[0] = this._paths[pathStr][0];
-        items[1] = this._paths[pathStr][1] || null;
-      }
-      return items;
     },
 
     /**
@@ -607,12 +664,12 @@
      */
     _measureItem(item) {
       const {fontFamily, fontSize, itemPadding, iconSize, iconPadding, openIconSize, openIconPadding} = this._getItemStyles();
-      const textLength = this._measureText(item.label, fontFamily, fontSize);
+      const textLength = this._measureText(item[this.keys.label], fontFamily, fontSize);
       if (!textLength) return;
       let totalLength = textLength; /* start with text size */
       totalLength += (itemPadding*2); /* add left pad + right pad */
-      if (item.icon && item.icon.length) totalLength += (iconSize + iconPadding); /* add icon size + icon right pad */
-      if (item.subitems && item.subitems.length) totalLength += (openIconSize + openIconPadding); /* add dropdown icon size + dropdown icon left pad */
+      if (item[this.keys.icon] && item[this.keys.icon].length) totalLength += (iconSize + iconPadding); /* add icon size + icon right pad */
+      if (item[this.keys.children] && item[this.keys.children].length) totalLength += (openIconSize + openIconPadding); /* add dropdown icon size + dropdown icon left pad */
       return totalLength;
     },
 
@@ -692,13 +749,18 @@
      * Otherwise, returns null.
      *
      * @param  {Object|null} selectedItem
+     * @param  {Object|null} selectedItemParent
+     * @param  {String} labelKey
      * @param  {Boolean} collapseWithIcon
      * @param  {Boolean} allCollapsed
      * @return {String|null}
      */
-    _getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed) {
+    _getDropdownLabel(selectedItem, selectedItemParent, labelKey, collapseWithIcon, allCollapsed) {
+      if (allCollapsed && selectedItemParent && typeof selectedItemParent === 'object' && !collapseWithIcon) {
+        return selectedItemParent[labelKey];
+      }
       if (allCollapsed && selectedItem && typeof selectedItem === 'object' && !collapseWithIcon) {
-        return selectedItem.label;
+        return selectedItem[labelKey];
       }
       return null;
     },
@@ -718,13 +780,15 @@
      * Otherwise, returns null.
      *
      * @param  {Object|null} selectedItem
+     * @param  {Object|null} selectedItemParent
+     * @param  {String} iconKey
      * @param  {Boolean} collapseWithIcon
      * @param  {Boolean} allCollapsed
      * @param  {Boolean} anyOverflowed
      * @param  {Boolean} collapseOpened
      * @return {String|null}
      */
-    _getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
+    _getDropdownIcon(selectedItem, selectedItemParent, iconKey, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
       if (anyOverflowed && !allCollapsed) {
         return 'px:collapse';
       }
@@ -734,8 +798,11 @@
       if (allCollapsed && collapseWithIcon && collapseOpened) {
         return 'px:close';
       }
+      if (allCollapsed && selectedItemParent && typeof selectedItemParent === 'object') {
+        return selectedItemParent[iconKey];
+      }
       if (allCollapsed && selectedItem && typeof selectedItem === 'object') {
-        return selectedItem.icon;
+        return selectedItem[iconKey];
       }
       return null;
     },
@@ -748,6 +815,19 @@
      */
     _getDropdownWidth(collapseDropdownWidth, allCollapsed) {
       return allCollapsed ? collapseDropdownWidth : undefined;
+    },
+
+    /**
+     * Fetches an item's property at the configured key. Used to dynamically
+     * fetch the item's label, icon, children, etc. based on the configured
+     * `keys` for the app.
+     *
+     * @param  {Object} item
+     * @param  {String} key
+     * @return {String}
+     */
+    _getItemProp(item, key) {
+      return item[key];
     },
 
     /**
@@ -808,23 +888,23 @@
     },
 
     /**
-     * Checks if the item is a parent of subitems.
+     * Checks if the item is a parent of children.
      *
      * @param  {Object} item
      * @return {Boolean}
      */
-    _isItemParent(item) {
-      return item && Array.isArray(item.subitems) && item.subitems.length;
+    _isItemParent(item, childrenKey) {
+      return item.hasOwnProperty(childrenKey) && Array.isArray(item[childrenKey]) && item[childrenKey].length > 0;
     },
 
     /**
-     * Checks if the item is NOT a parent of subitems.
+     * Checks if the item is NOT a parent of children.
      *
      * @param  {Object} item
      * @return {Boolean}
      */
-    _isItemNotParent(item) {
-      return !item.hasOwnProperty('subitems');
+    _isItemNotParent(item, childrenKey) {
+      return !item.hasOwnProperty(childrenKey) || !Array.isArray(item[childrenKey]) || item[childrenKey].length === 0;
     },
 
     /**
@@ -834,8 +914,9 @@
      * @param  {Array} overflowedItems
      * @return {Boolean}
      */
-    _isSelectedOverflowed(selectedItem, overflowedItems) {
+    _isSelectedOverflowed(selectedItem, selectedItemParent, overflowedItems) {
       if (!selectedItem || !overflowedItems || !Array.isArray(overflowedItems) || !overflowedItems.length) return false;
+      if (selectedItemParent) return overflowedItems.indexOf(selectedItemParent) !== -1;
       return overflowedItems.indexOf(selectedItem) !== -1;
     },
 

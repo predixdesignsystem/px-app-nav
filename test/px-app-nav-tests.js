@@ -5,133 +5,191 @@ document.addEventListener("WebComponentsReady", function() {
 function runCustomTests() {
 
   describe('px-app-nav [selection API]', function() {
-    var sandbox;
-
-    beforeEach(function() {
-      sandbox = sinon.sandbox.create();
-    });
-
-    afterEach(function() {
-      sandbox.restore();
-    });
-
-    it('selects an item by path when the `selectedPath` attribute is initially set', function(done) {
-      var fx = fixture('AppNavFixtureInitialSelectedPath');
+    it('sets its `selectedItemRoute` to the route of the `selectedItem`', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
-      var pathItem = appNavEl.items[1];
+      var item = appNavEl.items[2].children[0];
+      appNavEl.selectedItem = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItem).to.equal(pathItem);
-        var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
-        var pathItemEl = itemEls.filter(item => item.path === 'alerts')[0];
-        expect(pathItemEl.selected).to.equal(true);
+        expect(appNavEl.selectedItemRoute).to.eql(['dashboards', 'trucks']);
         done();
       }, 50);
     });
 
-    it('selects an item by path when the `selectedPath` and `selectedSubpath` attributes are initially set', function(done) {
-      var fx = fixture('AppNavFixtureInitialSelectedSubpath');
+    it('sets its `selectedItemParent` to reference the parent of the `selectedItem`', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
-      var pathItem = appNavEl.items[2];
-      var subpathItem = appNavEl.items[2].subitems[1];
+      var item = appNavEl.items[2].children[0];
+      var itemParent = appNavEl.items[2];
+      appNavEl.selectedItem = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItem).to.equal(pathItem);
-        expect(appNavEl.selectedSubitem).to.equal(subpathItem);
-        var pathItemEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
-        var subpathItemEl = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem').filter(item => item.path === 'orders')[0];
-        expect(pathItemEl.selected).to.equal(true);
-        expect(subpathItemEl.selected).to.equal(true);
+        expect(appNavEl.selectedItemParent).to.equal(itemParent);
         done();
       }, 50);
     });
 
-    it('dynamically changes the selected item and subitem when the `selectedItem` or `selectedSubitem` attributes are updated later', function(done) {
-      var fx = fixture('AppNavFixtureHorizontal');
+    it('sets its `selectedItemSiblings` property to reference the siblings of the `selectedItem`', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
+      var item = appNavEl.items[2].children[0];
+      var itemSiblings = appNavEl.items[2].children;
+      appNavEl.selectedItem = item;
 
       setTimeout(function() {
-        appNavEl.selectedPath = 'home';
+        expect(appNavEl.selectedItemSiblings).to.equal(itemSiblings);
+        done();
       }, 50);
+    });
+
+    it('sets its `selectedItemChildren` property to reference the children of the `selectedItem`', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var item = appNavEl.items[2];
+      var itemChildren = appNavEl.items[2].children;
+      appNavEl.selectedItem = item;
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItemChildren).to.equal(itemChildren);
+        done();
+      }, 50);
+    });
+
+    it('generates a `selectedItemPath` from the root of the graph to the `selectedItem`', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var item = appNavEl.items[2].children[0];
+      var itemParent = appNavEl.items[2];
+      appNavEl.selectedItem = item;
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItemPath).to.be.an('array');
+        expect(appNavEl.selectedItemPath.length).to.equal(2);
+        expect(appNavEl.selectedItemPath[0]).to.equal(itemParent);
+        expect(appNavEl.selectedItemPath[1]).to.equal(item);
+        done();
+      }, 50);
+    });
+
+
+    it('selects an item by route through the `selectedItemRoute` property', function(done) {
+      var fx = fixture('AppNavFixtureSelectedRoute');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var routeItem = appNavEl.items[1];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItem).to.equal(routeItem);
+        done();
+      }, 50);
+    });
+
+    it('selects an item and its parent by route through the `selectedItemRoute` property', function(done) {
+      var fx = fixture('AppNavFixtureSelectedRouteNested');
+      var appNavEl = fx.querySelector('px-app-nav');
+      var parentItem = appNavEl.items[2];
+      var item = appNavEl.items[2].children[1];
+
+      setTimeout(function() {
+        expect(appNavEl.selectedItemParent).to.equal(parentItem);
+        expect(appNavEl.selectedItem).to.equal(item);
+        done();
+      }, 50);
+    });
+
+    it('selects a different item and its parent by route through the `selectedItemRoute` property', function(done) {
+      var fx = fixture('AppNavFixtureUnselected');
+      var appNavEl = fx.querySelector('px-app-nav');
+      appNavEl.selectedItemRoute = ['home'];
+
       setTimeout(function() {
         var homeItem = appNavEl.items[0];
         expect(appNavEl.selectedItem).to.equal(homeItem);
-        appNavEl.selectedPath = 'dashboards';
-        appNavEl.selectedSubpath = 'trucks';
-      }, 60);
+        appNavEl.selectedItemRoute = ['dashboards', 'trucks'];
+      }, 50);
       setTimeout(function() {
         var dashboardsItem = appNavEl.items[2];
-        var trucksItem = appNavEl.items[2].subitems[0];
-        expect(appNavEl.selectedItem).to.equal(dashboardsItem);
-        expect(appNavEl.selectedSubitem).to.equal(trucksItem);
-        appNavEl.selectedPath = 'alerts';
-        appNavEl.selectedSubpath = null;
-      }, 70);
-      setTimeout(function() {
-        var alertsItem = appNavEl.items[1];
-        expect(appNavEl.selectedItem).to.equal(alertsItem);
-        expect(appNavEl.selectedSubitem).to.be.null;
+        var trucksItem = appNavEl.items[2].children[0];
+        expect(appNavEl.selectedItemParent).to.equal(dashboardsItem);
+        expect(appNavEl.selectedItem).to.equal(trucksItem);
         done();
-      }, 90);
+      }, 60);
     });
 
-    it('selects a fallback item when the `fallbackPath` attribute is initially set, and no `selectedPath` is provided', function(done) {
-      var fx = fixture('AppNavFixtureFallbackPath');
+    // it('selects a fallback item when the `fallbackPath` attribute is initially set, and no `selectedPath` is provided', function(done) {
+    //   var fx = fixture('AppNavFixtureFallbackPath');
+    //   var appNavEl = fx.querySelector('px-app-nav');
+    //   var fallbackItem = appNavEl.items[0];
+    //
+    //   setTimeout(function() {
+    //     expect(appNavEl.selectedItem).to.equal(fallbackItem);
+    //     done();
+    //   }, 50);
+    // });
+    //
+    // it('does not update the `selectedPath` property when the `fallbackPath` item is selected', function(done) {
+    //   var fx = fixture('AppNavFixtureFallbackPath');
+    //   var appNavEl = fx.querySelector('px-app-nav');
+    //
+    //   setTimeout(function() {
+    //     expect(appNavEl.selectedPath).to.be.undefined;
+    //     done();
+    //   }, 50);
+    // });
+    //
+    // it('selects a fallback subitem when the `fallbackPath` and `fallbackSubpath` are initially set, and no `selectedPath` or `selectedSubpath` is provided', function(done) {
+    //   var fx = fixture('AppNavFixtureFallbackSubpath');
+    //   var appNavEl = fx.querySelector('px-app-nav');
+    //   var fallbackItem = appNavEl.items[2];
+    //   var fallbackSubitem = appNavEl.items[2].subitems[2];
+    //
+    //   setTimeout(function() {
+    //     expect(appNavEl.selectedItem).to.equal(fallbackItem);
+    //     expect(appNavEl.selectedSubitem).to.equal(fallbackSubitem);
+    //     done();
+    //   }, 50);
+    // });
+    //
+    // it('does not update the `selectedPath` or `selectedSubpath` properties when the `fallbackPath` and `fallbackSubpath` items are selected', function(done) {
+    //   var fx = fixture('AppNavFixtureFallbackSubpath');
+    //   var appNavEl = fx.querySelector('px-app-nav');
+    //
+    //   setTimeout(function() {
+    //     expect(appNavEl.selectedPath).to.be.undefined;
+    //     expect(appNavEl.selectedSubpath).to.be.undefined;
+    //     done();
+    //   }, 50);
+    // });
+  });
+
+  describe('px-app-nav [selecting DOM nodes]', function() {
+    it('marks a <px-app-nav-item> as selected when its route is selected', function(done) {
+      var fx = fixture('AppNavFixtureSelectedRoute');
       var appNavEl = fx.querySelector('px-app-nav');
-      var fallbackItem = appNavEl.items[0];
 
       setTimeout(function() {
-        expect(appNavEl.selectedItem).to.equal(fallbackItem);
+        var itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
+        var routeItemEl = itemEls.filter(el => el.item.id === 'alerts')[0];
+        expect(routeItemEl.selected).to.equal(true);
         done();
       }, 50);
     });
 
-    it('does not update the `selectedPath` property when the `fallbackPath` item is selected', function(done) {
-      var fx = fixture('AppNavFixtureFallbackPath');
+    it('marks a <px-app-nav-group> and <px-app-nav-subitem> as selected when their route is selected', function(done) {
+      var fx = fixture('AppNavFixtureSelectedRouteNested');
       var appNavEl = fx.querySelector('px-app-nav');
 
       setTimeout(function() {
-        expect(appNavEl.selectedPath).to.be.undefined;
-        done();
-      }, 50);
-    });
-
-    it('selects a fallback subitem when the `fallbackPath` and `fallbackSubpath` are initially set, and no `selectedPath` or `selectedSubpath` is provided', function(done) {
-      var fx = fixture('AppNavFixtureFallbackSubpath');
-      var appNavEl = fx.querySelector('px-app-nav');
-      var fallbackItem = appNavEl.items[2];
-      var fallbackSubitem = appNavEl.items[2].subitems[2];
-
-      setTimeout(function() {
-        expect(appNavEl.selectedItem).to.equal(fallbackItem);
-        expect(appNavEl.selectedSubitem).to.equal(fallbackSubitem);
-        done();
-      }, 50);
-    });
-
-    it('does not update the `selectedPath` or `selectedSubpath` properties when the `fallbackPath` and `fallbackSubpath` items are selected', function(done) {
-      var fx = fixture('AppNavFixtureFallbackSubpath');
-      var appNavEl = fx.querySelector('px-app-nav');
-
-      setTimeout(function() {
-        expect(appNavEl.selectedPath).to.be.undefined;
-        expect(appNavEl.selectedSubpath).to.be.undefined;
+        var groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+        var subitemEl = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem').filter(el => el.item.id === 'orders')[0];
+        expect(groupEl.selected).to.equal(true);
+        expect(subitemEl.selected).to.equal(true);
         done();
       }, 50);
     });
   });
 
   describe('px-app-nav [horizontal]', function() {
-    var sandbox;
-
-    beforeEach(function() {
-      sandbox = sinon.sandbox.create();
-    });
-
-    afterEach(function() {
-      sandbox.restore();
-    });
-
     it('fills its container', function(done) {
       var fx = fixture('AppNavFixtureHorizontal');
       var appNavEl = fx.querySelector('px-app-nav');
@@ -169,12 +227,12 @@ function runCustomTests() {
 
       setTimeout(function() {
         itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
-        itemEl = itemEls.filter(item => item.path === 'home')[0];
+        itemEl = itemEls.filter(el => el.item.id === 'home')[0];
         itemEl.click();
       }, 50);
       setTimeout(function() {
         expect(itemEl.selected).to.equal(true);
-        expect(appNavEl.selectedPath).to.equal('home');
+        expect(appNavEl.selectedItemRoute).to.eql(['home']);
         expect(appNavEl.selectedItem).to.equal(homeItem);
         done();
       }, 100);
@@ -190,17 +248,17 @@ function runCustomTests() {
 
       setTimeout(function() {
         itemEls = Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item');
-        firstSelectedEl = itemEls.filter(item => item.path === 'home')[0];
+        firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
         firstSelectedEl.click();
       }, 50);
       setTimeout(function() {
-        secondSelectedEl = itemEls.filter(item => item.path === 'alerts')[0];
+        secondSelectedEl = itemEls.filter(el => el.item.id === 'alerts')[0];
         secondSelectedEl.click();
       }, 60);
       setTimeout(function() {
         expect(firstSelectedEl.selected).to.equal(false);
         expect(secondSelectedEl.selected).to.equal(true);
-        expect(appNavEl.selectedPath).to.equal('alerts');
+        expect(appNavEl.selectedItemRoute).to.eql(['alerts']);
         expect(appNavEl.selectedItem).to.equal(alertsItem);
         done();
       }, 100);
@@ -247,7 +305,7 @@ function runCustomTests() {
       var fx = fixture('AppNavFixtureHorizontal');
       var appNavEl = fx.querySelector('px-app-nav');
       var groupItem = appNavEl.items[2];
-      var groupSubitem = groupItem.subitems[0];
+      var groupSubitem = groupItem.children[0];
       var groupEl;
       var groupItemEl;
       var subitemEls;
@@ -257,7 +315,7 @@ function runCustomTests() {
         groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
         groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
         subitemEls = Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem');
-        subitemEl = subitemEls.filter(item => item.path === 'trucks')[0];
+        subitemEl = subitemEls.filter(el => el.item.id === 'trucks')[0];
         groupItemEl.click();
       }, 50);
       setTimeout(function() {
@@ -265,10 +323,9 @@ function runCustomTests() {
       }, 100);
       setTimeout(function() {
         expect(subitemEl.selected).to.equal(true);
-        expect(appNavEl.selectedPath).to.equal('dashboards');
-        expect(appNavEl.selectedItem).to.equal(groupItem);
-        expect(appNavEl.selectedSubpath).to.equal('trucks');
-        expect(appNavEl.selectedSubitem).to.equal(groupSubitem);
+        expect(appNavEl.selectedItemRoute).to.eql(['dashboards','trucks']);
+        expect(appNavEl.selectedItem).to.equal(groupSubitem);
+        expect(appNavEl.selectedItemParent).to.equal(groupItem);
         done();
       }, 200);
     });

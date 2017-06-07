@@ -132,7 +132,6 @@ function runCustomTests() {
         itemEl.click();
       }, 50);
       setTimeout(function() {
-        debugger;
         var subitemEl = Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem')[0];
         var subitemWidth = subitemEl.getBoundingClientRect().width;
         var contentEl = Polymer.dom(groupEl.root).querySelector('#groupcontent');
@@ -223,7 +222,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(dropdownEl.opened).to.be.false;
         done();
-      }, 90);
+      }, 100);
     });
 
     it('closes its dropdown when a subitem is selected', function(done) {
@@ -319,55 +318,6 @@ function runCustomTests() {
         expect(groupEl.opened).to.be.false;
         done();
       }, 70);
-    });
-
-    it('intercepts subitem selection events and retargets them to include its own path', function(done) {
-      var fx = fixture('AppNavGroup');
-      var groupEl = fx.querySelector('px-app-nav-group');
-      var evtSpy = sinon.spy();
-      groupEl.addEventListener('px-app-nav-item-tapped', evtSpy);
-      var itemEl;
-      var subitemEl;
-
-      setTimeout(function() {
-        itemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        subitemEl = Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem')[0];
-        itemEl.click();
-      }, 50);
-      setTimeout(function() {
-        subitemEl.click();
-      }, 60);
-      setTimeout(function() {
-        expect(evtSpy).to.have.been.calledOnce;
-        var evtArg = evtSpy.getCall(0).args[0];
-        expect(evtArg.detail).to.be.instanceof(Object);
-        expect(evtArg.detail).to.deep.equal({ group: true, path: ['alerts', 'generators'] });
-        done();
-      }, 60);
-    });
-
-    it('does not intercept subitem selection events if the `cancelSelect` property is true', function(done) {
-      var fx = fixture('AppNavGroupCancelSelect');
-      var groupEl = fx.querySelector('px-app-nav-group');
-      var evtSpy = sinon.spy();
-      groupEl.addEventListener('px-app-nav-item-tapped', evtSpy);
-      var itemEl;
-      var subitemEl;
-
-      setTimeout(function() {
-        itemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        subitemEl = Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem')[0];
-        itemEl.click();
-      }, 50);
-      setTimeout(function() {
-        subitemEl.click();
-      }, 60);
-      setTimeout(function() {
-        expect(evtSpy).to.have.been.calledOnce;
-        var evtArg = evtSpy.getCall(0).args[0];
-        expect(evtArg.detail).to.deep.equal({ path: ['generators'] });
-        done();
-      }, 60);
     });
   });
 }

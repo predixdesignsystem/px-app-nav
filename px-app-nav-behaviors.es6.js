@@ -12,18 +12,16 @@
   PxAppNavBehavior.Item = {
     properties: {
       /**
-       * Used as the label text for the item.
+       * A reference the object used to create this nav item.
        */
-      label: {
-        type: String
+      item: {
+        type: Object
       },
 
       /**
-       * A named path for this item. Used to select it programatically, e.g.
-       * by binding to the current URL route. Path names cannot have a dot
-       * ('.') in them or they will not work.
+       * Used as the label text for the item.
        */
-      path: {
+      label: {
         type: String
       },
 
@@ -78,9 +76,9 @@
      * Fire the select event so this item's parent will mark it as selected.
      */
     _handleSelfTapped(evt) {
-      if (this.cancelSelect || !this.path) return;
+      if (this.cancelSelect || !this.item) return;
       this.fire('px-app-nav-item-tapped', {
-        path: [this.path]
+        item: this.item
       }, {cancelable:true});
     }
   };

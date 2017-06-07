@@ -8,6 +8,7 @@
 <link rel="import" href="../iron-dropdown/iron-dropdown.html"/>
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html"/>
 
+<link rel="import" href="px-app-behavior-context-graph.html"/>
 <link rel="import" href="px-app-nav-behavior-measure-text.html"/>
 <link rel="import" href="px-app-nav-group.html"/>
 <link rel="import" href="px-app-nav-subgroup.html"/>
@@ -29,11 +30,11 @@ item fits in the window, the nav will collapse (see #2).
 ```
 <px-app-nav
     items='[
-      { "label" : "Home",   "path" : "home",   "icon" : "px:home" },
-      { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-      { "label" : "Assets", "path" : "assets", "icon" : "px:asset", subitems: [
-        { "label" : "Asset #1", "path" : "a1" },
-        { "label" : "Asset #2", "path" : "a2" }
+      { "label" : "Home",   "id" : "home",   "icon" : "px:home" },
+      { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+      { "label" : "Assets", "id" : "assets", "icon" : "px:asset", children: [
+        { "label" : "Asset #1", "id" : "a1" },
+        { "label" : "Asset #2", "id" : "a2" }
       ] }
     ]'
     selected-item="assets"
@@ -53,11 +54,11 @@ size with the `collapseAt` attribute.
 ```
 <px-app-nav
     items='[
-      { "label" : "Home",   "path" : "home",   "icon" : "px:home" },
-      { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-      { "label" : "Assets", "path" : "assets", "icon" : "px:asset", subitems: [
-        { "label" : "Asset #1", "path" : "a1" },
-        { "label" : "Asset #2", "path" : "a2" }
+      { "label" : "Home",   "id" : "home",   "icon" : "px:home" },
+      { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+      { "label" : "Assets", "id" : "assets", "icon" : "px:asset", children: [
+        { "label" : "Asset #1", "id" : "a1" },
+        { "label" : "Asset #2", "id" : "a2" }
       ] }
     ]'
     selected-item="home"
@@ -75,11 +76,11 @@ item labels. (Development of this style is still in progress.)
 ```
 <px-app-nav
     items='[
-      { "label" : "Home",   "path" : "home",   "icon" : "px:home" },
-      { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-      { "label" : "Assets", "path" : "assets", "icon" : "px:asset", subitems: [
-        { "label" : "Asset #1", "path" : "a1" },
-        { "label" : "Asset #2", "path" : "a2" }
+      { "label" : "Home",   "id" : "home",   "icon" : "px:home" },
+      { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+      { "label" : "Assets", "id" : "assets", "icon" : "px:asset", children: [
+        { "label" : "Asset #1", "id" : "a1" },
+        { "label" : "Asset #2", "id" : "a2" }
       ] }
     ]'
     selected-item="alerts"
@@ -110,51 +111,50 @@ Custom property | Description | Default
     <section class="app-nav" id="container">
       <section class="app-nav__items" id="items">
         <!-- First item stamp: visible items -->
-        <template is="dom-repeat" items="{{items}}" filter="_isItemVisible" id="visible">
-          <!-- Stamp groups, which hold subitems -->
-          <template is="dom-if" if="{{_isItemParent(item)}}">
-            <px-app-nav-group label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
-              <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}"></px-app-nav-subitem>
+        <template is="dom-repeat" items="{{items]]" filter="_isItemVisible" id="visible">
+          <!-- Stamp groups, which hold children -->
+          <template is="dom-if" if="{{_isItemParent(item, keys.children)]]">
+            <px-app-nav-group label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedItemParent)]]">
+              <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
+                <px-app-nav-subitem item="[[subitem]]" label="[[_getItemProp(subitem, keys.label)]]" selected$="[[_isItemSelected(subitem, selectedItem)]]"></px-app-nav-subitem>
               </template>
             </px-app-nav-group>
           </template>
 
-          <!-- Stamp plain old items, which hold subitems -->
-          <template is="dom-if" if="{{_isItemNotParent(item)}}">
-            <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}">
-            </px-app-nav-item>
+          <!-- Stamp plain old items, which hold children -->
+          <template is="dom-if" if="[[_isItemNotParent(item, keys.children)}}">
+            <px-app-nav-item item="[[item]]" label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedItem)]]"></px-app-nav-item>
           </template>
         </template>
 
         <!-- STATE: Items overflowed or collapsed -->
-        <template is="dom-if" if="{{anyOverflowed}}">
+        <template is="dom-if" if="[[anyOverflowed]]">
           <px-app-nav-group
               cancel-select
               fixed-width="[[_getDropdownWidth(collapseDropdownWidth, allCollapsed)]]"
               id="overflowedGroup"
-              label="{{_getDropdownLabel(selectedItem, collapseWithIcon, allCollapsed)}}"
-              icon="{{_getDropdownIcon(selectedItem, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)}}"
-              selected$="{{_isSelectedOverflowed(selectedItem, overflowedItems)}}"
-              hide-dropdown-icon="{{_isCollapsedCaratHidden(allCollapsed, collapseWithIcon)}}"
-              no-highlight="{{allCollapsed}}"
-              empty="{{_isCollapsedDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon)}}"
-              opened="{{collapseOpened}}"
-              fit-into="{{fitInto}}">
+              label="[[_getDropdownLabel(selectedItem, selectedItemParent, keys.label, collapseWithIcon, allCollapsed)]]"
+              icon="[[_getDropdownIcon(selectedItem, selectedItemParent, keys.icon, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)]]"
+              selected$="[[_isSelectedOverflowed(selectedItem, selectedItemParent, overflowedItems)]]"
+              hide-dropdown-icon="[[_isCollapsedCaratHidden(allCollapsed, collapseWithIcon)]]"
+              no-highlight="[[allCollapsed]]"
+              empty="[[_isCollapsedDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon)]]"
+              fit-into="[[fitInto]]"
+              opened="{{collapseOpened}}">
             <!-- Second item stamp: overflowed/collapsed items -->
-            <template is="dom-repeat" items="{{items}}" filter="_isItemOverflowed" id="overflowed">
-              <!-- Stamp groups, which hold subitems -->
-              <template is="dom-if" if="{{_isItemParent(item)}}">
-                <px-app-nav-subgroup label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
-                  <template is="dom-repeat" items="{{item.subitems}}" as="subitem">
-                    <px-app-nav-subitem label="{{subitem.label}}" path="{{subitem.path}}" selected$="{{_isItemSelected(subitem, selectedSubitem)}}" parent-selected$="{{_isItemSelected(item, selectedItem)}}" collapsed$="{{allCollapsed}}"></px-app-nav-item>
+            <template is="dom-repeat" items="[[items]]" filter="_isItemOverflowed" id="overflowed">
+              <!-- Stamp groups, which hold children -->
+              <template is="dom-if" if="[[_isItemParent(item, keys.children)]]">
+                <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedItemParent)]]" overflowed$="[[someOverflowed]]" collapsed$="[[allCollapsed]]">
+                  <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
+                    <px-app-nav-subitem item="[[subitem]]" label="[[_getItemProp(subitem, keys.label)]]" selected$="[[_isItemSelected(subitem, selectedItem)]]" parent-selected$="[[_isItemSelected(item, selectedItemParent)]]" collapsed$="[[allCollapsed]]"></px-app-nav-item>
                   </template>
                 </px-app-nav-subgroup>
               </template>
 
-              <!-- Stamp plain old items, which hold subitems -->
-              <template is="dom-if" if="{{_isItemNotParent(item)}}">
-                <px-app-nav-item label="{{item.label}}" icon="{{item.icon}}" path="{{item.path}}" selected$="{{_isItemSelected(item, selectedItem)}}" overflowed$="{{someOverflowed}}" collapsed$="{{allCollapsed}}">
+              <!-- Stamp plain old items, which hold children -->
+              <template is="dom-if" if="[[_isItemNotParent(item, keys.children)]]">
+                <px-app-nav-item item="[[item]]" label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedItem)]]" overflowed$="[[someOverflowed]]" collapsed$="[[allCollapsed]]">
                 </px-app-nav-item>
               </template>
             </template>

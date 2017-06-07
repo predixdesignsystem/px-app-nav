@@ -74,6 +74,13 @@
       },
 
       /**
+       * A reference the object used to create this nav item.
+       */
+      item: {
+        type: Object
+      },
+
+      /**
        * The label text for the group's button.
        */
       label: {
@@ -86,15 +93,6 @@
        */
       icon: {
         type: String
-      },
-
-      /**
-       * A named path for this item. Used to select one of its subitems programatically,
-       * e.g. by binding to the current URL route. Path names cannot have a dot
-       * ('.') in them or they will not work.
-       */
-      path: {
-        type: String,
       },
 
       /**
@@ -201,7 +199,7 @@
       this.listen(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      this.listen(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      this.listen(this, 'px-app-nav-item-tapped', '_handleItemSelected');
       this.set('_offsetHeight', this._getVerticalOffset());
     },
 
@@ -210,7 +208,7 @@
       this.unlisten(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
-      this.unlisten(this.$.group, 'px-app-nav-item-tapped', '_handleSubitemSelected');
+      this.unlisten(this, 'px-app-nav-item-tapped', '_handleItemSelected');
     },
 
     _openedChangedFromOutside: function(newVal) {
@@ -236,7 +234,7 @@
       evt.stopPropagation();
 
       this.fire('px-app-nav-group-opened', {
-        path: this.path
+        item: this.item
       });
     },
 
@@ -245,7 +243,7 @@
       evt.stopPropagation();
 
       this.fire('px-app-nav-group-closed', {
-        path: this.path
+        item: this.item
       });
     },
 
@@ -331,32 +329,20 @@
     },
 
     /**
-     * If a group's subitem is selected, it should also be selected. Fire an event
-     * to ask this item's parent to select it when its subitem is selected.
+     * If a group's selected state is changed and it is open, close the group.
      */
-    _handleSubitemSelected(evt) {
-      if (!this.cancelSelect && this.path) {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        var path = [this.path].concat(evt.detail.path);
-
-        this.fire('px-app-nav-item-tapped', {
-          group: true,
-          path: path
-        });
+    _handleSelectedChanged(nextState, lastState) {
+      if (nextState !== lastState && this.opened) {
+        this.closeGroup();
       }
-
-      this.closeGroup();
     },
 
     /**
-     * If a group is goes from being selected to deselected, call closeGroup
-     * to ensure it is closed.
+     * Closes a superlist if its subitem is selected.
      */
-    _handleSelectedChanged(nextState, lastState) {
-      if (lastState === true && nextState === false) {
-        this.closeGroup();
+    _handleItemSelected(evt) {
+      if (this.opened) {
+        this.closeGroup();  
       }
     },
 

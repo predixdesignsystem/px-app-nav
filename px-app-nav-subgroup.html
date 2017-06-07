@@ -60,6 +60,13 @@
       },
 
       /**
+       * A reference the object used to create this nav item.
+       */
+      item: {
+        type: Object
+      },
+
+      /**
        * The label text for the group's button.
        */
       label: {
@@ -71,16 +78,6 @@
        */
       icon: {
         type: String
-      },
-
-      /**
-       * A named path for this item. Used to select one of its subitems programatically,
-       * e.g. by binding to the current URL route. Path names cannot have a dot
-       * ('.') in them or they will not work.
-       */
-      path: {
-        type: String,
-        reflectToAttribute: true
       },
 
       /**
@@ -121,12 +118,10 @@
 
     attached: function() {
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
-      this.listen(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
     },
 
     detached: function() {
       this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
-      this.unlisten(this.$.groupcontainer, 'px-app-nav-item-tapped', '_handleSubitemSelected');
     },
 
     _toggleGroup() {
@@ -161,25 +156,6 @@
      */
     _handleSelfTapped(evt) {
       this._toggleGroup();
-    },
-
-    /**
-     * If a group's subitem is selected, it should also be selected. Fire an event
-     * to ask this item's parent to select it when its subitem is selected.
-     */
-    _handleSubitemSelected(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      var localPath = this.path ? this.path : (typeof this.index === 'number' ? this.index : this.item);
-      var path = [localPath].concat(evt.detail.path);
-      var items = [this.item].concat(evt.detail.items);
-
-      this.fire('px-app-nav-item-tapped', {
-        group: true,
-        path: path,
-        items: items
-      });
     }
   });
 
