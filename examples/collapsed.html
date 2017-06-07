@@ -18,25 +18,25 @@
   <template is="dom-bind">
     <px-app-nav
         items='[
-          { "label" : "Home", "path" : "home", "icon" : "px:home" },
-          { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-            { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-            { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+          { "label" : "Home", "id" : "home", "icon" : "px:home" },
+          { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
+          { "label" : "Dashboards", "id" : "dashboards", "icon" : "px:dashboard", "children": [
+            { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px:truck" },
+            { "label" : "Track Orders", "id" : "orders", "icon" : "px:order" },
+            { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px:note" }
           ]}
         ]'
         collapse-all
         collapse-dropdown-width="275"
-        selected-path="{{selectedPath}}"
-        selected-subpath="{{selectedSubpath}}"
+        selected-item="{{selectedItem}}"
+        selected-route="{{selectedRoute}}"
         collapse-opened="{{collapseOpened}}">
     </px-app-nav>
 
     <div id="app">
       <ul>
-        <li>Selected path: <strong>{{selectedPath}}</strong></li>
-        <li>Selected subpath: <strong>{{selectedSubpath}}</strong></li>
+        <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
+        <li>Selected route: <strong>{{selectedRoute}}</strong></li>
         <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
       </ul>
     </div>

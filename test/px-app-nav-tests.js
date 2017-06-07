@@ -5,14 +5,14 @@ document.addEventListener("WebComponentsReady", function() {
 function runCustomTests() {
 
   describe('px-app-nav [selection API]', function() {
-    it('sets its `selectedItemRoute` to the route of the `selectedItem`', function(done) {
+    it('sets its `selectedRoute` to the route of the `selectedItem`', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
       var item = appNavEl.items[2].children[0];
       appNavEl.selectedItem = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItemRoute).to.eql(['dashboards', 'trucks']);
+        expect(appNavEl.selectedRoute).to.eql(['dashboards', 'trucks']);
         done();
       }, 50);
     });
@@ -73,7 +73,7 @@ function runCustomTests() {
     });
 
 
-    it('selects an item by route through the `selectedItemRoute` property', function(done) {
+    it('selects an item by route through the `selectedRoute` property', function(done) {
       var fx = fixture('AppNavFixtureSelectedRoute');
       var appNavEl = fx.querySelector('px-app-nav');
       var routeItem = appNavEl.items[1];
@@ -84,7 +84,7 @@ function runCustomTests() {
       }, 50);
     });
 
-    it('selects an item and its parent by route through the `selectedItemRoute` property', function(done) {
+    it('selects an item and its parent by route through the `selectedRoute` property', function(done) {
       var fx = fixture('AppNavFixtureSelectedRouteNested');
       var appNavEl = fx.querySelector('px-app-nav');
       var parentItem = appNavEl.items[2];
@@ -97,15 +97,15 @@ function runCustomTests() {
       }, 50);
     });
 
-    it('selects a different item and its parent by route through the `selectedItemRoute` property', function(done) {
+    it('selects a different item and its parent by route through the `selectedRoute` property', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
-      appNavEl.selectedItemRoute = ['home'];
+      appNavEl.selectedRoute = ['home'];
 
       setTimeout(function() {
         var homeItem = appNavEl.items[0];
         expect(appNavEl.selectedItem).to.equal(homeItem);
-        appNavEl.selectedItemRoute = ['dashboards', 'trucks'];
+        appNavEl.selectedRoute = ['dashboards', 'trucks'];
       }, 50);
       setTimeout(function() {
         var dashboardsItem = appNavEl.items[2];
@@ -232,7 +232,7 @@ function runCustomTests() {
       }, 50);
       setTimeout(function() {
         expect(itemEl.selected).to.equal(true);
-        expect(appNavEl.selectedItemRoute).to.eql(['home']);
+        expect(appNavEl.selectedRoute).to.eql(['home']);
         expect(appNavEl.selectedItem).to.equal(homeItem);
         done();
       }, 100);
@@ -258,7 +258,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(firstSelectedEl.selected).to.equal(false);
         expect(secondSelectedEl.selected).to.equal(true);
-        expect(appNavEl.selectedItemRoute).to.eql(['alerts']);
+        expect(appNavEl.selectedRoute).to.eql(['alerts']);
         expect(appNavEl.selectedItem).to.equal(alertsItem);
         done();
       }, 100);
@@ -323,7 +323,7 @@ function runCustomTests() {
       }, 100);
       setTimeout(function() {
         expect(subitemEl.selected).to.equal(true);
-        expect(appNavEl.selectedItemRoute).to.eql(['dashboards','trucks']);
+        expect(appNavEl.selectedRoute).to.eql(['dashboards','trucks']);
         expect(appNavEl.selectedItem).to.equal(groupSubitem);
         expect(appNavEl.selectedItemParent).to.equal(groupItem);
         done();

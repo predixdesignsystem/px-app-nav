@@ -112,14 +112,14 @@
        * A reference to the currently selected item. Use this property to set the
        * selected item directly. The object passed to this property must be a
        * direct reference to one of the `items` objects. Changing this property
-       * will automatically update the `selectedItemRoute`.
+       * will automatically update the `selectedRoute`.
        *
        * Selecting an item automatically selects its parent if it has one.
        * For the navigation, top-level items with children cannot be selected
        * directly - instead, select a child item and its parent will also be
        * marked as selected (and set as the `selectedItemParent`).
        *
-       * See `selectedItemRoute` for an alternative way to select items.
+       * See `selectedRoute` for an alternative way to select items.
        */
       selectedItem: {
         type: Object,
@@ -167,7 +167,7 @@
        *     ["dash", "generators"]
        *
        */
-      selectedItemRoute: {
+      selectedRoute: {
         type: Array,
         notify: true,
         observer: '_itemSelectedByRoute'
@@ -432,7 +432,7 @@
     },
 
     /**
-     * Updates the selected item properties when the `selectedItemRoute` changes.
+     * Updates the selected item properties when the `selectedRoute` changes.
      */
     _itemSelectedByRoute(route) {
       if (!route || this._lastSelection.route === route) return;
@@ -472,7 +472,7 @@
       if (this.selectedItem !== item) {
         this.set('selectedItem', item);
       }
-      this.set('selectedItemRoute', route);
+      this.set('selectedRoute', route);
       this._setSelectedItemPath(path);
       this._setSelectedItemParent(parent);
       this._setSelectedItemChildren(children);
@@ -496,7 +496,7 @@
      * the selection:
      *
      *   * 'DOM_EVENT' - the user tapped on a navigation item
-     *   * 'ROUTE_CHANGED' - the array bound to `selectedItemRoute` changed
+     *   * 'ROUTE_CHANGED' - the array bound to `selectedRoute` changed
      *   * 'ITEM_CHANGED' - the object bound to `selectedItem` changed
      *   * 'SELECT_METHOD' - the `select()` method was called
      *   * 'SELECT_ROUTE_METHOD' - the `selectRoute()` method was called
