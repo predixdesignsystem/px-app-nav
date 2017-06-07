@@ -26,16 +26,14 @@
             { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
           ]}
         ]'
-        selected-path="{{selectedPath}}"
-        selected-subpath="{{selectedSubpath}}"
-        fallback-path="home"
-        fallback-selected="{{fallbackSelected}}">
+        selected-item="{{selectedItem}}"
+        selected-route="{{selectedRoute}}">
     </px-app-nav>
 
     <div id="app">
       <ul>
-        <li>Selected path: <strong>{{selectedPath}}</strong></li>
-        <li>Selected subpath: <strong>{{selectedSubpath}}</strong></li>
+        <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
+        <li>Selected route: <strong>{{selectedRoute}}</strong></li>
         <li>Using fallback path: <strong>{{fallbackSelected}}</strong></li>
       </ul>
     </div>
