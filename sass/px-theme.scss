@@ -436,7 +436,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
   // Table View
   --px-table-row-color: inherit;
-  --px-table-row-background-color: transparent;
+  --px-table-row-background-color: $white;
   --px-table-row-selected-background-color: $select-default;
   --px-table-row-selected-color: $white;
   --px-table-row-title-color: inherit;
