@@ -228,39 +228,40 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-deck-selector-text-color--selected: $white;
   --px-deck-selector-li-border: $gray2;
 
-  // //// Charts
-  //
-  // // Percent Circle
-  // --px-percent-circle-fill-color:
-  // --px-percent-circle-background-color:
-  // --px-percent-circle-text-color:
-  //
-  // // Simple Bar Chart
-  // --px-simple-bar-chart-text-color:
-  // --px-simple-bar-chart-background-color:
-  //
-  // // Simple Horizontal Bar Chart
-  // --px-simple-horizontal-bar-chart-background-color:
-  // --px-simple-horizontal-bar-chart-legend-text-color:
-  // --px-simple-horizontal-bar-chart-label-text-color:
-  // --px-simple-horizontal-bar-chart-axis-color:
-  //
-  // // Simple Line Chart
-  // --px-simple-line-chart-background-color:
-  // --px-simple-line-chart-border-color:
-  // --px-simple-line-chart-grid-color:
-  // --px-simple-line-chart-bottom-color:
-  // --px-simple-line-chart-axis-bar-color:
-  // --px-simple-line-chart-axis-label-color:
-  // --px-simple-line-chart-axis-label-font-weight:
-  // --px-simple-line-chart-line-color:
-  // --px-simple-line-chart-theshold-line-color:
-  //
-  // // Simple Win-Loss Chart
-  // --px-win-loss-border-color:
-  // --px-win-loss-background-color:
-  // --px-win-loss-positive-fill-color:
-  // --px-win-loss-negative-fill-color:
+  //// Charts
+
+  // Percent Circle
+  --px-percent-circle-fill-color: $cyan6;
+  --px-percent-circle-background-color: $gray5;
+  --px-percent-circle-text-color: $gray15;
+
+  // Simple Bar Chart
+  --px-simple-bar-chart-text-color: $gray15;
+  --px-simple-bar-chart-background-color: transparent;
+  --px-simple-bar-chart-axis-color: $gray10;
+
+  // Simple Horizontal Bar Chart
+  --px-simple-horizontal-bar-chart-background-color: transparent;
+  --px-simple-horizontal-bar-chart-legend-text-color: $gray15;
+  --px-simple-horizontal-bar-chart-label-text-color: $gray15;
+  --px-simple-horizontal-bar-chart-axis-color: $gray10;
+
+  // Simple Line Chart
+  --px-simple-line-chart-background-color: transparent;
+  --px-simple-line-chart-border-color: $gray10;
+  --px-simple-line-chart-grid-color: $gray3;
+  --px-simple-line-chart-bottom-color: transparent;
+  --px-simple-line-chart-axis-bar-color: $gray1;
+  --px-simple-line-chart-axis-label-color: $gray10;
+  --px-simple-line-chart-axis-label-font-weight: normal;
+  --px-simple-line-chart-line-color: $cyan6;
+  --px-simple-line-chart-threshold-line-color: $orange5;
+
+  // Simple Win-Loss Chart
+  --px-win-loss-border-color: $gray10;
+  --px-win-loss-background-color: transparent;
+  --px-win-loss-positive-fill-color: $yellow-green4;
+  --px-win-loss-negative-fill-color: $red4;
 
   // Clipboard
   --px-clipboard-icon-color: $gray15;
@@ -534,20 +535,20 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-vis-register-series-name:
   // --px-vis-register-data-value:
   // --px-vis-register-box:
-  //
-  // // Vis Data Vis
-  // // Colors MUST start at 0 and cannot contain gaps.
-  // --px-vis-series-color-0:
-  // --px-vis-series-color-1:
-  // --px-vis-series-color-2:
-  // --px-vis-series-color-3:
-  // --px-vis-series-color-4:
+
+  // Vis Data Vis
+  // Colors MUST start at 0 and cannot contain gaps.
+  --px-vis-series-color-0: $red5;
+  --px-vis-series-color-1: $green5;
+  --px-vis-series-color-2: $green4;
+  --px-vis-series-color-3: $teal6;
+  --px-vis-series-color-4: $teal5;
   // --px-vis-series-color-5:
   // --px-vis-series-color-6:
   // --px-vis-series-color-7:
   // --px-vis-series-color-8:
   // --px-vis-series-color-9:
-  //
+
   // --px-vis-series-color-10:
   // --px-vis-series-color-11:
   // --px-vis-series-color-12:
@@ -558,7 +559,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-vis-series-color-17:
   // --px-vis-series-color-18:
   // --px-vis-series-color-19:
-  //
+
   // --px-vis-series-color-20:
   // --px-vis-series-color-21:
   // --px-vis-series-color-22:
@@ -569,16 +570,15 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-vis-series-color-27:
   // --px-vis-series-color-28:
   // --px-vis-series-color-29:
-  //
-  //
-  // // Gauge styles
-  // --px-gauge-fill-error-color:
-  // --px-gauge-fill-anomaly-color:
-  // --px-gauge-fill-abnormal-color:
-  // --px-gauge-fill-normal-color:
-  // --px-gauge-empty-color:
-  // --px-gauge-needle-color:
-  //
+
+  // Gauge styles
+  --px-gauge-fill-error-color: $status-red3;
+  --px-gauge-fill-anomaly-color: $status-yellow3;
+  --px-gauge-fill-abnormal-color: $status-orange3;
+  --px-gauge-fill-normal-color: $status-blue3;
+  --px-gauge-empty-color: $gray5;
+  --px-gauge-needle-color: $gray15;
+
   // // Seed App styles
   // --px-seed-app-main-content-area-background-color:
   // --px-seed-app-logo-color:
