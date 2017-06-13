@@ -1,3 +1,7 @@
+v1.10.13
+==================
+* fix css var for hamburger
+
 v1.10.12
 ==================
 * sass fix for safari 9
