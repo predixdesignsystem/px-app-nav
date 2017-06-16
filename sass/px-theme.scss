@@ -91,19 +91,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-code-background-color: $gray1;
   --px-code-border-color: transparent;
 
-  // Headings
-  --px-headings-heading-page-color: $gray15;
-  --px-headings-heading-section-color: $gray10;
-  --px-headings-heading-subsection-color: $gray15;
-  --px-headings-heading-subsection-background: $gray2;
-  --px-headings-label-color: $gray10;
-  --px-headings-value-color: $gray15;
-
   // Forms
   --px-input-text-color: $gray15;
   --px-input-label-text-color: $gray10;
-  --px-input-text-color--placeholder: $gray5;
-  --px-input-text-color--placeholder--focused: $gray5;
+  --px-input-text-color--placeholder: rgba($black,0.3);
+  --px-input-text-color--placeholder--focused: rgba($black,0.3);
   --px-input-text-color--help: $gray10;
   --px-input-background-color: transparent;
   --px-input-background-color--hover: $gray3;
@@ -112,8 +104,8 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-input-border-color--outer: $gray8;
   --px-input-border-color--outer--focused: $primary-default;
   --px-input-text-color--focused: $gray15;
-  --px-input-text-color--disabled: $gray4;
-  --px-input-border-color--disabled: $gray4;
+  --px-input-text-color--disabled: rgba($black,0.2);
+  --px-input-border-color--disabled: rgba($black,0.2);
   --px-input-textarea-background--focused: $gray3;
   --px-select-text-color: $gray15;
   --px-select-background-color: $gray3;
@@ -129,9 +121,13 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-validation-success-text-color: $status-green3;
   --px-validation-success-background-color: $status-green1;
 
-  // // Input Group
-  // --px-input-group-text-color:
-  // --px-input-group-icon-color:
+  // Headings
+  --px-headings-heading-page-color: $gray15;
+  --px-headings-heading-section-color: $gray10;
+  --px-headings-heading-subsection-color: $gray15;
+  --px-headings-heading-subsection-background: $gray2;
+  --px-headings-label-color: $gray10;
+  --px-headings-value-color: $gray15;
 
   // List UI
   --px-list-ui-border-color: $gray10;
@@ -172,31 +168,27 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   /***********************************/
 
   // Alert Label
-  // --px-alert-label-text-color--alert:
-  // --px-alert-label-background-color--alert:
-  // --px-alert-label-text-color--warning:
-  // --px-alert-label-background-color--warning:
-  // --px-alert-label-text-color--error:
-  // --px-alert-label-background-color--error:
-  // --px-alert-label-text-color--info:
-  // --px-alert-label-background-color--info:
-  // --px-alert-label-text-color--healthy:
-  // --px-alert-label-background-color--healthy:
-  // --px-alert-label-border-color--healthy:
-  // --px-alert-label-text-color--inverted:
-  // --px-alert-label-background-color--inverted:
-  // --px-alert-label-text-color--unknown:
-  // --px-alert-label-background-color--unknown:
-  //
-  // // Alert Message
-  // --px-alert-message-background-color:
-  // --px-alert-message-icon-outline-color:
-  // --px-alert-message-icon-text-color:
-  // --px-alert-message-alert-color:
-  // --px-alert-message-warning-color:
-  // --px-alert-message-error-color:
-  // --px-alert-message-info-color:
-  // --px-alert-message-dismiss-icon-color:
+  --px-alert-label-text-color--important: $white;
+  --px-alert-label-background-color--important: $status-red3;
+  --px-alert-label-text-color--warning: $white;
+  --px-alert-label-background-color--warning: $status-orange3;
+  --px-alert-label-text-color--error: $yellow10;
+  --px-alert-label-background-color--error: $status-yellow3;
+  --px-alert-label-text-color--info: $white;
+  --px-alert-label-background-color--info: $status-blue3;
+  --px-alert-label-text-color--healthy: $white;
+  --px-alert-label-background-color--healthy: $status-green3;
+  --px-alert-label-text-color--unknown: $white;
+  --px-alert-label-background-color--unknown: $neutral-gray3;
+
+  // Alert Message
+  --px-alert-message-background-color: $white;
+  --px-alert-message-text-color: $gray15;
+  --px-alert-message-color--important: $status-red3;
+  --px-alert-message-color--warning: $status-orange3;
+  --px-alert-message-color--error: $status-yellow3;
+  --px-alert-message-color--information: $status-blue3;
+  --px-alert-message-dismiss-icon-color: $gray8;
 
   // App Nav
 
@@ -454,13 +446,10 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
   // Tabs
   --px-tab-color: $gray10;
-  --px-tab-color--hover: $primary-default;
-  --px-tab-color--active: $primary-pressed;
+  --px-tab-color--hover: $select-default;
+  --px-tab-color--active: $select-pressed;
   --px-tab-color--selected: $select-default;
-  --px-tab-color--selected--hover: $select-hover;
-  --px-tab-color--selected--active: $select-pressed;
   --px-tab-border-color: $gray5;
-  --px-tab-outline-style: none;
 
   // Tooltip
   --px-tooltip-background-color: $white;
