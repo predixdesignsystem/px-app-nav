@@ -16,250 +16,248 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 @import "px-iconography-design/_base.iconography.scss";
 
   // Defaults
-  --px-base-text-color: $gray15;
-  --px-base-background-color: $white;
+  --px-base-text-color       : $gray15;
+  --px-base-background-color : $white;
 
   @import "px-defaults-design/_settings.defaults.scss";
   @import "px-mixins-design/_tools.mixins.scss";
 
   // Actionable Text & Icons
-  --px-actionable-text-color: $primary-default;
-  --px-actionable-text-color--hover: $primary-hover;
-  --px-actionable-text-color--active: $primary-pressed;
-  --px-selectable-text-color: $select-default;
-  --px-selectable-text-color--hover: $select-hover;
-  --px-selectable-text-color--active: $select-pressed;
-  --px-actionable-alt-text-color: $gray15;
-  --px-actionable-alt-text-color--hover: $primary-default;
-  --px-actionable-alt-text-color--active: $primary-pressed;
-  --px-actionable-disabled-text-color: rgba($black, 0.2);
+  --px-actionable-text-color              :  $primary-default;
+  --px-actionable-text-color--hover       :  $primary-hover;
+  --px-actionable-text-color--active      :  $primary-pressed;
+  --px-selectable-text-color              :  $select-default;
+  --px-selectable-text-color--hover       :  $select-hover;
+  --px-selectable-text-color--active      :  $select-pressed;
+  --px-actionable-alt-text-color          :  $gray15;
+  --px-actionable-alt-text-color--hover   :  $primary-default;
+  --px-actionable-alt-text-color--active  :  $primary-pressed;
+  --px-actionable-disabled-text-color     :  rgba($black, 0.2);
 
   // Button Group
-  --px-btn-group-text-color: $white;
-  --px-btn-group-background-color: $select-default;
-  --px-btn-group-background-color--hover: $select-hover;
-  --px-btn-group-background-color--pressed: $select-pressed;
-  --px-btn-group-border-color: transparent;
-  --px-btn-group-border-color--hover: transparent;
-  --px-btn-group-border-color--pressed: transparent;
+  --px-btn-group-text-color                 :  $white;
+  --px-btn-group-background-color           :  $select-default;
+  --px-btn-group-background-color--hover    :  $select-hover;
+  --px-btn-group-background-color--pressed  :  $select-pressed;
+  --px-btn-group-border-color               :  transparent;
+  --px-btn-group-border-color--hover        :  transparent;
+  --px-btn-group-border-color--pressed      :  transparent;
 
   // Buttons
-  --px-btn-color: $gray15;
-  --px-btn-background: $gray3;
-  --px-btn-background--hover: $gray6;
-  --px-btn-background--pressed: $gray8;
-  --px-btn-border-color: transparent;
-  --px-btn-border-color--hover: transparent;
-  --px-btn-border-color--pressed: transparent;
-  --px-btn-shadow: none;
-  --px-btn-shadow--light: none;
-  --px-btn-primary-color: $white;
-  --px-btn-primary-background: $gray14;
-  --px-btn-primary-background--hover: $gray16;
-  --px-btn-primary-background--pressed: $gray18;
-  --px-btn-primary-border-color: transparent;
-  --px-btn-tertiary-color: $primary-default;
-  --px-btn-tertiary-color--hover: $primary-hover;
-  --px-btn-tertiary-color--pressed: $primary-pressed;
-  --px-btn-tertiary-background: $white;
-  --px-btn-tertiary-background--hover: $gray4;
-  --px-btn-tertiary-background--pressed: $gray7;
-  --px-btn-tertiary-border-color: $gray8;
-  --px-btn-disabled-color: rgba($black,.2);
-  --px-btn-disabled-background: transparent;
-  --px-btn-disabled-border-color: rgba($black,.2);
-  --px-btn-call-to-action-color: $white;
-  --px-btn-call-to-action-background: $primary-default;
-  --px-btn-call-to-action-background--hover: $primary-hover;
-  --px-btn-call-to-action-background--pressed: $primary-pressed;
-  --px-btn-call-to-action-disabled-color: $white;
-  --px-btn-call-to-action-disabled-background: $cyan5;
-  // --px-btn-icon-border: 0px solid;
-  // --px-btn-icon-background: transparent;
-  // --px-btn-icon-color: $primary-default;
-  // --px-btn-icon--hover: $primary-hover;
-  // --px-btn-icon--pressed: $primary-pressed;
-  --px-btn-bare-color: $gray15;
-  --px-btn-bare-color--hover: $primary-default;
-  --px-btn-bare-color--pressed: $primary-pressed;
-  --px-btn-primary-bare-color--visited: $primary-default;
-  --px-btn-primary-bare-color--hover: $primary-hover;
-  --px-btn-primary-bare-color--pressed: $primary-pressed;
+  --px-btn-color                               :  $gray15;
+  --px-btn-background                          :  $gray3;
+  --px-btn-background--hover                   :  $gray6;
+  --px-btn-background--pressed                 :  $gray8;
+  --px-btn-border-color                        :  transparent;
+  --px-btn-border-color--hover                 :  transparent;
+  --px-btn-border-color--pressed               :  transparent;
+  --px-btn-shadow                              :  none;
+  --px-btn-shadow--light                       :  none;
+  --px-btn-primary-color                       :  $white;
+  --px-btn-primary-background                  :  $gray14;
+  --px-btn-primary-background--hover           :  $gray16;
+  --px-btn-primary-background--pressed         :  $gray18;
+  --px-btn-primary-border-color                :  transparent;
+  --px-btn-tertiary-color                      :  $primary-default;
+  --px-btn-tertiary-color--hover               :  $primary-hover;
+  --px-btn-tertiary-color--pressed             :  $primary-pressed;
+  --px-btn-tertiary-background                 :  $white;
+  --px-btn-tertiary-background--hover          :  $gray4;
+  --px-btn-tertiary-background--pressed        :  $gray7;
+  --px-btn-tertiary-border-color               :  $gray8;
+  --px-btn-disabled-color                      :  rgba($black,.2);
+  --px-btn-disabled-background                 :  transparent;
+  --px-btn-disabled-border-color               :  rgba($black,.2);
+  --px-btn-call-to-action-color                :  $white;
+  --px-btn-call-to-action-background           :  $primary-default;
+  --px-btn-call-to-action-background--hover    :  $primary-hover;
+  --px-btn-call-to-action-background--pressed  :  $primary-pressed;
+  --px-btn-call-to-action-disabled-color       :  $white;
+  --px-btn-call-to-action-disabled-background  :  $cyan5;
+  --px-btn-icon-border                         :  0px solid;
+  --px-btn-icon-background                     :  transparent;
+  --px-btn-bare-color                          :  $gray15;
+  --px-btn-bare-color--hover                   :  $primary-default;
+  --px-btn-bare-color--pressed                 :  $primary-pressed;
+  --px-btn-primary-bare-color--visited         :  $primary-default;
+  --px-btn-primary-bare-color--hover           :  $primary-hover;
+  --px-btn-primary-bare-color--pressed         :  $primary-pressed;
 
   // Code
-  --px-code-text-color: $blue8;
-  --px-code-background-color: $gray1;
-  --px-code-border-color: transparent;
+  --px-code-text-color        :  $blue8;
+  --px-code-background-color  :  $gray1;
+  --px-code-border-color      :  transparent;
 
   // Forms
-  --px-input-text-color: $gray15;
-  --px-input-label-text-color: $gray10;
-  --px-input-text-color--placeholder: rgba($black,0.3);
-  --px-input-text-color--placeholder--focused: rgba($black,0.3);
-  --px-input-text-color--help: $gray10;
-  --px-input-background-color: transparent;
-  --px-input-background-color--hover: $gray3;
-  --px-input-background-color--disabled: transparent;
-  --px-input-background-color--focused: $primary-light;
-  --px-input-border-color--outer: $gray8;
-  --px-input-border-color--outer--focused: $primary-default;
-  --px-input-text-color--focused: $gray15;
-  --px-input-text-color--disabled: rgba($black,0.2);
-  --px-input-border-color--disabled: rgba($black,0.2);
-  --px-input-textarea-background--focused: $gray3;
-  --px-select-text-color: $gray15;
-  --px-select-background-color: $gray3;
-  --px-select-background-color--hover: $gray6;
-  --px-select-background-color--active: $gray8;
-  --px-select-border-color: transparent;
-  --px-select-text-color: $gray15;
-  --px-multiselect-background-color: $gray1;
-  --px-validation-warning-text-color: $status-orange3;
-  --px-validation-warning-background-color: $status-orange1;
-  --px-validation-error-text-color: $status-red3;
-  --px-validation-error-background-color: $status-red1;
-  --px-validation-success-text-color: $status-green3;
-  --px-validation-success-background-color: $status-green1;
+  --px-input-text-color                        :  $gray15;
+  --px-input-label-text-color                  :  $gray10;
+  --px-input-text-color--placeholder           :  rgba($black,0.3);
+  --px-input-text-color--placeholder--focused  :  rgba($black,0.3);
+  --px-input-text-color--help                  :  $gray10;
+  --px-input-background-color                  :  transparent;
+  --px-input-background-color--hover           :  $gray3;
+  --px-input-background-color--disabled        :  transparent;
+  --px-input-background-color--focused         :  $primary-light;
+  --px-input-border-color--outer               :  $gray8;
+  --px-input-border-color--outer--focused      :  $primary-default;
+  --px-input-text-color--focused               :  $gray15;
+  --px-input-text-color--disabled              :  rgba($black,0.2);
+  --px-input-border-color--disabled            :  rgba($black,0.2);
+  --px-input-textarea-background--focused      :  $gray3;
+  --px-select-text-color                       :  $gray15;
+  --px-select-background-color                 :  $gray3;
+  --px-select-background-color--hover          :  $gray6;
+  --px-select-background-color--active         :  $gray8;
+  --px-select-border-color                     :  transparent;
+  --px-select-text-color                       :  $gray15;
+  --px-multiselect-background-color            :  $gray1;
+  --px-validation-warning-text-color           :  $status-orange3;
+  --px-validation-warning-background-color     :  $status-orange1;
+  --px-validation-error-text-color             :  $status-red3;
+  --px-validation-error-background-color       :  $status-red1;
+  --px-validation-success-text-color           :  $status-green3;
+  --px-validation-success-background-color     :  $status-green1;
 
   // Headings
-  --px-headings-heading-page-color: $gray15;
-  --px-headings-heading-section-color: $gray10;
-  --px-headings-heading-subsection-color: $gray15;
-  --px-headings-heading-subsection-background: $gray2;
-  --px-headings-label-color: $gray10;
-  --px-headings-value-color: $gray15;
+  --px-headings-heading-page-color             :  $gray15;
+  --px-headings-heading-section-color          :  $gray10;
+  --px-headings-heading-subsection-color       :  $gray15;
+  --px-headings-heading-subsection-background  :  $gray2;
+  --px-headings-label-color                    :  $gray10;
+  --px-headings-value-color                    :  $gray15;
 
   // List UI
-  --px-list-ui-border-color: $gray10;
-  --px-list-ui-separator-color: $gray5;
+  --px-list-ui-border-color                    :  $gray10;
+  --px-list-ui-separator-color                 :  $gray5;
 
   // Tables
-  --px-table-border-color: $gray10;
-  --px-table-separator-color: $gray5;
+  --px-table-border-color                      :  $gray10;
+  --px-table-separator-color                   :  $gray5;
 
   // Toggle
-  --px-toggle__background--checked: $primary-default;
-  --px-toggle__background--checked--hover: $primary-hover;
-  --px-toggle__background--checked--pressed: $primary-pressed;
-  --px-toggle__background--checked--disabled: rgba($black,0.2);
+  --px-toggle__background--checked                     :  $primary-default;
+  --px-toggle__background--checked--hover              :  $primary-hover;
+  --px-toggle__background--checked--pressed            :  $primary-pressed;
+  --px-toggle__background--checked--disabled           :  rgba($black,0.2);
 
-  --px-toggle__background--unchecked: $gray3;
-  --px-toggle__background--unchecked--hover: $gray5;
-  --px-toggle__background--unchecked--pressed: $gray9;
-  --px-toggle__background--unchecked--disabled: $white;
+  --px-toggle__background--unchecked                   :  $gray3;
+  --px-toggle__background--unchecked--hover            :  $gray5;
+  --px-toggle__background--unchecked--pressed          :  $gray9;
+  --px-toggle__background--unchecked--disabled         :  $white;
 
-  --px-toggle__background-border--unchecked: $gray8;
-  --px-toggle__background-border--unchecked--hover: $gray10;
-  --px-toggle__background-border--unchecked--pressed: $gray12;
-  --px-toggle__background-border--unchecked--disabled: rgba($black,0.2);
+  --px-toggle__background-border--unchecked            :  $gray8;
+  --px-toggle__background-border--unchecked--hover     :  $gray10;
+  --px-toggle__background-border--unchecked--pressed   :  $gray12;
+  --px-toggle__background-border--unchecked--disabled  :  rgba($black,0.2);
 
-  --px-toggle__switch: $white;
-  --px-toggle__switch--hover: $gray4;
-  --px-toggle__switch--pressed: $gray7;
-  --px-toggle__switch--disabled: $white;
+  --px-toggle__switch                   :  $white;
+  --px-toggle__switch--hover            :  $gray4;
+  --px-toggle__switch--pressed          :  $gray7;
+  --px-toggle__switch--disabled         :  $white;
 
-  --px-toggle__switch-border: $gray8;
-  --px-toggle__switch-border--hover: $gray10;
-  --px-toggle__switch-border--pressed: $gray12;
-  --px-toggle__switch-border--disabled: rgba($black,0.2);
+  --px-toggle__switch-border            :  $gray8;
+  --px-toggle__switch-border--hover     :  $gray10;
+  --px-toggle__switch-border--pressed   :  $gray12;
+  --px-toggle__switch-border--disabled  :  rgba($black,0.2);
 
   /***********************************/
   /* Default Theme for Px Components */
   /***********************************/
 
   // Alert Label
-  --px-alert-label-text-color--important: $white;
-  --px-alert-label-background-color--important: $status-red3;
-  --px-alert-label-text-color--warning: $white;
-  --px-alert-label-background-color--warning: $status-orange3;
-  --px-alert-label-text-color--error: $yellow10;
-  --px-alert-label-background-color--error: $status-yellow3;
-  --px-alert-label-text-color--info: $white;
-  --px-alert-label-background-color--info: $status-blue3;
-  --px-alert-label-text-color--healthy: $white;
-  --px-alert-label-background-color--healthy: $status-green3;
-  --px-alert-label-text-color--unknown: $white;
-  --px-alert-label-background-color--unknown: $neutral-gray3;
+  --px-alert-label-border-color                 :  transparent;
+  --px-alert-label-text-color--important        : $white;
+  --px-alert-label-background-color--important  :  $status-red3;
+  --px-alert-label-text-color--warning          :  $white;
+  --px-alert-label-background-color--warning    :  $status-orange3;
+  --px-alert-label-text-color--error            :  $yellow10;
+  --px-alert-label-background-color--error      : $status-yellow3;
+  --px-alert-label-text-color--info             :  $white;
+  --px-alert-label-background-color--info       :  $status-blue3;
+  --px-alert-label-text-color--healthy          :  $white;
+  --px-alert-label-background-color--healthy    : $status-green3;
+  --px-alert-label-text-color--unknown          :  $white;
+  --px-alert-label-background-color--unknown    :  $neutral-gray3;
 
   // Alert Message
-  --px-alert-message-background-color: $white;
-  --px-alert-message-text-color: $gray15;
-  --px-alert-message-color--important: $status-red3;
-  --px-alert-message-color--warning: $status-orange3;
-  --px-alert-message-color--error: $status-yellow3;
-  --px-alert-message-color--information: $status-blue3;
-  --px-alert-message-dismiss-icon-color: $gray8;
+  --px-alert-message-background-color    :  $white;
+  --px-alert-message-text-color          :  $gray15;
+  --px-alert-message-color--important    :  $status-red3;
+  --px-alert-message-color--warning      :  $status-orange3;
+  --px-alert-message-color--error        :  $status-yellow3;
+  --px-alert-message-color--information  :  $status-blue3;
+  --px-alert-message-dismiss-icon-color  :  $gray8;
 
   // App Nav
 
-  --px-app-nav-background-color:            $gray10;
-  --px-app-nav-link-text-color:             $white;
-  --px-app-nav-link-selected-color:         $select-pressed;
-  --px-app-nav-link-selected-active-color:  $select-hover;
-  --px-app-nav-link-hover-color:            $gray8;
-  --px-app-nav-link-active-color:           $primary-hover;
-  --px-app-nav-hamburger-button-color:      $white;
+  --px-app-nav-background-color            :  $gray10;
+  --px-app-nav-link-text-color             :  $white;
+  --px-app-nav-link-selected-color         :  $select-pressed;
+  --px-app-nav-link-selected-active-color  :  $select-hover;
+  --px-app-nav-link-hover-color            :  $gray8;
+  --px-app-nav-link-active-color           :  $primary-hover;
+  --px-app-nav-hamburger-button-color      :  $white;
 
   // Card
-  --px-card-background-color: $gray1;
-  --px-card-border-color: $gray3;
-  --px-card-header-color: $gray10;
-  --px-card-icon-color: $gray10;
-  --px-card-action-icon-color: $gray10;
-  --px-card-action-icon-color--hover: $primary-default;
-  --px-card-action-icon-color--pressed: $primary-pressed;
+  --px-card-background-color               :  $gray1;
+  --px-card-border-color                   :  $gray3;
+  --px-card-header-color                   :  $gray10;
+  --px-card-icon-color                     :  $gray10;
+  --px-card-action-icon-color              :  $gray10;
+  --px-card-action-icon-color--hover       :  $primary-default;
+  --px-card-action-icon-color--pressed     :  $primary-pressed;
 
   // Deck Selector
-  --px-deck-selector-border-color: $gray3;
-  --px-deck-selector-shadow-color: rgba($black, 0.2);
-  --px-deck-selector-background-color: $white;
-  --px-deck-selector-text-color: $gray15;
-  --px-deck-selector-background-color--hover: $gray1;
-  --px-deck-selector-text-color--hover: $gray15;
-  --px-deck-selector-background-color--selected: $select-default;
-  --px-deck-selector-text-color--selected: $white;
-  --px-deck-selector-li-border: $gray2;
+  --px-deck-selector-border-color                :  $gray3;
+  --px-deck-selector-shadow-color                :  rgba($black, 0.2);
+  --px-deck-selector-background-color            :  $white;
+  --px-deck-selector-text-color                  :  $gray15;
+  --px-deck-selector-background-color--hover     :  $gray1;
+  --px-deck-selector-text-color--hover           :  $gray15;
+  --px-deck-selector-background-color--selected  :  $select-default;
+  --px-deck-selector-text-color--selected        :  $white;
+  --px-deck-selector-li-border                   :  $gray2;
 
   //// Charts
 
   // Percent Circle
-  --px-percent-circle-fill-color: $cyan6;
-  --px-percent-circle-background-color: $gray5;
-  --px-percent-circle-text-color: $gray15;
+  --px-percent-circle-fill-color          :  $cyan6;
+  --px-percent-circle-background-color    :  $gray5;
+  --px-percent-circle-text-color          :  $gray15;
 
   // Simple Bar Chart
-  --px-simple-bar-chart-text-color: $gray15;
-  --px-simple-bar-chart-background-color: transparent;
-  --px-simple-bar-chart-axis-color: $gray10;
+  --px-simple-bar-chart-text-color        :  $gray15;
+  --px-simple-bar-chart-background-color  :  transparent;
+  --px-simple-bar-chart-axis-color        :  $gray10;
 
   // Simple Horizontal Bar Chart
-  --px-simple-horizontal-bar-chart-background-color: transparent;
-  --px-simple-horizontal-bar-chart-legend-text-color: $gray15;
-  --px-simple-horizontal-bar-chart-label-text-color: $gray15;
-  --px-simple-horizontal-bar-chart-axis-color: $gray10;
+  --px-simple-horizontal-bar-chart-background-color   :  transparent;
+  --px-simple-horizontal-bar-chart-legend-text-color  :  $gray15;
+  --px-simple-horizontal-bar-chart-label-text-color   :  $gray15;
+  --px-simple-horizontal-bar-chart-axis-color         :  $gray10;
 
   // Simple Line Chart
-  --px-simple-line-chart-background-color: transparent;
-  --px-simple-line-chart-border-color: $gray10;
-  --px-simple-line-chart-grid-color: $gray3;
-  --px-simple-line-chart-bottom-color: transparent;
-  --px-simple-line-chart-axis-bar-color: $gray1;
-  --px-simple-line-chart-axis-label-color: $gray10;
-  --px-simple-line-chart-axis-label-font-weight: normal;
-  --px-simple-line-chart-line-color: $cyan6;
-  --px-simple-line-chart-threshold-line-color: $orange5;
+  --px-simple-line-chart-background-color        :  transparent;
+  --px-simple-line-chart-border-color            :  $gray10;
+  --px-simple-line-chart-grid-color              :  $gray3;
+  --px-simple-line-chart-bottom-color            :  transparent;
+  --px-simple-line-chart-axis-bar-color          :  $gray1;
+  --px-simple-line-chart-axis-label-color        :  $gray10;
+  --px-simple-line-chart-axis-label-font-weight  :  normal;
+  --px-simple-line-chart-line-color              :  $cyan6;
+  --px-simple-line-chart-threshold-line-color    :  $orange5;
 
   // Simple Win-Loss Chart
-  --px-win-loss-border-color: $gray10;
-  --px-win-loss-background-color: transparent;
-  --px-win-loss-positive-fill-color: $yellow-green4;
-  --px-win-loss-negative-fill-color: $red4;
+  --px-win-loss-border-color          :  $gray10;
+  --px-win-loss-background-color      :  transparent;
+  --px-win-loss-positive-fill-color   :  $yellow-green4;
+  --px-win-loss-negative-fill-color   :  $red4;
 
   // Clipboard
-  --px-clipboard-icon-color: $gray15;
-  --px-clipboard-icon-color--hover: $primary-default;
-  --px-clipboard-icon-color--pressed: $primary-pressed;
-  --px-clipboard-icon-color--copied: $status-green3;
+  --px-clipboard-icon-color           :  $gray15;
+  --px-clipboard-icon-color--hover    :  $primary-default;
+  --px-clipboard-icon-color--pressed  :  $primary-pressed;
+  --px-clipboard-icon-color--copied   :  $status-green3;
 
   // // Context Browser
   // --px-cb-background-color:
@@ -272,28 +270,28 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-cb-background-color--secondary:
 
   // Data Table
-  --px-data-table-border-color: $gray10;
-  --px-data-table-separator-color: $gray5;
-  --px-data-table-header-text-color: inherit;
-  --px-data-table-header-background-color: inherit;
-  --px-data-table-background-color-striped--even: rgba($black,0.07);
-  --px-data-table-cell-border-validation--failed: $status-red3;
-  --px-data-table-cell-border-color--edit: $primary-default;
-  --px-data-table-cell-border-color--selected: $select-default;
-  --px-data-table-cell-border-validation--failed: $status-red3;
-  --px-data-table-cell-background-color--selected: $select-default;
-  --px-data-table-cell-background-color--edit: transparent;
-  --px-data-table-cell-text-color--selected: $white;
-  --px-data-table-cell-text-color-validation--failed: $status-red3;
-  --px-data-table-cell-text-color--sorted: $select-default;
-  --px-data-table-results-text-color--none: $gray8;
-  --px-data-table-insertion-indicator-td-background-color: $primary-default;
-  --px-data-table-text-input-background-color--filter: $white;
-  --px-data-table-tr--filter: $white;
-  --px-data-table-text-color--dragged: $primary-default;
-  --px-data-table-highlight--high: rgba($status-red3,0.25);
-  --px-data-table-highlight--medium: rgba($status-yellow3,0.25);
-  --px-data-table-highlight--low: rgba($status-blue3,0.25);
+  --px-data-table-border-color                             :  $gray10;
+  --px-data-table-separator-color                          :  $gray5;
+  --px-data-table-header-text-color                        :  inherit;
+  --px-data-table-header-background-color                  :  inherit;
+  --px-data-table-background-color-striped--even           :  rgba($black,0.07);
+  --px-data-table-cell-border-validation--failed           :  $status-red3;
+  --px-data-table-cell-border-color--edit                  :  $primary-default;
+  --px-data-table-cell-border-color--selected              :  $select-default;
+  --px-data-table-cell-border-validation--failed           :  $status-red3;
+  --px-data-table-cell-background-color--selected          :  $select-default;
+  --px-data-table-cell-background-color--edit              :  transparent;
+  --px-data-table-cell-text-color--selected                :  $white;
+  --px-data-table-cell-text-color-validation--failed       :  $status-red3;
+  --px-data-table-cell-text-color--sorted                  :  $select-default;
+  --px-data-table-results-text-color--none                 :  $gray8;
+  --px-data-table-insertion-indicator-td-background-color  :  $primary-default;
+  --px-data-table-text-input-background-color--filter      :  $white;
+  --px-data-table-tr--filter                               :  $white;
+  --px-data-table-text-color--dragged                      :  $primary-default;
+  --px-data-table-highlight--high                          :  rgba($status-red3,0.25);
+  --px-data-table-highlight--medium                        :  rgba($status-yellow3,0.25);
+  --px-data-table-highlight--low                           :  rgba($status-blue3,0.25);
 
   // //// Datetime Components
   //
@@ -347,37 +345,37 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-demo-snippet-background-color:
 
   // Dropdown
-  --px-dropdown-bg-color: $white;
-  --px-dropdown-bg-color--hover: $gray1;
-  --px-dropdown-bg-color--selected: $select-default;
-  --px-dropdown-text-color--disabled: $gray4;
-  --px-dropdown-text-color--selected: $white;
-  --px-dropdown-border-color: $gray3;
+  --px-dropdown-bg-color                      :  $white;
+  --px-dropdown-bg-color--hover               :  $gray1;
+  --px-dropdown-bg-color--selected            :  $select-default;
+  --px-dropdown-text-color--disabled          :  $gray4;
+  --px-dropdown-text-color--selected          :  $white;
+  --px-dropdown-border-color                  :  $gray3;
 
   // File Upload
-  --px-file-upload-file-list-color: $gray10;
-  --px-file-upload-validation-color: $status-red3;
-  --px-file-upload-dropzone-background-color: $primary-light;
+  --px-file-upload-file-list-color            :  $gray10;
+  --px-file-upload-validation-color           :  $status-red3;
+  --px-file-upload-dropzone-background-color  :  $primary-light;
 
   // Inbox
-  --px-inbox-border-color: $gray3;
-  --px-inbox-secondary-text-color: $gray10;
-  --px-inbox-li-background-color: $gray1;
-  --px-inbox-li-background-color--selected: $select-default;
-  --px-inbox-li-text-color--selected: $white;
-  --px-inbox-icon-outline-color: $white;
-  --px-inbox-alert-color: $status-red3;
-  --px-inbox-warning-color: $status-orange3;
-  --px-inbox-error-color: $status-yellow3;
-  --px-inbox-information-color: $status-blue3;
-  --px-inbox-height: 100vh;
-  --px-inbox-list-width: 320px;
+  --px-inbox-border-color                     :  $gray3;
+  --px-inbox-secondary-text-color             :  $gray10;
+  --px-inbox-li-background-color              :  $gray1;
+  --px-inbox-li-background-color--selected    :  $select-default;
+  --px-inbox-li-text-color--selected          :  $white;
+  --px-inbox-icon-outline-color               :  $white;
+  --px-inbox-alert-color                      :  $status-red3;
+  --px-inbox-warning-color                    :  $status-orange3;
+  --px-inbox-error-color                      :  $status-yellow3;
+  --px-inbox-information-color                :  $status-blue3;
+  --px-inbox-height                           :  100vh;
+  --px-inbox-list-width                       :  320px;
 
   // KPI
-  --px-kpi-text-color: $gray15;
-  --px-kpi-secondary-text-color: $gray10;
-  --px-kpi-border-color: $gray10;
-  --px-kpi-separator-color: $gray5;
+  --px-kpi-text-color                         :  $gray15;
+  --px-kpi-secondary-text-color               :  $gray10;
+  --px-kpi-border-color                       :  $gray10;
+  --px-kpi-separator-color                    :  $gray5;
 
   // // Login
   // --px-login-border-color:
@@ -387,90 +385,90 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // --px-login-background-color--hover:
 
   // Modal
-  --px-modal-background-color: $white;
-  --px-modal-overlay-color: rgba($black, .7);
-  --px-modal-border-color: transparent;
-  --px-modal-text-color: $gray15;
-  --px-modal-btn--disabled: $gray4;
+  --px-modal-background-color         :  $white;
+  --px-modal-overlay-color            :  rgba($black, .7);
+  --px-modal-border-color             :  transparent;
+  --px-modal-text-color               :  $gray15;
+  --px-modal-btn--disabled            :  $gray4;
 
   // Overlay
-  --px-overlay-color: rgba($black, .65);
+  --px-overlay-color                  :  rgba($black, .65);
 
   // Popover
-  --px-popover-background-color: $white;
-  --px-popover-border-color: $gray3;
-  --px-popover-text-color: $gray15;
-  --px-popover-shadow-color: rgba($black,0.15);
+  --px-popover-background-color       :  $white;
+  --px-popover-border-color           :  $gray3;
+  --px-popover-text-color             :  $gray15;
+  --px-popover-shadow-color           :  rgba($black,0.15);
 
   // Progress Bar
-  --px-progress-bar-fill-color: $primary-default;
-  --px-progress-bar-background-color: $cyan1;
+  --px-progress-bar-fill-color        :  $primary-default;
+  --px-progress-bar-background-color  :  $cyan1;
 
   // Slider
-  --px-slider-border-color: $gray6;
-  --px-slider-border-color--disabled: $gray4;
-  --px-slider-border-color--selected: $primary-default;
-  --px-slider-background-color: $gray1;
-  --px-slider-background-color--disabled: $white;
-  --px-slider-background-color--selected: $primary-default;
-  --px-slider-background-color--hover: $primary-hover;
-  --px-slider-background-color--pressed: $primary-pressed;
-  --px-slider-progress-border-color--disabled: $gray4;
-  --px-slider-progress-background-color--disabled: $gray4;
-  --px-handle-stroke-color: $gray8;
-  --px-handle-stroke-color--hover: $gray8;
-  --px-handle-stroke-color--active: $gray8;
-  --px-handle-color--disabled: $gray4;
-  --px-handle-background-color: $white;
-  --px-handle-background-color--hover: $gray4;
-  --px-handle-background-color--active: $gray7;
-  --px-handle-background-color--disabled: $white;
+  --px-slider-border-color                         :  $gray6;
+  --px-slider-border-color--disabled               :  $gray4;
+  --px-slider-border-color--selected               :  $primary-default;
+  --px-slider-background-color                     :  $gray1;
+  --px-slider-background-color--disabled           :  $white;
+  --px-slider-background-color--selected           :  $primary-default;
+  --px-slider-background-color--hover              :  $primary-hover;
+  --px-slider-background-color--pressed            :  $primary-pressed;
+  --px-slider-progress-border-color--disabled      :  $gray4;
+  --px-slider-progress-background-color--disabled  :  $gray4;
+  --px-handle-stroke-color                         :  $gray8;
+  --px-handle-stroke-color--hover                  :  $gray8;
+  --px-handle-stroke-color--active                 :  $gray8;
+  --px-handle-color--disabled                      :  $gray4;
+  --px-handle-background-color                     :  $white;
+  --px-handle-background-color--hover              :  $gray4;
+  --px-handle-background-color--active             :  $gray7;
+  --px-handle-background-color--disabled           :  $white;
 
   // Spinner
-  --px-spinner-fill-color: $primary-default;
-  --px-spinner-background-color: $cyan1;
+  --px-spinner-fill-color                    :  $primary-default;
+  --px-spinner-background-color              :  $cyan1;
 
   // Table View
-  --px-table-row-color: inherit;
-  --px-table-row-background-color: $white;
-  --px-table-row-selected-background-color: $select-default;
-  --px-table-row-selected-color: $white;
-  --px-table-row-title-color: inherit;
-  --px-table-row-subtitle-color: $gray8;
-  --px-table-row-body-color: $gray10;
-  --px-table-row-label-color: $gray10;
-  --px-table-row-header-color: inherit;
-  --px-table-row-header-background-color: $gray2;
-  --px-table-row-border-color: $gray10;
-  --px-table-row-separator-color: $gray5;
+  --px-table-row-color                       :  inherit;
+  --px-table-row-background-color            :  $white;
+  --px-table-row-selected-background-color   :  $select-default;
+  --px-table-row-selected-color              :  $white;
+  --px-table-row-title-color                 :  inherit;
+  --px-table-row-subtitle-color              :  $gray8;
+  --px-table-row-body-color                  :  $gray10;
+  --px-table-row-label-color                 :  $gray10;
+  --px-table-row-header-color                :  inherit;
+  --px-table-row-header-background-color     :  $gray2;
+  --px-table-row-border-color                :  $gray10;
+  --px-table-row-separator-color             :  $gray5;
 
   // Tabs
-  --px-tab-color: $gray10;
-  --px-tab-color--hover: $select-default;
-  --px-tab-color--active: $select-pressed;
-  --px-tab-color--selected: $select-default;
-  --px-tab-border-color: $gray5;
+  --px-tab-color                             :  $gray10;
+  --px-tab-color--hover                      :  $select-default;
+  --px-tab-color--active                     :  $select-pressed;
+  --px-tab-color--selected                   :  $select-default;
+  --px-tab-border-color                      :  $gray5;
 
   // Tooltip
-  --px-tooltip-background-color: $white;
-  --px-tooltip-text-color: $gray15;
-  --px-tooltip-border-color: $gray3;
-  --px-tooltip-shadow-color: rgba($black,0.15);
+  --px-tooltip-background-color              :  $white;
+  --px-tooltip-text-color                    :  $gray15;
+  --px-tooltip-border-color                  :  $gray3;
+  --px-tooltip-shadow-color                  :  rgba($black,0.15);
 
   // Typeahead
-  --px-typeahead-background-color: $white;
-  --px-typeahead-background-color--hover: $gray1;
-  --px-typeahead-background-color--selected: $select-default;
-  --px-typeahead-border-color: $gray3;
-  --px-typeahead-box-shadow-color: rgba($black,0.15);
-  --px-typeahead-text-color: $gray15;
-  --px-typeahead-text-color--hover: $gray15;
-  --px-typeahead-text-color--selected: $white;
+  --px-typeahead-background-color            :  $white;
+  --px-typeahead-background-color--hover     :  $gray1;
+  --px-typeahead-background-color--selected  :  $select-default;
+  --px-typeahead-border-color                :  $gray3;
+  --px-typeahead-box-shadow-color            :  rgba($black,0.15);
+  --px-typeahead-text-color                  :  $gray15;
+  --px-typeahead-text-color--hover           :  $gray15;
+  --px-typeahead-text-color--selected        :  $white;
 
   // View Header
-  --px-view-header-background-color: $gray2;
-  --px-view-header-title-color: $gray15;
-  --px-view-header-subtitle-color: $gray10;
+  --px-view-header-background-color          :  $gray2;
+  --px-view-header-title-color               :  $gray15;
+  --px-view-header-subtitle-color            :  $gray10;
 
   // // Vis
   // --px-vis-axis-brush-outline-color:
@@ -530,53 +528,46 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
   // Vis Data Vis
   // Colors MUST start at 0 and cannot contain gaps.
-  --px-vis-series-color-0: $cyan5;
-  --px-vis-series-color-1: $blue4;
-  --px-vis-series-color-2: $violet4;
-  --px-vis-series-color-3: $purple4;
-  --px-vis-series-color-4: $pink1;
-  // --px-vis-series-color-5:
-  // --px-vis-series-color-6:
-  // --px-vis-series-color-7:
-  // --px-vis-series-color-8:
-  // --px-vis-series-color-9:
+  --px-vis-series-color-0   :  $cyan5;
+  --px-vis-series-color-1   :  $blue4;
+  --px-vis-series-color-2   :  $violet4;
+  --px-vis-series-color-3   :  $purple4;
+  --px-vis-series-color-4   :  $pink1;
+  // --px-vis-series-color-5   :
+  // --px-vis-series-color-6   :
+  // --px-vis-series-color-7   :
+  // --px-vis-series-color-8   :
+  // --px-vis-series-color-9   :
 
-  // --px-vis-series-color-10:
-  // --px-vis-series-color-11:
-  // --px-vis-series-color-12:
-  // --px-vis-series-color-13:
-  // --px-vis-series-color-14:
-  // --px-vis-series-color-15:
-  // --px-vis-series-color-16:
-  // --px-vis-series-color-17:
-  // --px-vis-series-color-18:
-  // --px-vis-series-color-19:
+  // --px-vis-series-color-10  :
+  // --px-vis-series-color-11  :
+  // --px-vis-series-color-12  :
+  // --px-vis-series-color-13  :
+  // --px-vis-series-color-14  :
+  // --px-vis-series-color-15  :
+  // --px-vis-series-color-16  :
+  // --px-vis-series-color-17  :
+  // --px-vis-series-color-18  :
+  // --px-vis-series-color-19  :
 
-  // --px-vis-series-color-20:
-  // --px-vis-series-color-21:
-  // --px-vis-series-color-22:
-  // --px-vis-series-color-23:
-  // --px-vis-series-color-24:
-  // --px-vis-series-color-25:
-  // --px-vis-series-color-26:
-  // --px-vis-series-color-27:
-  // --px-vis-series-color-28:
-  // --px-vis-series-color-29:
+  // --px-vis-series-color-20  :
+  // --px-vis-series-color-21  :
+  // --px-vis-series-color-22  :
+  // --px-vis-series-color-23  :
+  // --px-vis-series-color-24  :
+  // --px-vis-series-color-25  :
+  // --px-vis-series-color-26  :
+  // --px-vis-series-color-27  :
+  // --px-vis-series-color-28  :
+  // --px-vis-series-color-29  :
 
   // Gauge styles
-  --px-gauge-fill-error-color: $status-red3;
-  --px-gauge-fill-anomaly-color: $status-yellow3;
-  --px-gauge-fill-abnormal-color: $status-orange3;
-  --px-gauge-fill-normal-color: $status-blue3;
-  --px-gauge-empty-color: $gray5;
-  --px-gauge-needle-color: $gray15;
-
-  // // Seed App styles
-  // --px-seed-app-main-content-area-background-color:
-  // --px-seed-app-logo-color:
-  // --px-seed-header-text-color:
-  // --px-seed-header-background-color:
-  // --px-seed-footer-background-color:
+  --px-gauge-fill-error-color     :  $status-red3;
+  --px-gauge-fill-anomaly-color   :  $status-yellow3;
+  --px-gauge-fill-abnormal-color  :  $status-orange3;
+  --px-gauge-fill-normal-color    :  $status-blue3;
+  --px-gauge-empty-color          :  $gray5;
+  --px-gauge-needle-color         :  $gray15;
 
 }
 
