@@ -293,22 +293,20 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-data-table-highlight--medium                        :  rgba($status-yellow3,0.25);
   --px-data-table-highlight--low                           :  rgba($status-blue3,0.25);
 
-  // //// Datetime Components
-  //
-  // // Calendar Picker
-  // --px-calendar-background-color:
-  // --px-calendar-background-color--hover:
-  // --px-calendar-background-color--pressed:
-  // --px-calendar-background-color--selected:
-  // --px-calendar-background-color--selected--hover:
-  // --px-calendar-background-color--selected--pressed:
-  // --px-calendar-text-color:
-  // --px-calendar-text-color--hover:
-  // --px-calendar-text-color--selected:
-  // --px-calendar-alt-background-color:
-  // --px-calendar-labels--text-color:
-  // --px-calendar-sub-labels--text-color:
-  //
+  //// Datetime Components
+
+  // Calendar Picker
+  --px-calendar-background-color--hover              : $gray1;
+  --px-calendar-background-color--pressed            : $select-pressed;
+  --px-calendar-background-color--selected           : $select-default;
+  --px-calendar-background-color--selected--hover    : $select-hover;
+  --px-calendar-background-color--selected--pressed  : $select-pressed;
+  --px-calendar-text-color                           : $gray15;
+  --px-calendar-text-color--hover                    : $gray15;
+  --px-calendar-text-color--selected                 : $white;
+  --px-calendar-alt-background-color                 : $select-light;
+  --px-calendar-sub-labels--text-color               : $gray6;
+
   // // Datetime Common
   // --px-datetime-entry-selected:
   //
@@ -325,19 +323,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   // // Datetime Range Field
   // --px-datetime-range-field-text-color-validation--failed:
   // --px-datetime-range-field-to-color:
-  //
-  // // Datetime Range Panel
-  // --px-range-panel-border-color:
-  // --px-range-panel-background-color:
-  // --px-range-panel-text-color:
-  // --px-range-panel-dash:
-  // --px-range-panel-overlay-color:
-  // --px-range-panel-background-color--hover:
-  // --px-range-panel-background-color--pressed:
-  // --px-range-panel-text-color--selected:
-  // --px-range-panel-text-color--selected--hover:
-  // --px-range-panel-text-color--selected--pressed:
-  //
+
+  // Datetime Range Panel
+  --px-range-panel-border-color      : $gray3;
+  --px-range-panel-background-color  : $white;
+
   // // Rangepicker
   // --px-rangepicker-overlay-color:
   //
