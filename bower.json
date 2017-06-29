@@ -1,7 +1,7 @@
 {
   "name": "px-app-nav",
   "description": "A navigation component that allows the user to browse app pages and content",
-  "version": "2.0.0-prerelease.1",
+  "version": "2.0.0",
   "main": [
     "px-app-nav.html"
   ],
@@ -20,7 +20,7 @@
     "px-app-nav.png"
   ],
   "dependencies": {
-    "polymer": "^1.8.1",
+    "polymer": "^1.9.1",
     "px-polymer-font-awesome": "^2.0.0",
     "neon-animation": "^1.2.4",
     "iron-icon": "^1.0.0",
