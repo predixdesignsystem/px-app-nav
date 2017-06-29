@@ -11,14 +11,13 @@
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
 // Normalize (excerpt)
-:host, html {
+:host {
   color: $inuit-base-text-color;
   line-height: $inuit-base-line-height / $inuit-base-font-size; /* [1] */
   text-size-adjust: 100%; /* [4] */
   -moz-osx-font-smoothing: grayscale; /* [5] */
   -webkit-font-smoothing: antialiased; /* [5] */
 }
-@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
@@ -35,8 +34,8 @@ px-app-nav-item {
   flex: 1;
 }
 
-$px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, $white); // Same background color as subitem
-$px-app-nav-group-border-color: var(--px-app-nav-group-border-color, $gray3);
+$px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, white); // Same background color as subitem
+$px-app-nav-group-border-color: var(--px-app-nav-group-border-color, lightgray);
 .app-nav-group__dropdown {
   display: block;
   height: calc(100vh - #{$px-app-nav-group-height});

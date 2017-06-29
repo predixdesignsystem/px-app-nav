@@ -11,14 +11,12 @@
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
 // Normalize (excerpt)
-:host, html {
-  color: $inuit-base-text-color;
+:host {
   line-height: $inuit-base-line-height / $inuit-base-font-size; /* [1] */
   text-size-adjust: 100%; /* [4] */
   -moz-osx-font-smoothing: grayscale; /* [5] */
   -webkit-font-smoothing: antialiased; /* [5] */
 }
-@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
@@ -26,8 +24,8 @@
 // Component
 /* Subitem State: Default */
 $px-app-nav-subitem-height: var(--px-app-nav-subitem-height, calculateRem(30px));
-$px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, $gray15);
-$px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color, $white);
+$px-app-nav-subitem-text-color: var(--px-app-nav-subitem-text-color, darkgray);
+$px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color, white);
 :host {
   position: relative;
   display: flex;
@@ -42,41 +40,41 @@ $px-app-nav-subitem-background-color: var(--px-app-nav-subitem-background-color,
 }
 
 /* Subitem State: Hover */
-$px-app-nav-subitem-text-color--hover: var(--px-app-nav-subitem-text-color--hover, $gray15);
-$px-app-nav-subitem-background-color--hover: var(--px-app-nav-subitem-background-color--hover, $gray1);
+$px-app-nav-subitem-text-color--hover: var(--px-app-nav-subitem-text-color--hover, darkgray);
+$px-app-nav-subitem-background-color--hover: var(--px-app-nav-subitem-background-color--hover, lightgray);
 :host(:hover) {
   color: $px-app-nav-subitem-text-color--hover;
   background-color: $px-app-nav-subitem-background-color--hover;
 }
 
 /* Subitem State: Selected */
-$px-app-nav-subitem-text-color--selected: var(--px-app-nav-subitem-text-color--selected, $white);
-$px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-background-color--selected, $select-default);
+$px-app-nav-subitem-text-color--selected: var(--px-app-nav-subitem-text-color--selected, white);
+$px-app-nav-subitem-background-color--selected: var(--px-app-nav-subitem-background-color--selected, blue);
 :host([selected]) {
   color: $px-app-nav-subitem-text-color--selected;
   background-color: $px-app-nav-subitem-background-color--selected;
 }
 
 /* Subitem State: Collapsed */
-$px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--collapsed, $gray15);
+$px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--collapsed, darkgray);
 :host([collapsed]) {
   color: $px-app-nav-subitem-text-color--collapsed;
-  background-color: $gray2;
+  background-color: lightgray;
   padding-left: calculateRem(55px);
 }
 :host([collapsed]:hover) {
-  background-color: $gray4;
+  background-color: lightgray;
 }
 
 /* Subitem State: Collapsed+Parent Selected+NOT selected */
 :host([collapsed][parent-selected]) {
-  color: $gray15;
-  background-color: $white;
+  color: darkgray;
+  background-color: white;
 }
 :host([collapsed][parent-selected]):before {
   content: '';
   display: block;
-  background-color: $select-default;
+  background-color: blue;
   position: absolute;
   top: 0;
   left: 0;
@@ -85,13 +83,13 @@ $px-app-nav-subitem-text-color--collapsed: var(--px-app-nav-subitem-text-color--
   height: 100%;
 }
 :host([collapsed][parent-selected]:hover) {
-  background-color: $gray1;
+  background-color: lightgray;
 }
 
 /* Subitem State: Collapsed+Parent Selected+Selected */
 :host([collapsed][parent-selected][selected]) {
-  color: $white;
-  background-color: $select-default;
+  color: white;
+  background-color: blue;
 }
 
 /* Sub-components */
