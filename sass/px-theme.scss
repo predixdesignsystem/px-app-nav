@@ -217,7 +217,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-app-nav-subitem-text-color--hover                    : $gray15;
   --px-app-nav-subitem-text-color--selected                 : $white;
   --px-app-nav-subitem-text-color                           : $gray15;
-  
+
   // Card
   --px-card-background-color               :  $gray1;
   --px-card-border-color                   :  $gray3;
@@ -460,6 +460,12 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-tab-color--active                     :  $select-pressed;
   --px-tab-color--selected                   :  $select-default;
   --px-tab-border-color                      :  $gray5;
+
+  // Tree
+  --px-tree-text-color--hover                :  $gray15;
+  --px-tree-background-color--hover          :  $gray1;
+  --px-tree-text-color--selected             :  $white;
+  --px-tree-background-color--selected       :  $select-default;
 
   // Tooltip
   --px-tooltip-background-color              :  $white;
