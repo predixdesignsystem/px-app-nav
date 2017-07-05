@@ -227,7 +227,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-app-nav-subitem-text-color--parent-collapsed-not-selected        : $gray15;
   --px-app-nav-subitem-background-color--parent-collapsed-not-selected  : $white;
 
+  // Branding Bar
 
+  --px-ge-svg-logo-color                      : $gray8;
+  --px-branding-bar-background-color          : $gray17;
+  --px-branding-bar-logo-and-title-text-color : $gray8;
   // Card
   --px-card-background-color               :  $gray1;
   --px-card-border-color                   :  $gray3;
