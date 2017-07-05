@@ -35,7 +35,6 @@ px-app-nav-item {
 }
 
 $px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, white); // Same background color as subitem
-$px-app-nav-group-border-color: var(--px-app-nav-group-border-color, lightgray);
 .app-nav-group__dropdown {
   display: block;
   height: calc(100vh - #{$px-app-nav-group-height});
