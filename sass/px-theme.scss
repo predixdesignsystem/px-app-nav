@@ -6,21 +6,15 @@
 @import "px-defaults-design/_settings.defaults.scss";
 @import "px-mixins-design/_tools.mixins.scss";
 
-$fa-font-path       : "../font-awesome/fonts";
-$fa-version         : "4.4.0" !default;
 $predix-font-family : "GE Inspira Sans", sans-serif !default;
-
 @import "px-typography-design/_base.typography.scss";
 
+
 :root{
-@import "px-iconography-design/_base.iconography.scss";
 
   // Defaults
   --px-base-text-color       : $gray15;
   --px-base-background-color : $white;
-
-  @import "px-defaults-design/_settings.defaults.scss";
-  @import "px-mixins-design/_tools.mixins.scss";
 
   // Actionable Text & Icons
   --px-actionable-text-color              :  $primary-default;
@@ -737,16 +731,4 @@ html {
 
 :host {
   font-family: $predix-font-family;
-}
-
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?v=#{$fa-version}');
-  src: url('#{$fa-font-path}/fontawesome-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
-    url('#{$fa-font-path}/fontawesome-webfont.woff2?v=#{$fa-version}') format('woff2'),
-    url('#{$fa-font-path}/fontawesome-webfont.woff?v=#{$fa-version}') format('woff'),
-    url('#{$fa-font-path}/fontawesome-webfont.ttf?v=#{$fa-version}') format('truetype'),
-    url('#{$fa-font-path}/fontawesome-webfont.svg?v=#{$fa-version}#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }

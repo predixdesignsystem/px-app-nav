@@ -17,8 +17,7 @@
   ],
   "dependencies": {
     "polymer": "^1.7.0",
-    "px-typography-design": "^2.0.0",
-    "px-iconography-design": "^0.3.0"
+    "px-typography-design": "^2.0.0"
   },
   "devDependencies": {
     "px-colors-design": "^1.0.0"
