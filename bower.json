@@ -20,7 +20,7 @@
     "px-app-nav.png"
   ],
   "dependencies": {
-    "polymer": "^1.8.1",
+    "polymer": "^1.9.0",
     "px-polymer-font-awesome": "^2.0.0",
     "neon-animation": "^1.2.4",
     "iron-icon": "^1.0.0",
