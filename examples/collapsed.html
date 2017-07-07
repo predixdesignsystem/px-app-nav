@@ -5,6 +5,7 @@
   <script src="../webcomponentsjs/webcomponents.min.js"></script>
   <link rel="import" href="../polymer/polymer-mini.html"/>
   <link rel="import" href="../px-app-nav.html"/>
+  <link rel="import" href="../px-theme/px-theme-styles.html"/>
 
   <style>
     html, body {
@@ -16,6 +17,7 @@
 </head>
 <body>
   <template is="dom-bind">
+    <style is="custom-style" include="px-theme-styles"></style>
     <px-app-nav
         items='[
           { "label" : "Home", "id" : "home", "icon" : "px:home" },

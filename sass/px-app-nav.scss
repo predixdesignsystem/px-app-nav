@@ -11,14 +11,12 @@
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
 // Normalize (excerpt)
-:host, html {
-  color: $inuit-base-text-color;
+:host {
   line-height: $inuit-base-line-height / $inuit-base-font-size; /* [1] */
   text-size-adjust: 100%; /* [4] */
   -moz-osx-font-smoothing: grayscale; /* [5] */
   -webkit-font-smoothing: antialiased; /* [5] */
 }
-@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-box-sizing-design/_generic.box-sizing.scss";
@@ -28,7 +26,7 @@
 
 // Component
 $px-app-nav-height: var(--px-app-nav-height, calculateRem(60px));
-$px-app-nav-background-color: var(--px-app-nav-background-color, $gray2);
+$px-app-nav-background-color: var(--px-app-nav-background-color, gray);
 $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, $inuit-shadow-navigation);
 
 :host {
