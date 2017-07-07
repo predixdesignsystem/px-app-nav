@@ -1,7 +1,7 @@
 {
   "name": "px-app-nav",
   "description": "A navigation component that allows the user to browse app pages and content",
-  "version": "2.0.0-prerelease.1",
+  "version": "2.0.0",
   "main": [
     "px-app-nav.html"
   ],
