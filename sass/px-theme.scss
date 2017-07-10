@@ -324,16 +324,18 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   //// Datetime Components
 
   // Calendar Picker
-  --px-calendar-background-color--hover              : $gray1;
+  --px-calendar-background-color--hover              : rgba($gray6,0.2);
   --px-calendar-background-color--pressed            : $select-pressed;
   --px-calendar-background-color--selected           : $select-default;
   --px-calendar-background-color--selected--hover    : $select-hover;
   --px-calendar-background-color--selected--pressed  : $select-pressed;
+  --px-calendar-title-color                          : $gray10;
   --px-calendar-text-color                           : $gray15;
   --px-calendar-text-color--hover                    : $gray15;
   --px-calendar-text-color--selected                 : $white;
   --px-calendar-alt-background-color                 : $select-light;
   --px-calendar-sub-labels--text-color               : $gray6;
+  --px-calendar-today-border                         : $select-default;
 
   //Common
   --px-datetime-icon-color: $gray10;
