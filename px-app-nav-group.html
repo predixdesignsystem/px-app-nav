@@ -37,7 +37,7 @@
         on-iron-overlay-canceled="_handleGroupCanceled"
         open-animation-config="{{_openAnimation}}"
         close-animation-config="{{_closeAnimation}}">
-      <div class="dropdown-content app-nav-group__dropdown" id="groupcontainer">
+      <div slot="dropdown-content" class="dropdown-content app-nav-group__dropdown" id="groupcontainer">
         <div class="app-nav-group__dropdown__content" id="groupcontent">
           <content select="*"></content>
         </div>
@@ -342,7 +342,7 @@
      */
     _handleItemSelected(evt) {
       if (this.opened) {
-        this.closeGroup();  
+        this.closeGroup();
       }
     },
 
