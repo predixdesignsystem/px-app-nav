@@ -324,21 +324,24 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   //// Datetime Components
 
   // Calendar Picker
-  --px-calendar-background-color--hover              : $gray1;
+  --px-calendar-background-color--hover              : rgba($gray6,0.2);
   --px-calendar-background-color--pressed            : $select-pressed;
   --px-calendar-background-color--selected           : $select-default;
   --px-calendar-background-color--selected--hover    : $select-hover;
   --px-calendar-background-color--selected--pressed  : $select-pressed;
+  --px-calendar-title-color                          : $gray10;
   --px-calendar-text-color                           : $gray15;
   --px-calendar-text-color--hover                    : $gray15;
   --px-calendar-text-color--selected                 : $white;
   --px-calendar-alt-background-color                 : $select-light;
   --px-calendar-sub-labels--text-color               : $gray6;
+  --px-calendar-today-border                         : $select-default;
 
   //Common
   --px-datetime-icon-color: $gray10;
   --px-datetime-read-only-text-color: $gray5;
   --px-datetime-entry-selected: $cyan2;
+  --px-datetime-preset-title-color: $gray10;
 
   // Datetime Field
   --dt-field-background-color-fix: $white;
@@ -464,6 +467,12 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-tab-color--active                     :  $select-pressed;
   --px-tab-color--selected                   :  $select-default;
   --px-tab-border-color                      :  $gray5;
+
+  // Timeline
+  --px-timeline-border-color                 :  $gray10;
+  --px-timeline-text-color                   :  $gray15;
+  --px-timeline-alt-text-color               :  $gray10;
+  --px-timeline-quote-mark-color             :  $gray2;
 
   // Tree
   --px-tree-text-color--hover                :  $gray15;
