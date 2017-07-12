@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../iron-icon/iron-icon.html"/>
+<link rel="import" href="../px-icon/px-icon.html"/>
 <link rel="import" href="../px-icon-set/px-icon-set.html"/>
 <link rel="import" href="px-app-nav-behaviors.html"/>
 <link rel="import" href="css/px-app-nav-item-styles.html"/>
@@ -9,7 +9,7 @@
     <style include="px-app-nav-item-styles"></style>
 
     <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
-      <iron-icon class$="app-nav-item__icon {{_addClassIfHasLabel(label)}}" icon="{{icon}}"></iron-icon>
+      <px-icon class$="app-nav-item__icon {{_addClassIfHasLabel(label)}}" icon="{{icon}}"></px-icon>
     </template>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
@@ -22,7 +22,7 @@
     </template>
 
     <template is="dom-if" if="{{dropdown}}">
-      <iron-icon class="app-nav-item__dropdown-icon" icon="px:chevron-down"></iron-icon>
+      <px-icon class="app-nav-item__dropdown-icon" icon="px:chevron-down"></px-icon>
     </template>
   </template>
 </dom-module>

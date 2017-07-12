@@ -23,7 +23,6 @@
     "polymer": "^1.9.0",
     "px-icon-set": "^2.0.0",
     "neon-animation": "^2.0.0",
-    "iron-icon": "^2.0.0",
     "iron-dropdown": "^2.0.0",
     "iron-resizable-behavior": "^2.0.0",
     "web-animations-js": "^2.2.0"

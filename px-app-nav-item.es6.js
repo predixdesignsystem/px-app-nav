@@ -39,7 +39,7 @@
         type: Boolean,
         value: false,
         reflectToAttribute: true,
-        observer: 'updateStyles' // Necessary to ensure correct style scoping for iron-icon
+        observer: 'updateStyles' // Necessary to ensure correct style scoping for px-icon
       },
 
       /**

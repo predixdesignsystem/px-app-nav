@@ -55,7 +55,7 @@ function runCustomTests() {
       var itemEl = fx.querySelector('px-app-nav-item');
 
       flush(function() {
-        var iconNode = Polymer.dom(itemEl.root).querySelector('iron-icon');
+        var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
         expect(iconNode.icon).to.equal('px:home');
         done();
       });
@@ -66,7 +66,7 @@ function runCustomTests() {
       var itemEl = fx.querySelector('px-app-nav-item');
 
       flush(function() {
-        var iconNode = Polymer.dom(itemEl.root).querySelector('iron-icon');
+        var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
         expect(iconNode.icon).to.equal('px:home');
         done();
       });
@@ -77,7 +77,7 @@ function runCustomTests() {
       var itemEl = fx.querySelector('px-app-nav-item');
 
       flush(function() {
-        var caratNode = Polymer.dom(itemEl.root).querySelector('iron-icon.app-nav-item__dropdown-icon');
+        var caratNode = Polymer.dom(itemEl.root).querySelector('px-icon.app-nav-item__dropdown-icon');
         expect(caratNode).to.be.instanceof(HTMLElement);
         done();
       });
@@ -88,7 +88,7 @@ function runCustomTests() {
       var itemEl = fx.querySelector('px-app-nav-item');
 
       flush(function() {
-        var iconNode = Polymer.dom(itemEl.root).querySelector('iron-icon');
+        var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
         var hasCorrectClass = iconNode
         expect(iconNode.classList.contains('app-nav-item__icon--with-label')).to.be.true;
         done();
@@ -100,7 +100,7 @@ function runCustomTests() {
       var itemEl = fx.querySelector('px-app-nav-item');
 
       flush(function() {
-        var iconNode = Polymer.dom(itemEl.root).querySelector('iron-icon');
+        var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
         var hasCorrectClass = iconNode
         expect(iconNode.classList.contains('app-nav-item__icon--with-label')).to.be.false;
         done();

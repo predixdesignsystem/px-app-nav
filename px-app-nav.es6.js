@@ -26,9 +26,9 @@
        *
        * The following optional properties can be used for top-level items only:
        *
-       * - {String} icon - The name of a valid iron-icon that will be placed
+       * - {String} icon - The name of a valid px-icon that will be placed
        * next to the text label for the item. Use a valid icon from px-icon-set
-       * or define your own using the iron-iconset or iron-iconset-svg elements.
+       * or define your own using the px-iconset or px-iconset-svg elements.
        * - {Array} children - An array of subitem objects that will placed in a
        * dropdown under the top-level item. Each subitem must have a `path`
        * and `label` defined. If an `icon` or `children` property is defined
