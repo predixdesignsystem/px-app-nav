@@ -345,14 +345,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
   // Datetime Field
   --dt-field-background-color-fix: $white;
-  //
-  // // Datetime Picker
-  // --px-datetime-picker-background-color:
-  // --px-datetime-picker-background-color--hover:
-  // --px-datetime-picker-background-color--pressed:
-  // --px-datetime-picker-border-color:
-  // --px-datetime-picker-overlay-color:
-  //
+
+  // Datetime Picker
+  --px-datetime-picker-border-color: $gray3;
+  --px-datetime-picker-background-color: $white;
+
   // // Datetime Range Field
   // --px-datetime-range-field-text-color-validation--failed:
   // --px-datetime-range-field-to-color:
