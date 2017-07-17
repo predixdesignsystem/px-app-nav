@@ -1,9 +1,8 @@
-Px-theme
---------------
+# px-theme
 
 ## Overview
 
-Px-theme is a Predix UI component. This is the starting point for theming Predix UI  components. It is based loosely on the concepts outlined [here](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling).
+Px-theme is a Predix UI component which serves as the starting point for theming other Predix UI components. It is based loosely on the concepts outlined [here](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling).
 
 
 ## Usage
