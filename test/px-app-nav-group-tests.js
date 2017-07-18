@@ -78,17 +78,6 @@ function runCustomTests() {
       });
     });
 
-    it('sets its icon to the empty state if the `empty` attribute is set to true', function(done) {
-      var fx = fixture('AppNavGroupEmpty');
-      var groupEl = fx.querySelector('px-app-nav-group');
-
-      flush(function() {
-        var itemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        expect(itemEl.empty).to.be.true;
-        done();
-      });
-    });
-
     it('sets its dropdown content width to a static value from `fixedWidth`', function(done) {
       var fx = fixture('AppNavGroupFixedWidth');
       var groupEl = fx.querySelector('px-app-nav-group');

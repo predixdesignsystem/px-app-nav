@@ -19,7 +19,9 @@
         label="{{label}}"
         selected$="{{selected}}"
         overflowed$="{{overflowed}}"
-        collapsed$="{{collapsed}}">
+        collapsed$="{{collapsed}}"
+        only-show-icon$="[[onlyShowIcon]]"
+        empty-icon="[[emptyIcon]]">
     </px-app-nav-item>
 
     <div class="app-nav-subgroup__dropdown" id="groupcontainer">
@@ -80,11 +82,27 @@
         type: String
       },
 
+      emptyIcon: {
+        type: Boolean,
+        value: false
+      },
+
       /**
        * If `true` the group is expanded so the user can select a subitem.
        */
       opened: {
         type: Boolean
+      },
+
+      onlyShowIcon: {
+        type: Boolean,
+        value: false,
+        observer: '_onlyShowIconChanged'
+      },
+
+      _reopen: {
+        type: Boolean,
+        value: false
       },
 
       animationConfig: {
@@ -156,6 +174,21 @@
      */
     _handleSelfTapped(evt) {
       this._toggleGroup();
+    },
+
+    _onlyShowIconChanged(newVal, oldVal) {
+      if (typeof oldVal !== 'boolean') return;
+
+      if (newVal && !oldVal && this.opened) {
+        this.closeGroup();
+        this._reopen = true;
+        return;
+      }
+      if (!newVal && oldVal && this._reopen) {
+        this.openGroup();
+        this._reopen = false;
+        return;
+      }
     }
   });
 

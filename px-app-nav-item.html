@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-icon/px-icon.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html"/>
 <link rel="import" href="../px-icon-set/px-icon-set.html"/>
 <link rel="import" href="px-app-nav-behaviors.html"/>
 <link rel="import" href="css/px-app-nav-item-styles.html"/>
@@ -10,6 +10,13 @@
 
     <template is="dom-if" if="{{_propIsTypeOf(icon, 'string')}}">
       <px-icon class$="app-nav-item__icon {{_addClassIfHasLabel(label)}}" icon="{{icon}}"></px-icon>
+    </template>
+
+    <template is="dom-if" if="{{emptyIcon}}">
+      <div class="app-nav-item__icon app-nav-item__icon--with-label app-nav-item__icon--empty"></div>
+    </template>
+    <template is="dom-if" if="{{emptyLabel}}">
+      <div class="app-nav-item__label app-nav-item__label--empty"></div>
     </template>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">

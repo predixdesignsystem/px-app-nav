@@ -21,7 +21,9 @@
         dropdown="{{!hideDropdownIcon}}"
         selected$="{{_isGroupSelected(selected, noHighlight)}}"
         overflowed$="{{overflowed}}"
-        empty$="{{empty}}">
+        empty-icon="{{emptyIcon}}"
+        empty-label="{{emptyLabel}}"
+        collapsed$="{{collapsed}}">
     </px-app-nav-item>
 
     <div class="app-nav-group__target" id="grouptarget"></div>
@@ -143,7 +145,15 @@
       /**
        * If `true` the group item button should have an empty state.
        */
-      empty: {
+      emptyIcon: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * If `true` the group item label should have an empty state.
+       */
+      emptyLabel: {
         type: Boolean,
         value: false
       },
@@ -156,12 +166,16 @@
         value: false
       },
 
-
       /**
        * A reference to the HTMLElement to fit the group dropdown into.
        */
       fitInto: {
         type: HTMLElement
+      },
+
+      collapsed: {
+        type: Boolean,
+        value: false
       },
 
       _openAnimation: {

@@ -43,9 +43,18 @@
       },
 
       /**
-       * Shows an empty state outline for the button instead of a label/icon.
+       * Shows an empty state outline for icon.
        */
-      empty: {
+      emptyIcon: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+
+      /**
+       * Shows an empty state outline for the label.
+       */
+      emptyLabel: {
         type: Boolean,
         value: false,
         reflectToAttribute: true

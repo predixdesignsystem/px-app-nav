@@ -35,6 +35,7 @@ $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, $inuit-shadow-navigation);
   box-shadow: $px-app-nav-box-shadow;
   display: block;
   width: 100%;
+  @apply --px-app-nav;
 }
 
 .app-nav {
@@ -46,4 +47,28 @@ $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, $inuit-shadow-navigation);
   flex: 1 1 auto;
   display: flex;
   max-width: 100%;
+}
+
+$px-app-nav-vertical-width: var(--px-app-nav-vertical-width, calculateRem(60px));
+$px-app-nav-vertical-height: var(--px-app-nav-vertical-height, 100%);
+$px-app-nav-vertical-position: var(--px-app-nav-vertical-position, absolute);
+$px-app-nav-vertical-transition: var(--px-app-nav-vertical-transition, max-width 250ms ease);
+
+:host([vertical]) {
+  overflow: hidden;
+  position: $px-app-nav-vertical-position;
+  height: $px-app-nav-vertical-height;
+  min-width: $px-app-nav-vertical-width;
+  max-width: $px-app-nav-vertical-width;
+  transition: $px-app-nav-vertical-transition;
+  @apply --px-app-nav;
+}
+
+:host([vertical]) .app-nav {
+  display: block;
+}
+
+:host([vertical]) .app-nav__items {
+  flex-direction: column;
+  height: 100%;
 }

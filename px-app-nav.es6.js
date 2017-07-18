@@ -109,6 +109,41 @@
       },
 
       /**
+       * Shows the vertical navigation. The navigation will be take up the
+       * full left-hand side of the page.
+       */
+      vertical: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+
+      /**
+       * The width the vertical menu will animate to when it opens on hover.
+       * Use a number (e.g. `300`) whichwill be converted to a pixel
+       * value (e.g. '60px').
+       *
+       * To set the menu's non-opened width, use the CSS style variable
+       * `--px-app-nav-vertical-width`.
+       */
+      verticalOpenWidth: {
+        type: Number,
+        value: 300
+      },
+
+      /**
+       * When `true`, the vertical navigation is open and the user is interacting
+       * with it. When `false`, the vertical navigation is closed.
+       */
+      verticalOpened: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        readOnly: true,
+        observer: '_verticalOpenedChanged'
+      },
+
+      /**
        * A reference to the currently selected item. Use this property to set the
        * selected item directly. The object passed to this property must be a
        * direct reference to one of the `items` objects. Changing this property
@@ -374,7 +409,47 @@
 
     listeners: {
       'iron-resize' : '_handleResize',
-      'px-app-nav-item-tapped' : '_itemSelectedByEvent'
+      'px-app-nav-item-tapped' : '_itemSelectedByEvent',
+      'mouseenter' : '_handleMouseEnter',
+      'mouseleave' : '_handleMouseLeave'
+    },
+
+    _handleMouseEnter() {
+      if (!this.vertical) return;
+
+      this._mouseIsOverNav = true;
+      if (this.isDebouncerActive('close-nav-on-mouseleave')) {
+        this.cancelDebouncer('close-nav-on-mouseleave');
+      }
+      if (this._mouseIsOverNav && !this.verticalOpened) {
+        this._setVerticalOpened(true);
+      }
+    },
+
+    _handleMouseLeave() {
+      if (!this.vertical) return;
+
+      this._mouseIsOverNav = false;
+      this.debounce('close-nav-on-mouseleave', function() {
+        if (!this._mouseIsOverNav && this.verticalOpened) {
+          this._setVerticalOpened(false);
+        }
+      }, 250);
+    },
+
+    /**
+     * @param {boolean} isOpened
+     * @param {boolean} wasOpened
+     */
+    _verticalOpenedChanged(isOpened, wasOpened) {
+      if (!this.vertical || typeof wasOpened !== 'boolean') return;
+
+      if (isOpened && !wasOpened) {
+        this.style.maxWidth = this.verticalOpenWidth + 'px';
+      }
+      if (!isOpened && wasOpened) {
+        this.style.maxWidth = '60px';
+      }
     },
 
     /**
@@ -524,7 +599,7 @@
      * will not be triggered.
      */
     _handleResize() {
-      if (this.collapseAll) return;
+      if (this.collapseAll || this.vertical) return;
 
       const debouncer = 'measure-available-width';
       if (typeof this._availableWidth !== 'number') {
@@ -564,13 +639,16 @@
      * This method will only run if some nav items have been passed to the
      * `items` attribute or property.
      *
-     *
-     *
      * @return {Array.<Array>} - First item is the list of visible items (if any), second item is the list of overflowed items (if any)
      */
     rebuild() {
-      if (!this.items || !Array.isArray(this.items) || (!this.collapseAll && typeof this._availableWidth !== 'number')) return;
+      if (!this.items || !Array.isArray(this.items) || (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number')) return;
 
+      if (this.vertical) {
+        this._setVisibleItems(this.items.slice(0));
+        this._setOverflowedItems([]);
+        return [this.visibleItems, this.overflowedItems];
+      }
       if (this.collapseAll || this._availableWidth === 0 || (typeof this.collapseAt === 'number' && this._availableWidth <= this.collapseAt)) {
         this._setVisibleItems([]);
         this._setOverflowedItems(this.items.slice(0));
@@ -790,13 +868,13 @@
      */
     _getDropdownIcon(selectedItem, selectedItemParent, iconKey, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
       if (anyOverflowed && !allCollapsed) {
-        return 'px:collapse';
+        return 'pxm:collapse';
       }
       if (allCollapsed && collapseWithIcon && !collapseOpened) {
-        return 'px:hamburger';
+        return 'pxm:hamburger';
       }
       if (allCollapsed && collapseWithIcon && collapseOpened) {
-        return 'px:close';
+        return 'pxm:close';
       }
       if (allCollapsed && selectedItemParent && typeof selectedItemParent === 'object') {
         return selectedItemParent[iconKey];
@@ -918,6 +996,17 @@
       if (!selectedItem || !overflowedItems || !Array.isArray(overflowedItems) || !overflowedItems.length) return false;
       if (selectedItemParent) return overflowedItems.indexOf(selectedItemParent) !== -1;
       return overflowedItems.indexOf(selectedItem) !== -1;
+    },
+
+    /**
+     * Checks if the icon is undefined or an empty string.
+     *
+     * @param  {Object|null} item
+     * @param  {String} iconKey
+     * @return {Boolean}
+     */
+    _isIconEmpty(item, iconKey) {
+      return (!item.hasOwnProperty(iconKey) || typeof item[iconKey] !== 'string' && item[iconKey].length >= 0);
     },
 
     /**
