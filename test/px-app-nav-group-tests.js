@@ -62,7 +62,7 @@ function runCustomTests() {
 
       flush(function() {
         var itemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        expect(itemEl.icon).to.equal('px:alert');
+        expect(itemEl.icon).to.equal('px-fea:alerts');
         done();
       });
     });

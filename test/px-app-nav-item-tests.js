@@ -56,7 +56,7 @@ function runCustomTests() {
 
       flush(function() {
         var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
-        expect(iconNode.icon).to.equal('px:home');
+        expect(iconNode.icon).to.equal('px-nav:home');
         done();
       });
     });
@@ -67,7 +67,7 @@ function runCustomTests() {
 
       flush(function() {
         var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
-        expect(iconNode.icon).to.equal('px:home');
+        expect(iconNode.icon).to.equal('px-nav:home');
         done();
       });
     });

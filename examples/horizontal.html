@@ -21,12 +21,12 @@
     <style is="custom-style" include="px-theme-styles"></style>
     <px-app-nav
         items='[
-          { "label" : "Home", "path" : "home", "icon" : "px:home" },
-          { "label" : "Alerts", "path" : "alerts", "icon" : "px:alert" },
-          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px:dashboard", "subitems": [
-            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px:truck" },
-            { "label" : "Track Orders", "path" : "orders", "icon" : "px:order" },
-            { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px:note" }
+          { "label" : "Home", "path" : "home", "icon" : "px-nav:home" },
+          { "label" : "Alerts", "path" : "alerts", "icon" : "px-fea:alerts" },
+          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px-fea:dashboard", "subitems": [
+            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px-obj:truck" },
+            { "label" : "Track Orders", "path" : "orders", "icon" : "px-fea:orders" },
+            { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px-fea:templates" }
           ]}
         ]'
         selected-item="{{selectedItem}}"

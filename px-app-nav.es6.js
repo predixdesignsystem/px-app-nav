@@ -37,9 +37,9 @@
        * The following is an example of a list of valid nav items:
        *
        *     [
-       *       { "label" : "Home",   "id" : "home",   "icon" : "px:home" },
-       *       { "label" : "Alerts", "id" : "alerts", "icon" : "px:alert" },
-       *       { "label" : "Assets", "id" : "assets", "icon" : "px:asset", "children": [
+       *       { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+       *       { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+       *       { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", "children": [
        *         { "label" : "Asset #1", "id" : "a1" },
        *         { "label" : "Asset #2", "id" : "a2" }
        *       ] }
@@ -868,13 +868,13 @@
      */
     _getDropdownIcon(selectedItem, selectedItemParent, iconKey, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
       if (anyOverflowed && !allCollapsed) {
-        return 'pxm:collapse';
+        return 'px-nav:collapse';
       }
       if (allCollapsed && collapseWithIcon && !collapseOpened) {
-        return 'pxm:hamburger';
+        return 'px-nav:hamburger';
       }
       if (allCollapsed && collapseWithIcon && collapseOpened) {
-        return 'pxm:close';
+        return 'px-nav:close';
       }
       if (allCollapsed && selectedItemParent && typeof selectedItemParent === 'object') {
         return selectedItemParent[iconKey];
