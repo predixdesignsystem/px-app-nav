@@ -18,6 +18,11 @@
 <body>
   <template is="dom-bind">
     <style is="custom-style" include="px-theme-styles"></style>
+    <style is="custom-style">
+      px-app-nav {
+        --px-app-nav-collapsed-width: 275px;
+      }
+    </style>
     <px-app-nav
         items='[
           { "label" : "Home", "id" : "home", "icon" : "px-nav:home" },
@@ -29,7 +34,6 @@
           ]}
         ]'
         collapse-all
-        collapse-dropdown-width="275"
         collapse-opened="{{collapseOpened}}"
         selected-item="{{selectedItem}}"
         selected-route="{{selectedRoute}}">

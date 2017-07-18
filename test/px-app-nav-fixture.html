@@ -212,7 +212,13 @@
     <test-fixture id="AppNavFixtureCollapsed">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <style>
+            #collapsed {
+              --px-app-nav-collapsed-width: 275px;
+            }
+          </style>
           <px-app-nav
+              id="collapsed"
               items='[
                 { "label" : "Home", "id" : "home", "icon" : "px-nav:home" },
                 { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
@@ -222,8 +228,7 @@
                   { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
                 ]}
               ]'
-              collapse-all
-              collapse-dropdown-width="275">
+              collapse-all>
           </px-app-nav>
         </div>
       </template>

@@ -81,15 +81,6 @@
       },
 
       /**
-       * The width of the collapsed menu dropdown. Use a number (e.g. `60`) which
-       * will be converted to a pixel value (e.g. '60px').
-       */
-      collapseDropdownWidth: {
-        type: Number,
-        value: 320
-      },
-
-      /**
        * Set to `true` to show an open/close icon for the collapsed menu instead
        * of the selected item.
        */
@@ -119,19 +110,6 @@
       },
 
       /**
-       * The width the vertical menu will animate to when it opens on hover.
-       * Use a number (e.g. `300`) whichwill be converted to a pixel
-       * value (e.g. '60px').
-       *
-       * To set the menu's non-opened width, use the CSS style variable
-       * `--px-app-nav-vertical-width`.
-       */
-      verticalOpenWidth: {
-        type: Number,
-        value: 300
-      },
-
-      /**
        * When `true`, the vertical navigation is open and the user is interacting
        * with it. When `false`, the vertical navigation is closed.
        */
@@ -140,7 +118,7 @@
         value: false,
         notify: true,
         readOnly: true,
-        observer: '_verticalOpenedChanged'
+        reflectToAttribute: true
       },
 
       /**
@@ -435,21 +413,6 @@
           this._setVerticalOpened(false);
         }
       }, 250);
-    },
-
-    /**
-     * @param {boolean} isOpened
-     * @param {boolean} wasOpened
-     */
-    _verticalOpenedChanged(isOpened, wasOpened) {
-      if (!this.vertical || typeof wasOpened !== 'boolean') return;
-
-      if (isOpened && !wasOpened) {
-        this.style.maxWidth = this.verticalOpenWidth + 'px';
-      }
-      if (!isOpened && wasOpened) {
-        this.style.maxWidth = '60px';
-      }
     },
 
     /**
@@ -886,13 +849,16 @@
     },
 
     /**
-     * If the dropdown is collapsed, returns the `collapseDropdownWidth` value.
-     * Otherwise, returns undefined.
+     * If the dropdown is collapsed, reads the `-px-app-nav-collapsed-width--open`
+     * style variable and returns it or default value `320`.
      *
      * @return {Number|undefined}
      */
-    _getDropdownWidth(collapseDropdownWidth, allCollapsed) {
-      return allCollapsed ? collapseDropdownWidth : undefined;
+    _getDropdownWidth(allCollapsed) {
+      if (allCollapsed) {
+        const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
+        return isNaN(width) ? 320 : width;
+      }
     },
 
     /**

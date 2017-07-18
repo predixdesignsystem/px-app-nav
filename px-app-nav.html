@@ -132,7 +132,7 @@ Custom property | Description | Default
         <template is="dom-if" if="[[anyOverflowed]]">
           <px-app-nav-group
               cancel-select
-              fixed-width="[[_getDropdownWidth(collapseDropdownWidth, allCollapsed)]]"
+              fixed-width="[[_getDropdownWidth(allCollapsed)]]"
               id="overflowedGroup"
               label="[[_getDropdownLabel(selectedItem, selectedItemParent, keys.label, collapseWithIcon, allCollapsed)]]"
               icon="[[_getDropdownIcon(selectedItem, selectedItemParent, keys.icon, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)]]"
