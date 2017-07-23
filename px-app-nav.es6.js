@@ -4,7 +4,12 @@
   Polymer({
     is: 'px-app-nav',
 
-    behaviors: [Polymer.IronResizableBehavior, PxAppNavBehavior.MeasureText, PxAppBehavior.ContextGraph],
+    behaviors: [
+      Polymer.IronResizableBehavior,
+      PxAppNavBehavior.MeasureText,
+      PxAppBehavior.AssetGraph,
+      PxAppBehavior.AssetSelectable,
+    ],
 
     properties: {
       /**
@@ -47,12 +52,96 @@
        *
        * The item property names can be changed, e.g. to choose a different item
        * property to serve as a unique ID. See the `keys` property for details.
+       *
+       * @property items
        */
-      items: {
-        type: Array,
-        notify: true,
-        observer: '_handleNavItemsChanged'
-      },
+
+      /**
+       * A reference to the currently selected item. Use this property to set the
+       * selected item directly. The object passed to this property must be a
+       * direct reference to one of the `items` objects. Changing this property
+       * will automatically update the `selectedRoute`.
+       *
+       * Selecting an item automatically selects its parent if it has one.
+       * For the navigation, top-level items with children cannot be selected
+       * directly - instead, select a child item and its parent will also be
+       * marked as selected (and set as the `selectedItemParent`).
+       *
+       * See `selectedRoute` for an alternative way to select items.
+       *
+       * @property selected
+       */
+
+      /**
+       * The route to the selected item as an array of strings. Use this property
+       * to set the selected item by route, or to bind to updates when the
+       * selected item is changed. Changing this property will automatically
+       * update the `selectedItem`.
+       *
+       * The route array starts at the top of the graph and ends with the selected
+       * item. Each route entry is a string that corresponds to the unique ID
+       * of an item. The item property this unique ID will be taken from can be
+       * configured with the `key` property. By default, it will be `item.id`.
+       *
+       * Selecting an item automatically selects its parent if it has one.
+       * For the navigation, top-level items with children cannot be selected
+       * directly - instead, select a child item and its parent will also be
+       * marked as selected (and set as the `selectedItemParent`).
+       *
+       * For example, given the following graph:
+       *
+       *     [
+       *       {
+       *         "label" : "Dashboards",
+       *         "id" : "dash",
+       *         "children" : [
+       *           { "label" : "Truck Statuses", "id" : "trucks" },
+       *           { "label" : "Generator Alerts", "id" : "generators" }
+       *         ]
+       *       },
+       *     ]
+       *
+       * To select the "Truck Statuses" page, set the route array to:
+       *
+       *     ["dash", "trucks"]
+       *
+       * If the user then selects the "Generator Alerts" item, the route array
+       * would be replaced with a new array with the following entries:
+       *
+       *     ["dash", "generators"]
+       *
+       * @property selectedRoute
+       */
+
+      /**
+       * Changes the item properties (keys) that will be used internally to find
+       * each item's unique ID, label, icon, and child list.
+       *
+       * Use this property if you already have a predefined data schema for your
+       * application and want to customize this component to match your schema.
+       * Otherwise, its recommended to leave the defaults.
+       *
+       * The following properties can be set:
+       *
+       * - id: [default='id'] a unique ID for the item
+       * - label: [default='label'] a human-readable label
+       * - icon: [default='icon'] an icon configuration string
+       * - children: [default='children'] an array of child items
+       *
+       * If you want to configure any keys, you must set all the keys. If any
+       * of the keys are not defined, the navigation will fail.
+       *
+       * For example, the schema could be changed to the following:
+       *
+       *     {
+       *       "id" : "assetId",
+       *       "label" : "assetName",
+       *       "icon" : "assetIcon",
+       *       "children" : "subAssets"
+       *     }
+       *
+       * @property keys
+       */
 
       /**
        * Set to `true` to collapse all nav items into a dropdown. Makes the nav
@@ -119,162 +208,6 @@
         notify: true,
         readOnly: true,
         reflectToAttribute: true
-      },
-
-      /**
-       * A reference to the currently selected item. Use this property to set the
-       * selected item directly. The object passed to this property must be a
-       * direct reference to one of the `items` objects. Changing this property
-       * will automatically update the `selectedRoute`.
-       *
-       * Selecting an item automatically selects its parent if it has one.
-       * For the navigation, top-level items with children cannot be selected
-       * directly - instead, select a child item and its parent will also be
-       * marked as selected (and set as the `selectedItemParent`).
-       *
-       * See `selectedRoute` for an alternative way to select items.
-       */
-      selectedItem: {
-        type: Object,
-        notify: true,
-        value: null,
-        observer: '_itemSelectedByReference'
-      },
-
-      /**
-       * The route to the selected item as an array of strings. Use this property
-       * to set the selected item by route, or to bind to updates when the
-       * selected item is changed. Changing this property will automatically
-       * update the `selectedItem`.
-       *
-       * The route array starts at the top of the graph and ends with the selected
-       * item. Each route entry is a string that corresponds to the unique ID
-       * of an item. The item property this unique ID will be taken from can be
-       * configured with the `key` property. By default, it will be `item.id`.
-       *
-       * Selecting an item automatically selects its parent if it has one.
-       * For the navigation, top-level items with children cannot be selected
-       * directly - instead, select a child item and its parent will also be
-       * marked as selected (and set as the `selectedItemParent`).
-       *
-       * For example, given the following graph:
-       *
-       *     [
-       *       {
-       *         "label" : "Dashboards",
-       *         "id" : "dash",
-       *         "children" : [
-       *           { "label" : "Truck Statuses", "id" : "trucks" },
-       *           { "label" : "Generator Alerts", "id" : "generators" }
-       *         ]
-       *       },
-       *     ]
-       *
-       * To select the "Truck Statuses" page, set the route array to:
-       *
-       *     ["dash", "trucks"]
-       *
-       * If the user then selects the "Generator Alerts" item, the route array
-       * would be replaced with a new array with the following entries:
-       *
-       *     ["dash", "generators"]
-       *
-       */
-      selectedRoute: {
-        type: Array,
-        notify: true,
-        observer: '_itemSelectedByRoute'
-      },
-
-      /**
-       * [Read-only] A reference to the currently selected item's parent. `null`
-       * if the selected item has no parent or no item is selected.
-       */
-      selectedItemParent: {
-        type: Object,
-        notify: true,
-        readOnly: true,
-        value: null
-      },
-
-      /**
-       * [Read-only] A reference to the currenty selected item's siblings - the
-       * children of its parent. Array with only the selected item if the selected
-       * item has no siblings. `null` if no item is selected.
-       */
-      selectedItemSiblings: {
-        type: Array,
-        notify: true,
-        readOnly: true,
-        value: null
-      },
-
-      /**
-       * [Read-only] A reference to the currently selected item's children.
-       * Empty array (`[]`) if the selected item has no children. `null` if no
-       * item is selected.
-       */
-      selectedItemChildren: {
-        type: Array,
-        notify: true,
-        readOnly: true,
-        value: null
-      },
-
-      /**
-       * [Read-only] The path to the selected item as an array. Begins with
-       * the top-most item in the graph and ends with the selected item. It
-       * the selected item is at the top of the graph, the array will include
-       * only the selected item.
-       *
-       * If no item is selected, set to null.
-       */
-      selectedItemPath: {
-        type: Array,
-        notify: true,
-        readOnly: true,
-        value: null
-      },
-
-      /**
-       * Changes the item properties (keys) that will be used internally to find
-       * each item's unique ID, label, icon, and child list.
-       *
-       * Use this property if you already have a predefined data schema for your
-       * application and want to customize this component to match your schema.
-       * Otherwise, its recommended to leave the defaults.
-       *
-       * The following properties can be set:
-       *
-       * - id: [default='id'] a unique ID for the item
-       * - label: [default='label'] a human-readable label
-       * - icon: [default='icon'] an icon configuration string
-       * - children: [default='children'] an array of child items
-       *
-       * If you want to configure any keys, you must set all the keys. If any
-       * of the keys are not defined, the navigation will fail.
-       *
-       * For example, the schema could be changed to the following:
-       *
-       *     {
-       *       "id" : "assetId",
-       *       "label" : "assetName",
-       *       "icon" : "assetIcon",
-       *       "children" : "subAssets"
-       *     }
-       *
-       */
-      keys: {
-        type: Object,
-        value: function() {
-          return {
-            'id' : 'id',
-            'label' : 'label',
-            'icon' : 'icon',
-            'children' : 'children',
-            'route' : 'route'
-          }
-        }
       },
 
       /**
@@ -350,21 +283,6 @@
       _availableWidth: {
         type: Number,
         observer: 'rebuild'
-      },
-
-      _context: {
-        type: Object
-      },
-
-      _lastSelection: {
-        type: Object,
-        value: function() {
-          return {
-            source: null,
-            reason: null,
-            item: null
-          }
-        }
       }
     },
 
@@ -372,7 +290,7 @@
      * Static values we use to calculate the size of items when we do math to
      * measure if they can fit in the nav.
      */
-    statics: {
+    _statics: {
       ITEM_PADDING: '1rem', /*on both sides*/
       ITEM_ICON_WIDTH: '2rem',
       ITEM_ICON_PADDING: '0.33rem', /*only on one side*/
@@ -389,7 +307,8 @@
       'iron-resize' : '_handleResize',
       'px-app-nav-item-tapped' : '_itemSelectedByEvent',
       'mouseenter' : '_handleMouseEnter',
-      'mouseleave' : '_handleMouseLeave'
+      'mouseleave' : '_handleMouseLeave',
+      'px-app-asset-graph-created' : 'rebuild'
     },
 
     _handleMouseEnter() {
@@ -413,21 +332,6 @@
           this._setVerticalOpened(false);
         }
       }, 250);
-    },
-
-    /**
-     * When the `items` list changes, retraces and memoizes item paths so they
-     * can easily be found later during a selection.
-     */
-    _handleNavItemsChanged(items, keys) {
-      // @TODO: Handle when nav items is emptied later....
-      if (!items || !Array.isArray(items) || typeof keys !== 'object') return;
-      this._context = this._createContextGraph(items, {
-        idKey: keys.id,
-        childrenKey: keys.children,
-        routeKey: keys.route
-      });
-      this.rebuild();
     },
 
     /**
@@ -465,93 +369,9 @@
      */
     _itemSelectedByEvent(evt) {
       if (evt.detail.item) {
-        this._selectItem(evt.detail.item, 'DOM_EVENT');
+        this.select(evt.detail.item, 'DOM_EVENT');
       }
     },
-
-    /**
-     * Updates the selected item properties when the `selectedRoute` changes.
-     */
-    _itemSelectedByRoute(route) {
-      if (!route || this._lastSelection.route === route) return;
-
-      const item = this._context.getNodeAtRoute(route);
-      if (item) {
-        this._selectItem(item, 'ROUTE_CHANGED');
-      } else {
-        throw new Error(`The route ${JSON.stringify(route)} could not be found in the items graph.`)
-      }
-    },
-
-    /**
-     * Updates other selected item properties when the `selectedItem` changes.
-     */
-    _itemSelectedByReference(item) {
-      if (!item || this._lastSelection.item === item) return;
-
-      if (this._context.hasNode(item)) {
-        this._selectItem(item, 'ITEM_CHANGED');
-      } else {
-        throw new Error(`The following item could not be found in the items graph:
-        ${JSON.stringify(item)}`)
-      }
-    },
-
-    /**
-     * Gets item metadata from the ContextGraph and updates internaly APIs
-     */
-    _selectItem(item, source) {
-      const {path, route, parent, children, siblings} = this._context.getNodeInfo(item);
-      this._lastSelection = {
-        item: item,
-        source: source,
-        route: route
-      }
-      if (this.selectedItem !== item) {
-        this.set('selectedItem', item);
-      }
-      this.set('selectedRoute', route);
-      this._setSelectedItemPath(path);
-      this._setSelectedItemParent(parent);
-      this._setSelectedItemChildren(children);
-      this._setSelectedItemSiblings(siblings);
-
-      this.fire('px-app-nav-selected', {
-        selectionSource: source,
-        item: item,
-        route: route,
-        path: path,
-        parent: parent,
-        children: children,
-        siblings: siblings
-      });
-    },
-    /**
-     * Fired when a new navigation item is selected. Includes details about how
-     * the item was selected, and information about the new selected item.
-     *
-     * The `selectionSource` property is a string describing what triggered
-     * the selection:
-     *
-     *   * 'DOM_EVENT' - the user tapped on a navigation item
-     *   * 'ROUTE_CHANGED' - the array bound to `selectedRoute` changed
-     *   * 'ITEM_CHANGED' - the object bound to `selectedItem` changed
-     *   * 'SELECT_METHOD' - the `select()` method was called
-     *   * 'SELECT_ROUTE_METHOD' - the `selectRoute()` method was called
-     *
-     * The event will have the following properties:
-     *
-     *   * {Object} detail - Contains the event details
-     *   * {String} detail.selectionSource - Info about the change trigger, see above
-     *   * {Object} detail.item - Reference to the selected item
-     *   * {Array} detail.route - Route from the top of the graph to the selected item
-     *   * {Array} detail.path - Path from the top of the graph to the selected item
-     *   * {Object|null} detail.parent - Reference to the selected item's parent, or null if no parent defined
-     *   * {Array} detail.children - Reference to the the selected item's children, or an empty array if no children defined
-     *   * {Array} detail.siblings - Reference to the the selected item's siblings, or an array with only the selected item if no siblings defined
-     *
-     * @event px-app-nav-selected
-     */
 
     /**
      * Called when an `iron-resize` event notifies the element that its
@@ -732,11 +552,11 @@
         const {fontSize, fontFamily} = window.getComputedStyle(this);
         const rem = (val) => this._remToPx(parseFloat(val));
         const parse = (cssVar, fallbackRem) => this._parseSizeStyleVar(cssVar, rem(fallbackRem), parseInt(fontSize));
-        const itemPadding = parse('--px-app-nav-item-padding', this.statics.ITEM_PADDING);
-        const iconSize = parse('--px-app-nav-item-icon-size', this.statics.ITEM_ICON_WIDTH);
-        const iconPadding = rem(this.statics.ITEM_ICON_PADDING);
-        const openIconSize = rem(this.statics.OPEN_ICON_WIDTH);
-        const openIconPadding = rem(this.statics.OPEN_ICON_PADDING);
+        const itemPadding = parse('--px-app-nav-item-padding', this._statics.ITEM_PADDING);
+        const iconSize = parse('--px-app-nav-item-icon-size', this._statics.ITEM_ICON_WIDTH);
+        const iconPadding = rem(this._statics.ITEM_ICON_PADDING);
+        const openIconSize = rem(this._statics.OPEN_ICON_WIDTH);
+        const openIconPadding = rem(this._statics.OPEN_ICON_PADDING);
         this._fontStyleCache = {fontSize, fontFamily, itemPadding, iconSize, iconPadding, openIconSize, openIconPadding};
       }
       return this._fontStyleCache;

@@ -1,3 +1,12 @@
+v2.0.1
+==================
+* Move to px-app-asset-graph API for creating and selecting items
+
+v2.0.0
+==================
+* Complete overhaul of px-app-nav API and design. See the documentation for
+  more information on how to migrate to the new component.
+
 v1.10.12
 ==================
 * sass fix for safari 9

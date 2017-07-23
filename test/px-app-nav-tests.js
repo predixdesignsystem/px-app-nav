@@ -5,11 +5,11 @@ document.addEventListener("WebComponentsReady", function() {
 function runCustomTests() {
 
   describe('px-app-nav [selection API]', function() {
-    it('sets its `selectedRoute` to the route of the `selectedItem`', function(done) {
+    it('sets its `selectedRoute` to the route of the `selected` item', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
       var item = appNavEl.items[2].children[0];
-      appNavEl.selectedItem = item;
+      appNavEl.selected = item;
 
       setTimeout(function() {
         expect(appNavEl.selectedRoute).to.eql(['dashboards', 'trucks']);
@@ -17,57 +17,44 @@ function runCustomTests() {
       }, 50);
     });
 
-    it('sets its `selectedItemParent` to reference the parent of the `selectedItem`', function(done) {
+    it('sets its `selectedMeta.parent` to reference the parent of the `selected` item', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
       var item = appNavEl.items[2].children[0];
       var itemParent = appNavEl.items[2];
-      appNavEl.selectedItem = item;
+      appNavEl.selected = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItemParent).to.equal(itemParent);
+        expect(appNavEl.selectedMeta.parent).to.equal(itemParent);
         done();
       }, 50);
     });
 
-    it('sets its `selectedItemSiblings` property to reference the siblings of the `selectedItem`', function(done) {
-      var fx = fixture('AppNavFixtureUnselected');
-      var appNavEl = fx.querySelector('px-app-nav');
-      var item = appNavEl.items[2].children[0];
-      var itemSiblings = appNavEl.items[2].children;
-      appNavEl.selectedItem = item;
-
-      setTimeout(function() {
-        expect(appNavEl.selectedItemSiblings).to.equal(itemSiblings);
-        done();
-      }, 50);
-    });
-
-    it('sets its `selectedItemChildren` property to reference the children of the `selectedItem`', function(done) {
+    it('sets its `selectedMeta.children` property to the children of the `selected` item', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
       var item = appNavEl.items[2];
       var itemChildren = appNavEl.items[2].children;
-      appNavEl.selectedItem = item;
+      appNavEl.selected = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItemChildren).to.equal(itemChildren);
+        expect(appNavEl.selectedMeta.children).to.eql(itemChildren);
         done();
       }, 50);
     });
 
-    it('generates a `selectedItemPath` from the root of the graph to the `selectedItem`', function(done) {
+    it('generates a `selectedMeta.path` from the root of the graph to the `selected` item', function(done) {
       var fx = fixture('AppNavFixtureUnselected');
       var appNavEl = fx.querySelector('px-app-nav');
       var item = appNavEl.items[2].children[0];
       var itemParent = appNavEl.items[2];
-      appNavEl.selectedItem = item;
+      appNavEl.selected = item;
 
       setTimeout(function() {
-        expect(appNavEl.selectedItemPath).to.be.an('array');
-        expect(appNavEl.selectedItemPath.length).to.equal(2);
-        expect(appNavEl.selectedItemPath[0]).to.equal(itemParent);
-        expect(appNavEl.selectedItemPath[1]).to.equal(item);
+        expect(appNavEl.selectedMeta.path).to.be.an('array');
+        expect(appNavEl.selectedMeta.path.length).to.equal(2);
+        expect(appNavEl.selectedMeta.path[0]).to.equal(itemParent);
+        expect(appNavEl.selectedMeta.path[1]).to.equal(item);
         done();
       }, 50);
     });
@@ -79,7 +66,7 @@ function runCustomTests() {
       var routeItem = appNavEl.items[1];
 
       setTimeout(function() {
-        expect(appNavEl.selectedItem).to.equal(routeItem);
+        expect(appNavEl.selected).to.equal(routeItem);
         done();
       }, 50);
     });
@@ -91,8 +78,8 @@ function runCustomTests() {
       var item = appNavEl.items[2].children[1];
 
       setTimeout(function() {
-        expect(appNavEl.selectedItemParent).to.equal(parentItem);
-        expect(appNavEl.selectedItem).to.equal(item);
+        expect(appNavEl.selectedMeta.parent).to.equal(parentItem);
+        expect(appNavEl.selected).to.equal(item);
         done();
       }, 50);
     });
@@ -104,14 +91,14 @@ function runCustomTests() {
 
       setTimeout(function() {
         var homeItem = appNavEl.items[0];
-        expect(appNavEl.selectedItem).to.equal(homeItem);
+        expect(appNavEl.selected).to.equal(homeItem);
         appNavEl.selectedRoute = ['dashboards', 'trucks'];
       }, 50);
       setTimeout(function() {
         var dashboardsItem = appNavEl.items[2];
         var trucksItem = appNavEl.items[2].children[0];
-        expect(appNavEl.selectedItemParent).to.equal(dashboardsItem);
-        expect(appNavEl.selectedItem).to.equal(trucksItem);
+        expect(appNavEl.selectedMeta.parent).to.equal(dashboardsItem);
+        expect(appNavEl.selected).to.equal(trucksItem);
         done();
       }, 60);
     });
@@ -233,7 +220,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(itemEl.selected).to.equal(true);
         expect(appNavEl.selectedRoute).to.eql(['home']);
-        expect(appNavEl.selectedItem).to.equal(homeItem);
+        expect(appNavEl.selected).to.equal(homeItem);
         done();
       }, 100);
     });
@@ -259,7 +246,7 @@ function runCustomTests() {
         expect(firstSelectedEl.selected).to.equal(false);
         expect(secondSelectedEl.selected).to.equal(true);
         expect(appNavEl.selectedRoute).to.eql(['alerts']);
-        expect(appNavEl.selectedItem).to.equal(alertsItem);
+        expect(appNavEl.selected).to.equal(alertsItem);
         done();
       }, 100);
     });
@@ -298,7 +285,7 @@ function runCustomTests() {
       setTimeout(function() {
         expect(groupEl.opened).to.equal(false);
         done();
-      }, 500);
+      }, 650);
     });
 
     it('selects a subitem and its group when the subitem is tapped', function(done) {
@@ -324,8 +311,8 @@ function runCustomTests() {
       setTimeout(function() {
         expect(subitemEl.selected).to.equal(true);
         expect(appNavEl.selectedRoute).to.eql(['dashboards','trucks']);
-        expect(appNavEl.selectedItem).to.equal(groupSubitem);
-        expect(appNavEl.selectedItemParent).to.equal(groupItem);
+        expect(appNavEl.selected).to.equal(groupSubitem);
+        expect(appNavEl.selectedMeta.parent).to.equal(groupItem);
         done();
       }, 200);
     });

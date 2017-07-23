@@ -1,7 +1,7 @@
 {
   "name": "px-app-nav",
   "description": "A navigation component that allows the user to browse app pages and content",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": [
     "px-app-nav.html"
   ],
@@ -25,7 +25,8 @@
     "neon-animation": "^2.0.0",
     "iron-dropdown": "^2.0.0",
     "iron-resizable-behavior": "^2.0.0",
-    "web-animations-js": "^2.2.0"
+    "web-animations-js": "^2.2.0",
+    "px-app-helpers": "^1.0.1"
   },
   "devDependencies": {
     "px-box-sizing-design": "^1.0.0",
