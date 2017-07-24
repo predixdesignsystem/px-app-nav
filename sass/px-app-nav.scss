@@ -60,6 +60,8 @@ $px-app-nav-vertical-transition: var(--px-app-nav-vertical-transition, max-width
   overflow-y: hidden;
   position: $px-app-nav-vertical-position;
   height: $px-app-nav-vertical-height;
+  left: 0;
+  top: 0;
   min-width: $px-app-nav-vertical-width;
   max-width: $px-app-nav-vertical-width;
   transition: $px-app-nav-vertical-transition;
