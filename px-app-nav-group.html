@@ -287,7 +287,7 @@
       var container = this.$.groupcontainer;
       var content = this.$.groupcontent;
       var minWidth = button.getBoundingClientRect().width + 'px';
-      if (content.style.minWidth !== minWidth) {
+      if (content.style.minWidth !== minWidth && !(typeof this.fixedWidth === 'number')) {
         container.style.minWidth = minWidth;
       }
       if (typeof this.fixedWidth === 'number') {
