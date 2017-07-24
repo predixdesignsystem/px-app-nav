@@ -299,7 +299,6 @@
     },
 
     observers: [
-      '_handleNavItemsChanged(items, keys)',
       '_handleItemVisibilityChanged(visibleItems, overflowedItems, visibleItems.*, overflowedItems.*)'
     ],
 
