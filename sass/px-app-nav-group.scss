@@ -31,7 +31,7 @@ $px-app-nav-group-height: var(--px-app-nav-height, calculateRem(60px));
   overflow: hidden;
 }
 px-app-nav-item {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 $px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, white); // Same background color as subitem
