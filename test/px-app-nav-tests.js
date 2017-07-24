@@ -599,7 +599,7 @@ function runCustomTests() {
       }, 100);
     });
 
-    it('sizes the collapsed dropdown from the `collapseDropdownWidth` attribute value', function(done) {
+    it('sizes the collapsed dropdown from the `--px-app-nav-collapsed-width` style variable', function(done) {
       var fx = fixture('AppNavFixtureCollapsed');
       var appNavEl = fx.querySelector('px-app-nav');
 
@@ -612,7 +612,7 @@ function runCustomTests() {
         var width = dropdownEl.getBoundingClientRect().width;
         expect(width).to.equal(275);
         done();
-      }, 100);
+      }, 400);
     });
 
     it('collapses when its container is smaller than the `collapseAt` size', function(done) {
