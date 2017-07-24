@@ -304,6 +304,17 @@
       group.close();
     },
 
+    refitGroup() {
+      if (!this.__group) {
+        var group = this.$.group;
+        if (!group) return;
+        this.__group = group;
+      }
+      window.requestAnimationFrame(function(){
+        this.__group.refit();
+      }.bind(this))
+    },
+
     /**
      * When the user clicks on a group, toggle the group's dropdown menu
      * so the user can to select a subitem.

@@ -307,7 +307,20 @@
       'px-app-nav-item-tapped' : '_itemSelectedByEvent',
       'mouseenter' : '_handleMouseEnter',
       'mouseleave' : '_handleMouseLeave',
-      'px-app-asset-graph-created' : 'rebuild'
+      'px-app-asset-graph-created' : 'rebuild',
+      'px-app-nav-rebuilt' : '_handleRebuild'
+    },
+
+    _handleRebuild() {
+      if (!this.collapseAll && !this.vertical && this.someOverflowed && this.collapseOpened) {
+        if (!this._collapsedGroup) {
+          var group = Polymer.dom(this.root).querySelector('#overflowedGroup');
+          if (!group) return;
+          this._collapsedGroup = group;
+        }
+
+        this._collapsedGroup.refitGroup();
+      }
     },
 
     _handleMouseEnter() {
@@ -380,7 +393,7 @@
      * every 100ms. If the menu is currently collapsed, measure events
      * will not be triggered.
      */
-    _handleResize() {
+    _handleResize(evt) {
       if (this.collapseAll || this.vertical) return;
 
       const debouncer = 'measure-available-width';
@@ -451,6 +464,8 @@
       this._setOverflowedItems(overflowed);
       this.notifyPath('visibleItems.*');
       this.notifyPath('overflowedItems.*');
+
+      this.fire('px-app-nav-rebuilt');
 
       return [this.visibleItems, this.overflowedItems];
     },
