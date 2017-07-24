@@ -312,7 +312,7 @@
     },
 
     _handleRebuild() {
-      if (!this.collapseAll && !this.vertical && this.someOverflowed && this.collapseOpened) {
+      if (!this.collapseAll && !this.vertical && this.anyOverflowed && this.collapseOpened) {
         if (!this._collapsedGroup) {
           var group = Polymer.dom(this.root).querySelector('#overflowedGroup');
           if (!group) return;
@@ -447,6 +447,7 @@
       if (this.collapseAll || this._availableWidth === 0 || (typeof this.collapseAt === 'number' && this._availableWidth <= this.collapseAt)) {
         this._setVisibleItems([]);
         this._setOverflowedItems(this.items.slice(0));
+        this.fire('px-app-nav-rebuilt');
         return [this.visibleItems, this.overflowedItems];
       }
 
@@ -457,6 +458,7 @@
       if (visible.length === 1) {
         this._setVisibleItems([]);
         this._setOverflowedItems(this.items.slice(0));
+        this.fire('px-app-nav-rebuilt');
         return [this.visibleItems, this.overflowedItems];
       }
 
@@ -466,7 +468,6 @@
       this.notifyPath('overflowedItems.*');
 
       this.fire('px-app-nav-rebuilt');
-
       return [this.visibleItems, this.overflowedItems];
     },
 
