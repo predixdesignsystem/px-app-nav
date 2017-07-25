@@ -97,7 +97,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-input-text-color--focused               :  $gray15;
   --px-input-text-color--disabled              :  rgba($gray8,0.5);
   --px-input-border-color--disabled            :  rgba($gray8,0.4);
-  --px-input-textarea-background--focused      :  $gray3;
+  --px-input-textarea-background--focused      :  $primary-light;
   --px-select-text-color                       :  $gray15;
   --px-select-background-color                 :  $gray3;
   --px-select-background-color--hover          :  $gray6;
@@ -399,7 +399,45 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-kpi-separator-color                    :  $gray5;
 
   // Login
-  --px-login-text-color               :  $gray5;
+  --px-login-text-color                       :  $gray5;
+
+  // Map
+  --px-map-icon-unknown-color                         : $neutral-gray5;
+  --px-map-icon-info-color                            : $primary-default;
+  --px-map-icon-warning-color                         : $status-orange3;
+  --px-map-icon-important-color                       : $status-red3;
+  --px-map-icon-border-color                          : $white;
+  --px-map-icon-symbol-color                          : $white;
+  --px-map-marker-group-cluster-path-size             : 10px;
+  --px-map-marker-group-cluster-font-size             : 15px;
+  --px-map-marker-group-cluster-font-color            : $primary-default;
+  --px-map-marker-group-cluster-font-weight           : normal;
+  --px-map-marker-group-cluster-font-color            : inherit;
+  --px-map-marker-group-cluster-font-size             : inherit;
+  --px-map-marker-group-cluster-font-weight           : inherit;
+  --px-map-marker-group-cluster-line-height           : inherit;
+  --px-map-marker-group-cluster-border-size           : 5px;
+  --px-map-marker-group-cluster-border-color          : rgba($black,0.3);
+  --px-map-marker-group-cluster-polygon-stroke-color  : $blue3;
+  --px-map-marker-group-cluster-polygon-fill-color    : $blue5;
+  --px-map-marker-group-cluster-background-color      : $white;
+  --px-map-control-button-background-color            : $white;
+  --px-map-control-button-text-color                  : $primary-default;
+  --px-map-control-button-border-width                : 3px;
+  --px-map-control-button-border-color                : rgba($black,.3);
+  --px-map-control-button-background-color--hover     : $gray2;
+  --px-map-control-button-text-color--hover           : $primary-hover;
+  --px-map-control-button-border-color--disabled      : $gray4;
+  --px-map-control-button-text-color--disabled        : $gray4;
+  --px-map-info-control-background-color              : $white;
+  --px-map-info-control-border-color                  : $gray4;
+  --px-map-data-box-border-color__top                 : $gray4;
+  --px-map-data-box-border-color__left                : $gray4;
+  --px-map-popup-content-wrapper-border               : $gray6;
+  --px-map-marker-locate-icon-color                   : $primary-default;
+  --px-map-marker-locate-icon-border-color            : $white;
+  --px-map-marker-locate-icon-accuracy-color          : $black;
+  --px-map-marker-locate-icon-accuracy-opacity        : 0.3;
 
   // Modal
   --px-modal-background-color         :  $white;
