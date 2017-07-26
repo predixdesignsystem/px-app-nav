@@ -2,7 +2,7 @@
 
 ## Overview
 
-Px-theme is a Predix UI component which serves as the starting point for theming other Predix UI components. It is based loosely on the concepts outlined [here](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling).
+`Px-theme` is a Predix UI component which serves as the starting point for theming other Predix UI components. It is based loosely on the concepts outlined [here](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling).
 
 
 ## Usage
@@ -13,17 +13,17 @@ Px-theme is a Predix UI component which serves as the starting point for theming
 3. bower
 4. [webcomponents-lite.js polyfill](https://github.com/webcomponents/webcomponentsjs)
 
-Node, npm and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
+Node, npm, and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
 
 ### Getting Started
 
-First, install the style module via bower on the command line.
+First, install the style module via bower on the command line:
 
 ```
 bower install px-theme --save
 ```
 
-Second, import the style module to your application with the following tag in your head.
+Second, import the style module in your application with the following tag in your head:
 
 ```
 <link rel="import" href="/bower_components/px-theme/px-theme-styles.html"/>
@@ -35,7 +35,7 @@ Finally, use the style module in your application.
 <style include="px-theme-styles"></style>
 ```
 
-Click [here](https://www.polymer-project.org/2.0/docs/devguide/style-shadow-dom#style-modules) to read more about Polymer style modules.
+Read more about Polymer style modules [here](https://www.polymer-project.org/2.0/docs/devguide/style-shadow-dom#style-modules).
 
 
 ## Local Development
