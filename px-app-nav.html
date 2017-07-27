@@ -16,78 +16,369 @@
 <link rel="import" href="px-app-nav-subitem.html"/>
 
 <!--
-px-app-nav is a navigation component that allows the user to browse app pages
-and content. It is fully responsive and comes in three visual styles:
+`px-app-nav` is an app-level navigation element that allows users to change the
+current view. The element is designed to work on desktop and mobile/touch
+devices, supporting any viewport size. It has three distinct visual styles that
+can be switched at any time to suit different app designs.
+
+### Navigation styles
+
+Two of the navigation styles, horizontal and vertical, should only be used on
+desktop screens. The collapsed navigation style should be used on mobile/touch
+devices and can also be used for desktop devices.
+
+--------------------------------------------------------------------------------
 
 #### 1. Horizontal navigation
 
-A persistent, horizontal navigation that is fixed to the top of the browser
-window. (This is the default style.) The nav items will be displayed in a row at
-the top of the screen. If the window is too narrow to display all the items,
-any overflowed items will be placed into an overflow dropdown. If only one nav
-item fits in the window, the nav will collapse (see #2).
+The horizontal navigation style is a persistent bar fixed to the top of the viewport.
+Navigation items are displayed in a row. If the window is too narrow to fit all
+the items, any overflowed items are placed into an overflow dropdown. If only
+one navigation item fits in the window, the navigation will automatically
+switch to collapse style (see description below).
 
-```
-<px-app-nav
-    items='[
-      { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
-      { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-      { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
-        { "label" : "Asset #1", "id" : "a1" },
-        { "label" : "Asset #2", "id" : "a2" }
-      ] }
-    ]'
-    selected-route='["assets","a1"]'>
-</px-app-nav>
-```
+This is the default style. It doesn't require any additional configuration to
+enable beyond putting the `px-app-nav` element tag on the app page. The following
+example shows how to configure px-app-nav in the horizontal style:
+
+
+    <px-app-nav
+        items='[
+          { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+          { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
+            { "label" : "Asset #1", "id" : "a1" },
+            { "label" : "Asset #2", "id" : "a2" }
+          ] }
+        ]'
+        selected-route='["assets","a1"]'>
+    </px-app-nav>
+
+<strong>Positioning in an app:</strong>
+
+The horizontal style `px-app-nav` element should be fixed at the top of your app
+with app content configured to scroll beneath it. The app must position the
+`px-app-nav` element using CSS to fix it to the top of the view. By default, the
+element is `position: relative` and `display: block`, causing it to fill its
+parent container's width but scroll out of the view as the user scrolls down
+the page.
+
+The following example fixes the element to the top of the view so content
+can scroll beneath it:
+
+
+    <style>
+      px-app-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <px-app-nav items="..."></px-app-nav>
+
+Using position fixed will cause the `px-app-nav` element to cover other HTML
+elements at the top of your page. Offset your content (e.g. by setting
+`margin-top: 80px` on your content container) to ensure the navigation does not
+cover other app elements unintentionally.
+
+--------------------------------------------------------------------------------
 
 #### 2. Collapsed navigation
 
-A persistent, collapsed navigation that is fixed to the top of the browser.
-The nav items will be displayed in a dropdown menu that can be opened and closed.
-The selected item (if any) will be displayed at the top of the dropdown, and is
-always visible. This style can be turned on by default with the `collapseAll`
-attribute. It can turned on dynamically when the window is shrunk below a desired
-size with the `collapseAt` attribute.
+The collapsed navigation style is also a persistent bar fixed to the top of the
+viewport. The navigation items are displayed in a dropdown menu that the user
+can open by clicking or tapping on the open button; and closed by selecting
+a navigation item or clicking or tapping anywhere else in the viewport.
 
-```
-<px-app-nav
-    items='[
-      { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
-      { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-      { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
-        { "label" : "Asset #1", "id" : "a1" },
-        { "label" : "Asset #2", "id" : "a2" }
-      ] }
-    ]'
-    selected-route='["assets","a1"]'
-    collapse-all>
-</px-app-nav>
-```
+If no item is selected, the collapsed navigation will show an empty outline
+for the dropdown trigger button. If an item is selected that item's label and
+icon will be shown in the dropdown trigger button.
+
+This style can be enabled in a few different ways:
+
+<strong>Force collapse:</strong> Setting the `collapseAll` property to true or enabling the
+`collapse-all` attribute on the `px-app-nav` element will force the navigation
+to use the collapsed style at all times. Example:
+
+
+    <px-app-nav items="..." collapse-all></px-app-nav>
+
+
+<strong>Dynamic collapse:</strong> The `collapseAt` property can be used to dynamically
+collapse and un-collapse the navigation when the viewport size changes. If the
+size of the `px-app-nav` element's container becomes smaller than the `collapseAt`
+value, it is collapsed. If the element's container becomes larger than the
+`collapseAt` value, it is un-collapsed.
+
+
+    <px-app-nav items="..." collapse-at="420"></px-app-nav>
+
+
+The `collapseAt` property should be a number that will be converted into pixels.
+
+When the navigation is automatically collapsed or uncollapsed, the read-only
+`collapsed` property will be updated. Watch that property to figure out the
+state of the navigation.
+
+<strong>Auto-collapse:</strong> When the default horizontal style is in use and only 1 item
+fits in the space available to the `px-app-nav` element, the navigation will be
+automatically collapsed.
+
+<strong>Positioning in an app:</strong>
+
+Follow the sticking instructions in the Horizontal style section above to
+correctly position the `px-app-nav` element on the page in collapsed style.
+
+--------------------------------------------------------------------------------
 
 #### 3. Vertical navigation
 
-An animated navigation that is fixed to the left or right side of the browser.
-When the user is not interacting with the nav, only the nav item icons will
-be visible. When the user hovers over the nav, it will animate open and reveal
-item labels. (Development of this style is still in progress.)
+The vertical navigation style is fixed to the left or right side of the browser.
+When the navigation is not being interacted with it displays as a narrow strip
+showing only the navigation item icons. When the user hovers over the vertical
+navigation, the bar animates open and allows the user to click/tap to select
+a new item. Example:
 
-```
-<px-app-nav
-    items='[
-      { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
-      { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-      { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
-        { "label" : "Asset #1", "id" : "a1" },
-        { "label" : "Asset #2", "id" : "a2" }
-      ] }
-    ]'
-    selected-route='["assets","a1"]'
-    vertical>
-</px-app-nav>
-```
 
-#### Styling
+    <px-app-nav items="..." vertical></px-app-nav>
+
+
+<strong>Positioning in an app:</strong>
+
+The vertical style defaults to CSS styles `position: absolute; left: 0; top: 0;`
+to stick to the left side of the screen. This causes the navigation element to
+fill the first `position: relative` item above it in the DOM. Override these
+values to position it in whatever way your app requires:
+
+
+      <style>
+        px-app-nav {
+          position: fixed;
+          right: 0;
+          top: 0;
+        }
+      </style>
+      <px-app-nav items="..."></px-app-nav>
+
+
+### Navigation items: Structuring data and managing selection
+
+The navigation accepts a list of items that will be converted into buttons for
+the user to interact with. Each item should have at least a label that will
+be displayed for the user to select and a unique ID that will be used to keep
+track of which item is selected.
+
+This data should be passed into the `items` attribute or property on the
+`px-app-nav` element.
+
+This is a simple navigation data example:
+
+
+    [
+      {
+        "id" : "home",
+        "label" : "Home",
+        "icon" : "px-nav:home"
+      },
+      {
+        "id" : "alert",
+        "label" : "Alerts",
+        "icon" : "px-nav:notification"
+      }
+    ]
+
+
+Top-level navigation items can optionally have child items. This is useful for
+creating categories of related pages. If a top-level navigation item has any
+children it cannot be selected directly - users can select its child items,
+and the top-level "category" item will get the selected visual style.
+
+This example shows a "Dashboards" category with a few different dashboard pages:
+
+
+    [
+      {
+        "id" : "dash",
+        "label" : "Dashboards",
+        "icon" : "px-fea:dashboard",
+        "children" : [
+          {
+            "id" : "plant-status",
+            "label" : "Plant Status Updates"
+          },
+          {
+            "id" : "output-info",
+            "label" : "Daily Output Measurements"
+          }
+        ]
+      }
+    ]
+
+All items (top-level items, top-level category items, and child items) should
+have the following properties:
+
+  - <strong>id</strong> {string} - unique string that identifies the item. Should only contain
+  valid, URI-safe characters. Example: "home", "alerts1"
+  - <strong>label</strong> {string} - short, human-readable text. The user will tap this text
+  to select the item. Example: "Homepage", "View Alerts"
+
+The following optional properties can be defined for top-level items only:
+
+  - <strong>icon</strong> {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)
+  icon placed next to the text label for the item. Use an icon from the `px-nav`
+  for the best sizing and visual styling.
+  - <strong>children</strong> {array} - child items that will be placed in a dropdown under
+  their parent top-level item. Each child item should have an `id` and `label`.
+  If the child item has an `icon` property, it will be ignored.
+
+Example top-level item without children:
+
+
+    {
+      "id" : "page-id",
+      "label" : "Page Title",
+      "icon" : "px-nav:grid-view"
+    }
+
+
+Example top-level item with child items:
+
+
+    {
+      "id" : "category-id",
+      "label" : "Category Title",
+      "icon" : "px-nav:tree",
+      "children" : [
+        {
+          "id" : "child-item-1",
+          "label" : "First Child Title"
+        },
+        {
+          "id" : "child-item-2",
+          "label" : "Second Child Title"
+        }
+      ]
+    }
+
+
+Additional data not used by `px-app-nav` can also be included in each item's
+object. This is a useful way to store metadata about app pages that will be used
+at run-time when a new nav item is selected. Example:
+
+
+    {
+      "id" : "all-cases",
+      "label" : "Cases",
+      "metadata" : {
+        "openCases" : "12",
+        "closedCases" : "82"
+      }
+    }
+
+The navigation will not mutate any of its items properties, making it easy to
+share any item metadata with other app components.
+
+#### Responding to item selection
+
+When the user taps on a navigation item it will be marked as selected. The app
+containing the `px-app-nav` element should respond to the new selected item and
+update its view.
+
+There are two ways for an app to listen for user selection:
+
+<strong>By reference:</strong> The element's `selected` property will be updated when a new
+item is selected. The `selected` property will notify a reference to the object
+that describes the item in the `items` array.
+
+<strong>By route:</strong> The element's `selectedRoute` property will notify an array of
+strings that trace the path from the root of the `items` graph to the selected
+item. This is useful for binding the navigation state to the app's URL path.
+(See the [px-app-route](https://www.predix-ui.com/#/components/px-app-route)
+module for a guide to binding the navigation state to the URL.)
+
+For example, given the following simplified navigation `items` list:
+
+    [
+      {
+        "id" : "dash",
+        "label" : "Dashboards",
+        "children" : [
+          {
+            "id" : "info-dash",
+            "label" : "Info Dashboard"
+          }
+        ]
+      }
+    ]
+
+When the user selects the "Info Dashboard", the `selectedRoute` will be set to
+`["dash", "info-fash"]`.
+
+#### Selecting an item programatically
+
+Sometimes it is useful for an app to automatically change the active page
+(e.g. opening the home page when the app is first loaded, or opening a dashboard
+when the user clicks on an alert message). The `selected` and `selectedRoute`
+properties can be used to set the selected navigation item state in the same
+way they are used to read the selected navigation item state.
+
+The simplest way to do this is through `selectedRoute`:
+
+
+    <px-app-nav
+        items='[
+          { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+          { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
+            { "label" : "Asset #1", "id" : "a1" },
+            { "label" : "Asset #2", "id" : "a2" }
+          ] }
+        ]'
+        selected-route='["assets", "a1"]'>
+    </px-app-nav>
+
+
+Items can also be selected by reference using the `selected` property. Selecting
+this way requires a bit of JavaScript; the navigation does a simple reference
+equality check (`item1 === item2`) to find the item in the graph and select it.
+Passing an item with the same properties as one of the `items` objects will
+not select it.
+
+
+    <px-app-nav id="nav"></px-app-nav>
+    <script>
+      var nav = document.getElementById('nav');
+      var navItems = [
+        { "id" : "home", "label" : "Home" }
+      ];
+      nav.items = navItems;
+      nav.selected = navItems[0];
+    </script>
+
+
+Data-binding can also be used to accomplish the same thing without manually
+finding the `px-app-nav` element in the DOM.
+
+### Binding to the URL path (routing)
+
+The `px-app-nav` element is designed to easily bind its state to the URL path.
+When the user selects an item, its `selectedRoute` can be encoded and used to
+set the URL path. The user can then bookmark the page or share the URL to link
+to a specific view. When the user loads a page with a URL path defined, that
+path can be decoded and used to select the right navigation item (and show a
+page).
+
+For a ready-to-go solution for binding `px-app-nav` to the URL path, see the
+[px-app-route](https://www.predix-ui.com/#/components/px-app-route) component.
+This component works best in applications built using Polymer as a data-binding
+framework, but also exposes methods to help convert the navigation's
+`selectedRoute` to and from a path string for use in other framework routers.
+
+Alternatively, listen for update events from the `selected` and/or `selectedRoute`
+properties in your app and send the values to the framework router of your
+choice, or implement your own routing system from scratch.
+
+### Styling
 
 The following custom properties are available for styling:
 
