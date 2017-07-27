@@ -1,3 +1,7 @@
+v3.0.1
+=================
+* slider styles
+
 v3.0.0
 =================
 * add and update styles for px redesign

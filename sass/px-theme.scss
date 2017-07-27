@@ -469,10 +469,10 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-progress-bar-background-color  :  $cyan1;
 
   // Slider
-  --px-slider-border-color                         :  $gray6;
+  --px-slider-border-color                         :  transparent;
   --px-slider-border-color--disabled               :  rgba($gray8,0.5);
   --px-slider-border-color--selected               :  $primary-default;
-  --px-slider-background-color                     :  $gray1;
+  --px-slider-background-color                     :  rgba($gray8,0.4);
   --px-slider-background-color--disabled           :  $white;
   --px-slider-background-color--selected           :  $primary-default;
   --px-slider-background-color--hover              :  $primary-hover;
