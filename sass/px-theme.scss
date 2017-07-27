@@ -287,15 +287,25 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-clipboard-icon-color--pressed  :  $primary-pressed;
   --px-clipboard-icon-color--copied   :  $status-green3;
 
-  // // Context Browser
-  // --px-cb-background-color:
-  // --px-cb-modal-color:
-  // --px-cb-scrollbar-track-color:
-  // --px-cb-scrollbar-thumb-color:
-  // --px-cb-border-color:
-  // --px-cb-background-color--selected:
-  // --px-cb-text-color--selected:
-  // --px-cb-background-color--secondary:
+  // Context Browser
+  --px-context-browser-header-background-color            :  $gray1;
+  --px-context-browser-header-border-color                :  $gray3;
+  --px-context-browser-header-text-color                  :  $select-default;
+  --px-context-browser-icon-stroke                        :  $gray15;
+  --px-context-browser-item-text-color                    :  $gray15;
+  --px-context-browser-item-background-color--hover       :  $gray1;
+  --px-context-browser-item-background-color--selected    :  $select-default;
+  --px-context-browser-item-color--selected               :  $white;
+  --px-context-browser-item-text-color--selected          :  $white;
+  --px-context-browser-icon-stroke--item-selected         :  $white;
+  --px-context-browser-panel-border-color                 :  $gray3;
+  --px-context-browser-panel-background-color             :  $white;
+  --px-context-browser-loading-background-color           :  $primary-default;
+  --px-context-browser-loading-foreground-color           :  $cyan1;
+  --px-context-browser-icon-select-stroke                 :  $yellow-green8;
+  --px-context-browser-icon-select-fill                   :  $yellow-green5;
+  --px-context-browser-icon-favorite-stroke               :  $yellow8;
+  --px-context-browser-icon-favorite-fill                 :  $yellow5;
 
   // Data Table
   --px-data-table-border-color                             :  $gray10;
