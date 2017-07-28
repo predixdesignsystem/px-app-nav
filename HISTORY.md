@@ -1,5 +1,10 @@
 v2.0.1
 ==================
+* Rebuilt demo
+* Added css variable docs
+
+v2.0.1
+==================
 * Move to px-app-asset-graph API for creating and selecting items
 
 v2.0.0
