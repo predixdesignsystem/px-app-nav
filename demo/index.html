@@ -18,7 +18,15 @@
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <style include="px-demo-styles" is="custom-style">
+      #wrapper {
+        position: relative;
+      }
+
+      px-app-nav {
+        z-index: 10;
+      }
+    </style>
 
     <!-- Header -->
     <px-demo-header module-name="px-app-nav" description="The side navigation is the highest level of navigation, for navigating between major sections of the application.
@@ -37,9 +45,23 @@
       <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component style="width:100%;height:500px;">
-        <px-app-nav items="[[props.navItems.value]]">
+      <px-demo-component id="demoComponent" style="width:100%;height:500px;position:relative;">
+        <px-app-nav
+        id="appNav"
+        items="[[props.items.value]]"
+        vertical="[[props.vertical.value]]"
+        collapse-with-icon="[[props.collapseWithIcon.value]]"
+        collapse-all="[[props.collapseAll.value]]"
+        collapse-at="[[props.collapseAt.value]]"
+        selected-meta="{{props.selectedMeta.value}}"
+        selected="{{selected}}"
+        selected-route="{{props.selectedRoute.value}}">
         </px-app-nav>
+
+        <div id="wrapper">
+          <h4>Selected property is:</h4>
+          <p>[[_returnJson(selected)]]</p>
+        </div>
 </px-demo-component>
 <!-- END Component ------------------------------------------------------>
 
@@ -97,7 +119,20 @@
         value: function () {
           return [
             {
-              configName: "Default",
+              configName: "Horizontal",
+              configReset: true
+            }, {
+              configName: "Vertical",
+              vertical: true,
+              configReset: true
+            }, {
+              configName: "Collapsed All",
+              collapseAll: true,
+              configReset: true
+            }, {
+              configName: "Collapsed At",
+              collapseAll: null,
+              collapseAt: 500,
               configReset: true
             }
           ]
@@ -109,64 +144,77 @@
      * A reference for `this.props`. Read the documentation there.
      */
     demoProps: {
-      navItems: {
+      items: {
         type: Array,
         defaultValue: [
-          {
-            "path": "tab1",
-            "icon": "px-fea:alerts",
-            "eventName": "firstItem",
-            "label": "Alerts",
-            "subitems": [
-              {
-                "label": "Sub Category 1"
-              },
-              {
-                "label": "Sub Category 2",
-                "eventName": "subitemTwo"
-              },
-              {
-                "label": "Sub Category 3",
-                "path": "subitem3"
-              }
-            ]
+          { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts",
+            "metadata" : { "openCases" : "12", "closedCases" : "82" }
           },
-          {
-            "path": "tab2",
-            "icon": "px-fea:asset",
-            "label": "Cases",
-            "subitems": [
-              {
-                "label": "Sub Category 1"
-              },
-              {
-                "label": "Sub Category 2"
-              },
-              {
-                "label": "Sub Category 3"
-              }
-            ]
-          },
-          {
-            "path": "tab3",
-            "icon": "px-fea:tag",
-            "label": "Analysis"
-          },
-          {
-            "path": "tab4",
-            "icon": "px-fea:dashboard",
-            "label": "Dashboards"
-          }
+          { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
+            { "label" : "Asset #1", "id" : "a1" },
+            { "label" : "Asset #2", "id" : "a2" }
+          ] },
+          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px-fea:dashboard", "subitems": [
+            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px-obj:truck" },
+            { "label" : "Track Orders", "path" : "orders", "icon" : "px-fea:orders" },
+            { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px-fea:templates" }
+          ]}
         ],
         inputType: 'code:JSON'
+      },
+      vertical: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle',
+      },
+      collapseWithIcon: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      collapseAll: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      collapseAt: {
+        type: Number,
+        defaultValue: false,
+        inputType: 'number',
+        inputHelpText: 'collapseAll must be null for collapseAt to work'
+      },
+      selectedRoute: {
+        type: Array,
+        defaultValue: [],
+        inputType: 'code:JSON'
+      },
+      selectedMeta: {
+        type: Object,
+        defaultValue: {},
+        inputType: 'code:JSON',
+        inputHelpText: "Read Only"
       }
 
     },
 
+    observers: [ '_returnPos(props.vertical.value)' ],
+
+
     listeners: {
-        'firstItem': 'firstItemFunction',
-        'subitemTwo': 'subitemTwoFunction'
-      },
+      'firstItem': 'firstItemFunction',
+      'subitemTwo': 'subitemTwoFunction'
+    },
+
+    attached: function() {
+      var div = this.$.demoComponent,
+          nav = this.$.appNav;
+      nav.set('fitInto', div);
+
+      window.requestAnimationFrame(function() {
+        nav.notifyResize();
+      });
+    },
 
     firstItemFunction: function(e) {
       console.log("Event 'firstItem' attached to a nav item via the 'eventName' prop was fired");
@@ -176,6 +224,20 @@
       console.log("Event 'subitemTwo' attached to a nav item via the 'eventName' prop was fired.");
     },
 
+    _returnJson: function(json) {
+      return JSON.stringify(json);
+    },
+
+    _returnPos: function(vertical) {
+      var div = this.$$('#wrapper');
+      if(vertical) {
+        div.style.top = '10px';
+        div.style.left = '90px';
+      } else {
+        div.style.top = '20px';
+        div.style.left = '10px';
+      }
+    }
 
   });
 </script>
