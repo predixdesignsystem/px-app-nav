@@ -1,3 +1,7 @@
+v3.0.4
+=================
+* Update placeholder pseudoclass to latest spec
+
 v3.0.3
 =================
 * update alert label styles
