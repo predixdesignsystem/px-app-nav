@@ -1,6 +1,6 @@
 v3.0.4
 =================
-* Update placeholder pseudoclass to latest spec
+* rebuilt styles
 
 v3.0.3
 =================
