@@ -1,3 +1,7 @@
+v3.0.3
+=================
+* update alert label styles
+
 v3.0.2
 =================
 * update data table styles

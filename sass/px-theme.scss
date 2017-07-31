@@ -159,19 +159,19 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   /***********************************/
 
   // Alert Label
-  --px-alert-label-border-color                 :  transparent;
-  --px-alert-label-text-color--important        :  $white;
-  --px-alert-label-background-color--important  :  $status-red3;
-  --px-alert-label-text-color--warning          :  $white;
-  --px-alert-label-background-color--warning    :  $status-orange3;
-  --px-alert-label-text-color--error            :  $yellow10;
-  --px-alert-label-background-color--error      :  $status-yellow3;
-  --px-alert-label-text-color--info             :  $white;
-  --px-alert-label-background-color--info       :  $status-blue3;
-  --px-alert-label-text-color--healthy          :  $white;
-  --px-alert-label-background-color--healthy    :  $status-green3;
-  --px-alert-label-text-color--unknown          :  $white;
-  --px-alert-label-background-color--unknown    :  $neutral-gray3;
+  --px-alert-label-border-color                   :  transparent;
+  --px-alert-label-text-color--important          :  $white;
+  --px-alert-label-background-color--important    :  $status-red3;
+  --px-alert-label-text-color--warning            :  $white;
+  --px-alert-label-background-color--warning      :  $status-orange3;
+  --px-alert-label-text-color--error              :  $yellow10;
+  --px-alert-label-background-color--error        :  $status-yellow3;
+  --px-alert-label-text-color--information        :  $white;
+  --px-alert-label-background-color--information  :  $status-blue3;
+  --px-alert-label-text-color--healthy            :  $white;
+  --px-alert-label-background-color--healthy      :  $status-green3;
+  --px-alert-label-text-color--unknown            :  $white;
+  --px-alert-label-background-color--unknown      :  $neutral-gray3;
 
   // Alert Message
   --px-alert-message-background-color    :  $white;
