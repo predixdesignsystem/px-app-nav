@@ -1,3 +1,7 @@
+v3.0.5
+=================
+* update data table styles
+
 v3.0.4
 =================
 * rebuilt styles
