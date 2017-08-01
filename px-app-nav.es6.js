@@ -666,7 +666,7 @@
      */
     _getDropdownIcon(selectedItem, selectedItemParent, iconKey, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened) {
       if (anyOverflowed && !allCollapsed) {
-        return 'px-nav:collapse';
+        return 'px-utl:overflow';
       }
       if (allCollapsed && collapseWithIcon && !collapseOpened) {
         return 'px-nav:hamburger';

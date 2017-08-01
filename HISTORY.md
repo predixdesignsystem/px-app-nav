@@ -1,4 +1,8 @@
-v2.0.1
+v2.0.3
+==================
+* Changed overflow icon to px-utl:overflow instead of px-nav:collapse
+
+v2.0.2
 ==================
 * Rebuilt demo
 * Added css variable docs
