@@ -1,0 +1,27 @@
+{
+  "entrypoint": "index.html",
+  "shell": "demo/index.html",
+  "sources": [
+    "demo/**/*",
+    "*.html",
+    "*.js",
+    "favicon.ico",
+    "bower.json",
+    "bower_components/px-demo/monogram-wdmk.png",
+    "bower_components/px-typography-design/type/*",
+    "bower_components/px-code-editor/ace/theme-predix.js",
+    "bower_components/px-code-editor/ace/mode-javascript.js",
+    "bower_components/px-code-editor/load-*.js",
+    "bower_components/js-beautify/js/lib/*.js"
+  ],
+  "builds": [
+    {
+      "name": "unbundled",
+      "preset": "es5-bundled",
+      "js": {"minify":false},
+      "html": {"minify":false},
+      "bundle": false,
+      "addServiceWorker": false
+    }
+  ]
+}

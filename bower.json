@@ -17,7 +17,8 @@
     "OSS_Notice.pdf",
     "scripts",
     ".github",
-    "px-app-nav.png"
+    "px-app-nav.png",
+    "polymer.json"
   ],
   "dependencies": {
     "polymer": "^1.9.0",
@@ -33,7 +34,8 @@
     "px-colors-design": "^1.0.0",
     "px-defaults-design": "^2.0.0",
     "px-demo": "^2.0.0",
-    "px-shadows-design": "^1.0.0"
+    "px-shadows-design": "^1.0.0",
+    "web-component-tester": "^6.0.0"
   },
   "resolutions": {
     "webcomponentsjs": "^0.7.24"

@@ -14,20 +14,16 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install web-component-tester@^5.0.0
-- npm install bower
 - export PATH=$PWD/node_modules/.bin:$PATH
-- bower install
+- ./node_modules/.bin/bower install
 script:
-- xvfb-run wct --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --plugin sauce --skip-plugin
-  local; fi
+- xvfb-run ./node_modules/.bin/wct --root $TRAVIS_BUILD_DIR --skip-plugin sauce
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./node_modules/.bin/wct --root
+  $TRAVIS_BUILD_DIR --plugin sauce --skip-plugin local; fi
 after_success:
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then openssl aes-256-cbc -k "$DEPLOYSECRET"
   -in deploy.enc -out deploy_key -d; fi
-- cd $TRAVIS_BUILD_DIR/scripts
-- chmod 755 ghp.sh
-- "./ghp.sh"
+- ./scripts/ghp.sh
 env:
   global:
   - secure: HhjM3XtQfg6bj+r3sjqlaWFKVSKY/0WM+nct9BgTvh0nCGzI8jPgvgcvRF+gH4uVq3Sw/YhV177O8gs+KHYmujn/IRT0VhZirGR9chjeO16sQ7oIuiXaRNM6nJ1rWdlej12VvBa76kVFX/wcmoT3Ep/55tKxBIrT+DIGSHF2YA/1iwTkCJ5ijzVrFpkX5uoHBnQWRP5AXHWN6cmAU0DQVtCYze495xbublyxvkglpNMyKAzxbB8NESZ4/b+qQycA+13iC7S1eeVj+Qwk8GwaJArT0RedeARlV+PZebez8+OjQ5lY39+MvsKzIzxSSzVLYSbihb0Zab39SdplfM0sCrXhcW356Spl4QUx/KIelp23HQcIYEIviB/LKpMo3aHXi30oUynGq7tnfqrI83vOov5EEIdUB7sDXYvI3TWqup7QM0nZQ/6Xp/dA80g3xhqTiBrwtA3r1tCdEIhB/S/mXGOsJyWHHareDGkT55W2au/ZjgYVZpqSi7M7lYgZZZ4QCSRfpBSOdgr3U9YbkxGEUz5zOHYpASRznCqX3xnzGqEk9NlQJ+XTYT+KXrdzAsCH340nu7FtLK69i/iFqlS+njltPTF403mRjEdEjeegIJ7jqG8v3C1K+S3EkTEs2USXv46t7AhOlWeuAFYi3dFPbvx6eMlVPXoH09idcBGKL4Y=
