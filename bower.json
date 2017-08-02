@@ -1,6 +1,6 @@
 {
   "name": "px-theme",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "main": [
     "px-theme.html"
   ],
@@ -18,7 +18,9 @@
     "OSS_Notice.pdf",
     "wct.conf.json",
     "*.png",
-    "npm-debug.log"
+    "npm-debug.log",
+    "package.json",
+    "yarn.lock"
   ],
   "dependencies": {
     "polymer": "^1.9.0",
