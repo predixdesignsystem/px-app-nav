@@ -1,3 +1,7 @@
+v3.0.7
+================
+* ensure latest dependencies are loaded
+
 v3.0.6
 =================
 * update slider styles
