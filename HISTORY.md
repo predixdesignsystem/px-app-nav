@@ -1,3 +1,7 @@
+v3.0.9
+================
+* fix bower ignore section
+
 v3.0.8
 ================
 * add demo-snippet background color
