@@ -1,3 +1,7 @@
+v3.0.8
+================
+* add demo-snippet background color
+
 v3.0.7
 ================
 * ensure latest dependencies are loaded
