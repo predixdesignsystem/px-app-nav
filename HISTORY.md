@@ -1,3 +1,7 @@
+v3.0.10
+================
+* remove unnecessary vars for calendar
+
 v3.0.9
 ================
 * fix bower ignore section
