@@ -387,7 +387,7 @@ function runCustomTests() {
     it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function() {
       var fx = fixture('AppNavFixtureIconSizeVariable');
       var appNavEl = fx.querySelector('px-app-nav');
-      var item = { label: 'Home', path: 'home', icon: 'px-nav:home' };
+      var item = { label: 'Home', path: 'home', icon: 'px-fea:home' };
       var measurement = appNavEl._measureItem(item);
       expect(measurement).to.be.closeTo(120, 2);
     });
@@ -395,7 +395,7 @@ function runCustomTests() {
     it('measures items correctly when their padding is sized with the CSS style variable --px-app-nav-item-padding', function() {
       var fx = fixture('AppNavFixtureItemPaddingVariable');
       var appNavEl = fx.querySelector('px-app-nav');
-      var item = { label: 'Home', path: 'home', icon: 'px-nav:home' };
+      var item = { label: 'Home', path: 'home', icon: 'px-fea:home' };
       var measurement = appNavEl._measureItem(item);
       expect(measurement).to.be.closeTo(193, 2);
     });
@@ -648,7 +648,7 @@ function runCustomTests() {
         var collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
         var collapsedGroupItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');
         expect(collapsedGroupItemEl.label).to.equal('Home');
-        expect(collapsedGroupItemEl.icon).to.equal('px-nav:home');
+        expect(collapsedGroupItemEl.icon).to.equal('px-fea:home');
         done();
       }, 50);
     });

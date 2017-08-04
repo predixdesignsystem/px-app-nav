@@ -34,12 +34,12 @@ This is a simple navigation data example:
       {
         "id" : "home",
         "label" : "Home",
-        "icon" : "px-nav:home"
+        "icon" : "px-fea:home"
       },
       {
         "id" : "alert",
         "label" : "Alerts",
-        "icon" : "px-nav:notification"
+        "icon" : "px-fea:alerts"
       }
     ]
 
@@ -81,7 +81,7 @@ have the following properties:
 The following optional properties can be defined for top-level items only:
 
   - <strong>icon</strong> {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)
-  icon placed next to the text label for the item. Use an icon from the `px-nav`
+  icon placed next to the text label for the item. Use an icon from the `px-fea`
   for the best sizing and visual styling.
   - <strong>children</strong> {array} - child items that will be placed in a dropdown under
   their parent top-level item. Each child item should have an `id` and `label`.
@@ -93,7 +93,7 @@ Example top-level item without children:
     {
       "id" : "page-id",
       "label" : "Page Title",
-      "icon" : "px-nav:grid-view"
+      "icon" : "px-fea:templates"
     }
 
 
@@ -103,7 +103,7 @@ Example top-level item with child items:
     {
       "id" : "category-id",
       "label" : "Category Title",
-      "icon" : "px-nav:tree",
+      "icon" : "px-fea:microservice",
       "children" : [
         {
           "id" : "child-item-1",
@@ -183,7 +183,7 @@ The simplest way to do this is through `selectedRoute`:
 
     <px-app-nav
         items='[
-          { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+          { "label" : "Home",   "id" : "home",   "icon" : "px-fea:home" },
           { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
           { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
             { "label" : "Asset #1", "id" : "a1" },
@@ -259,7 +259,7 @@ example shows how to configure px-app-nav in the horizontal style:
 
     <px-app-nav
         items='[
-          { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+          { "label" : "Home",   "id" : "home",   "icon" : "px-fea:home" },
           { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
           { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", children: [
             { "label" : "Asset #1", "id" : "a1" },

@@ -42,7 +42,7 @@
        * The following is an example of a list of valid nav items:
        *
        *     [
-       *       { "label" : "Home",   "id" : "home",   "icon" : "px-nav:home" },
+       *       { "label" : "Home",   "id" : "home",   "icon" : "px-fea:home" },
        *       { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
        *       { "label" : "Assets", "id" : "assets", "icon" : "px-fea:asset", "children": [
        *         { "label" : "Asset #1", "id" : "a1" },
