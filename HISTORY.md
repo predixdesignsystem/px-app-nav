@@ -1,3 +1,7 @@
+v2.0.4
+==================
+* update demo to use unique name
+
 v2.0.3
 ==================
 * Changed overflow icon to px-utl:overflow instead of px-nav:collapse
