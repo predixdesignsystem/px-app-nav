@@ -387,6 +387,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-file-upload-validation-color           :  $status-red3;
   --px-file-upload-dropzone-background-color  :  $primary-light;
 
+  // Heatmap Grid
+  --px-heatmap-grid-start-color               :  $gray1;
+  --px-heatmap-grid-end-color                 :  $status-red3;
+  --px-heatmap-grid-table-border-color        :  $gray4;
+
   // Inbox
   --px-inbox-border-color                     :  $gray3;
   --px-inbox-secondary-text-color             :  $gray10;
