@@ -1,3 +1,7 @@
+v2.0.5
+==================
+* Fix comment block for analyzer
+
 v2.0.4
 ==================
 * update demo to use unique name
