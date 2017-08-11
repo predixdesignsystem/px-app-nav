@@ -1,3 +1,7 @@
+v2.0.6
+==================
+* update to use px-fea icons instead of px-nav where possible
+
 v2.0.5
 ==================
 * Fix comment block for analyzer
