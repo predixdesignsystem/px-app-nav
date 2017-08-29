@@ -309,6 +309,8 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-context-browser-icon-select-fill                   :  $yellow-green5;
   --px-context-browser-icon-favorite-stroke               :  $yellow8;
   --px-context-browser-icon-favorite-fill                 :  $yellow5;
+  --px-context-browser-trigger-hover-background           :  $gray3;
+  --px-context-browser-trigger-icon-color                 :  $gray15;
 
   // Data Table
   --px-data-table-border-color                             :  $gray10;
@@ -381,6 +383,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-dropdown-text-color--disabled          :  $gray4;
   --px-dropdown-text-color--selected          :  $white;
   --px-dropdown-border-color                  :  $gray3;
+  --px-dropdown-text-color                    :  $gray15;
 
   // File Upload
   --px-file-upload-file-list-color            :  $gray10;

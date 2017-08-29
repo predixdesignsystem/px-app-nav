@@ -1,3 +1,7 @@
+v3.0.12
+================
+* add missing c.b. and dropdown styles
+
 v3.0.11
 ================
 * add heatmap styles
