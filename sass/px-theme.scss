@@ -10,8 +10,8 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 @import "px-typography-design/_base.typography.scss";
 
 
-:root{
-
+:host > * {
+  font-family: $predix-font-family;
   // Defaults
   --px-base-text-color       : $gray15;
   --px-base-background-color : $white;
@@ -803,8 +803,4 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 html {
   font-family: $predix-font-family;
   font-size: $inuit-base-font-size;
-}
-
-:host {
-  font-family: $predix-font-family;
 }
