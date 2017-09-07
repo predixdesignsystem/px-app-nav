@@ -76,19 +76,19 @@ This example shows a "Dashboards" category with a few different dashboard pages:
 All items (top-level items, top-level category items, and child items) should
 have the following properties:
 
-  - <strong>id</strong> {string} - unique string that identifies the item. Should only contain
+  - **id** {string} - unique string that identifies the item. Should only contain
   valid, URI-safe characters. Example: "home", "alerts1"
-  - <strong>label</strong> {string} - short, human-readable text. The user will tap this text
+  - **label** {string} - short, human-readable text. The user will tap this text
   to select the item. Example: "Homepage", "View Alerts"
 
 The following optional properties can be defined for top-level items only:
 
-  - <strong>icon</strong> {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)
+  - **icon** {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)
   icon placed next to the text label for the item. Use an icon from the `px-fea`
   for the best sizing and visual styling. If the icon you need is not available in
   the `px-fea` icon set, you may use an icon from the `px-nav` icon set, but only
   do so if absolutely necessary.
-  - <strong>children</strong> {array} - child items that will be placed in a dropdown under
+  - **children** {array} - child items that will be placed in a dropdown under
   their parent top-level item. Each child item should have an `id` and `label`.
   If the child item has an `icon` property, it will be ignored.
 
@@ -147,11 +147,11 @@ update its view.
 
 There are two ways for an app to listen for user selection:
 
-<strong>By reference:</strong> The element's `selected` property will be updated when a new
+- **By reference:** The element's `selected` property will be updated when a new
 item is selected. The `selected` property will notify a reference to the object
 that describes the item in the `items` array.
 
-<strong>By route:</strong> The element's `selectedRoute` property will notify an array of
+- **By route:** The element's `selectedRoute` property will notify an array of
 strings that trace the path from the root of the `items` graph to the selected
 item. This is useful for binding the navigation state to the app's URL path.
 (See the [px-app-route](https://www.predix-ui.com/#/components/px-app-route)
@@ -175,7 +175,7 @@ For example, given the following simplified navigation `items` list:
 When the user selects the "Info Dashboard", the `selectedRoute` will be set to
 `["dash", "info-fash"]`.
 
-#### Selecting an item programatically
+#### Selecting an item programmatically
 
 Sometimes it is useful for an app to automatically change the active page
 (e.g. opening the home page when the app is first loaded, or opening a dashboard
@@ -274,7 +274,7 @@ example shows how to configure px-app-nav in the horizontal style:
         selected-route='["assets","a1"]'>
     </px-app-nav>
 
-<strong>Positioning a horizontal app-nav in an app:</strong>
+#### Positioning a horizontal app-nav in an app:
 
 The horizontal style `px-app-nav` element should be fixed at the top of your app
 with app content configured to scroll beneath it. The app must position the
@@ -316,7 +316,7 @@ icon will be shown in the dropdown trigger button.
 
 This style can be enabled in a few different ways:
 
-<strong>Force collapse:</strong> Setting the `collapseAll` property to true or enabling the
+- **Force collapse:** Setting the `collapseAll` property to true or enabling the
 `collapse-all` attribute on the `px-app-nav` element will force the navigation
 to use the collapsed style at all times. Example:
 
@@ -324,7 +324,7 @@ to use the collapsed style at all times. Example:
     <px-app-nav items="..." collapse-all></px-app-nav>
 
 
-<strong>Dynamic collapse:</strong> The `collapseAt` property can be used to dynamically
+- **Dynamic collapse:** The `collapseAt` property can be used to dynamically
 collapse and un-collapse the navigation when the viewport size changes. If the
 size of the `px-app-nav` element's container becomes smaller than the `collapseAt`
 value, it is collapsed. If the element's container becomes larger than the
@@ -336,15 +336,15 @@ value, it is collapsed. If the element's container becomes larger than the
 
 The `collapseAt` property should be a number that will be converted into pixels.
 
-When the navigation is automatically collapsed or uncollapsed, the read-only
+When the navigation is automatically collapsed or un-collapsed, the read-only
 `collapsed` property will be updated. Watch that property to figure out the
 state of the navigation.
 
-<strong>Auto-collapse:</strong> When the default horizontal style is in use and only 1 item
+- **Auto-collapse:** When the default horizontal style is in use and only 1 item
 fits in the space available to the `px-app-nav` element, the navigation will be
 automatically collapsed.
 
-<strong>Positioning a collapsed app-nav in an app:</strong>
+#### Positioning a collapsed app-nav in an app:
 
 Follow the sticking instructions in the Horizontal style section above to
 correctly position the `px-app-nav` element on the page in collapsed style.
@@ -363,7 +363,7 @@ a new item. Example:
     <px-app-nav items="..." vertical></px-app-nav>
 
 
-<strong>Positioning a vertical app-nav  in an app:</strong>
+#### Positioning a vertical app-nav  in an app:
 
 The vertical style defaults to CSS styles `position: absolute; left: 0; top: 0;`
 to stick to the left side of the screen. This causes the navigation element to

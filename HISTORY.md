@@ -1,3 +1,7 @@
+v2.0.7
+==================
+* update docs
+
 v2.0.6
 ==================
 * update to use px-fea icons instead of px-nav where possible
