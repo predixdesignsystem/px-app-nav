@@ -535,6 +535,11 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-tab-color--selected                   :  $select-default;
   --px-tab-border-color                      :  $gray5;
 
+  // Tile
+  --px-tile-background-color                 :  $gray1;
+  --px-tile-overlay-background-color         :  $gray17;
+  --px-tile-overlay-text-color               :  $gray1;
+
   // Timeline
   --px-timeline-border-color                 :  $gray10;
   --px-timeline-text-color                   :  $gray15;
