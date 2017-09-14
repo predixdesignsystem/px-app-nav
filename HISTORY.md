@@ -1,3 +1,8 @@
+v2.0.8
+==================
+* Docs changes only: Add vertical navigation simple example (examples/vertical.html)
+  and fix vertical demo so it shows up
+
 v2.0.7
 ==================
 * update docs
