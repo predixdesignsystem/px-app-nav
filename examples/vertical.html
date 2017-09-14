@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>App Nav Demo -- Vertical</title>
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="../polymer/polymer-mini.html"/>
+  <link rel="import" href="../px-app-nav.html"/>
+  <link rel="import" href="../px-theme/px-theme-styles.html"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      font-size: 15px;
+      font-family: 'GE Inspira Sans';
+    }
+  </style>
+</head>
+<body>
+  <template is="dom-bind">
+    <style is="custom-style" include="px-theme-styles"></style>
+    <style is="custom-style">
+      px-app-nav {
+        position: fixed;
+        right: 0;
+        top: 0;
+      }
+      #app {
+        display: block;
+        margin-left: 75px;
+      }
+    </style>
+    <px-app-nav
+        items='[
+          { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+          { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+            { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+            { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+            { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          ]}
+        ]'
+        vertical
+        collapse-opened="{{collapseOpened}}"
+        selected="{{selectedItem}}"
+        selected-route="{{selectedRoute}}">
+    </px-app-nav>
+
+    <div id="app">
+      <ul>
+        <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
+        <li>Selected route: <strong>{{selectedRoute}}</strong></li>
+        <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
+      </ul>
+    </div>
+  </template>
+</body>
+</html>
