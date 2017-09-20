@@ -36,6 +36,41 @@ v2.0.0
 ==================
 * Complete overhaul of px-app-nav API and design. See the documentation for
   more information on how to migrate to the new component.
+* Clicking on an item in px-app-nav no longer automatically navigates to the
+  item's URL by setting the window.location. Instead, listen to the event
+  `selected-changed` for updates when an item is selected and sync the state to
+  the URL if you choose (e.g. by setting `window.location`, using a framework
+  router, or using the new px-app-route helper element).
+* The `navItems` property has been renamed to `items`. The format of the
+  navigation items object has also changed.
+* In `navItems`, child items were added to a parent item with the `subitems` key.
+  In `items`, child items are added to a parent item with the `children` key.
+* In `navItems`, item paths were set with the `path` key. In `items`, item paths
+  are set with the `id` key.
+* In `navItems`, item paths were set with the `path` key. In `items`, item paths
+  are set with the `id` key.
+* In `navItems`, an `eventName` could be passed that would be fired when the
+  item was tapped. That option has been removed from `items`. Instead, watch
+  `selected-changed` for updates when a new item is selected (when tapped or
+  through data binding).
+* All icon names used in `navItems` should be updated to use the new px-icon
+  names. If you do not update to use the px-icon names, you will need to load the
+  font awesome icons in your app. The font awesome icons will not be loaded with
+  the px-app-nav component by default.
+* The `navContracting` and `naxExpanding` properties have been removed. See the
+  `collapseOpened` property for an approximate replacement.
+* The `pathPrefix` property has been removed as px-app-nav no longer navigates
+  the page directly when an item is clicked. You can implement this yourself by
+  listening to `selected-changed` and setting the URL.
+* The `pathKey` property has been removed.
+* The `markSelected` method has been removed. Use the `select()` method to
+  select an item by reference.
+* The nav is no longer configured to be vertical and toggle to open/close by
+  default. There are now a variety of modes available (horizontal, vertical,
+  collapsed) for different use cases. See the documentation for more
+  information. To use the vertical mode, set the `vertical` property to true.
+  The vertical mode is no longer meant to be used on mobile. The `collapsed`
+  mode should be used on mobile instead.
 
 v1.10.12
 ==================
