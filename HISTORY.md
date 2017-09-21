@@ -1,3 +1,7 @@
+v3.0.15
+================
+* add chip styles
+
 v3.0.14
 ================
 * add tile styles

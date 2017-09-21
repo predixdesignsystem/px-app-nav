@@ -246,6 +246,9 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-deck-selector-text-color--selected        :  $white;
   --px-deck-selector-li-border                   :  $gray2;
 
+  // Breadcrumbs
+  --px-breadcrumbs-chevron-color      :  $gray4;
+
   //// Charts
 
   // Percent Circle
@@ -281,8 +284,17 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-win-loss-positive-fill-color   :  $yellow-green4;
   --px-win-loss-negative-fill-color   :  $red4;
 
-  // Breadcrumbs
-  --px-breadcrumbs-chevron-color      :  $gray4;
+  // Chip
+  --px-chip-background-color              : transparent;
+  --px-chip-background-color--hover       : rgba($gray10,0.2);
+  --px-chip-background-color--selected    : $white;
+  --px-chip-border-color                  : $gray8;
+  --px-chip-border-color--hover           : $gray8;
+  --px-chip-border-color--selected        : $primary-default;
+  --px-chip-text-color                    : $gray10;
+  --px-chip-text-color--selected          : $primary-default;
+  --px-chip-icon-color                    : $gray10;
+  --px-chip-icon-color--hover             : $primary-default;
 
   // Clipboard
   --px-clipboard-icon-color           :  $gray15;
