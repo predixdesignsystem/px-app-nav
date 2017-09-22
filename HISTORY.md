@@ -1,3 +1,11 @@
+v3.0.15
+================
+* add chip styles
+
+v3.0.14
+================
+* add tile styles
+
 v3.0.12
 ================
 * add missing c.b. and dropdown styles
