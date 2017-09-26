@@ -454,8 +454,9 @@
       const measurements = this._measureItems(this.items);
       const {visible, overflowed} = this._fitItems(this.items, measurements, this._availableWidth);
 
-      // If only one item can fit, switch to collapsed mode
-      if (visible.length === 1) {
+      // If only one item can fit, and there is more than one nav item defined,
+      // switch to collapsed mode
+      if (visible.length === 1 && this.items.length > 1) {
         this._setVisibleItems([]);
         this._setOverflowedItems(this.items.slice(0));
         this.fire('px-app-nav-rebuilt');

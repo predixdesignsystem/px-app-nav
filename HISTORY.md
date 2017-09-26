@@ -1,3 +1,7 @@
+v2.0.9
+==================
+* Does not collapse navigation if only one item is present
+
 v2.0.8
 ==================
 * Docs changes only: Add vertical navigation simple example (examples/vertical.html)

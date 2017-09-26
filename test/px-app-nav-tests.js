@@ -384,6 +384,22 @@ function runCustomTests() {
       }, 500);
     });
 
+    it('does not mark all of its items as overflowed if there is only one top-level item', function(done) {
+      var fx = fixture('AppNavFixtureOneItem');
+      var appNavEl = fx.querySelector('px-app-nav');
+
+      setTimeout(function() {
+        fx.style.width = '180px';
+        appNavEl.notifyResize();
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.visibleItems.length).to.equal(1);
+        expect(appNavEl.overflowedItems.length).to.equal(0);
+        expect(appNavEl.allCollapsed).to.equal(false);
+        done();
+      }, 500);
+    });
+
     it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function() {
       var fx = fixture('AppNavFixtureIconSizeVariable');
       var appNavEl = fx.querySelector('px-app-nav');
