@@ -1,3 +1,7 @@
+v3.0.16
+================
+* add styles for vis lasso
+
 v3.0.15
 ================
 * add chip styles

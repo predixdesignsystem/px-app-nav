@@ -638,6 +638,10 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-vis-zoom-brush-fill-color          :  $gray2;
   --px-vis-zoom-brush-fill-opacity        :  0.5;
 
+  --px-vis-lasso-outline-color      :  $gray12;
+  --px-vis-lasso-fill-color          :  none;
+  --px-vis-lasso-fill-opacity        :  0.5;
+
 
   // Vis CSS
   --px-vis-pie-title-color               :  $gray10;
