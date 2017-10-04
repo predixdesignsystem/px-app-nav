@@ -658,6 +658,7 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-vis-toolbar-hover-color           :  $primary-hover;
   --px-vis-toolbar-active-color          :  $primary-default;
   --px-vis-toolbar-subrow-background-color  :  rgba($gray6, 0.5);
+  --px-vis-toolbar-submenu-z-index       :  2;
 
   // Vis Data Vis
   // Colors MUST start at 0 and cannot contain gaps.

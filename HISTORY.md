@@ -1,3 +1,7 @@
+v3.0.17
+================
+* add  --px-vis-toolbar-submenu-z-index
+
 v3.0.16
 ================
 * add styles for vis lasso
