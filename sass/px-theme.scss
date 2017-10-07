@@ -513,6 +513,14 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
   --px-spinner-fill-color                    :  $primary-default;
   --px-spinner-background-color              :  $cyan1;
 
+  // Steps
+  --px-steps-connector-color                 :  rgba($gray10,0.6);
+  --px-steps-text-color                      :  rgba($gray8,0.6);
+  --px-steps-text-color--current             :  $select-default;
+  --px-steps-text-color--completed           :  $gray10;
+  --px-steps-text-color--hover               :  $select-hover;
+  --px-steps-text-color--pressed             :  $select-pressed;
+
   // Table View
   --px-table-row-color                       :  inherit;
   --px-table-row-background-color            :  $white;

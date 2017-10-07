@@ -1,3 +1,7 @@
+v3.0.18
+================
+* add steps styles
+
 v3.0.17
 ================
 * add  --px-vis-toolbar-submenu-z-index
