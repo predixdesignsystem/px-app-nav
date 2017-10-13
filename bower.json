@@ -23,13 +23,23 @@
     "yarn.lock"
   ],
   "dependencies": {
-    "polymer": "^1.9.0",
+    "polymer": "1.9 - 2",
     "px-typography-design": "^2.0.0"
   },
   "devDependencies": {
     "px-colors-design": "^1.0.0"
   },
   "resolutions": {
-    "webcomponentsjs": "^0.7.24"
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "^1.9.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
   }
 }
