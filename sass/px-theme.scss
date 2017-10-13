@@ -513,6 +513,14 @@ html, :host > * {
   --px-spinner-fill-color                    :  $primary-default;
   --px-spinner-background-color              :  $cyan1;
 
+  // Steps
+  --px-steps-connector-color                 :  rgba($gray10,0.6);
+  --px-steps-text-color                      :  rgba($gray8,0.6);
+  --px-steps-text-color--current             :  $select-default;
+  --px-steps-text-color--completed           :  $gray10;
+  --px-steps-text-color--hover               :  $select-hover;
+  --px-steps-text-color--pressed             :  $select-pressed;
+
   // Table View
   --px-table-row-color                       :  inherit;
   --px-table-row-background-color            :  $white;
@@ -638,6 +646,10 @@ html, :host > * {
   --px-vis-zoom-brush-fill-color          :  $gray2;
   --px-vis-zoom-brush-fill-opacity        :  0.5;
 
+  --px-vis-lasso-outline-color      :  $gray12;
+  --px-vis-lasso-fill-color          :  none;
+  --px-vis-lasso-fill-opacity        :  0.5;
+
 
   // Vis CSS
   --px-vis-pie-title-color               :  $gray10;
@@ -654,6 +666,7 @@ html, :host > * {
   --px-vis-toolbar-hover-color           :  $primary-hover;
   --px-vis-toolbar-active-color          :  $primary-default;
   --px-vis-toolbar-subrow-background-color  :  rgba($gray6, 0.5);
+  --px-vis-toolbar-submenu-z-index       :  2;
 
   // Vis Data Vis
   // Colors MUST start at 0 and cannot contain gaps.

@@ -1,3 +1,15 @@
+v3.0.18
+================
+* add steps styles
+
+v3.0.17
+================
+* add  --px-vis-toolbar-submenu-z-index
+
+v3.0.16
+================
+* add styles for vis lasso
+
 v3.0.15
 ================
 * add chip styles
