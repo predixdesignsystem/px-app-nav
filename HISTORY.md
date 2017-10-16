@@ -1,3 +1,7 @@
+v3.1.0
+================
+* polymer 2.x compatible release
+
 v3.0.18
 ================
 * add steps styles
