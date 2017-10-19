@@ -36,6 +36,7 @@ $px-app-nav-box-shadow: var(--px-app-nav-box-shadow, $inuit-shadow-navigation);
   display: block;
   width: 100%;
   @apply --px-app-nav;
+  outline: none; /* the outline doesn't need to cleared, but @apply can't be the last CSS declaration because of a bug in css-slam library (https://github.com/PolymerLabs/css-slam/issues/15) */
 }
 
 .app-nav {
@@ -66,6 +67,7 @@ $px-app-nav-vertical-transition: var(--px-app-nav-vertical-transition, max-width
   max-width: $px-app-nav-vertical-width;
   transition: $px-app-nav-vertical-transition;
   @apply --px-app-nav;
+  outline: none;  /* the outline doesn't need to cleared, but @apply can't be the last CSS declaration because of a bug in css-slam library (https://github.com/PolymerLabs/css-slam/issues/15) */
 }
 
 :host([vertical][vertical-opened]) {
