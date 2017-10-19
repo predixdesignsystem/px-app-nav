@@ -1,3 +1,7 @@
+v2.0.10
+==================
+* Update demo to use "id" instead of "path" for Dashboard item and subitems
+
 v2.0.9
 ==================
 * Does not collapse navigation if only one item is present
