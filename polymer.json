@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "demo/index.html",
+  "shell": "demo/px-app-nav-demo.html",
   "sources": [
     "demo/**/*",
     "*.html",
