@@ -22,16 +22,20 @@
     <px-app-nav
 
         items='[
-          { "label" : "Home", "path" : "home", "icon" : "px-fea:home" },
-          { "label" : "Alerts", "path" : "alerts", "icon" : "px-fea:alerts" },
-          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px-fea:dashboard", "subitems": [
+          { "label" : "Home lorem dot lorem lorem lorem lorem long", "path" : "home", "icon" : "px-fea:home" },
+          { "label" : "Alerts", "path" : "alerts", "icon" : "px-fea:alerts", "children": [
+            { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px-obj:truck" }
+          ]},
+          { "label" : "Dashboards", "path" : "dashboards", "icon" : "px-fea:dashboard", "children": [
             { "label" : "See Live Truck View", "path" : "trucks", "icon" : "px-obj:truck" },
             { "label" : "Track Orders", "path" : "orders", "icon" : "px-fea:orders" },
             { "label" : "Analyze Invoices", "path" : "invoices", "icon" : "px-fea:templates" }
           ]}
         ]'
         selected="{{selectedItem}}"
-        selected-route="{{selectedRoute}}">
+        selected-route="{{selectedRoute}}"
+        on-px-app-nav-group-will-open="handleGroupOpened"
+        on-px-app-nav-group-will-close="handleGroupClosed">
     </px-app-nav>
 
     <div id="app">
@@ -42,5 +46,14 @@
       </ul>
     </div>
   </template>
+  <script>
+    var tmpl = document.querySelector('template[is="dom-bind"]');
+    tmpl.handleGroupOpened = function(e) {
+      debugger;
+    }
+    tmpl.handleGroupClosed = function(e) {
+      debugger;
+    }
+  </script>
 </body>
 </html>

@@ -36,7 +36,9 @@
         collapse-all
         collapse-opened="{{collapseOpened}}"
         selected="{{selectedItem}}"
-        selected-route="{{selectedRoute}}">
+        selected-route="{{selectedRoute}}"
+        on-px-app-nav-group-will-open="handleGroupOpened"
+        on-px-app-nav-group-will-close="handleGroupClosed">
     </px-app-nav>
 
     <div id="app">
@@ -47,5 +49,14 @@
       </ul>
     </div>
   </template>
+  <script>
+    var tmpl = document.querySelector('template[is="dom-bind"]');
+    tmpl.handleGroupOpened = function(e) {
+      debugger;
+    }
+    tmpl.handleGroupClosed = function(e) {
+      debugger;
+    }
+  </script>
 </body>
 </html>

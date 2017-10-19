@@ -214,6 +214,7 @@
       this.listen(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      this.listen(this.$.group, 'opened-changed', '_handleDropdownStateWillChange');
       this.listen(this, 'px-app-nav-item-tapped', '_handleItemSelected');
       this.set('_offsetHeight', this._getVerticalOffset());
     },
@@ -223,7 +224,20 @@
       this.unlisten(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
       this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
       this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+      this.unlisten(this.$.group, 'opened-changed', '_handleDropdownStateWillChange');
       this.unlisten(this, 'px-app-nav-item-tapped', '_handleItemSelected');
+    },
+
+    _handleDropdownStateWillChange: function(evt) {
+      if (evt.detail.value === true) {
+        this.fire('px-app-nav-group-will-open', {
+          item: this.item
+        });
+      } else {
+        this.fire('px-app-nav-group-will-close', {
+          item: this.item
+        });
+      }
     },
 
     _openedChangedFromOutside: function(newVal) {
