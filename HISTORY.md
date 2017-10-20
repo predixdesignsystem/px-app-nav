@@ -1,3 +1,7 @@
+v3.1.1
+================
+* fix selector combo for theme
+
 v3.1.0
 ================
 * polymer 2.x compatible release
