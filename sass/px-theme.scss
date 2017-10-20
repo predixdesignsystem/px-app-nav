@@ -478,6 +478,12 @@ html {
   // Overlay
   --px-overlay-color                  :  rgba($black, .65);
 
+  // Panel
+  --px-panel-bg-color--light          : $white;
+  --px-panel-bg-color--medium         : $gray1;
+  --px-panel-bg-color--dark           : $gray2;
+  --px-panel-border-color             : $gray5;
+
   // Popover
   --px-popover-background-color       :  $white;
   --px-popover-border-color           :  $gray3;
@@ -572,6 +578,7 @@ html {
   --px-tree-background-color--hover          :  $gray1;
   --px-tree-text-color--selected             :  $white;
   --px-tree-background-color--selected       :  $select-default;
+  --px-tree-text-color--disabled             :  rgba($gray8,0.5);
 
   // Tooltip
   --px-tooltip-background-color              :  $white;

@@ -1,3 +1,7 @@
+v3.1.2
+================
+* add disabled color for tree
+
 v3.1.1
 ================
 * fix selector combo for theme
