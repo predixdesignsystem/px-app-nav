@@ -1,3 +1,7 @@
+v2.0.12
+==================
+* add device flags
+
 v2.0.11
 ==================
 * Temporary fix for #78, adds a CSS declaration after the @apply to ensure polymer-cli w/ css-slam doesn't break this
