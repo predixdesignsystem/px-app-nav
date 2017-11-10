@@ -1,3 +1,7 @@
+v3.1.4
+================
+* add styles for context browser
+
 v3.1.3
 ================
 * add style for inbox
