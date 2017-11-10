@@ -308,10 +308,12 @@ html {
   --px-context-browser-header-text-color                  :  $select-default;
   --px-context-browser-icon-stroke                        :  $gray15;
   --px-context-browser-item-text-color                    :  $gray15;
+  --px-context-browser-item-text-color--selected          :  $white;
+  --px-context-browser-item-breadcrumbs-color             :  $gray10;
+  --px-context-browser-item-breadcrumbs-color--selected   :  $white;
   --px-context-browser-item-background-color--hover       :  $gray1;
   --px-context-browser-item-background-color--selected    :  $select-default;
   --px-context-browser-item-color--selected               :  $white;
-  --px-context-browser-item-text-color--selected          :  $white;
   --px-context-browser-icon-stroke--item-selected         :  $white;
   --px-context-browser-panel-border-color                 :  $gray3;
   --px-context-browser-panel-background-color             :  $white;
