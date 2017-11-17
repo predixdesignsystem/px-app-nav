@@ -106,27 +106,7 @@
       },
 
       animationConfig: {
-        type: Array,
-        value: function() {
-          return {
-            'open' : {
-              name: 'expand-subgroup-animation',
-              node: this.$.groupcontainer,
-              endHeightNode: this.$.groupcontent,
-              timing: {
-                easing: 'ease-in'
-              }
-            },
-            'close' : {
-              name: 'contract-subgroup-animation',
-              node: this.$.groupcontainer,
-              startHeightNode: this.$.groupcontent,
-              timing: {
-                easing: 'ease-out'
-              }
-            }
-          }
-        }
+        type: Array
       }
     },
 
@@ -136,6 +116,31 @@
 
     attached: function() {
       this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
+      /*
+       * Polymer 2.x initializes the properties before the template is created.
+       * To use node finding in the animationConfig property, it must be set
+       * after the component has been attached and its template has been stamped.
+       */
+      if (!this.animationConfig) {
+        this.animationConfig = {
+          'open' : {
+            name: 'expand-subgroup-animation',
+            node: this.$.groupcontainer,
+            endHeightNode: this.$.groupcontent,
+            timing: {
+              easing: 'ease-in'
+            }
+          },
+          'close' : {
+            name: 'contract-subgroup-animation',
+            node: this.$.groupcontainer,
+            startHeightNode: this.$.groupcontent,
+            timing: {
+              easing: 'ease-out'
+            }
+          }
+        };
+      }
     },
 
     detached: function() {

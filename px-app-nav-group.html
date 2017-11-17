@@ -42,7 +42,7 @@
         close-animation-config="{{_closeAnimation}}">
       <div slot="dropdown-content" class="dropdown-content app-nav-group__dropdown" id="groupcontainer">
         <div class="app-nav-group__dropdown__content" id="groupcontent">
-          <content select="*"></content>
+          <slot></slot>
         </div>
       </div>
     </iron-dropdown>
@@ -179,29 +179,11 @@
       },
 
       _openAnimation: {
-        type: Object,
-        value: function() {
-          return {
-            name: 'expand-animation',
-            timing: {
-              easing: 'ease-in'
-            },
-            endHeightNode: this.$.groupcontent
-          }
-        }
+        type: Object
       },
 
       _closeAnimation: {
-        type: Object,
-        value: function() {
-          return {
-            name: 'contract-animation',
-            timing: {
-              easing: 'ease-out'
-            },
-            startHeightNode: this.$.groupcontent
-          }
-        }
+        type: Object
       },
 
       _offsetHeight: {
@@ -216,6 +198,30 @@
       this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
       this.listen(this, 'px-app-nav-item-tapped', '_handleItemSelected');
       this.set('_offsetHeight', this._getVerticalOffset());
+
+      /*
+       * Polymer 2.x initializes the properties before the template is created.
+       * To use node finding in the animationConfig property, it must be set
+       * after the component has been attached and its template has been stamped.
+       */
+      if (!this._openAnimation) {
+        this._openAnimation = {
+          name: 'expand-animation',
+          timing: {
+            easing: 'ease-in'
+          },
+          endHeightNode: this.$.groupcontent
+        };
+      }
+      if (!this._closeAnimation) {
+        this._closeAnimation = {
+          name: 'contract-animation',
+          timing: {
+            easing: 'ease-out'
+          },
+          startHeightNode: this.$.groupcontent
+        };
+      }
     },
 
     detached: function() {

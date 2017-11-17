@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <title>App Nav Demo -- Collapsed</title>
-  <script src="../webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="../polymer/polymer-mini.html"/>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html"/>
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
   <link rel="import" href="../px-app-nav.html"/>
-  <link rel="import" href="../px-theme/px-theme-styles.html"/>
 
   <style>
     html, body {
@@ -16,36 +17,40 @@
   </style>
 </head>
 <body>
-  <template is="dom-bind">
-    <style is="custom-style" include="px-theme-styles"></style>
-    <style is="custom-style">
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles">
       px-app-nav {
         --px-app-nav-collapsed-width: 275px;
       }
     </style>
-    <px-app-nav
-        items='[
-          { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-          { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-          { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-            { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-            { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-            { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
-          ]}
-        ]'
-        collapse-all
-        collapse-opened="{{collapseOpened}}"
-        selected="{{selectedItem}}"
-        selected-route="{{selectedRoute}}">
-    </px-app-nav>
+  </custom-style>
 
-    <div id="app">
-      <ul>
-        <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
-        <li>Selected route: <strong>{{selectedRoute}}</strong></li>
-        <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
-      </ul>
-    </div>
-  </template>
+  <dom-bind>
+    <template is="dom-bind">
+      <px-app-nav
+          items='[
+            { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+            { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+            { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+              { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+              { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+              { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+            ]}
+          ]'
+          collapse-all
+          collapse-opened="{{collapseOpened}}"
+          selected="{{selectedItem}}"
+          selected-route="{{selectedRoute}}">
+      </px-app-nav>
+
+      <div id="app">
+        <ul>
+          <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
+          <li>Selected route: <strong>{{selectedRoute}}</strong></li>
+          <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
+        </ul>
+      </div>
+    </template>
+  </dom-bind>
 </body>
 </html>

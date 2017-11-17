@@ -14,12 +14,12 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- export PATH=$PWD/node_modules/.bin:$PATH
-- ./node_modules/.bin/bower install
+- yarn add polymer-cli
+- polymer install --variants
 script:
-- xvfb-run ./node_modules/.bin/wct --root $TRAVIS_BUILD_DIR --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then ./node_modules/.bin/wct --root
-  $TRAVIS_BUILD_DIR --plugin sauce --skip-plugin local; fi
+- xvfb-run wct --skip-plugin sauce
+- if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --plugin sauce --skip-plugin
+  local; fi
 after_success:
 - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then openssl aes-256-cbc -k "$DEPLOYSECRET"
   -in deploy.enc -out deploy_key -d; fi
