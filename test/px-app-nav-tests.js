@@ -506,23 +506,34 @@ describe('px-app-nav [horizontal]', function() {
     });
 
     it('opens the overflow dropdown when the overflow icon is tapped', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var overflowGroupEl;
-      var overflowIconEl;
+      let appNavEl = fx.querySelector('px-app-nav');
+      let overflowGroupEl;
+      let overflowIconEl;
 
-      setTimeout(function() {
-        fx.style.width = '300px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
-        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
-        overflowIconEl.click();
-      }, 250);
-      setTimeout(function() {
-        expect(overflowGroupEl.opened).to.equal(true);
-        done();
-      }, 500);
+      fx.style.width = '300px';
+      appNavEl.notifyResize();
+      overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+
+      async.until(
+        () => (!!overflowGroupEl),
+        (cb)=> {
+          overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+          setTimeout(cb, 1000)
+        },
+        ()=>{
+          overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+          overflowIconEl.click();
+
+          async.until(
+            ()=> (overflowGroupEl.opened),
+            (cb)=>setTimeout(cb, 1000),
+            ()=>{
+              expect(overflowGroupEl.opened).to.equal(true);
+              done();
+            }
+          );
+        }
+      );
     });
 
     it('closes the open overflow dropdown when something else is tapped', function(done) {
