@@ -161,6 +161,7 @@ describe('px-app-nav [selecting DOM nodes]', function() {
           return (!!routeItemEl);
         },
         (cb) => {
+          itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
           routeItemEl = itemEls.filter(el => el.item.id === 'alerts')[0];
           setTimeout(cb, 1000);
         },
@@ -221,6 +222,8 @@ describe('px-app-nav [horizontal]', function() {
       async.until(
         () => (itemEls.length === 2),
         (cb) => {
+          itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+          groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
           itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
           setTimeout(cb,1000)
         },
