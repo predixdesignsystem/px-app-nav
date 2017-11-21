@@ -262,34 +262,34 @@ describe('px-app-nav [horizontal]', function() {
       var firstSelectedEl;
       var secondSelectedEl;
 
+      itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+      firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
 
-        itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
-        firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
+      async.until(
+        () => {
+          return (!!firstSelectedEl);
+        },
+        (cb) => {
+          itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+          firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
+          setTimeout(cb, 1000);
+        },
+        () => {
+          firstSelectedEl.click();
 
-        async.until(
-          () => {
-            return (!!firstSelectedEl);
-          },
-          (cb) => {
-            firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
-            setTimeout(cb, 1000);
-          },
-          () => {
-            firstSelectedEl.click();
-
-            setTimeout(function() {
-              secondSelectedEl = itemEls.filter(el => el.item.id === 'alerts')[0];
-              secondSelectedEl.click();
-            }, 60);
-            setTimeout(function() {
-              expect(firstSelectedEl.selected).to.equal(false);
-              expect(secondSelectedEl.selected).to.equal(true);
-              expect(appNavEl.selectedRoute).to.eql(['alerts']);
-              expect(appNavEl.selected).to.equal(alertsItem);
-              done();
-            }, 100);
-          }
-        );
+          setTimeout(function() {
+            secondSelectedEl = itemEls.filter(el => el.item.id === 'alerts')[0];
+            secondSelectedEl.click();
+          }, 60);
+          setTimeout(function() {
+            expect(firstSelectedEl.selected).to.equal(false);
+            expect(secondSelectedEl.selected).to.equal(true);
+            expect(appNavEl.selectedRoute).to.eql(['alerts']);
+            expect(appNavEl.selected).to.equal(alertsItem);
+            done();
+          }, 100);
+        }
+      );
     });
 
     it('opens a dropdown when a group is tapped', function(done) {
@@ -685,31 +685,40 @@ describe('px-app-nav [horizontal]', function() {
       var subgroupItemEl;
       var subitemEl;
 
-      setTimeout(function() {
-        fx.style.width = '300px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
+      fx.style.width = '300px';
+      appNavEl.notifyResize();
+      flush(()=>{
         overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
-        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
-        overflowIconEl.click();
-      }, 350);
-      setTimeout(function() {
-        subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
-        subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
-        subgroupItemEl.click();
-      }, 550);
-      setTimeout(function() {
-        subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-subitem');
-        subitemEl.click();
-      }, 750);
-      setTimeout(function() {
-        expect(overflowGroupEl.opened).to.equal(false);
-        expect(subitemEl.selected).to.equal(true);
-        expect(overflowGroupEl.selected).to.equal(true);
-        expect(subgroupEl.selected).to.equal(true);
-        done();
-      }, 950);
+
+        async.until(
+          () => (!!overflowGroupEl),
+          (cb) => {
+            overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+            setTimeout(cb, 1000);
+          },
+          () => {
+            overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+            overflowIconEl.click();
+            setTimeout(function() {
+              subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+              subgroupItemEl = Polymer.dom(subgroupEl.root).querySelector('px-app-nav-item');
+              subgroupItemEl.click();
+            }, 550);
+            setTimeout(function() {
+              subitemEl = Polymer.dom(subgroupEl).querySelector('px-app-nav-subitem');
+              subitemEl.click();
+            }, 750);
+            setTimeout(function() {
+              expect(overflowGroupEl.opened).to.equal(false);
+              expect(subitemEl.selected).to.equal(true);
+              expect(overflowGroupEl.selected).to.equal(true);
+              expect(subgroupEl.selected).to.equal(true);
+              done();
+            }, 950);
+          }
+        )
+
+      });
     });
   });
 });
