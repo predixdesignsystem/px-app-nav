@@ -214,10 +214,10 @@ describe('px-app-nav [horizontal]', function() {
     });
 
     it('paints all of the groups, items and subitems it is given', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
-      var groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
-      var subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
+      let appNavEl = fx.querySelector('px-app-nav');
+      let itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+      let groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
+      let subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
 
       async.until(
         () => (itemEls.length === 2),
@@ -225,6 +225,7 @@ describe('px-app-nav [horizontal]', function() {
           itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
           groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
           itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+          subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
           setTimeout(cb,1000)
         },
         () => {
