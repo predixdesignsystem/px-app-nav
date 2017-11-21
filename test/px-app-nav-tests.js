@@ -383,16 +383,20 @@ describe('px-app-nav [horizontal]', function() {
     it('marks all of its items as overflowed and collapses fully when only one item fits', function(done) {
       var appNavEl = fx.querySelector('px-app-nav');
 
-      setTimeout(function() {
-        fx.style.width = '180px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        expect(appNavEl.visibleItems.length).to.equal(0);
-        expect(appNavEl.overflowedItems.length).to.equal(6);
-        expect(appNavEl.allCollapsed).to.equal(true);
-        done();
-      }, 500);
+      fx.style.width = '180px';
+      appNavEl.notifyResize();
+      flush(()=>{
+        async.until(
+          ()=> (appNavEl.overflowedItems.length === 6),
+          (cb)=>setTimeout(cb, 1000),
+          ()=>{
+            expect(appNavEl.visibleItems.length).to.equal(0);
+            expect(appNavEl.overflowedItems.length).to.equal(6);
+            expect(appNavEl.allCollapsed).to.equal(true);
+            done();
+          }
+        );
+      });
     });
   });
 
@@ -783,19 +787,26 @@ describe('px-app-nav [collapsed]', function() {
       var collapsedGroupEl;
       var dropdownEl;
 
-      setTimeout(function() {
-        collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
-        dropdownEl = Polymer.dom(collapsedGroupEl.root).querySelector('#groupcontent');
-        appNavEl.collapseOpened = true;
-      }, 50);
-      setTimeout(function() {
-        expect(dropdownEl.offsetLeft).to.be.greaterThan(0);
-        appNavEl.collapseOpened = false;
-      }, 500);
-      setTimeout(function() {
-        expect(dropdownEl.offsetLeft).to.equal(0);
-        done();
-      }, 750);
+      collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+      dropdownEl = Polymer.dom(collapsedGroupEl.root).querySelector('#groupcontent');
+      appNavEl.collapseOpened = true;
+
+      async.until(
+        ()=> (dropdownEl.offsetLeft > 0),
+        (cb)=>setTimeout(cb, 1000),
+        ()=>{
+          expect(dropdownEl.offsetLeft).to.be.greaterThan(0);
+          appNavEl.collapseOpened = false;
+          async.until(
+            ()=> (dropdownEl.offsetLeft === 0),
+            (cb)=>setTimeout(cb, 1000),
+            ()=>{
+              expect(dropdownEl.offsetLeft).to.equal(0);
+              done();
+            }
+          );
+        }
+      );
     });
   });
 });
