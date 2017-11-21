@@ -381,24 +381,29 @@ describe('px-app-nav [horizontal]', function() {
     });
 
     it('marks all of its items as overflowed and collapses fully when only one item fits', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
+      let appNavEl = fx.querySelector('px-app-nav');
 
       fx.style.width = '180px';
       appNavEl.notifyResize();
       flush(()=>{
         async.until(
-          ()=> (appNavEl.overflowedItems.length === 6),
-          (cb)=>setTimeout(cb, 1000),
+          ()=> (!!appNavEl.overflowedItems),
+          (cb)=> setTimeout(cb, 1000),
           ()=>{
-            expect(appNavEl.visibleItems.length).to.equal(0);
-            expect(appNavEl.overflowedItems.length).to.equal(6);
-            expect(appNavEl.allCollapsed).to.equal(true);
-            done();
+            async.until(
+              ()=> (appNavEl.overflowedItems.length === 6),
+              (cb)=>setTimeout(cb, 1000),
+              ()=>{
+                expect(appNavEl.visibleItems.length).to.equal(0);
+                expect(appNavEl.overflowedItems.length).to.equal(6);
+                expect(appNavEl.allCollapsed).to.equal(true);
+                done();
+              }
+            );
           }
         );
       });
     });
-  });
 
   it('does not mark all of its items as overflowed if there is only one top-level item', function(done) {
     var fx = fixture('AppNavFixtureOneItem');
@@ -426,8 +431,18 @@ describe('px-app-nav [horizontal]', function() {
       var appNavEl = fx.querySelector('px-app-nav');
       var item = { label: 'Home', path: 'home', icon: 'px-fea:home' };
       var measurement = appNavEl._measureItem(item);
-      expect(measurement).to.be.closeTo(120, 2);
-      done();
+
+      async.until(
+        ()=> (measurement >= 118 && measurement <= 120),
+        (cb)=>{
+          measurement = appNavEl._measureItem(item);
+          setTimeout(cb, 1000)
+        },
+        ()=>{
+          expect(measurement).to.be.closeTo(120, 2);
+          done();
+        }
+      );
     });
   });
 
@@ -458,8 +473,9 @@ describe('px-app-nav [horizontal]', function() {
         expect(overflowGroupEl).to.be.instanceof(HTMLElement);
         done();
       }, 500);
-    })
+    });
   });
+});
 
   describe('[dropdown actions]', () => {
     let fx;
