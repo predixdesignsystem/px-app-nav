@@ -149,17 +149,27 @@ describe('px-app-nav [selection API]', function() {
 
 describe('px-app-nav [selecting DOM nodes]', function() {
   it('marks a <px-app-nav-item> as selected when its route is selected', function(done) {
-    var fx = fixture('AppNavFixtureSelectedRoute');
+    let fx = fixture('AppNavFixtureSelectedRoute');
 
     flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
+      let appNavEl = fx.querySelector('px-app-nav');
+      let itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+      let routeItemEl = itemEls.filter(el => el.item.id === 'alerts')[0];
 
-      setTimeout(function() {
-        var itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
-        var routeItemEl = itemEls.filter(el => el.item.id === 'alerts')[0];
-        expect(routeItemEl.selected).to.equal(true);
-        done();
-      }, 50);
+      async.until(
+        () => {
+          return (!!routeItemEl);
+        },
+        (cb) => {
+          routeItemEl = itemEls.filter(el => el.item.id === 'alerts')[0];
+          setTimeout(cb, 1000);
+        },
+        () => {
+          expect(routeItemEl.selected).to.equal(true);
+          done();
+        }
+      );
+
     });
   });
 
@@ -204,16 +214,23 @@ describe('px-app-nav [horizontal]', function() {
 
     it('paints all of the groups, items and subitems it is given', function(done) {
       var appNavEl = fx.querySelector('px-app-nav');
+      var itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+      var groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
+      var subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
 
-      setTimeout(function() {
-        var itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
-        var groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
-        var subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
-        expect(itemEls.length).to.equal(2);
-        expect(groupEls.length).to.equal(1);
-        expect(subitemEls.length).to.equal(3);
-        done();
-      }, 100);
+      async.until(
+        () => (itemEls.length === 2),
+        (cb) => {
+          itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
+          setTimeout(cb,1000)
+        },
+        () => {
+          expect(itemEls.length).to.equal(2);
+          expect(groupEls.length).to.equal(1);
+          expect(subitemEls.length).to.equal(3);
+          done();
+        }
+      )
     });
 
     it('selects an item when the item is tapped', function(done) {
@@ -242,38 +259,59 @@ describe('px-app-nav [horizontal]', function() {
       var firstSelectedEl;
       var secondSelectedEl;
 
-      setTimeout(function() {
+
         itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
         firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
-        firstSelectedEl.click();
-      }, 50);
-      setTimeout(function() {
-        secondSelectedEl = itemEls.filter(el => el.item.id === 'alerts')[0];
-        secondSelectedEl.click();
-      }, 60);
-      setTimeout(function() {
-        expect(firstSelectedEl.selected).to.equal(false);
-        expect(secondSelectedEl.selected).to.equal(true);
-        expect(appNavEl.selectedRoute).to.eql(['alerts']);
-        expect(appNavEl.selected).to.equal(alertsItem);
-        done();
-      }, 100);
+
+        async.until(
+          () => {
+            return (!!firstSelectedEl);
+          },
+          (cb) => {
+            firstSelectedEl = itemEls.filter(el => el.item.id === 'home')[0];
+            setTimeout(cb, 1000);
+          },
+          () => {
+            firstSelectedEl.click();
+
+            setTimeout(function() {
+              secondSelectedEl = itemEls.filter(el => el.item.id === 'alerts')[0];
+              secondSelectedEl.click();
+            }, 60);
+            setTimeout(function() {
+              expect(firstSelectedEl.selected).to.equal(false);
+              expect(secondSelectedEl.selected).to.equal(true);
+              expect(appNavEl.selectedRoute).to.eql(['alerts']);
+              expect(appNavEl.selected).to.equal(alertsItem);
+              done();
+            }, 100);
+          }
+        );
     });
 
     it('opens a dropdown when a group is tapped', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var groupEl;
-      var groupItemEl;
+      let appNavEl = fx.querySelector('px-app-nav');
+      let groupEl;
+      let groupItemEl;
 
-      setTimeout(function() {
-        groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
-        groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        groupItemEl.click();
-      }, 50);
-      setTimeout(function() {
-        expect(groupEl.opened).to.equal(true);
-        done();
-      }, 500);
+
+      groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+
+      async.until(
+        () => (!!groupEl),
+        (cb) => {
+          groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+          setTimeout(cb, 1000)
+        },
+        () => {
+          groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
+          groupItemEl.click();
+          flush(()=>{
+            expect(groupEl.opened).to.equal(true);
+            done();
+          })
+        }
+      )
     });
 
     it('closes an open dropdown when something else is tapped', function(done) {
@@ -296,31 +334,37 @@ describe('px-app-nav [horizontal]', function() {
     });
 
     it('selects a subitem and its group when the subitem is tapped', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var groupItem = appNavEl.items[2];
-      var groupSubitem = groupItem.children[0];
-      var groupEl;
-      var groupItemEl;
-      var subitemEls;
-      var subitemEl;
+      let appNavEl = fx.querySelector('px-app-nav');
+      let groupItem = appNavEl.items[2];
+      let groupSubitem = groupItem.children[0];
+      let groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+      let groupItemEl;
+      let subitemEls;
+      let subitemEl;
 
-      setTimeout(function() {
-        groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
-        groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
-        subitemEls = ensureNodeListIsArray(Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem'));
-        subitemEl = subitemEls.filter(el => el.item.id === 'trucks')[0];
-        groupItemEl.click();
-      }, 50);
-      setTimeout(function() {
-        subitemEl.click();
-      }, 100);
-      setTimeout(function() {
-        expect(subitemEl.selected).to.equal(true);
-        expect(appNavEl.selectedRoute).to.eql(['dashboards','trucks']);
-        expect(appNavEl.selected).to.equal(groupSubitem);
-        expect(appNavEl.selectedMeta.parent).to.equal(groupItem);
-        done();
-      }, 200);
+      async.until(
+        () => (!!groupEl),
+        (cb) => {
+          groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
+          setTimeout(cb, 1000);
+        },
+        () =>{
+          groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
+          subitemEls = ensureNodeListIsArray(Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem'));
+          subitemEl = subitemEls.filter(el => el.item.id === 'trucks')[0];
+          groupItemEl.click();
+          setTimeout(function() {
+            subitemEl.click();
+          }, 100);
+          setTimeout(function() {
+            expect(subitemEl.selected).to.equal(true);
+            expect(appNavEl.selectedRoute).to.eql(['dashboards','trucks']);
+            expect(appNavEl.selected).to.equal(groupSubitem);
+            expect(appNavEl.selectedMeta.parent).to.equal(groupItem);
+            done();
+          }, 200);
+        }
+      );
     });
   });
 
@@ -537,26 +581,39 @@ describe('px-app-nav [horizontal]', function() {
     });
 
     it('closes the open overflow dropdown when something else is tapped', function(done) {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var overflowGroupEl;
-      var overflowIconEl;
+      let appNavEl = fx.querySelector('px-app-nav');
+      let overflowGroupEl;
+      let overflowIconEl;
 
-      setTimeout(function() {
-        fx.style.width = '300px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
-        overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
-        overflowIconEl.click();
-      }, 250);
-      setTimeout(function() {
-        appNavEl.click();
-      }, 450);
-      setTimeout(function() {
-        expect(overflowGroupEl.opened).to.equal(false);
-        done();
-      }, 750);
+      fx.style.width = '300px';
+      appNavEl.notifyResize();
+
+      overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+
+      async.until(
+        () => (!!overflowGroupEl),
+        (cb)=> {
+          overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+          setTimeout(cb, 1000)
+        },
+        ()=>{
+          overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+          overflowIconEl.click();
+          flush(()=>{
+            async.whilst(
+              () => overflowGroupEl.opened,
+              (cb)=> {
+                appNavEl.click();
+                setTimeout(cb, 1000)
+              },
+              ()=>{
+                expect(overflowGroupEl.opened).to.equal(false);
+                done();
+              }
+            );
+          });
+        }
+      );
     });
 
     it('opens a subgroup in the overflow dropdown when the subgroup is tapped', function(done) {
