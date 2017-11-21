@@ -4,8 +4,7 @@
     "local": {
       "browsers": [
         "chrome",
-        "firefox",
-        "safari"
+        "firefox"
       ]
     },
     "sauce": {
