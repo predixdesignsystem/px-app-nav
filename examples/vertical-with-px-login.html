@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>App Nav Demo -- Collapsed</title>
+  <title>App Nav Demo -- Vertical</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../polymer/polymer.html"/>
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
@@ -15,15 +15,24 @@
       font-size: 15px;
       font-family: 'GE Inspira Sans';
     }
+    #app {
+      display: block;
+      margin-left: 75px;
+    }
+    px-app-nav {
+      position: fixed;
+      right: 0;
+      top: 0;
+    }
+    .actions {
+      padding: 1rem;
+      display: flex;
+    }
   </style>
 </head>
 <body>
   <custom-style>
-    <style is="custom-style" include="px-theme-styles">
-      px-app-nav {
-        --px-app-nav-collapsed-width: 275px;
-      }
-    </style>
+    <style is="custom-style" include="px-theme-styles"></style>
   </custom-style>
 
   <dom-bind>
@@ -38,12 +47,12 @@
               { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
             ]}
           ]'
-          collapse-all
-          collapse-opened="{{collapseOpened}}"
+          vertical
           selected="{{selectedItem}}"
-          selected-route="{{selectedRoute}}">
-        <div slot="actions" style="margin:1rem;">
-          <px-login user-name="Thomas Edison"></px-login>
+          selected-route="{{selectedRoute}}"
+          vertical-opened="{{verticalOpened}}">
+        <div slot="actions" class="actions">
+          <px-login user-name="Thomas Edison" collapsed="{{!verticalOpened}}" popover-location="top"></px-login>
         </div>
       </px-app-nav>
 
@@ -51,7 +60,6 @@
         <ul>
           <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
           <li>Selected route: <strong>{{selectedRoute}}</strong></li>
-          <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
         </ul>
       </div>
     </template>

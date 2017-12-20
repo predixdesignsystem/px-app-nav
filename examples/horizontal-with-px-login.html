@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>App Nav Demo -- Collapsed</title>
+  <title>App Nav Demo -- Horizontal</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../polymer/polymer.html"/>
   <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
   <link rel="import" href="../../px-theme/px-theme-styles.html"/>
   <link rel="import" href="../../px-login/px-login.html"/>
+  <link rel="import" href="../../px-icon-set/px-icon-set.html"/>
   <link rel="import" href="../px-app-nav.html"/>
 
   <style>
@@ -15,15 +16,15 @@
       font-size: 15px;
       font-family: 'GE Inspira Sans';
     }
+
+    .actions {
+      margin: 1rem;
+    }
   </style>
 </head>
 <body>
   <custom-style>
-    <style is="custom-style" include="px-theme-styles">
-      px-app-nav {
-        --px-app-nav-collapsed-width: 275px;
-      }
-    </style>
+    <style is="custom-style" include="px-theme-styles"></style>
   </custom-style>
 
   <dom-bind>
@@ -38,11 +39,9 @@
               { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
             ]}
           ]'
-          collapse-all
-          collapse-opened="{{collapseOpened}}"
           selected="{{selectedItem}}"
           selected-route="{{selectedRoute}}">
-        <div slot="actions" style="margin:1rem;">
+        <div slot="actions" class="actions">
           <px-login user-name="Thomas Edison"></px-login>
         </div>
       </px-app-nav>
@@ -51,7 +50,6 @@
         <ul>
           <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
           <li>Selected route: <strong>{{selectedRoute}}</strong></li>
-          <li>Collapse dropdown opened: <strong>{{collapseOpened}}</strong></li>
         </ul>
       </div>
     </template>
