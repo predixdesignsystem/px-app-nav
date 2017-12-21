@@ -1,3 +1,7 @@
+v3.1.5
+================
+* Add code editor styles
+
 v3.1.4
 ================
 * add styles for context browser
