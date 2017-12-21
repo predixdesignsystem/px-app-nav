@@ -302,6 +302,28 @@ html {
   --px-clipboard-icon-color--pressed  :  $primary-pressed;
   --px-clipboard-icon-color--copied   :  $status-green3;
 
+  // Code Editor
+  --px-code-editor-background-color          : $gray2;
+  --px-code-editor-text-color                : $gray19;
+  --px-code-editor-gutter-background-color   : $gray2;
+  --px-code-editor-gutter-border-right       : 1px solid $gray5;
+  --px-code-editor-line-number-color         : $gray10;
+  --px-code-editor-cursor-border             : 1px solid $gray19;
+  --px-code-editor-selected-background-color : $gray6;
+  --px-code-editor-comment-color             : $gray11;
+  --px-code-editor-number-color              : $orange7;
+  --px-code-editor-string-color              : $brown7;
+  --px-code-editor-keyword-color             : $purple8;
+  --px-code-editor-variable-color            : $cyan10;
+  --px-code-editor-variable2-color           : $red7;
+  --px-code-editor-property-color            : $gray17;
+  --px-code-editor-atom-color                : $orange7;
+  --px-code-editor-def-color                 : $gray19;
+  --px-code-editor-tag-color                 : $red7;
+  --px-code-editor-attribute-color           : $orange7;
+  --px-code-editor-error-background-color    : $red8;
+  --px-code-editor-error-color               : $white;
+
   // Context Browser
   --px-context-browser-header-background-color            :  $gray1;
   --px-context-browser-header-border-color                :  $gray3;
