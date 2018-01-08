@@ -495,11 +495,13 @@ html {
   --px-map-marker-locate-icon-accuracy-opacity        : 0.3;
 
   // Modal
-  --px-modal-background-color         :  $white;
-  --px-modal-overlay-color            :  rgba($black, .7);
-  --px-modal-border-color             :  transparent;
-  --px-modal-text-color               :  $gray15;
-  --px-modal-btn--disabled            :  $gray4;
+  --px-modal-background-color            :  $white;
+  --px-modal-background-color--container :  $white;
+  --px-modal-overlay-color               :  rgba($black, .7);
+  --px-modal-border-color                :  transparent;
+  --px-modal-text-color                  :  $gray15;
+  --px-modal-text-color--container       :  $gray15;
+  --px-modal-btn--disabled               :  $gray4;
 
   // Overlay
   --px-overlay-color                  :  rgba($black, .65);
