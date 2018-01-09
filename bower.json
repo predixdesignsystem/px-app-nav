@@ -34,8 +34,10 @@
     "px-colors-design": "^1.0.0",
     "px-defaults-design": "^2.0.0",
     "px-demo": "^3.0.0",
+    "px-login": "^2.2.1",
     "px-shadows-design": "^1.0.0",
-    "web-component-tester": "^6.0.0"
+    "web-component-tester": "^6.0.0",
+    "px-icon-set": "^2.1.2"
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0"

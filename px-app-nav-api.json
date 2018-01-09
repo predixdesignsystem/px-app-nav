@@ -4886,7 +4886,7 @@
             }
           ],
           "return": {
-            "type": "(Number|undefined)",
+            "type": "(Number | undefined)",
             "desc": "The expected width of the text in pixels as a number (e.g. `68` for '68px'), undefined it can't be measured"
           },
           "inheritedFrom": "PxAppNavBehavior.MeasureText"
@@ -4935,7 +4935,7 @@
               "column": 4
             },
             "end": {
-              "line": 137,
+              "line": 140,
               "column": 5
             }
           },
@@ -4957,11 +4957,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
-              "line": 139,
+              "line": 142,
               "column": 4
             },
             "end": {
-              "line": 156,
+              "line": 162,
               "column": 5
             }
           },
@@ -4980,11 +4980,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
-              "line": 170,
+              "line": 176,
               "column": 4
             },
             "end": {
-              "line": 182,
+              "line": 188,
               "column": 5
             }
           },
@@ -4992,11 +4992,11 @@
           "params": [
             {
               "name": "node",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "children",
-              "type": "(Object|Array.<Object>)"
+              "type": "(Object | Array.<Object>)"
             },
             {
               "name": "options"
@@ -5011,11 +5011,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
-              "line": 197,
+              "line": 203,
               "column": 4
             },
             "end": {
-              "line": 224,
+              "line": 230,
               "column": 5
             }
           },
@@ -5023,11 +5023,11 @@
           "params": [
             {
               "name": "node",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "children",
-              "type": "(Object|Array.<Object>)"
+              "type": "(Object | Array.<Object>)"
             },
             {
               "name": "options"
@@ -5100,7 +5100,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|Array)"
+              "type": "(Object | Array)"
             },
             {
               "name": "source",
@@ -5109,7 +5109,7 @@
             }
           ],
           "return": {
-            "type": "(Object|Array)",
+            "type": "(Object | Array)",
             "desc": "The next `selected` item or items"
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
@@ -5133,7 +5133,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|Array|null)"
+              "type": "(Object | Array | null)"
             },
             {
               "name": "source",
@@ -5142,7 +5142,7 @@
             }
           ],
           "return": {
-            "type": "(Object|Array|null)",
+            "type": "(Object | Array | null)",
             "desc": "The remaining `selected` items or null"
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
@@ -5832,11 +5832,11 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "labelKey",
@@ -5852,7 +5852,7 @@
             }
           ],
           "return": {
-            "type": "(String|null)"
+            "type": "(String | null)"
           }
         },
         {
@@ -5873,11 +5873,11 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "iconKey",
@@ -5901,7 +5901,7 @@
             }
           ],
           "return": {
-            "type": "(String|null)"
+            "type": "(String | null)"
           }
         },
         {
@@ -5925,7 +5925,7 @@
             }
           ],
           "return": {
-            "type": "(Number|undefined)"
+            "type": "(Number | undefined)"
           }
         },
         {
@@ -6004,7 +6004,7 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "allCollapsed",
@@ -6041,7 +6041,7 @@
             },
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             }
           ],
           "return": {
@@ -6172,7 +6172,7 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent"
@@ -6204,7 +6204,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "iconKey",
@@ -6751,7 +6751,7 @@
                 }
               ],
               "return": {
-                "type": "(Number|undefined)",
+                "type": "(Number | undefined)",
                 "desc": "The expected width of the text in pixels as a number (e.g. `68` for '68px'), undefined it can't be measured"
               }
             },

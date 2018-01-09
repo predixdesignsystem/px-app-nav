@@ -76,7 +76,9 @@ $px-app-nav-vertical-transition: var(--px-app-nav-vertical-transition, max-width
 }
 
 :host([vertical]) .app-nav {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 :host([vertical]) .app-nav__items {
