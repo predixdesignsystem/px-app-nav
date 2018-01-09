@@ -490,28 +490,28 @@ Custom property | Description
             </template>
           </px-app-nav-group>
         </template>
-      </section>
 
-      <!-- STATE: Vertical nav -->
-      <template is="dom-if" if="[[vertical]]">
-        <!-- Second item stamp: overflowed/collapsed items -->
-        <template is="dom-repeat" items="[[items]]" id="vertical">
-          <!-- Stamp groups, which hold children -->
-          <template is="dom-if" if="[[_isItemParent(item, keys.children)]]">
-            <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed only-show-icon="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]">
-              <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
-                <px-app-nav-subitem item="[[subitem]]" label="[[_getItemProp(subitem, keys.label)]]" selected$="[[_isItemSelected(subitem, selectedMeta.item)]]" parent-selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed></px-app-nav-item>
-              </template>
-            </px-app-nav-subgroup>
-          </template>
+        <!-- STATE: Vertical nav -->
+        <template is="dom-if" if="[[vertical]]">
+          <!-- Second item stamp: overflowed/collapsed items -->
+          <template is="dom-repeat" items="[[items]]" id="vertical">
+            <!-- Stamp groups, which hold children -->
+            <template is="dom-if" if="[[_isItemParent(item, keys.children)]]">
+              <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed only-show-icon="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]">
+                <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
+                  <px-app-nav-subitem item="[[subitem]]" label="[[_getItemProp(subitem, keys.label)]]" selected$="[[_isItemSelected(subitem, selectedMeta.item)]]" parent-selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed></px-app-nav-item>
+                </template>
+              </px-app-nav-subgroup>
+            </template>
 
-          <!-- Stamp plain old items, which hold children -->
-          <template is="dom-if" if="[[_isItemNotParent(item, keys.children)]]">
-            <px-app-nav-item item="[[item]]" label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.item)]]" collapsed only-show-icon$="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]">
-            </px-app-nav-item>
+            <!-- Stamp plain old items, which hold children -->
+            <template is="dom-if" if="[[_isItemNotParent(item, keys.children)]]">
+              <px-app-nav-item item="[[item]]" label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.item)]]" collapsed only-show-icon$="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]">
+              </px-app-nav-item>
+            </template>
           </template>
         </template>
-      </template>
+      </section>
 
       <section class="app-nav__actions" id="actions">
         <slot id="actionsvisible" name="actions"></slot>
