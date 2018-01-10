@@ -1,3 +1,7 @@
+v3.1.8
+================
+* add styles for tile
+
 v3.1.7
 ================
 * add styles for modal

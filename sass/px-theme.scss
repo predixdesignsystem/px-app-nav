@@ -591,9 +591,13 @@ html {
 
   // Tile
   --px-tile-background-color                 :  $gray1;
-  --px-tile-thumbnail-background-color       :  $white;
+  --px-tile-thumbnail-background-color       :  $gray3;
   --px-tile-overlay-background-color         :  $gray17;
   --px-tile-overlay-text-color               :  $gray1;
+  --px-tile-text-background-color            :  $gray5;
+  --px-tile-title-color                      :  $gray18;
+  --px-tile-subtitle-color                   :  $gray15;
+  --px-tile-text-color                       :  $gray18;
 
   // Timeline
   --px-timeline-border-color                 :  $gray10;
