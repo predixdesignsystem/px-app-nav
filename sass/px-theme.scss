@@ -12,6 +12,8 @@ $predix-font-family : "GE Inspira Sans", sans-serif !default;
 
 html {
   font-family: $predix-font-family;
+  font-size: $inuit-base-font-size;
+
   // Defaults
   --px-base-text-color       : $gray15;
   --px-base-background-color : $white;
@@ -867,7 +869,4 @@ html {
   --px-gauge-fill-normal-color    :  $status-blue3;
   --px-gauge-empty-color         :  $gray5;
   --px-gauge-needle-color        :  $gray15;
-
-  font-family: $predix-font-family;
-  font-size: $inuit-base-font-size;
 }
