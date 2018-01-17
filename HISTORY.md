@@ -1,3 +1,7 @@
+v3.2.0
+================
+* added theme that loads fonts locally instead of via CDN.
+
 v3.1.8
 ================
 * add styles for tile
