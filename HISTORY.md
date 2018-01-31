@@ -1,3 +1,7 @@
+v3.2.1
+================
+* add styles for product-switcher
+
 v3.2.0
 ================
 * added theme that loads fonts locally instead of via CDN.
