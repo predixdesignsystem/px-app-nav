@@ -392,25 +392,32 @@ html {
   --px-calendar-today-border                         : $select-default;
 
   //Common
-  --px-datetime-icon-color: $gray10;
-  --px-datetime-read-only-text-color: $gray5;
-  --px-datetime-entry-selected: $cyan2;
-  --px-datetime-preset-title-color: $gray10;
-  --px-datetime-dropdown-content-color: var(--px-base-text-color);
+  --px-datetime-icon-color                           : $gray10;
+  --px-datetime-read-only-text-color                 : $gray5;
+  --px-datetime-entry-selected                       : $cyan2;
+  --px-datetime-preset-title-color                   : $gray10;
+  --px-datetime-dropdown-content-color               : var(--px-base-text-color);
 
   // Datetime Field
-  --dt-field-background-color-fix: $white;
+  --dt-field-background-color-fix                    : $white;
 
   // Datetime Picker
-  --px-datetime-picker-border-color: $gray3;
-  --px-datetime-picker-background-color: $white;
+  --px-datetime-picker-border-color                  : $gray3;
+  --px-datetime-picker-background-color              : $white;
 
-  // // Datetime Range Field
-  --px-datetime-range-field-to-color: $gray10;
+  // Datetime Range Field
+  --px-datetime-range-field-to-color                 : $gray10;
 
   // Datetime Range Panel
-  --px-range-panel-border-color      : $gray3;
-  --px-range-panel-background-color  : $white;
+  --px-range-panel-border-color                      : $gray3;
+  --px-range-panel-background-color                  : $white;
+
+  // Rangepicker
+  --px-calendar-background-color--hover--invalid     : rgba($gray8, 0.5);
+  --px-calendar-background-color--pressed--invalid   : rgba($gray8, 0.5);
+  --px-calendar-background-color--selected--invalid  : rgba($gray8, 0.5);
+  --px-calendar-alt-background-color--invalid        : rgba($gray8, 0.2);
+
 
   // Demo Snippet
   --px-demo-snippet-background-color          : $gray2;
