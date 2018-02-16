@@ -1,3 +1,7 @@
+v3.3.0
+================
+* Build against latest px-typography-design (Move typography CDN over to our own location)
+
 v3.2.2
 ================
 * add styles for when calendar is invalid
