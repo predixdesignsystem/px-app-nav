@@ -1,3 +1,7 @@
+v3.3.1
+================
+* add styles for threshold bar
+
 v3.3.0
 ================
 * Build against latest px-typography-design (Move typography CDN over to our own location)
