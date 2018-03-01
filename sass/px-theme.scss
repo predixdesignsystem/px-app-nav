@@ -891,4 +891,46 @@ html {
   --px-gauge-fill-normal-color    :  $status-blue3;
   --px-gauge-empty-color         :  $gray5;
   --px-gauge-needle-color        :  $gray15;
+
+  // Data Grid
+  --px-data-grid-border-color                             :  $gray10;
+  --px-data-grid-separator-color                          :  $gray4;
+  --px-data-grid-header-text-color                        :  $gray10;
+  --px-data-grid-header-text-color--hover                 :  $select-hover;
+  --px-data-grid-header-text-color--active                :  $select-pressed;
+  --px-data-grid-header-background-color                  :  $white;
+  --px-data-grid-background-color-striped--odd            :  $gray3;
+  --px-data-grid-background-color-striped--groupby        :  $gray4;
+  --px-data-grid-background-color-striped--selected       :  $gray5;
+  --px-data-grid-dragged-column-background-color          :  $select-light;
+  --px-data-grid-cell-border-validation--failed           :  $status-red3;
+  --px-data-grid-cell-border-color--edit                  :  $primary-default;
+  --px-data-grid-cell-border-color--selected              :  rgba($gray8,0.2);
+  --px-data-grid-cell-border-validation--failed           :  $status-red3;
+  --px-data-grid-cell-background-color--selected          :  $gray5;
+  --px-data-grid-cell-background-color--edit              :  transparent;
+  --px-data-grid-cell-text-color--selected                :  $gray15;
+  --px-data-grid-cell-text-color-validation--failed       :  $status-red3;
+  --px-data-grid-cell-text-color--sorted                  :  $select-default;
+  --px-data-grid-cell-text-color--editing                 :  $gray15;
+  --px-data-grid-results-text-color--none                 :  $gray8;
+  --px-data-grid-insertion-indicator-td-background-color  :  $primary-default;
+  --px-data-grid-text-input-background-color--filter      :  $white;
+  --px-data-grid-tr--filter                               :  $white;
+  --px-data-grid-text-color--dragged                      :  $primary-default;
+  --px-data-grid-text-color--hover                        :  $primary-hover;
+  --px-data-grid-spinner-background-color                 :  rgba($white, 0.9);
+  --px-data-grid-action-button-color                      :  $primary-default;
+  --px-data-grid-action-button-color--pressed             :  $primary-pressed;
+
+  // Navigation
+  --px-data-grid-navigation-background-color              :  $white;
+  --px-data-grid-navigation-text-color                    :  $gray10;
+  --px-data-grid-navigation-text-color--dark              :  $gray15;
+  --px-data-grid-navigation-text-color--selected          :  $select-default;
+  --px-data-grid-navigation-text-color--disabled          :  rgba($grey8,0.5);
+  --px-data-grid-navigation-page-number-border-color      :  $grey7;
+
+  // Row Details
+  --px-data-grid-cell-details-background-color            :  $gray7;
 }

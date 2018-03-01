@@ -1,3 +1,7 @@
+v3.3.3
+================
+* Add style for data grid
+
 v3.3.2
 ================
 * add styles for the datetime icon
