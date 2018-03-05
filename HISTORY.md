@@ -1,3 +1,7 @@
+v3.4.0
+================
+* Rebuild theme to pick up woff2 support from px-mixin-design
+
 v3.3.3
 ================
 * Add style for data grid
