@@ -1,3 +1,7 @@
+v3.5.0
+================
+* Font-display:swap for px-theme-local-fonts-styles
+
 v3.4.0
 ================
 * Rebuild theme to pick up woff2 support from px-mixin-design
