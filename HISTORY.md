@@ -1,3 +1,7 @@
+v3.5.1
+================
+* remove background color of tertiary buttons
+
 v3.5.0
 ================
 * Font-display:swap for px-theme-local-fonts-styles
