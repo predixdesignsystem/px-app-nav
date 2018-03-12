@@ -1,3 +1,7 @@
+v3.5.2
+================
+* rebuild css with new deps
+
 v3.5.1
 ================
 * remove background color of tertiary buttons
