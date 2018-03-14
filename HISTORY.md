@@ -1,3 +1,7 @@
+v3.5.3
+================
+* Added new datetime-picker var
+
 v3.5.2
 ================
 * rebuild css with new deps

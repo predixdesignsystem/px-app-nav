@@ -380,45 +380,46 @@ html {
   //// Datetime Components
 
   // Calendar Picker
-  --px-calendar-background-color--hover              : rgba($gray6,0.2);
-  --px-calendar-background-color--pressed            : $select-pressed;
-  --px-calendar-background-color--selected           : $select-default;
-  --px-calendar-title-color                          : $gray10;
-  --px-calendar-text-color                           : $gray15;
-  --px-calendar-text-color--hover                    : $gray15;
-  --px-calendar-text-color--selected                 : $white;
-  --px-calendar-alt-background-color                 : $select-light;
-  --px-calendar-sub-labels--text-color               : $gray6;
-  --px-calendar-today-border                         : $select-default;
+  --px-calendar-background-color--hover               : rgba($gray6,0.2);
+  --px-calendar-background-color--pressed             : $select-pressed;
+  --px-calendar-background-color--selected            : $select-default;
+  --px-calendar-title-color                           : $gray10;
+  --px-calendar-text-color                            : $gray15;
+  --px-calendar-text-color--hover                     : $gray15;
+  --px-calendar-text-color--selected                  : $white;
+  --px-calendar-alt-background-color                  : $select-light;
+  --px-calendar-sub-labels--text-color                : $gray6;
+  --px-calendar-today-border                          : $select-default;
 
   //Common
-  --px-datetime-icon-color                           : $gray10;
-  --px-datetime-icon-color--hover                    : $primary-default;
-  --px-datetime-icon-color--pressed                  : $primary-pressed;
-  --px-datetime-read-only-text-color                 : $gray5;
-  --px-datetime-entry-selected                       : $cyan2;
-  --px-datetime-preset-title-color                   : $gray10;
-  --px-datetime-dropdown-content-color               : var(--px-base-text-color);
+  --px-datetime-icon-color                            : $gray10;
+  --px-datetime-icon-color--hover                     : $primary-default;
+  --px-datetime-icon-color--pressed                   : $primary-pressed;
+  --px-datetime-read-only-text-color                  : $gray5;
+  --px-datetime-entry-selected                        : $cyan2;
+  --px-datetime-preset-title-color                    : $gray10;
+  --px-datetime-dropdown-content-color                : var(--px-base-text-color);
 
   // Datetime Field
-  --dt-field-background-color-fix                    : $white;
+  --dt-field-background-color-fix                     : $white;
 
   // Datetime Picker
-  --px-datetime-picker-border-color                  : $gray3;
-  --px-datetime-picker-background-color              : $white;
+  --px-datetime-picker-border-color                   : $gray3;
+  --px-datetime-picker-background-color               : $white;
+  --px-datetime-picker-btn-container-background-color : $gray1;
 
   // Datetime Range Field
-  --px-datetime-range-field-to-color                 : $gray10;
+  --px-datetime-range-field-to-color                  : $gray10;
 
   // Datetime Range Panel
-  --px-range-panel-border-color                      : $gray3;
-  --px-range-panel-background-color                  : $white;
+  --px-range-panel-border-color                       : $gray3;
+  --px-range-panel-background-color                   : $white;
 
   // Rangepicker
-  --px-calendar-background-color--hover--invalid     : rgba($gray8, 0.5);
-  --px-calendar-background-color--pressed--invalid   : rgba($gray8, 0.5);
-  --px-calendar-background-color--selected--invalid  : rgba($gray8, 0.5);
-  --px-calendar-alt-background-color--invalid        : rgba($gray8, 0.2);
+  --px-calendar-background-color--hover--invalid      : rgba($gray8, 0.5);
+  --px-calendar-background-color--pressed--invalid    : rgba($gray8, 0.5);
+  --px-calendar-background-color--selected--invalid   : rgba($gray8, 0.5);
+  --px-calendar-alt-background-color--invalid         : rgba($gray8, 0.2);
 
 
   // Demo Snippet
