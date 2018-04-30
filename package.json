@@ -49,5 +49,5 @@
     "test": "./node_modules/.bin/wct",
     "build": "./scripts/build.sh"
   },
-  "license": "BSD-3-Clause"
+  "license": "Apache-2.0"
 }
