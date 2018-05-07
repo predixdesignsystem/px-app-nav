@@ -885,6 +885,43 @@ html {
   --px-vis-series-color-148  :  $neutral-gray10;
   --px-vis-series-color-149  :  $brown10;
 
+  // boxplot
+  --px-vis-box-whisker-fill-color: $pink7;
+  --px-vis-box-whisker-stroke-color: $pink7;
+  --px-vis-box-whisker-median-color: $purple1;
+  --px-vis-box-whisker-median-width: 2px;
+  --px-vis-box-whisker-mean-color: $pink7;
+  --px-vis-box-whisker-mean-fill-color: $white;
+  --px-vis-box-whisker-mean-size: 20px;
+  --px-vis-box-whisker-outlier-color: $pink7;
+  --px-vis-box-whisker-outlier-fill-color: transparent;
+  --px-vis-box-whisker-outlier-size: 15px;
+
+  // heatmap
+  --px-vis-heatmap-cell-border-color: $gray3;
+  --px-vis-heatmap-cell-border-width: 1px;
+  --px-vis-heatmap-cell-text-color: $gray18;
+  --px-vis-heatmap-cell-text-size: 12px;
+  // colors
+  --px-vis-heatmap-colors-0: $aqua6;
+  --px-vis-heatmap-colors-1: $green6;
+  --px-vis-heatmap-colors-2: $yellow6;
+  --px-vis-heatmap-colors-3: $blue6;
+  --px-vis-heatmap-colors-4: $violet6;
+  --px-vis-heatmap-colors-5: $red6;
+
+  // heatmap legend
+  --px-vis-heatmap-legend-border-color: $gray3;
+  --px-vis-heatmap-legend-border-width: 1px;
+
+  // custom column
+  --px-vis-heatmap-custom-column-text-color: $grey10;
+  --px-vis-heatmap-custom-column-text-size: 12px;
+  --px-vis-heatmap-custom-column-label-text-color: $grey10;
+  --px-vis-heatmap-custom-column-label-text-size: 12px;
+  --px-vis-heatmap-custom-column-border-color: $gray3;
+  --px-vis-heatmap-custom-column-border-width: 1px;
+
   // Gauge styles
   --px-gauge-fill-error-color     :  $status-red3;
   --px-gauge-fill-anomaly-color   :  $status-yellow3;
