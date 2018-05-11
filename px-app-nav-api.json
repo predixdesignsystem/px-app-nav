@@ -14,11 +14,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 16,
+              "line": 33,
               "column": 6
             },
             "end": {
-              "line": 18,
+              "line": 35,
               "column": 7
             }
           },
@@ -35,11 +35,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 23,
+              "line": 40,
               "column": 6
             },
             "end": {
-              "line": 25,
+              "line": 42,
               "column": 7
             }
           },
@@ -56,11 +56,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 30,
+              "line": 47,
               "column": 6
             },
             "end": {
-              "line": 35,
+              "line": 52,
               "column": 7
             }
           },
@@ -80,11 +80,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 40,
+              "line": 57,
               "column": 6
             },
             "end": {
-              "line": 45,
+              "line": 62,
               "column": 7
             }
           },
@@ -104,11 +104,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 50,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 53,
+              "line": 70,
               "column": 7
             }
           },
@@ -125,11 +125,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 12,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 14,
+              "line": 31,
               "column": 7
             }
           },
@@ -144,11 +144,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 19,
+              "line": 36,
               "column": 6
             },
             "end": {
-              "line": 23,
+              "line": 40,
               "column": 7
             }
           },
@@ -164,11 +164,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 29,
+              "line": 46,
               "column": 6
             },
             "end": {
-              "line": 32,
+              "line": 49,
               "column": 7
             }
           },
@@ -184,11 +184,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 37,
+              "line": 54,
               "column": 6
             },
             "end": {
-              "line": 42,
+              "line": 59,
               "column": 7
             }
           },
@@ -206,11 +206,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 47,
+              "line": 64,
               "column": 6
             },
             "end": {
-              "line": 51,
+              "line": 68,
               "column": 7
             }
           },
@@ -226,11 +226,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 56,
+              "line": 73,
               "column": 6
             },
             "end": {
-              "line": 60,
+              "line": 77,
               "column": 7
             }
           },
@@ -248,11 +248,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 56,
+              "line": 73,
               "column": 4
             },
             "end": {
-              "line": 58,
+              "line": 75,
               "column": 5
             }
           },
@@ -267,11 +267,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 60,
+              "line": 77,
               "column": 4
             },
             "end": {
-              "line": 62,
+              "line": 79,
               "column": 5
             }
           },
@@ -286,11 +286,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 70,
+              "line": 87,
               "column": 4
             },
             "end": {
-              "line": 72,
+              "line": 89,
               "column": 5
             }
           },
@@ -316,11 +316,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 77,
+              "line": 94,
               "column": 4
             },
             "end": {
-              "line": 82,
+              "line": 99,
               "column": 5
             }
           },
@@ -338,11 +338,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 66,
+              "line": 83,
               "column": 4
             },
             "end": {
-              "line": 68,
+              "line": 85,
               "column": 5
             }
           },
@@ -359,11 +359,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 3,
+          "line": 20,
           "column": 10
         },
         "end": {
-          "line": 69,
+          "line": 86,
           "column": 3
         }
       },
@@ -376,11 +376,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 16,
+              "line": 33,
               "column": 6
             },
             "end": {
-              "line": 18,
+              "line": 35,
               "column": 7
             }
           },
@@ -394,11 +394,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 23,
+              "line": 40,
               "column": 6
             },
             "end": {
-              "line": 25,
+              "line": 42,
               "column": 7
             }
           },
@@ -412,11 +412,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 30,
+              "line": 47,
               "column": 6
             },
             "end": {
-              "line": 35,
+              "line": 52,
               "column": 7
             }
           },
@@ -430,11 +430,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 40,
+              "line": 57,
               "column": 6
             },
             "end": {
-              "line": 45,
+              "line": 62,
               "column": 7
             }
           },
@@ -448,11 +448,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 50,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 53,
+              "line": 70,
               "column": 7
             }
           },
@@ -465,11 +465,11 @@
           "description": "Used to set the icon for the item.",
           "sourceRange": {
             "start": {
-              "line": 12,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 14,
+              "line": 31,
               "column": 7
             }
           },
@@ -481,11 +481,11 @@
           "description": "Set to `true` if this is a subitem.",
           "sourceRange": {
             "start": {
-              "line": 19,
+              "line": 36,
               "column": 6
             },
             "end": {
-              "line": 23,
+              "line": 40,
               "column": 7
             }
           },
@@ -497,11 +497,11 @@
           "description": "Shows a dropdown arrow icon to indicate this item can be tapped to\nopen a subgroup.",
           "sourceRange": {
             "start": {
-              "line": 29,
+              "line": 46,
               "column": 6
             },
             "end": {
-              "line": 32,
+              "line": 49,
               "column": 7
             }
           },
@@ -513,11 +513,11 @@
           "description": "Set to `true` if the item is inside a overflowed dropdown.",
           "sourceRange": {
             "start": {
-              "line": 37,
+              "line": 54,
               "column": 6
             },
             "end": {
-              "line": 42,
+              "line": 59,
               "column": 7
             }
           },
@@ -529,11 +529,11 @@
           "description": "Shows an empty state outline for icon.",
           "sourceRange": {
             "start": {
-              "line": 47,
+              "line": 64,
               "column": 6
             },
             "end": {
-              "line": 51,
+              "line": 68,
               "column": 7
             }
           },
@@ -545,11 +545,11 @@
           "description": "Shows an empty state outline for the label.",
           "sourceRange": {
             "start": {
-              "line": 56,
+              "line": 73,
               "column": 6
             },
             "end": {
-              "line": 60,
+              "line": 77,
               "column": 7
             }
           },
@@ -644,11 +644,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 70,
+              "line": 86,
               "column": 6
             },
             "end": {
-              "line": 76,
+              "line": 92,
               "column": 7
             }
           },
@@ -667,11 +667,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 81,
+              "line": 97,
               "column": 6
             },
             "end": {
-              "line": 83,
+              "line": 99,
               "column": 7
             }
           },
@@ -686,11 +686,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 104,
               "column": 6
             },
             "end": {
-              "line": 90,
+              "line": 106,
               "column": 7
             }
           },
@@ -705,11 +705,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 112,
               "column": 6
             },
             "end": {
-              "line": 98,
+              "line": 114,
               "column": 7
             }
           },
@@ -724,11 +724,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 103,
+              "line": 119,
               "column": 6
             },
             "end": {
-              "line": 107,
+              "line": 123,
               "column": 7
             }
           },
@@ -746,11 +746,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 114,
+              "line": 130,
               "column": 6
             },
             "end": {
-              "line": 117,
+              "line": 133,
               "column": 7
             }
           },
@@ -767,11 +767,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 135,
               "column": 6
             },
             "end": {
-              "line": 121,
+              "line": 137,
               "column": 7
             }
           },
@@ -786,11 +786,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 142,
               "column": 6
             },
             "end": {
-              "line": 129,
+              "line": 145,
               "column": 7
             }
           },
@@ -803,46 +803,6 @@
           "name": "overflowed",
           "type": "boolean",
           "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 131,
-              "column": 6
-            },
-            "end": {
-              "line": 134,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "noHighlight",
-          "type": "boolean",
-          "description": "Disables highlighting the group when it is selected.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 139,
-              "column": 6
-            },
-            "end": {
-              "line": 142,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "emptyIcon",
-          "type": "boolean",
-          "description": "If `true` the group item button should have an empty state.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -860,9 +820,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "emptyLabel",
+          "name": "noHighlight",
           "type": "boolean",
-          "description": "If `true` the group item label should have an empty state.",
+          "description": "Disables highlighting the group when it is selected.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -880,9 +840,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "cancelSelect",
+          "name": "emptyIcon",
           "type": "boolean",
-          "description": "Cancels events that trigger selection.",
+          "description": "If `true` the group item button should have an empty state.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -900,9 +860,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "fitInto",
-          "type": "HTMLElement",
-          "description": "A reference to the HTMLElement to fit the group dropdown into.",
+          "name": "emptyLabel",
+          "type": "boolean",
+          "description": "If `true` the group item label should have an empty state.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -910,7 +870,47 @@
               "column": 6
             },
             "end": {
-              "line": 173,
+              "line": 174,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "cancelSelect",
+          "type": "boolean",
+          "description": "Cancels events that trigger selection.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 179,
+              "column": 6
+            },
+            "end": {
+              "line": 182,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "fitInto",
+          "type": "HTMLElement",
+          "description": "A reference to the HTMLElement to fit the group dropdown into.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 187,
+              "column": 6
+            },
+            "end": {
+              "line": 189,
               "column": 7
             }
           },
@@ -925,11 +925,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 175,
+              "line": 191,
               "column": 6
             },
             "end": {
-              "line": 178,
+              "line": 194,
               "column": 7
             }
           },
@@ -945,11 +945,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 180,
+              "line": 196,
               "column": 6
             },
             "end": {
-              "line": 182,
+              "line": 198,
               "column": 7
             }
           },
@@ -964,11 +964,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 184,
+              "line": 200,
               "column": 6
             },
             "end": {
-              "line": 186,
+              "line": 202,
               "column": 7
             }
           },
@@ -983,11 +983,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 188,
+              "line": 204,
               "column": 6
             },
             "end": {
-              "line": 190,
+              "line": 206,
               "column": 7
             }
           },
@@ -1147,7 +1147,7 @@
               "column": 4
             },
             "end": {
-              "line": 53,
+              "line": 75,
               "column": 5
             }
           },
@@ -1166,11 +1166,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 55,
+              "line": 77,
               "column": 4
             },
             "end": {
-              "line": 64,
+              "line": 86,
               "column": 5
             }
           },
@@ -1189,11 +1189,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 66,
+              "line": 88,
               "column": 4
             },
             "end": {
-              "line": 73,
+              "line": 95,
               "column": 5
             }
           },
@@ -1212,11 +1212,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 80,
+              "line": 102,
               "column": 4
             },
             "end": {
-              "line": 109,
+              "line": 131,
               "column": 5
             }
           },
@@ -1240,11 +1240,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 114,
+              "line": 136,
               "column": 4
             },
             "end": {
-              "line": 119,
+              "line": 146,
               "column": 5
             }
           },
@@ -1258,11 +1258,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 193,
+              "line": 209,
               "column": 4
             },
             "end": {
-              "line": 224,
+              "line": 240,
               "column": 5
             }
           },
@@ -1275,11 +1275,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 242,
               "column": 4
             },
             "end": {
-              "line": 232,
+              "line": 248,
               "column": 5
             }
           },
@@ -1292,11 +1292,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 234,
+              "line": 250,
               "column": 4
             },
             "end": {
-              "line": 241,
+              "line": 257,
               "column": 5
             }
           },
@@ -1313,11 +1313,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 243,
+              "line": 259,
               "column": 4
             },
             "end": {
-              "line": 250,
+              "line": 266,
               "column": 5
             }
           },
@@ -1334,11 +1334,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 268,
               "column": 4
             },
             "end": {
-              "line": 259,
+              "line": 275,
               "column": 5
             }
           },
@@ -1355,11 +1355,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 261,
+              "line": 277,
               "column": 4
             },
             "end": {
-              "line": 268,
+              "line": 284,
               "column": 5
             }
           },
@@ -1376,11 +1376,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 286,
               "column": 4
             },
             "end": {
-              "line": 281,
+              "line": 297,
               "column": 5
             }
           },
@@ -1393,11 +1393,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 283,
+              "line": 299,
               "column": 4
             },
             "end": {
-              "line": 303,
+              "line": 319,
               "column": 5
             }
           },
@@ -1410,11 +1410,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 305,
+              "line": 321,
               "column": 4
             },
             "end": {
-              "line": 310,
+              "line": 326,
               "column": 5
             }
           },
@@ -1427,11 +1427,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 312,
+              "line": 328,
               "column": 4
             },
             "end": {
-              "line": 321,
+              "line": 337,
               "column": 5
             }
           },
@@ -1444,11 +1444,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 327,
+              "line": 343,
               "column": 4
             },
             "end": {
-              "line": 329,
+              "line": 345,
               "column": 5
             }
           },
@@ -1465,11 +1465,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 335,
+              "line": 351,
               "column": 4
             },
             "end": {
-              "line": 342,
+              "line": 358,
               "column": 5
             }
           },
@@ -1486,11 +1486,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 351,
+              "line": 367,
               "column": 4
             },
             "end": {
-              "line": 360,
+              "line": 376,
               "column": 5
             }
           },
@@ -1507,11 +1507,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 365,
+              "line": 381,
               "column": 4
             },
             "end": {
-              "line": 369,
+              "line": 385,
               "column": 5
             }
           },
@@ -1531,11 +1531,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 374,
+              "line": 390,
               "column": 4
             },
             "end": {
-              "line": 378,
+              "line": 394,
               "column": 5
             }
           },
@@ -1552,11 +1552,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 383,
+              "line": 399,
               "column": 4
             },
             "end": {
-              "line": 385,
+              "line": 401,
               "column": 5
             }
           },
@@ -1569,11 +1569,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 391,
+              "line": 407,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 409,
               "column": 5
             }
           },
@@ -1586,11 +1586,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 395,
+              "line": 411,
               "column": 4
             },
             "end": {
-              "line": 400,
+              "line": 416,
               "column": 5
             }
           },
@@ -1610,11 +1610,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 53,
+          "line": 69,
           "column": 10
         },
         "end": {
-          "line": 401,
+          "line": 417,
           "column": 3
         }
       },
@@ -1680,11 +1680,11 @@
           "description": "If `true`, one of the group's subitems is selected.\n\nWatch for updates to find out when the group becomes selected through\nuser interaction or through automatic selection.\n\nSet the `selected` attribute on one of the group's subitems to select\nthis group.",
           "sourceRange": {
             "start": {
-              "line": 70,
+              "line": 86,
               "column": 6
             },
             "end": {
-              "line": 76,
+              "line": 92,
               "column": 7
             }
           },
@@ -1696,11 +1696,11 @@
           "description": "A reference the object used to create this nav item.",
           "sourceRange": {
             "start": {
-              "line": 81,
+              "line": 97,
               "column": 6
             },
             "end": {
-              "line": 83,
+              "line": 99,
               "column": 7
             }
           },
@@ -1712,11 +1712,11 @@
           "description": "The label text for the group's button.",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 104,
               "column": 6
             },
             "end": {
-              "line": 90,
+              "line": 106,
               "column": 7
             }
           },
@@ -1728,11 +1728,11 @@
           "description": "The icon for the group's button. Should be a valid px icon\nname (e.g. 'px-fea:cases').",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 112,
               "column": 6
             },
             "end": {
-              "line": 98,
+              "line": 114,
               "column": 7
             }
           },
@@ -1744,11 +1744,11 @@
           "description": "If `true` the group is expanded so the user can select a subitem.",
           "sourceRange": {
             "start": {
-              "line": 103,
+              "line": 119,
               "column": 6
             },
             "end": {
-              "line": 107,
+              "line": 123,
               "column": 7
             }
           },
@@ -1760,11 +1760,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 119,
+              "line": 135,
               "column": 6
             },
             "end": {
-              "line": 121,
+              "line": 137,
               "column": 7
             }
           },
@@ -1776,11 +1776,11 @@
           "description": "Disables the group's dropdown carat icon.",
           "sourceRange": {
             "start": {
-              "line": 126,
+              "line": 142,
               "column": 6
             },
             "end": {
-              "line": 129,
+              "line": 145,
               "column": 7
             }
           },
@@ -1790,38 +1790,6 @@
         {
           "name": "overflowed",
           "description": "",
-          "sourceRange": {
-            "start": {
-              "line": 131,
-              "column": 6
-            },
-            "end": {
-              "line": 134,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "type": "boolean"
-        },
-        {
-          "name": "no-highlight",
-          "description": "Disables highlighting the group when it is selected.",
-          "sourceRange": {
-            "start": {
-              "line": 139,
-              "column": 6
-            },
-            "end": {
-              "line": 142,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "type": "boolean"
-        },
-        {
-          "name": "empty-icon",
-          "description": "If `true` the group item button should have an empty state.",
           "sourceRange": {
             "start": {
               "line": 147,
@@ -1836,8 +1804,8 @@
           "type": "boolean"
         },
         {
-          "name": "empty-label",
-          "description": "If `true` the group item label should have an empty state.",
+          "name": "no-highlight",
+          "description": "Disables highlighting the group when it is selected.",
           "sourceRange": {
             "start": {
               "line": 155,
@@ -1852,8 +1820,8 @@
           "type": "boolean"
         },
         {
-          "name": "cancel-select",
-          "description": "Cancels events that trigger selection.",
+          "name": "empty-icon",
+          "description": "If `true` the group item button should have an empty state.",
           "sourceRange": {
             "start": {
               "line": 163,
@@ -1868,15 +1836,47 @@
           "type": "boolean"
         },
         {
-          "name": "fit-into",
-          "description": "A reference to the HTMLElement to fit the group dropdown into.",
+          "name": "empty-label",
+          "description": "If `true` the group item label should have an empty state.",
           "sourceRange": {
             "start": {
               "line": 171,
               "column": 6
             },
             "end": {
-              "line": 173,
+              "line": 174,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "cancel-select",
+          "description": "Cancels events that trigger selection.",
+          "sourceRange": {
+            "start": {
+              "line": 179,
+              "column": 6
+            },
+            "end": {
+              "line": 182,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "fit-into",
+          "description": "A reference to the HTMLElement to fit the group dropdown into.",
+          "sourceRange": {
+            "start": {
+              "line": 187,
+              "column": 6
+            },
+            "end": {
+              "line": 189,
               "column": 7
             }
           },
@@ -1888,11 +1888,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 175,
+              "line": 191,
               "column": 6
             },
             "end": {
-              "line": 178,
+              "line": 194,
               "column": 7
             }
           },
@@ -1925,11 +1925,11 @@
           "range": {
             "file": "px-app-nav-group.html",
             "start": {
-              "line": 44,
+              "line": 60,
               "column": 10
             },
             "end": {
-              "line": 44,
+              "line": 60,
               "column": 23
             }
           }
@@ -2069,11 +2069,15 @@
             },
             "end": {
               "line": 87,
-              "column": 27
+              "column": 33
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "config"
+            }
+          ],
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2082,11 +2086,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 408,
+              "line": 424,
               "column": 4
             },
             "end": {
-              "line": 421,
+              "line": 437,
               "column": 5
             }
           },
@@ -2103,11 +2107,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 403,
+          "line": 419,
           "column": 10
         },
         "end": {
-          "line": 422,
+          "line": 438,
           "column": 3
         }
       },
@@ -2273,11 +2277,15 @@
             },
             "end": {
               "line": 87,
-              "column": 27
+              "column": 33
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "config"
+            }
+          ],
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2286,11 +2294,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 429,
+              "line": 445,
               "column": 4
             },
             "end": {
-              "line": 442,
+              "line": 458,
               "column": 5
             }
           },
@@ -2307,11 +2315,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 424,
+          "line": 440,
           "column": 10
         },
         "end": {
-          "line": 443,
+          "line": 459,
           "column": 3
         }
       },
@@ -2357,11 +2365,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 107,
+              "line": 123,
               "column": 6
             },
             "end": {
-              "line": 109,
+              "line": 125,
               "column": 7
             }
           },
@@ -2422,11 +2430,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 44,
+              "line": 60,
               "column": 6
             },
             "end": {
-              "line": 49,
+              "line": 65,
               "column": 7
             }
           },
@@ -2444,11 +2452,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 51,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 55,
+              "line": 71,
               "column": 7
             }
           },
@@ -2464,11 +2472,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 57,
+              "line": 73,
               "column": 6
             },
             "end": {
-              "line": 61,
+              "line": 77,
               "column": 7
             }
           },
@@ -2484,11 +2492,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 66,
+              "line": 82,
               "column": 6
             },
             "end": {
-              "line": 68,
+              "line": 84,
               "column": 7
             }
           },
@@ -2503,11 +2511,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 73,
+              "line": 89,
               "column": 6
             },
             "end": {
-              "line": 75,
+              "line": 91,
               "column": 7
             }
           },
@@ -2522,11 +2530,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 96,
               "column": 6
             },
             "end": {
-              "line": 82,
+              "line": 98,
               "column": 7
             }
           },
@@ -2541,11 +2549,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 100,
               "column": 6
             },
             "end": {
-              "line": 87,
+              "line": 103,
               "column": 7
             }
           },
@@ -2561,11 +2569,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 108,
               "column": 6
             },
             "end": {
-              "line": 94,
+              "line": 110,
               "column": 7
             }
           },
@@ -2580,11 +2588,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 112,
               "column": 6
             },
             "end": {
-              "line": 100,
+              "line": 116,
               "column": 7
             }
           },
@@ -2602,11 +2610,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 102,
+              "line": 118,
               "column": 6
             },
             "end": {
-              "line": 105,
+              "line": 121,
               "column": 7
             }
           },
@@ -2767,7 +2775,7 @@
               "column": 4
             },
             "end": {
-              "line": 53,
+              "line": 75,
               "column": 5
             }
           },
@@ -2786,11 +2794,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 55,
+              "line": 77,
               "column": 4
             },
             "end": {
-              "line": 64,
+              "line": 86,
               "column": 5
             }
           },
@@ -2809,11 +2817,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 66,
+              "line": 88,
               "column": 4
             },
             "end": {
-              "line": 73,
+              "line": 95,
               "column": 5
             }
           },
@@ -2832,11 +2840,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 80,
+              "line": 102,
               "column": 4
             },
             "end": {
-              "line": 109,
+              "line": 131,
               "column": 5
             }
           },
@@ -2860,11 +2868,11 @@
           "sourceRange": {
             "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
             "start": {
-              "line": 114,
+              "line": 136,
               "column": 4
             },
             "end": {
-              "line": 119,
+              "line": 146,
               "column": 5
             }
           },
@@ -2878,11 +2886,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 132,
               "column": 4
             },
             "end": {
-              "line": 143,
+              "line": 159,
               "column": 5
             }
           },
@@ -2895,11 +2903,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 145,
+              "line": 161,
               "column": 4
             },
             "end": {
-              "line": 147,
+              "line": 163,
               "column": 5
             }
           },
@@ -2912,11 +2920,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 149,
+              "line": 165,
               "column": 4
             },
             "end": {
-              "line": 155,
+              "line": 171,
               "column": 5
             }
           },
@@ -2929,11 +2937,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 157,
+              "line": 173,
               "column": 4
             },
             "end": {
-              "line": 160,
+              "line": 176,
               "column": 5
             }
           },
@@ -2946,11 +2954,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 162,
+              "line": 178,
               "column": 4
             },
             "end": {
-              "line": 165,
+              "line": 181,
               "column": 5
             }
           },
@@ -2963,11 +2971,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 167,
+              "line": 183,
               "column": 4
             },
             "end": {
-              "line": 173,
+              "line": 189,
               "column": 5
             }
           },
@@ -2984,11 +2992,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 195,
               "column": 4
             },
             "end": {
-              "line": 181,
+              "line": 197,
               "column": 5
             }
           },
@@ -3005,11 +3013,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 183,
+              "line": 199,
               "column": 4
             },
             "end": {
-              "line": 196,
+              "line": 212,
               "column": 5
             }
           },
@@ -3029,11 +3037,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 36,
+          "line": 52,
           "column": 10
         },
         "end": {
-          "line": 197,
+          "line": 213,
           "column": 3
         }
       },
@@ -3045,11 +3053,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 107,
+              "line": 123,
               "column": 6
             },
             "end": {
-              "line": 109,
+              "line": 125,
               "column": 7
             }
           },
@@ -3097,11 +3105,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 44,
+              "line": 60,
               "column": 6
             },
             "end": {
-              "line": 49,
+              "line": 65,
               "column": 7
             }
           },
@@ -3113,11 +3121,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 51,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 55,
+              "line": 71,
               "column": 7
             }
           },
@@ -3129,11 +3137,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 57,
+              "line": 73,
               "column": 6
             },
             "end": {
-              "line": 61,
+              "line": 77,
               "column": 7
             }
           },
@@ -3145,11 +3153,11 @@
           "description": "A reference the object used to create this nav item.",
           "sourceRange": {
             "start": {
-              "line": 66,
+              "line": 82,
               "column": 6
             },
             "end": {
-              "line": 68,
+              "line": 84,
               "column": 7
             }
           },
@@ -3161,11 +3169,11 @@
           "description": "The label text for the group's button.",
           "sourceRange": {
             "start": {
-              "line": 73,
+              "line": 89,
               "column": 6
             },
             "end": {
-              "line": 75,
+              "line": 91,
               "column": 7
             }
           },
@@ -3177,11 +3185,11 @@
           "description": "The icon for the group's button.",
           "sourceRange": {
             "start": {
-              "line": 80,
+              "line": 96,
               "column": 6
             },
             "end": {
-              "line": 82,
+              "line": 98,
               "column": 7
             }
           },
@@ -3193,11 +3201,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 84,
+              "line": 100,
               "column": 6
             },
             "end": {
-              "line": 87,
+              "line": 103,
               "column": 7
             }
           },
@@ -3209,11 +3217,11 @@
           "description": "If `true` the group is expanded so the user can select a subitem.",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 108,
               "column": 6
             },
             "end": {
-              "line": 94,
+              "line": 110,
               "column": 7
             }
           },
@@ -3225,11 +3233,11 @@
           "description": "",
           "sourceRange": {
             "start": {
-              "line": 96,
+              "line": 112,
               "column": 6
             },
             "end": {
-              "line": 100,
+              "line": 116,
               "column": 7
             }
           },
@@ -3256,11 +3264,11 @@
           "range": {
             "file": "px-app-nav-subgroup.html",
             "start": {
-              "line": 28,
+              "line": 44,
               "column": 8
             },
             "end": {
-              "line": 28,
+              "line": 44,
               "column": 21
             }
           }
@@ -3400,11 +3408,15 @@
             },
             "end": {
               "line": 87,
-              "column": 27
+              "column": 33
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "config"
+            }
+          ],
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3413,11 +3425,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 220,
               "column": 4
             },
             "end": {
-              "line": 217,
+              "line": 233,
               "column": 5
             }
           },
@@ -3434,11 +3446,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 199,
+          "line": 215,
           "column": 10
         },
         "end": {
-          "line": 218,
+          "line": 234,
           "column": 3
         }
       },
@@ -3604,11 +3616,15 @@
             },
             "end": {
               "line": 87,
-              "column": 27
+              "column": 33
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "config"
+            }
+          ],
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3617,11 +3633,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 225,
+              "line": 241,
               "column": 4
             },
             "end": {
-              "line": 239,
+              "line": 255,
               "column": 5
             }
           },
@@ -3638,11 +3654,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 220,
+          "line": 236,
           "column": 10
         },
         "end": {
-          "line": 240,
+          "line": 256,
           "column": 3
         }
       },
@@ -3689,11 +3705,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 16,
+              "line": 33,
               "column": 6
             },
             "end": {
-              "line": 18,
+              "line": 35,
               "column": 7
             }
           },
@@ -3710,11 +3726,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 23,
+              "line": 40,
               "column": 6
             },
             "end": {
-              "line": 25,
+              "line": 42,
               "column": 7
             }
           },
@@ -3731,11 +3747,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 30,
+              "line": 47,
               "column": 6
             },
             "end": {
-              "line": 35,
+              "line": 52,
               "column": 7
             }
           },
@@ -3755,11 +3771,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 40,
+              "line": 57,
               "column": 6
             },
             "end": {
-              "line": 45,
+              "line": 62,
               "column": 7
             }
           },
@@ -3779,11 +3795,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 50,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 53,
+              "line": 70,
               "column": 7
             }
           },
@@ -3800,11 +3816,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 12,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 17,
+              "line": 34,
               "column": 7
             }
           },
@@ -3824,11 +3840,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 56,
+              "line": 73,
               "column": 4
             },
             "end": {
-              "line": 58,
+              "line": 75,
               "column": 5
             }
           },
@@ -3843,11 +3859,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 60,
+              "line": 77,
               "column": 4
             },
             "end": {
-              "line": 62,
+              "line": 79,
               "column": 5
             }
           },
@@ -3862,11 +3878,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 70,
+              "line": 87,
               "column": 4
             },
             "end": {
-              "line": 72,
+              "line": 89,
               "column": 5
             }
           },
@@ -3892,11 +3908,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 77,
+              "line": 94,
               "column": 4
             },
             "end": {
-              "line": 82,
+              "line": 99,
               "column": 5
             }
           },
@@ -3914,11 +3930,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 3,
+          "line": 20,
           "column": 10
         },
         "end": {
-          "line": 19,
+          "line": 36,
           "column": 3
         }
       },
@@ -3931,11 +3947,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 16,
+              "line": 33,
               "column": 6
             },
             "end": {
-              "line": 18,
+              "line": 35,
               "column": 7
             }
           },
@@ -3949,11 +3965,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 23,
+              "line": 40,
               "column": 6
             },
             "end": {
-              "line": 25,
+              "line": 42,
               "column": 7
             }
           },
@@ -3967,11 +3983,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 30,
+              "line": 47,
               "column": 6
             },
             "end": {
-              "line": 35,
+              "line": 52,
               "column": 7
             }
           },
@@ -3985,11 +4001,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 40,
+              "line": 57,
               "column": 6
             },
             "end": {
-              "line": 45,
+              "line": 62,
               "column": 7
             }
           },
@@ -4003,11 +4019,11 @@
           "sourceRange": {
             "file": "px-app-nav-behaviors.es6.js",
             "start": {
-              "line": 50,
+              "line": 67,
               "column": 6
             },
             "end": {
-              "line": 53,
+              "line": 70,
               "column": 7
             }
           },
@@ -4020,11 +4036,11 @@
           "description": "Set to `true` if the subitem's parent is selected.",
           "sourceRange": {
             "start": {
-              "line": 12,
+              "line": 29,
               "column": 6
             },
             "end": {
-              "line": 17,
+              "line": 34,
               "column": 7
             }
           },
@@ -4275,11 +4291,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 152,
+              "line": 169,
               "column": 6
             },
             "end": {
-              "line": 157,
+              "line": 174,
               "column": 7
             }
           },
@@ -4298,11 +4314,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 183,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 186,
               "column": 7
             }
           },
@@ -4319,11 +4335,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 175,
+              "line": 192,
               "column": 6
             },
             "end": {
-              "line": 178,
+              "line": 195,
               "column": 7
             }
           },
@@ -4339,11 +4355,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 184,
+              "line": 201,
               "column": 6
             },
             "end": {
-              "line": 188,
+              "line": 205,
               "column": 7
             }
           },
@@ -4361,11 +4377,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 211,
               "column": 6
             },
             "end": {
-              "line": 198,
+              "line": 215,
               "column": 7
             }
           },
@@ -4381,11 +4397,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 221,
               "column": 6
             },
             "end": {
-              "line": 210,
+              "line": 227,
               "column": 7
             }
           },
@@ -4404,11 +4420,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 216,
+              "line": 233,
               "column": 6
             },
             "end": {
-              "line": 220,
+              "line": 237,
               "column": 7
             }
           },
@@ -4426,11 +4442,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 243,
               "column": 6
             },
             "end": {
-              "line": 230,
+              "line": 247,
               "column": 7
             }
           },
@@ -4448,11 +4464,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 235,
+              "line": 252,
               "column": 6
             },
             "end": {
-              "line": 241,
+              "line": 258,
               "column": 7
             }
           },
@@ -4471,11 +4487,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 263,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 269,
               "column": 7
             }
           },
@@ -4494,11 +4510,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 257,
+              "line": 274,
               "column": 6
             },
             "end": {
-              "line": 263,
+              "line": 280,
               "column": 7
             }
           },
@@ -4517,11 +4533,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 278,
+              "line": 295,
               "column": 6
             },
             "end": {
-              "line": 280,
+              "line": 297,
               "column": 7
             }
           },
@@ -4536,11 +4552,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 282,
+              "line": 299,
               "column": 6
             },
             "end": {
-              "line": 285,
+              "line": 302,
               "column": 7
             }
           },
@@ -4557,11 +4573,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 292,
+              "line": 309,
               "column": 4
             },
             "end": {
-              "line": 298,
+              "line": 315,
               "column": 5
             }
           },
@@ -4859,11 +4875,11 @@
           "sourceRange": {
             "file": "px-app-nav-behavior-measure-text.es6.js",
             "start": {
-              "line": 32,
+              "line": 49,
               "column": 4
             },
             "end": {
-              "line": 36,
+              "line": 53,
               "column": 5
             }
           },
@@ -4886,7 +4902,7 @@
             }
           ],
           "return": {
-            "type": "(Number|undefined)",
+            "type": "(Number | undefined)",
             "desc": "The expected width of the text in pixels as a number (e.g. `68` for '68px'), undefined it can't be measured"
           },
           "inheritedFrom": "PxAppNavBehavior.MeasureText"
@@ -4898,11 +4914,11 @@
           "sourceRange": {
             "file": "px-app-nav-behavior-measure-text.es6.js",
             "start": {
-              "line": 47,
+              "line": 64,
               "column": 4
             },
             "end": {
-              "line": 62,
+              "line": 79,
               "column": 5
             }
           },
@@ -4992,11 +5008,11 @@
           "params": [
             {
               "name": "node",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "children",
-              "type": "(Object|Array.<Object>)"
+              "type": "(Object | Array.<Object>)"
             },
             {
               "name": "options"
@@ -5023,11 +5039,11 @@
           "params": [
             {
               "name": "node",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "children",
-              "type": "(Object|Array.<Object>)"
+              "type": "(Object | Array.<Object>)"
             },
             {
               "name": "options"
@@ -5100,7 +5116,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|Array)"
+              "type": "(Object | Array)"
             },
             {
               "name": "source",
@@ -5109,7 +5125,7 @@
             }
           ],
           "return": {
-            "type": "(Object|Array)",
+            "type": "(Object | Array)",
             "desc": "The next `selected` item or items"
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
@@ -5133,7 +5149,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|Array|null)"
+              "type": "(Object | Array | null)"
             },
             {
               "name": "source",
@@ -5142,7 +5158,7 @@
             }
           ],
           "return": {
-            "type": "(Object|Array|null)",
+            "type": "(Object | Array | null)",
             "desc": "The remaining `selected` items or null"
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
@@ -5250,7 +5266,7 @@
               "column": 6
             },
             "end": {
-              "line": 326,
+              "line": 332,
               "column": 7
             }
           },
@@ -5269,11 +5285,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 328,
+              "line": 334,
               "column": 6
             },
             "end": {
-              "line": 351,
+              "line": 357,
               "column": 7
             }
           },
@@ -5292,11 +5308,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 357,
+              "line": 363,
               "column": 5
             },
             "end": {
-              "line": 367,
+              "line": 373,
               "column": 7
             }
           },
@@ -5315,11 +5331,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 369,
+              "line": 375,
               "column": 6
             },
             "end": {
-              "line": 372,
+              "line": 378,
               "column": 7
             }
           },
@@ -5338,11 +5354,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 374,
+              "line": 380,
               "column": 6
             },
             "end": {
-              "line": 394,
+              "line": 400,
               "column": 7
             }
           },
@@ -5361,11 +5377,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 396,
+              "line": 402,
               "column": 6
             },
             "end": {
-              "line": 413,
+              "line": 419,
               "column": 7
             }
           },
@@ -5384,11 +5400,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 415,
+              "line": 421,
               "column": 6
             },
             "end": {
-              "line": 428,
+              "line": 434,
               "column": 7
             }
           },
@@ -5403,11 +5419,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 430,
+              "line": 436,
               "column": 6
             },
             "end": {
-              "line": 437,
+              "line": 443,
               "column": 7
             }
           },
@@ -5429,11 +5445,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 439,
+              "line": 445,
               "column": 6
             },
             "end": {
-              "line": 453,
+              "line": 459,
               "column": 7
             }
           },
@@ -5455,11 +5471,11 @@
           "sourceRange": {
             "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
-              "line": 477,
+              "line": 483,
               "column": 6
             },
             "end": {
-              "line": 492,
+              "line": 498,
               "column": 7
             }
           },
@@ -5480,11 +5496,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 313,
+              "line": 330,
               "column": 4
             },
             "end": {
-              "line": 323,
+              "line": 340,
               "column": 5
             }
           },
@@ -5497,11 +5513,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 325,
+              "line": 342,
               "column": 4
             },
             "end": {
-              "line": 335,
+              "line": 352,
               "column": 5
             }
           },
@@ -5514,11 +5530,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 337,
+              "line": 354,
               "column": 4
             },
             "end": {
-              "line": 346,
+              "line": 363,
               "column": 5
             }
           },
@@ -5531,11 +5547,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 352,
+              "line": 369,
               "column": 4
             },
             "end": {
-              "line": 359,
+              "line": 376,
               "column": 5
             }
           },
@@ -5548,11 +5564,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 368,
+              "line": 385,
               "column": 4
             },
             "end": {
-              "line": 376,
+              "line": 393,
               "column": 5
             }
           },
@@ -5570,11 +5586,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 381,
+              "line": 398,
               "column": 4
             },
             "end": {
-              "line": 385,
+              "line": 402,
               "column": 5
             }
           },
@@ -5591,11 +5607,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 395,
+              "line": 412,
               "column": 4
             },
             "end": {
-              "line": 407,
+              "line": 424,
               "column": 5
             }
           },
@@ -5612,11 +5628,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 415,
+              "line": 432,
               "column": 4
             },
             "end": {
-              "line": 425,
+              "line": 442,
               "column": 5
             }
           },
@@ -5629,11 +5645,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 438,
+              "line": 455,
               "column": 4
             },
             "end": {
-              "line": 472,
+              "line": 489,
               "column": 5
             }
           },
@@ -5650,11 +5666,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 486,
+              "line": 503,
               "column": 4
             },
             "end": {
-              "line": 517,
+              "line": 534,
               "column": 5
             }
           },
@@ -5687,11 +5703,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 529,
+              "line": 546,
               "column": 4
             },
             "end": {
-              "line": 532,
+              "line": 549,
               "column": 5
             }
           },
@@ -5714,11 +5730,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 541,
+              "line": 558,
               "column": 4
             },
             "end": {
-              "line": 550,
+              "line": 567,
               "column": 5
             }
           },
@@ -5739,11 +5755,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 565,
+              "line": 582,
               "column": 4
             },
             "end": {
-              "line": 578,
+              "line": 595,
               "column": 5
             }
           },
@@ -5760,11 +5776,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 589,
+              "line": 606,
               "column": 4
             },
             "end": {
-              "line": 601,
+              "line": 618,
               "column": 5
             }
           },
@@ -5794,11 +5810,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 609,
+              "line": 626,
               "column": 4
             },
             "end": {
-              "line": 612,
+              "line": 629,
               "column": 5
             }
           },
@@ -5820,11 +5836,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 634,
+              "line": 651,
               "column": 4
             },
             "end": {
-              "line": 642,
+              "line": 659,
               "column": 5
             }
           },
@@ -5832,11 +5848,11 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "labelKey",
@@ -5852,7 +5868,7 @@
             }
           ],
           "return": {
-            "type": "(String|null)"
+            "type": "(String | null)"
           }
         },
         {
@@ -5861,11 +5877,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 667,
+              "line": 684,
               "column": 4
             },
             "end": {
-              "line": 684,
+              "line": 701,
               "column": 5
             }
           },
@@ -5873,11 +5889,11 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "iconKey",
@@ -5901,7 +5917,7 @@
             }
           ],
           "return": {
-            "type": "(String|null)"
+            "type": "(String | null)"
           }
         },
         {
@@ -5910,11 +5926,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 692,
+              "line": 709,
               "column": 4
             },
             "end": {
-              "line": 697,
+              "line": 714,
               "column": 5
             }
           },
@@ -5925,7 +5941,7 @@
             }
           ],
           "return": {
-            "type": "(Number|undefined)"
+            "type": "(Number | undefined)"
           }
         },
         {
@@ -5934,11 +5950,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 708,
+              "line": 725,
               "column": 4
             },
             "end": {
-              "line": 710,
+              "line": 727,
               "column": 5
             }
           },
@@ -5963,11 +5979,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 720,
+              "line": 737,
               "column": 4
             },
             "end": {
-              "line": 722,
+              "line": 739,
               "column": 5
             }
           },
@@ -5992,11 +6008,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 732,
+              "line": 749,
               "column": 4
             },
             "end": {
-              "line": 734,
+              "line": 751,
               "column": 5
             }
           },
@@ -6004,7 +6020,7 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "allCollapsed",
@@ -6025,11 +6041,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 741,
+              "line": 758,
               "column": 4
             },
             "end": {
-              "line": 743,
+              "line": 760,
               "column": 5
             }
           },
@@ -6041,7 +6057,7 @@
             },
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             }
           ],
           "return": {
@@ -6054,11 +6070,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 752,
+              "line": 769,
               "column": 4
             },
             "end": {
-              "line": 755,
+              "line": 772,
               "column": 5
             }
           },
@@ -6079,11 +6095,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 764,
+              "line": 781,
               "column": 4
             },
             "end": {
-              "line": 767,
+              "line": 784,
               "column": 5
             }
           },
@@ -6104,11 +6120,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 775,
+              "line": 792,
               "column": 4
             },
             "end": {
-              "line": 777,
+              "line": 794,
               "column": 5
             }
           },
@@ -6132,11 +6148,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 785,
+              "line": 802,
               "column": 4
             },
             "end": {
-              "line": 787,
+              "line": 804,
               "column": 5
             }
           },
@@ -6160,11 +6176,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 796,
+              "line": 813,
               "column": 4
             },
             "end": {
-              "line": 800,
+              "line": 817,
               "column": 5
             }
           },
@@ -6172,7 +6188,7 @@
           "params": [
             {
               "name": "selectedItem",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "selectedItemParent"
@@ -6192,11 +6208,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 809,
+              "line": 826,
               "column": 4
             },
             "end": {
-              "line": 811,
+              "line": 828,
               "column": 5
             }
           },
@@ -6204,7 +6220,7 @@
           "params": [
             {
               "name": "item",
-              "type": "(Object|null)"
+              "type": "(Object | null)"
             },
             {
               "name": "iconKey",
@@ -6221,11 +6237,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 818,
+              "line": 835,
               "column": 4
             },
             "end": {
-              "line": 820,
+              "line": 837,
               "column": 5
             }
           },
@@ -6250,11 +6266,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 827,
+              "line": 844,
               "column": 4
             },
             "end": {
-              "line": 829,
+              "line": 846,
               "column": 5
             }
           },
@@ -6279,11 +6295,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 836,
+              "line": 853,
               "column": 4
             },
             "end": {
-              "line": 838,
+              "line": 855,
               "column": 5
             }
           },
@@ -6313,11 +6329,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 3,
+          "line": 20,
           "column": 10
         },
         "end": {
-          "line": 839,
+          "line": 856,
           "column": 3
         }
       },
@@ -6419,11 +6435,11 @@
           "description": "Set to `true` to collapse all nav items into a dropdown. Makes the nav\nmore accessible on mobile devices.\n\nUse `collapseAt` instead to dynamically collapse the nav based on the\ncurrent window size.",
           "sourceRange": {
             "start": {
-              "line": 152,
+              "line": 169,
               "column": 6
             },
             "end": {
-              "line": 157,
+              "line": 174,
               "column": 7
             }
           },
@@ -6435,11 +6451,11 @@
           "description": "The width below which the nav will automatically collapse. Use a number\n(e.g. `450`) which will be converted to a pixel value (e.g. '450px').\n\nThis property will overwrite the `collapseAll` property. Avoid data\nbinding in to both properties at the same time.",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 183,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 186,
               "column": 7
             }
           },
@@ -6451,11 +6467,11 @@
           "description": "Set to `true` to show an open/close icon for the collapsed menu instead\nof the selected item.",
           "sourceRange": {
             "start": {
-              "line": 175,
+              "line": 192,
               "column": 6
             },
             "end": {
-              "line": 178,
+              "line": 195,
               "column": 7
             }
           },
@@ -6467,11 +6483,11 @@
           "description": "When `true`, the collapse dropdown is open. When `false`, it is closed\nor does not exist.",
           "sourceRange": {
             "start": {
-              "line": 184,
+              "line": 201,
               "column": 6
             },
             "end": {
-              "line": 188,
+              "line": 205,
               "column": 7
             }
           },
@@ -6483,11 +6499,11 @@
           "description": "Shows the vertical navigation. The navigation will be take up the\nfull left-hand side of the page.",
           "sourceRange": {
             "start": {
-              "line": 194,
+              "line": 211,
               "column": 6
             },
             "end": {
-              "line": 198,
+              "line": 215,
               "column": 7
             }
           },
@@ -6499,11 +6515,11 @@
           "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
           "sourceRange": {
             "start": {
-              "line": 204,
+              "line": 221,
               "column": 6
             },
             "end": {
-              "line": 210,
+              "line": 227,
               "column": 7
             }
           },
@@ -6515,11 +6531,11 @@
           "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
           "sourceRange": {
             "start": {
-              "line": 216,
+              "line": 233,
               "column": 6
             },
             "end": {
-              "line": 220,
+              "line": 237,
               "column": 7
             }
           },
@@ -6531,11 +6547,11 @@
           "description": "An array of items that are currently hidden in the overflow dropdown\nor in the collapsed dropdown.",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 243,
               "column": 6
             },
             "end": {
-              "line": 230,
+              "line": 247,
               "column": 7
             }
           },
@@ -6547,11 +6563,11 @@
           "description": "True if all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 235,
+              "line": 252,
               "column": 6
             },
             "end": {
-              "line": 241,
+              "line": 258,
               "column": 7
             }
           },
@@ -6563,11 +6579,11 @@
           "description": "True if some items are overflowed, or all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 263,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 269,
               "column": 7
             }
           },
@@ -6579,11 +6595,11 @@
           "description": "True if some items are overflowed, and some items are visible.",
           "sourceRange": {
             "start": {
-              "line": 257,
+              "line": 274,
               "column": 6
             },
             "end": {
-              "line": 263,
+              "line": 280,
               "column": 7
             }
           },
@@ -6595,11 +6611,11 @@
           "description": "Reference the HTMLElement to fit any nav dropdowns into. Dropdowns will\nautomatically be constrained to fit their width and height inside\nthis container element. If the nav items in the dropdown are wider than\nthe container, they will be truncated with ellipses. If the nav items\nin the dropdown are taller than the container, the dropdown will show\nand scroll bar so users can see the overset items.\n\nBy default, dropdowns will be fit into the `window`. If your nav is\nplaced inside of another container, and should not expand to take\nup all available space in the window, use this property to constrain\nthe dropdowns' sizes.",
           "sourceRange": {
             "start": {
-              "line": 278,
+              "line": 295,
               "column": 6
             },
             "end": {
-              "line": 280,
+              "line": 297,
               "column": 7
             }
           },
@@ -6696,11 +6712,11 @@
           "range": {
             "file": "px-app-nav.html",
             "start": {
-              "line": 516,
+              "line": 532,
               "column": 8
             },
             "end": {
-              "line": 516,
+              "line": 532,
               "column": 56
             }
           }
@@ -6724,11 +6740,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 32,
+                  "line": 49,
                   "column": 4
                 },
                 "end": {
-                  "line": 36,
+                  "line": 53,
                   "column": 5
                 }
               },
@@ -6751,7 +6767,7 @@
                 }
               ],
               "return": {
-                "type": "(Number|undefined)",
+                "type": "(Number | undefined)",
                 "desc": "The expected width of the text in pixels as a number (e.g. `68` for '68px'), undefined it can't be measured"
               }
             },
@@ -6761,11 +6777,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 47,
+                  "line": 64,
                   "column": 4
                 },
                 "end": {
-                  "line": 62,
+                  "line": 79,
                   "column": 5
                 }
               },
@@ -6792,11 +6808,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 15,
+              "line": 32,
               "column": 2
             },
             "end": {
-              "line": 63,
+              "line": 80,
               "column": 4
             }
           },
@@ -6822,11 +6838,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 16,
+                  "line": 33,
                   "column": 6
                 },
                 "end": {
-                  "line": 18,
+                  "line": 35,
                   "column": 7
                 }
               },
@@ -6841,11 +6857,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 23,
+                  "line": 40,
                   "column": 6
                 },
                 "end": {
-                  "line": 25,
+                  "line": 42,
                   "column": 7
                 }
               },
@@ -6860,11 +6876,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 30,
+                  "line": 47,
                   "column": 6
                 },
                 "end": {
-                  "line": 35,
+                  "line": 52,
                   "column": 7
                 }
               },
@@ -6882,11 +6898,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 40,
+                  "line": 57,
                   "column": 6
                 },
                 "end": {
-                  "line": 45,
+                  "line": 62,
                   "column": 7
                 }
               },
@@ -6904,11 +6920,11 @@
               "privacy": "public",
               "sourceRange": {
                 "start": {
-                  "line": 50,
+                  "line": 67,
                   "column": 6
                 },
                 "end": {
-                  "line": 53,
+                  "line": 70,
                   "column": 7
                 }
               },
@@ -6925,11 +6941,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 56,
+                  "line": 73,
                   "column": 4
                 },
                 "end": {
-                  "line": 58,
+                  "line": 75,
                   "column": 5
                 }
               },
@@ -6942,11 +6958,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 60,
+                  "line": 77,
                   "column": 4
                 },
                 "end": {
-                  "line": 62,
+                  "line": 79,
                   "column": 5
                 }
               },
@@ -6959,11 +6975,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 70,
+                  "line": 87,
                   "column": 4
                 },
                 "end": {
-                  "line": 72,
+                  "line": 89,
                   "column": 5
                 }
               },
@@ -6987,11 +7003,11 @@
               "privacy": "protected",
               "sourceRange": {
                 "start": {
-                  "line": 77,
+                  "line": 94,
                   "column": 4
                 },
                 "end": {
-                  "line": 82,
+                  "line": 99,
                   "column": 5
                 }
               },
@@ -7008,11 +7024,11 @@
           "metadata": {},
           "sourceRange": {
             "start": {
-              "line": 11,
+              "line": 28,
               "column": 2
             },
             "end": {
-              "line": 83,
+              "line": 100,
               "column": 4
             }
           },
@@ -7024,11 +7040,11 @@
               "description": "A reference the object used to create this nav item.",
               "sourceRange": {
                 "start": {
-                  "line": 16,
+                  "line": 33,
                   "column": 6
                 },
                 "end": {
-                  "line": 18,
+                  "line": 35,
                   "column": 7
                 }
               },
@@ -7040,11 +7056,11 @@
               "description": "Used as the label text for the item.",
               "sourceRange": {
                 "start": {
-                  "line": 23,
+                  "line": 40,
                   "column": 6
                 },
                 "end": {
-                  "line": 25,
+                  "line": 42,
                   "column": 7
                 }
               },
@@ -7056,11 +7072,11 @@
               "description": "Set to `true` if the item is selected.",
               "sourceRange": {
                 "start": {
-                  "line": 30,
+                  "line": 47,
                   "column": 6
                 },
                 "end": {
-                  "line": 35,
+                  "line": 52,
                   "column": 7
                 }
               },
@@ -7072,11 +7088,11 @@
               "description": "Set to `true` if the item is in a collapsed dropdown.",
               "sourceRange": {
                 "start": {
-                  "line": 40,
+                  "line": 57,
                   "column": 6
                 },
                 "end": {
-                  "line": 45,
+                  "line": 62,
                   "column": 7
                 }
               },
@@ -7088,11 +7104,11 @@
               "description": "Cancels events that trigger selection.",
               "sourceRange": {
                 "start": {
-                  "line": 50,
+                  "line": 67,
                   "column": 6
                 },
                 "end": {
-                  "line": 53,
+                  "line": 70,
                   "column": 7
                 }
               },
