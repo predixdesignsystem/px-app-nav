@@ -45,6 +45,7 @@ $px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, w
   display: block;
   height: calc(100vh - #{$px-app-nav-group-height});
   z-index: 399;
+  overflow: visible;
 }
 
 .app-nav-group__dropdown__content {
