@@ -957,7 +957,7 @@ describe('px-app-nav-measure-text behavior', function() {
 
   it('configures the 2d canvas interface with the requested font-family and font-size', function() {
     const canvasInterface = stubEl._get2dMeasureCanvas('Arial', '23px');
-    expect(canvasInterface.font).to.equal('23px Arial');
+    expect(canvasInterface.font.trim()).to.equal('23px Arial');
   });
 
   it('correctly measures a bit of text', function() {
