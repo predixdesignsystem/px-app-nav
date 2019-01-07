@@ -67,7 +67,7 @@ $px-app-nav-subitem-background-color--collapsed: var(--px-app-nav-subitem-backgr
 :host([collapsed]) {
   color: $px-app-nav-subitem-text-color--collapsed;
   background-color: $px-app-nav-subitem-background-color--collapsed;
-  padding-left: calculateRem(55px);
+  padding-left: calculateRem(50px);
 }
 
 $px-app-nav-subitem-background-color--collapsed-hover: var(--px-app-nav-subitem-background-color--collapsed-hover, darkgray);
