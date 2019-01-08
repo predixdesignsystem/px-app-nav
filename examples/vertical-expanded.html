@@ -1,0 +1,121 @@
+<!--
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>App Nav Demo -- Vertical</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html"/>
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+  <link rel="import" href="../px-app-nav.html"/>
+
+  <style>
+    html, body {
+      margin: 0;
+      font-size: 15px;
+      font-family: 'GE Inspira Sans';
+    }
+    #app {
+      display: block;
+      margin-left: 325px;
+    }
+    px-app-nav {
+      position: fixed;
+      right: 0;
+      top: 0;
+    }
+
+    /*
+     * Tip: It helps to pick a static height for your actions container.
+     * Then you can size/position your actions within this container.
+     *
+     * If you want the height to be dynamically calculated (e.g. you don't
+     * know how many actions you will have), don't set a static height and
+     * ensure the actions container is display: block or display: flex, and
+     * the container will automatically grow to fill the space it needs.
+     */
+    .actions {
+      height: 60px;
+      padding: 0 1rem;
+      display: flex;
+      background-color: cornflowerblue;
+      cursor: pointer;
+    }
+    .actions-collapsed {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
+    }
+    .actions-expanded {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+    }
+    .email-address {
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <custom-style>
+    <style is="custom-style" include="px-theme-styles"></style>
+  </custom-style>
+
+  <dom-bind>
+    <template is="dom-bind">
+      <px-app-nav
+          items='[
+            { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+            { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+            { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+              { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+              { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+              { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+            ]}
+          ]'
+          vertical
+          vertical-expanded
+          selected="{{selectedItem}}"
+          selected-route="{{selectedRoute}}"
+          vertical-opened="{{verticalOpened}}">
+        <div slot="actions" class="actions">
+          <template is="dom-if" if="[[verticalOpened]]">
+            <div class="actions-expanded">
+              <span class="email-address">thomas.edison@ge.com</span>
+              <px-icon icon="px-utl:app-settings"></px-icon>
+            </div>
+          </template>
+          <template is="dom-if" if="[[!verticalOpened]]">
+            <div class="actions-collapsed">
+              <px-icon icon="px-utl:app-settings"></px-icon>
+            </div>
+          </template>
+        </div>
+      </px-app-nav>
+
+      <div id="app">
+        <ul>
+          <li>Selected item label: <strong>{{selectedItem.label}}</strong></li>
+          <li>Selected route: <strong>{{selectedRoute}}</strong></li>
+        </ul>
+      </div>
+    </template>
+  </dom-bind>
+</body>
+</html>

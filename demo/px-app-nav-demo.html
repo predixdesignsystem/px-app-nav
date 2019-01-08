@@ -73,6 +73,7 @@ limitations under the License.
         id="appNav"
         items="[[props.items.value]]"
         vertical="[[props.vertical.value]]"
+        vertical-expanded="[[props.verticalExpanded.value]]"
         collapse-with-icon="[[props.collapseWithIcon.value]]"
         collapse-all="[[props.collapseAll.value]]"
         collapse-at="[[props.collapseAt.value]]"
@@ -149,6 +150,11 @@ limitations under the License.
               vertical: true,
               configReset: true
             }, {
+              configName: "Vertical Expanded",
+              vertical: true,
+              verticalExpanded: true,
+              configReset: true
+            }, {
               configName: "Collapsed All",
               collapseAll: true,
               configReset: true
@@ -191,6 +197,11 @@ limitations under the License.
         defaultValue: false,
         inputType: 'toggle',
       },
+      verticalExpanded: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle',
+      },
       collapseWithIcon: {
         type: Boolean,
         defaultValue: false,
@@ -221,7 +232,7 @@ limitations under the License.
 
     },
 
-    observers: [ '_returnPos(props.vertical.value)' ],
+    observers: [ '_returnPos(props.vertical.value, props.verticalExpanded.value)' ],
 
 
     listeners: {
@@ -251,11 +262,11 @@ limitations under the License.
       return JSON.stringify(json);
     },
 
-    _returnPos: function(vertical) {
+    _returnPos: function(vertical, verticalExpanded) {
       var div = this.$$('#wrapper');
       if(vertical) {
         div.style.top = '10px';
-        div.style.left = '90px';
+        div.style.left = verticalExpanded ? '350px' : '90px';
       } else {
         div.style.top = '20px';
         div.style.left = '10px';
