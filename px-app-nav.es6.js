@@ -216,6 +216,18 @@
       },
 
       /**
+       * Shows the vertical navigation in an expanded view. The navigation will take up the
+       * full left-hand side of the page.
+       */
+      verticalExpanded: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true,
+        observer: '_handleVerticalExpandedViewChanged'
+      },
+
+      /**
        * When `true`, the vertical navigation is open and the user is interacting
        * with it. When `false`, the vertical navigation is closed.
        */
@@ -341,7 +353,7 @@
     },
 
     _handleMouseEnter() {
-      if (!this.vertical) return;
+      if (!this.vertical || this.verticalExpanded) return;
 
       this._mouseIsOverNav = true;
       if (this.isDebouncerActive('close-nav-on-mouseleave')) {
@@ -353,7 +365,7 @@
     },
 
     _handleMouseLeave() {
-      if (!this.vertical) return;
+      if (!this.vertical || this.verticalExpanded) return;
 
       this._mouseIsOverNav = false;
       this.debounce('close-nav-on-mouseleave', function() {
@@ -393,6 +405,11 @@
       }
     },
 
+    _handleVerticalExpandedViewChanged(verticalExpanded) {
+      this._setVerticalOpened(verticalExpanded);
+      if (verticalExpanded) this.rebuild();
+      else this._handleResize();
+    },
     /**
      * Updates the selected item when the user taps on a nav item button.
      */
