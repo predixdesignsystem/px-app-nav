@@ -92,6 +92,11 @@ $px-app-nav-item-stripe-color--selected: var(--px-app-nav-item-stripe-color--sel
   background-color: $px-app-nav-item-stripe-color--selected;
 }
 
+/* Item State: Collapsed */
+:host([collapsed]) {
+  width: calculateRem(350px);
+}
+
 /* Item State: Selected+Collapsed */
 $px-app-nav-item-icon-color--collapsed: var(--px-app-nav-item-icon-color--collapsed, darkgray);
 $px-app-nav-item-text-color--collapsed: var(--px-app-nav-item-text-color--collapsed, darkgray);
