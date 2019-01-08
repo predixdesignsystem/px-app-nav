@@ -8,7 +8,7 @@
       "properties": [
         {
           "name": "item",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "A reference the object used to create this nav item.",
           "privacy": "public",
           "sourceRange": {
@@ -23,13 +23,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Used as the label text for the item.",
           "privacy": "public",
           "sourceRange": {
@@ -44,13 +46,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "selected",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the item is selected.",
           "privacy": "public",
           "sourceRange": {
@@ -66,7 +70,8 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false",
@@ -74,7 +79,7 @@
         },
         {
           "name": "collapsed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the item is in a collapsed dropdown.",
           "privacy": "public",
           "sourceRange": {
@@ -90,7 +95,8 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false",
@@ -98,7 +104,7 @@
         },
         {
           "name": "cancelSelect",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Cancels events that trigger selection.",
           "privacy": "public",
           "sourceRange": {
@@ -113,14 +119,16 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "icon",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Used to set the icon for the item.",
           "privacy": "public",
           "sourceRange": {
@@ -134,12 +142,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "subitem",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if this is a subitem.",
           "privacy": "public",
           "sourceRange": {
@@ -153,13 +163,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "dropdown",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Shows a dropdown arrow icon to indicate this item can be tapped to\nopen a subgroup.",
           "privacy": "public",
           "sourceRange": {
@@ -173,13 +185,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "overflowed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the item is inside a overflowed dropdown.",
           "privacy": "public",
           "sourceRange": {
@@ -194,14 +208,15 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "emptyIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Shows an empty state outline for icon.",
           "privacy": "public",
           "sourceRange": {
@@ -215,13 +230,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "emptyLabel",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Shows an empty state outline for the label.",
           "privacy": "public",
           "sourceRange": {
@@ -235,7 +252,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         }
@@ -258,6 +277,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -277,6 +299,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -330,6 +355,9 @@
               "name": "evt"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -385,7 +413,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -403,7 +431,7 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -421,7 +449,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -439,7 +467,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -457,7 +485,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -474,7 +502,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "subitem",
@@ -490,7 +518,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "dropdown",
@@ -506,7 +534,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "overflowed",
@@ -522,7 +550,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "empty-icon",
@@ -538,7 +566,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "empty-label",
@@ -554,7 +582,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [],
@@ -572,11 +600,11 @@
       "properties": [
         {
           "name": "animationConfig",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Animation configuration. See README for more info.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 26,
               "column": 6
@@ -587,17 +615,19 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "entryAnimation",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Convenience property for setting an 'entry' animation. Do not set `animationConfig.entry`\nmanually if using this. The animated node is set to `this` if using this property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 34,
               "column": 6
@@ -609,18 +639,19 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_entryAnimationChanged\""
+              "observer": "\"_entryAnimationChanged\"",
+              "attributeType": "String"
             }
           },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "exitAnimation",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Convenience property for setting an 'exit' animation. Do not set `animationConfig.exit`\nmanually if using this. The animated node is set to `this` if using this property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 43,
               "column": 6
@@ -632,14 +663,15 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_exitAnimationChanged\""
+              "observer": "\"_exitAnimationChanged\"",
+              "attributeType": "String"
             }
           },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "selected",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If `true`, one of the group's subitems is selected.\n\nWatch for updates to find out when the group becomes selected through\nuser interaction or through automatic selection.\n\nSet the `selected` attribute on one of the group's subitems to select\nthis group.",
           "privacy": "public",
           "sourceRange": {
@@ -655,14 +687,15 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_handleSelectedChanged\""
+              "observer": "\"_handleSelectedChanged\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "item",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "A reference the object used to create this nav item.",
           "privacy": "public",
           "sourceRange": {
@@ -676,12 +709,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The label text for the group's button.",
           "privacy": "public",
           "sourceRange": {
@@ -695,12 +730,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "icon",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The icon for the group's button. Should be a valid px icon\nname (e.g. 'px-fea:cases').",
           "privacy": "public",
           "sourceRange": {
@@ -714,12 +751,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "opened",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If `true` the group is expanded so the user can select a subitem.",
           "privacy": "public",
           "sourceRange": {
@@ -735,13 +774,14 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_openedChangedFromOutside\""
+              "observer": "\"_openedChangedFromOutside\"",
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "_opened",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Internal representation of the `opened` state. Ensures changing `opened`\nflows through `openGroup` and `closeGroup` which are necessary to\ncorrectly size the resulting dropdown.",
           "privacy": "protected",
           "sourceRange": {
@@ -756,13 +796,14 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_openedChangedFromInside\""
+              "observer": "\"_openedChangedFromInside\"",
+              "attributeType": "Boolean"
             }
           }
         },
         {
           "name": "fixedWidth",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -776,12 +817,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         },
         {
           "name": "hideDropdownIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Disables the group's dropdown carat icon.",
           "privacy": "public",
           "sourceRange": {
@@ -795,13 +838,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "overflowed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -815,13 +860,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "noHighlight",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Disables highlighting the group when it is selected.",
           "privacy": "public",
           "sourceRange": {
@@ -835,13 +882,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "emptyIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If `true` the group item button should have an empty state.",
           "privacy": "public",
           "sourceRange": {
@@ -855,13 +904,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "emptyLabel",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If `true` the group item label should have an empty state.",
           "privacy": "public",
           "sourceRange": {
@@ -875,13 +926,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "cancelSelect",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Cancels events that trigger selection.",
           "privacy": "public",
           "sourceRange": {
@@ -895,13 +948,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "fitInto",
-          "type": "HTMLElement",
+          "type": "HTMLElement | null | undefined",
           "description": "A reference to the HTMLElement to fit the group dropdown into.",
           "privacy": "public",
           "sourceRange": {
@@ -915,12 +970,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "HTMLElement"
+            }
           }
         },
         {
           "name": "collapsed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -934,13 +991,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "_openAnimation",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -954,12 +1013,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "_closeAnimation",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -973,12 +1034,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "_offsetHeight",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -992,7 +1055,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Number"
+            }
           }
         }
       ],
@@ -1002,7 +1067,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 50,
               "column": 4
@@ -1014,6 +1079,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -1021,7 +1089,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 58,
               "column": 4
@@ -1033,6 +1101,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -1040,7 +1111,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 66,
               "column": 4
@@ -1059,6 +1130,9 @@
               "name": "config2"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -1066,7 +1140,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 73,
               "column": 4
@@ -1089,7 +1163,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 81,
               "column": 4
@@ -1111,6 +1185,9 @@
               "name": "allConfigs"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -1118,7 +1195,7 @@
           "description": "An element implementing `Polymer.NeonAnimationRunnerBehavior` calls this method to configure\nan animation with an optional type. Elements implementing `Polymer.NeonAnimatableBehavior`\nshould define the property `animationConfig`, which is either a configuration object\nor a map of animation type to array of configuration objects.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 136,
               "column": 4
@@ -1141,7 +1218,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 21,
               "column": 4
@@ -1164,7 +1241,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 77,
               "column": 4
@@ -1187,7 +1264,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 88,
               "column": 4
@@ -1203,6 +1280,9 @@
               "name": "activeEntries"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -1210,7 +1290,7 @@
           "description": "Plays an animation with an optional `type`.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 102,
               "column": 4
@@ -1231,6 +1311,9 @@
               "type": "!Object="
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -1238,7 +1321,7 @@
           "description": "Cancels the currently running animations.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 136,
               "column": 4
@@ -1250,6 +1333,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -1267,7 +1353,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "detached",
@@ -1284,7 +1373,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_openedChangedFromOutside",
@@ -1305,7 +1397,10 @@
             {
               "name": "newVal"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_openedChangedFromInside",
@@ -1326,7 +1421,10 @@
             {
               "name": "newVal"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleDropdownOpened",
@@ -1347,7 +1445,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleDropdownClosed",
@@ -1368,7 +1469,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_toggleGroup",
@@ -1385,7 +1489,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "openGroup",
@@ -1402,7 +1509,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "closeGroup",
@@ -1419,7 +1529,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "refitGroup",
@@ -1436,7 +1549,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleSelfTapped",
@@ -1457,7 +1573,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleGroupContainerTapped",
@@ -1478,7 +1597,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleGroupCanceled",
@@ -1499,7 +1621,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleSelectedChanged",
@@ -1523,7 +1648,10 @@
             {
               "name": "lastState"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleItemSelected",
@@ -1544,7 +1672,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_getPositionTarget",
@@ -1625,7 +1756,7 @@
           "name": "animation-config",
           "description": "Animation configuration. See README for more info.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 26,
               "column": 6
@@ -1636,14 +1767,14 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "entry-animation",
           "description": "Convenience property for setting an 'entry' animation. Do not set `animationConfig.entry`\nmanually if using this. The animated node is set to `this` if using this property.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 34,
               "column": 6
@@ -1654,14 +1785,14 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "exit-animation",
           "description": "Convenience property for setting an 'exit' animation. Do not set `animationConfig.exit`\nmanually if using this. The animated node is set to `this` if using this property.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 43,
               "column": 6
@@ -1672,7 +1803,7 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -1689,7 +1820,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "item",
@@ -1705,7 +1836,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "label",
@@ -1721,7 +1852,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "icon",
@@ -1737,7 +1868,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "opened",
@@ -1753,7 +1884,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "fixed-width",
@@ -1769,7 +1900,7 @@
             }
           },
           "metadata": {},
-          "type": "number"
+          "type": "number | null | undefined"
         },
         {
           "name": "hide-dropdown-icon",
@@ -1785,7 +1916,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "overflowed",
@@ -1801,7 +1932,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "no-highlight",
@@ -1817,7 +1948,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "empty-icon",
@@ -1833,7 +1964,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "empty-label",
@@ -1849,7 +1980,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "cancel-select",
@@ -1865,7 +1996,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "fit-into",
@@ -1881,7 +2012,7 @@
             }
           },
           "metadata": {},
-          "type": "HTMLElement"
+          "type": "HTMLElement | null | undefined"
         },
         {
           "name": "collapsed",
@@ -1897,7 +2028,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [
@@ -1923,7 +2054,6 @@
           "description": "",
           "name": "",
           "range": {
-            "file": "px-app-nav-group.html",
             "start": {
               "line": 60,
               "column": 10
@@ -1944,11 +2074,11 @@
       "properties": [
         {
           "name": "animationTiming",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Defines the animation timing.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -1959,17 +2089,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
+          "defaultValue": "{\"duration\":500,\"easing\":\"cubic-bezier(0.4, 0, 0.2, 1)\",\"fill\":\"both\"}",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
           "name": "isNeonAnimation",
           "type": "boolean",
-          "description": "Can be used to determine that elements implement this behavior.",
+          "description": "Can be used to determine that elements implement this behavior.\n     ",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 41,
               "column": 4
@@ -1980,7 +2113,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
           },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
@@ -1991,7 +2126,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 49,
               "column": 4
@@ -2003,6 +2138,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2010,7 +2148,7 @@
           "description": "Returns the animation timing by mixing in properties from `config` to the defaults defined\nby the animation.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 60,
               "column": 4
@@ -2033,7 +2171,7 @@
           "description": "Sets `transform` and `transformOrigin` properties along with the prefixed versions.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 72,
               "column": 4
@@ -2055,6 +2193,9 @@
               "name": "value"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2062,7 +2203,7 @@
           "description": "Called when the animation finishes.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 87,
               "column": 4
@@ -2078,6 +2219,9 @@
               "name": "config"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2122,7 +2266,7 @@
           "name": "animation-timing",
           "description": "Defines the animation timing.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -2133,7 +2277,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
       ],
@@ -2152,11 +2296,11 @@
       "properties": [
         {
           "name": "animationTiming",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Defines the animation timing.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -2167,17 +2311,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
+          "defaultValue": "{\"duration\":500,\"easing\":\"cubic-bezier(0.4, 0, 0.2, 1)\",\"fill\":\"both\"}",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
           "name": "isNeonAnimation",
           "type": "boolean",
-          "description": "Can be used to determine that elements implement this behavior.",
+          "description": "Can be used to determine that elements implement this behavior.\n     ",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 41,
               "column": 4
@@ -2188,7 +2335,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
           },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
@@ -2199,7 +2348,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 49,
               "column": 4
@@ -2211,6 +2360,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2218,7 +2370,7 @@
           "description": "Returns the animation timing by mixing in properties from `config` to the defaults defined\nby the animation.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 60,
               "column": 4
@@ -2241,7 +2393,7 @@
           "description": "Sets `transform` and `transformOrigin` properties along with the prefixed versions.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 72,
               "column": 4
@@ -2263,6 +2415,9 @@
               "name": "value"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2270,7 +2425,7 @@
           "description": "Called when the animation finishes.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 87,
               "column": 4
@@ -2286,6 +2441,9 @@
               "name": "config"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -2330,7 +2488,7 @@
           "name": "animation-timing",
           "description": "Defines the animation timing.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -2341,7 +2499,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
       ],
@@ -2360,7 +2518,7 @@
       "properties": [
         {
           "name": "animationConfig",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2374,16 +2532,18 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Array"
+            }
           }
         },
         {
           "name": "entryAnimation",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Convenience property for setting an 'entry' animation. Do not set `animationConfig.entry`\nmanually if using this. The animated node is set to `this` if using this property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 34,
               "column": 6
@@ -2395,18 +2555,19 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_entryAnimationChanged\""
+              "observer": "\"_entryAnimationChanged\"",
+              "attributeType": "String"
             }
           },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "exitAnimation",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Convenience property for setting an 'exit' animation. Do not set `animationConfig.exit`\nmanually if using this. The animated node is set to `this` if using this property.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 43,
               "column": 6
@@ -2418,14 +2579,15 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_exitAnimationChanged\""
+              "observer": "\"_exitAnimationChanged\"",
+              "attributeType": "String"
             }
           },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "selected",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2440,14 +2602,15 @@
           },
           "metadata": {
             "polymer": {
-              "notify": true
+              "notify": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "collapsed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2461,13 +2624,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "overflowed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2481,13 +2646,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "item",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "A reference the object used to create this nav item.",
           "privacy": "public",
           "sourceRange": {
@@ -2501,12 +2668,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           }
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The label text for the group's button.",
           "privacy": "public",
           "sourceRange": {
@@ -2520,12 +2689,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "icon",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "The icon for the group's button.",
           "privacy": "public",
           "sourceRange": {
@@ -2539,12 +2710,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           }
         },
         {
           "name": "emptyIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2558,13 +2731,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "opened",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "If `true` the group is expanded so the user can select a subitem.",
           "privacy": "public",
           "sourceRange": {
@@ -2578,12 +2753,14 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           }
         },
         {
           "name": "onlyShowIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "public",
           "sourceRange": {
@@ -2598,14 +2775,15 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_onlyShowIconChanged\""
+              "observer": "\"_onlyShowIconChanged\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "_reopen",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -2619,7 +2797,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         }
@@ -2630,7 +2810,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 50,
               "column": 4
@@ -2642,6 +2822,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -2649,7 +2832,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 58,
               "column": 4
@@ -2661,6 +2844,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -2668,7 +2854,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 66,
               "column": 4
@@ -2687,6 +2873,9 @@
               "name": "config2"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -2694,7 +2883,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 73,
               "column": 4
@@ -2717,7 +2906,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 81,
               "column": 4
@@ -2739,6 +2928,9 @@
               "name": "allConfigs"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -2746,7 +2938,7 @@
           "description": "An element implementing `Polymer.NeonAnimationRunnerBehavior` calls this method to configure\nan animation with an optional type. Elements implementing `Polymer.NeonAnimatableBehavior`\nshould define the property `animationConfig`, which is either a configuration object\nor a map of animation type to array of configuration objects.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 136,
               "column": 4
@@ -2769,7 +2961,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 21,
               "column": 4
@@ -2792,7 +2984,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 77,
               "column": 4
@@ -2815,7 +3007,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 88,
               "column": 4
@@ -2831,6 +3023,9 @@
               "name": "activeEntries"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -2838,7 +3033,7 @@
           "description": "Plays an animation with an optional `type`.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 102,
               "column": 4
@@ -2859,6 +3054,9 @@
               "type": "!Object="
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -2866,7 +3064,7 @@
           "description": "Cancels the currently running animations.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-runner-behavior.html",
+            "file": "../neon-animation/neon-animation-runner-behavior.html",
             "start": {
               "line": 136,
               "column": 4
@@ -2878,6 +3076,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationRunnerBehavior"
         },
         {
@@ -2895,7 +3096,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "detached",
@@ -2912,7 +3116,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_toggleGroup",
@@ -2929,7 +3136,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "openGroup",
@@ -2946,7 +3156,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "closeGroup",
@@ -2963,7 +3176,10 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_onNeonAnimationFinish",
@@ -2984,7 +3200,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleSelfTapped",
@@ -3005,7 +3224,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_onlyShowIconChanged",
@@ -3029,7 +3251,10 @@
             {
               "name": "oldVal"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         }
       ],
       "staticMethods": [],
@@ -3062,13 +3287,13 @@
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "Array | null | undefined"
         },
         {
           "name": "entry-animation",
           "description": "Convenience property for setting an 'entry' animation. Do not set `animationConfig.entry`\nmanually if using this. The animated node is set to `this` if using this property.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 34,
               "column": 6
@@ -3079,14 +3304,14 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
           "name": "exit-animation",
           "description": "Convenience property for setting an 'exit' animation. Do not set `animationConfig.exit`\nmanually if using this. The animated node is set to `this` if using this property.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animatable-behavior.html",
+            "file": "../neon-animation/neon-animatable-behavior.html",
             "start": {
               "line": 43,
               "column": 6
@@ -3097,7 +3322,7 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimatableBehavior"
         },
         {
@@ -3114,7 +3339,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "collapsed",
@@ -3130,7 +3355,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "overflowed",
@@ -3146,7 +3371,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "item",
@@ -3162,7 +3387,7 @@
             }
           },
           "metadata": {},
-          "type": "Object"
+          "type": "Object | null | undefined"
         },
         {
           "name": "label",
@@ -3178,7 +3403,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "icon",
@@ -3194,7 +3419,7 @@
             }
           },
           "metadata": {},
-          "type": "string"
+          "type": "string | null | undefined"
         },
         {
           "name": "empty-icon",
@@ -3210,7 +3435,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "opened",
@@ -3226,7 +3451,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "only-show-icon",
@@ -3242,7 +3467,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [
@@ -3262,7 +3487,6 @@
           "description": "",
           "name": "",
           "range": {
-            "file": "px-app-nav-subgroup.html",
             "start": {
               "line": 44,
               "column": 8
@@ -3283,11 +3507,11 @@
       "properties": [
         {
           "name": "animationTiming",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Defines the animation timing.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -3298,17 +3522,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
+          "defaultValue": "{\"duration\":500,\"easing\":\"cubic-bezier(0.4, 0, 0.2, 1)\",\"fill\":\"both\"}",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
           "name": "isNeonAnimation",
           "type": "boolean",
-          "description": "Can be used to determine that elements implement this behavior.",
+          "description": "Can be used to determine that elements implement this behavior.\n     ",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 41,
               "column": 4
@@ -3319,7 +3546,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
           },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
@@ -3330,7 +3559,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 49,
               "column": 4
@@ -3342,6 +3571,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3349,7 +3581,7 @@
           "description": "Returns the animation timing by mixing in properties from `config` to the defaults defined\nby the animation.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 60,
               "column": 4
@@ -3372,7 +3604,7 @@
           "description": "Sets `transform` and `transformOrigin` properties along with the prefixed versions.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 72,
               "column": 4
@@ -3394,6 +3626,9 @@
               "name": "value"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3401,7 +3636,7 @@
           "description": "Called when the animation finishes.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 87,
               "column": 4
@@ -3417,6 +3652,9 @@
               "name": "config"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3461,7 +3699,7 @@
           "name": "animation-timing",
           "description": "Defines the animation timing.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -3472,7 +3710,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
       ],
@@ -3491,11 +3729,11 @@
       "properties": [
         {
           "name": "animationTiming",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Defines the animation timing.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -3506,17 +3744,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
+          "defaultValue": "{\"duration\":500,\"easing\":\"cubic-bezier(0.4, 0, 0.2, 1)\",\"fill\":\"both\"}",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
           "name": "isNeonAnimation",
           "type": "boolean",
-          "description": "Can be used to determine that elements implement this behavior.",
+          "description": "Can be used to determine that elements implement this behavior.\n     ",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 41,
               "column": 4
@@ -3527,7 +3768,9 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
           },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
@@ -3538,7 +3781,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 49,
               "column": 4
@@ -3550,6 +3793,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3557,7 +3803,7 @@
           "description": "Returns the animation timing by mixing in properties from `config` to the defaults defined\nby the animation.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 60,
               "column": 4
@@ -3580,7 +3826,7 @@
           "description": "Sets `transform` and `transformOrigin` properties along with the prefixed versions.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 72,
               "column": 4
@@ -3602,6 +3848,9 @@
               "name": "value"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3609,7 +3858,7 @@
           "description": "Called when the animation finishes.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 87,
               "column": 4
@@ -3625,6 +3874,9 @@
               "name": "config"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         },
         {
@@ -3669,7 +3921,7 @@
           "name": "animation-timing",
           "description": "Defines the animation timing.",
           "sourceRange": {
-            "file": "bower_components/neon-animation/neon-animation-behavior.html",
+            "file": "../neon-animation/neon-animation-behavior.html",
             "start": {
               "line": 25,
               "column": 6
@@ -3680,7 +3932,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "Polymer.NeonAnimationBehavior"
         }
       ],
@@ -3699,7 +3951,7 @@
       "properties": [
         {
           "name": "item",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "A reference the object used to create this nav item.",
           "privacy": "public",
           "sourceRange": {
@@ -3714,13 +3966,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "label",
-          "type": "string",
+          "type": "string | null | undefined",
           "description": "Used as the label text for the item.",
           "privacy": "public",
           "sourceRange": {
@@ -3735,13 +3989,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "String"
+            }
           },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "selected",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the item is selected.",
           "privacy": "public",
           "sourceRange": {
@@ -3757,7 +4013,8 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false",
@@ -3765,7 +4022,7 @@
         },
         {
           "name": "collapsed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the item is in a collapsed dropdown.",
           "privacy": "public",
           "sourceRange": {
@@ -3781,7 +4038,8 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false",
@@ -3789,7 +4047,7 @@
         },
         {
           "name": "cancelSelect",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Cancels events that trigger selection.",
           "privacy": "public",
           "sourceRange": {
@@ -3804,14 +4062,16 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
           "name": "parentSelected",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` if the subitem's parent is selected.",
           "privacy": "public",
           "sourceRange": {
@@ -3826,7 +4086,8 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"updateStyles\""
+              "observer": "\"updateStyles\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
@@ -3850,6 +4111,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -3869,6 +4133,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -3922,6 +4189,9 @@
               "name": "evt"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppNavBehavior.Item"
         }
       ],
@@ -3956,7 +4226,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -3974,7 +4244,7 @@
             }
           },
           "metadata": {},
-          "type": "string",
+          "type": "string | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -3992,7 +4262,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -4010,7 +4280,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -4028,7 +4298,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "inheritedFrom": "PxAppNavBehavior.Item"
         },
         {
@@ -4045,7 +4315,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         }
       ],
       "events": [],
@@ -4063,56 +4333,59 @@
       "properties": [
         {
           "name": "_parentResizable",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "The closest ancestor element that implements `IronResizableBehavior`.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 36,
+              "line": 41,
               "column": 6
             },
             "end": {
-              "line": 39,
-              "column": 7
+              "line": 41,
+              "column": 75
             }
           },
           "metadata": {
             "polymer": {
-              "observer": "\"_parentResizableChanged\""
+              "observer": "\"_parentResizableChanged\"",
+              "attributeType": "Object"
             }
           },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
           "name": "_notifyingDescendant",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "True if this element is currently notifying its descendant elements of\nresize.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 45,
+              "line": 47,
               "column": 6
             },
             "end": {
-              "line": 48,
-              "column": 7
+              "line": 47,
+              "column": 57
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false",
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
           "name": "items",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "An array of objects that will be used to build the nav. Top-level items\ncan optionally have one level of children beneath them, turning the\ntop-level item into a dropdown group.\n\nSelecting an item automatically selects its parent if it has one.\nFor the navigation, top-level items with children cannot be selected\ndirectly - instead, users can select a child item and its parent will\nalso be marked as selected (and set as the `selectedItemParent`).\n\nAll items should have at least the following properties:\n\n- {String} id - A unique string that identifies the item. Should only\ncontain valid ASCII characters. It's recommended to only use URI-safe\ncharacters to allow for easy binding to the URL. Examples: 'home' or 'alerts'\n- {String} label - A short, human-readable text label for the item.\n\nThe following optional properties can be used:\n\n- {Array} children - An array of subitem objects that are children of\nthe item. Each child item should also have an `id` and `label`, and\nmay have its own child items.\n- {Boolean=false} isTerminal - If `true` the item cannot have any children.\nTerminal items can only be selected, not activated (navigated into).\nItems with children should not be marked as terminal.\n- {Boolean=false} isExhausted - If `true` the item does not have any\nadditional children available to load from a remote data source.\n- {Boolean=true} isSelectable - If `false` the item can only be activated\n(navigated into) to view its children, not selected.\n\nThe following is an example of a list of valid nav items:\n\n    [\n      { \"label\" : \"Home\",   \"id\" : \"home\" },\n      { \"label\" : \"Alerts\", \"id\" : \"alerts\" },\n      { \"label\" : \"Assets\", \"id\" : \"assets\", \"children\": [\n        { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n        { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n      ] }\n    ]\n\nThe item property names can be changed, e.g. to choose a different item\nproperty to serve as a unique ID. See the `keys` property for details.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 58,
               "column": 6
@@ -4123,17 +4396,19 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Array"
+            }
           },
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "keys",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "Changes the item properties (keys) that will be used internally to find\neach item's unique ID, label, and child list.\n\nUse this property if you already have a predefined data schema for your\napplication and want to customize this component to match your schema.\nOtherwise, it's recommended to leave the defaults.\n\nThe following properties can be set:\n\n- id: [default='id'] a unique ID for the item\n- label: [default='label'] a human-readable label\n- children: [default='children'] an array of child items\n\nIf you want to configure any keys, you must set all the keys. If any\nof the keys are not defined, the navigation will fail.\n\nFor example, the schema could be changed to the following:\n\n    {\n      \"id\" : \"assetId\",\n      \"label\" : \"assetName\",\n      \"children\" : \"subAssets\"\n    }",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 88,
               "column": 6
@@ -4144,18 +4419,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "defaultValue": "{\"id\":\"id\",\"label\":\"label\",\"children\":\"children\",\"icon\":\"icon\"}",
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "_assetGraph",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 100,
               "column": 6
@@ -4166,18 +4443,20 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Object"
+            }
           },
           "defaultValue": "null",
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "__rootItems",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "",
           "privacy": "private",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 104,
               "column": 6
@@ -4188,17 +4467,19 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Array"
+            }
           },
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "selected",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "A reference to the currently selected item. Use this property to set the\nselected item directly. The object passed to this property must be a\ndirect reference to one of the `items` objects. Changing this property\nwill automatically update the `selectedRoute`.\n\nSee `selectedRoute` for an alternative way to select items.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 56,
               "column": 8
@@ -4210,18 +4491,19 @@
           },
           "metadata": {
             "polymer": {
-              "notify": true
+              "notify": true,
+              "attributeType": "Object"
             }
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "selectedRoute",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "The route to the selected item as an array of strings. Use this property\nto set the selected item by route, or to bind to updates when the\nselected item is changed. Changing this property will automatically\nupdate the `selected` item.\n\nThe route array starts at the top of the graph and ends with the selected\nitem. Each route entry is a string that corresponds to the unique ID\nof an item. The item property that this unique ID will be taken from can be\nconfigured with the `key` property. By default, it will be `item.id`.\n\n\nFor example, given the following graph:\n\n    [\n      {\n        \"label\" : \"Dashboards\",\n        \"id\" : \"dash\",\n        \"children\" : [\n          { \"label\" : \"Truck Statuses\", \"id\" : \"trucks\" },\n          { \"label\" : \"Generator Alerts\", \"id\" : \"generators\" }\n        ]\n      },\n    ]\n\nTo select the \"Truck Statuses\" page, set the route array to:\n\n    [\"dash\", \"trucks\"]\n\nIf the user then selects the \"Generator Alerts\" item, the route array\nwould be replaced with a new array with the following entries:\n\n    [\"dash\", \"generators\"]",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 99,
               "column": 8
@@ -4233,18 +4515,19 @@
           },
           "metadata": {
             "polymer": {
-              "notify": true
+              "notify": true,
+              "attributeType": "Array"
             }
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "selectedMeta",
-          "type": "Object",
+          "type": "Object | null | undefined",
           "description": "[Read-only] Helpful metadata about the selected item.\n\nSINGLE-SELECT MODE: An object with the following information about\nthe selected item (if no selected item, all values will be null):\n\n- {Object} `item`: Reference to the selected item\n- {Array} `path`: The path to the selected item as an array. Begins with\nthe top-most item in the graph and ends with the selected item. It\nthe selected item is at the top of the graph, the array will include\nonly the selected item.\n- {Array} `route`: Route to the selected item (see `selectedRoute`\nfor more information on how this is created)\n- {Object} `parent`: Reference to the selected item's parent,\nor `null` if it has no parent\n- {Array} `children`: Reference to the selected item's children,\nor empty array if it has no children\n- {Array} `siblings`: Reference to the selected item's siblings (e.g.\nthe children of its parent) or an array with only the selected item\nif it has no children.\n\nMUTLI-SELECT MODE: An array of objects with metadata about each\nselected item. Each object will be contain the same values as above.\nIf no items are selected, all values will be null.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 132,
               "column": 8
@@ -4257,7 +4540,8 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Object"
             }
           },
           "defaultValue": "null",
@@ -4269,7 +4553,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 160,
               "column": 6
@@ -4280,13 +4564,38 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
+          },
+          "inheritedFrom": "PxAppBehavior.AssetSelectable"
+        },
+        {
+          "name": "multiSelect",
+          "type": "?",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "start": {
+              "line": 162,
+              "column": 6
+            },
+            "end": {
+              "line": 164,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": false
+            }
           },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "collapseAll",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` to collapse all nav items into a dropdown. Makes the nav\nmore accessible on mobile devices.\n\nUse `collapseAt` instead to dynamically collapse the nav based on the\ncurrent window size.",
           "privacy": "public",
           "sourceRange": {
@@ -4302,14 +4611,15 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "observer": "\"_handleCollapseAllChanged\""
+              "observer": "\"_handleCollapseAllChanged\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "collapseAt",
-          "type": "number",
+          "type": "number | null | undefined",
           "description": "The width below which the nav will automatically collapse. Use a number\n(e.g. `450`) which will be converted to a pixel value (e.g. '450px').\n\nThis property will overwrite the `collapseAll` property. Avoid data\nbinding in to both properties at the same time.",
           "privacy": "public",
           "sourceRange": {
@@ -4324,13 +4634,14 @@
           },
           "metadata": {
             "polymer": {
-              "observer": "\"rebuild\""
+              "observer": "\"rebuild\"",
+              "attributeType": "Number"
             }
           }
         },
         {
           "name": "collapseWithIcon",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Set to `true` to show an open/close icon for the collapsed menu instead\nof the selected item.",
           "privacy": "public",
           "sourceRange": {
@@ -4344,13 +4655,15 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
           "name": "collapseOpened",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "When `true`, the collapse dropdown is open. When `false`, it is closed\nor does not exist.",
           "privacy": "public",
           "sourceRange": {
@@ -4365,14 +4678,15 @@
           },
           "metadata": {
             "polymer": {
-              "notify": true
+              "notify": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "vertical",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "Shows the vertical navigation. The navigation will be take up the\nfull left-hand side of the page.",
           "privacy": "public",
           "sourceRange": {
@@ -4386,14 +4700,16 @@
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "attributeType": "Boolean"
+            }
           },
           "defaultValue": "false"
         },
         {
-          "name": "verticalOpened",
-          "type": "boolean",
-          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
+          "name": "verticalExpanded",
+          "type": "boolean | null | undefined",
+          "description": "Shows the vertical navigation in an expanded view. The navigation will take up the\nfull left-hand side of the page.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -4408,15 +4724,16 @@
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "observer": "\"_handleVerticalExpandedViewChanged\"",
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
-          "name": "visibleItems",
-          "type": "Array",
-          "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
+          "name": "verticalOpened",
+          "type": "boolean | null | undefined",
+          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -4424,165 +4741,199 @@
               "column": 6
             },
             "end": {
-              "line": 237,
+              "line": 239,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "visibleItems",
+          "type": "Array | null | undefined",
+          "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 245,
+              "column": 6
+            },
+            "end": {
+              "line": 249,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         },
         {
           "name": "overflowedItems",
-          "type": "Array",
+          "type": "Array | null | undefined",
           "description": "An array of items that are currently hidden in the overflow dropdown\nor in the collapsed dropdown.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 243,
+              "line": 255,
               "column": 6
             },
             "end": {
-              "line": 247,
+              "line": 259,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Array"
             }
           }
         },
         {
           "name": "allCollapsed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "True if all items are collapsed.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 264,
               "column": 6
             },
             "end": {
-              "line": 258,
+              "line": 270,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "anyOverflowed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "True if some items are overflowed, or all items are collapsed.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 263,
+              "line": 275,
               "column": 6
             },
             "end": {
-              "line": 269,
+              "line": 281,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "someOverflowed",
-          "type": "boolean",
+          "type": "boolean | null | undefined",
           "description": "True if some items are overflowed, and some items are visible.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 286,
               "column": 6
             },
             "end": {
-              "line": 280,
+              "line": 292,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
               "notify": true,
-              "readOnly": true
+              "readOnly": true,
+              "attributeType": "Boolean"
             }
           },
           "defaultValue": "false"
         },
         {
           "name": "fitInto",
-          "type": "HTMLElement",
+          "type": "HTMLElement | null | undefined",
           "description": "Reference the HTMLElement to fit any nav dropdowns into. Dropdowns will\nautomatically be constrained to fit their width and height inside\nthis container element. If the nav items in the dropdown are wider than\nthe container, they will be truncated with ellipses. If the nav items\nin the dropdown are taller than the container, the dropdown will show\nand scroll bar so users can see the overset items.\n\nBy default, dropdowns will be fit into the `window`. If your nav is\nplaced inside of another container, and should not expand to take\nup all available space in the window, use this property to constrain\nthe dropdowns' sizes.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 295,
+              "line": 307,
               "column": 6
             },
             "end": {
-              "line": 297,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          }
-        },
-        {
-          "name": "_availableWidth",
-          "type": "number",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 299,
-              "column": 6
-            },
-            "end": {
-              "line": 302,
+              "line": 309,
               "column": 7
             }
           },
           "metadata": {
             "polymer": {
-              "observer": "\"rebuild\""
+              "attributeType": "HTMLElement"
+            }
+          }
+        },
+        {
+          "name": "_availableWidth",
+          "type": "number | null | undefined",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 311,
+              "column": 6
+            },
+            "end": {
+              "line": 314,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"rebuild\"",
+              "attributeType": "Number"
             }
           }
         },
         {
           "name": "_statics",
           "type": "Object",
-          "description": "Static values we use to calculate the size of items when we do math to\nmeasure if they can fit in the nav.",
+          "description": "Static values we use to calculate the size of items when we do math to\nmeasure if they can fit in the nav.\n     ",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 309,
+              "line": 321,
               "column": 4
             },
             "end": {
-              "line": 315,
+              "line": 327,
               "column": 5
             }
           },
           "metadata": {
-            "polymer": {}
+            "polymer": {
+              "readOnly": false
+            }
           }
         }
       ],
@@ -4592,7 +4943,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 141,
               "column": 6
@@ -4604,6 +4955,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -4611,18 +4965,21 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 62,
+              "line": 61,
               "column": 4
             },
             "end": {
-              "line": 64,
+              "line": 63,
               "column": 5
             }
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4630,9 +4987,9 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 66,
+              "line": 65,
               "column": 4
             },
             "end": {
@@ -4642,6 +4999,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4649,7 +5009,7 @@
           "description": "Can be called to manually notify a resizable and its descendant\nresizables of a resize change.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
               "line": 80,
               "column": 4
@@ -4661,6 +5021,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4668,13 +5031,13 @@
           "description": "Used to assign the closest resizable ancestor to this resizable\nif the ancestor detects a request for notifications.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
               "line": 98,
               "column": 4
             },
             "end": {
-              "line": 100,
+              "line": 110,
               "column": 5
             }
           },
@@ -4684,6 +5047,9 @@
               "name": "parentResizable"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4691,13 +5057,13 @@
           "description": "Used to remove a resizable descendant from the list of descendants\nthat should be notified of a resize change.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 106,
+              "line": 116,
               "column": 4
             },
             "end": {
-              "line": 113,
+              "line": 123,
               "column": 5
             }
           },
@@ -4707,6 +5073,9 @@
               "name": "target"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4714,14 +5083,14 @@
           "description": "This method can be overridden to filter nested elements that should or\nshould not be notified by the current element. Return true if an element\nshould be notified, or false if it should not be notified.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 124,
+              "line": 134,
               "column": 4
             },
             "end": {
-              "line": 124,
-              "column": 59
+              "line": 136,
+              "column": 5
             }
           },
           "metadata": {},
@@ -4743,13 +5112,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 126,
+              "line": 138,
               "column": 4
             },
             "end": {
-              "line": 138,
+              "line": 150,
               "column": 5
             }
           },
@@ -4759,6 +5128,9 @@
               "name": "event"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4766,18 +5138,21 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 140,
+              "line": 152,
               "column": 4
             },
             "end": {
-              "line": 145,
+              "line": 154,
               "column": 5
             }
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4785,13 +5160,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 147,
+              "line": 156,
               "column": 4
             },
             "end": {
-              "line": 162,
+              "line": 166,
               "column": 5
             }
           },
@@ -4801,6 +5176,9 @@
               "name": "event"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4808,13 +5186,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 164,
+              "line": 168,
               "column": 4
             },
             "end": {
-              "line": 168,
+              "line": 172,
               "column": 5
             }
           },
@@ -4824,6 +5202,9 @@
               "name": "parentResizable"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4831,13 +5212,13 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 170,
+              "line": 174,
               "column": 4
             },
             "end": {
-              "line": 181,
+              "line": 185,
               "column": 5
             }
           },
@@ -4847,6 +5228,9 @@
               "name": "descendant"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4854,18 +5238,43 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/iron-resizable-behavior/iron-resizable-behavior.html",
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
             "start": {
-              "line": 183,
+              "line": 187,
               "column": 4
             },
             "end": {
-              "line": 211,
+              "line": 232,
               "column": 5
             }
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "Polymer.IronResizableBehavior"
+        },
+        {
+          "name": "_findParent",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "../iron-resizable-behavior/iron-resizable-behavior.html",
+            "start": {
+              "line": 234,
+              "column": 4
+            },
+            "end": {
+              "line": 246,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "Polymer.IronResizableBehavior"
         },
         {
@@ -4945,7 +5354,7 @@
           "description": "",
           "privacy": "private",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 115,
               "column": 4
@@ -4971,7 +5380,7 @@
           "description": "",
           "privacy": "private",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 142,
               "column": 4
@@ -4987,6 +5396,9 @@
               "name": "record"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
@@ -4994,7 +5406,7 @@
           "description": "Adds a child or children to the requested node. Pass a single object\nto add one child, or an array of objects to add multiple children.\n\nThe `node` should be a direct reference to one of the objects already\nin the asset graph (e.g. one of the `items` objects or another node\nadded through the `addChildren` API). To remove children from the root\nof the graph, call with `node` as null.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 176,
               "column": 4
@@ -5018,6 +5430,9 @@
               "name": "options"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
@@ -5025,7 +5440,7 @@
           "description": "Removes a child or children from the requested node. Pass `children` a\nsingle object to remove one child, an array of objects to remove multiple\nchildren, or null to remove all children.\n\nThe `node` should be a direct reference to one of the objects already\nin the asset graph (e.g. one of the `items` objects or another node\nadded through the `addChildren` API). To add children to the root\nof the graph, call with `node` as null.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 203,
               "column": 4
@@ -5049,37 +5464,17 @@
               "name": "options"
             }
           ],
-          "inheritedFrom": "PxAppBehavior.AssetGraph"
-        },
-        {
-          "name": "multiSelect",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
-            "start": {
-              "line": 166,
-              "column": 6
-            },
-            "end": {
-              "line": 171,
-              "column": 7
-            }
+          "return": {
+            "type": "void"
           },
-          "metadata": {},
-          "params": [
-            {
-              "name": "val"
-            }
-          ],
-          "inheritedFrom": "PxAppBehavior.AssetSelectable"
+          "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "_toggleMultiSelect",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 173,
               "column": 6
@@ -5095,6 +5490,9 @@
               "name": "allowMultiSelect"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5102,7 +5500,7 @@
           "description": "Selects an item. Call with an object that is a direct reference to one\nof the `items` objects.\n\nIf multi-select mode is enabled, call with an object to select a single\nitem or an array of objects to select multiple items.\n\nAn optional source of the change can be provided as a string.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 196,
               "column": 6
@@ -5135,7 +5533,7 @@
           "description": "Deselects an item. Call with a direct reference to the selected item\nor with `null` to deselect whatever is selected.\n\nIf multi-select mode is enabled, call with a direct reference to one of\nthe selected items to deselect it, or an array of selected items to\ndeselect multiple, or `null` to deselect all items.",
           "privacy": "public",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 232,
               "column": 6
@@ -5168,7 +5566,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 253,
               "column": 6
@@ -5191,7 +5589,7 @@
           "description": "The event `detail.item` should be a reference to an item in the asset graph.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 276,
               "column": 6
@@ -5207,6 +5605,9 @@
               "name": "evt"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5214,7 +5615,7 @@
           "description": "The event `detail.item` should be a reference to an item in the asset graph.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 286,
               "column": 6
@@ -5230,6 +5631,9 @@
               "name": "evt"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5237,7 +5641,7 @@
           "description": "Should only sync changes to `selectedRoute` when necessary to avoid\ninfinite loop of `selected` observer triggering `selectedRoute` observer.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 297,
               "column": 6
@@ -5253,6 +5657,9 @@
               "name": "ref"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5260,7 +5667,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 309,
               "column": 6
@@ -5276,6 +5683,9 @@
               "name": "route"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5283,7 +5693,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 334,
               "column": 6
@@ -5299,6 +5709,9 @@
               "name": "route"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5306,7 +5719,7 @@
           "description": "Should only sync changes to `selectedRoute` when necessary to avoid\ninfinite loop of `selected` observer triggering `selectedRoute` observer.",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 363,
               "column": 5
@@ -5322,6 +5735,9 @@
               "name": "ref"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5329,7 +5745,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 375,
               "column": 6
@@ -5352,7 +5768,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 380,
               "column": 6
@@ -5368,6 +5784,9 @@
               "name": "selected"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5375,7 +5794,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 402,
               "column": 6
@@ -5391,6 +5810,9 @@
               "name": "selected"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5398,7 +5820,7 @@
           "description": "",
           "privacy": "private",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 421,
               "column": 6
@@ -5410,6 +5832,9 @@
           },
           "metadata": {},
           "params": [],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5417,7 +5842,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 436,
               "column": 6
@@ -5443,7 +5868,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 445,
               "column": 6
@@ -5462,6 +5887,9 @@
               "name": "source"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -5469,7 +5897,7 @@
           "description": "",
           "privacy": "protected",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 483,
               "column": 6
@@ -5488,27 +5916,13 @@
               "name": "source"
             }
           ],
+          "return": {
+            "type": "void"
+          },
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "_handleRebuild",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 330,
-              "column": 4
-            },
-            "end": {
-              "line": 340,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
-          "name": "_handleMouseEnter",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -5522,10 +5936,13 @@
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
-          "name": "_handleMouseLeave",
+          "name": "_handleMouseEnter",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -5534,12 +5951,35 @@
               "column": 4
             },
             "end": {
-              "line": 363,
+              "line": 364,
               "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_handleMouseLeave",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 366,
+              "column": 4
+            },
+            "end": {
+              "line": 375,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleItemVisibilityChanged",
@@ -5547,16 +5987,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 369,
+              "line": 381,
               "column": 4
             },
             "end": {
-              "line": 376,
+              "line": 388,
               "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleCollapseAllChanged",
@@ -5564,11 +6007,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 385,
+              "line": 397,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 405,
               "column": 5
             }
           },
@@ -5578,7 +6021,34 @@
               "name": "collapseAll",
               "type": "Boolean"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_handleVerticalExpandedViewChanged",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 407,
+              "column": 4
+            },
+            "end": {
+              "line": 411,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "verticalExpanded"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_itemSelectedByEvent",
@@ -5586,11 +6056,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 398,
+              "line": 415,
               "column": 4
             },
             "end": {
-              "line": 402,
+              "line": 419,
               "column": 5
             }
           },
@@ -5599,7 +6069,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_handleResize",
@@ -5607,11 +6080,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 412,
+              "line": 429,
               "column": 4
             },
             "end": {
-              "line": 424,
+              "line": 441,
               "column": 5
             }
           },
@@ -5620,7 +6093,10 @@
             {
               "name": "evt"
             }
-          ]
+          ],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "_measureAvailableWidth",
@@ -5628,16 +6104,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 432,
+              "line": 449,
               "column": 4
             },
             "end": {
-              "line": 442,
+              "line": 459,
               "column": 5
             }
           },
           "metadata": {},
-          "params": []
+          "params": [],
+          "return": {
+            "type": "void"
+          }
         },
         {
           "name": "rebuild",
@@ -5645,11 +6124,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 455,
+              "line": 472,
               "column": 4
             },
             "end": {
-              "line": 489,
+              "line": 506,
               "column": 5
             }
           },
@@ -5666,11 +6145,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 503,
+              "line": 520,
               "column": 4
             },
             "end": {
-              "line": 534,
+              "line": 551,
               "column": 5
             }
           },
@@ -5703,11 +6182,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 546,
+              "line": 563,
               "column": 4
             },
             "end": {
-              "line": 549,
+              "line": 566,
               "column": 5
             }
           },
@@ -5730,11 +6209,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 558,
+              "line": 575,
               "column": 4
             },
             "end": {
-              "line": 567,
+              "line": 584,
               "column": 5
             }
           },
@@ -5755,19 +6234,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 582,
+              "line": 599,
               "column": 4
             },
             "end": {
-              "line": 595,
+              "line": 612,
               "column": 5
             }
           },
           "metadata": {},
           "params": [],
           "return": {
-            "type": "Number",
-            "desc": "styles.iconSize - The size of the icon in pixels as a number"
+            "type": "Object",
+            "desc": "styles"
           }
         },
         {
@@ -5776,11 +6255,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 606,
+              "line": 623,
               "column": 4
             },
             "end": {
-              "line": 618,
+              "line": 635,
               "column": 5
             }
           },
@@ -5810,11 +6289,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 626,
+              "line": 643,
               "column": 4
             },
             "end": {
-              "line": 629,
+              "line": 646,
               "column": 5
             }
           },
@@ -5836,11 +6315,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 651,
+              "line": 668,
               "column": 4
             },
             "end": {
-              "line": 659,
+              "line": 676,
               "column": 5
             }
           },
@@ -5877,11 +6356,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 684,
+              "line": 701,
               "column": 4
             },
             "end": {
-              "line": 701,
+              "line": 718,
               "column": 5
             }
           },
@@ -5926,11 +6405,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 709,
+              "line": 726,
               "column": 4
             },
             "end": {
-              "line": 714,
+              "line": 731,
               "column": 5
             }
           },
@@ -5950,11 +6429,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 725,
+              "line": 742,
               "column": 4
             },
             "end": {
-              "line": 727,
+              "line": 744,
               "column": 5
             }
           },
@@ -5979,11 +6458,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 737,
+              "line": 754,
               "column": 4
             },
             "end": {
-              "line": 739,
+              "line": 756,
               "column": 5
             }
           },
@@ -6008,11 +6487,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 749,
+              "line": 766,
               "column": 4
             },
             "end": {
-              "line": 751,
+              "line": 768,
               "column": 5
             }
           },
@@ -6041,11 +6520,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 758,
+              "line": 775,
               "column": 4
             },
             "end": {
-              "line": 760,
+              "line": 777,
               "column": 5
             }
           },
@@ -6070,11 +6549,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 769,
+              "line": 786,
               "column": 4
             },
             "end": {
-              "line": 772,
+              "line": 789,
               "column": 5
             }
           },
@@ -6095,11 +6574,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 781,
+              "line": 798,
               "column": 4
             },
             "end": {
-              "line": 784,
+              "line": 801,
               "column": 5
             }
           },
@@ -6120,11 +6599,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 792,
+              "line": 809,
               "column": 4
             },
             "end": {
-              "line": 794,
+              "line": 811,
               "column": 5
             }
           },
@@ -6148,11 +6627,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 802,
+              "line": 819,
               "column": 4
             },
             "end": {
-              "line": 804,
+              "line": 821,
               "column": 5
             }
           },
@@ -6176,11 +6655,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 813,
+              "line": 830,
               "column": 4
             },
             "end": {
-              "line": 817,
+              "line": 834,
               "column": 5
             }
           },
@@ -6208,11 +6687,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 826,
+              "line": 843,
               "column": 4
             },
             "end": {
-              "line": 828,
+              "line": 845,
               "column": 5
             }
           },
@@ -6237,11 +6716,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 835,
+              "line": 852,
               "column": 4
             },
             "end": {
-              "line": 837,
+              "line": 854,
               "column": 5
             }
           },
@@ -6266,11 +6745,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 844,
+              "line": 861,
               "column": 4
             },
             "end": {
-              "line": 846,
+              "line": 863,
               "column": 5
             }
           },
@@ -6295,11 +6774,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 853,
+              "line": 870,
               "column": 4
             },
             "end": {
-              "line": 855,
+              "line": 872,
               "column": 5
             }
           },
@@ -6333,7 +6812,7 @@
           "column": 10
         },
         "end": {
-          "line": 856,
+          "line": 873,
           "column": 3
         }
       },
@@ -6344,7 +6823,7 @@
           "name": "items",
           "description": "An array of objects that will be used to build the nav. Top-level items\ncan optionally have one level of children beneath them, turning the\ntop-level item into a dropdown group.\n\nSelecting an item automatically selects its parent if it has one.\nFor the navigation, top-level items with children cannot be selected\ndirectly - instead, users can select a child item and its parent will\nalso be marked as selected (and set as the `selectedItemParent`).\n\nAll items should have at least the following properties:\n\n- {String} id - A unique string that identifies the item. Should only\ncontain valid ASCII characters. It's recommended to only use URI-safe\ncharacters to allow for easy binding to the URL. Examples: 'home' or 'alerts'\n- {String} label - A short, human-readable text label for the item.\n\nThe following optional properties can be used:\n\n- {Array} children - An array of subitem objects that are children of\nthe item. Each child item should also have an `id` and `label`, and\nmay have its own child items.\n- {Boolean=false} isTerminal - If `true` the item cannot have any children.\nTerminal items can only be selected, not activated (navigated into).\nItems with children should not be marked as terminal.\n- {Boolean=false} isExhausted - If `true` the item does not have any\nadditional children available to load from a remote data source.\n- {Boolean=true} isSelectable - If `false` the item can only be activated\n(navigated into) to view its children, not selected.\n\nThe following is an example of a list of valid nav items:\n\n    [\n      { \"label\" : \"Home\",   \"id\" : \"home\" },\n      { \"label\" : \"Alerts\", \"id\" : \"alerts\" },\n      { \"label\" : \"Assets\", \"id\" : \"assets\", \"children\": [\n        { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n        { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n      ] }\n    ]\n\nThe item property names can be changed, e.g. to choose a different item\nproperty to serve as a unique ID. See the `keys` property for details.",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 58,
               "column": 6
@@ -6355,14 +6834,14 @@
             }
           },
           "metadata": {},
-          "type": "Array",
+          "type": "Array | null | undefined",
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "keys",
           "description": "Changes the item properties (keys) that will be used internally to find\neach item's unique ID, label, and child list.\n\nUse this property if you already have a predefined data schema for your\napplication and want to customize this component to match your schema.\nOtherwise, it's recommended to leave the defaults.\n\nThe following properties can be set:\n\n- id: [default='id'] a unique ID for the item\n- label: [default='label'] a human-readable label\n- children: [default='children'] an array of child items\n\nIf you want to configure any keys, you must set all the keys. If any\nof the keys are not defined, the navigation will fail.\n\nFor example, the schema could be changed to the following:\n\n    {\n      \"id\" : \"assetId\",\n      \"label\" : \"assetName\",\n      \"children\" : \"subAssets\"\n    }",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-graph.es6.js",
             "start": {
               "line": 88,
               "column": 6
@@ -6373,14 +6852,14 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "PxAppBehavior.AssetGraph"
         },
         {
           "name": "selected",
           "description": "A reference to the currently selected item. Use this property to set the\nselected item directly. The object passed to this property must be a\ndirect reference to one of the `items` objects. Changing this property\nwill automatically update the `selectedRoute`.\n\nSee `selectedRoute` for an alternative way to select items.",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 56,
               "column": 8
@@ -6391,14 +6870,14 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "selected-route",
           "description": "The route to the selected item as an array of strings. Use this property\nto set the selected item by route, or to bind to updates when the\nselected item is changed. Changing this property will automatically\nupdate the `selected` item.\n\nThe route array starts at the top of the graph and ends with the selected\nitem. Each route entry is a string that corresponds to the unique ID\nof an item. The item property that this unique ID will be taken from can be\nconfigured with the `key` property. By default, it will be `item.id`.\n\n\nFor example, given the following graph:\n\n    [\n      {\n        \"label\" : \"Dashboards\",\n        \"id\" : \"dash\",\n        \"children\" : [\n          { \"label\" : \"Truck Statuses\", \"id\" : \"trucks\" },\n          { \"label\" : \"Generator Alerts\", \"id\" : \"generators\" }\n        ]\n      },\n    ]\n\nTo select the \"Truck Statuses\" page, set the route array to:\n\n    [\"dash\", \"trucks\"]\n\nIf the user then selects the \"Generator Alerts\" item, the route array\nwould be replaced with a new array with the following entries:\n\n    [\"dash\", \"generators\"]",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 99,
               "column": 8
@@ -6409,14 +6888,14 @@
             }
           },
           "metadata": {},
-          "type": "Array",
+          "type": "Array | null | undefined",
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
           "name": "selected-meta",
           "description": "[Read-only] Helpful metadata about the selected item.\n\nSINGLE-SELECT MODE: An object with the following information about\nthe selected item (if no selected item, all values will be null):\n\n- {Object} `item`: Reference to the selected item\n- {Array} `path`: The path to the selected item as an array. Begins with\nthe top-most item in the graph and ends with the selected item. It\nthe selected item is at the top of the graph, the array will include\nonly the selected item.\n- {Array} `route`: Route to the selected item (see `selectedRoute`\nfor more information on how this is created)\n- {Object} `parent`: Reference to the selected item's parent,\nor `null` if it has no parent\n- {Array} `children`: Reference to the selected item's children,\nor empty array if it has no children\n- {Array} `siblings`: Reference to the selected item's siblings (e.g.\nthe children of its parent) or an array with only the selected item\nif it has no children.\n\nMUTLI-SELECT MODE: An array of objects with metadata about each\nselected item. Each object will be contain the same values as above.\nIf no items are selected, all values will be null.",
           "sourceRange": {
-            "file": "bower_components/px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
+            "file": "../px-app-helpers/px-app-asset/px-app-asset-behavior-selectable.html",
             "start": {
               "line": 132,
               "column": 8
@@ -6427,7 +6906,7 @@
             }
           },
           "metadata": {},
-          "type": "Object",
+          "type": "Object | null | undefined",
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
         {
@@ -6444,7 +6923,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "collapse-at",
@@ -6460,7 +6939,7 @@
             }
           },
           "metadata": {},
-          "type": "number"
+          "type": "number | null | undefined"
         },
         {
           "name": "collapse-with-icon",
@@ -6476,7 +6955,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "collapse-opened",
@@ -6492,7 +6971,7 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "vertical",
@@ -6508,11 +6987,11 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
-          "name": "vertical-opened",
-          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
+          "name": "vertical-expanded",
+          "description": "Shows the vertical navigation in an expanded view. The navigation will take up the\nfull left-hand side of the page.",
           "sourceRange": {
             "start": {
               "line": 221,
@@ -6524,110 +7003,126 @@
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
-          "name": "visible-items",
-          "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
+          "name": "vertical-opened",
+          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
           "sourceRange": {
             "start": {
               "line": 233,
               "column": 6
             },
             "end": {
-              "line": 237,
+              "line": 239,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "visible-items",
+          "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
+          "sourceRange": {
+            "start": {
+              "line": 245,
+              "column": 6
+            },
+            "end": {
+              "line": 249,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "Array | null | undefined"
         },
         {
           "name": "overflowed-items",
           "description": "An array of items that are currently hidden in the overflow dropdown\nor in the collapsed dropdown.",
           "sourceRange": {
             "start": {
-              "line": 243,
+              "line": 255,
               "column": 6
             },
             "end": {
-              "line": 247,
+              "line": 259,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "Array"
+          "type": "Array | null | undefined"
         },
         {
           "name": "all-collapsed",
           "description": "True if all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 264,
               "column": 6
             },
             "end": {
-              "line": 258,
+              "line": 270,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "any-overflowed",
           "description": "True if some items are overflowed, or all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 263,
+              "line": 275,
               "column": 6
             },
             "end": {
-              "line": 269,
+              "line": 281,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "some-overflowed",
           "description": "True if some items are overflowed, and some items are visible.",
           "sourceRange": {
             "start": {
-              "line": 274,
+              "line": 286,
               "column": 6
             },
             "end": {
-              "line": 280,
+              "line": 292,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "boolean"
+          "type": "boolean | null | undefined"
         },
         {
           "name": "fit-into",
           "description": "Reference the HTMLElement to fit any nav dropdowns into. Dropdowns will\nautomatically be constrained to fit their width and height inside\nthis container element. If the nav items in the dropdown are wider than\nthe container, they will be truncated with ellipses. If the nav items\nin the dropdown are taller than the container, the dropdown will show\nand scroll bar so users can see the overset items.\n\nBy default, dropdowns will be fit into the `window`. If your nav is\nplaced inside of another container, and should not expand to take\nup all available space in the window, use this property to constrain\nthe dropdowns' sizes.",
           "sourceRange": {
             "start": {
-              "line": 295,
+              "line": 307,
               "column": 6
             },
             "end": {
-              "line": 297,
+              "line": 309,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "HTMLElement"
+          "type": "HTMLElement | null | undefined"
         }
       ],
       "events": [
         {
           "type": "CustomEvent",
           "name": "px-app-asset-selected",
-          "description": "px-app-asset-selected",
+          "description": "Fired when a new item is selected. Includes details about how the item\nwas selected, and information about the new selected item.\n\nThe `source` property is a string describing what triggered\nthe selection:\n\n'DOM_EVENT' - the user interacted with an item and selected it\n'ROUTE_CHANGED' - the array bound to `selectedRoute` changed\n'ITEM_CHANGED' - the object bound to `selected` changed\n'METHOD' - the `select()` method was called\n\nThe event will have the following properties:\n\n{Object} detail - Contains the event details\n{String} detail.source - Info about the change trigger, see above\n{Object} detail.item - Reference to the item\n{Array} detail.route - Route from the top of the graph to the item\n{Array} detail.path - Path from the top of the graph to the item",
           "metadata": {},
           "inheritedFrom": "PxAppBehavior.AssetSelectable"
         },
@@ -6662,6 +7157,12 @@
           "type": "CustomEvent",
           "name": "collapse-opened-changed",
           "description": "Fired when the `collapseOpened` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "vertical-expanded-changed",
+          "description": "Fired when the `verticalExpanded` property changes.",
           "metadata": {}
         },
         {
@@ -6833,7 +7334,7 @@
           "properties": [
             {
               "name": "item",
-              "type": "Object",
+              "type": "Object | null | undefined",
               "description": "A reference the object used to create this nav item.",
               "privacy": "public",
               "sourceRange": {
@@ -6847,12 +7348,14 @@
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "Object"
+                }
               }
             },
             {
               "name": "label",
-              "type": "string",
+              "type": "string | null | undefined",
               "description": "Used as the label text for the item.",
               "privacy": "public",
               "sourceRange": {
@@ -6866,12 +7369,14 @@
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "String"
+                }
               }
             },
             {
               "name": "selected",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Set to `true` if the item is selected.",
               "privacy": "public",
               "sourceRange": {
@@ -6886,14 +7391,15 @@
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"updateStyles\""
+                  "observer": "\"updateStyles\"",
+                  "attributeType": "Boolean"
                 }
               },
               "defaultValue": "false"
             },
             {
               "name": "collapsed",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Set to `true` if the item is in a collapsed dropdown.",
               "privacy": "public",
               "sourceRange": {
@@ -6908,14 +7414,15 @@
               },
               "metadata": {
                 "polymer": {
-                  "observer": "\"updateStyles\""
+                  "observer": "\"updateStyles\"",
+                  "attributeType": "Boolean"
                 }
               },
               "defaultValue": "false"
             },
             {
               "name": "cancelSelect",
-              "type": "boolean",
+              "type": "boolean | null | undefined",
               "description": "Cancels events that trigger selection.",
               "privacy": "public",
               "sourceRange": {
@@ -6929,7 +7436,9 @@
                 }
               },
               "metadata": {
-                "polymer": {}
+                "polymer": {
+                  "attributeType": "Boolean"
+                }
               },
               "defaultValue": "false"
             }
@@ -6950,7 +7459,10 @@
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "detached",
@@ -6967,7 +7479,10 @@
                 }
               },
               "metadata": {},
-              "params": []
+              "params": [],
+              "return": {
+                "type": "void"
+              }
             },
             {
               "name": "_propIsTypeOf",
@@ -7016,7 +7531,10 @@
                 {
                   "name": "evt"
                 }
-              ]
+              ],
+              "return": {
+                "type": "void"
+              }
             }
           ],
           "staticMethods": [],
@@ -7049,7 +7567,7 @@
                 }
               },
               "metadata": {},
-              "type": "Object"
+              "type": "Object | null | undefined"
             },
             {
               "name": "label",
@@ -7065,7 +7583,7 @@
                 }
               },
               "metadata": {},
-              "type": "string"
+              "type": "string | null | undefined"
             },
             {
               "name": "selected",
@@ -7081,7 +7599,7 @@
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "collapsed",
@@ -7097,7 +7615,7 @@
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             },
             {
               "name": "cancel-select",
@@ -7113,7 +7631,7 @@
                 }
               },
               "metadata": {},
-              "type": "boolean"
+              "type": "boolean | null | undefined"
             }
           ],
           "events": [],

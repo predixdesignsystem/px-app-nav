@@ -1,3 +1,8 @@
+v2.2.0
+==================
+* Added `vertical-expanded` property to allow vertical px-app-nav instances to be permanently expanded
+* Fixed missing drop shadow on sub navigation
+
 v2.1.7
 ==================
 * Fix demo for IE
