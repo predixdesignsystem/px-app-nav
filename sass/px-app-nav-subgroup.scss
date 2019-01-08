@@ -33,6 +33,10 @@
   height: auto;
 }
 
+:host([collapsed]) {
+  width: calculateRem(350px);
+}
+
 .app-nav-subgroup__dropdown {
   height: 0px;
   overflow: hidden;
