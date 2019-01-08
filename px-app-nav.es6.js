@@ -312,6 +312,21 @@
       _availableWidth: {
         type: Number,
         observer: 'rebuild'
+      },
+
+      /**
+       * Integer value in [ms] to delay opening the vertical nav until the mouse
+       * has hover the specified time.
+       */
+      delaySlideAnimation: {
+        type: Number,
+        value: 0,
+        reflectToAttribute: true
+      },
+
+      _delayAnimationAsyncHandler: {
+        type: Number,
+        value: undefined
       }
     },
 
@@ -337,7 +352,13 @@
       'mouseenter' : '_handleMouseEnter',
       'mouseleave' : '_handleMouseLeave',
       'px-app-asset-graph-created' : 'rebuild',
-      'px-app-nav-rebuilt' : '_handleRebuild'
+      'px-app-nav-rebuilt' : '_handleRebuild',
+      'tap' : '_handleTap'
+    },
+
+    _handleTap() {
+      // Force navigation bar open on click to eliminate weird double slide animation effect.
+      this._setVerticalOpened(true);
     },
 
     _handleRebuild() {
@@ -356,16 +377,26 @@
       if (!this.vertical || this.verticalExpanded) return;
 
       this._mouseIsOverNav = true;
-      if (this.isDebouncerActive('close-nav-on-mouseleave')) {
-        this.cancelDebouncer('close-nav-on-mouseleave');
-      }
-      if (this._mouseIsOverNav && !this.verticalOpened) {
-        this._setVerticalOpened(true);
-      }
+
+      var delay = this.delaySlideAnimation;
+      this._delayAnimationAsyncHandler = this.async(() => {
+        if (this.isDebouncerActive('close-nav-on-mouseleave')) {
+          this.cancelDebouncer('close-nav-on-mouseleave');
+        }
+
+        if (this._mouseIsOverNav && !this.verticalOpened) {
+          this._setVerticalOpened(true);
+        }
+      }, delay);
     },
 
     _handleMouseLeave() {
       if (!this.vertical || this.verticalExpanded) return;
+
+      if (this._delayAnimationAsyncHandler) {
+        this.cancelAsync(this._delayAnimationAsyncHandler);
+        this._delayAnimationAsyncHandler = undefined;
+      }
 
       this._mouseIsOverNav = false;
       this.debounce('close-nav-on-mouseleave', function() {
