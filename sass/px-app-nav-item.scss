@@ -110,6 +110,11 @@ $px-app-nav-item-background-color--collapsed: var(--px-app-nav-item-background-c
   width: $px-app-nav-item-stripe-size--selected;
 }
 
+/* Item State: Selected+Overflowed */
+:host([selected][overflowed]) {
+  background-color: $px-app-nav-item-background-color;
+}
+
 /* Item State: Empty */
 $px-app-nav-item-background-color--empty: var(--px-app-nav-item-background-color--empty, lightgray);
 
