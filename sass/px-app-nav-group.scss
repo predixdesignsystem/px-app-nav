@@ -51,7 +51,6 @@ $px-app-nav-group-background-color: var(--px-app-nav-subitem-background-color, w
 .app-nav-group__dropdown__content {
   background-color: $px-app-nav-group-background-color;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.30);
-  max-width: inherit;
   margin: 1px;
   position: relative;
   top: -1px;
