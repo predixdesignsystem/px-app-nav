@@ -756,10 +756,10 @@
      * @return {Number|undefined}
      */
     _getDropdownWidth(allCollapsed) {
-      if (allCollapsed) {
-        const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
-        return isNaN(width) ? 320 : width;
-      }
+      const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
+      if (allCollapsed && !isNaN(width)) return width;
+      else if (allCollapsed) return 350;
+      else return 320;
     },
 
     /**
