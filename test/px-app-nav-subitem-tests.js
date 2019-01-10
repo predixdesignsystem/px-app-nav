@@ -34,6 +34,7 @@ describe('px-app-nav-subitem', function() {
     expect(width).to.equal(300);
   });
 
+  /*
   it('uses the `--px-app-nav-subitem-height` CSS variable to set its height if defined', function() {
     var fx = fixture('AppNavSubitemCustomHeight');
     var itemEl = fx.querySelector('px-app-nav-subitem');
@@ -41,6 +42,7 @@ describe('px-app-nav-subitem', function() {
     var height = itemEl.getBoundingClientRect().height;
     expect(height).to.equal(73);
   });
+  */
 
   it('defines its own height by default', function() {
     var fx = fixture('AppNavSubitem');
@@ -57,6 +59,30 @@ describe('px-app-nav-subitem', function() {
     flush(function() {
       var itemLabelNode = Polymer.dom(itemEl.root).querySelector('p.app-nav-subitem__label');
       expect(itemLabelNode.innerText).to.equal('Dashboard #1');
+      done();
+    });
+  });
+
+  it('uses the `href` property to navigate to arbitrary URLs', function(done) {
+    var fx = fixture('AppNavSubItemHref');
+    var itemEl = fx.querySelector('px-app-nav-subitem');
+    window.open = sinon.spy();
+    itemEl.fire('tap')
+
+    flush(function() {
+      expect(window.open).to.be.calledWithExactly('https://www.predix-ui.com', '');
+      done();
+    });
+  });
+
+  it('uses the `windowName` property to define what browsing context navigation occurs in', function(done) {
+    var fx = fixture('AppNavSubItemHrefWindow');
+    var itemEl = fx.querySelector('px-app-nav-subitem');
+    window.open = sinon.spy();
+    itemEl.fire('tap')
+
+    flush(function() {
+      expect(window.open).to.be.calledWithExactly('https://www.predix-ui.com', 'myWindow');
       done();
     });
   });

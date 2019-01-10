@@ -111,5 +111,41 @@ limitations under the License.
         </div>
       </template>
     </test-fixture>
+
+    <test-fixture id="AppNavItemHref">
+      <template>
+        <div style="width: 300px;">
+          <px-app-nav-item
+              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
+              href='https://www.predix-ui.com'>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemHrefWindow">
+      <template>
+        <div style="width: 300px;">
+          <px-app-nav-item
+              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
+              href='https://www.predix-ui.com'
+              window-name='myWindow'>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemHrefDropdown">
+      <template>
+        <div style="width: 300px;">
+          <px-app-nav-item
+              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
+              href='https://www.predix-ui.com'
+              dropdown
+              cancel-select>
+          </px-app-nav-item>
+        </div>
+      </template>
+    </test-fixture>
   </body>
 </html>

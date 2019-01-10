@@ -43,6 +43,22 @@
       },
 
       /**
+       * URL to navigate to when selected.
+       */
+      href: {
+        type: String
+      },
+
+      /**
+       * A string specifying the name of the browsing context into which to load the value
+       * of the `href` attribute. Default value will open a new window/tab.
+       */
+      windowName: {
+        type: String,
+        value: ''
+      },
+
+      /**
        * Set to `true` if the item is selected.
        */
       selected: {
@@ -94,6 +110,11 @@
      */
     _handleSelfTapped(evt) {
       if (this.cancelSelect || !this.item) return;
+      if (this.href) {
+        window.open(this.href, this.windowName)
+        // Do not fire select event
+        return;
+      }
       this.fire('px-app-nav-item-tapped', {
         item: this.item
       }, {cancelable:true});
