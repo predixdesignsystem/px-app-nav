@@ -1,3 +1,8 @@
+v2.3.0
+==================
+* Items now support `href` and `window` properties for navigation to user-defined URLs
+* Added `delaySlideAnimation` property to px-app-nav for optionally specifying a timeout (in ms) before the vertical nav expands after hover
+
 v2.2.0
 ==================
 * Added `vertical-expanded` property to allow vertical px-app-nav instances to be permanently expanded
