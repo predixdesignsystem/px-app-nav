@@ -477,7 +477,7 @@ Custom property | Description
           <px-app-nav-group
               id="overflowedGroup"
               cancel-select
-              fixed-width="[[_getDropdownWidth(allCollapsed)]]"
+              fixed-width="[[_getDropdownWidth(allCollapsed, anyOverflowed)]]"
               label="[[_getDropdownLabel(selectedMeta.item, selectedMeta.parent, keys.label, collapseWithIcon, allCollapsed)]]"
               icon="[[_getDropdownIcon(selectedMeta.item, selectedMeta.parent, keys.icon, collapseWithIcon, allCollapsed, anyOverflowed, collapseOpened)]]"
               selected$="[[_isSelectedOverflowed(selectedMeta.item, selectedMeta.parent, overflowedItems)]]"

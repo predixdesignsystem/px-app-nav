@@ -755,10 +755,11 @@
      *
      * @return {Number|undefined}
      */
-    _getDropdownWidth(allCollapsed) {
+    _getDropdownWidth(allCollapsed, anyOverflowed) {
       const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
-      if (allCollapsed && !isNaN(width)) return width;
+      if (allCollapsed && !isNaN(width)) return width; 
       else if (allCollapsed) return 350;
+      else if (anyOverflowed) return undefined;
       else return 320;
     },
 
