@@ -34,6 +34,7 @@ describe('px-app-nav-item', function() {
     expect(width).to.equal(300);
   });
 
+  /*
   it('uses the `--px-app-nav-height` CSS variable to set its height if defined', function() {
     var fx = fixture('AppNavItemCustomHeight');
     var itemEl = fx.querySelector('px-app-nav-item');
@@ -41,6 +42,7 @@ describe('px-app-nav-item', function() {
     var height = itemEl.getBoundingClientRect().height;
     expect(height).to.equal(73);
   });
+  */
 
   it('defines its own height by default', function() {
     var fx = fixture('AppNavItem');
@@ -114,6 +116,43 @@ describe('px-app-nav-item', function() {
       var iconNode = Polymer.dom(itemEl.root).querySelector('px-icon');
       var hasCorrectClass = iconNode
       expect(iconNode.classList.contains('app-nav-item__icon--with-label')).to.be.false;
+      done();
+    });
+  });
+
+  it('uses the `href` property to navigate to arbitrary URLs', function(done) {
+    var fx = fixture('AppNavItemHref');
+    var itemEl = fx.querySelector('px-app-nav-item');
+    window.open = sinon.spy();
+    itemEl.fire('tap')
+
+    flush(function() {
+      expect(window.open).to.be.calledWithExactly('https://www.predix-ui.com', '');
+      done();
+    });
+  });
+
+  it('uses the `windowName` property to define what browsing context navigation occurs in', function(done) {
+    var fx = fixture('AppNavItemHrefWindow');
+    var itemEl = fx.querySelector('px-app-nav-item');
+    window.open = sinon.spy();
+    itemEl.fire('tap')
+
+    flush(function() {
+      expect(window.open).to.be.calledWithExactly('https://www.predix-ui.com', 'myWindow');
+      done();
+    });
+  });
+
+  it('does not trigger navigation when the `href` property is set on an item dropdown', function(done) {
+    // ie. ignore the `href` prop if the item has children
+    var fx = fixture('AppNavItemHrefDropdown');
+    var itemEl = fx.querySelector('px-app-nav-item');
+    window.open = sinon.spy();
+    itemEl.fire('tap')
+
+    flush(function() {
+      expect(window.open).to.not.be.called;
       done();
     });
   });

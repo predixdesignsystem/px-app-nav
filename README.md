@@ -1,5 +1,5 @@
 # px-app-nav
-[![Build Status](https://travis-ci.org/PredixDev/px-app-nav.svg?branch=master)](https://travis-ci.org/PredixDev/px-app-nav)
+[![Build Status](https://travis-ci.org/predixdesignsystem/px-app-nav.svg?branch=master)](https://travis-ci.org/predixdesignsystem/px-app-nav)
 
 Px-app-nav is a Predix UI component which can be used as a navigation bar or as a drawer for applications.
 
@@ -39,7 +39,7 @@ Finally, use the component in your application:
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-app-nav).
+Read the full API and view the demo [here](https://www.predix-ui.com/#/elements/px-app-nav).
 
 ## Using Events
 
@@ -83,4 +83,4 @@ By default gulp serve is configured to enable LiveReload and will be watching fo
 
 ## Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/px-app-nav/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/predixdesignsystem/px-app-nav/issues) to submit any bugs you might find.

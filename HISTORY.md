@@ -1,7 +1,7 @@
-v2.2.1
+v2.3.0
 ==================
-* Design compliance: style tweaks to align with design specified in https://github.com/predixdesignsystem/px-app-nav/issues/51 
-    and https://github.com/predixdesignsystem/px-app-nav/issues/61
+* Items now support `href` and `window` properties for navigation to user-defined URLs
+* Added `delaySlideAnimation` property to px-app-nav for optionally specifying a timeout (in ms) before the vertical nav expands after hover
 
 v2.2.0
 ==================
