@@ -776,11 +776,12 @@
      *
      * @return {Number|undefined}
      */
-    _getDropdownWidth(allCollapsed) {
-      if (allCollapsed) {
-        const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
-        return isNaN(width) ? 320 : width;
-      }
+    _getDropdownWidth(allCollapsed, anyOverflowed) {
+      const width = parseInt(this.getComputedStyleValue('--px-app-nav-collapsed-width'));
+      if (allCollapsed && !isNaN(width)) return width; 
+      else if (allCollapsed) return 350;
+      else if (anyOverflowed) return undefined;
+      else return 320;
     },
 
     /**
