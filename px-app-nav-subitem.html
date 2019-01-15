@@ -23,7 +23,7 @@ limitations under the License.
     <style include="px-app-nav-subitem-styles"></style>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
-      <p class="app-nav-subitem__label">{{label}}</p>
+      <p title="[[label]]" class="app-nav-subitem__label">{{label}}</p>
     </template>
   </template>
 </dom-module>
