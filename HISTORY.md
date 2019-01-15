@@ -1,3 +1,8 @@
+v2.3.1
+==================
+* Fixing collapsed and vertical dropdown width & padding
+* Fixing collapsed dropdown box-shaddow
+
 v2.3.0
 ==================
 * Items now support `href` and `window` properties for navigation to user-defined URLs
