@@ -36,7 +36,7 @@ limitations under the License.
     </template>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
-      <p class="app-nav-item__label">{{label}}</p>
+      <p title="[[label]]" class="app-nav-item__label">{{label}}</p>
     </template>
 
     <template is="dom-if" if="{{empty}}">
