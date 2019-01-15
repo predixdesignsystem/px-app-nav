@@ -1,3 +1,7 @@
+v2.3.2
+=================
+* Adding title attribute to item and subitem labels
+
 v2.3.1
 ==================
 * Fixing collapsed and vertical dropdown width & padding
