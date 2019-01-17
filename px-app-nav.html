@@ -378,31 +378,32 @@ a new item. Example:
 
     <px-app-nav items="..." vertical></px-app-nav>
 
-The vertical navigation can be expanded in a few ways:
+The vertical navigation can be opened in a few ways:
 
-- **Force expand:** Setting the `verticalExpanded` property to true or enabling the
-`vertical-expanded` attribute on the `px-app-nav` element will force the navigation
-to use the expanded style at all times. Example:
+- **Auto open:** When the default vertical style is in use the navigation will automatically
+open on hover over the `px-app-nav` element.
+
+- **Force open:** Setting the `verticalOpenedAt` property to 0 on the `px-app-nav` 
+element will force the navigation to use the opened style at all times. Example:
 
 
-    <px-app-nav items="..." vertical-expanded></px-app-nav>
+    <px-app-nav items="..." vertical-opened=at="0"></px-app-nav>
 
 
-- **Dynamic expand:** The `verticalExpandedAt` property can be used to dynamically expand 
+- **Dynamic open:** The `verticalOpenedAt` property can be used to dynamically open 
 the navigation when the viewport size changes. If the size of the `px-app-nav` element's 
-parent container becomes larger than the `verticalExpandedAt` value, it is expanded.
+parent container becomes larger than the value of `verticalOpenedAt`, it is opened.
+For example, if `verticalOpenedAt` is 600, the navigation will open if the containers
+width exceeds 600px and close if below 600px.
 
 
-    <px-app-nav items="..." vertical-expanded-at="600"></px-app-nav>
+    <px-app-nav items="..." vertical-opened-at="600"></px-app-nav>
 
 
-The `verticalExpandedAt` property should be a number that will be converted into pixels.
+The `verticalOpenedAt` property should be a number that will be converted into pixels.
 
-When the navigation is dynamically expanded, the `verticalExpanded` property will be updated. 
+When the navigation is dynamically opened, the `verticalOpened` property will be updated. 
 Watch that property to figure out the state of the navigation.
-
-- **Auto-expand:** When the default vertical style is in use the navigation will automatically
-expand on hover over the `px-app-nav` element.
 
 
 #### Positioning a vertical app-nav  in an app:
