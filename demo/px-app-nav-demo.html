@@ -74,6 +74,7 @@ limitations under the License.
         items="[[props.items.value]]"
         vertical="[[props.vertical.value]]"
         vertical-expanded="[[props.verticalExpanded.value]]"
+        vertical-expanded-at="[[props.verticalExpandedAt.value]]"
         collapse-with-icon="[[props.collapseWithIcon.value]]"
         collapse-all="[[props.collapseAll.value]]"
         collapse-at="[[props.collapseAt.value]]"
@@ -155,6 +156,12 @@ limitations under the License.
               verticalExpanded: true,
               configReset: true
             }, {
+              configName: "Vertical Expanded At",
+              vertical: true,
+              verticalExpanded: false,
+              verticalExpandedAt: 600,
+              configReset: true
+            }, {
               configName: "Collapsed All",
               collapseAll: true,
               configReset: true
@@ -201,6 +208,12 @@ limitations under the License.
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle',
+      },
+      verticalExpandedAt: {
+        type: Number,
+        defaultValue: false,
+        inputType: 'number',
+        inputHelpText: 'vertical must be true in order for verticalExpandedAt to work'
       },
       collapseWithIcon: {
         type: Boolean,
