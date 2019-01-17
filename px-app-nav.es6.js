@@ -229,32 +229,13 @@
       },
 
       /**
-       * Shows the vertical navigation in an expanded view. The navigation will take up the
-       * full left-hand side of the page.
-       */
-      verticalExpanded: {
-        type: Boolean,
-        value: false,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_handleVerticalExpandedViewChanged'
-      },
-
-      /**
-       * The parent container width at which the vertical navigation should be expanded. 
-       * Use a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').
+       * When `true`, the vertical navigation is open. 
+       * When `false`, the vertical navigation is closed.
        * 
-       * This property will overwrite the `verticalExpanded` property. Avoid data
-       * binding in both properties at the same time.
-       */
-      verticalExpandedAt: {
-        type: Number,
-        observer: 'rebuild'
-      },
-
-      /**
-       * When `true`, the vertical navigation is open and the user is interacting
-       * with it. When `false`, the vertical navigation is closed.
+       * This property is controlled by two means:
+       *    1. when `verticalOpenedAt` is configured and its
+       *        value is currently below `_parentWidth`
+       *    2. otherwise, `mouseenter` and `mouseleave` events
        */
       verticalOpened: {
         type: Boolean,
@@ -262,6 +243,18 @@
         notify: true,
         readOnly: true,
         reflectToAttribute: true
+      },
+
+      /**
+       * The parent container width at which the vertical navigation should be opened. 
+       * Use a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').
+       * 
+       * This property will overwrite the `verticalOpened` property. Avoid data
+       * binding in both properties at the same time.
+       */
+      verticalOpenedAt: {
+        type: Number,
+        observer: 'rebuild'
       },
 
       /**
@@ -335,8 +328,7 @@
       },
 
       /**
-       * Available width within the `px-app-nav` container element. Necessary for
-       * calculating item collapse and overflow in horizontal mode.
+       * Available width within the `px-app-nav` container element.
        */
       _availableWidth: {
         type: Number,
@@ -344,8 +336,7 @@
       },
 
       /**
-       * Width of the `px-app-nav` parent element. Necessary for calculating 
-       * vertical expansion in vertical mode.
+       * Width of the `px-app-nav` parent element.
        */
       _parentWidth: {
         type: Number,
@@ -419,7 +410,7 @@
     },
 
     _handleMouseEnter() {
-      if (!this.vertical || this.verticalExpanded) return;
+      if (!this.vertical || this._isVerticalOpenedByThreshold()) return;
 
       this._mouseIsOverNav = true;
 
@@ -436,7 +427,7 @@
     },
 
     _handleMouseLeave() {
-      if (!this.vertical || this.verticalExpanded) return;
+      if (!this.vertical || this._isVerticalOpenedByThreshold()) return;
 
       if (this._delayAnimationAsyncHandler) {
         this.cancelAsync(this._delayAnimationAsyncHandler);
@@ -481,11 +472,6 @@
       }
     },
 
-    _handleVerticalExpandedViewChanged(verticalExpanded) {
-      this._setVerticalOpened(verticalExpanded);
-      if (verticalExpanded) this.rebuild();
-      else this._handleResize();
-    },
     /**
      * Updates the selected item when the user taps on a nav item button.
      * If the button was for an external link, have window open it.
@@ -505,7 +491,7 @@
      * will not be triggered.
      */
     _handleResize(evt) {
-      if (this.collapseAll || (this.vertical && typeof this.verticalExpandedAt !== 'number')) return;
+      if (this.collapseAll || (this.vertical && typeof this.verticalOpenedAt !== 'number')) return;
 
       const debouncer = 'measure-available-and-parent-width';
       if (typeof this._availableWidth !== 'number' || typeof this._parentWidth !== 'number') {
@@ -557,10 +543,10 @@
     rebuild() {
       if (!this.items || !Array.isArray(this.items) || 
           (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number') || 
-          (this.vertical && (typeof this.verticalExpandedAt !== 'number' && typeof this._parentWidth !== 'number'))) return;
+          (this.vertical && typeof this.verticalOpenedAt !== 'number' && !this._parentWidth)) return;
 
       if (this.vertical) {
-        if (typeof this.verticalExpandedAt === 'number') this.set('verticalExpanded', (this._parentWidth >= this.verticalExpandedAt));
+        if (this.verticalOpenedAt >= 0) this._setVerticalOpened(this._parentWidth > this.verticalOpenedAt);
 
         this._setVisibleItems(this.items.slice(0));
         this._setOverflowedItems([]);
@@ -932,6 +918,14 @@
      */
     _isIconEmpty(item, iconKey) {
       return (!item.hasOwnProperty(iconKey) || typeof item[iconKey] !== 'string' && item[iconKey].length >= 0);
+    },
+
+    /**
+     * Checks if the vertical navigation is currently opened 
+     * by means of the `verticalOpenedAt` property.
+     */
+    _isVerticalOpenedByThreshold() {
+      return this.verticalOpened && typeof this.verticalOpenedAt === 'number' && this._parentWidth > this.verticalOpenedAt;
     },
 
     /**
