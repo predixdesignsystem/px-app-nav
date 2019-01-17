@@ -925,6 +925,102 @@ describe('px-app-nav [collapsed]', function() {
   });
 });
 
+describe('px-app-nav [vertical]', function() {
+  var sandbox;
+
+  beforeEach(function() {
+    sandbox = sinon.sandbox.create();
+  });
+
+  afterEach(function() {
+    sandbox.restore();
+  });
+
+  it('opens navigation on hover', function(done) {
+    var fx = fixture('AppNavFixtureVertical');
+  
+    flush(() => {
+      var appNavEl = fx.querySelector('px-app-nav');
+  
+      var mouseenterSpy = sinon.spy(),
+      mouseleaveSpy = sinon.spy();
+      appNavEl.addEventListener('mouseenter', mouseenterSpy);
+      appNavEl.addEventListener('mouseleave', mouseleaveSpy);
+  
+      setTimeout(function() {
+        expect(appNavEl.verticalOpened).to.equal(false);
+        appNavEl.dispatchEvent(new CustomEvent('mouseenter'))
+      }, 50);
+      setTimeout(function() {
+        expect(mouseenterSpy).to.have.been.called;
+        expect(appNavEl.verticalOpened).to.equal(true);
+        appNavEl.dispatchEvent(new CustomEvent('mouseleave'))
+      }, 250);
+      setTimeout(function() {
+        expect(mouseleaveSpy).to.have.been.called;
+        expect(appNavEl.verticalOpened).to.equal(false);
+        done();
+      }, 550);
+    });
+  });
+  
+  it('expands navigation when `vertical-expanded` attribute is set', function(done) {
+    var fx = fixture('AppNavFixtureVerticalExpanded');
+  
+    flush(() => {
+      var appNavEl = fx.querySelector('px-app-nav');
+  
+      setTimeout(function() {
+        expect(appNavEl.verticalExpanded).to.equal(true);
+        expect(appNavEl.verticalOpened).to.equal(true);
+        done();
+      }, 100);
+    });
+  });
+
+  it('expands navigation by viewport size when `vertical-expanded-at` attribute is set', function(done) {
+    var fx = fixture('AppNavFixtureVerticalExpandedAt');
+  
+    flush(() => {
+      var appNavEl = fx.querySelector('px-app-nav');
+      var resizeSpy = sinon.spy();
+      appNavEl.addEventListener('iron-resize', resizeSpy);
+  
+      setTimeout(function() {
+        expect(appNavEl.verticalExpanded).to.equal(true);
+        appNavEl.parentElement.style.width = `700px`;
+        appNavEl.dispatchEvent(new CustomEvent('iron-resize'));
+      }, 50);
+      setTimeout(function() {
+        expect(resizeSpy).to.have.been.called;
+        expect(appNavEl.verticalExpanded).to.equal(false);
+        done();
+      }, 250);
+    });
+  });
+
+  it('expands and collapses navigation when `vertical-expanded-at` attribute is changed', function(done) {
+    var fx = fixture('AppNavFixtureVerticalExpandedAt');
+  
+    flush(() => {
+      var appNavEl = fx.querySelector('px-app-nav');
+  
+      setTimeout(function() {
+        expect(appNavEl.verticalExpanded).to.equal(true);
+        appNavEl.verticalExpandedAt = 1100;
+      }, 50);
+      setTimeout(function() {
+        expect(appNavEl.verticalExpanded).to.equal(false);
+        appNavEl.verticalExpandedAt = 800;
+      }, 250);
+      setTimeout(function() {
+        expect(appNavEl.verticalExpanded).to.equal(true);
+        done();
+      }, 450);
+    });
+  });
+});
+
 describe('px-app-nav-measure-text behavior', function() {
   var sandbox;
   var fx;

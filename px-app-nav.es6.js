@@ -241,6 +241,18 @@
       },
 
       /**
+       * The parent container width at which the vertical navigation should be expanded. 
+       * Use a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').
+       * 
+       * This property will overwrite the `verticalExpanded` property. Avoid data
+       * binding in both properties at the same time.
+       */
+      verticalExpandedAt: {
+        type: Number,
+        observer: 'rebuild'
+      },
+
+      /**
        * When `true`, the vertical navigation is open and the user is interacting
        * with it. When `false`, the vertical navigation is closed.
        */
@@ -322,7 +334,20 @@
         type: HTMLElement
       },
 
+      /**
+       * Available width within the `px-app-nav` container element. Necessary for
+       * calculating item collapse and overflow in horizontal mode.
+       */
       _availableWidth: {
+        type: Number,
+        observer: 'rebuild'
+      },
+
+      /**
+       * Width of the `px-app-nav` parent element. Necessary for calculating 
+       * vertical expansion in vertical mode.
+       */
+      _parentWidth: {
         type: Number,
         observer: 'rebuild'
       },
@@ -480,17 +505,17 @@
      * will not be triggered.
      */
     _handleResize(evt) {
-      if (this.collapseAll || this.vertical) return;
+      if (this.collapseAll || (this.vertical && typeof this.verticalExpandedAt !== 'number')) return;
 
-      const debouncer = 'measure-available-width';
-      if (typeof this._availableWidth !== 'number') {
-        this._measureAvailableWidth();
+      const debouncer = 'measure-available-and-parent-width';
+      if (typeof this._availableWidth !== 'number' || typeof this._parentWidth !== 'number') {
+        this._measureAvailableAndParentWidth();
         return;
       }
       if (this.isDebouncerActive(debouncer)) {
         this.cancelDebouncer(debouncer);
       }
-      this.debounce(debouncer, this._measureAvailableWidth.bind(this), 100);
+      this.debounce(debouncer, this._measureAvailableAndParentWidth.bind(this), 100);
     },
 
     /**
@@ -499,15 +524,22 @@
      * overflowed. Measurements happen in the next animation frame, ensuring
      * we don't trigger a premature reflow and that the tab is visible.
      */
-    _measureAvailableWidth() {
+    _measureAvailableAndParentWidth() {
       window.requestAnimationFrame(() => {
         const containerEl = this.$.container;
         const actionsEl = this.$.actions;
-        if (!containerEl || !actionsEl) return;
-        const containerWidth = containerEl.getBoundingClientRect().width;
-        const actionsWidth = actionsEl.getBoundingClientRect().width;
-        const width = containerWidth - actionsWidth;
-        if (this._availableWidth !== width) this.set('_availableWidth', width);
+        if (containerEl && actionsEl) {
+          const containerWidth = containerEl.getBoundingClientRect().width;
+          const actionsWidth = actionsEl.getBoundingClientRect().width;
+          const width = containerWidth - actionsWidth;
+          if (this._availableWidth !== width) this.set('_availableWidth', width);
+        }
+
+        const parentEl = this.parentElement;
+        if (parentEl) {
+          const width = parentEl.getBoundingClientRect().width;
+          if (this._parentWidth !== width) this.set('_parentWidth', width);
+        }
       });
     },
 
@@ -523,9 +555,13 @@
      * @return {Array.<Array>} - First item is the list of visible items (if any), second item is the list of overflowed items (if any)
      */
     rebuild() {
-      if (!this.items || !Array.isArray(this.items) || (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number')) return;
+      if (!this.items || !Array.isArray(this.items) || 
+          (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number') || 
+          (this.vertical && (typeof this.verticalExpandedAt !== 'number' && typeof this._parentWidth !== 'number'))) return;
 
       if (this.vertical) {
+        if (typeof this.verticalExpandedAt === 'number') this.set('verticalExpanded', (this._parentWidth >= this.verticalExpandedAt));
+
         this._setVisibleItems(this.items.slice(0));
         this._setOverflowedItems([]);
         return [this.visibleItems, this.overflowedItems];

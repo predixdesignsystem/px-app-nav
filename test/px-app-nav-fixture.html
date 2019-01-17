@@ -324,6 +324,65 @@ limitations under the License.
       </template>
     </test-fixture>
 
+    <test-fixture id="AppNavFixtureVertical">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <px-app-nav
+            items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+                { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              vertical>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavFixtureVerticalExpanded">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <px-app-nav
+            items='[
+                  { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                  { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                  { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              vertical
+              vertical-expanded>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavFixtureVerticalExpandedAt">
+      <template>
+        <div class="app-nav-container" style="width: 1000px; height:1000px;">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
+                { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              vertical
+              vertical-expanded-at="800">
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
     <test-fixture id="AppNavMeasureTextStub">
       <template>
         <div>

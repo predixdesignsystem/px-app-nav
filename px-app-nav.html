@@ -378,6 +378,32 @@ a new item. Example:
 
     <px-app-nav items="..." vertical></px-app-nav>
 
+The vertical navigation can be expanded in a few ways:
+
+- **Force expand:** Setting the `verticalExpanded` property to true or enabling the
+`vertical-expanded` attribute on the `px-app-nav` element will force the navigation
+to use the expanded style at all times. Example:
+
+
+    <px-app-nav items="..." vertical-expanded></px-app-nav>
+
+
+- **Dynamic expand:** The `verticalExpandedAt` property can be used to dynamically expand 
+the navigation when the viewport size changes. If the size of the `px-app-nav` element's 
+parent container becomes larger than the `verticalExpandedAt` value, it is expanded.
+
+
+    <px-app-nav items="..." vertical-expanded-at="600"></px-app-nav>
+
+
+The `verticalExpandedAt` property should be a number that will be converted into pixels.
+
+When the navigation is dynamically expanded, the `verticalExpanded` property will be updated. 
+Watch that property to figure out the state of the navigation.
+
+- **Auto-expand:** When the default vertical style is in use the navigation will automatically
+expand on hover over the `px-app-nav` element.
+
 
 #### Positioning a vertical app-nav  in an app:
 
