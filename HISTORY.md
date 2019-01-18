@@ -1,3 +1,8 @@
+v3.0.0
+=================
+* Replacing `vertical-expanded` propert with `vertical-opened-at` property for dynamic open behaviour on vertical navigations
+
+
 v2.3.2
 =================
 * Adding title attribute to item and subitem labels
