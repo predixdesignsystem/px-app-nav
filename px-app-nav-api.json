@@ -1587,7 +1587,7 @@
               "column": 4
             },
             "end": {
-              "line": 319,
+              "line": 321,
               "column": 5
             }
           },
@@ -1603,11 +1603,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 321,
+              "line": 323,
               "column": 4
             },
             "end": {
-              "line": 326,
+              "line": 328,
               "column": 5
             }
           },
@@ -1623,11 +1623,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 328,
+              "line": 330,
               "column": 4
             },
             "end": {
-              "line": 337,
+              "line": 339,
               "column": 5
             }
           },
@@ -1643,11 +1643,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 343,
+              "line": 345,
               "column": 4
             },
             "end": {
-              "line": 345,
+              "line": 347,
               "column": 5
             }
           },
@@ -1667,11 +1667,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 351,
+              "line": 353,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 360,
               "column": 5
             }
           },
@@ -1691,11 +1691,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 367,
+              "line": 369,
               "column": 4
             },
             "end": {
-              "line": 376,
+              "line": 378,
               "column": 5
             }
           },
@@ -1715,11 +1715,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 381,
+              "line": 383,
               "column": 4
             },
             "end": {
-              "line": 385,
+              "line": 387,
               "column": 5
             }
           },
@@ -1742,11 +1742,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 390,
+              "line": 392,
               "column": 4
             },
             "end": {
-              "line": 394,
+              "line": 396,
               "column": 5
             }
           },
@@ -1766,11 +1766,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 399,
+              "line": 401,
               "column": 4
             },
             "end": {
-              "line": 401,
+              "line": 403,
               "column": 5
             }
           },
@@ -1783,11 +1783,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 407,
+              "line": 409,
               "column": 4
             },
             "end": {
-              "line": 409,
+              "line": 411,
               "column": 5
             }
           },
@@ -1800,11 +1800,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 411,
+              "line": 413,
               "column": 4
             },
             "end": {
-              "line": 416,
+              "line": 418,
               "column": 5
             }
           },
@@ -1828,7 +1828,7 @@
           "column": 10
         },
         "end": {
-          "line": 417,
+          "line": 419,
           "column": 3
         }
       },
@@ -2313,11 +2313,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 424,
+              "line": 426,
               "column": 4
             },
             "end": {
-              "line": 437,
+              "line": 439,
               "column": 5
             }
           },
@@ -2334,11 +2334,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 419,
+          "line": 421,
           "column": 10
         },
         "end": {
-          "line": 438,
+          "line": 440,
           "column": 3
         }
       },
@@ -2535,11 +2535,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 445,
+              "line": 447,
               "column": 4
             },
             "end": {
-              "line": 458,
+              "line": 460,
               "column": 5
             }
           },
@@ -2556,11 +2556,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 440,
+          "line": 442,
           "column": 10
         },
         "end": {
-          "line": 459,
+          "line": 461,
           "column": 3
         }
       },
@@ -4493,7 +4493,7 @@
       "tagname": "px-app-nav-subitem"
     },
     {
-      "description": "`px-app-nav` is an app-level navigation element that allows users to change the\ncurrent view. The element is designed to work on desktop and mobile/touch\ndevices, supporting any viewport size. It has three distinct visual styles that\ncan be switched at any time to suit different app designs.\n\n--------------------------------------------------------------------------------\n\n### Navigation items: Structuring data and managing selection\n\nThe navigation accepts a list of items that will be converted into buttons for\nthe user to interact with. Each item should have at least a label that will\nbe displayed for the user to select and a unique ID that will be used to keep\ntrack of which item is selected.\n\nThis data should be passed into the `items` attribute or property on the\n`px-app-nav` element.\n\nThis is a simple navigation data example:\n\n\n    [\n      {\n        \"id\" : \"home\",\n        \"label\" : \"Home\",\n        \"icon\" : \"px-fea:home\"\n      },\n      {\n        \"id\" : \"alert\",\n        \"label\" : \"Alerts\",\n        \"icon\" : \"px-fea:alerts\"\n      }\n    ]\n\n\nTop-level navigation items can optionally have child items. This is useful for\ncreating categories of related pages. If a top-level navigation item has any\nchildren it cannot be selected directly - users can select its child items,\nand the top-level \"category\" item will get the selected visual style.\n\nThis example shows a \"Dashboards\" category with a few different dashboard pages:\n\n\n    [\n      {\n        \"id\" : \"dash\",\n        \"label\" : \"Dashboards\",\n        \"icon\" : \"px-fea:dashboard\",\n        \"children\" : [\n          {\n            \"id\" : \"plant-status\",\n            \"label\" : \"Plant Status Updates\"\n          },\n          {\n            \"id\" : \"output-info\",\n            \"label\" : \"Daily Output Measurements\"\n          }\n        ]\n      }\n    ]\n\nAll items (top-level items, top-level category items, and child items) should\nhave the following properties:\n\n  - **id** {string} - unique string that identifies the item. Should only contain\n  valid, URI-safe characters. Example: \"home\", \"alerts1\"\n  - **label** {string} - short, human-readable text. The user will tap this text\n  to select the item. Example: \"Homepage\", \"View Alerts\"\n\nThe following optional properties can be defined for top-level items only:\n\n  - **icon** {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)\n  icon placed next to the text label for the item. Use an icon from the `px-fea`\n  for the best sizing and visual styling. If the icon you need is not available in\n  the `px-fea` icon set, you may use an icon from the `px-nav` icon set, but only\n  do so if absolutely necessary.\n  - **children** {array} - child items that will be placed in a dropdown under\n  their parent top-level item. Each child item should have an `id` and `label`.\n  If the child item has an `icon` property, it will be ignored.\n\nExample top-level item without children:\n\n\n    {\n      \"id\" : \"page-id\",\n      \"label\" : \"Page Title\",\n      \"icon\" : \"px-fea:templates\"\n    }\n\n\nExample top-level item with child items:\n\n\n    {\n      \"id\" : \"category-id\",\n      \"label\" : \"Category Title\",\n      \"icon\" : \"px-fea:microservice\",\n      \"children\" : [\n        {\n          \"id\" : \"child-item-1\",\n          \"label\" : \"First Child Title\"\n        },\n        {\n          \"id\" : \"child-item-2\",\n          \"label\" : \"Second Child Title\"\n        }\n      ]\n    }\n\n\nAdditional data not used by `px-app-nav` can also be included in each item's\nobject. This is a useful way to store metadata about app pages that will be used\nat run-time when a new nav item is selected. Example:\n\n\n    {\n      \"id\" : \"all-cases\",\n      \"label\" : \"Cases\",\n      \"metadata\" : {\n        \"openCases\" : \"12\",\n        \"closedCases\" : \"82\"\n      }\n    }\n\nThe navigation will not mutate any of its items properties, making it easy to\nshare any item metadata with other app components.\n\n#### Responding to item selection\n\nWhen the user taps on a navigation item it will be marked as selected. The app\ncontaining the `px-app-nav` element should respond to the new selected item and\nupdate its view.\n\nThere are two ways for an app to listen for user selection:\n\n- **By reference:** The element's `selected` property will be updated when a new\nitem is selected. The `selected` property will notify a reference to the object\nthat describes the item in the `items` array.\n\n- **By route:** The element's `selectedRoute` property will notify an array of\nstrings that trace the path from the root of the `items` graph to the selected\nitem. This is useful for binding the navigation state to the app's URL path.\n(See the [px-app-route](https://www.predix-ui.com/#/elements/px-app-helpers/px-app-route)\nmodule for a guide to binding the navigation state to the URL.)\n\nFor example, given the following simplified navigation `items` list:\n\n    [\n      {\n        \"id\" : \"dash\",\n        \"label\" : \"Dashboards\",\n        \"children\" : [\n          {\n            \"id\" : \"info-dash\",\n            \"label\" : \"Info Dashboard\"\n          }\n        ]\n      }\n    ]\n\nWhen the user selects the \"Info Dashboard\", the `selectedRoute` will be set to\n`[\"dash\", \"info-fash\"]`.\n\n#### Selecting an item programmatically\n\nSometimes it is useful for an app to automatically change the active page\n(e.g. opening the home page when the app is first loaded, or opening a dashboard\nwhen the user clicks on an alert message). The `selected` and `selectedRoute`\nproperties can be used to set the selected navigation item state in the same\nway they are used to read the selected navigation item state.\n\nThe simplest way to do this is through `selectedRoute`:\n\n\n    <px-app-nav\n        items='[\n          { \"label\" : \"Home\",   \"id\" : \"home\",   \"icon\" : \"px-fea:home\" },\n          { \"label\" : \"Alerts\", \"id\" : \"alerts\", \"icon\" : \"px-fea:alerts\" },\n          { \"label\" : \"Assets\", \"id\" : \"assets\", \"icon\" : \"px-fea:asset\", children: [\n            { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n            { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n          ] }\n        ]'\n        selected-route='[\"assets\", \"a1\"]'>\n    </px-app-nav>\n\n\nItems can also be selected by reference using the `selected` property. Selecting\nthis way requires a bit of JavaScript; the navigation does a simple reference\nequality check (`item1 === item2`) to find the item in the graph and select it.\nPassing an item with the same properties as one of the `items` objects will\nnot select it.\n\n\n    <px-app-nav id=\"nav\"></px-app-nav>\n    <script>\n      var nav = document.getElementById('nav');\n      var navItems = [\n        { \"id\" : \"home\", \"label\" : \"Home\" }\n      ];\n      nav.items = navItems;\n      nav.selected = navItems[0];\n    </script>\n\n\nData-binding can also be used to accomplish the same thing without manually\nfinding the `px-app-nav` element in the DOM.\n\n### Binding to the URL path (routing)\n\nThe `px-app-nav` element is designed to easily bind its state to the URL path.\nWhen the user selects an item, its `selectedRoute` can be encoded and used to\nset the URL path. The user can then bookmark the page or share the URL to link\nto a specific view. When the user loads a page with a URL path defined, that\npath can be decoded and used to select the right navigation item (and show a\npage).\n\nFor a ready-to-go solution for binding `px-app-nav` to the URL path, see the\n[px-app-route](https://www.predix-ui.com/#/elements/px-app-helpers/px-app-route) component.\nThis component works best in applications built using Polymer as a data-binding\nframework, but also exposes methods to help convert the navigation's\n`selectedRoute` to and from a path string for use in other framework routers.\n\nAlternatively, listen for update events from the `selected` and/or `selectedRoute`\nproperties in your app and send the values to the framework router of your\nchoice, or implement your own routing system from scratch.\n\n--------------------------------------------------------------------------------\n\n\n### Navigation styles\n\nTwo of the navigation styles, horizontal and vertical, should only be used on\ndesktop screens. The collapsed navigation style should be used on mobile/touch\ndevices and can also be used for desktop devices.\n\n\n#### 1. Horizontal navigation\n\nThe horizontal navigation style is a persistent bar fixed to the top of the viewport.\nNavigation items are displayed in a row. If the window is too narrow to fit all\nthe items, any overflowed items are placed into an overflow dropdown. If only\none navigation item fits in the window, the navigation will automatically\nswitch to collapse style (see description below).\n\nThis is the default style. It doesn't require any additional configuration to\nenable beyond putting the `px-app-nav` element tag on the app page. The following\nexample shows how to configure px-app-nav in the horizontal style:\n\n\n    <px-app-nav\n        items='[\n          { \"label\" : \"Home\",   \"id\" : \"home\",   \"icon\" : \"px-fea:home\" },\n          { \"label\" : \"Alerts\", \"id\" : \"alerts\", \"icon\" : \"px-fea:alerts\" },\n          { \"label\" : \"Assets\", \"id\" : \"assets\", \"icon\" : \"px-fea:asset\", children: [\n            { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n            { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n          ] }\n        ]'\n        selected-route='[\"assets\",\"a1\"]'>\n    </px-app-nav>\n\n#### Positioning a horizontal app-nav in an app:\n\nThe horizontal style `px-app-nav` element should be fixed at the top of your app\nwith app content configured to scroll beneath it. The app must position the\n`px-app-nav` element using CSS to fix it to the top of the view. By default, the\nelement is `position: relative` and `display: block`, causing it to fill its\nparent container's width but scroll out of the view as the user scrolls down\nthe page.\n\nThe following example fixes the element to the top of the view so content\ncan scroll beneath it:\n\n\n    <style>\n      px-app-nav {\n        position: fixed;\n        top: 0;\n        left: 0;\n      }\n    </style>\n    <px-app-nav items=\"...\"></px-app-nav>\n\nUsing position fixed will cause the `px-app-nav` element to cover other HTML\nelements at the top of your page. Offset your content (e.g. by setting\n`margin-top: 80px` on your content container) to ensure the navigation does not\ncover other app elements unintentionally.\n\n--------------------------------------------------------------------------------\n\n#### 2. Collapsed navigation\n\nThe collapsed navigation style is also a persistent bar fixed to the top of the\nviewport. The navigation items are displayed in a dropdown menu that the user\ncan open by clicking or tapping on the open button; and closed by selecting\na navigation item or clicking or tapping anywhere else in the viewport.\n\nIf no item is selected, the collapsed navigation will show an empty outline\nfor the dropdown trigger button. If an item is selected that item's label and\nicon will be shown in the dropdown trigger button.\n\nThis style can be enabled in a few different ways:\n\n- **Force collapse:** Setting the `collapseAll` property to true or enabling the\n`collapse-all` attribute on the `px-app-nav` element will force the navigation\nto use the collapsed style at all times. Example:\n\n\n    <px-app-nav items=\"...\" collapse-all></px-app-nav>\n\n\n- **Dynamic collapse:** The `collapseAt` property can be used to dynamically\ncollapse and un-collapse the navigation when the viewport size changes. If the\nsize of the `px-app-nav` element's container becomes smaller than the `collapseAt`\nvalue, it is collapsed. If the element's container becomes larger than the\n`collapseAt` value, it is un-collapsed.\n\n\n    <px-app-nav items=\"...\" collapse-at=\"420\"></px-app-nav>\n\n\nThe `collapseAt` property should be a number that will be converted into pixels.\n\nWhen the navigation is automatically collapsed or un-collapsed, the read-only\n`collapsed` property will be updated. Watch that property to figure out the\nstate of the navigation.\n\n- **Auto-collapse:** When the default horizontal style is in use and only 1 item\nfits in the space available to the `px-app-nav` element, the navigation will be\nautomatically collapsed.\n\n#### Positioning a collapsed app-nav in an app:\n\nFollow the sticking instructions in the Horizontal style section above to\ncorrectly position the `px-app-nav` element on the page in collapsed style.\n\n--------------------------------------------------------------------------------\n\n#### 3. Vertical navigation\n\nThe vertical navigation style is fixed to the left or right side of the browser.\nWhen the navigation is not being interacted with it displays as a narrow strip\nshowing only the navigation item icons. When the user hovers over the vertical\nnavigation, the bar animates open and allows the user to click/tap to select\na new item. Example:\n\n\n    <px-app-nav items=\"...\" vertical></px-app-nav>\n\n\n#### Positioning a vertical app-nav  in an app:\n\nThe vertical style defaults to CSS styles `position: absolute; left: 0; top: 0;`\nto stick to the left side of the screen. This causes the navigation element to\nfill the first `position: relative` item above it in the DOM. Override these\nvalues to position it in whatever way your app requires:\n\n\n      <style>\n        px-app-nav {\n          position: fixed;\n          right: 0;\n          top: 0;\n        }\n      </style>\n      <px-app-nav items=\"...\"></px-app-nav>\n\n--------------------------------------------------------------------------------\n\n\n### Styling\n\nThe following custom properties are available for styling:\n\nCustom property | Description\n----------------|-------------\n`--px-app-nav-background-color`                                         | The background color of the app nav bar\n`--px-app-nav-item-background-color--collapsed`                         | The background color for a collapsed app nav\n`--px-app-nav-item-background-color--empty`                             | The background color for an empty app nav\n`--px-app-nav-item-background-color--hover`                             | The hover state color for an app nav item\n`--px-app-nav-item-background-color--pressed`                           | The pressed state color for an app nav item\n`--px-app-nav-item-background-color--selected`                          | The background color for a selected app nav item\n`--px-app-nav-item-background-color`                                    | The background color for an unselected app nav item\n`--px-app-nav-item-icon-color--collapsed`                               | The color of the icon in a collapsed app nav\n`--px-app-nav-item-icon-color--hover`                                   | The hover state color for an icon\n`--px-app-nav-item-icon-color--pressed`                                 | The pressed state color for an icon\n`--px-app-nav-item-icon-color--selected`                                | The  color for the icon in a selected item\n`--px-app-nav-item-icon-color`                                          | The normal, unselected color for an icon\n`--px-app-nav-item-stripe-color--selected`                              | The stripe accent color on the top or side of a selected item\n`--px-app-nav-item-text-color--collapsed`                               | The text color in a collapsed state\n`--px-app-nav-item-text-color--hover`                                   | The text color in a hover state\n`--px-app-nav-item-text-color--pressed`                                 | The text color in a pressed state\n`--px-app-nav-item-text-color--selected`                                | The text color for a selected item\n`--px-app-nav-item-text-color`                                          | The normal, unselected text color\n`--px-app-nav-subitem-background-color--hover`                          | The hover state background color for the dropdown submenu\n`--px-app-nav-subitem-background-color--selected`                       | The  background color for a selected item in the dropdown submenu\n`--px-app-nav-subitem-background-color`                                 | The background color for the dropdown submenu\n`--px-app-nav-subitem-text-color--collapsed`                            | The collapsed state text color for a submenu item\n`--px-app-nav-subitem-text-color--hover`                                | The hover state text color for a submenu item\n`--px-app-nav-subitem-text-color--selected`                             | The text color for a selected submenu item\n`--px-app-nav-subitem-text-color`                                       | The normal, unselected text color for a submenu item\n`--px-app-nav-subitem-background-color--collapsed`                      | The background color for the dropdown submenu in a collapsed state\n`--px-app-nav-subitem-background-color--collapsed-hover`                | The hover state background color for the dropdown submenu in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-selected`            | The background color for the selected dropdown submenu in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-selected`      | The background color for the parent item of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-accent-color--parent-collapsed-selected`          | The strip accent color for the parent item of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-hover`         | The background color for the parent of a hovered submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-selected`      | The background color for the parent of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-selected`            | The text color for the parent of a hovered submenu item in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-not-selected`        | The text color for the parent of an open, unselected submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-not-selected`  | The background color for the parent of an open, unselected submenu item in a collapsed state",
+      "description": "`px-app-nav` is an app-level navigation element that allows users to change the\ncurrent view. The element is designed to work on desktop and mobile/touch\ndevices, supporting any viewport size. It has three distinct visual styles that\ncan be switched at any time to suit different app designs.\n\n--------------------------------------------------------------------------------\n\n### Navigation items: Structuring data and managing selection\n\nThe navigation accepts a list of items that will be converted into buttons for\nthe user to interact with. Each item should have at least a label that will\nbe displayed for the user to select and a unique ID that will be used to keep\ntrack of which item is selected.\n\nThis data should be passed into the `items` attribute or property on the\n`px-app-nav` element.\n\nThis is a simple navigation data example:\n\n\n    [\n      {\n        \"id\" : \"home\",\n        \"label\" : \"Home\",\n        \"icon\" : \"px-fea:home\"\n      },\n      {\n        \"id\" : \"alert\",\n        \"label\" : \"Alerts\",\n        \"icon\" : \"px-fea:alerts\"\n      }\n    ]\n\n\nTop-level navigation items can optionally have child items. This is useful for\ncreating categories of related pages. If a top-level navigation item has any\nchildren it cannot be selected directly - users can select its child items,\nand the top-level \"category\" item will get the selected visual style.\n\nThis example shows a \"Dashboards\" category with a few different dashboard pages:\n\n\n    [\n      {\n        \"id\" : \"dash\",\n        \"label\" : \"Dashboards\",\n        \"icon\" : \"px-fea:dashboard\",\n        \"children\" : [\n          {\n            \"id\" : \"plant-status\",\n            \"label\" : \"Plant Status Updates\"\n          },\n          {\n            \"id\" : \"output-info\",\n            \"label\" : \"Daily Output Measurements\"\n          }\n        ]\n      }\n    ]\n\nAll items (top-level items, top-level category items, and child items) should\nhave the following properties:\n\n  - **id** {string} - unique string that identifies the item. Should only contain\n  valid, URI-safe characters. Example: \"home\", \"alerts1\"\n  - **label** {string} - short, human-readable text. The user will tap this text\n  to select the item. Example: \"Homepage\", \"View Alerts\"\n\nThe following optional properties can be defined for top-level items only:\n\n  - **icon** {string} - valid [px-icon-set](https://www.predix-ui.com/#/modules/px-icon-set/)\n  icon placed next to the text label for the item. Use an icon from the `px-fea`\n  for the best sizing and visual styling. If the icon you need is not available in\n  the `px-fea` icon set, you may use an icon from the `px-nav` icon set, but only\n  do so if absolutely necessary.\n  - **children** {array} - child items that will be placed in a dropdown under\n  their parent top-level item. Each child item should have an `id` and `label`.\n  If the child item has an `icon` property, it will be ignored.\n\nExample top-level item without children:\n\n\n    {\n      \"id\" : \"page-id\",\n      \"label\" : \"Page Title\",\n      \"icon\" : \"px-fea:templates\"\n    }\n\n\nExample top-level item with child items:\n\n\n    {\n      \"id\" : \"category-id\",\n      \"label\" : \"Category Title\",\n      \"icon\" : \"px-fea:microservice\",\n      \"children\" : [\n        {\n          \"id\" : \"child-item-1\",\n          \"label\" : \"First Child Title\"\n        },\n        {\n          \"id\" : \"child-item-2\",\n          \"label\" : \"Second Child Title\"\n        }\n      ]\n    }\n\n\nAdditional data not used by `px-app-nav` can also be included in each item's\nobject. This is a useful way to store metadata about app pages that will be used\nat run-time when a new nav item is selected. Example:\n\n\n    {\n      \"id\" : \"all-cases\",\n      \"label\" : \"Cases\",\n      \"metadata\" : {\n        \"openCases\" : \"12\",\n        \"closedCases\" : \"82\"\n      }\n    }\n\nThe navigation will not mutate any of its items properties, making it easy to\nshare any item metadata with other app components.\n\n#### Responding to item selection\n\nWhen the user taps on a navigation item it will be marked as selected. The app\ncontaining the `px-app-nav` element should respond to the new selected item and\nupdate its view.\n\nThere are two ways for an app to listen for user selection:\n\n- **By reference:** The element's `selected` property will be updated when a new\nitem is selected. The `selected` property will notify a reference to the object\nthat describes the item in the `items` array.\n\n- **By route:** The element's `selectedRoute` property will notify an array of\nstrings that trace the path from the root of the `items` graph to the selected\nitem. This is useful for binding the navigation state to the app's URL path.\n(See the [px-app-route](https://www.predix-ui.com/#/elements/px-app-helpers/px-app-route)\nmodule for a guide to binding the navigation state to the URL.)\n\nFor example, given the following simplified navigation `items` list:\n\n    [\n      {\n        \"id\" : \"dash\",\n        \"label\" : \"Dashboards\",\n        \"children\" : [\n          {\n            \"id\" : \"info-dash\",\n            \"label\" : \"Info Dashboard\"\n          }\n        ]\n      }\n    ]\n\nWhen the user selects the \"Info Dashboard\", the `selectedRoute` will be set to\n`[\"dash\", \"info-fash\"]`.\n\n#### Selecting an item programmatically\n\nSometimes it is useful for an app to automatically change the active page\n(e.g. opening the home page when the app is first loaded, or opening a dashboard\nwhen the user clicks on an alert message). The `selected` and `selectedRoute`\nproperties can be used to set the selected navigation item state in the same\nway they are used to read the selected navigation item state.\n\nThe simplest way to do this is through `selectedRoute`:\n\n\n    <px-app-nav\n        items='[\n          { \"label\" : \"Home\",   \"id\" : \"home\",   \"icon\" : \"px-fea:home\" },\n          { \"label\" : \"Alerts\", \"id\" : \"alerts\", \"icon\" : \"px-fea:alerts\" },\n          { \"label\" : \"Assets\", \"id\" : \"assets\", \"icon\" : \"px-fea:asset\", children: [\n            { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n            { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n          ] }\n        ]'\n        selected-route='[\"assets\", \"a1\"]'>\n    </px-app-nav>\n\n\nItems can also be selected by reference using the `selected` property. Selecting\nthis way requires a bit of JavaScript; the navigation does a simple reference\nequality check (`item1 === item2`) to find the item in the graph and select it.\nPassing an item with the same properties as one of the `items` objects will\nnot select it.\n\n\n    <px-app-nav id=\"nav\"></px-app-nav>\n    <script>\n      var nav = document.getElementById('nav');\n      var navItems = [\n        { \"id\" : \"home\", \"label\" : \"Home\" }\n      ];\n      nav.items = navItems;\n      nav.selected = navItems[0];\n    </script>\n\n\nData-binding can also be used to accomplish the same thing without manually\nfinding the `px-app-nav` element in the DOM.\n\n### Binding to the URL path (routing)\n\nThe `px-app-nav` element is designed to easily bind its state to the URL path.\nWhen the user selects an item, its `selectedRoute` can be encoded and used to\nset the URL path. The user can then bookmark the page or share the URL to link\nto a specific view. When the user loads a page with a URL path defined, that\npath can be decoded and used to select the right navigation item (and show a\npage).\n\nFor a ready-to-go solution for binding `px-app-nav` to the URL path, see the\n[px-app-route](https://www.predix-ui.com/#/elements/px-app-helpers/px-app-route) component.\nThis component works best in applications built using Polymer as a data-binding\nframework, but also exposes methods to help convert the navigation's\n`selectedRoute` to and from a path string for use in other framework routers.\n\nAlternatively, listen for update events from the `selected` and/or `selectedRoute`\nproperties in your app and send the values to the framework router of your\nchoice, or implement your own routing system from scratch.\n\n--------------------------------------------------------------------------------\n\n\n### Navigation styles\n\nTwo of the navigation styles, horizontal and vertical, should only be used on\ndesktop screens. The collapsed navigation style should be used on mobile/touch\ndevices and can also be used for desktop devices.\n\n\n#### 1. Horizontal navigation\n\nThe horizontal navigation style is a persistent bar fixed to the top of the viewport.\nNavigation items are displayed in a row. If the window is too narrow to fit all\nthe items, any overflowed items are placed into an overflow dropdown. If only\none navigation item fits in the window, the navigation will automatically\nswitch to collapse style (see description below).\n\nThis is the default style. It doesn't require any additional configuration to\nenable beyond putting the `px-app-nav` element tag on the app page. The following\nexample shows how to configure px-app-nav in the horizontal style:\n\n\n    <px-app-nav\n        items='[\n          { \"label\" : \"Home\",   \"id\" : \"home\",   \"icon\" : \"px-fea:home\" },\n          { \"label\" : \"Alerts\", \"id\" : \"alerts\", \"icon\" : \"px-fea:alerts\" },\n          { \"label\" : \"Assets\", \"id\" : \"assets\", \"icon\" : \"px-fea:asset\", children: [\n            { \"label\" : \"Asset #1\", \"id\" : \"a1\" },\n            { \"label\" : \"Asset #2\", \"id\" : \"a2\" }\n          ] }\n        ]'\n        selected-route='[\"assets\",\"a1\"]'>\n    </px-app-nav>\n\n#### Positioning a horizontal app-nav in an app:\n\nThe horizontal style `px-app-nav` element should be fixed at the top of your app\nwith app content configured to scroll beneath it. The app must position the\n`px-app-nav` element using CSS to fix it to the top of the view. By default, the\nelement is `position: relative` and `display: block`, causing it to fill its\nparent container's width but scroll out of the view as the user scrolls down\nthe page.\n\nThe following example fixes the element to the top of the view so content\ncan scroll beneath it:\n\n\n    <style>\n      px-app-nav {\n        position: fixed;\n        top: 0;\n        left: 0;\n      }\n    </style>\n    <px-app-nav items=\"...\"></px-app-nav>\n\nUsing position fixed will cause the `px-app-nav` element to cover other HTML\nelements at the top of your page. Offset your content (e.g. by setting\n`margin-top: 80px` on your content container) to ensure the navigation does not\ncover other app elements unintentionally.\n\n--------------------------------------------------------------------------------\n\n#### 2. Collapsed navigation\n\nThe collapsed navigation style is also a persistent bar fixed to the top of the\nviewport. The navigation items are displayed in a dropdown menu that the user\ncan open by clicking or tapping on the open button; and closed by selecting\na navigation item or clicking or tapping anywhere else in the viewport.\n\nIf no item is selected, the collapsed navigation will show an empty outline\nfor the dropdown trigger button. If an item is selected that item's label and\nicon will be shown in the dropdown trigger button.\n\nThis style can be enabled in a few different ways:\n\n- **Force collapse:** Setting the `collapseAll` property to true or enabling the\n`collapse-all` attribute on the `px-app-nav` element will force the navigation\nto use the collapsed style at all times. Example:\n\n\n    <px-app-nav items=\"...\" collapse-all></px-app-nav>\n\n\n- **Dynamic collapse:** The `collapseAt` property can be used to dynamically\ncollapse and un-collapse the navigation when the viewport size changes. If the\nsize of the `px-app-nav` element's container becomes smaller than the `collapseAt`\nvalue, it is collapsed. If the element's container becomes larger than the\n`collapseAt` value, it is un-collapsed.\n\n\n    <px-app-nav items=\"...\" collapse-at=\"420\"></px-app-nav>\n\n\nThe `collapseAt` property should be a number that will be converted into pixels.\n\nWhen the navigation is automatically collapsed or un-collapsed, the read-only\n`collapsed` property will be updated. Watch that property to figure out the\nstate of the navigation.\n\n- **Auto-collapse:** When the default horizontal style is in use and only 1 item\nfits in the space available to the `px-app-nav` element, the navigation will be\nautomatically collapsed.\n\n#### Positioning a collapsed app-nav in an app:\n\nFollow the sticking instructions in the Horizontal style section above to\ncorrectly position the `px-app-nav` element on the page in collapsed style.\n\n--------------------------------------------------------------------------------\n\n#### 3. Vertical navigation\n\nThe vertical navigation style is fixed to the left or right side of the browser.\nWhen the navigation is not being interacted with it displays as a narrow strip\nshowing only the navigation item icons. When the user hovers over the vertical\nnavigation, the bar animates open and allows the user to click/tap to select\na new item. Example:\n\n\n    <px-app-nav items=\"...\" vertical></px-app-nav>\n\nThe vertical navigation can be opened in a few ways:\n\n- **Auto open:** When the default vertical style is in use the navigation will automatically\nopen on hover over the `px-app-nav` element.\n\n- **Force open:** Setting the `verticalOpenedAt` property to 0 on the `px-app-nav` \nelement will force the navigation to use the opened style at all times. Example:\n\n\n    <px-app-nav items=\"...\" vertical-opened=at=\"0\"></px-app-nav>\n\n\n- **Dynamic open:** The `verticalOpenedAt` property can be used to dynamically open \nthe navigation when the viewport size changes. If the size of the `px-app-nav` element's \nparent container becomes larger than the value of `verticalOpenedAt`, it is opened.\nFor example, if `verticalOpenedAt` is 600, the navigation will open if the containers\nwidth exceeds 600px and close if below 600px.\n\n\n    <px-app-nav items=\"...\" vertical-opened-at=\"600\"></px-app-nav>\n\n\nThe `verticalOpenedAt` property should be a number that will be converted into pixels.\n\nWhen the navigation is dynamically opened, the `verticalOpened` property will be updated. \nWatch that property to figure out the state of the navigation.\n\n\n#### Positioning a vertical app-nav  in an app:\n\nThe vertical style defaults to CSS styles `position: absolute; left: 0; top: 0;`\nto stick to the left side of the screen. This causes the navigation element to\nfill the first `position: relative` item above it in the DOM. Override these\nvalues to position it in whatever way your app requires:\n\n\n      <style>\n        px-app-nav {\n          position: fixed;\n          right: 0;\n          top: 0;\n        }\n      </style>\n      <px-app-nav items=\"...\"></px-app-nav>\n\n--------------------------------------------------------------------------------\n\n\n### Styling\n\nThe following custom properties are available for styling:\n\nCustom property | Description\n----------------|-------------\n`--px-app-nav-background-color`                                         | The background color of the app nav bar\n`--px-app-nav-item-background-color--collapsed`                         | The background color for a collapsed app nav\n`--px-app-nav-item-background-color--empty`                             | The background color for an empty app nav\n`--px-app-nav-item-background-color--hover`                             | The hover state color for an app nav item\n`--px-app-nav-item-background-color--pressed`                           | The pressed state color for an app nav item\n`--px-app-nav-item-background-color--selected`                          | The background color for a selected app nav item\n`--px-app-nav-item-background-color`                                    | The background color for an unselected app nav item\n`--px-app-nav-item-icon-color--collapsed`                               | The color of the icon in a collapsed app nav\n`--px-app-nav-item-icon-color--hover`                                   | The hover state color for an icon\n`--px-app-nav-item-icon-color--pressed`                                 | The pressed state color for an icon\n`--px-app-nav-item-icon-color--selected`                                | The  color for the icon in a selected item\n`--px-app-nav-item-icon-color`                                          | The normal, unselected color for an icon\n`--px-app-nav-item-stripe-color--selected`                              | The stripe accent color on the top or side of a selected item\n`--px-app-nav-item-text-color--collapsed`                               | The text color in a collapsed state\n`--px-app-nav-item-text-color--hover`                                   | The text color in a hover state\n`--px-app-nav-item-text-color--pressed`                                 | The text color in a pressed state\n`--px-app-nav-item-text-color--selected`                                | The text color for a selected item\n`--px-app-nav-item-text-color`                                          | The normal, unselected text color\n`--px-app-nav-subitem-background-color--hover`                          | The hover state background color for the dropdown submenu\n`--px-app-nav-subitem-background-color--selected`                       | The  background color for a selected item in the dropdown submenu\n`--px-app-nav-subitem-background-color`                                 | The background color for the dropdown submenu\n`--px-app-nav-subitem-text-color--collapsed`                            | The collapsed state text color for a submenu item\n`--px-app-nav-subitem-text-color--hover`                                | The hover state text color for a submenu item\n`--px-app-nav-subitem-text-color--selected`                             | The text color for a selected submenu item\n`--px-app-nav-subitem-text-color`                                       | The normal, unselected text color for a submenu item\n`--px-app-nav-subitem-background-color--collapsed`                      | The background color for the dropdown submenu in a collapsed state\n`--px-app-nav-subitem-background-color--collapsed-hover`                | The hover state background color for the dropdown submenu in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-selected`            | The background color for the selected dropdown submenu in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-selected`      | The background color for the parent item of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-accent-color--parent-collapsed-selected`          | The strip accent color for the parent item of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-hover`         | The background color for the parent of a hovered submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-selected`      | The background color for the parent of a selected submenu item in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-selected`            | The text color for the parent of a hovered submenu item in a collapsed state\n`--px-app-nav-subitem-text-color--parent-collapsed-not-selected`        | The text color for the parent of an open, unselected submenu item in a collapsed state\n`--px-app-nav-subitem-background-color--parent-collapsed-not-selected`  | The background color for the parent of an open, unselected submenu item in a collapsed state",
       "summary": "",
       "path": "px-app-nav.es6.js",
       "properties": [
@@ -4873,41 +4873,17 @@
           "defaultValue": "false"
         },
         {
-          "name": "verticalExpanded",
-          "type": "boolean | null | undefined",
-          "description": "Shows the vertical navigation in an expanded view. The navigation will take up the\nfull left-hand side of the page.",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 234,
-              "column": 6
-            },
-            "end": {
-              "line": 240,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "notify": true,
-              "observer": "\"_handleVerticalExpandedViewChanged\"",
-              "attributeType": "Boolean"
-            }
-          },
-          "defaultValue": "false"
-        },
-        {
           "name": "verticalOpened",
           "type": "boolean | null | undefined",
-          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
+          "description": "When `true`, the vertical navigation is open.\nWhen `false`, the vertical navigation is closed.\n\nThis property is controlled by two means:\n   1. when `verticalOpenedAt` is configured and its\n       value is currently below `_parentWidth`\n   2. otherwise, `mouseenter` and `mouseleave` events",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 239,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 245,
               "column": 7
             }
           },
@@ -4921,17 +4897,39 @@
           "defaultValue": "false"
         },
         {
+          "name": "verticalOpenedAt",
+          "type": "number | null | undefined",
+          "description": "The parent container width at which the vertical navigation should be opened.\nUse a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').\n\nThis property will overwrite the `verticalOpened` property. Avoid data\nbinding in both properties at the same time.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 254,
+              "column": 6
+            },
+            "end": {
+              "line": 257,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"rebuild\"",
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
           "name": "visibleItems",
           "type": "Array | null | undefined",
           "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 258,
+              "line": 263,
               "column": 6
             },
             "end": {
-              "line": 262,
+              "line": 267,
               "column": 7
             }
           },
@@ -4950,11 +4948,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 268,
+              "line": 273,
               "column": 6
             },
             "end": {
-              "line": 272,
+              "line": 277,
               "column": 7
             }
           },
@@ -4973,11 +4971,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 277,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 283,
+              "line": 288,
               "column": 7
             }
           },
@@ -4997,11 +4995,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 288,
+              "line": 293,
               "column": 6
             },
             "end": {
-              "line": 294,
+              "line": 299,
               "column": 7
             }
           },
@@ -5021,11 +5019,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 299,
+              "line": 304,
               "column": 6
             },
             "end": {
-              "line": 305,
+              "line": 310,
               "column": 7
             }
           },
@@ -5045,11 +5043,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 320,
+              "line": 325,
               "column": 6
             },
             "end": {
-              "line": 322,
+              "line": 327,
               "column": 7
             }
           },
@@ -5062,15 +5060,37 @@
         {
           "name": "_availableWidth",
           "type": "number | null | undefined",
-          "description": "",
+          "description": "Available width within the `px-app-nav` container element.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 324,
+              "line": 332,
               "column": 6
             },
             "end": {
-              "line": 327,
+              "line": 335,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "observer": "\"rebuild\"",
+              "attributeType": "Number"
+            }
+          }
+        },
+        {
+          "name": "_parentWidth",
+          "type": "number | null | undefined",
+          "description": "Width of the `px-app-nav` parent element.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 340,
+              "column": 6
+            },
+            "end": {
+              "line": 343,
               "column": 7
             }
           },
@@ -5088,11 +5108,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 333,
+              "line": 349,
               "column": 6
             },
             "end": {
-              "line": 337,
+              "line": 353,
               "column": 7
             }
           },
@@ -5110,11 +5130,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 339,
+              "line": 355,
               "column": 6
             },
             "end": {
-              "line": 342,
+              "line": 358,
               "column": 7
             }
           },
@@ -5131,11 +5151,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 349,
+              "line": 365,
               "column": 4
             },
             "end": {
-              "line": 355,
+              "line": 371,
               "column": 5
             }
           },
@@ -6136,11 +6156,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 371,
+              "line": 387,
               "column": 4
             },
             "end": {
-              "line": 374,
+              "line": 390,
               "column": 5
             }
           },
@@ -6156,11 +6176,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 376,
+              "line": 392,
               "column": 4
             },
             "end": {
-              "line": 381,
+              "line": 397,
               "column": 5
             }
           },
@@ -6176,11 +6196,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 383,
+              "line": 399,
               "column": 4
             },
             "end": {
-              "line": 393,
+              "line": 409,
               "column": 5
             }
           },
@@ -6196,11 +6216,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 395,
+              "line": 411,
               "column": 4
             },
             "end": {
-              "line": 410,
+              "line": 426,
               "column": 5
             }
           },
@@ -6216,11 +6236,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 412,
+              "line": 428,
               "column": 4
             },
             "end": {
-              "line": 426,
+              "line": 442,
               "column": 5
             }
           },
@@ -6236,11 +6256,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 432,
+              "line": 448,
               "column": 4
             },
             "end": {
-              "line": 439,
+              "line": 455,
               "column": 5
             }
           },
@@ -6256,11 +6276,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 448,
+              "line": 464,
               "column": 4
             },
             "end": {
-              "line": 456,
+              "line": 472,
               "column": 5
             }
           },
@@ -6276,40 +6296,16 @@
           }
         },
         {
-          "name": "_handleVerticalExpandedViewChanged",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 458,
-              "column": 4
-            },
-            "end": {
-              "line": 462,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "verticalExpanded"
-            }
-          ],
-          "return": {
-            "type": "void"
-          }
-        },
-        {
           "name": "_itemSelectedByEvent",
           "description": "Updates the selected item when the user taps on a nav item button.\nIf the button was for an external link, have window open it.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 467,
+              "line": 478,
               "column": 4
             },
             "end": {
-              "line": 471,
+              "line": 482,
               "column": 5
             }
           },
@@ -6329,11 +6325,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 481,
+              "line": 492,
               "column": 4
             },
             "end": {
-              "line": 493,
+              "line": 504,
               "column": 5
             }
           },
@@ -6348,16 +6344,16 @@
           }
         },
         {
-          "name": "_measureAvailableWidth",
+          "name": "_measureAvailableAndParentWidth",
           "description": "Measures the width the nav items may occupy, allowing the component to\ndo math to see which items fit/are visible and which don't fit/will be\noverflowed. Measurements happen in the next animation frame, ensuring\nwe don't trigger a premature reflow and that the tab is visible.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 501,
+              "line": 512,
               "column": 4
             },
             "end": {
-              "line": 511,
+              "line": 529,
               "column": 5
             }
           },
@@ -6373,11 +6369,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 524,
+              "line": 542,
               "column": 4
             },
             "end": {
-              "line": 558,
+              "line": 580,
               "column": 5
             }
           },
@@ -6394,11 +6390,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 572,
+              "line": 594,
               "column": 4
             },
             "end": {
-              "line": 603,
+              "line": 625,
               "column": 5
             }
           },
@@ -6431,11 +6427,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 615,
+              "line": 637,
               "column": 4
             },
             "end": {
-              "line": 618,
+              "line": 640,
               "column": 5
             }
           },
@@ -6458,11 +6454,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 627,
+              "line": 649,
               "column": 4
             },
             "end": {
-              "line": 636,
+              "line": 658,
               "column": 5
             }
           },
@@ -6483,11 +6479,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 651,
+              "line": 673,
               "column": 4
             },
             "end": {
-              "line": 664,
+              "line": 686,
               "column": 5
             }
           },
@@ -6504,11 +6500,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 675,
+              "line": 697,
               "column": 4
             },
             "end": {
-              "line": 687,
+              "line": 709,
               "column": 5
             }
           },
@@ -6538,11 +6534,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 695,
+              "line": 717,
               "column": 4
             },
             "end": {
-              "line": 698,
+              "line": 720,
               "column": 5
             }
           },
@@ -6564,11 +6560,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 720,
+              "line": 742,
               "column": 4
             },
             "end": {
-              "line": 728,
+              "line": 750,
               "column": 5
             }
           },
@@ -6605,11 +6601,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 753,
+              "line": 775,
               "column": 4
             },
             "end": {
-              "line": 770,
+              "line": 792,
               "column": 5
             }
           },
@@ -6654,11 +6650,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 778,
+              "line": 800,
               "column": 4
             },
             "end": {
-              "line": 783,
+              "line": 806,
               "column": 5
             }
           },
@@ -6666,6 +6662,9 @@
           "params": [
             {
               "name": "allCollapsed"
+            },
+            {
+              "name": "anyOverflowed"
             }
           ],
           "return": {
@@ -6678,11 +6677,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 794,
+              "line": 817,
               "column": 4
             },
             "end": {
-              "line": 796,
+              "line": 819,
               "column": 5
             }
           },
@@ -6707,11 +6706,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 806,
+              "line": 829,
               "column": 4
             },
             "end": {
-              "line": 808,
+              "line": 831,
               "column": 5
             }
           },
@@ -6736,11 +6735,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 818,
+              "line": 841,
               "column": 4
             },
             "end": {
-              "line": 820,
+              "line": 843,
               "column": 5
             }
           },
@@ -6769,11 +6768,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 827,
+              "line": 850,
               "column": 4
             },
             "end": {
-              "line": 829,
+              "line": 852,
               "column": 5
             }
           },
@@ -6798,11 +6797,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 838,
+              "line": 861,
               "column": 4
             },
             "end": {
-              "line": 841,
+              "line": 864,
               "column": 5
             }
           },
@@ -6823,11 +6822,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 850,
+              "line": 873,
               "column": 4
             },
             "end": {
-              "line": 853,
+              "line": 876,
               "column": 5
             }
           },
@@ -6848,11 +6847,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 861,
+              "line": 884,
               "column": 4
             },
             "end": {
-              "line": 863,
+              "line": 886,
               "column": 5
             }
           },
@@ -6876,11 +6875,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 871,
+              "line": 894,
               "column": 4
             },
             "end": {
-              "line": 873,
+              "line": 896,
               "column": 5
             }
           },
@@ -6904,11 +6903,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 882,
+              "line": 905,
               "column": 4
             },
             "end": {
-              "line": 886,
+              "line": 909,
               "column": 5
             }
           },
@@ -6936,11 +6935,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 895,
+              "line": 918,
               "column": 4
             },
             "end": {
-              "line": 897,
+              "line": 920,
               "column": 5
             }
           },
@@ -6960,16 +6959,33 @@
           }
         },
         {
+          "name": "_isVerticalOpenedByThreshold",
+          "description": "Checks if the vertical navigation is currently opened\nby means of the `verticalOpenedAt` property.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 926,
+              "column": 4
+            },
+            "end": {
+              "line": 928,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
           "name": "_computeAnyOverflowed",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 904,
+              "line": 935,
               "column": 4
             },
             "end": {
-              "line": 906,
+              "line": 937,
               "column": 5
             }
           },
@@ -6994,11 +7010,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 913,
+              "line": 944,
               "column": 4
             },
             "end": {
-              "line": 915,
+              "line": 946,
               "column": 5
             }
           },
@@ -7023,11 +7039,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 922,
+              "line": 953,
               "column": 4
             },
             "end": {
-              "line": 924,
+              "line": 955,
               "column": 5
             }
           },
@@ -7061,7 +7077,7 @@
           "column": 10
         },
         "end": {
-          "line": 925,
+          "line": 956,
           "column": 3
         }
       },
@@ -7239,15 +7255,15 @@
           "type": "boolean | null | undefined"
         },
         {
-          "name": "vertical-expanded",
-          "description": "Shows the vertical navigation in an expanded view. The navigation will take up the\nfull left-hand side of the page.",
+          "name": "vertical-opened",
+          "description": "When `true`, the vertical navigation is open.\nWhen `false`, the vertical navigation is closed.\n\nThis property is controlled by two means:\n   1. when `verticalOpenedAt` is configured and its\n       value is currently below `_parentWidth`\n   2. otherwise, `mouseenter` and `mouseleave` events",
           "sourceRange": {
             "start": {
-              "line": 234,
+              "line": 239,
               "column": 6
             },
             "end": {
-              "line": 240,
+              "line": 245,
               "column": 7
             }
           },
@@ -7255,31 +7271,31 @@
           "type": "boolean | null | undefined"
         },
         {
-          "name": "vertical-opened",
-          "description": "When `true`, the vertical navigation is open and the user is interacting\nwith it. When `false`, the vertical navigation is closed.",
+          "name": "vertical-opened-at",
+          "description": "The parent container width at which the vertical navigation should be opened.\nUse a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').\n\nThis property will overwrite the `verticalOpened` property. Avoid data\nbinding in both properties at the same time.",
           "sourceRange": {
             "start": {
-              "line": 246,
+              "line": 254,
               "column": 6
             },
             "end": {
-              "line": 252,
+              "line": 257,
               "column": 7
             }
           },
           "metadata": {},
-          "type": "boolean | null | undefined"
+          "type": "number | null | undefined"
         },
         {
           "name": "visible-items",
           "description": "An array of items that are currently visible — they fit in the menu\nand are not overflowed or collapse.",
           "sourceRange": {
             "start": {
-              "line": 258,
+              "line": 263,
               "column": 6
             },
             "end": {
-              "line": 262,
+              "line": 267,
               "column": 7
             }
           },
@@ -7291,11 +7307,11 @@
           "description": "An array of items that are currently hidden in the overflow dropdown\nor in the collapsed dropdown.",
           "sourceRange": {
             "start": {
-              "line": 268,
+              "line": 273,
               "column": 6
             },
             "end": {
-              "line": 272,
+              "line": 277,
               "column": 7
             }
           },
@@ -7307,11 +7323,11 @@
           "description": "True if all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 277,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 283,
+              "line": 288,
               "column": 7
             }
           },
@@ -7323,11 +7339,11 @@
           "description": "True if some items are overflowed, or all items are collapsed.",
           "sourceRange": {
             "start": {
-              "line": 288,
+              "line": 293,
               "column": 6
             },
             "end": {
-              "line": 294,
+              "line": 299,
               "column": 7
             }
           },
@@ -7339,11 +7355,11 @@
           "description": "True if some items are overflowed, and some items are visible.",
           "sourceRange": {
             "start": {
-              "line": 299,
+              "line": 304,
               "column": 6
             },
             "end": {
-              "line": 305,
+              "line": 310,
               "column": 7
             }
           },
@@ -7355,11 +7371,11 @@
           "description": "Reference the HTMLElement to fit any nav dropdowns into. Dropdowns will\nautomatically be constrained to fit their width and height inside\nthis container element. If the nav items in the dropdown are wider than\nthe container, they will be truncated with ellipses. If the nav items\nin the dropdown are taller than the container, the dropdown will show\nand scroll bar so users can see the overset items.\n\nBy default, dropdowns will be fit into the `window`. If your nav is\nplaced inside of another container, and should not expand to take\nup all available space in the window, use this property to constrain\nthe dropdowns' sizes.",
           "sourceRange": {
             "start": {
-              "line": 320,
+              "line": 325,
               "column": 6
             },
             "end": {
-              "line": 322,
+              "line": 327,
               "column": 7
             }
           },
@@ -7371,11 +7387,11 @@
           "description": "Integer value in [ms] to delay opening the vertical nav until the mouse\nhas hover the specified time.",
           "sourceRange": {
             "start": {
-              "line": 333,
+              "line": 349,
               "column": 6
             },
             "end": {
-              "line": 337,
+              "line": 353,
               "column": 7
             }
           },
@@ -7426,12 +7442,6 @@
         },
         {
           "type": "CustomEvent",
-          "name": "vertical-expanded-changed",
-          "description": "Fired when the `verticalExpanded` property changes.",
-          "metadata": {}
-        },
-        {
-          "type": "CustomEvent",
           "name": "vertical-opened-changed",
           "description": "Fired when the `verticalOpened` property changes.",
           "metadata": {}
@@ -7478,11 +7488,11 @@
           "range": {
             "file": "px-app-nav.html",
             "start": {
-              "line": 571,
+              "line": 598,
               "column": 8
             },
             "end": {
-              "line": 571,
+              "line": 598,
               "column": 56
             }
           }

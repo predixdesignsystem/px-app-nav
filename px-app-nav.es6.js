@@ -229,20 +229,13 @@
       },
 
       /**
-       * Shows the vertical navigation in an expanded view. The navigation will take up the
-       * full left-hand side of the page.
-       */
-      verticalExpanded: {
-        type: Boolean,
-        value: false,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_handleVerticalExpandedViewChanged'
-      },
-
-      /**
-       * When `true`, the vertical navigation is open and the user is interacting
-       * with it. When `false`, the vertical navigation is closed.
+       * When `true`, the vertical navigation is open. 
+       * When `false`, the vertical navigation is closed.
+       * 
+       * This property is controlled by two means:
+       *    1. when `verticalOpenedAt` is configured and its
+       *        value is currently below `_parentWidth`
+       *    2. otherwise, `mouseenter` and `mouseleave` events
        */
       verticalOpened: {
         type: Boolean,
@@ -250,6 +243,18 @@
         notify: true,
         readOnly: true,
         reflectToAttribute: true
+      },
+
+      /**
+       * The parent container width at which the vertical navigation should be opened. 
+       * Use a number (e.g. `600`) which will be converted to a pixel value (e.g. '600px').
+       * 
+       * This property will overwrite the `verticalOpened` property. Avoid data
+       * binding in both properties at the same time.
+       */
+      verticalOpenedAt: {
+        type: Number,
+        observer: 'rebuild'
       },
 
       /**
@@ -322,7 +327,18 @@
         type: HTMLElement
       },
 
+      /**
+       * Available width within the `px-app-nav` container element.
+       */
       _availableWidth: {
+        type: Number,
+        observer: 'rebuild'
+      },
+
+      /**
+       * Width of the `px-app-nav` parent element.
+       */
+      _parentWidth: {
         type: Number,
         observer: 'rebuild'
       },
@@ -394,7 +410,7 @@
     },
 
     _handleMouseEnter() {
-      if (!this.vertical || this.verticalExpanded) return;
+      if (!this.vertical || this._isVerticalOpenedByThreshold()) return;
 
       this._mouseIsOverNav = true;
 
@@ -411,7 +427,7 @@
     },
 
     _handleMouseLeave() {
-      if (!this.vertical || this.verticalExpanded) return;
+      if (!this.vertical || this._isVerticalOpenedByThreshold()) return;
 
       if (this._delayAnimationAsyncHandler) {
         this.cancelAsync(this._delayAnimationAsyncHandler);
@@ -456,11 +472,6 @@
       }
     },
 
-    _handleVerticalExpandedViewChanged(verticalExpanded) {
-      this._setVerticalOpened(verticalExpanded);
-      if (verticalExpanded) this.rebuild();
-      else this._handleResize();
-    },
     /**
      * Updates the selected item when the user taps on a nav item button.
      * If the button was for an external link, have window open it.
@@ -480,17 +491,17 @@
      * will not be triggered.
      */
     _handleResize(evt) {
-      if (this.collapseAll || this.vertical) return;
+      if (this.collapseAll || (this.vertical && typeof this.verticalOpenedAt !== 'number')) return;
 
-      const debouncer = 'measure-available-width';
-      if (typeof this._availableWidth !== 'number') {
-        this._measureAvailableWidth();
+      const debouncer = 'measure-available-and-parent-width';
+      if (typeof this._availableWidth !== 'number' || typeof this._parentWidth !== 'number') {
+        this._measureAvailableAndParentWidth();
         return;
       }
       if (this.isDebouncerActive(debouncer)) {
         this.cancelDebouncer(debouncer);
       }
-      this.debounce(debouncer, this._measureAvailableWidth.bind(this), 100);
+      this.debounce(debouncer, this._measureAvailableAndParentWidth.bind(this), 100);
     },
 
     /**
@@ -499,15 +510,22 @@
      * overflowed. Measurements happen in the next animation frame, ensuring
      * we don't trigger a premature reflow and that the tab is visible.
      */
-    _measureAvailableWidth() {
+    _measureAvailableAndParentWidth() {
       window.requestAnimationFrame(() => {
         const containerEl = this.$.container;
         const actionsEl = this.$.actions;
-        if (!containerEl || !actionsEl) return;
-        const containerWidth = containerEl.getBoundingClientRect().width;
-        const actionsWidth = actionsEl.getBoundingClientRect().width;
-        const width = containerWidth - actionsWidth;
-        if (this._availableWidth !== width) this.set('_availableWidth', width);
+        if (containerEl && actionsEl) {
+          const containerWidth = containerEl.getBoundingClientRect().width;
+          const actionsWidth = actionsEl.getBoundingClientRect().width;
+          const width = containerWidth - actionsWidth;
+          if (this._availableWidth !== width) this.set('_availableWidth', width);
+        }
+
+        const parentEl = this.parentElement;
+        if (parentEl) {
+          const width = parentEl.getBoundingClientRect().width;
+          if (this._parentWidth !== width) this.set('_parentWidth', width);
+        }
       });
     },
 
@@ -523,9 +541,13 @@
      * @return {Array.<Array>} - First item is the list of visible items (if any), second item is the list of overflowed items (if any)
      */
     rebuild() {
-      if (!this.items || !Array.isArray(this.items) || (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number')) return;
+      if (!this.items || !Array.isArray(this.items) || 
+          (!this.collapseAll && !this.vertical && typeof this._availableWidth !== 'number') || 
+          (this.vertical && typeof this.verticalOpenedAt !== 'number' && !this._parentWidth)) return;
 
       if (this.vertical) {
+        if (this.verticalOpenedAt >= 0) this._setVerticalOpened(this._parentWidth > this.verticalOpenedAt);
+
         this._setVisibleItems(this.items.slice(0));
         this._setOverflowedItems([]);
         return [this.visibleItems, this.overflowedItems];
@@ -896,6 +918,14 @@
      */
     _isIconEmpty(item, iconKey) {
       return (!item.hasOwnProperty(iconKey) || typeof item[iconKey] !== 'string' && item[iconKey].length >= 0);
+    },
+
+    /**
+     * Checks if the vertical navigation is currently opened 
+     * by means of the `verticalOpenedAt` property.
+     */
+    _isVerticalOpenedByThreshold() {
+      return this.verticalOpened && typeof this.verticalOpenedAt === 'number' && this._parentWidth > this.verticalOpenedAt;
     },
 
     /**
