@@ -145,11 +145,13 @@ limitations under the License.
           return [
             {
               configName: "Horizontal",
-              configReset: true
+              configReset: true,
+              configHideProps: ['vertical', 'verticalOpenedAt']
             }, {
               configName: "Vertical",
               vertical: true,
-              configReset: true
+              configReset: true,
+              configHideProps: ['verticalOpenedAt']
             }, {
               configName: "Vertical Opened At",
               vertical: true,
@@ -158,12 +160,14 @@ limitations under the License.
             }, {
               configName: "Collapsed All",
               collapseAll: true,
-              configReset: true
+              configReset: true,
+              configHideProps: ['vertical', 'verticalOpenedAt']
             }, {
               configName: "Collapsed At",
               collapseAll: null,
               collapseAt: 500,
-              configReset: true
+              configReset: true,
+              configHideProps: ['vertical', 'verticalOpenedAt']
             }
           ]
         }
@@ -197,12 +201,16 @@ limitations under the License.
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle',
+        // This is required to hide a property for the default config. It is visible for the relevant demos.
+        _visibleForConfig: false
       },
       verticalOpenedAt: {
         type: Number,
         defaultValue: false,
         inputType: 'number',
-        inputHelpText: 'vertical must be true in order for verticalOpenedAt to work'
+        inputHelpText: 'vertical must be true in order for verticalOpenedAt to work',
+        // This is required to hide a property for the default config. It is visible for the relevant demos.
+        _visibleForConfig: false
       },
       collapseWithIcon: {
         type: Boolean,
