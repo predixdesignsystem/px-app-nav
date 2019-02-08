@@ -243,7 +243,7 @@ describe('px-app-nav [horizontal]', function() {
           groupEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-group'));
           itemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-item'));
           subitemEls = ensureNodeListIsArray(Polymer.dom(appNavEl.root).querySelectorAll('px-app-nav-subitem'));
-          setTimeout(cb,1000)
+          setTimeout(cb, 1000)
         },
         () => {
           expect(itemEls.length).to.equal(2);
@@ -327,7 +327,7 @@ describe('px-app-nav [horizontal]', function() {
         () => {
           groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
           groupItemEl.click();
-          flush(()=>{
+          flush(() => {
             expect(groupEl.opened).to.equal(true);
             done();
           })
@@ -369,7 +369,7 @@ describe('px-app-nav [horizontal]', function() {
           groupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-group');
           setTimeout(cb, 1000);
         },
-        () =>{
+        () => {
           groupItemEl = Polymer.dom(groupEl.root).querySelector('px-app-nav-item');
           subitemEls = ensureNodeListIsArray(Polymer.dom(groupEl).querySelectorAll('px-app-nav-subitem'));
           subitemEl = subitemEls.filter(el => el.item.id === 'trucks')[0];
@@ -379,7 +379,7 @@ describe('px-app-nav [horizontal]', function() {
           }, 100);
           setTimeout(function() {
             expect(subitemEl.selected).to.equal(true);
-            expect(appNavEl.selectedRoute).to.eql(['dashboards','trucks']);
+            expect(appNavEl.selectedRoute).to.eql(['dashboards', 'trucks']);
             expect(appNavEl.selected).to.equal(groupSubitem);
             expect(appNavEl.selectedMeta.parent).to.equal(groupItem);
             done();
@@ -450,15 +450,15 @@ describe('px-app-nav [horizontal]', function() {
 
       fx.style.width = '180px';
       appNavEl.notifyResize();
-      flush(()=>{
+      flush(() => {
         async.until(
-          ()=> (!!appNavEl.overflowedItems),
-          (cb)=> setTimeout(cb, 1000),
-          ()=>{
+          () => (!!appNavEl.overflowedItems),
+          (cb) => setTimeout(cb, 1000),
+          () => {
             async.until(
-              ()=> (appNavEl.overflowedItems.length === 6),
-              (cb)=>setTimeout(cb, 1000),
-              ()=>{
+              () => (appNavEl.overflowedItems.length === 6),
+              (cb) => setTimeout(cb, 1000),
+              () => {
                 expect(appNavEl.visibleItems.length).to.equal(0);
                 expect(appNavEl.overflowedItems.length).to.equal(6);
                 expect(appNavEl.allCollapsed).to.equal(true);
@@ -470,77 +470,85 @@ describe('px-app-nav [horizontal]', function() {
       });
     });
 
-  it('does not mark all of its items as overflowed if there is only one top-level item', function(done) {
-    var fx = fixture('AppNavFixtureOneItem');
+    it('does not mark all of its items as overflowed if there is only one top-level item', function(done) {
+      var fx = fixture('AppNavFixtureOneItem');
 
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
 
-      setTimeout(function() {
-        fx.style.width = '180px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        expect(appNavEl.visibleItems.length).to.equal(1);
-        expect(appNavEl.overflowedItems.length).to.equal(0);
-        expect(appNavEl.allCollapsed).to.equal(false);
-        done();
-      }, 500);
-    });
-  });
-
-  it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function(done) {
-    var fx = fixture('AppNavFixtureIconSizeVariable');
-
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var item = { label: 'Home', path: 'home', icon: 'px-fea:home' };
-      var measurement = appNavEl._measureItem(item);
-
-      async.until(
-        ()=> (measurement >= 118 && measurement <= 120),
-        (cb)=>{
-          measurement = appNavEl._measureItem(item);
-          setTimeout(cb, 1000)
-        },
-        ()=>{
-          expect(measurement).to.be.closeTo(120, 2);
+        setTimeout(function() {
+          fx.style.width = '180px';
+          appNavEl.notifyResize();
+        }, 50);
+        setTimeout(function() {
+          expect(appNavEl.visibleItems.length).to.equal(1);
+          expect(appNavEl.overflowedItems.length).to.equal(0);
+          expect(appNavEl.allCollapsed).to.equal(false);
           done();
-        }
-      );
+        }, 500);
+      });
     });
-  });
 
-  it('measures items correctly when their padding is sized with the CSS style variable --px-app-nav-item-padding', function(done) {
-    var fx = fixture('AppNavFixtureItemPaddingVariable');
+    it('measures items correctly their icon is sized with the CSS style variable --px-app-nav-item-icon-size', function(done) {
+      var fx = fixture('AppNavFixtureIconSizeVariable');
 
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var item = { label: 'Home', path: 'home', icon: 'px-fea:home' };
-      var measurement = appNavEl._measureItem(item);
-      expect(measurement).to.be.closeTo(193, 2);
-      done();
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
+        var item = {
+          label: 'Home',
+          path: 'home',
+          icon: 'px-fea:home'
+        };
+        var measurement = appNavEl._measureItem(item);
+
+        async.until(
+          () => (measurement >= 118 && measurement <= 120),
+          (cb) => {
+            measurement = appNavEl._measureItem(item);
+            setTimeout(cb, 1000)
+          },
+          () => {
+            expect(measurement).to.be.closeTo(120, 2);
+            done();
+          }
+        );
+      });
     });
-  });
 
-  it('shows an overflow group when any of its items no longer fit', function(done) {
-    var fx = fixture('AppNavFixtureHorizontal');
+    it('measures items correctly when their padding is sized with the CSS style variable --px-app-nav-item-padding', function(done) {
+      var fx = fixture('AppNavFixtureItemPaddingVariable');
 
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
-
-      setTimeout(function() {
-        fx.style.width = '300px';
-        appNavEl.notifyResize();
-      }, 50);
-      setTimeout(function() {
-        var overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
-        expect(overflowGroupEl).to.be.instanceof(HTMLElement);
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
+        var item = {
+          label: 'Home',
+          path: 'home',
+          icon: 'px-fea:home'
+        };
+        var measurement = appNavEl._measureItem(item);
+        expect(measurement).to.be.closeTo(193, 2);
         done();
-      }, 500);
+      });
+    });
+
+    it('shows an overflow group when any of its items no longer fit', function(done) {
+      var fx = fixture('AppNavFixtureHorizontal');
+
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
+
+        setTimeout(function() {
+          fx.style.width = '300px';
+          appNavEl.notifyResize();
+        }, 50);
+        setTimeout(function() {
+          var overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+          expect(overflowGroupEl).to.be.instanceof(HTMLElement);
+          done();
+        }, 500);
+      });
     });
   });
-});
 
   describe('[dropdown actions]', () => {
     let fx;
@@ -581,18 +589,18 @@ describe('px-app-nav [horizontal]', function() {
 
       async.until(
         () => (!!overflowGroupEl),
-        (cb)=> {
+        (cb) => {
           overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
           setTimeout(cb, 1000)
         },
-        ()=>{
+        () => {
           overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
           overflowIconEl.click();
 
           async.until(
-            ()=> (overflowGroupEl.opened),
-            (cb)=>setTimeout(cb, 1000),
-            ()=>{
+            () => (overflowGroupEl.opened),
+            (cb) => setTimeout(cb, 1000),
+            () => {
               expect(overflowGroupEl.opened).to.equal(true);
               done();
             }
@@ -613,21 +621,21 @@ describe('px-app-nav [horizontal]', function() {
 
       async.until(
         () => (!!overflowGroupEl),
-        (cb)=> {
+        (cb) => {
           overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
           setTimeout(cb, 1000)
         },
-        ()=>{
+        () => {
           overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
           overflowIconEl.click();
-          flush(()=>{
+          flush(() => {
             async.whilst(
               () => overflowGroupEl.opened,
-              (cb)=> {
+              (cb) => {
                 appNavEl.click();
                 setTimeout(cb, 1000)
               },
-              ()=>{
+              () => {
                 expect(overflowGroupEl.opened).to.equal(false);
                 done();
               }
@@ -705,7 +713,7 @@ describe('px-app-nav [horizontal]', function() {
 
       fx.style.width = '300px';
       appNavEl.notifyResize();
-      flush(()=>{
+      flush(() => {
         overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
 
         async.until(
@@ -906,15 +914,15 @@ describe('px-app-nav [collapsed]', function() {
       appNavEl.collapseOpened = true;
 
       async.until(
-        ()=> (dropdownEl.offsetLeft > 0),
-        (cb)=>setTimeout(cb, 1000),
-        ()=>{
+        () => (dropdownEl.offsetLeft > 0),
+        (cb) => setTimeout(cb, 1000),
+        () => {
           expect(dropdownEl.offsetLeft).to.be.greaterThan(0);
           appNavEl.collapseOpened = false;
           async.until(
-            ()=> (dropdownEl.offsetLeft === 0),
-            (cb)=>setTimeout(cb, 1000),
-            ()=>{
+            () => (dropdownEl.offsetLeft === 0),
+            (cb) => setTimeout(cb, 1000),
+            () => {
               expect(dropdownEl.offsetLeft).to.equal(0);
               done();
             }
@@ -938,15 +946,15 @@ describe('px-app-nav [vertical]', function() {
 
   it('opens and closes navigation on hover', function(done) {
     var fx = fixture('AppNavFixtureVertical');
-  
+
     flush(() => {
       var appNavEl = fx.querySelector('px-app-nav');
-  
+
       var mouseenterSpy = sinon.spy(),
-      mouseleaveSpy = sinon.spy();
+        mouseleaveSpy = sinon.spy();
       appNavEl.addEventListener('mouseenter', mouseenterSpy);
       appNavEl.addEventListener('mouseleave', mouseleaveSpy);
-  
+
       setTimeout(function() {
         expect(appNavEl.verticalOpened).to.equal(false);
         appNavEl.dispatchEvent(new CustomEvent('mouseenter'))
@@ -966,12 +974,12 @@ describe('px-app-nav [vertical]', function() {
 
   it('opens and closes navigation by viewport size when `vertical-opened-at` attribute is set', function(done) {
     var fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
-  
+
     flush(() => {
       var appNavEl = fx.querySelector('px-app-nav');
       var resizeSpy = sinon.spy();
       appNavEl.addEventListener('iron-resize', resizeSpy);
-  
+
       setTimeout(function() {
         expect(appNavEl.verticalOpened).to.equal(true);
         appNavEl.parentElement.style.width = `700px`;
@@ -987,10 +995,10 @@ describe('px-app-nav [vertical]', function() {
 
   it('opens and closes navigation when `vertical-opened-at` attribute is changed', function(done) {
     var fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
-  
+
     flush(() => {
       var appNavEl = fx.querySelector('px-app-nav');
-  
+
       setTimeout(function() {
         expect(appNavEl.verticalOpened).to.equal(true);
         appNavEl.verticalOpenedAt = 1100;
@@ -1008,14 +1016,14 @@ describe('px-app-nav [vertical]', function() {
 
   it('opens and closes navigation on hover if `vertical-opened-at` attribute is larger than parent width', function(done) {
     var fx = fixture('AppNavFixtureVerticalOpenedAtClosed');
-  
+
     flush(() => {
       var appNavEl = fx.querySelector('px-app-nav');
       var mouseenterSpy = sinon.spy(),
-      mouseleaveSpy = sinon.spy();
+        mouseleaveSpy = sinon.spy();
       appNavEl.addEventListener('mouseenter', mouseenterSpy);
       appNavEl.addEventListener('mouseleave', mouseleaveSpy);
-  
+
       setTimeout(function() {
         expect(appNavEl.verticalOpened).to.equal(false);
         appNavEl.dispatchEvent(new CustomEvent('mouseenter'))
