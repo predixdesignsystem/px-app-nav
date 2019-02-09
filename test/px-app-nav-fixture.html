@@ -383,6 +383,82 @@ limitations under the License.
       </template>
     </test-fixture>
 
+    <test-fixture id="AppNavItemOpened">
+      <template>
+        <div class="app-nav-container">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemOpenedCollapsed">
+      <template>
+        <div class="app-nav-container">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              collapse-all>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemOpenedVertical">
+      <template>
+        <div class="app-nav-container">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              vertical>
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AppNavItemOpenedVerticalOpenedAt">
+      <template>
+        <div class="app-nav-container">
+          <px-app-nav
+              items='[
+                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
+                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
+                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
+                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
+                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
+                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+                ]}
+              ]'
+              vertical
+              vertical-opened-at="0">
+          </px-app-nav>
+        </div>
+      </template>
+    </test-fixture>
+
     <test-fixture id="AppNavMeasureTextStub">
       <template>
         <div>

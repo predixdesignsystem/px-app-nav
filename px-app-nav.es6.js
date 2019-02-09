@@ -55,6 +55,8 @@
        * dropdown under the top-level item. Each subitem must have a `path`
        * and `label` defined. If an `icon` or `children` property is defined
        * on a subitem, those properties will be ignored.
+       * - {Boolean} opened - (only valid if item has children) A boolean value
+       * that set the group to open by default.
        *
        * The following optional properties can only be used on items with no children:
        *
@@ -841,6 +843,16 @@
      */
     _isCollapsedDropdownEmpty(selectedItem, allCollapsed, collapseWithIcon) {
       return allCollapsed && !collapseWithIcon && (!selectedItem || typeof selectedItem !== 'object');
+    },
+
+    /**
+     * Checks if the sub group should be opened.
+     *
+     * @param  {Object|null} item
+     * @return {Boolean}
+     */
+    _isOpened(item) {
+      return item.opened === true;
     },
 
     /**

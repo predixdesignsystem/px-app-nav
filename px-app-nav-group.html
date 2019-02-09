@@ -319,6 +319,7 @@ limitations under the License.
       }
 
       group.open();
+      this._openSubgroups();
     },
 
     closeGroup() {
@@ -337,6 +338,24 @@ limitations under the License.
       window.requestAnimationFrame(function(){
         this.__group.refit();
       }.bind(this))
+    },
+
+    /**
+     * Subgroups support an `opened` property which immediately expands/opens the group when
+     * the menu structure is revealed.
+     * 
+     * When the menu is in a collapsed or overflowed state, the opened property is set but the height calculation
+     * fails as invisible elements have no dimensions. To workaround this, this method will fire
+     * whenever a menu is revealed and will re-trigger the open event on any subgroups that should
+     * be opened.
+     */
+    _openSubgroups() {
+        this.querySelectorAll("px-app-nav-subgroup").forEach(el => {
+        if (el.opened && (el.collapsed || el.overflowed))
+          Polymer.Async.animationFrame.run(() => {
+            el.openGroup(false);
+          });
+      });
     },
 
     /**

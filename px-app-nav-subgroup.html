@@ -36,6 +36,7 @@ limitations under the License.
         selected$="{{selected}}"
         overflowed$="{{overflowed}}"
         collapsed$="{{collapsed}}"
+        opened$="{{opened}}"
         only-show-icon$="[[onlyShowIcon]]"
         empty-icon="[[emptyIcon]]">
     </px-app-nav-item>
@@ -107,7 +108,8 @@ limitations under the License.
        * If `true` the group is expanded so the user can select a subitem.
        */
       opened: {
-        type: Boolean
+        type: Boolean,
+        observer: '_handleOpenedChanged'
       },
 
       onlyShowIcon: {
@@ -165,15 +167,25 @@ limitations under the License.
 
     _toggleGroup() {
       if (this.opened) {
+        if (this.item && this.item.opened && !this._handledFirstToggle) {
+          // Bug fix for where subgroup closes the first time it is clicked when it
+          // should be opened by default.
+          this.openGroup(false);
+          return;
+        }
+
         this.closeGroup();
       } else {
         this.openGroup();
       }
     },
 
-    openGroup() {
+    openGroup(animated = true) {
       this.opened = true;
-      this.playAnimation('open');
+      if (animated) this.playAnimation('open');
+      else this._onNeonAnimationFinish();
+
+      this._handledFirstToggle = true;
     },
 
     closeGroup() {
@@ -197,6 +209,11 @@ limitations under the License.
       this._toggleGroup();
     },
 
+    _handleOpenedChanged() {
+        if (this.opened) this.openGroup(false);
+        else this.closeGroup();
+    },
+
     _onlyShowIconChanged(newVal, oldVal) {
       if (typeof oldVal !== 'boolean') return;
 
@@ -205,8 +222,8 @@ limitations under the License.
         this._reopen = true;
         return;
       }
-      if (!newVal && oldVal && this._reopen) {
-        this.openGroup();
+      if (!newVal && oldVal && (this._reopen || this.opened)) {
+        this.openGroup(false);
         this._reopen = false;
         return;
       }

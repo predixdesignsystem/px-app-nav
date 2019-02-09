@@ -529,7 +529,7 @@ Custom property | Description
             <template is="dom-repeat" items="[[items]]" filter="_isItemOverflowed" id="overflowed">
               <!-- Stamp groups, which hold children -->
               <template is="dom-if" if="[[_isItemParent(item, keys.children)]]">
-                <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" overflowed$="[[someOverflowed]]" collapsed$="[[allCollapsed]]">
+                <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" overflowed$="[[someOverflowed]]" collapsed$="[[allCollapsed]]" opened$="[[_isOpened(item)]]">
                   <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
                     <px-app-nav-subitem item="[[subitem]]"
                                         label="[[_getItemProp(subitem, keys.label)]]"
@@ -565,7 +565,7 @@ Custom property | Description
           <template is="dom-repeat" items="[[items]]" id="vertical">
             <!-- Stamp groups, which hold children -->
             <template is="dom-if" if="[[_isItemParent(item, keys.children)]]">
-              <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed only-show-icon="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]">
+              <px-app-nav-subgroup label="[[_getItemProp(item, keys.label)]]" icon="[[_getItemProp(item, keys.icon)]]" selected$="[[_isItemSelected(item, selectedMeta.parent)]]" collapsed only-show-icon="[[!verticalOpened]]" empty-icon="[[_isIconEmpty(item, keys.icon)]]" opened$="[[_isOpened(item)]]" item="[[item]]">
                 <template is="dom-repeat" items="[[_getItemProp(item, keys.children)]]" as="subitem">
                   <px-app-nav-subitem item="[[subitem]]"
                                       label="[[_getItemProp(subitem, keys.label)]]"

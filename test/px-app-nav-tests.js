@@ -550,7 +550,7 @@ describe('px-app-nav [horizontal]', function() {
     });
   });
 
-  describe('[dropdown actions]', () => {
+  describe('[overflowed]', () => {
     let fx;
 
     beforeEach((done) => {
@@ -743,7 +743,42 @@ describe('px-app-nav [horizontal]', function() {
             }, 950);
           }
         )
+      });
+    });
 
+    it('opens subgroup when item has `opened` set to true and overflow clicked', function(done) {
+      fx = fixture('AppNavItemOpened');
+  
+      const appNavEl = fx.querySelector('px-app-nav');
+      let overflowGroupEl;
+      let overflowIconEl;
+      let subgroupEl;
+      let subgroupContentEl;
+
+      fx.style.width = '300px';
+      appNavEl.notifyResize();
+      flush(() => {
+        overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+
+        async.until(
+          () => (!!overflowGroupEl),
+          (cb) => {
+            overflowGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+            setTimeout(cb, 1000);
+          },
+          () => {
+            overflowIconEl = Polymer.dom(overflowGroupEl.root).querySelector('px-app-nav-item');
+            overflowIconEl.click();
+            setTimeout(function() {
+              subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+              subgroupContentEl = Polymer.dom(subgroupEl.root).querySelector('#groupcontent');
+              
+              expect(subgroupEl.opened).to.equal(true);
+              expect(subgroupContentEl.getBoundingClientRect().height).to.be.greaterThan(0);
+              done();
+            }, 550);
+          }
+        );
       });
     });
   });
@@ -931,6 +966,41 @@ describe('px-app-nav [collapsed]', function() {
       );
     });
   });
+
+  it('opens subgroup when item has `opened` set to true and collapsed item clicked', function(done) {
+    fx = fixture('AppNavItemOpenedCollapsed');
+
+    const appNavEl = fx.querySelector('px-app-nav');
+    let collapsedGroupEl;
+    let collapsedItemEl;
+    let subgroupEl;
+    let subgroupContentEl;
+
+    flush(() => {
+      collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+
+      async.until(
+        () => (!!collapsedGroupEl),
+        (cb) => {
+          collapsedGroupEl = Polymer.dom(appNavEl.root).querySelector('#overflowedGroup');
+          setTimeout(cb, 1000);
+        },
+        () => {
+          collapsedItemEl = Polymer.dom(collapsedGroupEl.root).querySelector('px-app-nav-item');  
+          collapsedItemEl.click();
+
+          setTimeout(function() {
+            subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+            subgroupContentEl = Polymer.dom(subgroupEl.root).querySelector('#groupcontent');
+            
+            expect(subgroupEl.opened).to.equal(true);
+            expect(subgroupContentEl.getBoundingClientRect().height).to.be.greaterThan(0);
+            done();
+          }, 550);
+        }
+      );
+    });
+  });
 });
 
 describe('px-app-nav [vertical]', function() {
@@ -972,10 +1042,15 @@ describe('px-app-nav [vertical]', function() {
     });
   });
 
-  it('opens and closes navigation by viewport size when `vertical-opened-at` attribute is set', function(done) {
-    var fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
+  describe('[vertical-opened-at]', () => {
+    let fx;
 
-    flush(() => {
+    beforeEach(function(done) {
+      fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
+      flush(done);
+    });
+    
+    it('opens and closes navigation by viewport size', function(done) {
       var appNavEl = fx.querySelector('px-app-nav');
       var resizeSpy = sinon.spy();
       appNavEl.addEventListener('iron-resize', resizeSpy);
@@ -991,53 +1066,107 @@ describe('px-app-nav [vertical]', function() {
         done();
       }, 250);
     });
-  });
-
-  it('opens and closes navigation when `vertical-opened-at` attribute is changed', function(done) {
-    var fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
-
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
-
-      setTimeout(function() {
-        expect(appNavEl.verticalOpened).to.equal(true);
-        appNavEl.verticalOpenedAt = 1100;
-      }, 50);
-      setTimeout(function() {
-        expect(appNavEl.verticalOpened).to.equal(false);
-        appNavEl.verticalOpenedAt = 800;
-      }, 250);
-      setTimeout(function() {
-        expect(appNavEl.verticalOpened).to.equal(true);
-        done();
-      }, 450);
+  
+    it('opens and closes navigation when `vertical-opened-at` attribute is changed', function(done) {
+      fx = fixture('AppNavFixtureVerticalOpenedAtOpen');
+  
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
+  
+        setTimeout(function() {
+          expect(appNavEl.verticalOpened).to.equal(true);
+          appNavEl.verticalOpenedAt = 1100;
+        }, 50);
+        setTimeout(function() {
+          expect(appNavEl.verticalOpened).to.equal(false);
+          appNavEl.verticalOpenedAt = 800;
+        }, 250);
+        setTimeout(function() {
+          expect(appNavEl.verticalOpened).to.equal(true);
+          done();
+        }, 450);
+      });
+    });
+  
+    it('opens and closes navigation on hover if `vertical-opened-at` attribute is larger than parent width', function(done) {
+      var fx = fixture('AppNavFixtureVerticalOpenedAtClosed');
+  
+      flush(() => {
+        var appNavEl = fx.querySelector('px-app-nav');
+        var mouseenterSpy = sinon.spy(),
+          mouseleaveSpy = sinon.spy();
+        appNavEl.addEventListener('mouseenter', mouseenterSpy);
+        appNavEl.addEventListener('mouseleave', mouseleaveSpy);
+  
+        setTimeout(function() {
+          expect(appNavEl.verticalOpened).to.equal(false);
+          appNavEl.dispatchEvent(new CustomEvent('mouseenter'))
+        }, 50);
+        setTimeout(function() {
+          expect(mouseenterSpy).to.have.been.called;
+          expect(appNavEl.verticalOpened).to.equal(true);
+          appNavEl.dispatchEvent(new CustomEvent('mouseleave'))
+        }, 250);
+        setTimeout(function() {
+          expect(mouseleaveSpy).to.have.been.called;
+          expect(appNavEl.verticalOpened).to.equal(false);
+          done();
+        }, 550);
+      });
     });
   });
 
-  it('opens and closes navigation on hover if `vertical-opened-at` attribute is larger than parent width', function(done) {
-    var fx = fixture('AppNavFixtureVerticalOpenedAtClosed');
-
-    flush(() => {
-      var appNavEl = fx.querySelector('px-app-nav');
-      var mouseenterSpy = sinon.spy(),
-        mouseleaveSpy = sinon.spy();
-      appNavEl.addEventListener('mouseenter', mouseenterSpy);
-      appNavEl.addEventListener('mouseleave', mouseleaveSpy);
-
-      setTimeout(function() {
-        expect(appNavEl.verticalOpened).to.equal(false);
+  describe('opened parent item behaviour', () => {
+    it('opens subgroup on vertical navigation hover', function(done) {
+      fx = fixture('AppNavItemOpenedVertical');
+  
+      const appNavEl = fx.querySelector('px-app-nav');
+      let subgroupEl;
+      let subgroupContentEl;
+  
+      flush(() => {
         appNavEl.dispatchEvent(new CustomEvent('mouseenter'))
-      }, 50);
-      setTimeout(function() {
-        expect(mouseenterSpy).to.have.been.called;
-        expect(appNavEl.verticalOpened).to.equal(true);
-        appNavEl.dispatchEvent(new CustomEvent('mouseleave'))
-      }, 250);
-      setTimeout(function() {
-        expect(mouseleaveSpy).to.have.been.called;
-        expect(appNavEl.verticalOpened).to.equal(false);
-        done();
-      }, 550);
+
+        async.until(
+          () => (!!appNavEl.verticalOpened),
+          (cb) => {
+            setTimeout(cb, 250);
+          },
+          () => {
+            subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+            subgroupContentEl = Polymer.dom(subgroupEl.root).querySelector('#groupcontent');
+
+            expect(subgroupEl.opened).to.equal(true);
+            expect(subgroupContentEl.getBoundingClientRect().height).to.be.greaterThan(0);
+            done();
+          }
+        );
+      });
+    });
+
+    it('opens subgroup when navigation opened by `vertical-opened-at`', function(done) {
+      fx = fixture('AppNavItemOpenedVerticalOpenedAt');
+  
+      const appNavEl = fx.querySelector('px-app-nav');
+      let subgroupEl;
+      let subgroupContentEl;
+  
+      flush(() => {
+        async.until(
+          () => (!!appNavEl.verticalOpened),
+          (cb) => {
+            setTimeout(cb, 250);
+          },
+          () => {
+            subgroupEl = Polymer.dom(appNavEl.root).querySelector('px-app-nav-subgroup');
+            subgroupContentEl = Polymer.dom(subgroupEl.root).querySelector('#groupcontent');
+
+            expect(subgroupEl.opened).to.equal(true);
+            expect(subgroupContentEl.getBoundingClientRect().height).to.be.greaterThan(0);
+            done();
+          }
+        );
+      });
     });
   });
 });
