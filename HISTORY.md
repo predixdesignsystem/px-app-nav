@@ -1,3 +1,7 @@
+v3.1.0
+=================
+* Adding ability to handle `opened` property on items with children. When configured, the subgroup dropdown is open by default in overflow, collapsed and vertical states.
+
 v3.0.0
 =================
 * Replacing `vertical-expanded` propert with `vertical-opened-at` property for dynamic open behaviour on vertical navigations
