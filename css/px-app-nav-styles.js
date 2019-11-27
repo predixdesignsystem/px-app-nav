@@ -1,0 +1,33 @@
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="px-app-nav-styles">
+<template>
+<style>
+:host{line-height:1.33333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}.shadow-component{box-shadow:0 1px 1px var(--px-shadow-component,rgba(0,0,0,.2))}.shadow-temporary{box-shadow:0 1px 3px var(--px-shadow-temporary,rgba(0,0,0,.2))}.shadow-navigation{box-shadow:0 2px 4px var(--px-shadow-navigation,rgba(0,0,0,.2))}.shadow-notification{box-shadow:0 4px 8px var(--px-shadow-notification,rgba(0,0,0,.2))}.shadow-modal{box-shadow:0 6px 12px var(--px-shadow-modal,rgba(0,0,0,.2))}:host{/*! Comment to prevent cssmin munging this rule with html above and borking Safari */box-sizing:border-box;height:var(--px-app-nav-height,4rem);background-color:var(--px-app-nav-background-color,gray);box-shadow:var(--px-app-nav-box-shadow,0 2px 4px var(--px-shadow-navigation,rgba(0,0,0,.2)));display:block;width:100%;@apply --px-app-nav;outline:0}.app-nav{display:flex}.app-nav__items{height:var(--px-app-nav-height,4rem);flex:1 1 auto;display:flex;max-width:100%}:host([vertical]){overflow-x:hidden;overflow-y:hidden;position:var(--px-app-nav-vertical-position,absolute);height:var(--px-app-nav-vertical-height,100%);left:0;top:0;min-width:var(--px-app-nav-vertical-width,4rem);max-width:var(--px-app-nav-vertical-width,4rem);transition:var(--px-app-nav-vertical-transition,max-width 250ms ease);@apply --px-app-nav;outline:0}:host([vertical][vertical-opened]){overflow-y:auto;max-width:var(--px-app-nav-vertical-width--opened,23.33333rem)}:host([vertical]) .app-nav{display:flex;flex-direction:column;min-height:100%}:host([vertical]) .app-nav__items{flex-direction:column;height:100%}
+</style>
+</template>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+;

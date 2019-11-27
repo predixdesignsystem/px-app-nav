@@ -23,148 +23,188 @@ limitations under the License.
 
     <!-- BOILERPLATE -->
     <!-- load webcomponents.js polyfill for browsers that don't support native web components -->
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <!-- load web-component-tester test runner script -->
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <!-- load default theme -->
-    <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+    <script type="module" src="../../px-theme/px-theme-styles.js"></script>
 
     <!-- UNIQUE TO THIS COMPONENT -->
     <!-- import web components to test -->
-    <link rel="import" href="../px-app-nav-group.html"/>
-    <link rel="import" href="../px-app-nav-subitem.html"/>
+    <script type="module" src="../px-app-nav-group.js"></script>
+    <script type="module" src="../px-app-nav-subitem.js"></script>
     <!-- load test script -->
-    <script src="px-app-nav-group-tests.js"></script>
+    <script src="./px-app-nav-group-tests.js"></script>
   </head>
   <body>
-    <custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style include="px-theme-styles" is="custom-style"></style>
-    </custom-style>
+    </custom-style>`;
 
-    <test-fixture id="AppNavGroup">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroup">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts">
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupSelected">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupSelected">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts"
-              selected>
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts" selected="">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupSelectedNoHighlight">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupSelectedNoHighlight">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts"
-              selected
-              no-highlight>
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts" selected="" no-highlight="">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupCancelSelect">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupCancelSelect">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts"
-              cancel-select>
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts" cancel-select="">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupHideDropdownIcon">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupHideDropdownIcon">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts"
-              hide-dropdown-icon>
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts" hide-dropdown-icon="">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupFixedWidth">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupFixedWidth">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts"
-              fixed-width="227">
-            <px-app-nav-subitem label="Generators" item='{"label":"generators"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Turbines" item='{"label":"turbines"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Trucks" item='{"label":"trucks"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Airplanes" item='{"label":"airplanes"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts" fixed-width="227">
+            <px-app-nav-subitem label="Generators" item="{&quot;label&quot;:&quot;generators&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Turbines" item="{&quot;label&quot;:&quot;turbines&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Trucks" item="{&quot;label&quot;:&quot;trucks&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Airplanes" item="{&quot;label&quot;:&quot;airplanes&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupDynamicWidthMin">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupDynamicWidthMin">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts">
-            <px-app-nav-subitem label="Aaa" item='{"label":"a"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Bbb" item='{"label":"b"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Ccc" item='{"label":"c"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Ddd" item='{"label":"d"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts">
+            <px-app-nav-subitem label="Aaa" item="{&quot;label&quot;:&quot;a&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Bbb" item="{&quot;label&quot;:&quot;b&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ccc" item="{&quot;label&quot;:&quot;c&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ddd" item="{&quot;label&quot;:&quot;d&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavGroupDynamicWidthGrow">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavGroupDynamicWidthGrow">
       <template>
         <div style="width:300px">
-          <px-app-nav-group
-              label="Alerts"
-              icon="px-fea:alerts">
-            <px-app-nav-subitem label="A very long item in here" item='{"label":"long"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Bbb" item='{"label":"b"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Ccc" item='{"label":"c"}'></px-app-nav-subitem>
-            <px-app-nav-subitem label="Ddd" item='{"label":"d"}'></px-app-nav-subitem>
+          <px-app-nav-group label="Alerts" icon="px-fea:alerts">
+            <px-app-nav-subitem label="A very long item in here" item="{&quot;label&quot;:&quot;long&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Bbb" item="{&quot;label&quot;:&quot;b&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ccc" item="{&quot;label&quot;:&quot;c&quot;}"></px-app-nav-subitem>
+            <px-app-nav-subitem label="Ddd" item="{&quot;label&quot;:&quot;d&quot;}"></px-app-nav-subitem>
           </px-app-nav-group>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
   </body>
 </html>

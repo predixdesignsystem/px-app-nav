@@ -1,0 +1,472 @@
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import '@polymer/iron-dropdown/iron-dropdown.js';
+import '@polymer/neon-animation/neon-animations.js';
+import { NeonAnimationBehavior } from '@polymer/neon-animation/neon-animation-behavior.js';
+import { NeonAnimationRunnerBehavior } from '@polymer/neon-animation/neon-animation-runner-behavior.js';
+import 'web-animations-js/web-animations-next-lite.min.js';
+import './px-app-nav-item.js';
+import './css/px-app-nav-group-styles.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { animationFrame } from '@polymer/polymer/lib/utils/async.js';
+import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
+Polymer({
+  _template: html`
+    <style include="px-app-nav-group-styles"></style>
+    <px-app-nav-item id="itemButton" cancel-select="" icon="{{icon}}" label="{{label}}" dropdown="{{!hideDropdownIcon}}" selected\$="{{_isGroupSelected(selected, noHighlight)}}" overflowed\$="{{overflowed}}" empty-icon="{{emptyIcon}}" empty-label="{{emptyLabel}}" collapsed\$="{{collapsed}}">
+    </px-app-nav-item>
+
+    <div class="app-nav-group__target" id="grouptarget"></div>
+
+    <iron-dropdown id="group" horizontal-align="left" vertical-align="top" dynamic-align="" vertical-offset="{{_offsetHeight}}" opened="{{_opened}}" position-target="[[_getPositionTarget()]]" fit-into="[[fitInto]]" on-iron-overlay-canceled="_handleGroupCanceled" open-animation-config="{{_openAnimation}}" close-animation-config="{{_closeAnimation}}">
+      <div slot="dropdown-content" class="dropdown-content app-nav-group__dropdown" id="groupcontainer">
+        <div class="app-nav-group__dropdown__content" id="groupcontent">
+          <slot></slot>
+        </div>
+      </div>
+    </iron-dropdown>
+`,
+
+  is: 'px-app-nav-group',
+
+  behaviors: [
+    NeonAnimationRunnerBehavior
+  ],
+
+  properties: {
+    /**
+     * If `true`, one of the group's subitems is selected.
+     *
+     * Watch for updates to find out when the group becomes selected through
+     * user interaction or through automatic selection.
+     *
+     * Set the `selected` attribute on one of the group's subitems to select
+     * this group.
+     */
+    selected: {
+      type: Boolean,
+      value: false,
+      notify: true,
+      reflectToAttribute: true,
+      observer: '_handleSelectedChanged'
+    },
+
+    /**
+     * A reference the object used to create this nav item.
+     */
+    item: {
+      type: Object
+    },
+
+    /**
+     * The label text for the group's button.
+     */
+    label: {
+      type: String
+    },
+
+    /**
+     * The icon for the group's button. Should be a valid px icon
+     * name (e.g. 'px-fea:cases').
+     */
+    icon: {
+      type: String
+    },
+
+    /**
+     * If `true` the group is expanded so the user can select a subitem.
+     */
+    opened: {
+      type: Boolean,
+      notify: true,
+      observer: '_openedChangedFromOutside'
+    },
+
+    /**
+     * Internal representation of the `opened` state. Ensures changing `opened`
+     * flows through `openGroup` and `closeGroup` which are necessary to
+     * correctly size the resulting dropdown.
+     */
+    _opened: {
+      type: Boolean,
+      observer: '_openedChangedFromInside'
+    },
+
+    fixedWidth: {
+      type: Number
+    },
+
+    /**
+     * Disables the group's dropdown carat icon.
+     */
+    hideDropdownIcon: {
+      type: Boolean,
+      value: false
+    },
+
+    overflowed: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * Disables highlighting the group when it is selected.
+     */
+    noHighlight: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * If `true` the group item button should have an empty state.
+     */
+    emptyIcon: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * If `true` the group item label should have an empty state.
+     */
+    emptyLabel: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * Cancels events that trigger selection.
+     */
+    cancelSelect: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * A reference to the HTMLElement to fit the group dropdown into.
+     */
+    fitInto: {
+      type: HTMLElement
+    },
+
+    collapsed: {
+      type: Boolean,
+      value: false
+    },
+
+    _openAnimation: {
+      type: Object
+    },
+
+    _closeAnimation: {
+      type: Object
+    },
+
+    _offsetHeight: {
+      type: Number
+    }
+  },
+
+  attached: function() {
+    this.listen(this.$.itemButton, 'tap', '_handleSelfTapped');
+    this.listen(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
+    this.listen(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+    this.listen(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+    this.listen(this, 'px-app-nav-item-tapped', '_handleItemSelected');
+    this.set('_offsetHeight', this._getVerticalOffset());
+
+    /*
+     * Polymer 2.x initializes the properties before the template is created.
+     * To use node finding in the animationConfig property, it must be set
+     * after the component has been attached and its template has been stamped.
+     */
+    if (!this._openAnimation) {
+      this._openAnimation = {
+        name: 'expand-animation',
+        timing: {
+          easing: 'ease-in'
+        },
+        endHeightNode: this.$.groupcontent
+      };
+    }
+    if (!this._closeAnimation) {
+      this._closeAnimation = {
+        name: 'contract-animation',
+        timing: {
+          easing: 'ease-out'
+        },
+        startHeightNode: this.$.groupcontent
+      };
+    }
+  },
+
+  detached: function() {
+    this.unlisten(this.$.itemButton, 'tap', '_handleSelfTapped');
+    this.unlisten(this.$.groupcontainer, 'tap', '_handleGroupContainerTapped');
+    this.unlisten(this.$.group, 'iron-overlay-opened', '_handleDropdownOpened');
+    this.unlisten(this.$.group, 'iron-overlay-closed', '_handleDropdownClosed');
+    this.unlisten(this, 'px-app-nav-item-tapped', '_handleItemSelected');
+  },
+
+  _openedChangedFromOutside: function(newVal) {
+    if (newVal === true && this._opened !== true) {
+      this.openGroup();
+    }
+    if (newVal === false && this._opened !== false) {
+      this.closeGroup();
+    }
+  },
+
+  _openedChangedFromInside: function(newVal) {
+    if (newVal === true && this.opened !== true) {
+      this.set('opened', true);
+    }
+    if (newVal === false && this.opened !== false) {
+      this.set('opened', false);
+    }
+  },
+
+  _handleDropdownOpened(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    this.fire('px-app-nav-group-opened', {
+      item: this.item
+    });
+  },
+
+  _handleDropdownClosed(evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    this.fire('px-app-nav-group-closed', {
+      item: this.item
+    });
+  },
+
+  _toggleGroup() {
+    if (this.opened) {
+      this.async(function(){
+        // Wait a tick before closing for the group to clear its event queue
+        // after we stopped the original cancel event
+        this.closeGroup();
+      });
+    }
+    if (!this.opened) {
+      this.openGroup();
+    }
+  },
+
+  openGroup() {
+    var group = this.$.group;
+    if (!group) return;
+
+    // Measure the size of the group's container before trying to open it,
+    // so we can set the min width of the group's dropdown
+    //
+    // Ben says this is OK.
+    var button = this.$.itemButton;
+    var container = this.$.groupcontainer;
+    var content = this.$.groupcontent;
+    var minWidth = button.getBoundingClientRect().width + 'px';
+    if (content.style.minWidth !== minWidth && !(typeof this.fixedWidth === 'number')) {
+      container.style.minWidth = minWidth;
+    }
+    if (typeof this.fixedWidth === 'number') {
+      content.style.width = this.fixedWidth + 'px';
+    } else {
+      content.style.width = '';
+    }
+
+    group.open();
+    this._openSubgroups();
+  },
+
+  closeGroup() {
+    var group = this.$.group;
+    if (!group) return;
+
+    group.close();
+  },
+
+  refitGroup() {
+    if (!this.__group) {
+      var group = this.$.group;
+      if (!group) return;
+      this.__group = group;
+    }
+    window.requestAnimationFrame(function(){
+      this.__group.refit();
+    }.bind(this))
+  },
+
+  /**
+   * Subgroups support an `opened` property which immediately expands/opens the group when
+   * the menu structure is revealed.
+   * 
+   * When the menu is in a collapsed or overflowed state, the opened property is set but the height calculation
+   * fails as invisible elements have no dimensions. To workaround this, this method will fire
+   * whenever a menu is revealed and will re-trigger the open event on any subgroups that should
+   * be opened.
+   */
+  _openSubgroups() {
+      this.querySelectorAll("px-app-nav-subgroup").forEach(el => {
+      if (el.opened && (el.collapsed || el.overflowed))
+        animationFrame.run(() => {
+          el.openGroup(false);
+        });
+    });
+  },
+
+  /**
+   * When the user clicks on a group, toggle the group's dropdown menu
+   * so the user can to select a subitem.
+   */
+  _handleSelfTapped(evt) {
+    this._toggleGroup();
+  },
+
+  /**
+   * When the user clicks on a group container but not on the group content,
+   * close the dropdown.
+   */
+  _handleGroupContainerTapped(evt) {
+    var path = dom(evt).path;
+    var content = dom(this.root).querySelector('#groupcontent');
+
+    if (path.indexOf(content) === -1) {
+      this.closeGroup();
+    }
+  },
+
+  /**
+   * If the dropdown is cancelled (about to close) but the cancel event comes
+   * from a click on target element, stop the cancel so we can handle it
+   * through the click handler on the target element.
+   *
+   * Thanks to paper-menu-button for the guidance on how to best handle this.
+   */
+  _handleGroupCanceled(evt) {
+    var uiEvt = evt.detail;
+    var target = dom(uiEvt).rootTarget;
+    var trigger = this;
+    var path = dom(uiEvt).path;
+
+    if (path.indexOf(trigger) > -1) {
+      evt.preventDefault();
+    }
+  },
+
+  /**
+   * If a group's selected state is changed and it is open, close the group.
+   */
+  _handleSelectedChanged(nextState, lastState) {
+    if (nextState !== lastState && this.opened) {
+      this.closeGroup();
+    }
+  },
+
+  /**
+   * Closes a superlist if its subitem is selected.
+   */
+  _handleItemSelected(evt) {
+    if (this.opened) {
+      this.closeGroup();
+    }
+  },
+
+  /**
+   * Sets the item button as the target the dropdown will position against.
+   */
+  _getPositionTarget() {
+    return this.$.itemButton;
+  },
+
+  /**
+   * Measures the size of the item button to position the dropdown at
+   * the bottom.
+   */
+  _getVerticalOffset() {
+    return this.getBoundingClientRect().height;
+  },
+
+  _isGroupSelected(isSelected, noHighlight) {
+    if (isSelected && !noHighlight) {
+      return true;
+    }
+    return false;
+  }
+});
+
+Polymer({
+  is: 'expand-animation',
+  behaviors: [
+    NeonAnimationBehavior
+  ],
+  configure: function(config) {
+    var node = config.node;
+    var endHeightNode = config.endHeightNode;
+    var height = endHeightNode.getBoundingClientRect().height;
+    var timing = Object.assign({}, this.timingFromConfig(config), {
+      duration: calculateAnimationDuration(height)
+    });
+    this._effect = new KeyframeEffect(node, [{
+      height: '0px'
+    }, {
+      height: height + 'px'
+    }], timing);
+    return this._effect;
+  }
+});
+
+Polymer({
+  is: 'contract-animation',
+  behaviors: [
+    NeonAnimationBehavior
+  ],
+  configure: function(config) {
+    var node = config.node;
+    var startHeightNode = config.startHeightNode;
+    var height = startHeightNode.getBoundingClientRect().height;
+    var timing = Object.assign({}, this.timingFromConfig(config), {
+      duration: calculateAnimationDuration(height)
+    });
+    this._effect = new KeyframeEffect(node, [{
+      height: height + 'px'
+    }, {
+      height: '0px'
+    }], timing);
+    return this._effect;
+  }
+});
+
+/**
+ * Takes a pixel-based height as a number and returns a duration in milliseconds
+ * for the animation to run.
+ *
+ * @param {Number} height - Pixel-based height, parsed to an integer
+ * @return {Number} - Animation duration in milliseconds
+ */
+function calculateAnimationDuration(height) {
+  return (1000 * height) / 800;
+}

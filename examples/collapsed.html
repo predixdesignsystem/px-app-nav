@@ -18,46 +18,64 @@ limitations under the License.
 <html lang="en">
 <head>
   <title>App Nav Demo -- Collapsed</title>
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../polymer/polymer.html"/>
-  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
-  <link rel="import" href="../../px-theme/px-theme-styles.html"/>
-  <link rel="import" href="../../px-login/px-login.html"/>
-  <link rel="import" href="../px-app-nav.html"/>
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../../@polymer/polymer/polymer-legacy.js"></script>
+  <script type="module" src="../../@polymer/polymer/lib/elements/dom-bind.js"></script>
+  <script type="module" src="../../px-theme/px-theme-styles.js"></script>
+  <script type="module" src="../../px-login/px-login.js"></script>
+  <script type="module" src="../px-app-nav.js"></script>
 
-  <style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<style>
     html, body {
       margin: 0;
       font-size: 15px;
       font-family: 'GE Inspira Sans';
     }
-  </style>
+  </style>`;
+
+document.head.appendChild($_documentContainer.content);
+</script>
 </head>
 <body>
-  <custom-style>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
     <style is="custom-style" include="px-theme-styles">
       px-app-nav {
         --px-app-nav-collapsed-width: 275px;
       }
     </style>
-  </custom-style>
+  </custom-style>`;
 
-  <dom-bind>
+document.body.appendChild($_documentContainer.content);
+</script>
+
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-bind>
     <template is="dom-bind">
-      <px-app-nav
-          items='[
-            { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-            { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-            { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-              { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-              { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-              { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+      <px-app-nav items="[
+            { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+            { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+            { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+              { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+              { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+              { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
             ]}
-          ]'
-          collapse-all
-          collapse-opened="{{collapseOpened}}"
-          selected="{{selectedItem}}"
-          selected-route="{{selectedRoute}}">
+          ]" collapse-all="" collapse-opened="{{collapseOpened}}" selected="{{selectedItem}}" selected-route="{{selectedRoute}}">
         <div slot="actions" style="margin:1rem;">
           <px-login user-name="Thomas Edison"></px-login>
         </div>
@@ -71,6 +89,9 @@ limitations under the License.
         </ul>
       </div>
     </template>
-  </dom-bind>
+  </dom-bind>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 </body>
 </html>

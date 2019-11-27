@@ -23,81 +23,116 @@ limitations under the License.
 
     <!-- BOILERPLATE -->
     <!-- load webcomponents.js polyfill for browsers that don't support native web components -->
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <!-- load web-component-tester test runner script -->
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <!-- load default theme -->
-    <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+    <script type="module" src="../../px-theme/px-theme-styles.js"></script>
 
     <!-- UNIQUE TO THIS COMPONENT -->
     <!-- import web components to test -->
-    <link rel="import" href="../px-app-nav.html"/>
+    <script type="module" src="../px-app-nav.js"></script>
     <!-- load test script -->
-    <script src="px-app-nav-tests.js"></script>
+    <script src="./px-app-nav-tests.js"></script>
   </head>
   <body>
-    <custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style include="px-theme-styles" is="custom-style"></style>
-    </custom-style>
+    </custom-style>`;
 
-    <h3>Web Component Test : Fixture for px-app-nav</h3>
-    <style include="px-theme-styles" is="custom-style"></style>
+document.body.appendChild($_documentContainer.content);
+</script>
 
-    <test-fixture id="AppNavFixtureUnselected">
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<h3>Web Component Test : Fixture for px-app-nav</h3>`;
+document.body.appendChild($_documentContainer.content);
+</script>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<style include="px-theme-styles" is="custom-style"></style>`;
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureUnselected">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'>
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureSelectedRoute">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureSelectedRoute">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              selected-route='["alerts"]'>
+              ]" selected-route="[&quot;alerts&quot;]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureSelectedRouteNested">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureSelectedRouteNested">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              selected-route='["dashboards","orders"]'>
+              ]" selected-route="[&quot;dashboards&quot;,&quot;orders&quot;]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 
     <!-- <test-fixture id="AppNavFixtureFallbackPath">
       <template>
@@ -138,60 +173,78 @@ limitations under the License.
       </template>
     </test-fixture> -->
 
-    <test-fixture id="AppNavFixtureHorizontal">
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureHorizontal">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'>
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureForMeasurements">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureForMeasurements">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]},
-                { "label" : "Projects", "id" : "projects", "children" : [
-                  { "label" : "First Project", "id" : "project1" }
+                { &quot;label&quot; : &quot;Projects&quot;, &quot;id&quot; : &quot;projects&quot;, &quot;children&quot; : [
+                  { &quot;label&quot; : &quot;First Project&quot;, &quot;id&quot; : &quot;project1&quot; }
                 ]},
-                { "label" : "Assets", "id" : "assets" },
-                { "label" : "Users", "id" : "users" }
-              ]'>
+                { &quot;label&quot; : &quot;Assets&quot;, &quot;id&quot; : &quot;assets&quot; },
+                { &quot;label&quot; : &quot;Users&quot;, &quot;id&quot; : &quot;users&quot; }
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureOneItem">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureOneItem">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" }
-              ]'>
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; }
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureIconSizeVariable">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureIconSizeVariable">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <style>
@@ -199,23 +252,27 @@ limitations under the License.
               --px-app-nav-item-icon-size: 47px;
             }
           </style>
-          <px-app-nav
-              id="iconSizeNav"
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav id="iconSizeNav" items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'>
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureItemPaddingVariable">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureItemPaddingVariable">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <style>
@@ -223,23 +280,27 @@ limitations under the License.
               --px-app-nav-item-padding: 4em;
             }
           </style>
-          <px-app-nav
-              id="itemPaddingNav"
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav id="itemPaddingNav" items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'>
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureCollapsed">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureCollapsed">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
           <style>
@@ -247,219 +308,257 @@ limitations under the License.
               --px-app-nav-collapsed-width: 275px;
             }
           </style>
-          <px-app-nav
-              id="collapsed"
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav id="collapsed" items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              collapse-all>
+              ]" collapse-all="">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureCollapseAtWidth">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureCollapseAtWidth">
       <template>
         <div class="app-nav-container" style="width: 400px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              collapse-at="450">
+              ]" collapse-at="450">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureCollapsedSelected">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureCollapsedSelected">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              collapse-all
-              selected-route='["home"]'>
+              ]" collapse-all="" selected-route="[&quot;home&quot;]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureCollapsedWithIconSelected">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureCollapsedWithIconSelected">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              collapse-all
-              collapse-with-icon
-              selected-route='["home"]'>
+              ]" collapse-all="" collapse-with-icon="" selected-route="[&quot;home&quot;]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureVertical">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureVertical">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-            items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              vertical>
+              ]" vertical="">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureVerticalOpenedAtOpen">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureVerticalOpenedAtOpen">
       <template>
         <div class="app-nav-container" style="width: 1000px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              vertical
-              vertical-opened-at="800">
+              ]" vertical="" vertical-opened-at="800">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavFixtureVerticalOpenedAtClosed">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavFixtureVerticalOpenedAtClosed">
       <template>
         <div class="app-nav-container" style="width: 700px; height:1000px;">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              vertical
-              vertical-opened-at="800">
+              ]" vertical="" vertical-opened-at="800">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemOpened">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemOpened">
       <template>
         <div class="app-nav-container">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;opened&quot;: true, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'>
+              ]">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemOpenedCollapsed">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemOpenedCollapsed">
       <template>
         <div class="app-nav-container">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;opened&quot;: true, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              collapse-all>
+              ]" collapse-all="">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemOpenedVertical">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemOpenedVertical">
       <template>
         <div class="app-nav-container">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;opened&quot;: true, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              vertical>
+              ]" vertical="">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemOpenedVerticalOpenedAt">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemOpenedVerticalOpenedAt">
       <template>
         <div class="app-nav-container">
-          <px-app-nav
-              items='[
-                { "label" : "Home", "id" : "home", "icon" : "px-fea:home" },
-                { "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts" },
-                { "label" : "Dashboards", "id" : "dashboards", "icon" : "px-fea:dashboard", "opened": true, "children": [
-                  { "label" : "See Live Truck View", "id" : "trucks", "icon" : "px-obj:truck" },
-                  { "label" : "Track Orders", "id" : "orders", "icon" : "px-fea:orders" },
-                  { "label" : "Analyze Invoices", "id" : "invoices", "icon" : "px-fea:templates" }
+          <px-app-nav items="[
+                { &quot;label&quot; : &quot;Home&quot;, &quot;id&quot; : &quot;home&quot;, &quot;icon&quot; : &quot;px-fea:home&quot; },
+                { &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot; },
+                { &quot;label&quot; : &quot;Dashboards&quot;, &quot;id&quot; : &quot;dashboards&quot;, &quot;icon&quot; : &quot;px-fea:dashboard&quot;, &quot;opened&quot;: true, &quot;children&quot;: [
+                  { &quot;label&quot; : &quot;See Live Truck View&quot;, &quot;id&quot; : &quot;trucks&quot;, &quot;icon&quot; : &quot;px-obj:truck&quot; },
+                  { &quot;label&quot; : &quot;Track Orders&quot;, &quot;id&quot; : &quot;orders&quot;, &quot;icon&quot; : &quot;px-fea:orders&quot; },
+                  { &quot;label&quot; : &quot;Analyze Invoices&quot;, &quot;id&quot; : &quot;invoices&quot;, &quot;icon&quot; : &quot;px-fea:templates&quot; }
                 ]}
-              ]'
-              vertical
-              vertical-opened-at="0">
+              ]" vertical="" vertical-opened-at="0">
           </px-app-nav>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavMeasureTextStub">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavMeasureTextStub">
       <template>
         <div>
           <style>
@@ -473,6 +572,9 @@ limitations under the License.
           <p id="testText">The quick brown fox jumps over the lazy programmer</p>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
   </body>
 </html>

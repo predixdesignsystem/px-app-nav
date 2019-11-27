@@ -23,35 +23,56 @@ limitations under the License.
 
     <!-- BOILERPLATE -->
     <!-- load webcomponents.js polyfill for browsers that don't support native web components -->
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <!-- load web-component-tester test runner script -->
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <!-- load default theme -->
-    <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+    <script type="module" src="../../px-theme/px-theme-styles.js"></script>
 
     <!-- UNIQUE TO THIS COMPONENT -->
     <!-- import web components to test -->
-    <link rel="import" href="../px-app-nav-subitem.html"/>
+    <script type="module" src="../px-app-nav-subitem.js"></script>
     <!-- load test script -->
-    <script src="px-app-nav-subitem-tests.js"></script>
+    <script src="./px-app-nav-subitem-tests.js"></script>
   </head>
   <body>
-    <custom-style>
-      <style include="px-theme-styles" is="custom-style"></style>
-    </custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-    <test-fixture id="AppNavSubitem">
+$_documentContainer.innerHTML = `<custom-style>
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavSubitem">
       <template>
         <div style="width:300px">
-          <px-app-nav-subitem
-              label="Dashboard #1"
-              item='{"label":"Dashboard #1", "id":"dash1"}'>
+          <px-app-nav-subitem label="Dashboard #1" item="{&quot;label&quot;:&quot;Dashboard #1&quot;, &quot;id&quot;:&quot;dash1&quot;}">
           </px-app-nav-subitem>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavSubitemCustomHeight">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavSubitemCustomHeight">
       <template>
         <div style="width:300px">
           <style is="custom-style">
@@ -59,36 +80,43 @@ limitations under the License.
               --px-app-nav-subitem-height: 73px;
             }
           </style>
-          <px-app-nav-subitem
-              id="customHeight"
-              label="Dashboard #1"
-              item='{"label":"Dashboard #1", "id":"dash1"}'>
+          <px-app-nav-subitem id="customHeight" label="Dashboard #1" item="{&quot;label&quot;:&quot;Dashboard #1&quot;, &quot;id&quot;:&quot;dash1&quot;}">
           </px-app-nav-subitem>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavSubItemHref">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavSubItemHref">
       <template>
         <div style="width: 300px;">
-          <px-app-nav-subitem
-              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
-              href='https://www.predix-ui.com'>
+          <px-app-nav-subitem item="{ &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot;}" href="https://www.predix-ui.com">
           </px-app-nav-subitem>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavSubItemHrefWindow">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavSubItemHrefWindow">
       <template>
         <div style="width: 300px;">
-          <px-app-nav-subitem
-              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
-              href='https://www.predix-ui.com'
-              window-name='myWindow'>
+          <px-app-nav-subitem item="{ &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot;}" href="https://www.predix-ui.com" window-name="myWindow">
           </px-app-nav-subitem>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
   </body>
 </html>

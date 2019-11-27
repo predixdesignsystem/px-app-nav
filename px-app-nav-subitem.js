@@ -1,4 +1,4 @@
-<!--
+/*
 Copyright (c) 2018, General Electric
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,20 +12,40 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-app-nav-behaviors.html"/>
-<link rel="import" href="css/px-app-nav-subitem-styles.html"/>
+import './px-app-nav-behaviors.js';
+import './css/px-app-nav-subitem-styles.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<dom-module id="px-app-nav-subitem">
-  <template>
+Polymer({
+  _template: html`
     <style include="px-app-nav-subitem-styles"></style>
 
     <template is="dom-if" if="{{_propIsTypeOf(label, 'string')}}">
       <p title="[[label]]" class="app-nav-subitem__label">{{label}}</p>
     </template>
-  </template>
-</dom-module>
+`,
 
-<script src="px-app-nav-subitem.es6.js"></script>
+  is: 'px-app-nav-subitem',
+  behaviors: [PxAppNavBehavior.Item],
+
+  properties: {
+    /**
+     * Set to `true` if the subitem's parent is selected.
+     */
+    parentSelected: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true,
+      observer: 'updateStyles'
+    }
+  }
+});

@@ -1,0 +1,33 @@
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<dom-module id="px-app-nav-subitem-styles">
+<template>
+<style>
+:host{line-height:1.33333;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;/*! Comment to prevent cssmin munging this rule with html above and borking Safari */box-sizing:border-box;position:relative;display:flex;align-items:center;padding-left:1rem;padding-right:1rem;cursor:pointer;height:var(--px-app-nav-subitem-height,2rem);color:var(--px-app-nav-subitem-text-color,#a9a9a9);background-color:var(--px-app-nav-subitem-background-color,#fff)}html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}:host(:hover){color:var(--px-app-nav-subitem-text-color--hover,#a9a9a9);background-color:var(--px-app-nav-subitem-background-color--hover,#d3d3d3)}:host([selected]){color:var(--px-app-nav-subitem-text-color--selected,#fff);background-color:var(--px-app-nav-subitem-background-color--selected,#00f)}:host([collapsed]){color:var(--px-app-nav-subitem-text-color--collapsed,#a9a9a9);background-color:var(--px-app-nav-subitem-background-color--collapsed,#a9a9a9);padding-left:3.33333rem}:host([collapsed]:hover){background-color:var(--px-app-nav-subitem-background-color--collapsed-hover,#a9a9a9)}:host([collapsed][parent-selected]){color:var(--px-app-nav-subitem-text-color--parent-collapsed-not-selected,#a9a9a9);background-color:var(--px-app-nav-subitem-background-color--parent-collapsed-not-selected,#fff)}:host([collapsed][parent-selected]):before{content:'';display:block;background-color:var(--px-app-nav-subitem-accent-color--parent-collapsed-selected,#00f);position:absolute;top:0;left:0;bottom:0;width:2px;height:100%}:host([collapsed][parent-selected]:hover){background-color:var(--px-app-nav-subitem-background-color--parent-collapsed-hover,#d3d3d3)}:host([collapsed][parent-selected][selected]){color:var(--px-app-nav-subitem-text-color--parent-collapsed-selected,#fff);background-color:var(--px-app-nav-subitem-background-color--parent-collapsed-selected,#d3d3d3)}.app-nav-subitem__label{margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+</style>
+</template>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);
+
+/*
+Copyright (c) 2018, General Electric
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+;

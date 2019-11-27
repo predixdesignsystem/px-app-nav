@@ -23,36 +23,56 @@ limitations under the License.
 
     <!-- BOILERPLATE -->
     <!-- load webcomponents.js polyfill for browsers that don't support native web components -->
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <!-- load web-component-tester test runner script -->
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <!-- load default theme -->
-    <link rel="import" href="../../px-theme/px-theme-styles.html"/>
+    <script type="module" src="../../px-theme/px-theme-styles.js"></script>
 
     <!-- UNIQUE TO THIS COMPONENT -->
     <!-- import web components to test -->
-    <link rel="import" href="../px-app-nav-item.html"/>
+    <script type="module" src="../px-app-nav-item.js"></script>
     <!-- load test script -->
-    <script src="px-app-nav-item-tests.js"></script>
+    <script src="./px-app-nav-item-tests.js"></script>
   </head>
   <body>
-    <custom-style>
-      <style include="px-theme-styles" is="custom-style"></style>
-    </custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-    <test-fixture id="AppNavItem">
+$_documentContainer.innerHTML = `<custom-style>
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItem">
       <template>
         <div style="width:300px">
-          <px-app-nav-item
-              label="Home"
-              icon="px-fea:home"
-              item='{"label":"Home", "id":"home", "icon":"px-fea:home"}'>
+          <px-app-nav-item label="Home" icon="px-fea:home" item="{&quot;label&quot;:&quot;Home&quot;, &quot;id&quot;:&quot;home&quot;, &quot;icon&quot;:&quot;px-fea:home&quot;}">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemCustomHeight">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemCustomHeight">
       <template>
         <div style="width:300px">
           <style is="custom-style">
@@ -60,92 +80,118 @@ limitations under the License.
               --px-app-nav-height: 73px;
             }
           </style>
-          <px-app-nav-item
-              id="customHeight"
-              label="Home"
-              icon="px-fea:home"
-              item='{"label":"Home", "id":"home", "icon":"px-fea:home"}'>
+          <px-app-nav-item id="customHeight" label="Home" icon="px-fea:home" item="{&quot;label&quot;:&quot;Home&quot;, &quot;id&quot;:&quot;home&quot;, &quot;icon&quot;:&quot;px-fea:home&quot;}">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemDropdown">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemDropdown">
       <template>
         <div style="width:300px">
-          <px-app-nav-item
-              label="Home"
-              icon="px-fea:home"
-              item='{"label":"Home", "id":"home", "icon":"px-fea:home"}'
-              dropdown>
+          <px-app-nav-item label="Home" icon="px-fea:home" item="{&quot;label&quot;:&quot;Home&quot;, &quot;id&quot;:&quot;home&quot;, &quot;icon&quot;:&quot;px-fea:home&quot;}" dropdown="">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemIconOnly">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemIconOnly">
       <template>
         <div style="width:300px">
-          <px-app-nav-item
-              icon="px-fea:home"
-              item='{"label":"Home", "id":"home", "icon":"px-fea:home"}'>
+          <px-app-nav-item icon="px-fea:home" item="{&quot;label&quot;:&quot;Home&quot;, &quot;id&quot;:&quot;home&quot;, &quot;icon&quot;:&quot;px-fea:home&quot;}">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemEmpty">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemEmpty">
       <template>
         <div style="width:300px">
-          <px-app-nav-item empty-icon empty-label>
+          <px-app-nav-item empty-icon="" empty-label="">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemCancelSelect">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemCancelSelect">
       <template>
         <div style="width:300px">
-          <px-app-nav-item cancel-select item='{"label":"Home", "id":"home", "icon":"px-fea:home"}'>
+          <px-app-nav-item cancel-select="" item="{&quot;label&quot;:&quot;Home&quot;, &quot;id&quot;:&quot;home&quot;, &quot;icon&quot;:&quot;px-fea:home&quot;}">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemHref">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemHref">
       <template>
         <div style="width: 300px;">
-          <px-app-nav-item
-              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
-              href='https://www.predix-ui.com'>
+          <px-app-nav-item item="{ &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot;}" href="https://www.predix-ui.com">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemHrefWindow">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemHrefWindow">
       <template>
         <div style="width: 300px;">
-          <px-app-nav-item
-              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
-              href='https://www.predix-ui.com'
-              window-name='myWindow'>
+          <px-app-nav-item item="{ &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot;}" href="https://www.predix-ui.com" window-name="myWindow">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="AppNavItemHrefDropdown">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="AppNavItemHrefDropdown">
       <template>
         <div style="width: 300px;">
-          <px-app-nav-item
-              item='{ "label" : "Alerts", "id" : "alerts", "icon" : "px-fea:alerts"}'
-              href='https://www.predix-ui.com'
-              dropdown
-              cancel-select>
+          <px-app-nav-item item="{ &quot;label&quot; : &quot;Alerts&quot;, &quot;id&quot; : &quot;alerts&quot;, &quot;icon&quot; : &quot;px-fea:alerts&quot;}" href="https://www.predix-ui.com" dropdown="" cancel-select="">
           </px-app-nav-item>
         </div>
       </template>
-    </test-fixture>
+    </test-fixture>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
   </body>
 </html>

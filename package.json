@@ -1,15 +1,14 @@
 {
-  "name": "px-app-nav",
-  "author": "General Electric",
   "description": "A navigation component that allows the user to browse app pages and content",
-  "version": "3.1.0",
-  "private": false,
-  "extName": null,
   "repository": {
     "type": "git",
     "url": "https://github.com/PredixDev/px-app-nav.git"
   },
   "homepage": "https://www.predix-ui.com/",
+  "name": "px-app-nav",
+  "author": "General Electric",
+  "version": "3.1.0",
+  "extName": null,
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
@@ -44,11 +43,26 @@
     "through2": "^2.0.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "wct-browser-legacy": "^1.0.1"
   },
   "scripts": {
     "test": "./node_modules/.bin/wct",
     "build": "./scripts/build.sh"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  },
+  "main": "px-app-nav.js",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "@polymer/neon-animation": "^3.0.0",
+    "@polymer/iron-dropdown": "^3.0.0",
+    "@polymer/iron-resizable-behavior": "^3.0.0",
+    "web-animations-js": "^2.3.1"
+  }
 }
